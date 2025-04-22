@@ -1,0 +1,259 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6730908177387250668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d88f7d353534a4fbdeb11196057db7, type: 3}
+  m_Name: UploadItch
+  m_EditorClassIdentifier: 
+  actionType: 1
+  actionName: UploadItch
+  note: 
+  actionEnabled: 0
+  configureEditor: 0
+  filter:
+    condition: 0
+    clauses: []
+  pathToButlerExe: C:\Users\Lucas Coates\AppData\Roaming\itch\apps\butler\butler.exe
+  nameOfItchUser: sonorant-studios
+  nameOfItchGame: dissonance
+  useGeneratedBuildVersion: 0
+  channelName: $PLATFORM-$ARCHITECTURE
+  showUploadProgress: 1
+  itchChannelOverride: 
+--- !u!114 &-4391194419113393582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acaf75cc66fc934ea46bf602fc7c245, type: 3}
+  m_Name: WebGL
+  m_EditorClassIdentifier: 
+  enabled: 1
+  distributionList:
+    distributions:
+    - distributionName: itch.io
+      enabled: 1
+  targets:
+  - type: 20
+    name: Player
+    enabled: 1
+    binaryNameFormat: '{0}'
+    subtarget: 0
+  variants: []
+  scriptingBackends:
+  - scriptingImplementation: 1
+    name: IL2CPP
+    enabled: 1
+  platformName: WebGL
+  targetGroup: 13
+--- !u!114 &-1404512141014301924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2786f6b2301a94f4288672ff5305244c, type: 3}
+  m_Name: Windows
+  m_EditorClassIdentifier: 
+  enabled: 1
+  distributionList:
+    distributions:
+    - distributionName: itch.io
+      enabled: 1
+  targets:
+  - type: 19
+    name: Player
+    enabled: 1
+    binaryNameFormat: '{0}.exe'
+    subtarget: 0
+  - type: 19
+    name: Dedicated Server
+    enabled: 0
+    binaryNameFormat: '{0}.exe'
+    subtarget: 1
+  variants:
+  - variantName: Architecture
+    selectedIndex: 0
+    values:
+    - Intel 64-bit
+    - Intel 32-bit
+    isFlag: 0
+  - variantName: Build Output
+    selectedIndex: 0
+    values:
+    - App
+    - Visual Studio Solution
+    isFlag: 0
+  scriptingBackends:
+  - scriptingImplementation: 0
+    name: Mono
+    enabled: 1
+  - scriptingImplementation: 1
+    name: IL2CPP
+    enabled: 0
+  platformName: Windows
+  targetGroup: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5886119a5c7b34d8872ab527ca3e1b, type: 3}
+  m_Name: SuperUnityBuildSettings
+  m_EditorClassIdentifier: 
+  _basicSettings:
+    baseBuildFolder: Builds
+    buildPath: $VERSION/$RELEASE_TYPE/$PLATFORM/$TARGET/$SCRIPTING_BACKEND
+    openFolderPostBuild: 1
+    constantsFileLocation: Assets\SuperUnityBuild
+  _productParameters:
+    buildCounter: 4
+    buildVersion: 1.0.0.4
+    versionTemplate: 1.0.0.$BUILD
+    autoGenerate: 1
+    syncWithPlayerSettings: 0
+  _releaseTypeList:
+    releaseTypes:
+    - typeName: Beta
+      bundleIdentifier: com.DefaultCompany.2DProject
+      companyName: SonorantStudios
+      productName: Dissonance
+      syncAppNameWithProduct: 1
+      appBuildName: Dissonance
+      buildOptions: 0
+      customDefines: 
+      sceneList:
+        releaseScenes:
+        - fileGUID: 2cda990e2423bbf4892e6590ba056729
+          sceneActive: 1
+  _platformList:
+    platforms:
+    - {fileID: -1404512141014301924}
+    - {fileID: -4391194419113393582}
+  _projectConfigurations:
+    configSet:
+      _Buckets: 03000000ffffffff08000000ffffffffffffffffffffffffffffffff0700000004000000ffffffffffffffffffffffff00000000010000000600000002000000ffffffff
+      _HashCodes: 55d413134a5bd22e7ccd881a1a12586a3a39da64c9b1f13f72e7b34496172369381e805e0000000000000000000000000000000000000000000000000000000000000000
+      _Next: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff050000000000000000000000000000000000000000000000000000000000000000000000
+      _Count: 9
+      _Version: 9
+      _FreeList: -1
+      _FreeCount: 0
+      _Keys:
+      - Beta/Windows/Player (Intel 64-bit,App)/Mono/itch.io
+      - Beta/Windows/Player (Intel 64-bit,App)/Mono
+      - Beta/Windows/Player (Intel 64-bit,App)
+      - Beta/Windows
+      - Beta/WebGL/Player/IL2CPP/itch.io
+      - Beta/WebGL/Player/IL2CPP
+      - Beta/WebGL/Player
+      - Beta/WebGL
+      - Beta
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      _Values:
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys:
+        - Beta/Windows/Player (Intel 64-bit,App)/Mono/itch.io
+      - enabled: 1
+        childKeys:
+        - Beta/Windows/Player (Intel 64-bit,App)/Mono
+      - enabled: 1
+        childKeys:
+        - Beta/Windows/Player (Intel 64-bit,App)
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys:
+        - Beta/WebGL/Player/IL2CPP/itch.io
+      - enabled: 1
+        childKeys:
+        - Beta/WebGL/Player/IL2CPP
+      - enabled: 1
+        childKeys:
+        - Beta/WebGL/Player
+      - enabled: 1
+        childKeys:
+        - Beta/Windows
+        - Beta/WebGL
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+    showViewOptions: 0
+    showConfigs: 0
+    showBuildInfo: 0
+    hideDisabled: 0
+    treeView: 0
+    selectedKeyChain: Beta/WebGL/Player/IL2CPP/itch.io
+  _preBuildActions:
+    buildActions: []
+  _postBuildActions:
+    buildActions:
+    - {fileID: -6730908177387250668}
+    - {fileID: 3745157775083565383}
+--- !u!114 &3745157775083565383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d88f7d353534a4fbdeb11196057db7, type: 3}
+  m_Name: UploadItch
+  m_EditorClassIdentifier: 
+  actionType: 1
+  actionName: UploadItch
+  note: 
+  actionEnabled: 1
+  configureEditor: 0
+  filter:
+    condition: 0
+    clauses: []
+  pathToButlerExe: C:\Users\coatesl\AppData\Roaming\itch\apps\butler\butler.exe
+  nameOfItchUser: sonorant-studios
+  nameOfItchGame: dissonance
+  useGeneratedBuildVersion: 0
+  channelName: $PLATFORM-$ARCHITECTURE
+  showUploadProgress: 1
+  itchChannelOverride: 

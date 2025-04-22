@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/TitleScreenStyle.uss?fileID=7433441132597879392&amp;guid=c2c65d9046dd6ed4bb9fd27e1b799d6e&amp;type=3#TitleScreenStyle" />
+    <ui:VisualElement name="Container" style="flex-grow: 1;">
+        <ui:VisualElement name="Header" class="header" style="flex-grow: 1;" />
+        <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Play" class="button" style="font-size: 20px; -unity-font: initial;" />
+        <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Settings" class="button" style="font-size: 20px; -unity-font: initial;" />
+        <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quit" class="button" style="font-size: 20px; -unity-font: initial;" />
+    </ui:VisualElement>
+</ui:UXML>

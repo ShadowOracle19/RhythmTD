@@ -32,7 +32,7 @@ public class CursorTD : MonoBehaviour
     private PlayerInputHandler inputHandler;
 
     public bool isMoving = false;
-    private Vector3 originPos, targetPos;
+    public Vector3 originPos, targetPos;
     public float timeToMove = 1f;
 
     public Vector3 desiredMovement;
@@ -249,7 +249,7 @@ public class CursorTD : MonoBehaviour
     public void InitializeCursor()
     {
         isMoving = false;
-        gameObject.transform.position = new Vector3(-2.5f, -0.54f, 0);
+        gameObject.transform.position = new Vector3(0.5f, 0.1f, 0.5f);
 
         SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
         SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
@@ -384,14 +384,15 @@ public class CursorTD : MonoBehaviour
         {
             if(CombatManager.Instance.resourceNum >= 150)
             {
-                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), true);
+                TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), true);
                 CombatManager.Instance.resourceNum -= 150;
             }
             else if(CombatManager.Instance.resourceNum < 149)
             {
-                TowerManager.Instance.SetTower(tower, transform.position, tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), false);
+                TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), false);
                 CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             }
+
 
             Debug.Log("Place towers");
 
@@ -513,23 +514,23 @@ public class CursorTD : MonoBehaviour
 
     private IEnumerator MovePlayer(Vector3 direction)
     {
-        
+        Debug.Log(direction);
         isMoving = true;
 
         float elapsedTime = 0;
 
         originPos = transform.position;
 
-        targetPos = originPos + (direction * 1.2f);
+        targetPos = originPos + new Vector3(direction.x, 0, direction.y);
 
 
         //bounding box function
-        if((targetPos.x <= -5 || targetPos.x >= 9) || (targetPos.y <= -3.5 || targetPos.y >= 2))
-        {
-            isMoving = false;
-            desiredMovement = Vector3.zero;
-            yield break;
-        }
+        //if((targetPos.x <= -5 || targetPos.x >= 9) || (targetPos.y <= -3.5 || targetPos.y >= 2))
+        //{
+        //    isMoving = false;
+        //    desiredMovement = Vector3.zero;
+        //    yield break;
+        //}
 
         while(elapsedTime < timeToMove)
         {
@@ -570,7 +571,7 @@ public class CursorTD : MonoBehaviour
     }
 
     //check which tile cursor is on
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay(Collider collision)
     {
         if(collision.gameObject.CompareTag("StageTile"))
         {

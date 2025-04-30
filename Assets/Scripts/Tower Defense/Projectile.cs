@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
+    public SpriteRenderer spriteRenderer;
     public float speed = 1;
     float timer;
     public bool canMove = false;
@@ -36,14 +37,14 @@ public class Projectile : MonoBehaviour
         if (isBurning)
         {
             //burningParticlesInstance = Instantiate(burningParticles, transform.position, Quaternion.identity);
-            this.GetComponent<SpriteRenderer>().sprite = flameAttackSprite;
+            spriteRenderer.sprite = flameAttackSprite;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        nextPosition = new Vector3(transform.position.x + 1.2f, transform.position.y);
+        nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
@@ -59,7 +60,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            nextPosition = new Vector3(transform.position.x + 1.2f, transform.position.y);
+            nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
             canMove = false;
         }
         

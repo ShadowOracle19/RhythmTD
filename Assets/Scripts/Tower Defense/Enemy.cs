@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
 
         dontMove = true;
 
-        nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
+        nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
@@ -117,17 +117,17 @@ public class Enemy : MonoBehaviour
                         _rand = 1.2f;
                     }
 
-                    nextPosition = new Vector3(transform.position.x, transform.position.y + _rand);
+                    nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + _rand);
 
-                    if(nextPosition.y >= 2 || nextPosition.y <= -3.5)//if hit top of bottom of the map
+                    if(nextPosition.z >= 2.5f || nextPosition.z <= -3)//if hit top of bottom of the map
                     {
-                        nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
+                        nextPosition = new Vector3(transform.position.x - 1f, transform.position.y);
                     }
                     dontMove = false;
                 }
                 else
                 {
-                    nextPosition = new Vector3(transform.position.x - 2.4f, transform.position.y);
+                    nextPosition = new Vector3(transform.position.x - 2f, transform.position.y);
                     dontMove = false;
                 }
                 break;
@@ -263,7 +263,7 @@ public class Enemy : MonoBehaviour
         {
            dontMove = true;
             timer = 0;
-            nextPosition = new Vector3(transform.position.x - 1.2f, transform.position.y);
+            nextPosition = new Vector3(transform.position.x - 1f, transform.position.y);
         }
         if (tileInFront != null && tileInFront.placedTower != null)
         {

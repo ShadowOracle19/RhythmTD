@@ -1,17 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Billboarding : MonoBehaviour
 {
-    Camera mainCamera;
-    void Start()
+    [SerializeField] bool freezeXZAxis = true;
+    private void Update()
     {
-        mainCamera = Camera.main;
-    }
-    void LateUpdate()
-    {
-        transform.LookAt(mainCamera.transform);
-        transform.Rotate(0, 180, 0);
+        transform.rotation = Camera.main.transform.rotation;
+        //if (freezeXZAxis)
+        //{
+        //    transform.rotation = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
+        //}
+        //else
+        //{
+            
+        //}
     }
 }
+

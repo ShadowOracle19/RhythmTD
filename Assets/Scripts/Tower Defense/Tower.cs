@@ -212,7 +212,7 @@ public class Tower : MonoBehaviour
         
 
         if(increaseBulletDamage || FeverSystem.Instance.feverModeActive)
-            bullet.GetComponent<SpriteRenderer>().sprite = increasedAttackSprite;
+            bullet.GetComponent<Projectile>().spriteRenderer.sprite = increasedAttackSprite;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
@@ -254,7 +254,7 @@ public class Tower : MonoBehaviour
 
 
         if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
-            bullet.GetComponent<SpriteRenderer>().sprite = increasedAttackSprite;
+            bullet.GetComponent<Projectile>().spriteRenderer.sprite = increasedAttackSprite;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
@@ -265,7 +265,7 @@ public class Tower : MonoBehaviour
 
 
             if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
-                _bullet.GetComponent<SpriteRenderer>().sprite = increasedAttackSprite;
+                _bullet.GetComponent<Projectile>().spriteRenderer.sprite = increasedAttackSprite;
 
             ConductorV2.instance.triggerEvent.Add(_bullet.GetComponent<Projectile>().trigger);
         }
@@ -308,14 +308,14 @@ public class Tower : MonoBehaviour
         GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
 
-        bullet.GetComponent<SpriteRenderer>().sprite = multiAttackSprite;
+        bullet.GetComponent<Projectile>().spriteRenderer.sprite = multiAttackSprite;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
         GameObject bullet2 = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet2.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
 
-        bullet2.GetComponent<SpriteRenderer>().sprite = multiAttackSprite;
+        bullet2.GetComponent<Projectile>().spriteRenderer.sprite = multiAttackSprite;
 
         ConductorV2.instance.triggerEvent.Add(bullet2.GetComponent<Projectile>().trigger);
         

@@ -97,10 +97,10 @@ public class EnemySpawner : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Wisp:
-                enemy = Instantiate(wispEnemy, new Vector3(transform.position.x, ypos), Quaternion.identity, enemyParent);
+                enemy = Instantiate(wispEnemy, new Vector3(transform.position.x, 0.5f, ypos), Quaternion.identity, enemyParent);
                 break;
             case EnemyType.Walker:
-                enemy = Instantiate(walkerEnemy, new Vector3(transform.position.x, ypos), Quaternion.identity, enemyParent);
+                enemy = Instantiate(walkerEnemy, new Vector3(transform.position.x, 0.5f, ypos), Quaternion.identity, enemyParent);
                 break;
             default:
                 break;
@@ -145,7 +145,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 randSpawn = Random.Range(0, spawnTiles.Count);
             }
-            GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, spawnTiles[randSpawn].transform.position.y), Quaternion.identity, enemyParent);
+            GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, 0.5f, spawnTiles[randSpawn].transform.localPosition.z), Quaternion.identity, enemyParent);
             lastRandomSpawn = randSpawn;
 
 

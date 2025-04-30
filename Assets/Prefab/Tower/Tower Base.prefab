@@ -435,6 +435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerAttackSFX: {fileID: 7692277564513255499}
+  towerAudioVolumeIncrement: 0.05
   towerInfo: {fileID: 0}
   trigger:
     m_PersistentCalls:
@@ -458,7 +459,9 @@ MonoBehaviour:
   connectedTile: {fileID: 0}
   currentDamage: 0
   tempDamageHolder: 0
-  attackBuffed: 0
+  burningBullet: 0
+  increaseBulletDamage: 0
+  towerRange: 0
   towerHover: 0
   beatIndicator: {fileID: 1137120996435424628}
   beatCircle: {fileID: 4305122640335676531}
@@ -478,7 +481,15 @@ MonoBehaviour:
   isPoweredUp: 0
   nonPoweredIcon: {fileID: 2416119472238725123}
   poweredIcon: {fileID: 3892228669112652279}
+  defaultAttackSprite: {fileID: 0}
+  increasedAttackSprite: {fileID: 0}
+  multiAttackSprite: {fileID: 0}
+  flameAttackSprite: {fileID: 0}
   aoeAttackParticles: {fileID: 5103615976187222216, guid: e8889e3cb260858418962975b4770ad7, type: 3}
+  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
+  shieldDestructionParticles: {fileID: 0}
+  clashParticles: {fileID: 0}
+  burningParticles: {fileID: 0}
 --- !u!61 &6367522176411443336
 BoxCollider2D:
   m_ObjectHideFlags: 0

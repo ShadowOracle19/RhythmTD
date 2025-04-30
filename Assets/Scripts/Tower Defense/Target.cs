@@ -10,7 +10,7 @@ public class Target : MonoBehaviour
     {
         shake = GameObject.FindGameObjectWithTag("ScreenShaker").GetComponent<ScreenShake>();
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay(Collider collision)
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {

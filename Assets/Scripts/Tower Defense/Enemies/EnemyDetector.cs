@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDetector : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("StageTile"))
         {

@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem clashParticles;
     private ParticleSystem clashParticlesInstance;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,13 +122,13 @@ public class Enemy : MonoBehaviour
 
                     if(nextPosition.z >= 2.5f || nextPosition.z <= -3)//if hit top of bottom of the map
                     {
-                        nextPosition = new Vector3(transform.position.x - 1f, transform.position.y);
+                        nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
                     }
                     dontMove = false;
                 }
                 else
                 {
-                    nextPosition = new Vector3(transform.position.x - 2f, transform.position.y);
+                    nextPosition = new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z);
                     dontMove = false;
                 }
                 break;
@@ -263,7 +264,7 @@ public class Enemy : MonoBehaviour
         {
            dontMove = true;
             timer = 0;
-            nextPosition = new Vector3(transform.position.x - 1f, transform.position.y);
+            nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
         }
         if (tileInFront != null && tileInFront.placedTower != null)
         {

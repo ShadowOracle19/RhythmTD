@@ -9,7 +9,7 @@ public class ScreenShake : MonoBehaviour
 
     public void CamShake()
     {
-        camAnim.SetTrigger("Screen Shake");
+        //camAnim.SetTrigger("Screen Shake");
         screenShakeAudio.Play();
     }
 }

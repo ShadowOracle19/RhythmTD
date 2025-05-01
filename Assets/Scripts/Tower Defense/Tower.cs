@@ -25,14 +25,12 @@ public class Tower : MonoBehaviour
 
     public TowerTypeCreator towerInfo;
 
-    public UnityEvent trigger;
-
     public bool rotateStarted = false;
 
     public Transform firePoint;
     public GameObject projectile;
 
-    private RaycastHit2D[] colliders;
+    private RaycastHit[] colliders;
 
     public int currentHealth = 0;
 
@@ -181,29 +179,7 @@ public class Tower : MonoBehaviour
 
         if (towerInfo.isAOETower)
         {
-            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerRange, 0, transform.forward);
-
-            foreach (var item in colliders)
-            {
-                if(item.transform.CompareTag("StageTile"))
-                {
-                    //item.transform.GetComponent<Tile>().Pulse(Color.red);
-
-                    SpawnParticles(item.transform, nextAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningBullet);
-                }
-                else if(item.transform.CompareTag("Enemy"))
-                {
-                    if(isPoweredUp && item.transform.GetComponent<Enemy>().isStunned == false) //empowered drum effect
-                    {
-                        item.transform.GetComponent<Enemy>().isStunned = true;
-                    }
-
-                    item.transform.GetComponent<Enemy>().Damage(currentDamage);
-                }
-            }
-            colliders = null;
-            burningBullet = false;
-            increaseBulletDamage = false;
+            AOE();
             return;
         }
 
@@ -281,44 +257,49 @@ public class Tower : MonoBehaviour
         
         if(towerInfo.isAOETower)
         {
-            colliders = Physics2D.BoxCastAll(transform.position, Vector2.one * towerRange * 2, 0, transform.forward);
-
-            foreach (var item in colliders)
-            {
-                if(item.transform.CompareTag("StageTile"))
-                {
-                    //item.transform.GetComponent<Tile>().Pulse(Color.blue);
-                    
-                    SpawnParticles(item.transform, multiAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningBullet);
-                }
-                else if(item.transform.CompareTag("Enemy"))
-                {
-                    if (isPoweredUp && item.transform.GetComponent<Enemy>().isStunned == false)//empowered drum effect
-                    {
-                        item.transform.GetComponent<Enemy>().isStunned = true;
-                    }
-
-                    item.transform.GetComponent<Enemy>().Damage(currentDamage);
-                }
-            }
-            colliders = null;
+            AOE();
             return;
         }
 
-        GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y + 1), gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
 
         bullet.GetComponent<Projectile>().spriteRenderer.sprite = multiAttackSprite;
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
-        GameObject bullet2 = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f), gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        GameObject bullet2 = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y + 1), gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet2.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
 
         bullet2.GetComponent<Projectile>().spriteRenderer.sprite = multiAttackSprite;
 
         ConductorV2.instance.triggerEvent.Add(bullet2.GetComponent<Projectile>().trigger);
         
+    }
+
+    public void AOE()
+    {
+        colliders = Physics.BoxCastAll(transform.position, Vector2.one * towerRange * 2, Vector3.zero, Quaternion.identity);
+
+        foreach (var item in colliders)
+        {
+            if (item.transform.CompareTag("StageTile"))
+            {
+                //item.transform.GetComponent<Tile>().Pulse(Color.blue);
+
+                SpawnParticles(item.transform, multiAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningBullet);
+            }
+            else if (item.transform.CompareTag("Enemy"))
+            {
+                if (isPoweredUp && item.transform.GetComponent<Enemy>().isStunned == false)//empowered drum effect
+                {
+                    item.transform.GetComponent<Enemy>().isStunned = true;
+                }
+
+                item.transform.GetComponent<Enemy>().Damage(currentDamage);
+            }
+        }
+        colliders = null;
     }
 
     public void RemoveTower()
@@ -350,7 +331,6 @@ public class Tower : MonoBehaviour
             default:
                 break;
         }
-        ConductorV2.instance.triggerEvent.Remove(trigger);
         TowerManager.Instance.towers.Remove(gameObject);
         connectedTile.placedTower = null;
         Destroy(gameObject);
@@ -525,17 +505,5 @@ public class Tower : MonoBehaviour
         pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity);
     }
 
-    /*
-    private void SpawnParticles(Transform tileTransform, Color colour, ParticleSystem pfxSource, ParticleSystem pfxInstance)
-    {
-        // Set PFX colour
-        var pfxMain = pfxSource.main;
-        
-        pfxMain.startColor = colour;
-
-        // Create instance of the particle effect
-        pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity);
-    }
-    */
 
 }

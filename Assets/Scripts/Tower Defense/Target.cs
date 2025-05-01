@@ -15,8 +15,8 @@ public class Target : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             GameManager.Instance.Damage();
-            shake.CamShake();
             collision.gameObject.GetComponent<Enemy>().Kill();
+            shake.CamShake();
         }
     }
 }

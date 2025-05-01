@@ -236,12 +236,6 @@ public class TowerManager : MonoBehaviour
         bassCooldownSlotPM.SetActive(bassCooldown);
         pianoCooldownSlotPM.SetActive(pianoCooldown);
         guitarCooldownSlotPM.SetActive(guitarCooldown);
-
-        drumCooldownSlotBack.SetActive(drumCooldownBack);
-        bassCooldownSlotBack.SetActive(bassCooldownBack);
-        pianoCooldownSlotBack.SetActive(pianoCooldownBack);
-        guitarCooldownSlotBack.SetActive(guitarCooldownBack);
-        
         //front slots
         if (drumCooldown)
         {
@@ -305,61 +299,6 @@ public class TowerManager : MonoBehaviour
                 pianoCooldownTime = 0;
             }
         }
-
-        //back slots
-        if (drumCooldownBack)
-        {
-            drumCooldownTimeBack += Time.deltaTime;
-
-            //cooldown effect
-            drumCooldownSlotBack.GetComponent<RectTransform>().offsetMax = new Vector2(drumCooldownSlotBack.GetComponent<RectTransform>().offsetMax.x, -((drumCooldownTimeBack / drumCooldownTimeRemainingBack) * 100));
-
-            if (drumCooldownTimeBack >= drumCooldownTimeRemainingBack)
-            {
-                drumCooldownBack = false;
-                drumCooldownTimeBack = 0;
-            }
-
-        }
-        if (bassCooldownBack)
-        {
-            bassCooldownTimeBack += Time.deltaTime;
-            
-            //cooldown effect
-            bassCooldownSlotBack.GetComponent<RectTransform>().offsetMax = new Vector2(bassCooldownSlotBack.GetComponent<RectTransform>().offsetMax.x, -((bassCooldownTimeBack / bassCooldownTimeRemainingBack) * 100));
-
-            if (bassCooldownTimeBack >= bassCooldownTimeRemainingBack)
-            {
-                bassCooldownBack = false;
-                bassCooldownTimeBack = 0;
-            }
-        }
-        if (guitarCooldownBack)
-        {
-            guitarCooldownTimeBack += Time.deltaTime;
-
-            //cooldown effect
-            guitarCooldownSlotBack.GetComponent<RectTransform>().offsetMax = new Vector2(guitarCooldownSlotBack.GetComponent<RectTransform>().offsetMax.x, -((guitarCooldownTimeBack / guitarCooldownTimeRemainingBack) * 100));
-
-            if (guitarCooldownTimeBack >= guitarCooldownTimeRemainingBack)
-            {
-                guitarCooldownBack = false;
-                guitarCooldownTimeBack = 0;
-            }
-        }
-        if (pianoCooldownBack)
-        {
-            pianoCooldownTimeBack += Time.deltaTime;
-
-            //cooldown effect
-            pianoCooldownSlotBack.GetComponent<RectTransform>().offsetMax = new Vector2(pianoCooldownSlotBack.GetComponent<RectTransform>().offsetMax.x, -((pianoCooldownTimeBack / pianoCooldownTimeRemainingBack) * 100));
-
-            if (pianoCooldownTimeBack >= pianoCooldownTimeRemainingBack)
-            {
-                pianoCooldownBack = false;
-                pianoCooldownTimeBack = 0;
-            }
-        }
     }
 
     public void SwapTowers()
@@ -407,7 +346,7 @@ public class TowerManager : MonoBehaviour
     {
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
         _tower.GetComponent<SpriteFollowMouse>().enabled = false;
-        _tower.GetComponent<BoxCollider2D>().enabled = true;
+        _tower.GetComponent<BoxCollider>().enabled = true;
 
         _tower.transform.position = tilePosition;
 
@@ -505,11 +444,6 @@ public class TowerManager : MonoBehaviour
         bassCooldown = false;
         pianoCooldown = false;
         guitarCooldown = false;
-
-        drumCooldownBack = false;
-        bassCooldownBack = false;
-        pianoCooldownBack = false;
-        guitarCooldownBack = false;
 
         towerList.Clear();
     }

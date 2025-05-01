@@ -18,6 +18,9 @@ public class Tile : MonoBehaviour
     //don't touch this bit below, this is fine
     public bool forecastingActive = false;
 
+    [Header("Spawn Tile Info")]
+    public float zPos = 0;
+
     private void Update()
     {
         

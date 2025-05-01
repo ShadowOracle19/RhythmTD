@@ -145,7 +145,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 randSpawn = Random.Range(0, spawnTiles.Count);
             }
-            GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, 0.5f, spawnTiles[randSpawn].transform.localPosition.z), Quaternion.identity, enemyParent);
+            GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, 0.5f, spawnTiles[randSpawn].GetComponent<Tile>().zPos), Quaternion.identity, enemyParent);
             lastRandomSpawn = randSpawn;
 
 

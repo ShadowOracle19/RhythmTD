@@ -226,7 +226,7 @@ public class Tower : MonoBehaviour
             currentDamage = currentDamage * 5;
         }
 
-        GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1.2f, gameObject.transform.position.y + yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, burningBullet);
 
 
@@ -269,6 +269,7 @@ public class Tower : MonoBehaviour
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
+
         GameObject bullet2 = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y + 1), gameObject.transform.rotation, GameManager.Instance.projectileParent);
         bullet2.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
 
@@ -289,7 +290,7 @@ public class Tower : MonoBehaviour
             {
                 //item.transform.GetComponent<Tile>().Pulse(Color.blue);
 
-                SpawnParticles(item.transform, multiAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningBullet);
+                SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningBullet);
             }
             else if (item.transform.CompareTag("Enemy"))
             {

@@ -516,13 +516,13 @@ public class TowerManager : MonoBehaviour
                             yPosition = 0;
                             break;
                         case 2:
-                            yPosition = 1.2f;
+                            yPosition = 1f;
                             break;
                         case 3:
                             yPosition = 0;
                             break;
                         case 4:
-                            yPosition = -1.2f;
+                            yPosition = -1f;
                             break;
                     }
                     tower.Fire(yPosition);

@@ -30,7 +30,8 @@ public class Tower : MonoBehaviour
     public Transform firePoint;
     public GameObject projectile;
 
-    private RaycastHit[] colliders;
+    private Collider[] colliders;
+    //public RaycastHit[] colliders;
 
     public int currentHealth = 0;
 
@@ -279,7 +280,8 @@ public class Tower : MonoBehaviour
 
     public void AOE()
     {
-        colliders = Physics.BoxCastAll(transform.position, Vector2.one * towerRange * 2, Vector3.zero, Quaternion.identity);
+        //colliders = Physics.BoxCastAll(transform.position, Vector3.one * towerRange * 2, Vector3.zero, transform.rotation, towerRange);
+        colliders = Physics.OverlapSphere(transform.position, towerRange);
 
         foreach (var item in colliders)
         {
@@ -301,6 +303,7 @@ public class Tower : MonoBehaviour
         }
         colliders = null;
     }
+
 
     public void RemoveTower()
     {

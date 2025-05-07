@@ -74,25 +74,6 @@ public class TowerManager : MonoBehaviour
     private float pianoCooldownTimeRemaining = 0;
     private float pianoCooldownTime = 0;
 
-    public GameObject drumCooldownSlotBack;
-    public bool drumCooldownBack;
-    private float drumCooldownTimeRemainingBack = 0;
-    private float drumCooldownTimeBack = 0;
-
-    public GameObject bassCooldownSlotBack;
-    public bool bassCooldownBack;
-    private float bassCooldownTimeRemainingBack = 0;
-    private float bassCooldownTimeBack = 0;
-
-    public GameObject guitarCooldownSlotBack;
-    public bool guitarCooldownBack;
-    private float guitarCooldownTimeRemainingBack = 0;
-    private float guitarCooldownTimeBack = 0;
-
-    public GameObject pianoCooldownSlotBack;
-    public bool pianoCooldownBack;
-    private float pianoCooldownTimeRemainingBack = 0;
-    private float pianoCooldownTimeBack = 0;
 
 
     public GameObject drumCooldownSlotPM;

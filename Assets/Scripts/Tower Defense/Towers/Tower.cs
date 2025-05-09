@@ -24,8 +24,7 @@ public class Tower : MonoBehaviour
     public float towerAudioVolumeIncrement = 0.05f;
 
     public TowerTypeCreator towerInfo;
-
-    public bool rotateStarted = false;
+    
 
     public Transform firePoint;
     public GameObject projectile;
@@ -41,6 +40,7 @@ public class Tower : MonoBehaviour
 
     public bool burningBullet = false;
     public bool increaseBulletDamage = false;
+    public bool multiAttack = false;
 
     public int towerRange;
 
@@ -73,7 +73,7 @@ public class Tower : MonoBehaviour
     public GameObject nonPoweredIcon;
     public GameObject poweredIcon;
 
-    // Projectile Sprites
+    [Header("Projectile Sprites")]
     private Sprite nextAttackSprite;
     
     public Sprite defaultAttackSprite;
@@ -154,22 +154,32 @@ public class Tower : MonoBehaviour
         }
     }
 
+    private void CreateBullet(int damage, bool burningBullet, bool multiAttack, Vector3 position)
+    {
+        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, burningBullet);
+
+        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+
+        if(multiAttack)
+        {
+            bullet.GetComponent<Projectile>().spriteRenderer.sprite = multiAttackSprite;
+        }
+    }
+
 
     public void Fire() //default fire
     {
-        if (!rotateStarted) return;
-
         //Audio SFX
         towerAttackSFX.Play();
         
-        
-        currentDamage = tempDamageHolder;
+        int damage = currentDamage;
 
         nextAttackSprite = defaultAttackSprite;
 
-        if (increaseBulletDamage)
+        if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
         {
-            currentDamage = currentDamage * 5;
+            damage = damage * 5;
 
             nextAttackSprite = increasedAttackSprite;
         }
@@ -184,26 +194,16 @@ public class Tower : MonoBehaviour
             return;
         }
 
-        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, burningBullet);
+        CreateBullet(damage, burningBullet, multiAttack, transform.position);
         
 
-        if(increaseBulletDamage || FeverSystem.Instance.feverModeActive)
-            bullet.GetComponent<Projectile>().spriteRenderer.sprite = increasedAttackSprite;
-
-        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
         //empowered guitar function
         if (isPoweredUp && towerInfo.type == InstrumentType.Guitar)
         {
-            GameObject _bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-            _bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, burningBullet);
 
+            CreateBullet(damage, burningBullet, multiAttack, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y));
 
-            if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
-                _bullet.GetComponent<SpriteRenderer>().sprite = increasedAttackSprite;
-
-            ConductorV2.instance.triggerEvent.Add(_bullet.GetComponent<Projectile>().trigger);
         }
 
         burningBullet = false;
@@ -213,38 +213,32 @@ public class Tower : MonoBehaviour
 
     public void Fire(float yPos) //Fire on specific ypos mainly for viola
     {
-        if (!rotateStarted) return;
 
         //Audio SFX
         towerAttackSFX.Play();
 
-        
-        currentDamage = tempDamageHolder;
+        int damage = currentDamage;
 
-        if (increaseBulletDamage)
-        {
-            currentDamage = currentDamage * 5;
-        }
-
-        GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, burningBullet);
-
+        nextAttackSprite = defaultAttackSprite;
 
         if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
-            bullet.GetComponent<Projectile>().spriteRenderer.sprite = increasedAttackSprite;
+        {
+            damage = damage * 5;
 
-        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+            nextAttackSprite = increasedAttackSprite;
+        }
+        else if (burningBullet)
+        {
+            nextAttackSprite = flameAttackSprite;
+        }
 
+        CreateBullet(damage, burningBullet, false, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
+
+        
         if(isPoweredUp && towerInfo.type == InstrumentType.Bass)
         {
-            GameObject _bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x + 1.2f, gameObject.transform.position.y + -yPos), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-            _bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, burningBullet);
-
-
-            if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
-                _bullet.GetComponent<Projectile>().spriteRenderer.sprite = increasedAttackSprite;
-
-            ConductorV2.instance.triggerEvent.Add(_bullet.GetComponent<Projectile>().trigger);
+            CreateBullet(damage, burningBullet, false, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + -yPos));
+            
         }
 
         burningBullet = false;
@@ -254,7 +248,6 @@ public class Tower : MonoBehaviour
 
     public void ExtraFire() //buff fire
     {
-        if (!rotateStarted) return;
         
         if(towerInfo.isAOETower)
         {
@@ -262,21 +255,11 @@ public class Tower : MonoBehaviour
             return;
         }
 
-        GameObject bullet = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y + 1), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
+        CreateBullet(currentDamage, false, true, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y + 1));
 
-        bullet.GetComponent<Projectile>().spriteRenderer.sprite = multiAttackSprite;
+        CreateBullet(currentDamage, false, true, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y - 1));
 
-        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
-
-
-        GameObject bullet2 = Instantiate(projectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y + 1), gameObject.transform.rotation, GameManager.Instance.projectileParent);
-        bullet2.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, currentDamage, towerInfo.projectilePiercesEnemies, false);
-
-        bullet2.GetComponent<Projectile>().spriteRenderer.sprite = multiAttackSprite;
-
-        ConductorV2.instance.triggerEvent.Add(bullet2.GetComponent<Projectile>().trigger);
-        
+        multiAttack = false;
     }
 
     public void AOE()

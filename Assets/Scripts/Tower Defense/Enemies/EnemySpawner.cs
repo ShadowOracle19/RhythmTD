@@ -65,15 +65,20 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        WaveCounter();
+    }
+
+    private void WaveCounter()
+    {
         GameManager.Instance.waveCounter.text = "Wave " + waveIndex + "/" + currentWaves.Count;
-        if(startOnce && allEnemiesSpawnedFromWave)
+        if (startOnce && allEnemiesSpawnedFromWave)
         {
             if (killAllEnemiesBeforeNextWave && enemies.Count != 0)
                 return;
             if (timeRemainingToWaveStart >= delay)
             {
                 //allow enemies to spawn
-                if(waveIndex >= currentWaves.Count) //if at the last wave stop running this
+                if (waveIndex >= currentWaves.Count) //if at the last wave stop running this
                 {
                     return;
                 }
@@ -83,7 +88,7 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                
+
                 timeRemainingToWaveStart += Time.deltaTime;
             }
         }
@@ -160,12 +165,6 @@ public class EnemySpawner : MonoBehaviour
 
             numEnemiesInWave += 1;
         }
-        
-
-
-        //if (GameManager.Instance.tutorialRunning)
-        //    return;
-
         
         if(numEnemiesInWave == currentWaves[waveIndex].numberOfEnemies)
         {

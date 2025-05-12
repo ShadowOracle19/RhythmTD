@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class MapSelectButton : MonoBehaviour, ISelectHandler
 {
-    public GameObject bandScreen;
+    //public GameObject bandScreen;
     public GameObject mapScreen;
     public AudioSource buttonSFX;
     public Animator bandAnimator;
@@ -13,12 +13,12 @@ public class MapSelectButton : MonoBehaviour, ISelectHandler
     public void OnSelect(BaseEventData eventData)
     {
         Debug.Log("Map Select");
-        bandScreen.SetActive(false);
+        //bandScreen.SetActive(false);
         mapScreen.SetActive(true);
         buttonSFX.Play();
-        bandAnimator.SetTrigger("Band Close");
-        bandAnimator.ResetTrigger("Band Open");
-        mapAnimator.SetTrigger("Map Open");
-        mapAnimator.ResetTrigger("Map Close");
+        //bandAnimator.SetTrigger("Band Close");
+        //bandAnimator.ResetTrigger("Band Open");
+        //mapAnimator.SetTrigger("Map Open");
+        //mapAnimator.ResetTrigger("Map Close");
     }
 }

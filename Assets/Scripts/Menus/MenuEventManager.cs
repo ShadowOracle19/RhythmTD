@@ -36,7 +36,7 @@ public class MenuEventManager : MonoBehaviour
     public GameObject DialogueMenuFirstObject;
     public GameObject mainMenuFirstObject;
     public GameObject winScreenFirstObject;
-    public GameObject winScreenSecondObject;
+    //public GameObject winScreenSecondObject;
     public GameObject loseScreenObject;
     public GameObject exitConfirmationObject;
     public GameObject logFirstObject;
@@ -112,10 +112,12 @@ public class MenuEventManager : MonoBehaviour
         {
             eventSystem.SetSelectedGameObject(titleMenuSecondObject);
         }
+        /*
         else if(GameManager.Instance.winScreen.activeSelf)
         {
             eventSystem.SetSelectedGameObject(winScreenSecondObject);
         }
+        */
     }
 
     public void DialogueOpen()

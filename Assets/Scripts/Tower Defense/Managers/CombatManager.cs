@@ -58,7 +58,7 @@ public class CombatManager : MonoBehaviour
     [Header("Combat UI")]
     public GameObject enemyTimerObject;
     public GameObject healthBar;
-    public GameObject controls;
+    //public GameObject controls;
     public GameObject resources;
     public GameObject overchargeResources;
     public GameObject towerDisplay;
@@ -66,7 +66,7 @@ public class CombatManager : MonoBehaviour
     public GameObject metronome;
     public GameObject waveCounter;
     public GameObject combo;
-    public GameObject knockEmDead;
+    //public GameObject knockEmDead;
 
     public GameObject tutorialManager;
 

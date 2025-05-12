@@ -122,8 +122,8 @@ public class ConductorV2 : MonoBehaviour
     {
 
         countingIn = false;
-        CombatManager.Instance.knockEmDead.SetActive(true);
-        CombatManager.Instance.knockEmDead.GetComponent<Animator>().SetTrigger("KnockEmDead");
+        //CombatManager.Instance.knockEmDead.SetActive(true);
+        //CombatManager.Instance.knockEmDead.GetComponent<Animator>().SetTrigger("KnockEmDead");
 
         pauseConductor = false;
         countInText.gameObject.SetActive(false);

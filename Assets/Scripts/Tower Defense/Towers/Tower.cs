@@ -356,7 +356,7 @@ public class Tower : MonoBehaviour
                 CombatManager.Instance.healthBar.SetActive(true);
                 CombatManager.Instance.feverBar.SetActive(true);
                 CombatManager.Instance.combo.SetActive(true);
-                CombatManager.Instance.controls.SetActive(true);
+                //CombatManager.Instance.controls.SetActive(true);
 
                 CursorTD.Instance.feverModeSequence = true;
                 FeverSystem.Instance.feverBarNum = 50;

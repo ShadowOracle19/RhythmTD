@@ -10,7 +10,7 @@ public enum InstrumentType
 
 public enum BuffType
 {
-    Fayruz, Sonu, Niimi, Normal
+    Burn, Multi, Shield, Normal
 }
 
 public enum TowerState
@@ -28,21 +28,25 @@ public class Tower : MonoBehaviour
 
     public Transform firePoint;
     public GameObject projectile;
+    public Tile connectedTile;
 
     private Collider[] colliders;
     //public RaycastHit[] colliders;
 
-    public int currentHealth = 0;
+    public int beat;
+    public bool everyOtherBeat = false;
 
-    public Tile connectedTile;
+    [Header("Tower Stats")]
+    public int currentHealth = 0;
     public int currentDamage;
     public int tempDamageHolder;
+    public int towerRange;
 
+    [Header("Buff Triggers")]
     public bool burningBullet = false;
     public bool increaseBulletDamage = false;
     public bool multiAttack = false;
 
-    public int towerRange;
 
     [Header("Tower Empower Indicator")]
     public bool towerHover = false;
@@ -53,9 +57,6 @@ public class Tower : MonoBehaviour
     [Header("Shield")]
     public GameObject shieldEffect;
     public bool isShielded = false;
-
-    public int beat;
-    public bool everyOtherBeat = false;
 
     [Header("Record Buff Input")]
     public TowerState currentState = TowerState.Default;
@@ -80,8 +81,8 @@ public class Tower : MonoBehaviour
     public Sprite increasedAttackSprite;
     public Sprite multiAttackSprite;
     public Sprite flameAttackSprite;
-    
-    // Attack PFX
+
+    [Header("Attack PFX")]
     [SerializeField] private ParticleSystem aoeAttackParticles;
     private ParticleSystem aoeAttackParticlesInstance;
     public Color aoeAttackColour;
@@ -99,10 +100,10 @@ public class Tower : MonoBehaviour
     {
         currentHealth = towerInfo.towerHealth;
 
-        if(isPoweredUp && towerInfo.type == InstrumentType.Piano)
-        {
-            currentHealth = currentHealth * 2;
-        }
+        //if(isPoweredUp && towerInfo.type == InstrumentType.Piano)
+        //{
+        //    currentHealth = currentHealth * 2;
+        //}
 
         beat = 1;
         currentState = TowerState.Default;
@@ -117,17 +118,17 @@ public class Tower : MonoBehaviour
 
         shieldEffect.SetActive(isShielded);
 
-        if (isPoweredUp) 
-        { 
-            poweredIcon.SetActive(true);
-            nonPoweredIcon.SetActive(false);
+        //if (isPoweredUp) 
+        //{ 
+        //    poweredIcon.SetActive(true);
+        //    nonPoweredIcon.SetActive(false);
 
-            if(towerInfo.type == InstrumentType.Guitar)
-            {
-                towerRange = 6;
-            }
+        //    if(towerInfo.type == InstrumentType.Guitar)
+        //    {
+        //        towerRange = 6;
+        //    }
 
-        }
+        //}
 
         towerEffectVisual();
 
@@ -135,17 +136,10 @@ public class Tower : MonoBehaviour
 
     public void towerEffectVisual()
     {
-        float beatDuration = ConductorV2.instance.beatDuration;
         if (towerHover && towerAboutToFire)
         {
             beatIndicator.SetActive(true);
             beatCircle.SetActive(true);
-            //beatIndicator.transform.localScale = Vector3.Lerp(Vector3.one * 1.5f, Vector3.one * 0.75f, beatDuration);
-
-            //if (ConductorV2.instance.beatDuration < 0.2)
-            //{
-            //    beatIndicator.transform.localScale = Vector3.one * 1.5f;
-            //}
         }
         else
         {
@@ -199,12 +193,12 @@ public class Tower : MonoBehaviour
 
 
         //empowered guitar function
-        if (isPoweredUp && towerInfo.type == InstrumentType.Guitar)
-        {
+        //if (isPoweredUp && towerInfo.type == InstrumentType.Guitar)
+        //{
 
-            CreateBullet(damage, burningBullet, multiAttack, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y));
+        //    CreateBullet(damage, burningBullet, multiAttack, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y));
 
-        }
+        //}
 
         burningBullet = false;
         increaseBulletDamage = false;
@@ -235,11 +229,11 @@ public class Tower : MonoBehaviour
         CreateBullet(damage, burningBullet, false, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
 
         
-        if(isPoweredUp && towerInfo.type == InstrumentType.Bass)
-        {
-            CreateBullet(damage, burningBullet, false, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + -yPos));
+        //if(isPoweredUp && towerInfo.type == InstrumentType.Bass)
+        //{
+        //    CreateBullet(damage, burningBullet, false, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + -yPos));
             
-        }
+        //}
 
         burningBullet = false;
         increaseBulletDamage = false;
@@ -277,10 +271,10 @@ public class Tower : MonoBehaviour
             }
             else if (item.transform.CompareTag("Enemy"))
             {
-                if (isPoweredUp && item.transform.GetComponent<Enemy>().isStunned == false)//empowered drum effect
-                {
-                    item.transform.GetComponent<Enemy>().isStunned = true;
-                }
+                //if (isPoweredUp && item.transform.GetComponent<Enemy>().isStunned == false)//empowered drum effect
+                //{
+                //    item.transform.GetComponent<Enemy>().isStunned = true;
+                //}
 
                 item.transform.GetComponent<Enemy>().Damage(currentDamage);
             }
@@ -381,19 +375,22 @@ public class Tower : MonoBehaviour
     {
         switch (buffType)
         {
-            case BuffType.Sonu://Sonu's Buff
+            case BuffType.Multi://Multi Buff
                 ExtraFire();
                 break;
-            case BuffType.Fayruz://Fayruz's Buff
+
+            case BuffType.Burn://Burn Buff
                 burningBullet = true;
                 break;
-            case BuffType.Niimi: //Niimi's Buff
-                isShielded = true;
 
+            case BuffType.Shield: //Shield Buff
+                isShielded = true;
                 break;
+
             case BuffType.Normal:
                 increaseBulletDamage = true;
                 break;
+
             default:
                 break;
         }
@@ -440,7 +437,7 @@ public class Tower : MonoBehaviour
         {
             if(buffIndex > recordedBuffs.Count - 1)
             {
-
+                //When no buff is activated
             }
             else
             {

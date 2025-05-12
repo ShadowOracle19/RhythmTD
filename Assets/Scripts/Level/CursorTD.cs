@@ -320,19 +320,19 @@ public class CursorTD : MonoBehaviour
     public void Buff1Trigger()
     {
         if (towerSelectMenuOpened) return;
-        TowerEmpowerment(BuffType.Niimi);
+        TowerEmpowerment(BuffType.Shield);
         SpawnBeatHitResult();
     }
     public void Buff2Trigger()
     {
         if (towerSelectMenuOpened) return;
-        TowerEmpowerment(BuffType.Sonu);
+        TowerEmpowerment(BuffType.Multi);
         SpawnBeatHitResult();
     }
     public void Buff3Trigger()
     {
         if (towerSelectMenuOpened) return;
-        TowerEmpowerment(BuffType.Fayruz);
+        TowerEmpowerment(BuffType.Burn);
         SpawnBeatHitResult();
     }
 

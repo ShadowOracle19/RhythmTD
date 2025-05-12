@@ -35,9 +35,11 @@ public class TowerManager : MonoBehaviour
     public List<GameObject> towers = new List<GameObject>();
 
     //Tower background shader management
+    /*
     public Material feverModeShader;
 
     public GameObject stageBackground;
+    */
     
     //Tower menu shader management
     public Material greyscaleShader;
@@ -125,6 +127,7 @@ public class TowerManager : MonoBehaviour
         Cooldown();
         UpdateCooldownShader();
 
+        /*
         if (FeverSystem.Instance.feverModeActive == true)
         {
            stageBackground.GetComponent<Image>().material = feverModeShader; 
@@ -133,6 +136,7 @@ public class TowerManager : MonoBehaviour
         {
             stageBackground.GetComponent<Image>().material = null; 
         }
+        */
     }
 
     public void SetupResourceBars()

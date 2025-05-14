@@ -42,8 +42,8 @@ public class TowerManager : MonoBehaviour
     */
     
     //Tower menu shader management
-    public Material greyscaleShader;
-    public Material overchargeShader;
+    //public Material greyscaleShader;
+    //public Material overchargeShader;
 
     public GameObject menuTower1;
     public GameObject menuTower2;
@@ -555,24 +555,24 @@ public class TowerManager : MonoBehaviour
         
         if (CombatManager.Instance.resourceNum == CombatManager.Instance.maxResource)
         {
-            menuTower1.GetComponent<Image>().material = overchargeShader;
-            sidebarTower1.GetComponent<Image>().material = overchargeShader;
+            //menuTower1.GetComponent<Image>().material = overchargeShader;
+            //sidebarTower1.GetComponent<Image>().material = overchargeShader;
 
-            menuTower2.GetComponent<Image>().material = overchargeShader;
-            sidebarTower2.GetComponent<Image>().material = overchargeShader;
+            //menuTower2.GetComponent<Image>().material = overchargeShader;
+            //sidebarTower2.GetComponent<Image>().material = overchargeShader;
 
-            menuTower3.GetComponent<Image>().material = overchargeShader;
-            sidebarTower3.GetComponent<Image>().material = overchargeShader;
+            //menuTower3.GetComponent<Image>().material = overchargeShader;
+            //sidebarTower3.GetComponent<Image>().material = overchargeShader;
 
-            menuTower4.GetComponent<Image>().material = overchargeShader;
-            sidebarTower4.GetComponent<Image>().material = overchargeShader;
+            //menuTower4.GetComponent<Image>().material = overchargeShader;
+            //sidebarTower4.GetComponent<Image>().material = overchargeShader;
         }
         else
         {
             if (guitarCooldown || CombatManager.Instance.resourceNum < towers[0].GetComponent<Tower>().towerInfo.resourceCost) 
             {
-                menuTower1.GetComponent<Image>().material = greyscaleShader;
-                sidebarTower1.GetComponent<Image>().material = greyscaleShader;
+                //menuTower1.GetComponent<Image>().material = greyscaleShader;
+                //sidebarTower1.GetComponent<Image>().material = greyscaleShader;
             }
             else if (!guitarCooldown && CombatManager.Instance.resourceNum >= towers[0].GetComponent<Tower>().towerInfo.resourceCost)
             {
@@ -582,8 +582,8 @@ public class TowerManager : MonoBehaviour
             
             if (drumCooldown || CombatManager.Instance.resourceNum < towers[1].GetComponent<Tower>().towerInfo.resourceCost) 
             {
-                menuTower2.GetComponent<Image>().material = greyscaleShader;
-                sidebarTower2.GetComponent<Image>().material = greyscaleShader;
+                //menuTower2.GetComponent<Image>().material = greyscaleShader;
+                //sidebarTower2.GetComponent<Image>().material = greyscaleShader;
             }
             else if (!drumCooldown && CombatManager.Instance.resourceNum >= towers[1].GetComponent<Tower>().towerInfo.resourceCost)
             {
@@ -593,8 +593,8 @@ public class TowerManager : MonoBehaviour
 
             if (bassCooldown || CombatManager.Instance.resourceNum < towers[2].GetComponent<Tower>().towerInfo.resourceCost) 
             {
-                menuTower3.GetComponent<Image>().material = greyscaleShader;
-                sidebarTower3.GetComponent<Image>().material = greyscaleShader;
+                //menuTower3.GetComponent<Image>().material = greyscaleShader;
+                //sidebarTower3.GetComponent<Image>().material = greyscaleShader;
             }
             else if (!bassCooldown && CombatManager.Instance.resourceNum >= towers[2].GetComponent<Tower>().towerInfo.resourceCost)
             {
@@ -604,8 +604,8 @@ public class TowerManager : MonoBehaviour
 
             if (pianoCooldown || CombatManager.Instance.resourceNum < towers[3].GetComponent<Tower>().towerInfo.resourceCost) 
             {
-                menuTower4.GetComponent<Image>().material = greyscaleShader;
-                sidebarTower4.GetComponent<Image>().material = greyscaleShader;
+                //menuTower4.GetComponent<Image>().material = greyscaleShader;
+                //sidebarTower4.GetComponent<Image>().material = greyscaleShader;
             }
             else if (!pianoCooldown && CombatManager.Instance.resourceNum >= towers[3].GetComponent<Tower>().towerInfo.resourceCost)
             {

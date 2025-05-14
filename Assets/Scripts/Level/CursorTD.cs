@@ -52,6 +52,7 @@ public class CursorTD : MonoBehaviour
     public GameObject SlotD;
 
     public GameObject cursorSprite;
+    public Vector3 defaultSize;
     public Vector3 pulseSize;
 
     public GameObject beatHitResultPrefab;
@@ -111,7 +112,7 @@ public class CursorTD : MonoBehaviour
             return;
 
         //return cursor sprite to origin size
-        cursorSprite.transform.localScale = Vector3.Lerp(cursorSprite.transform.localScale, Vector3.one, Time.deltaTime * 5);
+        cursorSprite.transform.localScale = Vector3.Lerp(cursorSprite.transform.localScale, defaultSize, Time.deltaTime * 5);
         
 
         if (GameManager.Instance.winState) return;

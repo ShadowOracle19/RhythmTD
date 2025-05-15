@@ -231,7 +231,7 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadCharacterSprite()
     {
-        var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].name}/{myDialogue.dialogue[index].name}_{myDialogue.dialogue[index].emotion}");
+        var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].name}/SPR-DS_{myDialogue.dialogue[index].name}-{myDialogue.dialogue[index].emotion}");
 
         if (characterSprite == null)
         {

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    private ScreenShake shake;
+    //private ScreenShake shake;
 
     private void Start()
     {
-        shake = GameObject.FindGameObjectWithTag("ScreenShaker").GetComponent<ScreenShake>();
+        //shake = GameObject.FindGameObjectWithTag("ScreenShaker").GetComponent<ScreenShake>();
     }
     private void OnTriggerStay(Collider collision)
     {
@@ -16,7 +16,7 @@ public class Target : MonoBehaviour
         {
             GameManager.Instance.Damage();
             collision.gameObject.GetComponent<Enemy>().Kill();
-            shake.CamShake();
+            //shake.CamShake();
         }
     }
 }

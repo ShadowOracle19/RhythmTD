@@ -447,11 +447,6 @@ public class TowerManager : MonoBehaviour
                 continue;
             }
 
-            if(tower.towerInfo.type == InstrumentType.Piano && tower.isPoweredUp)
-            {
-                CombatManager.Instance.resourceNum += 1;
-            }
-
             switch (tower.towerInfo.attackPattern)
             {
                 case TowerAttackPattern.everyBeat:
@@ -490,7 +485,6 @@ public class TowerManager : MonoBehaviour
                             tower.towerAboutToFire = false;
                             break;
                     }
-
                     break;
 
                 case TowerAttackPattern.everyBeatButOne:

@@ -280,7 +280,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4305122640335676531
@@ -437,39 +437,24 @@ MonoBehaviour:
   towerAttackSFX: {fileID: 7692277564513255499}
   towerAudioVolumeIncrement: 0.05
   towerInfo: {fileID: 0}
-  trigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1969963013028165710}
-        m_TargetAssemblyTypeName: Tower, Assembly-CSharp
-        m_MethodName: OnBeat
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  rotateStarted: 0
   firePoint: {fileID: 3199641180352351627}
   projectile: {fileID: 2456792131810543251, guid: a77cb059551aa414e9549713c6ebc95d, type: 3}
-  currentHealth: 0
   connectedTile: {fileID: 0}
+  beat: 0
+  everyOtherBeat: 0
+  currentHealth: 0
   currentDamage: 0
   tempDamageHolder: 0
+  towerRange: 0
   burningBullet: 0
   increaseBulletDamage: 0
-  towerRange: 0
+  multiAttack: 0
   towerHover: 0
   beatIndicator: {fileID: 1137120996435424628}
   beatCircle: {fileID: 4305122640335676531}
   towerAboutToFire: 0
   shieldEffect: {fileID: 5687361503201761549}
   isShielded: 0
-  beat: 0
-  everyOtherBeat: 0
   currentState: 0
   recordedBuffs: 
   isInputtingBuffs: 0
@@ -481,10 +466,10 @@ MonoBehaviour:
   isPoweredUp: 0
   nonPoweredIcon: {fileID: 2416119472238725123}
   poweredIcon: {fileID: 3892228669112652279}
-  defaultAttackSprite: {fileID: 0}
-  increasedAttackSprite: {fileID: 0}
-  multiAttackSprite: {fileID: 0}
-  flameAttackSprite: {fileID: 0}
+  defaultAttackSprite: {fileID: -352905814, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
+  increasedAttackSprite: {fileID: 560798113, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
+  multiAttackSprite: {fileID: 1452228942, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
+  flameAttackSprite: {fileID: 1643883141, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
   aoeAttackParticles: {fileID: 5103615976187222216, guid: e8889e3cb260858418962975b4770ad7, type: 3}
   aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
   shieldDestructionParticles: {fileID: 0}

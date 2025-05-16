@@ -231,6 +231,7 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadCharacterSprite()
     {
+        // Loads the character sprite from the JSON using their name and emotion tags
         var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].name}/SPR-DS_{myDialogue.dialogue[index].name}-{myDialogue.dialogue[index].emotion}");
 
         if (characterSprite == null)

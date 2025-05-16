@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1982102439767484879}
   - component: {fileID: 6669139555865573451}
   m_Layer: 5
-  m_Name: Tower 04 Cooldown
+  m_Name: Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5968024611057583227}
+  m_Father: {fileID: 7962291829865213669}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.5, y: 360.4}
+  m_AnchoredPosition: {x: 10, y: 360.4}
   m_SizeDelta: {x: 7, y: 37}
   m_Pivot: {x: 0.5000001, y: -0.000000013038516}
 --- !u!222 &3251842391391484987
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 366241070, guid: 81e6a582ae59d8049964ef601aec590c, type: 3}
+  m_Sprite: {fileID: -1889813793196319305, guid: 3f7824c93cc24a349a941a7465626cff, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -177,15 +177,15 @@ RectTransform:
   m_GameObject: {fileID: 46088305158440733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5723170908819186571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 420}
+  m_SizeDelta: {x: 44, y: 37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6909860830485911838
 CanvasRenderer:
@@ -208,14 +208,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 298fc608ddb645744a349cecaf8c920f, type: 3}
+  m_Sprite: {fileID: -5528023485845471248, guid: 3f7824c93cc24a349a941a7465626cff, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 7517278482238334781}
   - component: {fileID: 8041817433782564045}
   m_Layer: 5
-  m_Name: Tower 1
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -344,10 +344,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 959034027719188581}
-  - {fileID: 7213255629508281187}
-  - {fileID: 2237092341412841595}
+  m_Children: []
   m_Father: {fileID: 8962592888811902874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -449,7 +446,7 @@ GameObject:
   - component: {fileID: 6669413337679237746}
   - component: {fileID: 3316587845713728870}
   m_Layer: 0
-  m_Name: Resource Charge Slider
+  m_Name: Resource Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,16 +461,16 @@ RectTransform:
   m_GameObject: {fileID: 352349528079443088}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000799, y: 1.0000799, z: 1.0000799}
+  m_LocalScale: {x: 1.50012, y: 1.50012, z: 1.00008}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2585240421418148168}
   - {fileID: 3803556437692657701}
-  m_Father: {fileID: 8896241118101579132}
+  m_Father: {fileID: 4098332004778183975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: 2}
+  m_AnchoredPosition: {x: 89.99997, y: 3}
   m_SizeDelta: {x: 30, y: 142.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3316587845713728870
@@ -539,7 +536,7 @@ GameObject:
   - component: {fileID: 6392508983043757181}
   - component: {fileID: 6339899913938108518}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -843,7 +840,7 @@ GameObject:
   - component: {fileID: 6550261579400666358}
   - component: {fileID: 6163802544989405762}
   m_Layer: 5
-  m_Name: Tower 03 Cost
+  m_Name: Cost Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -858,15 +855,15 @@ RectTransform:
   m_GameObject: {fileID: 1141239190242481381}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000799, y: 1.0000799, z: 1.0000799}
+  m_LocalScale: {x: 1.50012, y: 1.50012, z: 1.00008}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6330805779685396370}
+  m_Father: {fileID: 8641414771454534448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 105, y: 49}
-  m_SizeDelta: {x: -54.789993, y: -54.789993}
+  m_AnchoredPosition: {x: 157.49997, y: -76.5}
+  m_SizeDelta: {x: -84.78999, y: -84.78999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6550261579400666358
 CanvasRenderer:
@@ -977,7 +974,7 @@ GameObject:
   - component: {fileID: 6519433201084970869}
   - component: {fileID: 7571059289192672865}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1141,8 +1138,9 @@ GameObject:
   - component: {fileID: 7962291829865213669}
   - component: {fileID: 6425003829450092461}
   - component: {fileID: 5930078685039869357}
+  - component: {fileID: 6740442284358371415}
   m_Layer: 5
-  m_Name: Tower 04 Box
+  m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1157,11 +1155,12 @@ RectTransform:
   m_GameObject: {fileID: 1445331013311780620}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.5000001, y: 1.5000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5968024611057583227}
-  m_Father: {fileID: 3301095413756049906}
+  - {fileID: 6902524512187110915}
+  m_Father: {fileID: 3956202764690936329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1206,6 +1205,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6740442284358371415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445331013311780620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &1486897494246870938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,8 +1229,9 @@ GameObject:
   - component: {fileID: 1080696761703448080}
   - component: {fileID: 5796874615298162314}
   - component: {fileID: 3826114925200033113}
+  - component: {fileID: 4295654811149323368}
   m_Layer: 5
-  m_Name: Tower 03 Box
+  m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1233,11 +1246,12 @@ RectTransform:
   m_GameObject: {fileID: 1486897494246870938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.5000001, y: 1.5000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6330805779685396370}
-  m_Father: {fileID: 3301095413756049906}
+  - {fileID: 7110681686721882586}
+  m_Father: {fileID: 8641414771454534448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1282,6 +1296,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4295654811149323368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486897494246870938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &1499272966324206415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,8 +1715,9 @@ GameObject:
   - component: {fileID: 3285896790386275255}
   - component: {fileID: 4191360238442331357}
   - component: {fileID: 5036396522383582531}
+  - component: {fileID: 3622684047774075133}
   m_Layer: 5
-  m_Name: Tower 02 Box
+  m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1704,11 +1732,12 @@ RectTransform:
   m_GameObject: {fileID: 2133876455319432473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.5000001, y: 1.5000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8896241118101579132}
-  m_Father: {fileID: 3301095413756049906}
+  - {fileID: 4007598844367669788}
+  m_Father: {fileID: 4098332004778183975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1805,6 +1834,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3622684047774075133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133876455319432473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &2148482274299129777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,6 +2182,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3183337252448102227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8641414771454534448}
+  m_Layer: 5
+  m_Name: Tower 03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8641414771454534448
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183337252448102227}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2434992647458955141}
+  - {fileID: 1080696761703448080}
+  - {fileID: 7175794768181823449}
+  m_Father: {fileID: 3301095413756049906}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3468213412090838680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2508,7 +2588,7 @@ GameObject:
   - component: {fileID: 8920338742843309487}
   - component: {fileID: 7529102900508883200}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2571,6 +2651,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3806909781449505324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8184245462040168193}
+  m_Layer: 5
+  m_Name: Tower 01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8184245462040168193
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3806909781449505324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7213255629508281187}
+  - {fileID: 8962592888811902874}
+  - {fileID: 2237092341412841595}
+  m_Father: {fileID: 3301095413756049906}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3842496451496857386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,10 +2754,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8962592888811902874}
-  - {fileID: 1409134187396175954}
-  - {fileID: 1080696761703448080}
-  - {fileID: 7962291829865213669}
+  - {fileID: 8184245462040168193}
+  - {fileID: 4098332004778183975}
+  - {fileID: 8641414771454534448}
+  - {fileID: 3956202764690936329}
   m_Father: {fileID: 7903306418981947670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2667,7 +2785,7 @@ GameObject:
   - component: {fileID: 3778843003744917819}
   - component: {fileID: 2375202570865021844}
   m_Layer: 5
-  m_Name: Tower 01 Cooldown
+  m_Name: Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2685,7 +2803,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2632387904708781083}
+  m_Father: {fileID: 8962592888811902874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2730,6 +2848,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4450664681940304495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3956202764690936329}
+  m_Layer: 5
+  m_Name: Tower 04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3956202764690936329
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450664681940304495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3348616719855797582}
+  - {fileID: 7962291829865213669}
+  - {fileID: 284505735200592204}
+  m_Father: {fileID: 3301095413756049906}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4527755488956503506
 GameObject:
   m_ObjectHideFlags: 0
@@ -3058,15 +3214,15 @@ RectTransform:
   m_GameObject: {fileID: 4987102021632659641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5723170908819186571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 415}
+  m_SizeDelta: {x: 44, y: 37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6688616619139262363
 CanvasRenderer:
@@ -3096,7 +3252,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0f22e8a53d0866e48a531a6451dd242f, type: 3}
+  m_Sprite: {fileID: 4595041431495556960, guid: 3f7824c93cc24a349a941a7465626cff, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3117,7 +3273,7 @@ GameObject:
   - component: {fileID: 2237092341412841595}
   - component: {fileID: 2245835931178754025}
   m_Layer: 0
-  m_Name: Resource Charge Slider
+  m_Name: Resource Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3130,18 +3286,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5031419833221594137}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5000002, y: 1.5000002, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7742228346328721849}
   - {fileID: 2129977861092408388}
-  m_Father: {fileID: 2632387904708781083}
+  m_Father: {fileID: 8184245462040168193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: 1}
+  m_AnchoredPosition: {x: 89.99997, y: 151.50002}
   m_SizeDelta: {x: 30, y: 142.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2245835931178754025
@@ -3357,7 +3513,7 @@ GameObject:
   - component: {fileID: 5233203974155801894}
   - component: {fileID: 2862745561532401489}
   m_Layer: 5
-  m_Name: Tower 3
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3374,10 +3530,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7110681686721882586}
-  - {fileID: 2434992647458955141}
-  - {fileID: 7175794768181823449}
+  m_Children: []
   m_Father: {fileID: 1080696761703448080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3824,7 +3977,7 @@ GameObject:
   - component: {fileID: 6415449235533240384}
   - component: {fileID: 1252441485063281966}
   m_Layer: 5
-  m_Name: Tower 4
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3841,10 +3994,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6902524512187110915}
-  - {fileID: 3348616719855797582}
-  - {fileID: 284505735200592204}
+  m_Children: []
   m_Father: {fileID: 7962291829865213669}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4167,9 +4317,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3516640260633789674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -299, y: -1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 794, y: -1}
   m_SizeDelta: {x: 389.70996, y: 84.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7977412706022417415
@@ -4295,16 +4445,16 @@ RectTransform:
   m_GameObject: {fileID: 6241015903784090780}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000799, y: 1.0000799, z: 1.0000799}
+  m_LocalScale: {x: 1.50012, y: 1.50012, z: 1.00008}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1820282448613820754}
   - {fileID: 4248194887329805496}
-  m_Father: {fileID: 6330805779685396370}
+  m_Father: {fileID: 8641414771454534448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: 2}
+  m_AnchoredPosition: {x: 89.99997, y: -147}
   m_SizeDelta: {x: 30, y: 142.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2949010909434109329
@@ -4749,7 +4899,7 @@ GameObject:
   - component: {fileID: 6260912304961535720}
   - component: {fileID: 7115451931076282490}
   m_Layer: 5
-  m_Name: Tower 01 Cost
+  m_Name: Cost Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4764,15 +4914,15 @@ RectTransform:
   m_GameObject: {fileID: 6872746752117459543}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000799, y: 1.0000799, z: 1.0000799}
+  m_LocalScale: {x: 1.50012, y: 1.50012, z: 1.00008}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2632387904708781083}
+  m_Father: {fileID: 8184245462040168193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 108, y: 58}
-  m_SizeDelta: {x: -54.789993, y: -54.789993}
+  m_AnchoredPosition: {x: 161.99998, y: 237.00002}
+  m_SizeDelta: {x: -84.78999, y: -84.78999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6260912304961535720
 CanvasRenderer:
@@ -5248,7 +5398,7 @@ GameObject:
   - component: {fileID: 5903716109648258334}
   - component: {fileID: 2747896518699224079}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5311,6 +5461,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7339191328640528546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4098332004778183975}
+  m_Layer: 5
+  m_Name: Tower 02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4098332004778183975
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339191328640528546}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7510605461638156030}
+  - {fileID: 1409134187396175954}
+  - {fileID: 6669413337679237746}
+  m_Father: {fileID: 3301095413756049906}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7404264822448463122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5337,16 +5525,16 @@ RectTransform:
   m_GameObject: {fileID: 7404264822448463122}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000799, y: 1.0000799, z: 1.0000799}
+  m_LocalScale: {x: 1.50012, y: 1.50012, z: 1.00008}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3100357507986796196}
   - {fileID: 7175412338785616369}
-  m_Father: {fileID: 5968024611057583227}
+  m_Father: {fileID: 3956202764690936329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: 2}
+  m_AnchoredPosition: {x: 89.99997, y: -297}
   m_SizeDelta: {x: 30, y: 142.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2036322686493845670
@@ -5411,8 +5599,9 @@ GameObject:
   - component: {fileID: 8962592888811902874}
   - component: {fileID: 8442508123328849200}
   - component: {fileID: 6249314032537271326}
+  - component: {fileID: 1698840059778477464}
   m_Layer: 5
-  m_Name: Tower 01 Box
+  m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5427,11 +5616,12 @@ RectTransform:
   m_GameObject: {fileID: 7572066805665392086}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.5000001, y: 1.5000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2632387904708781083}
-  m_Father: {fileID: 3301095413756049906}
+  - {fileID: 959034027719188581}
+  m_Father: {fileID: 8184245462040168193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5476,6 +5666,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1698840059778477464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572066805665392086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &7695763149748892777
 GameObject:
   m_ObjectHideFlags: 0
@@ -5629,15 +5832,15 @@ RectTransform:
   m_GameObject: {fileID: 7747777940336403998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5723170908819186571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 415}
+  m_SizeDelta: {x: 44, y: 37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &129497687300275268
 CanvasRenderer:
@@ -5660,14 +5863,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2511229593933714ea882bf5ee23b090, type: 3}
+  m_Sprite: {fileID: 4595041431495556960, guid: 3f7824c93cc24a349a941a7465626cff, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5973,7 +6176,7 @@ GameObject:
   - component: {fileID: 4064177359890430085}
   - component: {fileID: 8754988780227305265}
   m_Layer: 5
-  m_Name: Tower 02 Cooldown
+  m_Name: Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5986,12 +6189,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7981721040239420961}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8896241118101579132}
+  m_Father: {fileID: 1409134187396175954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6048,7 +6251,7 @@ GameObject:
   - component: {fileID: 6073403939139295479}
   - component: {fileID: 7056833770005029073}
   m_Layer: 5
-  m_Name: Tower 02 Cost
+  m_Name: Cost Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6061,17 +6264,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8020013889192029535}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5000002, y: 1.5000002, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8896241118101579132}
+  m_Father: {fileID: 4098332004778183975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 102, y: 62}
-  m_SizeDelta: {x: -54.79, y: -54.79}
+  m_AnchoredPosition: {x: 153, y: 93.00001}
+  m_SizeDelta: {x: -84.79, y: -84.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6073403939139295479
 CanvasRenderer:
@@ -6738,7 +6941,7 @@ GameObject:
   - component: {fileID: 4190480726488851963}
   - component: {fileID: 1278087545691171415}
   m_Layer: 5
-  m_Name: Tower 2
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6755,10 +6958,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4007598844367669788}
-  - {fileID: 7510605461638156030}
-  - {fileID: 6669413337679237746}
+  m_Children: []
   m_Father: {fileID: 1409134187396175954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6816,7 +7016,7 @@ GameObject:
   - component: {fileID: 8554765250184336529}
   - component: {fileID: 7596772145432025682}
   m_Layer: 5
-  m_Name: Tower 04 Cost
+  m_Name: Cost Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6831,15 +7031,15 @@ RectTransform:
   m_GameObject: {fileID: 9040429232531785933}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000799, y: 1.0000799, z: 1.0000799}
+  m_LocalScale: {x: 1.5001202, y: 1.5001202, z: 1.0000801}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5968024611057583227}
+  m_Father: {fileID: 3956202764690936329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 105, y: 50}
-  m_SizeDelta: {x: -54.789993, y: -54.789993}
+  m_AnchoredPosition: {x: 157.49997, y: -225.00003}
+  m_SizeDelta: {x: -84.78999, y: -84.78999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8554765250184336529
 CanvasRenderer:
@@ -6950,7 +7150,7 @@ GameObject:
   - component: {fileID: 4159899793332363264}
   - component: {fileID: 8740438730247291005}
   m_Layer: 5
-  m_Name: Tower 03 Cooldown
+  m_Name: Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6968,7 +7168,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6330805779685396370}
+  m_Father: {fileID: 1080696761703448080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

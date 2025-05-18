@@ -36,7 +36,7 @@ public class MenuCursorMovement : MonoBehaviour
     public Vector3 lowerRightTarget;
 
     // Lerp Animation
-    public float lerpSpeed = 2000.0f;
+    public float lerpSpeed = 10.0f;
     public float lerpStart;
     public float lerpLength;
     
@@ -74,7 +74,7 @@ public class MenuCursorMovement : MonoBehaviour
     void Update()
     {
         // Lerp Animation
-        float distanceLerped = (Time.time - lerpStart) * lerpSpeed;
+        float distanceLerped = (Time.time - lerpStart) * (lerpSpeed*lerpLength);
         float lerpFraction = distanceLerped / lerpLength;
         
         UpdateCursorPos(lerpFraction);

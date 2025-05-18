@@ -55,10 +55,10 @@ public class MenuCursorMovement : MonoBehaviour
         elementWidth = targetTransform.sizeDelta.x;
         elementHeight = targetTransform.sizeDelta.y;
         
-        upperLeftCorner.transform.position = new Vector3(targetElement.transform.position.x - (elementWidth/3), targetElement.transform.position.y + (elementHeight/3), 0);
-        upperRightCorner.transform.position = new Vector3(targetElement.transform.position.x + (elementWidth/3), targetElement.transform.position.y + (elementHeight/3),0);
-        lowerLeftCorner.transform.position = new Vector3(targetElement.transform.position.x - (elementWidth/3), targetElement.transform.position.y - (elementHeight/3), 0);
-        lowerRightCorner.transform.position = new Vector3(targetElement.transform.position.x + (elementWidth/3), targetElement.transform.position.y - (elementHeight/3), 0);
+        upperLeftCorner.transform.position = new Vector3(targetElement.transform.position.x - (elementWidth/3) - 10, targetElement.transform.position.y + (elementHeight/3), 0);
+        upperRightCorner.transform.position = new Vector3(targetElement.transform.position.x + (elementWidth/3) + 10, targetElement.transform.position.y + (elementHeight/3),0);
+        lowerLeftCorner.transform.position = new Vector3(targetElement.transform.position.x - (elementWidth/3) - 10, targetElement.transform.position.y - (elementHeight/3), 0);
+        lowerRightCorner.transform.position = new Vector3(targetElement.transform.position.x + (elementWidth/3) + 10, targetElement.transform.position.y - (elementHeight/3), 0);
 
         upperLeftPrev = upperLeftCorner.transform.position;
         upperRightPrev = upperRightCorner.transform.position;
@@ -93,12 +93,14 @@ public class MenuCursorMovement : MonoBehaviour
         targetTransform = (RectTransform)targetObject.transform;
 
         elementWidth = targetTransform.sizeDelta.x;
+        Debug.Log(elementWidth);
         elementHeight = targetTransform.sizeDelta.y;
+        Debug.Log(elementHeight);
         
-        upperLeftTarget = new Vector3(targetObject.transform.position.x - (elementWidth/3), targetObject.transform.position.y + (elementHeight/3), 0);
-        upperRightTarget = new Vector3(targetObject.transform.position.x + (elementWidth/3), targetObject.transform.position.y + (elementHeight/3),0);
-        lowerLeftTarget = new Vector3(targetObject.transform.position.x - (elementWidth/3), targetObject.transform.position.y - (elementHeight/3), 0);
-        lowerRightTarget = new Vector3(targetObject.transform.position.x + (elementWidth/3), targetObject.transform.position.y - (elementHeight/3), 0);
+        upperLeftTarget = new Vector3(targetObject.transform.position.x - (elementWidth/3) - 10, targetObject.transform.position.y + (elementHeight/3), 0);
+        upperRightTarget = new Vector3(targetObject.transform.position.x + (elementWidth/3) + 10, targetObject.transform.position.y + (elementHeight/3),0);
+        lowerLeftTarget = new Vector3(targetObject.transform.position.x - (elementWidth/3) - 10, targetObject.transform.position.y - (elementHeight/3), 0);
+        lowerRightTarget = new Vector3(targetObject.transform.position.x + (elementWidth/3) + 10, targetObject.transform.position.y - (elementHeight/3), 0);
     }
 
     public void SetPreviousElement(GameObject lastSelectedElement) 
@@ -117,6 +119,7 @@ public class MenuCursorMovement : MonoBehaviour
     public void SetActiveElement(GameObject currentlySelectedElement) 
     {
         targetElement = currentlySelectedElement;
+        //targetElement = EventSystem.current.currentSelectedGameObject;
 
         SetTargetPos(targetElement);
 

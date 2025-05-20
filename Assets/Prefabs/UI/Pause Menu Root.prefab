@@ -168,6 +168,7 @@ RectTransform:
   m_Children:
   - {fileID: 8266918055088766097}
   - {fileID: 6925197210602657744}
+  - {fileID: 1344889900983413630}
   m_Father: {fileID: 1568591397501113129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -297,6 +298,7 @@ GameObject:
   - component: {fileID: 876525453248178993}
   - component: {fileID: 1129336418916264728}
   - component: {fileID: 992501071954414429}
+  - component: {fileID: 6759294566714353054}
   m_Layer: 5
   m_Name: Settings Button
   m_TagString: Untagged
@@ -442,6 +444,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &6759294566714353054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137947922625640549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972227bd8e64eda499f5e0020ae64c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuCursor: {fileID: 5397606200137246936}
+  buttonHighlightAudio: {fileID: 0}
 --- !u!1 &2176624660514764875
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +545,7 @@ GameObject:
   - component: {fileID: 6621781000778379940}
   - component: {fileID: 818740939599844015}
   - component: {fileID: 191990965504574055}
+  - component: {fileID: 765073951488521428}
   m_Layer: 5
   m_Name: Restart Button
   m_TagString: Untagged
@@ -674,6 +691,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &765073951488521428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2953367316144803105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972227bd8e64eda499f5e0020ae64c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuCursor: {fileID: 5397606200137246936}
+  buttonHighlightAudio: {fileID: 0}
 --- !u!1 &3586196856434768047
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,6 +851,7 @@ GameObject:
   - component: {fileID: 4332000191290438228}
   - component: {fileID: 3602673626690291132}
   - component: {fileID: 3315305797098003016}
+  - component: {fileID: 6057520669116479072}
   m_Layer: 5
   m_Name: Resume Button
   m_TagString: Untagged
@@ -953,6 +985,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6057520669116479072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010947961210242657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972227bd8e64eda499f5e0020ae64c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuCursor: {fileID: 5397606200137246936}
+  buttonHighlightAudio: {fileID: 0}
 --- !u!1 &7944853034849244972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,6 +1177,7 @@ GameObject:
   - component: {fileID: 2760851314149685183}
   - component: {fileID: 6902912546647779421}
   - component: {fileID: 8135977072551329703}
+  - component: {fileID: 873789449427896462}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -1276,6 +1323,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &873789449427896462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9112261760944623689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972227bd8e64eda499f5e0020ae64c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuCursor: {fileID: 5397606200137246936}
+  buttonHighlightAudio: {fileID: 0}
 --- !u!1 &9208102207610477335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,3 +1471,98 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1001 &4309634708548468527
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2323879755946494889}
+    m_Modifications:
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5592390615601151234, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: targetElement
+      value: 
+      objectReference: {fileID: 4010947961210242657}
+    - target: {fileID: 5592390615601151234, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: previousElement
+      value: 
+      objectReference: {fileID: 4010947961210242657}
+    - target: {fileID: 5592390615601151234, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 6994382344693146338}
+    - target: {fileID: 8153419485837645815, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_Name
+      value: Menu Cursor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153419485837645815, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c63153164120685489db67ea501dbc32, type: 3}
+--- !u!4 &1344889900983413630 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2982763743707518033, guid: c63153164120685489db67ea501dbc32, type: 3}
+  m_PrefabInstance: {fileID: 4309634708548468527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5397606200137246936 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8153419485837645815, guid: c63153164120685489db67ea501dbc32, type: 3}
+  m_PrefabInstance: {fileID: 4309634708548468527}
+  m_PrefabAsset: {fileID: 0}

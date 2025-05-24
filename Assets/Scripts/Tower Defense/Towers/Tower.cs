@@ -182,24 +182,23 @@ public class Tower : MonoBehaviour
             nextAttackSprite = flameAttackSprite;
         }
 
-        if (towerInfo.isAOETower)
+        switch (towerInfo.projectileType)
         {
-            AOE();
-            return;
+            case ProjectileType.Bullet:
+                CreateBullet(damage, burningBullet, multiAttack, transform.position);
+                break;
+
+            case ProjectileType.AOE:
+                AOE();
+                break;
+
+            case ProjectileType.Charges:
+                PlaceCharge();
+                break;
+
+            default:
+                break;
         }
-
-        CreateBullet(damage, burningBullet, multiAttack, transform.position);
-        
-
-
-        //empowered guitar function
-        //if (isPoweredUp && towerInfo.type == InstrumentType.Guitar)
-        //{
-
-        //    CreateBullet(damage, burningBullet, multiAttack, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y));
-
-        //}
-
         burningBullet = false;
         increaseBulletDamage = false;
         
@@ -254,6 +253,16 @@ public class Tower : MonoBehaviour
         CreateBullet(currentDamage, false, true, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y - 1));
 
         multiAttack = false;
+    }
+
+    public void PlaceCharge()
+    {
+        colliders = Physics.OverlapBox(transform.position, new Vector3(2.5f, 1, 2.5f));
+
+        int rand = Random.Range(0, colliders.Length - 1);
+
+        colliders[rand].gameObject.SetActive(true);
+
     }
 
     public void AOE()

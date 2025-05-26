@@ -30,6 +30,10 @@ public class TowerTypeCreator : ScriptableObject
     [Tooltip("Set to true if you want tower to be AOE")]
     public bool isAOETower = false;
 
+    [Header("Projectile Type")]
+    [Tooltip("Set to desired firing type")]
+    public ProjectileType projectileType;
+
     [Header("Resource Tower")]
     public bool isResourceTower = false;
     public int resourceGain = 5;
@@ -46,4 +50,9 @@ public enum TowerAttackPattern
 public enum TowerResourceCost
 {
     one, two, three, four
+}
+
+public enum ProjectileType
+{
+    Bullet, AOE, Charges
 }

@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public Transform globelParent;
-    public Transform projectileParent;
     public AudioSource menuMusic;
 
     [SerializeField] public GameObject gameOverScreen;

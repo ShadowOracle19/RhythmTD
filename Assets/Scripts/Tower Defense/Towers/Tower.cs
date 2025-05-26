@@ -28,6 +28,7 @@ public class Tower : MonoBehaviour
 
     public Transform firePoint;
     public GameObject projectile;
+    
     public Tile connectedTile;
 
     private Collider[] colliders;
@@ -96,6 +97,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private ParticleSystem burningParticles;
     private ParticleSystem burningParticlesInstance;
 
+
     private void Start()
     {
         currentHealth = towerInfo.towerHealth;
@@ -150,7 +152,7 @@ public class Tower : MonoBehaviour
 
     private void CreateBullet(int damage, bool burningBullet, bool multiAttack, Vector3 position)
     {
-        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, burningBullet);
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
@@ -182,24 +184,23 @@ public class Tower : MonoBehaviour
             nextAttackSprite = flameAttackSprite;
         }
 
-        if (towerInfo.isAOETower)
+        switch (towerInfo.projectileType)
         {
-            AOE();
-            return;
+            case ProjectileType.Bullet:
+                CreateBullet(damage, burningBullet, multiAttack, transform.position);
+                break;
+
+            case ProjectileType.AOE:
+                AOE();
+                break;
+
+            case ProjectileType.Charges:
+                PlaceCharge();
+                break;
+
+            default:
+                break;
         }
-
-        CreateBullet(damage, burningBullet, multiAttack, transform.position);
-        
-
-
-        //empowered guitar function
-        //if (isPoweredUp && towerInfo.type == InstrumentType.Guitar)
-        //{
-
-        //    CreateBullet(damage, burningBullet, multiAttack, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y));
-
-        //}
-
         burningBullet = false;
         increaseBulletDamage = false;
         
@@ -254,6 +255,16 @@ public class Tower : MonoBehaviour
         CreateBullet(currentDamage, false, true, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y - 1));
 
         multiAttack = false;
+    }
+
+    public void PlaceCharge()
+    {
+        colliders = Physics.OverlapSphere(transform.position, towerRange);
+
+        int rand = Random.Range(0, colliders.Length - 1);
+
+        GameObject charge = Instantiate(projectile, transform.position, transform.rotation, CombatManager.Instance.chargesParent);
+        charge.GetComponent<Charges>().initalizeCharge(towerInfo.resourceGain,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z));
     }
 
     public void AOE()

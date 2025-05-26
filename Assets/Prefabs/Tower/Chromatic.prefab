@@ -143,8 +143,8 @@ Transform:
   m_GameObject: {fileID: 2749843575367313791}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.050000004, y: -0.118, z: 0.049}
-  m_LocalScale: {x: 0.1562225, y: 0.1562225, z: 0.1562225}
+  m_LocalPosition: {x: -0.05, y: 0.055, z: 0.679}
+  m_LocalScale: {x: 0.25852472, y: 0.25852472, z: 0.25852472}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6265875441098591601}
@@ -190,12 +190,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 175826868, guid: 20afd52492da45745a712fc6b056d8c0, type: 3}
+  m_Sprite: {fileID: 706195339, guid: 20afd52492da45745a712fc6b056d8c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.11, y: 7.250026}
+  m_Size: {x: 4.1899996, y: 8.331184}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -473,7 +473,7 @@ MonoBehaviour:
   towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: 001a12e674bb4c943b89583ba9b972b5, type: 2}
   firePoint: {fileID: 3199641180352351627}
-  projectile: {fileID: 2456792131810543251, guid: a77cb059551aa414e9549713c6ebc95d, type: 3}
+  projectile: {fileID: 394137417092299375, guid: 0a5e299489ca5fe40bbb4b0c3afa9bb1, type: 3}
   connectedTile: {fileID: 0}
   beat: 0
   everyOtherBeat: 0
@@ -510,6 +510,9 @@ MonoBehaviour:
   shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!82 &6659272261018043613
 AudioSource:
   m_ObjectHideFlags: 0
@@ -664,7 +667,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3121633194305466473
 Transform:
   m_ObjectHideFlags: 0

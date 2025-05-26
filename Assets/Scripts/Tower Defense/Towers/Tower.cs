@@ -28,6 +28,7 @@ public class Tower : MonoBehaviour
 
     public Transform firePoint;
     public GameObject projectile;
+    
     public Tile connectedTile;
 
     private Collider[] colliders;
@@ -96,6 +97,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private ParticleSystem burningParticles;
     private ParticleSystem burningParticlesInstance;
 
+
     private void Start()
     {
         currentHealth = towerInfo.towerHealth;
@@ -150,7 +152,7 @@ public class Tower : MonoBehaviour
 
     private void CreateBullet(int damage, bool burningBullet, bool multiAttack, Vector3 position)
     {
-        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, GameManager.Instance.projectileParent);
+        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, burningBullet);
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
@@ -257,12 +259,12 @@ public class Tower : MonoBehaviour
 
     public void PlaceCharge()
     {
-        colliders = Physics.OverlapBox(transform.position, new Vector3(2.5f, 1, 2.5f));
+        colliders = Physics.OverlapSphere(transform.position, towerRange);
 
         int rand = Random.Range(0, colliders.Length - 1);
 
-        colliders[rand].gameObject.SetActive(true);
-
+        GameObject charge = Instantiate(projectile, transform.position, transform.rotation, CombatManager.Instance.chargesParent);
+        charge.GetComponent<Charges>().initalizeCharge(towerInfo.resourceGain,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z));
     }
 
     public void AOE()

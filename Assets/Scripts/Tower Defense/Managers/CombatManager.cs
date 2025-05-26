@@ -37,6 +37,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public Transform enemiesParent;
     [SerializeField] public Transform towersParent;
     [SerializeField] public Transform projectilesParent;
+    [SerializeField] public Transform chargesParent;
 
     public TextMeshProUGUI enemiesSpawnIn;
     public int enemyTimerMax = 30;
@@ -108,7 +109,7 @@ public class CombatManager : MonoBehaviour
         {
             child.gameObject.GetComponent<Tower>().RemoveTower();
         }
-        //remove enemies
+        //remove projectiles
         foreach (Transform child in projectilesParent)
         {
             child.gameObject.GetComponent<Projectile>().RemoveProjectile();
@@ -193,10 +194,15 @@ public class CombatManager : MonoBehaviour
         {
             child.gameObject.GetComponent<Tower>().RemoveTower();
         }
-        //remove enemies
+        //remove Projectiles
         foreach (Transform child in projectilesParent)
         {
             child.gameObject.GetComponent<Projectile>().RemoveProjectile();
+        }
+        //remove Projectiles
+        foreach (Transform child in chargesParent)
+        {
+            child.gameObject.GetComponent<Charges>().RemoveCharge();
         }
         enemySpawners.startOnce = false;
         CursorTD.Instance.pauseMovement = true;

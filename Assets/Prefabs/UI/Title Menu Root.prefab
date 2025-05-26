@@ -325,7 +325,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuCursor: {fileID: 2300043841247897159}
   buttonHighlightAudio: {fileID: 0}
-  buttonHighlightAudioSource: {fileID: 0}
 --- !u!1 &1616147280895703797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,7 +1009,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuCursor: {fileID: 2300043841247897159}
   buttonHighlightAudio: {fileID: 0}
-  buttonHighlightAudioSource: {fileID: 0}
 --- !u!1 &7753709826418402585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,8 +1289,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: -1865881537331788973, guid: 3f7824c93cc24a349a941a7465626cff, type: 3}
+    m_PressedSprite: {fileID: -1865881537331788973, guid: 3f7824c93cc24a349a941a7465626cff, type: 3}
     m_SelectedSprite: {fileID: -1865881537331788973, guid: 3f7824c93cc24a349a941a7465626cff, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -1374,7 +1372,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuCursor: {fileID: 2300043841247897159}
   buttonHighlightAudio: {fileID: 0}
-  buttonHighlightAudioSource: {fileID: 0}
 --- !u!1 &8834047708369433629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1529,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.EventSystems.EventSystem, UnityEngine.UI
@@ -1544,7 +1541,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &6799128002010664551
 MonoBehaviour:
@@ -1578,7 +1575,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuCursor: {fileID: 2300043841247897159}
   buttonHighlightAudio: {fileID: 0}
-  buttonHighlightAudioSource: {fileID: 0}
 --- !u!1001 &7984220770794353072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1635,6 +1631,10 @@ PrefabInstance:
       propertyPath: previousElement
       value: 
       objectReference: {fileID: 8834047708369433629}
+    - target: {fileID: 5592390615601151234, guid: c63153164120685489db67ea501dbc32, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 311948801921453321}
     - target: {fileID: 8153419485837645815, guid: c63153164120685489db67ea501dbc32, type: 3}
       propertyPath: m_Name
       value: Menu Cursor

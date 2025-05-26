@@ -30,8 +30,8 @@ public class TutorialManager : MonoBehaviour
     public TextMeshProUGUI tutorialText;
     public bool pressKeyToNextDialogue = false;
 
-    public GameObject magicBarArrow;
-    public GameObject metronomeArrows;
+    //public GameObject magicBarArrow;
+    //public GameObject metronomeArrows;
     public GameObject cursorArrows;
     public GameObject cursorMovementGlyphs;
     public GameObject menuOpenGlyph;
@@ -74,23 +74,23 @@ public class TutorialManager : MonoBehaviour
 
         if (index == 2)
         {
-            metronomeArrows.SetActive(true);
+            //metronomeArrows.SetActive(true);
             cursorArrows.SetActive(true);
         }
         else
         {
-            metronomeArrows.SetActive(false);
+            //metronomeArrows.SetActive(false);
             cursorArrows.SetActive(false);
         }
 
         if (index == 4)
         {
-            magicBarArrow.SetActive(true);
+            //magicBarArrow.SetActive(true);
         }
         else
         {
             
-            magicBarArrow.SetActive(false);
+            //magicBarArrow.SetActive(false);
         }
 
         if (index == 5)

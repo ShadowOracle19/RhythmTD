@@ -47,10 +47,10 @@ public class ComboManager : MonoBehaviour
     {
         currentMultiplier = Mathf.Clamp(currentMultiplier, 1, 5);
 
-        currentComboText.text = "Combo: " + currentCombo;
-        streakText.text = "Streak: " + streak;
-        currentMultiplierText.text = "Multiplier: x" + currentMultiplier;
-        highestComboText.text = "Highest Combo: " + highestCombo;
+        currentComboText.text = "COMBO " + currentCombo;
+        streakText.text = "STREAK " + streak;
+        currentMultiplierText.text = "MULTIPLIER X" + currentMultiplier;
+        highestComboText.text = "SCORE " + highestCombo;
     }
 
     public void IncreaseCombo()

@@ -174,6 +174,8 @@ public class CombatManager : MonoBehaviour
 
         CursorTD.Instance.InitializeCursor();
 
+        BeatIndicatorManager.Instance.ResetBeatIndicator();
+
         TowerManager.Instance.SetupResourceBars();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -210,6 +212,8 @@ public class CombatManager : MonoBehaviour
         CursorTD.Instance.pauseMovement = true;
         CursorTD.Instance.isMoving = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        BeatIndicatorManager.Instance.ResetBeatIndicator();
 
         GameManager.Instance.menuMusic.Play();
         GameManager.Instance.playerInputManager.SetActive(false);

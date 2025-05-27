@@ -4,6 +4,27 @@ using UnityEngine;
 
 public class BeatIndicatorManager : MonoBehaviour
 {
+    #region dont touch this
+    private static BeatIndicatorManager _instance;
+    public static BeatIndicatorManager Instance
+    {
+        get
+        {
+            if (_instance is null)
+            {
+                Debug.LogError("BeatIndicatorManager is NULL");
+            }
+
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+    #endregion
+
     public int x1, x2;
 
     public List<GameObject> leftIndicators = new List<GameObject>();
@@ -12,38 +33,45 @@ public class BeatIndicatorManager : MonoBehaviour
     public float time;
     public float lerpTime;
 
-    
+    int beat = 1;
+
+    private void Start()
+    {
+        beat = 0;
+    }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
 
-        if(time < 3)
+    public void Beat()
+    {
+        if(beat == 4)
         {
-            time += Time.deltaTime;
-            lerpTime = time / 3;
-
-
-
-            leftIndicators[0].GetComponent<RectTransform>().localPosition =
-                Vector3.Lerp(leftIndicators[0].GetComponent<RectTransform>().localPosition,
-                new Vector3(0, leftIndicators[0].GetComponent<RectTransform>().localPosition.y, 0), lerpTime);
-
-
-            rightIndicators[0].GetComponent<RectTransform>().localPosition =
-                Vector3.Lerp(rightIndicators[0].GetComponent<RectTransform>().localPosition,
-                new Vector3(0, rightIndicators[0].GetComponent<RectTransform>().localPosition.y, 0), lerpTime);
-
-
-
+            beat = 0;
         }
-        else
+        float duration = leftIndicators.Count * (ConductorV2.instance.crotchet);
+        beat += 1;
+
+        leftIndicators[beat - 1].GetComponent<BeatDongle>().StartDongle(duration, x1);
+
+
+        rightIndicators[beat - 1].GetComponent<BeatDongle>().StartDongle(duration, x2);
+    }
+
+    public void ResetBeatIndicator()
+    {
+        beat = 0;
+
+        foreach (GameObject left in leftIndicators)
         {
-            time = 0;
-            leftIndicators[0].GetComponent<RectTransform>().localPosition = new Vector3(x1, leftIndicators[0].GetComponent<RectTransform>().localPosition.y, 0);
-            rightIndicators[0].GetComponent<RectTransform>().localPosition = new Vector3(x2, rightIndicators[0].GetComponent<RectTransform>().localPosition.y, 0);
+            left.GetComponent<BeatDongle>().ResetPosition(x1);
         }
-
+        foreach (GameObject right in rightIndicators)
+        {
+            right.GetComponent<BeatDongle>().ResetPosition(x2);
+        }
     }
 }

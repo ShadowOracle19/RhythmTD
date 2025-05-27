@@ -47,8 +47,10 @@ public class CombatManager : MonoBehaviour
     [Header("Resources")]
     public int resourceNum;
     public int maxResource = 100;
-    public Slider resourceSlider;
-    public TextMeshProUGUI resourceText;
+    public Slider resourceSlider1;
+    public Slider resourceSlider2;
+    public Slider resourceSlider3;
+    public Slider resourceSlider4;
     public int startingResources;
 
     [Header("Overcharge Resources")]
@@ -230,11 +232,8 @@ public class CombatManager : MonoBehaviour
     {
         TowerManager.Instance.TowerCost();
 
-        //resource stuff
-        resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
-        resourceSlider.value = resourceNum;
-        resourceText.text = resourceNum.ToString();
 
+        ResourceBar();
         
 
 
@@ -293,6 +292,16 @@ public class CombatManager : MonoBehaviour
             GameManager.Instance.WinLevel();
         } //checks if all enemies have died or player health hasnt reached zero to give a win state
 
+    }
+
+    void ResourceBar()
+    {
+        //resource stuff
+        resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
+        resourceSlider1.value = resourceNum;
+        resourceSlider2.value = resourceNum - 25;
+        resourceSlider3.value = resourceNum - 50;
+        resourceSlider4.value = resourceNum - 75;
     }
 
     void DelayTimer()

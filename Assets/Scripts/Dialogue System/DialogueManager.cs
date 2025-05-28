@@ -327,6 +327,27 @@ public class DialogueManager : MonoBehaviour
         else
         {
             GetComponent<AudioSource>().clip = _characterSpeaking;
+
+            //Below is theoretical code the increase the sound speed of the dialogue depending on the text speed. But it doesn't sound great / work right now.
+            /*if (GameManager.Instance.textSpeed == 0.01f) //Slow
+            {
+                audioSource.pitch = Random.Range(0.3f, 0.5f);
+            }
+            else if (GameManager.Instance.textSpeed == 0.05f) //Med
+            {
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
+            }
+            else if (GameManager.Instance.textSpeed == 0.001f) //Fast
+            {
+                audioSource.pitch = Random.Range(1.5f, 1.7f);
+            }
+            else //Broken :(
+            {
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
+                Debug.LogError("[DialogueManager] Dialogue Audio Speed is Broken :(");
+            } */
+
+            audioSource.pitch = Random.Range(0.9f, 1.1f); //Get rid of this line if you wanna use the code above.
             audioSource.Play();
         }
     }

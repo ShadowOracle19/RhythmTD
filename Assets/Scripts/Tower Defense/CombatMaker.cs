@@ -14,7 +14,15 @@ public class CombatMaker : ScriptableObject
 public class Wave
 {
     public int delay;
-    public GameObject enemy;
-    public int numberOfEnemies;
+    public List<EnemyInit> enemies = new List<EnemyInit>();
     public bool killAllEnemiesWave;
+}
+
+[System.Serializable]
+public class EnemyInit
+{
+    public GameObject enemy;
+
+    [Range(1,5)] public int tile;
+
 }

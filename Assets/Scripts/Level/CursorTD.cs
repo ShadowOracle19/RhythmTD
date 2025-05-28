@@ -250,7 +250,7 @@ public class CursorTD : MonoBehaviour
     public void InitializeCursor()
     {
         isMoving = false;
-        gameObject.transform.position = new Vector3(0.5f, 0.1f, 0.5f);
+        gameObject.transform.position = new Vector3(0.5f, 0.1f, -0.5f);
 
         SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
         SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
@@ -523,14 +523,14 @@ public class CursorTD : MonoBehaviour
 
 
         //bounding box function
-        //if((targetPos.x <= -5 || targetPos.x >= 9) || (targetPos.y <= -3.5 || targetPos.y >= 2))
-        //{
-        //    isMoving = false;
-        //    desiredMovement = Vector3.zero;
-        //    yield break;
-        //}
+        if ((targetPos.x <= -3.5f || targetPos.x >= 10.5f) || (targetPos.z <= -3.5f || targetPos.z >= 2.5f))
+        {
+            isMoving = false;
+            desiredMovement = Vector3.zero;
+            yield break;
+        }
 
-        while(elapsedTime < timeToMove)
+        while (elapsedTime < timeToMove)
         {
             transform.position = Vector3.Lerp(originPos, targetPos, elapsedTime / timeToMove);
             elapsedTime += Time.deltaTime;

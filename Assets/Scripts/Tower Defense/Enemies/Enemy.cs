@@ -268,7 +268,6 @@ public class Enemy : MonoBehaviour
         }
         if (tileInFront != null && tileInFront.placedTower != null)
         {
-            Debug.Log("Clash!");
             Clash(enemy.clashStrength);
             dontMove = true;
             return;

@@ -18,7 +18,7 @@ public class CursedEffect : EnemyEffect
             }
             else if (item.transform.CompareTag("StageTile"))
             {
-                item.transform.GetComponent<Tile>().Pulse(Color.green);
+                //item.transform.GetComponent<Tile>().Pulse(Color.green);
             }
         }
         colliders = null;

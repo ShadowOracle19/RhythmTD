@@ -305,7 +305,6 @@ public class CursorTD : MonoBehaviour
 
         if(towerSelectMenuOpened)
         {
-            Debug.Log("movement");
             HighlightPlacementSlot(desiredMovement);
         }
         else
@@ -395,7 +394,6 @@ public class CursorTD : MonoBehaviour
             }
 
 
-            Debug.Log("Place towers");
 
             SpawnBeatHitResult();
             TogglePlacementMenu();
@@ -515,7 +513,6 @@ public class CursorTD : MonoBehaviour
 
     private IEnumerator MovePlayer(Vector3 direction)
     {
-        Debug.Log(direction);
         isMoving = true;
 
         float elapsedTime = 0;

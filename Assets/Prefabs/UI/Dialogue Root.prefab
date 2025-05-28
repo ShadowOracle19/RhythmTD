@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 1005577014959903376}
   - component: {fileID: 8211612419965570797}
   m_Layer: 5
-  m_Name: Speaker Name
+  m_Name: Speaker Name Previous
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -706,16 +706,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663502380371268972}
-  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7548414197692550510}
+  m_Father: {fileID: 1774743456908170895}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1240, y: -180.00006}
+  m_AnchoredPosition: {x: 691.75, y: -455.00003}
   m_SizeDelta: {x: 525, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1005577014959903376
@@ -746,7 +746,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: '
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8126b4291ee892644bfeaa4d26d8f50e, type: 2}
   m_sharedMaterial: {fileID: -7870814419699348352, guid: 8126b4291ee892644bfeaa4d26d8f50e, type: 2}
@@ -897,7 +899,6 @@ RectTransform:
   - {fileID: 2540812534744380076}
   - {fileID: 5378023496861039119}
   - {fileID: 1901959601327408013}
-  - {fileID: 507388230149946365}
   m_Father: {fileID: 4422642259401487479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1726,6 +1727,7 @@ RectTransform:
   - {fileID: 8952658534863365665}
   - {fileID: 7862003396417021131}
   - {fileID: 7993373734718279720}
+  - {fileID: 507388230149946365}
   m_Father: {fileID: 4422642259401487479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3392,6 +3394,7 @@ MonoBehaviour:
   fadedColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
   previousCharacter: {fileID: 0}
   currentCharacterName: 
+  previousCharacterLabel: 
   previousCharacterName: 
   previousCharacterTalking: 0
   dialogueFinished: 0

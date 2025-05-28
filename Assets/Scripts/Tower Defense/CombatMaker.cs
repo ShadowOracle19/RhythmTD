@@ -23,6 +23,6 @@ public class EnemyInit
 {
     public GameObject enemy;
 
-    [Range(1,5)] public int tile;
+    [Range(1,6)] public int tile;
 
 }

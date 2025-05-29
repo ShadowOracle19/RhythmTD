@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private Color _baseColor;
-    [SerializeField] private SpriteRenderer _renderer;
 
     [SerializeField] public GameObject placedTower;
 

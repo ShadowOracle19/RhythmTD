@@ -443,7 +443,7 @@ public class CursorTD : MonoBehaviour
 
         if (direction == Vector2.up)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null)
+            if (towerSelectMenuOpened && tile.placedTower == null && tile.canPlaceTower)
             {
                 TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
 
@@ -457,7 +457,7 @@ public class CursorTD : MonoBehaviour
         }
         else if (direction == Vector2.left)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null)
+            if (towerSelectMenuOpened && tile.placedTower == null && tile.canPlaceTower)
             {
                 TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
 
@@ -471,7 +471,7 @@ public class CursorTD : MonoBehaviour
         }
         else if (direction == Vector2.down)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null)
+            if (towerSelectMenuOpened && tile.placedTower == null && tile.canPlaceTower)
             {
                 TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
 
@@ -486,7 +486,7 @@ public class CursorTD : MonoBehaviour
         else if (direction == Vector2.right)
         {
 
-            if (towerSelectMenuOpened && tile.placedTower == null)
+            if (towerSelectMenuOpened && tile.placedTower == null && tile.canPlaceTower)
             {
                 TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
 

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Outline SG
-  m_Shader: {fileID: -6465566751694194690, guid: 8554a246e73c6c747bc1d5f1d0ab7337, type: 3}
+  m_Name: Portal Mat 2
+  m_Shader: {fileID: -6465566751694194690, guid: f896ba374a8ba3a419153ef9d817d08e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,6 +23,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Base_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_74e58530f8584b1691e6010ff26f1465_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -37,14 +45,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Fade_Distance: 75
-    - _Outline_Thickness: 0.06
+    - _Noise_Scale: 4.5
+    - _Noise_Strength: 3.4
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Saturation: 12.6
+    - _Speed: 2
+    - _Strength: 35.4
     m_Colors:
-    - _Outline_Color: {r: 0, g: 0.07727194, b: 1, a: 0}
+    - _Base_Color: {r: 0.509434, g: 0.083669536, b: 0.0744927, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &1443887446673819088
+--- !u!114 &8178643069106186395
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

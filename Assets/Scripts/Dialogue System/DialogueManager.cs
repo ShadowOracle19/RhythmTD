@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     [System.Serializable]
     public class Dialogue
     {
+        public string character;
         public string name;
         public string emotion;
         public string text;
@@ -69,7 +70,9 @@ public class DialogueManager : MonoBehaviour
     public Color fadedColor;
     public Sprite previousCharacter;
     public string currentCharacterName;
+    public string previousCharacterLabel;
     public string previousCharacterName;
+    private string previousEmotion;
     public bool previousCharacterTalking;
 
     public bool dialogueFinished = false;
@@ -168,6 +171,14 @@ public class DialogueManager : MonoBehaviour
             mainTextBox.SetAsLastSibling();
 
             _speakerName.text = myDialogue.dialogue[index].name;
+
+            if(!(previousCharacterLabel == " "))
+            {
+                _previousSpeakerName.text = previousCharacterName;
+
+            }
+
+
             _dialogue.text = dialogueText;
 
             _dialogue.ForceMeshUpdate();
@@ -232,7 +243,7 @@ public class DialogueManager : MonoBehaviour
     public void LoadCharacterSprite()
     {
         // Loads the character sprite from the JSON using their name and emotion tags
-        var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].name}/SPR-DS_{myDialogue.dialogue[index].name}-{myDialogue.dialogue[index].emotion}");
+        var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].character}/SPR-DS_{myDialogue.dialogue[index].character}-{myDialogue.dialogue[index].emotion}");
 
         if (characterSprite == null)
         {
@@ -243,6 +254,7 @@ public class DialogueManager : MonoBehaviour
             _previousSpeakerName.text = string.Empty;
             _speakerName.text = string.Empty;
             previousCharacterName = string.Empty;
+            previousCharacterLabel = string.Empty;
             previousCharacterTalking = false;
 
             characterImage.sprite = null;
@@ -256,14 +268,15 @@ public class DialogueManager : MonoBehaviour
             descriptiveDialogueBox.SetActive(false);
             talkingDialogueBox.SetActive(true);
 
-            if(previousCharacterName == myDialogue.dialogue[index].name)
+            if(previousCharacterLabel == myDialogue.dialogue[index].character)
             {
                 previousCharacterTalking = true;
                 characterImage.color = fadedColor;
                 secondCharacterImage.color = Color.white;
 
                 previousTalkingDialogueBox.SetActive(true);
-                previousCharacter = Resources.Load<Sprite>($"Characters/{previousCharacterName}/{previousCharacterName}_1");
+                _previousSpeakerName.text = previousCharacterName;
+                previousCharacter = Resources.Load<Sprite>($"Characters/{previousCharacterLabel}/SPR-DS_{previousCharacterLabel}-{previousEmotion}");
                 return;
             }
             else
@@ -276,6 +289,8 @@ public class DialogueManager : MonoBehaviour
                 secondCharacterImage.sprite = previousCharacter;
                 secondCharacterImage.color = fadedColor;
                 previousCharacterName = myDialogue.dialogue[index - 1].name;
+                previousCharacterLabel = myDialogue.dialogue[index - 1].character;
+                previousEmotion = myDialogue.dialogue[index - 1].emotion;
 
                 if (secondCharacterImage.sprite == null)
                 {
@@ -312,6 +327,27 @@ public class DialogueManager : MonoBehaviour
         else
         {
             GetComponent<AudioSource>().clip = _characterSpeaking;
+
+            //Below is theoretical code the increase the sound speed of the dialogue depending on the text speed. But it doesn't sound great / work right now.
+            /*if (GameManager.Instance.textSpeed == 0.01f) //Slow
+            {
+                audioSource.pitch = Random.Range(0.3f, 0.5f);
+            }
+            else if (GameManager.Instance.textSpeed == 0.05f) //Med
+            {
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
+            }
+            else if (GameManager.Instance.textSpeed == 0.001f) //Fast
+            {
+                audioSource.pitch = Random.Range(1.5f, 1.7f);
+            }
+            else //Broken :(
+            {
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
+                Debug.LogError("[DialogueManager] Dialogue Audio Speed is Broken :(");
+            } */
+
+            audioSource.pitch = Random.Range(0.9f, 1.1f); //Get rid of this line if you wanna use the code above.
             audioSource.Play();
         }
     }

@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
         {
             if (killAllEnemiesBeforeNextWave && enemies.Count != 0)
                 return;
-            if (timeRemainingToWaveStart >= delay)
+            if (timeRemainingToWaveStart >= delay) //reset delay
             {
                 //allow enemies to spawn
                 if (waveIndex >= currentWaves.Count) //if at the last wave stop running this
@@ -84,11 +84,12 @@ public class EnemySpawner : MonoBehaviour
                 }
                 timeRemainingToWaveStart = 0;//set delay for next wave
                 allEnemiesSpawnedFromWave = false;
+                StopForecastingWave(waveIndex);
                 killAllEnemiesBeforeNextWave = currentWaves[waveIndex].killAllEnemiesWave;
             }
             else
             {
-
+                ForecastWave(waveIndex);
                 timeRemainingToWaveStart += Time.deltaTime;
             }
         }
@@ -125,8 +126,8 @@ public class EnemySpawner : MonoBehaviour
             waveIndex = 0;
             numEnemiesInWave = 0;
             delay = 0;
-            allEnemiesSpawnedFromWave = true;
             killAllEnemiesBeforeNextWave = currentWaves[waveIndex].killAllEnemiesWave;
+            StopForecastingWave(0);
         }
     }
 
@@ -143,18 +144,15 @@ public class EnemySpawner : MonoBehaviour
         }
         
 
-        for (int i = 0; i < currentWaves[waveIndex].numberOfEnemies; i++)
+        for (int i = 0; i < currentWaves[waveIndex].enemies.Count; i++)
         {
-            int randSpawn = Random.Range(0, spawnTiles.Count);
-            if (randSpawn == lastRandomSpawn)
-            {
-                randSpawn = Random.Range(0, spawnTiles.Count);
-            }
-            GameObject enemy = Instantiate(currentWaves[waveIndex].enemy, new Vector3(transform.position.x, 0.5f, spawnTiles[randSpawn].GetComponent<Tile>().zPos), Quaternion.identity, enemyParent);
-            lastRandomSpawn = randSpawn;
+            int tileNum = currentWaves[waveIndex].enemies[i].tile - 1;
+
+            GameObject enemy = Instantiate(currentWaves[waveIndex].enemies[i].enemy, new Vector3(transform.position.x, 0.5f, 
+                spawnTiles[tileNum].GetComponent<Tile>().zPos), Quaternion.identity, enemyParent);
 
 
-            spawnTiles[randSpawn].GetComponent<Tile>().forcastEnemy(spawnParticles);
+            spawnTiles[tileNum].GetComponent<Tile>().EnemySpawnEffect(spawnParticles);
             
 
             ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
@@ -166,7 +164,7 @@ public class EnemySpawner : MonoBehaviour
             numEnemiesInWave += 1;
         }
         
-        if(numEnemiesInWave == currentWaves[waveIndex].numberOfEnemies)
+        if(numEnemiesInWave == currentWaves[waveIndex].enemies.Count)
         {
             
             waveIndex += 1;
@@ -179,6 +177,26 @@ public class EnemySpawner : MonoBehaviour
                 return;
             }
             delay = currentWaves[waveIndex].delay;
+        }
+    }
+
+    public void ForecastWave(int _wave)
+    {
+        foreach (var enemyToForecast in currentWaves[_wave].enemies)
+        {
+
+            Debug.Log($"Start forecasting for tile {enemyToForecast.tile - 1}");
+            spawnTiles[enemyToForecast.tile - 1].GetComponent<Tile>().ForecastEnemy();
+        }
+           
+    }
+
+    public void StopForecastingWave(int _wave)
+    {
+        foreach (var _enemyToForecast in currentWaves[_wave].enemies)
+        {
+            Debug.Log($"Stop forecasting for tile {_enemyToForecast.tile - 1}");
+            spawnTiles[_enemyToForecast.tile - 1].GetComponent<Tile>().StopForecasting();
         }
     }
 }

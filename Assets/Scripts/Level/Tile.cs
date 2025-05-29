@@ -11,34 +11,35 @@ public class Tile : MonoBehaviour
     [SerializeField] public GameObject placedTower;
 
     private ParticleSystem spawnInstance;
-    float time = 1;
 
-    //to be changed to using beats once it's been proven to work
-    public float forecastEndsIn = 4;
-    //don't touch this bit below, this is fine
+    [Header("Forecasting for SpawnTiles")]
     public bool forecastingActive = false;
+    public GameObject forecastingObject;
 
     [Header("Spawn Tile Info")]
     public float zPos = 0;
 
     private void Update()
     {
-        
-        time -= Time.deltaTime;
-        _renderer.color = Color.Lerp(_renderer.color, _baseColor, Time.deltaTime / time);
-        
+        if(forecastingObject != null)
+        {
+            forecastingObject.SetActive(forecastingActive);
+        }
     }
 
-    public void Pulse(Color color)
-    {
-        _renderer.color = color;
-        time = 1;
-    }
 
-    public void forcastEnemy(ParticleSystem particles)
+    public void EnemySpawnEffect(ParticleSystem particles)
     {
         spawnInstance = Instantiate(particles, transform.position, Quaternion.identity);
-        //Pulse(Color.red);
     }
     
+    public void ForecastEnemy()
+    {
+        forecastingActive = true;
+    }
+
+    public void StopForecasting()
+    {
+        forecastingActive = false;
+    }
 }

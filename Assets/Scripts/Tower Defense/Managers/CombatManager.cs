@@ -44,6 +44,9 @@ public class CombatManager : MonoBehaviour
     public int enemyTimer = 40;
     bool switchColor = false;
 
+    [Header("Round Info")]
+    public int totalNumEnemies;
+
     [Header("Resources")]
     public int resourceNum;
     public int maxResource = 100;
@@ -160,8 +163,10 @@ public class CombatManager : MonoBehaviour
         enemyTotal = 0;
         foreach (var item in currentEncounter.waves)
         {
-            enemyTotal += item.numberOfEnemies;
+            enemyTotal += item.enemies.Count;
         }
+        totalNumEnemies = enemyTotal;
+
         enemySpawners.numberOfEnemiesToSpawn = enemyTotal;
         enemySpawners.startOnce = false;
         enemySpawners.currentNumberOfEnemiesSpawned = 0;
@@ -252,7 +257,7 @@ public class CombatManager : MonoBehaviour
             allEnemiesSpawned = true;
         }
 
-        
+        GameManager.Instance.enemyCounter.text = $"{enemyTotal}/{totalNumEnemies}";
 
 
         //delays enemy spawning
@@ -312,15 +317,17 @@ public class CombatManager : MonoBehaviour
     {
         if (GameManager.Instance.tutorialRunning && GameManager.Instance.currentEncounter.isShowcase && !TutorialManager.Instance.spawnEnemies)
             return;
-
-
-        enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
-        //Start spawning enemies on the 10th bar
         if (enemyTimer <= 0)
         {
             enemiesSpawnIn.gameObject.SetActive(false);
             enemySpawners.StartSpawningEnemies();
+            return;
         }
+        EnemySpawner.Instance.ForecastWave(0);//forecast the first wave
+
+        enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
+        //Start spawning enemies on the 10th bar
+        
 
     }
     public void BeatCountdown()

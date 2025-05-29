@@ -250,7 +250,7 @@ public class CursorTD : MonoBehaviour
     public void InitializeCursor()
     {
         isMoving = false;
-        gameObject.transform.position = new Vector3(0.5f, 0.1f, 0.5f);
+        gameObject.transform.position = new Vector3(0.5f, 0.1f, -0.5f);
 
         SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
         SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
@@ -305,7 +305,6 @@ public class CursorTD : MonoBehaviour
 
         if(towerSelectMenuOpened)
         {
-            Debug.Log("movement");
             HighlightPlacementSlot(desiredMovement);
         }
         else
@@ -395,7 +394,6 @@ public class CursorTD : MonoBehaviour
             }
 
 
-            Debug.Log("Place towers");
 
             SpawnBeatHitResult();
             TogglePlacementMenu();
@@ -515,7 +513,6 @@ public class CursorTD : MonoBehaviour
 
     private IEnumerator MovePlayer(Vector3 direction)
     {
-        Debug.Log(direction);
         isMoving = true;
 
         float elapsedTime = 0;
@@ -526,14 +523,14 @@ public class CursorTD : MonoBehaviour
 
 
         //bounding box function
-        //if((targetPos.x <= -5 || targetPos.x >= 9) || (targetPos.y <= -3.5 || targetPos.y >= 2))
-        //{
-        //    isMoving = false;
-        //    desiredMovement = Vector3.zero;
-        //    yield break;
-        //}
+        if ((targetPos.x <= -7.5f || targetPos.x >= 10.5f) || (targetPos.z <= -4.5f || targetPos.z >= 2.5f))
+        {
+            isMoving = false;
+            desiredMovement = Vector3.zero;
+            yield break;
+        }
 
-        while(elapsedTime < timeToMove)
+        while (elapsedTime < timeToMove)
         {
             transform.position = Vector3.Lerp(originPos, targetPos, elapsedTime / timeToMove);
             elapsedTime += Time.deltaTime;

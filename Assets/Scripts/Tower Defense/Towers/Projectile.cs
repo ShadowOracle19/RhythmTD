@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     public float speed = 1;
     float timer;
     public bool canMove = false;
-    Vector3 nextPosition;
+    public Vector3 nextPosition;
     public int bulletRange = 0;
     int activeTime;
     public bool piercing;

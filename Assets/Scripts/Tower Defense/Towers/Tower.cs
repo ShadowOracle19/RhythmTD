@@ -97,6 +97,9 @@ public class Tower : MonoBehaviour
     [SerializeField] private ParticleSystem burningParticles;
     private ParticleSystem burningParticlesInstance;
 
+    [Header("Tile Interactions")]
+    public bool ChargedUp = false;
+
 
     private void Start()
     {
@@ -173,7 +176,7 @@ public class Tower : MonoBehaviour
 
         nextAttackSprite = defaultAttackSprite;
 
-        if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
+        if (increaseBulletDamage || FeverSystem.Instance.feverModeActive || ChargedUp)
         {
             damage = damage * 5;
 
@@ -191,11 +194,17 @@ public class Tower : MonoBehaviour
                 break;
 
             case ProjectileType.AOE:
-                AOE();
+                AOE(damage);
                 break;
 
             case ProjectileType.Charges:
-                PlaceCharge();
+                int chargeValue = towerInfo.resourceGain;
+                if (increaseBulletDamage || ChargedUp)
+                {
+                    chargeValue = chargeValue * 5;
+                }
+
+                PlaceCharge(chargeValue);
                 break;
 
             default:
@@ -246,7 +255,7 @@ public class Tower : MonoBehaviour
         
         if(towerInfo.isAOETower)
         {
-            AOE();
+            AOE(currentDamage);
             return;
         }
 
@@ -257,17 +266,17 @@ public class Tower : MonoBehaviour
         multiAttack = false;
     }
 
-    public void PlaceCharge()
+    public void PlaceCharge(int chargeValue)
     {
         colliders = Physics.OverlapSphere(transform.position, towerRange);
 
         int rand = Random.Range(0, colliders.Length - 1);
 
         GameObject charge = Instantiate(projectile, transform.position, transform.rotation, CombatManager.Instance.chargesParent);
-        charge.GetComponent<Charges>().initalizeCharge(towerInfo.resourceGain,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z));
+        charge.GetComponent<Charges>().initalizeCharge(chargeValue,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z));
     }
 
-    public void AOE()
+    public void AOE(int damage)
     {
         //colliders = Physics.BoxCastAll(transform.position, Vector3.one * towerRange * 2, Vector3.zero, transform.rotation, towerRange);
         colliders = Physics.OverlapSphere(transform.position, towerRange);
@@ -287,7 +296,7 @@ public class Tower : MonoBehaviour
                 //    item.transform.GetComponent<Enemy>().isStunned = true;
                 //}
 
-                item.transform.GetComponent<Enemy>().Damage(currentDamage);
+                item.transform.GetComponent<Enemy>().Damage(damage);
             }
         }
         colliders = null;

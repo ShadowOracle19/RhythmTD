@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     public UnityEvent trigger;
 
-    [SerializeField] private Vector3 nextPosition;
+    public Vector3 nextPosition;
 
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;

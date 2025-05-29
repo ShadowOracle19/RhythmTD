@@ -8,8 +8,14 @@ public class TeleporterTile : Tile
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Projectile_Tower") || other.gameObject.CompareTag("Enemy"))
+        if(other.gameObject.CompareTag("Projectile_Tower"))
         {
+            other.gameObject.GetComponent<Projectile>().nextPosition = new Vector3(connectedTile.transform.position.x + 1, other.transform.position.y, connectedTile.transform.position.z);
+            Teleport(other.gameObject);
+        }
+        if(other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<Enemy>().nextPosition = new Vector3(connectedTile.transform.position.x - 1, other.transform.position.y, connectedTile.transform.position.z);
             Teleport(other.gameObject);
         }
     }

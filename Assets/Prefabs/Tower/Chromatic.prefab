@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6548897409101901140}
   - component: {fileID: 5396557391975718950}
+  - component: {fileID: 5353938361717681282}
   m_Layer: 0
   m_Name: Beat Indicator
   m_TagString: Untagged
@@ -115,6 +116,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5353938361717681282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137120996435424628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f71264e77bc04baf632f936244fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 1
 --- !u!1 &2749843575367313791
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4646282279044845171}
   - component: {fileID: 7866472827383804465}
+  - component: {fileID: 4527568957834091004}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -403,6 +418,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4527568957834091004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4305122640335676531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f71264e77bc04baf632f936244fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 1
 --- !u!1 &5183850645279424415
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,9 +538,7 @@ MonoBehaviour:
   shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
-  mask:
-    serializedVersion: 2
-    m_Bits: 128
+  ChargedUp: 0
 --- !u!82 &6659272261018043613
 AudioSource:
   m_ObjectHideFlags: 0

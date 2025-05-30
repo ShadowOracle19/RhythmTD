@@ -245,6 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1225402595923811262}
   - component: {fileID: 6998873495538553939}
+  - component: {fileID: 2129569168192684756}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -319,6 +320,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2129569168192684756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651270596960188021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f71264e77bc04baf632f936244fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 1
 --- !u!1 &4963708498863254925
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +512,7 @@ MonoBehaviour:
   shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
+  ChargedUp: 0
 --- !u!82 &3145858868990155513
 AudioSource:
   m_ObjectHideFlags: 0
@@ -658,6 +673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 309412583952537485}
   - component: {fileID: 4013599095017630685}
+  - component: {fileID: 6431640241156137997}
   m_Layer: 0
   m_Name: Beat Indicator
   m_TagString: Untagged
@@ -732,3 +748,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6431640241156137997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507092617889812758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f71264e77bc04baf632f936244fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 1

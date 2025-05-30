@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18102bcf76c94404eafc40143c5c6aad, type: 3}
-  m_Name: Viola
+  m_Name: Major
   m_EditorClassIdentifier: 
-  towerName: Viola
+  towerName: Major
   towerDescription: AOE based tower that deals 1 damage in its radius
   towerImage: {fileID: -2240888788196244684, guid: bd271a96fd8eb694e8eba0d0e84a3c38, type: 3}
   type: 2
   resourceCost: 75
   cost: 2
   cooldownTime: 8
+  cooldown: 1
   towerHealth: 5
   attackPattern: 4
   damage: 2
@@ -26,5 +27,6 @@ MonoBehaviour:
   projectilePiercesEnemies: 0
   projectileColor: {r: 0.004316493, g: 0.9150943, b: 0.04689455, a: 1}
   isAOETower: 0
+  projectileType: 0
   isResourceTower: 0
   resourceGain: 5

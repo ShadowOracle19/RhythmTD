@@ -320,7 +320,7 @@ public class DialogueManager : MonoBehaviour
 
         previousCharacterAudioCue = randNum;
 
-        var _characterSpeaking = Resources.Load<AudioClip>($"audio/{myDialogue.dialogue[index].name}/{myDialogue.dialogue[index].name}{randNum}");
+        var _characterSpeaking = Resources.Load<AudioClip>($"audio/{myDialogue.dialogue[index].character}/{myDialogue.dialogue[index].character}{randNum}");
 
         if (_characterSpeaking == null)
             return;

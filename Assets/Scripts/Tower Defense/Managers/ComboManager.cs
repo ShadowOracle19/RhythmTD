@@ -31,6 +31,8 @@ public class ComboManager : MonoBehaviour
     public int currentMultiplier;
     public int streak;
 
+    public int score;
+
     public TextMeshProUGUI currentComboText;
     public TextMeshProUGUI streakText;
     public TextMeshProUGUI currentMultiplierText;
@@ -72,6 +74,7 @@ public class ComboManager : MonoBehaviour
         {
             highestCombo = currentCombo;
         }
+        score += currentCombo;
         currentCombo = 0;
         streak = 0;
         currentMultiplier = 1;

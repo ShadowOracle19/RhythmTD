@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public enum InstrumentType
 {
-    Drums, Guitar, Bass, Piano
+    Drums, Guitar, Vocal, Piano
 }
 
 public enum BuffType
@@ -319,7 +319,7 @@ public class Tower : MonoBehaviour
                 ConductorV2.instance.guitarM.volume = Mathf.Clamp(ConductorV2.instance.guitarM.volume, 0, 0.5f);
                 break;
 
-            case InstrumentType.Bass:
+            case InstrumentType.Vocal:
                 ConductorV2.instance.bass.volume -= towerAudioVolumeIncrement;
                 ConductorV2.instance.bass.volume = Mathf.Clamp(ConductorV2.instance.bass.volume, 0, 0.5f);
                 break;

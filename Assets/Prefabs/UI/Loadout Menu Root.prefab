@@ -10351,6 +10351,7 @@ GameObject:
   - component: {fileID: 1434574366268603400}
   - component: {fileID: 1945777787379287487}
   - component: {fileID: 8261464349199326765}
+  - component: {fileID: 8181140280638880687}
   m_Layer: 0
   m_Name: Tower Info Box
   m_TagString: Untagged
@@ -10425,6 +10426,30 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8181140280638880687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7907455183855293884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71330d17f2092314ea6995568af4cb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: {fileID: 1580326077770135177}
+  instrumentName: {fileID: 8557968127686707504}
+  cost: 0
+  cooldown: {fileID: 2068824115017246060}
+  cost1: {fileID: 8412714482267889512}
+  cost2: {fileID: 4454461561507268006}
+  cost3: {fileID: 4785911867814879772}
+  cost4: {fileID: 4200804086055111319}
+  c1: {r: 0.9960785, g: 0.003921569, b: 0.003921569, a: 1}
+  c2: {r: 1, g: 0.6509804, b: 0.003921569, a: 1}
+  c3: {r: 0, g: 0.96470594, b: 1, a: 1}
+  c4: {r: 0.9960785, g: 0.003921569, b: 0.86666673, a: 1}
 --- !u!1 &7912071932098988868
 GameObject:
   m_ObjectHideFlags: 0

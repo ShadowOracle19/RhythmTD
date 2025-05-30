@@ -316,7 +316,7 @@ public class TowerManager : MonoBehaviour
             case InstrumentType.Guitar:
                 return guitarCooldown;
 
-            case InstrumentType.Bass:
+            case InstrumentType.Vocal:
                 return bassCooldown;
 
             case InstrumentType.Piano:
@@ -388,7 +388,7 @@ public class TowerManager : MonoBehaviour
                 guitarCooldownTime = 0;
                 break;
 
-            case InstrumentType.Bass:
+            case InstrumentType.Vocal:
 
                 ConductorV2.instance.bass.volume += towerAudioVolumeIncrement;
                 ConductorV2.instance.bass.volume = Mathf.Clamp(ConductorV2.instance.bass.volume, 0, 0.5f);

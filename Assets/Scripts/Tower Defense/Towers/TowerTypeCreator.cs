@@ -17,6 +17,7 @@ public class TowerTypeCreator : ScriptableObject
     public TowerResourceCost cost;
     [Tooltip("In Beats")]
     public int cooldownTime = 0;
+    public CooldownTime cooldown;
     public int towerHealth = 0;
     public TowerAttackPattern attackPattern;
     public int damage = 0;
@@ -55,4 +56,9 @@ public enum TowerResourceCost
 public enum ProjectileType
 {
     Bullet, AOE, Charges
+}
+
+public enum CooldownTime
+{
+    Short, Medium, Long
 }

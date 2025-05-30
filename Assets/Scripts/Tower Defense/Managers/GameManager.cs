@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
         playerInputManager.SetActive(true);
 
         CombatManager.Instance.enemyTimerObject.SetActive(false);
-        CombatManager.Instance.healthBar.SetActive(false);
+        //CombatManager.Instance.healthBar.SetActive(false);
         CombatManager.Instance.resources.SetActive(false);
         CombatManager.Instance.towerDisplay.SetActive(false);
         CombatManager.Instance.feverBar.SetActive(false);

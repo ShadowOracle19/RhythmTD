@@ -116,7 +116,7 @@ public class TutorialManager : MonoBehaviour
             CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);
             //GameManager.Instance.tutorialRunning = false;
             CombatManager.Instance.enemyTimerObject.SetActive(true);
-            CombatManager.Instance.healthBar.SetActive(true);
+            //CombatManager.Instance.healthBar.SetActive(true);
             //CombatManager.Instance.controls.SetActive(true);
             CombatManager.Instance.resources.SetActive(true);
             CombatManager.Instance.towerDisplay.SetActive(true);

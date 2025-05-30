@@ -284,7 +284,7 @@ public class DialogueManager : MonoBehaviour
                 previousCharacterTalking = false;
             }
 
-            if(index != 0 && myDialogue.dialogue[index].name != myDialogue.dialogue[index - 1].name && myDialogue.dialogue[index].name != string.Empty)
+            if(index != 0 && myDialogue.dialogue[index].character != myDialogue.dialogue[index - 1].character && myDialogue.dialogue[index].character != string.Empty)
             {
                 secondCharacterImage.sprite = previousCharacter;
                 secondCharacterImage.color = fadedColor;
@@ -428,7 +428,11 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.combatRoot.SetActive(false);
                 return;
             }
+
             GameManager.Instance.winScreen.SetActive(true);
+            GameManager.Instance.winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen
+                (true, GameManager.Instance.currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, GameManager.Instance._currentHealth == GameManager.Instance._maxHealth, false);
+
             MenuEventManager.Instance.WinScreenOpen();
             GameManager.Instance.dialogueRoot.SetActive(false);
         }

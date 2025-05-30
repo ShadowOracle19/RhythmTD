@@ -114,7 +114,7 @@ public class TutorialManager : MonoBehaviour
             tutorialPopup.SetActive(false);
             pressKeyToNextDialogue = false;
             CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);
-            //GameManager.Instance.tutorialRunning = false;
+            GameManager.Instance.tutorialRunning = false;
             CombatManager.Instance.enemyTimerObject.SetActive(true);
             //CombatManager.Instance.healthBar.SetActive(true);
             //CombatManager.Instance.controls.SetActive(true);

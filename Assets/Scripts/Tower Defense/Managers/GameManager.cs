@@ -275,10 +275,12 @@ public class GameManager : MonoBehaviour
     {
         if (loseState) return;
         loseState = true;
+        winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(false, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo, false, false);
+
         //Cursor.lockState = CursorLockMode.None;
         CombatManager.Instance.EndEncounter();
-        gameOverScreen.SetActive(true);
-        MenuEventManager.Instance.LoseScreenOpen();
+        //gameOverScreen.SetActive(true);
+        MenuEventManager.Instance.WinScreenOpen();
         //conductor.SetActive(false);
         //ConductorV2.instance.StopMusic();
     }
@@ -295,6 +297,8 @@ public class GameManager : MonoBehaviour
         if (currentEncounter.endDialogue == null)
         {
             winScreen.SetActive(true);
+            winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
+
             MenuEventManager.Instance.WinScreenOpen();
             return;
         }

@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3822256733840769249}
   - component: {fileID: 9182524983602347050}
+  - component: {fileID: 3982724778623520564}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -115,6 +116,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3982724778623520564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205972593765645086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f71264e77bc04baf632f936244fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 1
 --- !u!1 &1876591643564607199
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4817614503293324160}
   - component: {fileID: 589069300398570135}
+  - component: {fileID: 4866739125802942564}
   m_Layer: 0
   m_Name: Beat Indicator
   m_TagString: Untagged
@@ -403,6 +418,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4866739125802942564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2499767275724444200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f71264e77bc04baf632f936244fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 1
 --- !u!1 &5183850645279424415
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +538,7 @@ MonoBehaviour:
   shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
+  ChargedUp: 0
 --- !u!82 &-8906736978416925348
 AudioSource:
   m_ObjectHideFlags: 0

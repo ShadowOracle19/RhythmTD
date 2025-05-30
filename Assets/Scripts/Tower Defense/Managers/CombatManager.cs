@@ -315,7 +315,7 @@ public class CombatManager : MonoBehaviour
 
     void DelayTimer()
     {
-        if (GameManager.Instance.tutorialRunning && GameManager.Instance.currentEncounter.isShowcase && !TutorialManager.Instance.spawnEnemies)
+        if (GameManager.Instance.tutorialRunning || GameManager.Instance.currentEncounter.isShowcase || !TutorialManager.Instance.spawnEnemies)
             return;
         if (enemyTimer <= 0)
         {

@@ -7,6 +7,8 @@ using TMPro;
 public class MenuCursorMovement : MonoBehaviour
 {
     // VARIABLES
+    public AudioSource highlightSFX;
+
 
     // Cursor Corners
     public GameObject upperLeftCorner;
@@ -39,6 +41,12 @@ public class MenuCursorMovement : MonoBehaviour
     public float lerpSpeed = 10.0f;
     public float lerpStart;
     public float lerpLength;
+
+    //timer
+    [SerializeField]private float timeElapsed;
+    [SerializeField]private float duration = 0.2f;
+    [SerializeField]private float progress;
+    public bool inProgress;
     
     // Start is called before the first frame update
     void Start()
@@ -48,36 +56,80 @@ public class MenuCursorMovement : MonoBehaviour
 
         // Set the "previous" element to the current target element 
         //previousElement = EventSystem.current.currentSelectedGameObject;
-        
+
         // Sets cursor corner starting positions
-        targetTransform = (RectTransform)targetElement.transform;
+        // targetTransform = (RectTransform)targetElement.transform;
 
         elementWidth = targetTransform.sizeDelta.x;
         elementHeight = targetTransform.sizeDelta.y;
-        
-        upperLeftCorner.transform.position = new Vector3(targetElement.transform.position.x - (elementWidth/3) - 10, targetElement.transform.position.y + (elementHeight/3), 0);
-        upperRightCorner.transform.position = new Vector3(targetElement.transform.position.x + (elementWidth/3) + 10, targetElement.transform.position.y + (elementHeight/3),0);
-        lowerLeftCorner.transform.position = new Vector3(targetElement.transform.position.x - (elementWidth/3) - 10, targetElement.transform.position.y - (elementHeight/3), 0);
-        lowerRightCorner.transform.position = new Vector3(targetElement.transform.position.x + (elementWidth/3) + 10, targetElement.transform.position.y - (elementHeight/3), 0);
 
-        upperLeftPrev = upperLeftCorner.transform.position;
-        upperRightPrev = upperRightCorner.transform.position;
-        lowerLeftPrev = lowerLeftCorner.transform.position;
-        lowerRightPrev = lowerRightCorner.transform.position;
+        upperLeftCorner.transform.position = new Vector3(targetElement.transform.position.x - (elementWidth / 3) - 10, targetElement.transform.position.y + (elementHeight / 3), 0);
+        upperRightCorner.transform.position = new Vector3(targetElement.transform.position.x + (elementWidth / 3) + 10, targetElement.transform.position.y + (elementHeight / 3), 0);
+        lowerLeftCorner.transform.position = new Vector3(targetElement.transform.position.x - (elementWidth / 3) - 10, targetElement.transform.position.y - (elementHeight / 3), 0);
+        lowerRightCorner.transform.position = new Vector3(targetElement.transform.position.x + (elementWidth / 3) + 10, targetElement.transform.position.y - (elementHeight / 3), 0);
+
+        // upperLeftPrev = upperLeftCorner.transform.position;
+        // upperRightPrev = upperRightCorner.transform.position;
+        // lowerLeftPrev = lowerLeftCorner.transform.position;
+        // lowerRightPrev = lowerRightCorner.transform.position;
 
         // Lerp
-        lerpStart = Time.time;
-        lerpLength = Vector3.Distance(previousElement.transform.position, targetElement.transform.position);
+        //lerpStart = Time.time;
+        // lerpLength = Vector3.Distance(previousElement.transform.position, targetElement.transform.position);
+        upperLeftPrev = Vector3.zero;
+        upperRightPrev = Vector3.zero;
+        lowerLeftPrev = Vector3.zero;
+        lowerRightPrev = Vector3.zero;
+
+        SetTargetPos(targetElement);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Lerp Animation
-        float distanceLerped = (Time.time - lerpStart) * (lerpSpeed*lerpLength);
-        float lerpFraction = distanceLerped / lerpLength;
         
-        UpdateCursorPos(lerpFraction);
+        if (EventSystem.current.currentSelectedGameObject != targetElement)
+        {
+            Clear();
+            highlightSFX.Play();
+            SetPreviousElement(targetElement);
+            SetActiveElement(EventSystem.current.currentSelectedGameObject);
+        }
+
+        if (inProgress == false)
+        {
+            return;
+        }
+
+        UpdateCursorPos(progress);
+
+
+        timeElapsed += Time.deltaTime;
+        progress = timeElapsed / duration;
+
+        if (progress > 1f)
+        {
+            progress = 1f;
+        }
+
+        if(progress >= 1f)
+        {
+            inProgress = false;
+        }
+
+        //// Lerp Animation
+        //float distanceLerped = (Time.deltaTime - lerpStart) * (lerpSpeed * lerpLength);
+        //float lerpFraction = distanceLerped / lerpLength;
+
+        
+    }
+
+    public void Clear()
+    {
+        timeElapsed = 0;
+        progress = 0;
+        inProgress = false;
     }
 
     void UpdateCursorPos(float lerpSegment)
@@ -93,9 +145,9 @@ public class MenuCursorMovement : MonoBehaviour
         targetTransform = (RectTransform)targetObject.transform;
 
         elementWidth = targetTransform.sizeDelta.x;
-        Debug.Log(elementWidth);
+
         elementHeight = targetTransform.sizeDelta.y;
-        Debug.Log(elementHeight);
+
         
         upperLeftTarget = new Vector3(targetObject.transform.position.x - (elementWidth/3) - 10, targetObject.transform.position.y + (elementHeight/3), 0);
         upperRightTarget = new Vector3(targetObject.transform.position.x + (elementWidth/3) + 10, targetObject.transform.position.y + (elementHeight/3),0);
@@ -112,8 +164,6 @@ public class MenuCursorMovement : MonoBehaviour
         lowerLeftPrev = lowerLeftCorner.transform.position;
         lowerRightPrev = lowerRightCorner.transform.position;
 
-        // Set new lerp start time
-        lerpStart = Time.time;
     }
 
     public void SetActiveElement(GameObject currentlySelectedElement) 
@@ -124,5 +174,9 @@ public class MenuCursorMovement : MonoBehaviour
         SetTargetPos(targetElement);
 
         lerpLength = Vector3.Distance(previousElement.transform.position, targetElement.transform.position);
+
+        inProgress = true;
     }
+
+
 }

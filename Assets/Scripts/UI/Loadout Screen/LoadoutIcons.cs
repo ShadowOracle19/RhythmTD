@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LoadoutIcons : MonoBehaviour, ISelectHandler
+public class LoadoutIcons : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     [SerializeField] private TowerTypeCreator tower;
     public LoadoutInfoPanel infoPanel;
@@ -22,6 +22,12 @@ public class LoadoutIcons : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
+        infoPanel.gameObject.SetActive(true);
         infoPanel.WriteInfoPanel(tower);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        infoPanel.gameObject.SetActive(false);
     }
 }

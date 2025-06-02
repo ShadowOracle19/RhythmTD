@@ -418,7 +418,7 @@ public class TowerManager : MonoBehaviour
             TutorialManager.Instance.LoadNextTutorialDialogue();
             CursorTD.Instance.towerPlaceSequence = false;
             CursorTD.Instance.towerBuffSequence = true;
-            EnemySpawner.Instance.ForceEnemySpawn(gameObject.transform.position.z, EnemyType.Walker);
+            EnemySpawner.Instance.ForceEnemySpawn(-0.5f, EnemyType.Walker);
         }
     }
 

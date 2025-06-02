@@ -116,7 +116,22 @@ public class DialogueManager : MonoBehaviour
         
     }
 
-  
+    private void Clear()
+    {
+        _speakerName.text = string.Empty;
+        _dialogue.text = string.Empty;
+        _previousSpeakerName.text = string.Empty;
+        _previousSpeakerText.text = string.Empty;
+
+        previousCharacterName = string.Empty;
+        currentCharacterName = string.Empty;
+        previousCharacterLabel = string.Empty;
+        previousEmotion = string.Empty;
+
+        secondCharacterImage.sprite = null;
+        secondCharacterImage.color = Color.clear;
+        previousCharacterTalking = false;
+    }
 
     public void LoadDialogue(TextAsset desiredDialogue)
     {
@@ -127,15 +142,7 @@ public class DialogueManager : MonoBehaviour
         myDialogue = JsonUtility.FromJson<DialogueList>(currentDialogue.text);
         index = 0;
 
-        _speakerName.text = string.Empty;
-        _dialogue.text = string.Empty;
-        _previousSpeakerName.text = string.Empty;
-        _previousSpeakerText.text = string.Empty;
-
-        previousCharacterName = string.Empty;
-
-        secondCharacterImage.sprite = null;
-        secondCharacterImage.color = Color.clear;
+        Clear();
 
         //MenuEventManager.Instance.DialogueOpen();
 
@@ -245,7 +252,7 @@ public class DialogueManager : MonoBehaviour
         // Loads the character sprite from the JSON using their name and emotion tags
         var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].character}/SPR-DS_{myDialogue.dialogue[index].character}-{myDialogue.dialogue[index].emotion}");
 
-        if (characterSprite == null)
+        if (characterSprite == null)//if no character sprite is loaded
         {
             descriptiveDialogueBox.SetActive(true);
             talkingDialogueBox.SetActive(false);
@@ -263,29 +270,27 @@ public class DialogueManager : MonoBehaviour
             secondCharacterImage.sprite = null;
             secondCharacterImage.color = Color.clear;
         }
-        else
+        else//if a character sprite is loaded
         {
             descriptiveDialogueBox.SetActive(false);
             talkingDialogueBox.SetActive(true);
 
-            if(previousCharacterLabel == myDialogue.dialogue[index].character)
+            if(previousCharacterLabel == myDialogue.dialogue[index].character) //if the previous character is talking
             {
                 previousCharacterTalking = true;
                 characterImage.color = fadedColor;
                 secondCharacterImage.color = Color.white;
 
                 previousTalkingDialogueBox.SetActive(true);
+                talkingDialogueBox.SetActive(false);
                 _previousSpeakerName.text = previousCharacterName;
                 previousCharacter = Resources.Load<Sprite>($"Characters/{previousCharacterLabel}/SPR-DS_{previousCharacterLabel}-{previousEmotion}");
                 return;
             }
-            else
+
+            if(index != 0 && myDialogue.dialogue[index].character != myDialogue.dialogue[index - 1].character && myDialogue.dialogue[index].character != string.Empty) //if the previous character is not talking and a new character is
             {
                 previousCharacterTalking = false;
-            }
-
-            if(index != 0 && myDialogue.dialogue[index].character != myDialogue.dialogue[index - 1].character && myDialogue.dialogue[index].character != string.Empty)
-            {
                 secondCharacterImage.sprite = previousCharacter;
                 secondCharacterImage.color = fadedColor;
                 previousCharacterName = myDialogue.dialogue[index - 1].name;
@@ -297,7 +302,12 @@ public class DialogueManager : MonoBehaviour
                     secondCharacterImage.color = Color.clear;
                 }
             }
-
+            //else
+            //{
+            //    previousCharacterTalking = false;
+            //}
+            previousCharacterTalking = false;
+            previousTalkingDialogueBox.SetActive(false);
             characterImage.color = Color.white;
             characterImage.sprite = characterSprite;
         }

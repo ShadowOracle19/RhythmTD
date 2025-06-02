@@ -275,6 +275,7 @@ public class GameManager : MonoBehaviour
     {
         if (loseState) return;
         loseState = true;
+        winScreen.SetActive(true);
         winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(false, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo, false, false);
 
         //Cursor.lockState = CursorLockMode.None;

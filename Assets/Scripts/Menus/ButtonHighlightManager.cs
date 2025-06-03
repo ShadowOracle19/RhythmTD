@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ButtonHighlightManager : MonoBehaviour
+public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     // VARIABLES
     public GameObject menuCursor;
@@ -17,15 +17,15 @@ public class ButtonHighlightManager : MonoBehaviour
         //buttonHighlightAudioSource = buttonHighlightAudio.GetComponent<AudioSource>();
     }
 
-    //public void OnSelect(BaseEventData eventData)
-    //{
-    //    buttonHighlightAudioSource.Play();
+    public void OnSelect(BaseEventData eventData)
+    {
+        GameManager.Instance.buttonHighlightSFX.Play();
 
-    //    menuCursor.GetComponent<MenuCursorMovement>().SetActiveElement(this.gameObject);
-    //}
+        //menuCursor.GetComponent<MenuCursorMovement>().SetActiveElement(this.gameObject);
+    }
 
-    //public void OnDeselect(BaseEventData eventData)
-    //{
-    //    menuCursor.GetComponent<MenuCursorMovement>().SetPreviousElement(this.gameObject);
-    //}
+    public void OnDeselect(BaseEventData eventData)
+    {
+        //menuCursor.GetComponent<MenuCursorMovement>().SetPreviousElement(this.gameObject);
+    }
 }

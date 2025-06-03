@@ -133,7 +133,7 @@ public class CombatManager : MonoBehaviour
         ComboManager.Instance.ResetCombo();
         ComboManager.Instance.highestCombo = 0;
 
-        ConductorV2.instance.StopMusic();
+        //ConductorV2.instance.StopMusic();
 
         
     }

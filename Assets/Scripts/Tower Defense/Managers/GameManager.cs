@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public Transform globelParent;
     public AudioSource menuMusic;
+    public AudioSource buttonHighlightSFX;
 
     [SerializeField] public GameObject gameOverScreen;
     [SerializeField] public GameObject winScreen;

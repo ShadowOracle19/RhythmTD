@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour
 
                     nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + _rand);
 
-                    if(nextPosition.z >= 2.5f || nextPosition.z <= -4.5f)//if hit top of bottom of the map
+                    if(nextPosition.z >= 2.5f || nextPosition.z <= -4f)//if hit top of bottom of the map
                     {
                         nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
                     }

@@ -155,7 +155,7 @@ public class Tower : MonoBehaviour
 
     private void CreateBullet(int damage, bool burningBullet, bool multiAttack, Vector3 position)
     {
-        GameObject bullet = Instantiate(projectile, gameObject.transform.position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
+        GameObject bullet = Instantiate(projectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, burningBullet);
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
@@ -259,9 +259,9 @@ public class Tower : MonoBehaviour
             return;
         }
 
-        CreateBullet(currentDamage, false, true, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y + 1));
+        CreateBullet(currentDamage, false, true, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 1));
 
-        CreateBullet(currentDamage, false, true, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.y - 1));
+        CreateBullet(currentDamage, false, true, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 1));
 
         multiAttack = false;
     }

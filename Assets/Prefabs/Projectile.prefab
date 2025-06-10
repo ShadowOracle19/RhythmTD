@@ -50,6 +50,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1506309018840297455}
   speed: 1
   canMove: 0
+  nextPosition: {x: 0, y: 0, z: 0}
   bulletRange: 0
   piercing: 0
   damage: 1
@@ -70,7 +71,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   burningBullet: 0
-  flameAttackSprite: {fileID: 1643883141, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
+  flameAttackSprite: {fileID: -4176681958753459282, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
 --- !u!135 &4727961330694019307
 SphereCollider:
@@ -148,7 +149,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5738086396080506955}
@@ -194,7 +195,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -352905814, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
+  m_Sprite: {fileID: -4176681958753459282, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

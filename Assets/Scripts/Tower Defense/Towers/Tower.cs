@@ -100,6 +100,20 @@ public class Tower : MonoBehaviour
     [Header("Tile Interactions")]
     public bool ChargedUp = false;
 
+    [Header("Tower Upgrade")]
+    //upgrade 1 damage boost
+    public int upgradeCost1;
+
+    //upgrade 2 multiple projectile
+    public int upgradeCost2;
+    public int numberOfShots;
+
+    //upgrade 3
+    public int upgradeCost3;
+
+    //upgrade 4
+    public int upgradeCost4;
+
 
     private void Start()
     {
@@ -111,8 +125,16 @@ public class Tower : MonoBehaviour
         //}
 
         beat = 1;
+
         currentState = TowerState.Default;
+
         towerRange = towerInfo.range;
+
+        upgradeCost1 = 25;
+        upgradeCost2 = 25;
+        upgradeCost3 = 25;
+        upgradeCost4 = 25;
+        numberOfShots = 1;
     }
 
     private void Update()
@@ -187,29 +209,33 @@ public class Tower : MonoBehaviour
             nextAttackSprite = flameAttackSprite;
         }
 
-        switch (towerInfo.projectileType)
+        for (int i = 0; i < numberOfShots; i++)
         {
-            case ProjectileType.Bullet:
-                CreateBullet(damage, burningBullet, multiAttack, transform.position);
-                break;
+            switch (towerInfo.projectileType)
+            {
+                case ProjectileType.Bullet:
+                    CreateBullet(damage, burningBullet, multiAttack, transform.position);
+                    break;
 
-            case ProjectileType.AOE:
-                AOE(damage);
-                break;
+                case ProjectileType.AOE:
+                    AOE(damage);
+                    break;
 
-            case ProjectileType.Charges:
-                int chargeValue = towerInfo.resourceGain;
-                if (increaseBulletDamage || ChargedUp)
-                {
-                    chargeValue = chargeValue * 5;
-                }
+                case ProjectileType.Charges:
+                    int chargeValue = towerInfo.resourceGain;
+                    if (increaseBulletDamage || ChargedUp)
+                    {
+                        chargeValue = chargeValue * 5;
+                    }
 
-                PlaceCharge(chargeValue);
-                break;
+                    PlaceCharge(chargeValue);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
+        
         burningBullet = false;
         increaseBulletDamage = false;
         

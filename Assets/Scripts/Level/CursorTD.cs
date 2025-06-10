@@ -44,12 +44,17 @@ public class CursorTD : MonoBehaviour
 
     public Tile tile;
 
+    [Header("Placement Menu")]
     public GameObject placementMenu;
     public Animator radialMenuAnimator;
     public GameObject SlotW;
     public GameObject SlotA;
     public GameObject SlotS;
     public GameObject SlotD;
+
+    [Header ("Upgrade Menu")]
+    public GameObject upgradeMenu;
+    public bool upgradeTower = false;
 
     public GameObject cursorSprite;
     public Vector3 defaultSize;
@@ -303,11 +308,15 @@ public class CursorTD : MonoBehaviour
 
         
 
-        if(towerSelectMenuOpened)
+        if(towerSelectMenuOpened && upgradeTower) //upgrade tower
+        {
+            UpgradeTower(desiredMovement);    
+        }
+        else if(towerSelectMenuOpened) //place tower
         {
             HighlightPlacementSlot(desiredMovement);
         }
-        else
+        else //move
         {
             Move(desiredMovement);
         }
@@ -315,7 +324,6 @@ public class CursorTD : MonoBehaviour
         
         
     }
-
 
     public void Buff1Trigger()
     {
@@ -413,25 +421,36 @@ public class CursorTD : MonoBehaviour
         if (destructMode || GameManager.Instance.winState || GameManager.Instance.loseState || ConductorV2.instance.countingIn) return;
 
         towerSelectMenuOpened = true;
-        placementMenu.SetActive(towerSelectMenuOpened);
 
-        if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
+        if (tile != null && tile.placedTower != null)//tower on tile
         {
-            towerPlacementMenuSequencePassed = true;
-            TutorialManager.Instance.LoadNextTutorialDialogue();
-            towerPlacementMenuSequence = false;
-            towerPlaceSequence = true;
-            CombatManager.Instance.towerDisplay.SetActive(true);
+            upgradeTower = true;
+            upgradeMenu.SetActive(towerSelectMenuOpened);
+            return;
         }
+        else if(tile != null)//empty tile
+        {
+            placementMenu.SetActive(towerSelectMenuOpened);
 
+            if (GameManager.Instance.tutorialRunning && towerPlacementMenuSequence && towerSelectMenuOpened)
+            {
+                towerPlacementMenuSequencePassed = true;
+                TutorialManager.Instance.LoadNextTutorialDialogue();
+                towerPlacementMenuSequence = false;
+                towerPlaceSequence = true;
+                CombatManager.Instance.towerDisplay.SetActive(true);
+            }
+        }
 
     }
 
     public void ClosePlacementMenu()
     {
+        upgradeTower = false;
         placingTower = false;
         towerSelectMenuOpened = false;
         placementMenu.SetActive(towerSelectMenuOpened);
+        upgradeMenu.SetActive(towerSelectMenuOpened);
     }
 
     public void HighlightPlacementSlot(Vector2 direction)
@@ -501,6 +520,69 @@ public class CursorTD : MonoBehaviour
 
     }
 
+    public void UpgradeTower(Vector2 direction)
+    {
+        if (!towerSelectMenuOpened || placingTower || !upgradeTower) return;
+
+        placingTower = true;
+
+
+        if (direction == Vector2.up)//upgrade 1
+        {
+            if (towerSelectMenuOpened && tile.placedTower != null && CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost1)
+            {
+                tile.placedTower.GetComponent<Tower>().currentDamage += 3;
+                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost1;
+                tile.placedTower.GetComponent<Tower>().upgradeCost1 += 25;
+                return;
+            }
+
+            //PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
+
+        }
+        else if (direction == Vector2.right)//upgrade 2
+        {
+            if (towerSelectMenuOpened && tile.placedTower != null && CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost2)
+            {
+                tile.placedTower.GetComponent<Tower>().numberOfShots += 1;
+                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost2;
+                tile.placedTower.GetComponent<Tower>().upgradeCost2 += 50;
+                return;
+            }
+
+            //PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
+
+        }
+        else if (direction == Vector2.down)//upgrade 3
+        {
+            if (towerSelectMenuOpened && tile.placedTower != null && CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost3)
+            {
+                tile.placedTower.GetComponent<Tower>().currentDamage += 3;
+                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost3;
+                tile.placedTower.GetComponent<Tower>().upgradeCost3 += 25;
+
+                return;
+            }
+
+            //PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
+
+        }
+        else if (direction == Vector2.left)//upgrade 4
+        {
+
+            if (towerSelectMenuOpened && tile.placedTower != null && CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost4)
+            {
+                tile.placedTower.GetComponent<Tower>().currentDamage += 3;
+                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost4;
+                tile.placedTower.GetComponent<Tower>().upgradeCost4 += 25;
+
+                return;
+            }
+
+            //PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
+
+        }
+    }
 
     public void Move(Vector2 direction)
     {

@@ -43,6 +43,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem clashParticles;
     private ParticleSystem clashParticlesInstance;
 
+    public bool teleported = false;
+
 
     // Start is called before the first frame update
     void Start()

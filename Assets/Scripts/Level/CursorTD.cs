@@ -605,7 +605,7 @@ public class CursorTD : MonoBehaviour
 
 
         //bounding box function
-        if ((targetPos.x <= -7.5f || targetPos.x >= 10.5f) || (targetPos.z <= -4.5f || targetPos.z >= 2.5f))
+        if ((targetPos.x <= -6.5f || targetPos.x >= 10.5f) || (targetPos.z <= -4.5f || targetPos.z >= 2.5f))
         {
             isMoving = false;
             desiredMovement = Vector3.zero;

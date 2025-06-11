@@ -26,6 +26,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private ParticleSystem burningParticles;
     private ParticleSystem burningParticlesInstance;
 
+    public bool teleported = false;
+
     public void InitializeProjectile(int range, GameObject firedFrom, int _damage, bool isPiercing, bool isBurning)
     {
         bulletRange = range;

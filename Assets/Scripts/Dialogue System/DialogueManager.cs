@@ -49,6 +49,7 @@ public class DialogueManager : MonoBehaviour
     #endregion
 
     public TextAsset currentDialogue;
+    public AudioSource dialogueMusic;
 
     public Transform mainTextBox;
     public Transform secondaryTextBox;
@@ -144,6 +145,7 @@ public class DialogueManager : MonoBehaviour
 
         Clear();
 
+        dialogueMusic.Play();
         //MenuEventManager.Instance.DialogueOpen();
 
         typing = StartCoroutine(TypeLine());
@@ -399,6 +401,8 @@ public class DialogueManager : MonoBehaviour
         //end dialogue
         StopCoroutine(typing);
 
+        dialogueMusic.Stop();
+
         //dialogue if its going into a combat
         if (GameManager.Instance.encounterRunning)
         {
@@ -459,6 +463,11 @@ public class DialogueManager : MonoBehaviour
     {
         lastActiveObject = currentlyActiveObject;
         EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    private void OnDisable()
+    {
+        dialogueMusic.Stop();
     }
 
     string GetCompleteRichTextTag(ref int _index)

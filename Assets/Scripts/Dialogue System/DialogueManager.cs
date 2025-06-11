@@ -155,6 +155,11 @@ public class DialogueManager : MonoBehaviour
     {
         string dialogueText = myDialogue.dialogue[index].text;
 
+        if(dialogueText.Contains("Project Overture"))
+        {
+            Debug.Log("PROJECT OVERTURE");
+        }
+
         currentCharacterName = myDialogue.dialogue[index].name;
         LoadCharacterSprite();
 

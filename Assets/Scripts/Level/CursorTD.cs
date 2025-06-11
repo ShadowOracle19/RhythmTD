@@ -160,6 +160,7 @@ public class CursorTD : MonoBehaviour
     public void PlacementResourceBar()
     {
         tower1Slider.value = CombatManager.Instance.resourceNum;
+
         tower2Slider.value = CombatManager.Instance.resourceNum;
         tower3Slider.value = CombatManager.Instance.resourceNum;
         tower4Slider.value = CombatManager.Instance.resourceNum;
@@ -327,21 +328,21 @@ public class CursorTD : MonoBehaviour
 
     public void Buff1Trigger()
     {
-        if (towerSelectMenuOpened) return;
-        TowerEmpowerment(BuffType.Shield);
-        SpawnBeatHitResult();
+        //if (towerSelectMenuOpened) return;
+        //TowerEmpowerment(BuffType.Shield);
+        //SpawnBeatHitResult();
     }
     public void Buff2Trigger()
     {
-        if (towerSelectMenuOpened) return;
-        TowerEmpowerment(BuffType.Multi);
-        SpawnBeatHitResult();
+        //if (towerSelectMenuOpened) return;
+        //TowerEmpowerment(BuffType.Multi);
+        //SpawnBeatHitResult();
     }
     public void Buff3Trigger()
     {
-        if (towerSelectMenuOpened) return;
-        TowerEmpowerment(BuffType.Burn);
-        SpawnBeatHitResult();
+        //if (towerSelectMenuOpened) return;
+        //TowerEmpowerment(BuffType.Burn);
+        //SpawnBeatHitResult();
     }
 
     public void Buff4Trigger()
@@ -527,39 +528,42 @@ public class CursorTD : MonoBehaviour
         placingTower = true;
 
 
-        if (direction == Vector2.up)//upgrade 1
+        if (direction == Vector2.up)//upgrade 1 damage boost
         {
-            if (towerSelectMenuOpened && tile.placedTower != null && CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost1)
+            if (towerSelectMenuOpened && tile.placedTower != null && 
+                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost1 && 
+                !tile.placedTower.GetComponent<Tower>().damageBoostUpgrade)
             {
-                tile.placedTower.GetComponent<Tower>().currentDamage += 3;
+                tile.placedTower.GetComponent<Tower>().damageBoostUpgrade = true;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost1;
-                tile.placedTower.GetComponent<Tower>().upgradeCost1 += 25;
                 return;
             }
 
             //PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
 
         }
-        else if (direction == Vector2.right)//upgrade 2
+        else if (direction == Vector2.right)//upgrade 2 multi shot
         {
-            if (towerSelectMenuOpened && tile.placedTower != null && CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost2)
+            if (towerSelectMenuOpened && tile.placedTower != null && 
+                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost2 &&
+                !tile.placedTower.GetComponent<Tower>().multiShotUpgrade)
             {
-                tile.placedTower.GetComponent<Tower>().numberOfShots += 1;
+                tile.placedTower.GetComponent<Tower>().multiShotUpgrade = true; 
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost2;
-                tile.placedTower.GetComponent<Tower>().upgradeCost2 += 50;
                 return;
             }
 
             //PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
 
         }
-        else if (direction == Vector2.down)//upgrade 3
+        else if (direction == Vector2.down)//upgrade 3 burning bullet
         {
-            if (towerSelectMenuOpened && tile.placedTower != null && CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost3)
+            if (towerSelectMenuOpened && tile.placedTower != null && 
+                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost3 &&
+                !tile.placedTower.GetComponent<Tower>().burningUpgrade)
             {
-                tile.placedTower.GetComponent<Tower>().currentDamage += 3;
+                tile.placedTower.GetComponent<Tower>().burningUpgrade = true;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost3;
-                tile.placedTower.GetComponent<Tower>().upgradeCost3 += 25;
 
                 return;
             }
@@ -567,14 +571,15 @@ public class CursorTD : MonoBehaviour
             //PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
 
         }
-        else if (direction == Vector2.left)//upgrade 4
+        else if (direction == Vector2.left)//upgrade 4 range
         {
 
-            if (towerSelectMenuOpened && tile.placedTower != null && CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost4)
+            if (towerSelectMenuOpened && tile.placedTower != null && 
+                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost4 &&
+                !tile.placedTower.GetComponent<Tower>().rangeUpgrade)
             {
-                tile.placedTower.GetComponent<Tower>().currentDamage += 3;
+                tile.placedTower.GetComponent<Tower>().rangeUpgrade = true;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost4;
-                tile.placedTower.GetComponent<Tower>().upgradeCost4 += 25;
 
                 return;
             }

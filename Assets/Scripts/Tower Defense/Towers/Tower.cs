@@ -101,18 +101,22 @@ public class Tower : MonoBehaviour
     public bool ChargedUp = false;
 
     [Header("Tower Upgrade")]
+    public bool towerUpgradeUnlocked = false;
     //upgrade 1 damage boost
     public int upgradeCost1;
+    public bool damageBoostUpgrade = false;
 
     //upgrade 2 multiple projectile
     public int upgradeCost2;
-    public int numberOfShots;
+    public bool multiShotUpgrade = false;
 
-    //upgrade 3
+    //upgrade 3 burning
     public int upgradeCost3;
+    public bool burningUpgrade = false;
 
-    //upgrade 4
+    //upgrade 4 range
     public int upgradeCost4;
+    public bool rangeUpgrade = false;
 
 
     private void Start()
@@ -131,10 +135,9 @@ public class Tower : MonoBehaviour
         towerRange = towerInfo.range;
 
         upgradeCost1 = 25;
-        upgradeCost2 = 25;
+        upgradeCost2 = 50;
         upgradeCost3 = 25;
-        upgradeCost4 = 25;
-        numberOfShots = 1;
+        upgradeCost4 = 75;
     }
 
     private void Update()
@@ -175,16 +178,49 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private void CreateBullet(int damage, bool burningBullet, bool multiAttack, Vector3 position)
+    private void CreateBullet(int damage, bool upgradeActive, bool isTheMultiShot, Vector3 position)
     {
+        int tempRange = towerRange;
+
+        //instatiate bullet
         GameObject bullet = Instantiate(projectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, burningBullet);
+
+        if (upgradeActive)//upgrades are active
+        {
+            if (rangeUpgrade)
+            {
+                tempRange *= 2;
+            }
+
+
+            if(damageBoostUpgrade)
+            {
+                damage *= 2;
+
+                bullet.GetComponent<Projectile>().spriteRenderer.sprite = increasedAttackSprite;
+            }
+
+            bullet.GetComponent<Projectile>().InitializeProjectile(tempRange, gameObject, damage, towerInfo.projectilePiercesEnemies, burningUpgrade);
+        }
+        else //upgrades inactive
+        {
+            bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, false);
+        }
+            
 
         ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
-        if(multiAttack)
+        
+        //if bullet is from extra shot
+        if(isTheMultiShot)
         {
             bullet.GetComponent<Projectile>().spriteRenderer.sprite = multiAttackSprite;
+        }
+
+        if (upgradeActive && multiShotUpgrade)
+        {
+            ExtraFire();
+
         }
     }
 
@@ -209,36 +245,31 @@ public class Tower : MonoBehaviour
             nextAttackSprite = flameAttackSprite;
         }
 
-        for (int i = 0; i < numberOfShots; i++)
+        switch (towerInfo.projectileType)
         {
-            switch (towerInfo.projectileType)
-            {
-                case ProjectileType.Bullet:
-                    CreateBullet(damage, burningBullet, multiAttack, transform.position);
-                    break;
+            case ProjectileType.Bullet:
+                CreateBullet(damage, towerUpgradeUnlocked, false, transform.position);
+                break;
 
-                case ProjectileType.AOE:
-                    AOE(damage);
-                    break;
+            case ProjectileType.AOE:
+                AOE(damage, towerUpgradeUnlocked);
+                break;
 
-                case ProjectileType.Charges:
-                    int chargeValue = towerInfo.resourceGain;
-                    if (increaseBulletDamage || ChargedUp)
-                    {
-                        chargeValue = chargeValue * 5;
-                    }
+            case ProjectileType.Charges:
+                int chargeValue = towerInfo.resourceGain;
+                if (increaseBulletDamage || ChargedUp)
+                {
+                    chargeValue = chargeValue * 2;
+                }
 
-                    PlaceCharge(chargeValue);
-                    break;
+                PlaceCharge(chargeValue);
+                break;
 
-                default:
-                    break;
-            }
+            default:
+                break;
         }
         
-        burningBullet = false;
-        increaseBulletDamage = false;
-        
+        towerUpgradeUnlocked = false;
     }
 
     public void Fire(float yPos) //Fire on specific ypos mainly for viola
@@ -251,7 +282,7 @@ public class Tower : MonoBehaviour
 
         nextAttackSprite = defaultAttackSprite;
 
-        if (increaseBulletDamage || FeverSystem.Instance.feverModeActive)
+        if (ChargedUp || FeverSystem.Instance.feverModeActive)
         {
             damage = damage * 5;
 
@@ -262,7 +293,7 @@ public class Tower : MonoBehaviour
             nextAttackSprite = flameAttackSprite;
         }
 
-        CreateBullet(damage, burningBullet, false, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
+        CreateBullet(damage, towerUpgradeUnlocked, false, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
 
         
         //if(isPoweredUp && towerInfo.type == InstrumentType.Bass)
@@ -271,9 +302,7 @@ public class Tower : MonoBehaviour
             
         //}
 
-        burningBullet = false;
-        increaseBulletDamage = false;
-
+        towerUpgradeUnlocked = false;
     } 
 
     public void ExtraFire() //buff fire
@@ -281,7 +310,7 @@ public class Tower : MonoBehaviour
         
         if(towerInfo.isAOETower)
         {
-            AOE(currentDamage);
+            AOE(currentDamage, false);
             return;
         }
 
@@ -289,7 +318,6 @@ public class Tower : MonoBehaviour
 
         CreateBullet(currentDamage, false, true, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 1));
 
-        multiAttack = false;
     }
 
     public void PlaceCharge(int chargeValue)
@@ -302,10 +330,29 @@ public class Tower : MonoBehaviour
         charge.GetComponent<Charges>().initalizeCharge(chargeValue,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z));
     }
 
-    public void AOE(int damage)
+    public void AOE(int damage, bool towerUpgrades)
     {
-        //colliders = Physics.BoxCastAll(transform.position, Vector3.one * towerRange * 2, Vector3.zero, transform.rotation, towerRange);
-        colliders = Physics.OverlapSphere(transform.position, towerRange);
+        int tempRange = towerRange;
+        if(towerUpgrades)
+        {
+            if(rangeUpgrade)
+            {
+                tempRange *= 2;
+
+            }
+            if(damageBoostUpgrade)
+            {
+                damage *= 2;
+            }
+
+            if(multiShotUpgrade)
+            {
+                ExtraFire();
+            }
+
+        }
+
+        colliders = Physics.OverlapSphere(transform.position, tempRange);
 
         foreach (var item in colliders)
         {
@@ -313,7 +360,7 @@ public class Tower : MonoBehaviour
             {
                 //item.transform.GetComponent<Tile>().Pulse(Color.blue);
 
-                SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningBullet);
+                SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
             }
             else if (item.transform.CompareTag("Enemy"))
             {
@@ -323,6 +370,12 @@ public class Tower : MonoBehaviour
                 //}
 
                 item.transform.GetComponent<Enemy>().Damage(damage);
+
+                if(towerUpgrades && burningUpgrade)
+                {
+                    item.transform.GetComponent<Enemy>().burnt = true;
+                    item.transform.GetComponent<Enemy>().burnDamage += 2;
+                }
             }
         }
         colliders = null;
@@ -434,7 +487,7 @@ public class Tower : MonoBehaviour
                 break;
 
             case BuffType.Normal:
-                increaseBulletDamage = true;
+                towerUpgradeUnlocked = true;
                 break;
 
             default:
@@ -518,6 +571,15 @@ public class Tower : MonoBehaviour
 
     private void SpawnParticles(Transform tileTransform, Sprite projectileSprite, ParticleSystem pfxSource, ParticleSystem pfxInstance, bool shielded, bool burning)
     {
+        if(towerUpgradeUnlocked)
+        {
+            
+            if (burning || damageBoostUpgrade)
+            {
+                // Set sprite
+                burningParticlesInstance = Instantiate(burningParticles, tileTransform.position, Quaternion.identity);
+            }
+        }
         if (!shielded)
         {
             // Set sprite
@@ -525,11 +587,7 @@ public class Tower : MonoBehaviour
             pfxTexture.SetSprite(0, projectileSprite);
         }
 
-        if (burning == true)
-        {
-            // Set sprite
-            burningParticlesInstance = Instantiate(burningParticles, tileTransform.position, Quaternion.identity); 
-        }
+        
         
         // Create instance of the particle effect
         pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity);

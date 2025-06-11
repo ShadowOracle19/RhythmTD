@@ -103,6 +103,12 @@ public class DialogueManager : MonoBehaviour
 
     private int previousCharacterAudioCue;
 
+    [Header("project overture")]
+    [SerializeField] private Animator animator;
+    private bool projectOvertureMention = false;
+    [SerializeField] private AudioSource overtureAudio;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -157,7 +163,7 @@ public class DialogueManager : MonoBehaviour
 
         if(dialogueText.Contains("Project Overture"))
         {
-            Debug.Log("PROJECT OVERTURE");
+            ProjectOverture();
         }
 
         currentCharacterName = myDialogue.dialogue[index].name;
@@ -234,11 +240,45 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    public void ProjectOverture() //add new line and animator line up
+    {
+        projectOvertureMention = true;
+    }
+    public void PlayOverture()
+    {
+        overtureAudio.Play();
+    }
+
     public void NextLine()
     {
         GameObject _newLog = Instantiate(logEntry, logParent);
         _newLog.GetComponent<DialogueLogEntry>().characterName.text = _speakerName.text;
         _newLog.GetComponent<DialogueLogEntry>().dialogue.text = _dialogue.text;
+
+        if(projectOvertureMention) //load project overture animation
+        {
+            Clear();
+            descriptiveDialogueBox.SetActive(false);
+            talkingDialogueBox.SetActive(false);
+            previousTalkingDialogueBox.SetActive(false);
+
+            _previousSpeakerName.text = string.Empty;
+            _speakerName.text = string.Empty;
+            previousCharacterName = string.Empty;
+            previousCharacterLabel = string.Empty;
+            previousCharacterTalking = false;
+
+            characterImage.sprite = null;
+            characterImage.color = Color.clear;
+
+            secondCharacterImage.sprite = null;
+            secondCharacterImage.color = Color.clear;
+
+            animator.SetTrigger("Trigger Overture");
+            projectOvertureMention = false;
+            
+            return;
+        }
 
         if (index < myDialogue.dialogue.Length - 1)//start next line
         {
@@ -252,6 +292,21 @@ public class DialogueManager : MonoBehaviour
 
             return;
         }
+    }
+    public void SkipDialogue()
+    {
+        //end dialogue
+        StopCoroutine(typing);
+
+        for (int i = index; i < myDialogue.dialogue.Length; i++)
+        {
+            GameObject _newLog = Instantiate(logEntry, logParent);
+            _newLog.GetComponent<DialogueLogEntry>().characterName.text = myDialogue.dialogue[i].name;
+            _newLog.GetComponent<DialogueLogEntry>().dialogue.text = myDialogue.dialogue[i].text;
+        }
+
+        EndDialogue();
+
     }
 
     public void LoadCharacterSprite()
@@ -386,21 +441,7 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-    public void SkipDialogue()
-    {
-        //end dialogue
-        StopCoroutine(typing);
-
-        for (int i = index; i < myDialogue.dialogue.Length; i++)
-        {
-            GameObject _newLog = Instantiate(logEntry, logParent);
-            _newLog.GetComponent<DialogueLogEntry>().characterName.text = myDialogue.dialogue[i].name;
-            _newLog.GetComponent<DialogueLogEntry>().dialogue.text = myDialogue.dialogue[i].text;
-        }
-
-        EndDialogue();
-        
-    }
+    
     public void EndDialogue()
     {
         //end dialogue

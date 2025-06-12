@@ -59,7 +59,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.29, y: 1.29, z: 1.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6265875441098591601}
@@ -539,11 +539,15 @@ MonoBehaviour:
   clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   ChargedUp: 0
+  towerUpgradeUnlocked: 0
   upgradeCost1: 0
+  damageBoostUpgrade: 0
   upgradeCost2: 0
-  numberOfShots: 0
+  multiShotUpgrade: 0
   upgradeCost3: 0
+  burningUpgrade: 0
   upgradeCost4: 0
+  rangeUpgrade: 0
 --- !u!82 &-8906736978416925348
 AudioSource:
   m_ObjectHideFlags: 0

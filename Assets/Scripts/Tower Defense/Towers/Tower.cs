@@ -360,7 +360,32 @@ public class Tower : MonoBehaviour
             {
                 //item.transform.GetComponent<Tile>().Pulse(Color.blue);
 
-                SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
+                //Depending on the upgrade, change the sprite
+                if (burningUpgrade)
+                {
+                    SpawnParticles(item.transform, flameAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
+                    //Debug.Log("[Tower.cs] BurnUpgrade");
+                }
+                else if(rangeUpgrade)
+                {
+                    SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
+                    //Debug.Log("[Tower.cs] RangeUpgrade");
+                }
+                else if(damageBoostUpgrade)
+                {
+                    SpawnParticles(item.transform, increasedAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
+                    //Debug.Log("[Tower.cs] DamageUpgrade");
+                }
+                else if(multiShotUpgrade)
+                {
+                    SpawnParticles(item.transform, multiAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
+                    //Debug.Log("[Tower.cs] MultiUpgrade");
+                }
+                else
+                {
+                    SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
+                    //Debug.LogWarning("[Tower.cs] AOE sprite display broke :(");
+                }
             }
             else if (item.transform.CompareTag("Enemy"))
             {

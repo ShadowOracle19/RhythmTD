@@ -10,7 +10,7 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
 {
     [SerializeField] private TMP_Text _itemName;
     public EncounterCreator heldEncounter;
-    [SerializeField] private Image fill;
+    public Image fill;
 
     [SerializeField] private ItemButtonEvent _onSelectEvent;
     [SerializeField] private ItemButtonEvent _onSubmitEvent;
@@ -25,7 +25,7 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
 
     private void Update()
     {
-        fill.color = heldEncounter.fillColor;
+        
     }
 
     public void OnSelect(BaseEventData eventData)

@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int viewPortOffset = -150;
     private ItemButtonEvent _eventItemOnSelect;
     private ItemButtonEvent _eventItemOnSubmit;
+    [SerializeField] private Selectable returnToMainMenuButton;
 
     [Header("Info Panel Connections")]
     public GameObject infoPanel;
@@ -165,6 +166,7 @@ public class GameManager : MonoBehaviour
         item = gameObject.GetComponent<ItemButton>();
         item.ItemNameValue = encounter.LevelLabel;
         item.heldEncounter = encounter;
+        item.fill.color = encounter.fillColor;
         item.GetComponent<ItemButton>().viewportOffset = viewPortOffset;
         viewPortOffset += levelScrollView.viewportOffsetValue;
 
@@ -209,6 +211,7 @@ public class GameManager : MonoBehaviour
 
             navigation.selectOnLeft = GetNavigationLeft(i, children.Length);
             navigation.selectOnRight = GetNavigationRight(i, children.Length);
+            navigation.selectOnUp = returnToMainMenuButton;
 
             item.gameObject.GetComponent<Button>().navigation = navigation;
         }

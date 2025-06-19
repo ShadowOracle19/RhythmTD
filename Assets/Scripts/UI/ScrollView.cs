@@ -8,7 +8,7 @@ public class ScrollView : MonoBehaviour
     [SerializeField] private RectTransform _viewport;
     [SerializeField] private RectTransform _content;
 
-    [SerializeField] private int viewportOffsetValue = -150;
+    [SerializeField] public int viewportOffsetValue = -150;
 
     private TransitionHelper _transitionHelper = new TransitionHelper();
 
@@ -56,7 +56,7 @@ public class ScrollView : MonoBehaviour
 
     }
 
-    private void HandleOnSelect(ItemButton item)
+    public void HandleOnSelect(ItemButton item)
     {
         Debug.Log("AM here" + item.viewportOffset);
         Vector2 positionFrom = _viewport.anchoredPosition;

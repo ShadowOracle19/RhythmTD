@@ -19,79 +19,79 @@ public class ButtonHighlightInfoManager : MonoBehaviour, ISelectHandler, IDesele
     public Sprite objectiveCompleteIcon;
     public List<Sprite> intelIcons;
 
-    [Header("Info Panel Connections")]
-    public GameObject infoPanel;
-    public TextMeshProUGUI levelNameText;
-    public TextMeshProUGUI levelNumText;
-    public TextMeshProUGUI objectiveText01;
-    public TextMeshProUGUI objectiveText02;
-    public TextMeshProUGUI objectiveText03;
-    public Image levelPreviewImage;
-    public Image objectiveImage01;
-    public Image objectiveImage02;
-    public Image objectiveImage03;
-    public List<Image> intelImages;
-    private int imageIndex = 0;
+    private void Start()
+    {
+        levelName = GetComponent<ItemButton>().heldEncounter.encounterName;
+        levelNum = GetComponent<ItemButton>().heldEncounter.LevelLabel;
+        objectiveDesc01 = GetComponent<ItemButton>().heldEncounter.data.objectiveDesc01;
+        objectiveDesc02 = GetComponent<ItemButton>().heldEncounter.data.objectiveDesc02;
+        objectiveDesc03 = GetComponent<ItemButton>().heldEncounter.data.objectiveDesc03;
+        levelPreview = GetComponent<ItemButton>().heldEncounter.data.levelPreview;
+        objectiveIncompleteIcon = GetComponent<ItemButton>().heldEncounter.data.objectiveIncompleteIcon;
+        objectiveCompleteIcon = GetComponent<ItemButton>().heldEncounter.data.objectiveCompleteIcon;
+
+        intelIcons = GetComponent<ItemButton>().heldEncounter.data.intelIcons;
+    }
 
     public void OnSelect(BaseEventData eventData)
     {
-        levelNameText.enabled = true;
-        infoPanel.SetActive(true);
+        GameManager.Instance.levelNameText.enabled = true;
+        GameManager.Instance.infoPanel.SetActive(true);
 
-        levelNameText.text = levelName;
-        levelNumText.text = levelNum;
+        GameManager.Instance.levelNameText.text = levelName;
+        GameManager.Instance.levelNumText.text = levelNum;
 
-        levelPreviewImage.sprite = levelPreview;
-  
-        objectiveText01.text = objectiveDesc01;
-        objectiveText02.text = objectiveDesc02;
-        objectiveText03.text = objectiveDesc03;
+        GameManager.Instance.levelPreviewImage.sprite = levelPreview;
 
-        objectiveImage01.sprite = objectiveIncompleteIcon;
+        GameManager.Instance.objectiveText01.text = objectiveDesc01;
+        GameManager.Instance.objectiveText02.text = objectiveDesc02;
+        GameManager.Instance.objectiveText03.text = objectiveDesc03;
+
+        GameManager.Instance.objectiveImage01.sprite = objectiveIncompleteIcon;
 
         if (objectiveDesc02 != "")
         {
-            objectiveImage02.enabled = true;
+            GameManager.Instance.objectiveImage02.enabled = true;
 
-            objectiveImage02.sprite = objectiveIncompleteIcon;
+            GameManager.Instance.objectiveImage02.sprite = objectiveIncompleteIcon;
         }
         else
         {
-            objectiveImage02.enabled = false;
+            GameManager.Instance.objectiveImage02.enabled = false;
         }
 
         if (objectiveDesc03 != "")
         {
-            objectiveImage03.enabled = true;
+            GameManager.Instance.objectiveImage03.enabled = true;
 
-            objectiveImage03.sprite = objectiveIncompleteIcon;
+            GameManager.Instance.objectiveImage03.sprite = objectiveIncompleteIcon;
         }
         else 
         {
-            objectiveImage03.enabled = false;
+            GameManager.Instance.objectiveImage03.enabled = false;
         }
 
-        imageIndex = 0;
+        GameManager.Instance.imageIndex = 0;
 
-        foreach(Image image in intelImages)
+        foreach(Image image in GameManager.Instance.intelImages)
         {
-            if (imageIndex > (intelIcons.Count-1))
+            if (GameManager.Instance.imageIndex > (intelIcons.Count-1))
             {
                 image.enabled = false;
             }
             else
             {
-                image.sprite = intelIcons[imageIndex];
+                image.sprite = intelIcons[GameManager.Instance.imageIndex];
                 image.enabled = true;
             }
 
-            imageIndex += 1;
+            GameManager.Instance.imageIndex += 1;
         }
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        levelNameText.enabled = false;
-        infoPanel.SetActive(false);
+        GameManager.Instance.levelNameText.enabled = false;
+        GameManager.Instance.infoPanel.SetActive(false);
     }
 }

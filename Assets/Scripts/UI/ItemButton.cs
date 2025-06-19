@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using TMPro;
@@ -8,6 +9,8 @@ using TMPro;
 public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDeselectHandler
 {
     [SerializeField] private TMP_Text _itemName;
+    public EncounterCreator heldEncounter;
+    [SerializeField] private Image fill;
 
     [SerializeField] private ItemButtonEvent _onSelectEvent;
     [SerializeField] private ItemButtonEvent _onSubmitEvent;
@@ -19,6 +22,11 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
     public ItemButtonEvent OnSubmitEvent { get => _onSubmitEvent; set => _onSubmitEvent = value; }
 
     public string ItemNameValue { get => _itemName.text; set => _itemName.text = value; }
+
+    private void Update()
+    {
+        fill.color = heldEncounter.fillColor;
+    }
 
     public void OnSelect(BaseEventData eventData)
     {

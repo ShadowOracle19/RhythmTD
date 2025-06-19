@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2570545185214254783
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36,11 +36,11 @@ RectTransform:
   m_Children:
   - {fileID: 6369096594839662186}
   - {fileID: 1706286813432855542}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3488025329452308888
@@ -184,20 +184,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &2531839406390491034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 6218047980612761093}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -712,7 +700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4654916587740554128
 RectTransform:
   m_ObjectHideFlags: 0
@@ -727,11 +715,11 @@ RectTransform:
   m_Children:
   - {fileID: 7102387474884640022}
   - {fileID: 810643231094875275}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6287719750743972215
@@ -875,20 +863,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &637480330043163392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,6 +876,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 7792026832531848813}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -956,7 +932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8746078600588913637
 RectTransform:
   m_ObjectHideFlags: 0
@@ -971,11 +947,11 @@ RectTransform:
   m_Children:
   - {fileID: 1281812689713630693}
   - {fileID: 7867547895749089697}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2912626062856234083
@@ -1119,20 +1095,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &2309366873121155269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,6 +1108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 5454575951817158955}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1693,7 +1657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1294376709975187035
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1708,11 +1672,11 @@ RectTransform:
   m_Children:
   - {fileID: 5343533653634460342}
   - {fileID: 9055722961540207908}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2988291769359534809
@@ -1856,20 +1820,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &7554054226878228078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1883,6 +1833,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 289640484650069293}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2558,46 +2510,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7551430765686549880}
-  - {fileID: 8993795505716681324}
-  - {fileID: 3535851624531067484}
-  - {fileID: 7668321052997055416}
-  - {fileID: 5914662574857350087}
-  - {fileID: 9142844614009344994}
-  - {fileID: 8027225480721731477}
-  - {fileID: 4654916587740554128}
-  - {fileID: 2203252751146706679}
-  - {fileID: 3630031767729043644}
-  - {fileID: 6629864482074132029}
-  - {fileID: 6630895514852259311}
-  - {fileID: 3509581567201180828}
-  - {fileID: 5784944355564734399}
-  - {fileID: 4131184802881023633}
-  - {fileID: 7849592833773573164}
-  - {fileID: 320175989053558347}
-  - {fileID: 5268914125671742889}
-  - {fileID: 7816788225591555101}
-  - {fileID: 3002802576549143695}
-  - {fileID: 5736456683899965303}
-  - {fileID: 3907041668093747368}
-  - {fileID: 2570545185214254783}
-  - {fileID: 687720842830212249}
-  - {fileID: 5396242726236207980}
-  - {fileID: 2570843647702819687}
-  - {fileID: 8024648259903633391}
-  - {fileID: 6422381466984278248}
-  - {fileID: 7850199825772778536}
-  - {fileID: 6997775900588376210}
-  - {fileID: 1115156065581097434}
-  - {fileID: 687299806011296951}
-  - {fileID: 6776005214690914686}
-  - {fileID: 8423057272025741502}
-  - {fileID: 8746078600588913637}
-  - {fileID: 5732386527759437215}
-  - {fileID: 1862439710759742709}
-  - {fileID: 1294376709975187035}
-  - {fileID: 4643505015831305427}
-  - {fileID: 521219501628270399}
-  - {fileID: 377162281343657784}
   m_Father: {fileID: 7016200436392642812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -2666,7 +2578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6776005214690914686
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2681,11 +2593,11 @@ RectTransform:
   m_Children:
   - {fileID: 1448869701312901677}
   - {fileID: 4847363978489474081}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6814276573898311629
@@ -2829,20 +2741,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &4902700855607548127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2856,6 +2754,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 2423329507933702120}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2910,7 +2810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &377162281343657784
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2925,11 +2825,11 @@ RectTransform:
   m_Children:
   - {fileID: 2834090655469421168}
   - {fileID: 2576983602488058430}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3484765695891648925
@@ -3073,20 +2973,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &340415474110377240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3100,6 +2986,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 8408654926741342432}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -4139,7 +4027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8027225480721731477
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4155,11 +4043,11 @@ RectTransform:
   - {fileID: 3565330367858655040}
   - {fileID: 1765548137152786565}
   - {fileID: 447591111246000254}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2872234949107851123
@@ -4303,20 +4191,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &4650316718035345603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4330,6 +4204,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 4267342918207534652}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -4743,7 +4619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2203252751146706679
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4758,11 +4634,11 @@ RectTransform:
   m_Children:
   - {fileID: 3132398588570767510}
   - {fileID: 8981113134317423393}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2561764880133718964
@@ -4906,20 +4782,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &7583098664737091963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4933,6 +4795,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 2771812999497739792}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -6018,7 +5882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5914662574857350087
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6034,11 +5898,11 @@ RectTransform:
   - {fileID: 4373930219707247724}
   - {fileID: 3786579097121206000}
   - {fileID: 8988057080573034823}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3954334382445218815
@@ -6182,20 +6046,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &2534240040040198246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6209,6 +6059,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 358731258363475436}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -6996,7 +6848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &521219501628270399
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7011,11 +6863,11 @@ RectTransform:
   m_Children:
   - {fileID: 4956364100995482965}
   - {fileID: 2788203020178160468}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3420903893398618065
@@ -7159,20 +7011,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &4036722006885994272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7186,6 +7024,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 2254161065694560877}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -7306,7 +7146,7 @@ GameObject:
   - component: {fileID: 4607348956040423611}
   - component: {fileID: 7174684919973249146}
   m_Layer: 0
-  m_Name: Tutorial Button Text
+  m_Name: ' Button Text'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7359,7 +7199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: T-1
+  m_text: X - X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a6db596e8d8bce468fee9f2ce4774c6, type: 2}
   m_sharedMaterial: {fileID: -1542050462265699550, guid: 9a6db596e8d8bce468fee9f2ce4774c6, type: 2}
@@ -7733,7 +7573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6997775900588376210
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7748,11 +7588,11 @@ RectTransform:
   m_Children:
   - {fileID: 3808215210378114756}
   - {fileID: 1208849417047178019}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1327279294053834180
@@ -7896,20 +7736,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &659590667936049962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7923,6 +7749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 4982682720106328556}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -8362,7 +8190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7849592833773573164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8377,11 +8205,11 @@ RectTransform:
   m_Children:
   - {fileID: 3828259653779369343}
   - {fileID: 4728412741307350078}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3140281466294354305
@@ -8525,20 +8353,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &2798351219485934134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8552,6 +8366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 7924976247294137765}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -8681,7 +8497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1862439710759742709
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8696,11 +8512,11 @@ RectTransform:
   m_Children:
   - {fileID: 2465750459487845950}
   - {fileID: 7641030578267586895}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4587793790154214815
@@ -8844,20 +8660,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &6984514188805672940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8871,6 +8673,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 1803262125619941583}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -8925,7 +8729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5396242726236207980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8940,11 +8744,11 @@ RectTransform:
   m_Children:
   - {fileID: 1033127652111034982}
   - {fileID: 3480519877418681839}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7127295488183015799
@@ -9088,20 +8892,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &6901669632471284358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9115,6 +8905,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 3777456853913851617}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -10172,7 +9964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8993795505716681324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10188,11 +9980,11 @@ RectTransform:
   - {fileID: 8188581725677449030}
   - {fileID: 986468357923896100}
   - {fileID: 9165775246025241204}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4059328019701322002
@@ -10336,20 +10128,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &1821815779158772576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10363,6 +10141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 1130602391580512363}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -10961,7 +10741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6422381466984278248
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10976,11 +10756,11 @@ RectTransform:
   m_Children:
   - {fileID: 7936079954621025255}
   - {fileID: 5618655200290202092}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6803582064328433523
@@ -11124,20 +10904,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &7084991608167162024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11151,6 +10917,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 8567086244860675389}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -11205,7 +10973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7668321052997055416
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11221,11 +10989,11 @@ RectTransform:
   - {fileID: 798191744093290594}
   - {fileID: 4915806372850116076}
   - {fileID: 2495496995380449317}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1640303205935296843
@@ -11369,20 +11137,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &1977650618165849042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11396,6 +11150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 4648293765085083956}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -11450,7 +11206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8024648259903633391
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11465,11 +11221,11 @@ RectTransform:
   m_Children:
   - {fileID: 8294671573128923300}
   - {fileID: 9105161258517630482}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4958809300270397886
@@ -11613,20 +11369,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &3414057158349828869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11640,6 +11382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 597055435370316484}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -12131,7 +11875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4131184802881023633
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12146,11 +11890,11 @@ RectTransform:
   m_Children:
   - {fileID: 1859117745705531100}
   - {fileID: 1203656643618024901}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2338361510939065769
@@ -12294,20 +12038,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &479141393537266426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12321,6 +12051,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 2084158670317647641}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -12451,7 +12183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5268914125671742889
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12466,11 +12198,11 @@ RectTransform:
   m_Children:
   - {fileID: 1681140645959057430}
   - {fileID: 2854417868236151601}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6931495172532098565
@@ -12614,20 +12346,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &4190506025354549764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12641,6 +12359,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 8918889332888566018}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -12695,7 +12415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7816788225591555101
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12710,11 +12430,11 @@ RectTransform:
   m_Children:
   - {fileID: 5014573042803167745}
   - {fileID: 603292663407421319}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4040895486528487095
@@ -12858,20 +12578,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &1588373343016586061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12885,6 +12591,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 7727753396112932794}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -13299,7 +13007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3630031767729043644
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13314,11 +13022,11 @@ RectTransform:
   m_Children:
   - {fileID: 3803405306407346198}
   - {fileID: 603198890632829946}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4450360819571923628
@@ -13462,20 +13170,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &7908257255348933947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13489,6 +13183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 5836690388770643117}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -13618,7 +13314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5736456683899965303
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13633,11 +13329,11 @@ RectTransform:
   m_Children:
   - {fileID: 4509784077214569609}
   - {fileID: 990249397959836282}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3380497237039743203
@@ -13781,20 +13477,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &8641555514103776900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13808,6 +13490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 3954178035031308365}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -14281,7 +13965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1115156065581097434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14296,11 +13980,11 @@ RectTransform:
   m_Children:
   - {fileID: 5184521341842341508}
   - {fileID: 4126413343104202071}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1291287388726785523
@@ -14444,20 +14128,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &4742421489424442152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14471,6 +14141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 624718995777534994}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -15266,20 +14938,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &5307179497126049676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15293,21 +14951,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 7174684919973249146}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 7740202420106906841}
   _onSelectEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6637064771720053295}
-        m_TargetAssemblyTypeName: ScrollView, Assembly-CSharp
-        m_MethodName: HandleEventItemOnSelect
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 5307179497126049676}
-          m_ObjectArgumentAssemblyTypeName: ItemButton, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _onSubmitEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -16185,7 +15833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8423057272025741502
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16200,11 +15848,11 @@ RectTransform:
   m_Children:
   - {fileID: 1716353720686483476}
   - {fileID: 1139930206976333748}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3108724595782634912
@@ -16348,20 +15996,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &9105294208315942127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16375,6 +16009,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 4939476122683295246}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -16997,7 +16633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9142844614009344994
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17013,11 +16649,11 @@ RectTransform:
   - {fileID: 2243165118209496029}
   - {fileID: 6040939474270915120}
   - {fileID: 4650194229302455253}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4099050877361197722
@@ -17161,20 +16797,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &3301317314821004072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17188,6 +16810,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 8993500372822564179}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -17601,7 +17225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5732386527759437215
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17616,11 +17240,11 @@ RectTransform:
   m_Children:
   - {fileID: 3938421945350888113}
   - {fileID: 6771199495176095784}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5469469006180985343
@@ -17764,20 +17388,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &3534098791425463613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17791,6 +17401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 8874145405077654718}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -17845,7 +17457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4643505015831305427
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17860,11 +17472,11 @@ RectTransform:
   m_Children:
   - {fileID: 1876865775835540292}
   - {fileID: 3674568572782215585}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8619403763925905453
@@ -18008,20 +17620,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &3478925325293970961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18035,6 +17633,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 2577938643536265945}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -18089,7 +17689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6629864482074132029
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18104,11 +17704,11 @@ RectTransform:
   m_Children:
   - {fileID: 5881924984128241019}
   - {fileID: 938042215192772782}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7701797270215574119
@@ -18252,20 +17852,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &2911722077615186566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18279,6 +17865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 4037259730161920587}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -19889,7 +19477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3535851624531067484
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19905,11 +19493,11 @@ RectTransform:
   - {fileID: 5674731907572094413}
   - {fileID: 2403269666006011194}
   - {fileID: 4927565379035395585}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8493235274810535659
@@ -20053,20 +19641,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &337924383380543522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20080,6 +19654,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 4708962474493441575}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -20210,7 +19786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7850199825772778536
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20225,11 +19801,11 @@ RectTransform:
   m_Children:
   - {fileID: 4343177538352958785}
   - {fileID: 3469282713463470318}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2970835245710014612
@@ -20373,20 +19949,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &4325964316836997798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20400,6 +19962,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 8333613226131559489}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -20763,7 +20327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2570843647702819687
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20778,11 +20342,11 @@ RectTransform:
   m_Children:
   - {fileID: 3485591512577733178}
   - {fileID: 8043840429414009224}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1400084459993825236
@@ -20926,20 +20490,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &1715935549644449994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20953,6 +20503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 7519202347814186936}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -21670,7 +21222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3907041668093747368
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21685,11 +21237,11 @@ RectTransform:
   m_Children:
   - {fileID: 3854862426124414926}
   - {fileID: 2895695514396615841}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1246867024903100040
@@ -21833,20 +21385,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &637126403296291299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21860,6 +21398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 261127563138409116}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -23000,7 +22540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6630895514852259311
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23015,11 +22555,11 @@ RectTransform:
   m_Children:
   - {fileID: 2114080182319108053}
   - {fileID: 5516850077497852436}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2662189137395805436
@@ -23163,20 +22703,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &5651205617710110766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23190,6 +22716,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 7428788480033434902}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -23250,7 +22778,47 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8993795505716681324}
+  - {fileID: 3535851624531067484}
+  - {fileID: 7668321052997055416}
+  - {fileID: 5914662574857350087}
+  - {fileID: 9142844614009344994}
+  - {fileID: 8027225480721731477}
+  - {fileID: 4654916587740554128}
+  - {fileID: 2203252751146706679}
+  - {fileID: 3630031767729043644}
+  - {fileID: 6629864482074132029}
+  - {fileID: 6630895514852259311}
+  - {fileID: 3509581567201180828}
+  - {fileID: 5784944355564734399}
+  - {fileID: 4131184802881023633}
+  - {fileID: 7849592833773573164}
+  - {fileID: 320175989053558347}
+  - {fileID: 5268914125671742889}
+  - {fileID: 7816788225591555101}
+  - {fileID: 3002802576549143695}
+  - {fileID: 5736456683899965303}
+  - {fileID: 3907041668093747368}
+  - {fileID: 2570545185214254783}
+  - {fileID: 687720842830212249}
+  - {fileID: 5396242726236207980}
+  - {fileID: 2570843647702819687}
+  - {fileID: 8024648259903633391}
+  - {fileID: 6422381466984278248}
+  - {fileID: 7850199825772778536}
+  - {fileID: 6997775900588376210}
+  - {fileID: 1115156065581097434}
+  - {fileID: 687299806011296951}
+  - {fileID: 6776005214690914686}
+  - {fileID: 8423057272025741502}
+  - {fileID: 8746078600588913637}
+  - {fileID: 5732386527759437215}
+  - {fileID: 1862439710759742709}
+  - {fileID: 1294376709975187035}
+  - {fileID: 4643505015831305427}
+  - {fileID: 521219501628270399}
+  - {fileID: 377162281343657784}
   m_Father: {fileID: 1489342942541515483}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -23279,7 +22847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &687720842830212249
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23294,11 +22862,11 @@ RectTransform:
   m_Children:
   - {fileID: 7342112071523518751}
   - {fileID: 5292759403550044007}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2489155043991324307
@@ -23442,20 +23010,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &2633134493835257900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23469,6 +23023,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 9220968800632991882}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -23598,7 +23154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &687299806011296951
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23613,11 +23169,11 @@ RectTransform:
   m_Children:
   - {fileID: 209899061356677964}
   - {fileID: 9119910751428649170}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5238337461216378412
@@ -23761,20 +23317,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &8274103477297832662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23788,6 +23330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 1051897579559394167}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -24498,7 +24042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5784944355564734399
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24513,11 +24057,11 @@ RectTransform:
   m_Children:
   - {fileID: 775137589543444130}
   - {fileID: 9185847799151726085}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1944717448211463675
@@ -24661,20 +24205,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &5286256679473364416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24688,6 +24218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 4161604487094178336}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -24742,7 +24274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &320175989053558347
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24757,11 +24289,11 @@ RectTransform:
   m_Children:
   - {fileID: 2487811348611246456}
   - {fileID: 5440207879460923832}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6734391576507166398
@@ -24905,20 +24437,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &6725271769990042697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24932,6 +24450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 2357706607257976172}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -24986,7 +24506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3509581567201180828
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25001,11 +24521,11 @@ RectTransform:
   m_Children:
   - {fileID: 6246590019109402550}
   - {fileID: 5934495955163145055}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &578809166877213540
@@ -25149,20 +24669,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &8713151114264282555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25176,6 +24682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 1424943000538977319}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:
@@ -26621,7 +26129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3002802576549143695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26636,11 +26144,11 @@ RectTransform:
   m_Children:
   - {fileID: 7542997240489104490}
   - {fileID: 772186949003470661}
-  m_Father: {fileID: 8048393127752205597}
+  m_Father: {fileID: 3673324753964040962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: 504}
   m_SizeDelta: {x: 250, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8703624670760597617
@@ -26784,20 +26292,6 @@ MonoBehaviour:
   intelIcons:
   - {fileID: -1851642838118425799, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
   - {fileID: 7415964624165617143, guid: 9e23bede440c5bd48806fbd77928b4aa, type: 3}
-  infoPanel: {fileID: 6551056907063583039}
-  levelNameText: {fileID: 861588965964621254}
-  levelNumText: {fileID: 4999335563941119987}
-  objectiveText01: {fileID: 5775499428525558388}
-  objectiveText02: {fileID: 7525100684926892690}
-  objectiveText03: {fileID: 1885885604303518113}
-  levelPreviewImage: {fileID: 6932087525017101300}
-  objectiveImage01: {fileID: 1229353578543620530}
-  objectiveImage02: {fileID: 8987906658884780292}
-  objectiveImage03: {fileID: 2992661799545272304}
-  intelImages:
-  - {fileID: 6414174370625271447}
-  - {fileID: 4769748465742816494}
-  - {fileID: 226915731335723159}
 --- !u!114 &4099426270506005605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26811,6 +26305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 9040865735957965528}
+  heldEncounter: {fileID: 0}
+  fill: {fileID: 0}
   _onSelectEvent:
     m_PersistentCalls:
       m_Calls:

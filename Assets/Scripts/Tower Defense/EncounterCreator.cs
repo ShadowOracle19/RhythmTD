@@ -7,6 +7,7 @@ public class EncounterCreator : ScriptableObject
 {
     [Header("Encounter Info")]
     public string encounterName;
+    public string LevelLabel;
 
     [Header("Base Encounter Creator")]
     public TextAsset introDialogue;
@@ -19,4 +20,20 @@ public class EncounterCreator : ScriptableObject
     [Header("Show Case Level")]
     public bool isShowcase = false;
 
+    [Header("Encounter Data")]
+    public EncounterData data;
+    public Color fillColor;
+}
+
+[System.Serializable]
+public class EncounterData
+{
+    // Level Info
+    public string objectiveDesc01;
+    public string objectiveDesc02;
+    public string objectiveDesc03;
+    public Sprite levelPreview;
+    public Sprite objectiveIncompleteIcon;
+    public Sprite objectiveCompleteIcon;
+    public List<Sprite> intelIcons;
 }

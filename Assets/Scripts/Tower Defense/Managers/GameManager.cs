@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Linq;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -78,6 +80,30 @@ public class GameManager : MonoBehaviour
     public float audioOffset;
     public float inputOffset;
 
+    [Header("Level Buttons")]
+    [SerializeField] private GameObject levelButtons;
+    [SerializeField] private Transform levelParent;
+    [SerializeField] private ScrollView levelScrollView;
+    [SerializeField] private int viewPortOffset = -150;
+    private ItemButtonEvent _eventItemOnSelect;
+    private ItemButtonEvent _eventItemOnSubmit;
+    [SerializeField] private Selectable returnToMainMenuButton;
+
+    [Header("Info Panel Connections")]
+    public GameObject infoPanel;
+    public TextMeshProUGUI levelNameText;
+    public TextMeshProUGUI levelNumText;
+    public TextMeshProUGUI objectiveText01;
+    public TextMeshProUGUI objectiveText02;
+    public TextMeshProUGUI objectiveText03;
+    public Image levelPreviewImage;
+    public Image objectiveImage01;
+    public Image objectiveImage02;
+    public Image objectiveImage03;
+    public List<Image> intelImages;
+    public int imageIndex = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +124,9 @@ public class GameManager : MonoBehaviour
         Debug.Log(QualitySettings.vSyncCount + " Vsync");
         Cursor.lockState = CursorLockMode.Locked;
         playerInputManager.SetActive(false);
+
+        LoadLevelButtons();
+        UpdateAllLevelSelectButtonNavigationReferences();
     }
 
     // Update is called once per frame
@@ -109,6 +138,117 @@ public class GameManager : MonoBehaviour
             Health();
         }
 
+    }
+
+    private void LoadLevelButtons()
+    {
+        EncounterCreator[] encounters = Resources.LoadAll<EncounterCreator>("Encounters/");
+
+        foreach (EncounterCreator encounter in encounters)
+        {
+            CreateButton(encounter);
+        }
+    }
+
+    private ItemButton CreateButton(EncounterCreator encounter)
+    {
+        Debug.Log(encounter);
+
+        GameObject gameObject;
+        ItemButton item;
+
+        gameObject = Instantiate(levelButtons, Vector3.zero, Quaternion.identity);
+        gameObject.transform.SetParent(levelParent);
+        
+        gameObject.name = encounter.name;
+
+        //set params
+        item = gameObject.GetComponent<ItemButton>();
+        item.ItemNameValue = encounter.LevelLabel;
+        item.heldEncounter = encounter;
+        item.fill.color = encounter.fillColor;
+        item.GetComponent<ItemButton>().viewportOffset = viewPortOffset;
+        viewPortOffset += levelScrollView.viewportOffsetValue;
+
+        //add event listeners
+        //gameObject.GetComponent<Button>().onClick.AddListener(LoadEncounter(encounter));
+        item.OnSubmitEvent.AddListener((ItemButton) => { HandleEventItemOnSubmit(item); });
+        item.OnSelectEvent.AddListener((ItemButton) => { HandleEventItemOnSelect(item); });
+
+        return item;
+    }
+
+    public void HandleEventItemOnSelect(ItemButton item)
+    {
+        levelScrollView.HandleOnSelect(item);
+    }
+
+    public void HandleEventItemOnSubmit(ItemButton item)
+    {
+        menuRoot.SetActive(false);
+        menuMusic.Pause();
+        buttonHighlightSFX.Play();
+        LoadEncounter(item.heldEncounter);
+    }
+
+    private void UpdateAllLevelSelectButtonNavigationReferences()
+    {
+        ItemButton[] children = levelParent.GetComponentsInChildren<ItemButton>();
+
+        if (children.Length < 2)
+        {
+            return; //must have at least 2 buttons
+        }
+
+        ItemButton item;
+        Navigation navigation;
+
+        for (int i = 0; i < children.Length; i++)
+        {
+            item = children[i];
+
+            navigation = item.gameObject.GetComponent<Button>().navigation;
+
+            navigation.selectOnLeft = GetNavigationLeft(i, children.Length);
+            navigation.selectOnRight = GetNavigationRight(i, children.Length);
+            navigation.selectOnUp = returnToMainMenuButton;
+
+            item.gameObject.GetComponent<Button>().navigation = navigation;
+        }
+    }
+
+    private Selectable GetNavigationRight(int indexCurrent, int length)
+    {
+        ItemButton item;
+
+        if (indexCurrent == length - 1) //last item
+        {
+            //looping dont set anything here
+            return null;
+        }
+        else
+        {
+            item = levelParent.GetChild(indexCurrent + 1).GetComponent<ItemButton>();
+        }
+
+        return item.GetComponent<Selectable>();
+    }
+
+    private Selectable GetNavigationLeft(int indexCurrent, int length)
+    {
+        ItemButton item;
+
+        if (indexCurrent == 0)
+        {
+            //looping dont set anything here
+            return null;
+        }
+        else
+        {
+            item = levelParent.GetChild(indexCurrent - 1).GetComponent<ItemButton>();
+        }
+
+        return item.GetComponent<Selectable>();
     }
 
     #region pause function
@@ -186,6 +326,8 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
+
+
 
     public void LoadTutorial()
     {

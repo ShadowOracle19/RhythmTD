@@ -17,6 +17,9 @@ public class Tile : MonoBehaviour
     [Header("Spawn Tile Info")]
     public float zPos = 0;
 
+    [Header("Target Tile Info")]
+    public Transform targetPos;
+
     private void Update()
     {
         if(forecastingObject != null)

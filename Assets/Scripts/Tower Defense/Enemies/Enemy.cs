@@ -45,10 +45,15 @@ public class Enemy : MonoBehaviour
 
     public bool teleported = false;
 
+    // dynamic mover
+    LayerMask tileMask;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        tileMask = LayerMask.GetMask("Stage");
         currentHealth = enemy.maxHealth;
 
         dontMove = true;
@@ -62,15 +67,16 @@ public class Enemy : MonoBehaviour
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
-        
 
+        
         Movement();
 
     }
 
     public void OnTick()
     {
-        if(burnt)
+        
+        if (burnt)
         {
             Damage(burnDamage);
             burnParticlesInstance = Instantiate(burnParticles, this.transform, worldPositionStays:false); // Create instance of the burn particle effect
@@ -93,6 +99,9 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        
+
+        //enemy movement pattern handler
         switch (enemy.movementPattern)
         {
             case EnemyMovementPattern.everyBeat:
@@ -113,16 +122,16 @@ public class Enemy : MonoBehaviour
                     float _rand;
                     if(randYPos == -1)
                     {
-                        _rand = -1.2f;
+                        _rand = -1f;
                     }
                     else
                     {
-                        _rand = 1.2f;
+                        _rand = 1f;
                     }
 
                     nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + _rand);
 
-                    if(nextPosition.z >= 2.5f || nextPosition.z <= -4f)//if hit top of bottom of the map
+                    if(nextPosition.z >= 2.5f || nextPosition.z <= -4.5f)//if hit top of bottom of the map
                     {
                         nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
                     }
@@ -199,9 +208,30 @@ public class Enemy : MonoBehaviour
 
     }
 
-    /*
-     * TODO: Update clash system to hit a tower each beat instead of killing itself on a tower
-     */ 
+    //Enemies eyes to see if a tile or obstacle is around them
+    public void EnemyDetection()
+    {
+        //if enemy is infront of a obstacle tile
+        if(tileInFront != null && tileInFront.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("Obstacle Tile Found");
+            RaycastHit hit;
+
+            //If Tile above is a valid stage tile
+            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, 1, tileMask))
+            {
+                nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+                return;
+            }
+            //If tile below is a valid stage tile
+            else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1, tileMask))
+            {
+                nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+                return;
+
+            }
+        }
+    }
 
     public void Clash(ClashStrength clashStrength)
     {
@@ -267,6 +297,7 @@ public class Enemy : MonoBehaviour
            dontMove = true;
             timer = 0;
             nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+            EnemyDetection();
         }
         if (tileInFront != null && tileInFront.placedTower != null)
         {

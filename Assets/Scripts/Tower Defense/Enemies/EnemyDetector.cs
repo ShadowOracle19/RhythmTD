@@ -6,7 +6,7 @@ public class EnemyDetector : MonoBehaviour
 {
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.CompareTag("StageTile"))
+        if(collision.gameObject.CompareTag("StageTile") || collision.gameObject.CompareTag("Obstacle"))
         {
             GetComponentInParent<Enemy>().tileInFront = collision.GetComponent<Tile>();
         }

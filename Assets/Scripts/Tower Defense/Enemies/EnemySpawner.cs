@@ -185,7 +185,6 @@ public class EnemySpawner : MonoBehaviour
         foreach (var enemyToForecast in currentWaves[_wave].enemies)
         {
 
-            Debug.Log($"Start forecasting for tile {enemyToForecast.tile - 1}");
             spawnTiles[enemyToForecast.tile - 1].GetComponent<Tile>().ForecastEnemy();
         }
            
@@ -195,7 +194,6 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var _enemyToForecast in currentWaves[_wave].enemies)
         {
-            Debug.Log($"Stop forecasting for tile {_enemyToForecast.tile - 1}");
             spawnTiles[_enemyToForecast.tile - 1].GetComponent<Tile>().StopForecasting();
         }
     }

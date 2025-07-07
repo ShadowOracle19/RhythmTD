@@ -458,7 +458,6 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.LoadTutorial();
                 return;
             }
-            Debug.Log("Does this happen");
             GameManager.Instance.combatRoot.SetActive(true);
             GameManager.Instance.combatRunning = true;
             CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);

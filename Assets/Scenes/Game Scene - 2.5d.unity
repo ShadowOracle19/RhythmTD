@@ -4954,6 +4954,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8062817721462348428}
     m_Modifications:
+    - target: {fileID: 53756728613767783, guid: 87a3802f738b78040bfdfed40292f6ba, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ec21231e53307c4188e6eb496190e00, type: 2}
     - target: {fileID: 6026861394526949736, guid: 87a3802f738b78040bfdfed40292f6ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.5
@@ -12003,7 +12007,6 @@ GameObject:
   m_Component:
   - component: {fileID: 307364832}
   - component: {fileID: 307364829}
-  - component: {fileID: 307364831}
   - component: {fileID: 307364830}
   m_Layer: 11
   m_Name: Enemy Camera
@@ -12107,14 +12110,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &307364831
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307364828}
-  m_Enabled: 1
 --- !u!4 &307364832
 Transform:
   m_ObjectHideFlags: 0
@@ -12515,7 +12510,6 @@ GameObject:
   m_Component:
   - component: {fileID: 312938824}
   - component: {fileID: 312938821}
-  - component: {fileID: 312938823}
   - component: {fileID: 312938822}
   m_Layer: 11
   m_Name: Tower Camera
@@ -12619,14 +12613,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &312938823
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312938820}
-  m_Enabled: 1
 --- !u!4 &312938824
 Transform:
   m_ObjectHideFlags: 0
@@ -20424,7 +20410,6 @@ GameObject:
   m_Component:
   - component: {fileID: 554365217}
   - component: {fileID: 554365214}
-  - component: {fileID: 554365216}
   - component: {fileID: 554365215}
   m_Layer: 11
   m_Name: Indicator Camera
@@ -20528,14 +20513,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &554365216
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554365213}
-  m_Enabled: 1
 --- !u!4 &554365217
 Transform:
   m_ObjectHideFlags: 0
@@ -35143,7 +35120,6 @@ GameObject:
   m_Component:
   - component: {fileID: 965651577}
   - component: {fileID: 965651574}
-  - component: {fileID: 965651576}
   - component: {fileID: 965651575}
   m_Layer: 11
   m_Name: UI Camera
@@ -35247,14 +35223,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &965651576
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965651573}
-  m_Enabled: 1
 --- !u!4 &965651577
 Transform:
   m_ObjectHideFlags: 0
@@ -48509,7 +48477,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1349077444}
   - component: {fileID: 1349077441}
-  - component: {fileID: 1349077443}
   - component: {fileID: 1349077442}
   m_Layer: 11
   m_Name: Cursor Camera
@@ -48613,14 +48580,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &1349077443
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1349077440}
-  m_Enabled: 1
 --- !u!4 &1349077444
 Transform:
   m_ObjectHideFlags: 0
@@ -81172,7 +81131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2737315247605731274, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4035973514619479261, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

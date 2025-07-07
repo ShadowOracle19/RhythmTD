@@ -21,9 +21,9 @@ public class Tile : MonoBehaviour
     public Transform targetPos;
 
     [Header("Tile Glow")]
-    [SerializeField] private Renderer glowObject;
-    [SerializeField] private Material glowMaterial;
-    [SerializeField] private Material unglowMaterial;
+    public Renderer glowObject;
+    public Material glowMaterial;
+    public Material unglowMaterial;
 
     private void Update()
     {

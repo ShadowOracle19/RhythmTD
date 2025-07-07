@@ -67,7 +67,8 @@ public class Enemy : MonoBehaviour
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
-
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1, Color.blue);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.back) * 1, Color.red);
         
         Movement();
 
@@ -218,14 +219,16 @@ public class Enemy : MonoBehaviour
             RaycastHit hit;
 
             //If Tile above is a valid stage tile
-            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, 1, tileMask))
+            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, tileMask))
             {
+                Debug.Log("move up");
                 nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
                 return;
             }
             //If tile below is a valid stage tile
-            else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1, tileMask))
+            else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask))
             {
+                Debug.Log("move down");
                 nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
                 return;
 

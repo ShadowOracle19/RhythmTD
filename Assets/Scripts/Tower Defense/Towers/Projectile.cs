@@ -101,6 +101,12 @@ public class Projectile : MonoBehaviour
             if(!piercing) RemoveProjectile();
 
         }
+        //if a projectile hits a obstacle destroy it 
+        //TODO: Make tag specifically for wall obstacle
+        else if(collision.gameObject.CompareTag("Obstacle"))
+        {
+            RemoveProjectile();
+        }
     }
     public void RemoveProjectile()
     {

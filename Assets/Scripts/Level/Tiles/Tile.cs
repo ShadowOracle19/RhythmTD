@@ -20,11 +20,25 @@ public class Tile : MonoBehaviour
     [Header("Target Tile Info")]
     public Transform targetPos;
 
+    [Header("Tile Glow")]
+    public Renderer glowObject;
+    public Material glowMaterial;
+    public Material unglowMaterial;
+
     private void Update()
     {
         if(forecastingObject != null)
         {
             forecastingObject.SetActive(forecastingActive);
+        }
+
+        if (placedTower != null)
+        {
+            glowObject.material = glowMaterial;
+        }
+        else
+        {
+            glowObject.material = unglowMaterial;
         }
     }
 

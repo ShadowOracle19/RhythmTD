@@ -16,6 +16,11 @@ public class ChargeTile : Tile
         if(placedTower != null)
         {
             ChargeTower();
+            glowObject.material = glowMaterial;
+        }
+        else
+        {
+            glowObject.material = unglowMaterial;
         }
     }
 

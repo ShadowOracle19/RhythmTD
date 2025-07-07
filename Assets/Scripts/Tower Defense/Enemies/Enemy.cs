@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
 
     // dynamic mover
     LayerMask tileMask;
+    LayerMask obstacleMask;
 
 
 
@@ -54,6 +55,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         tileMask = LayerMask.GetMask("Stage");
+        obstacleMask = LayerMask.GetMask("Obstacle");
         currentHealth = enemy.maxHealth;
 
         dontMove = true;
@@ -67,7 +69,7 @@ public class Enemy : MonoBehaviour
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
-
+        
         
         Movement();
 
@@ -214,18 +216,22 @@ public class Enemy : MonoBehaviour
         //if enemy is infront of a obstacle tile
         if(tileInFront != null && tileInFront.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("Obstacle Tile Found");
             RaycastHit hit;
 
-            //If Tile above is a valid stage tile
-            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, 1, tileMask))
+            //If Tile above is a valid stage tile and the next tile in front isnt an obstacle
+            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward ), out hit, 1, tileMask) 
+                && !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out hit, 1, obstacleMask)))
             {
+                
+                Debug.Log("move up");
                 nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
                 return;
             }
             //If tile below is a valid stage tile
-            else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1, tileMask))
+            else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask)
+                && !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out hit, 1, obstacleMask)))
             {
+                Debug.Log("move down");
                 nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
                 return;
 

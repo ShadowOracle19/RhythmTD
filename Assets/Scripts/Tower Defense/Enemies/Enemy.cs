@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -292,18 +293,12 @@ public class Enemy : MonoBehaviour
 
     public void Movement()
     {
-        
-        timer += Time.deltaTime * speed;
-        if (gameObject.transform.position != nextPosition && !dontMove)
+       
+        if (!dontMove)
         {
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, nextPosition, timer);
-        }
-        else
-        {
-           dontMove = true;
-            timer = 0;
-            nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
-            EnemyDetection();
+            gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet)
+                .SetEase(Ease.OutSine)
+                .onComplete = CallNextPosition;
         }
         if (tileInFront != null && tileInFront.placedTower != null)
         {
@@ -311,6 +306,12 @@ public class Enemy : MonoBehaviour
             dontMove = true;
             return;
         }
+    }
+    void CallNextPosition()
+    {
+        dontMove = true;
+        nextPosition = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
+        EnemyDetection();
     }
 
     public void Damage(int damage)

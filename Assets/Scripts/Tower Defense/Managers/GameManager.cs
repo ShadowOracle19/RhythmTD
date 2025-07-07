@@ -159,6 +159,8 @@ public class GameManager : MonoBehaviour
 
         gameObject = Instantiate(levelButtons, Vector3.zero, Quaternion.identity);
         gameObject.transform.SetParent(levelParent);
+
+        gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
         
         gameObject.name = encounter.name;
 

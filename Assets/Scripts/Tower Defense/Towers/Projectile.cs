@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class Projectile : MonoBehaviour
 {
@@ -55,17 +56,26 @@ public class Projectile : MonoBehaviour
        
         if (!canMove) return;
         //transform.Translate(transform.right * 20 * Time.deltaTime);
-        timer += Time.deltaTime * speed;
-        if(gameObject.transform.position != nextPosition)
-        {
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, nextPosition, timer);
-        }
-        else
-        {
-            nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
-            canMove = false;
-        }
+        gameObject.transform.DOMoveX(nextPosition.x, ConductorV2.instance.crotchet) 
+            .SetEase(Ease.OutSine)
+            .onComplete = CallNextPosition;
+        //timer += Time.deltaTime * speed;
+        //if(gameObject.transform.position != nextPosition)
+        //{
+            
+        //    //gameObject.transform.position = Vector3.Slerp(gameObject.transform.position, nextPosition, timer);
+        //}
+        //else
+        //{
+        //    nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+        //    canMove = false;
+        //}
         
+    }
+
+    void CallNextPosition()
+    {
+        nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
     }
 
     public void OnTick()

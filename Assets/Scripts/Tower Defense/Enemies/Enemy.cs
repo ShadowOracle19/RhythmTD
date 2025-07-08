@@ -296,7 +296,7 @@ public class Enemy : MonoBehaviour
        
         if (!dontMove)
         {
-            gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet)
+            gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet - 0.1f)
                 .SetEase(Ease.OutSine)
                 .onComplete = CallNextPosition;
         }

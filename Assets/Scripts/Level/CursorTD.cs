@@ -164,7 +164,7 @@ public class CursorTD : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(CheckOnBeat() == _BeatResult.great)
+        if(CheckOnBeat() == _BeatResult.miss)
         {
             beatIsHit = false;
         }
@@ -776,10 +776,10 @@ public class CursorTD : MonoBehaviour
                 break;
             default:
                 // Cursor resource generation
-                CombatManager.Instance.resourceNum += 3;
-                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+                //CombatManager.Instance.resourceNum += 3;
+                //SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
 
-                beatHitResultSpriteRender.sprite = perfectHitSprite;
+                //beatHitResultSpriteRender.sprite = perfectHitSprite;
                 /*
                 beatResult.GetComponent<TMP_Text>().text = "perfect";
                 beatResult.GetComponent<TMP_Text>().fontSize = 50;

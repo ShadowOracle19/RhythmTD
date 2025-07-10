@@ -19,7 +19,7 @@ public class BeatResult : MonoBehaviour
         fade -= Time.deltaTime * 2;
         fade = Mathf.Clamp(fade, 0, 1);
 
-        GetComponent<TMP_Text>().color = new Color(GetComponent<TMP_Text>().color.r, GetComponent<TMP_Text>().color.g, GetComponent<TMP_Text>().color.b, fade);
+        GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r, GetComponent<SpriteRenderer>().color.g, GetComponent<SpriteRenderer>().color.b, fade);
         transform.position = Vector3.Lerp(new Vector3(originPos.x, originPos.y, originPos.z + 0.5f), transform.position, fade);
         if(fade == 0)
         {

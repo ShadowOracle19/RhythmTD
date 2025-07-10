@@ -50,6 +50,9 @@ public class Enemy : MonoBehaviour
     LayerMask tileMask;
     LayerMask obstacleMask;
 
+    //Animation
+    public Animator animator;
+
 
 
     // Start is called before the first frame update
@@ -62,6 +65,8 @@ public class Enemy : MonoBehaviour
         dontMove = true;
 
         nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+
+        //animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -333,6 +338,8 @@ public class Enemy : MonoBehaviour
             enemyEffect.UseEffect();
         }
 
+        animator.SetBool("IsKilled",true); //Play death animation
+        
         RemoveEnemy();
     }
 

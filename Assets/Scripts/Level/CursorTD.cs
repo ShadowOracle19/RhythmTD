@@ -61,6 +61,12 @@ public class CursorTD : MonoBehaviour
     public Vector3 pulseSize;
 
     public GameObject beatHitResultPrefab;
+    public SpriteRenderer beatHitResultSpriteRender;
+    public Sprite perfectHitSprite;
+    public Sprite greatHitSprite;
+    public Sprite earlyHitSprite;
+    public Sprite lateHitSprite;
+    public Sprite missHitSprite;
 
     public bool pauseMovement = false;
 
@@ -108,6 +114,9 @@ public class CursorTD : MonoBehaviour
     void Start()
     {
         radialMenuAnimator = placementMenu.GetComponent<Animator>();
+
+        // Get reference to the hit judgement sprite renderer
+        beatHitResultSpriteRender = beatHitResultPrefab.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -717,44 +726,65 @@ public class CursorTD : MonoBehaviour
         switch (CheckOnBeat())
         {
             case _BeatResult.late:
+                
+                beatHitResultSpriteRender.sprite = lateHitSprite;
+                /*
                 beatResult.GetComponent<TMP_Text>().text = "late";//miss beat
                 beatResult.GetComponent<TMP_Text>().color = Color.grey;
+                */
                 break;
             case _BeatResult.miss:
+                
+                beatHitResultSpriteRender.sprite = missHitSprite;
+                /*
                 beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
                 beatResult.GetComponent<TMP_Text>().color = Color.red;
+                */
                 break;
             case _BeatResult.early:
+                
+                beatHitResultSpriteRender.sprite = earlyHitSprite;
+                /*
                 beatResult.GetComponent<TMP_Text>().text = "early";
                 beatResult.GetComponent<TMP_Text>().fontSize = 40;
                 beatResult.GetComponent<TMP_Text>().color = Color.yellow;
+                */
                 break;
             case _BeatResult.great:
                 // Cursor resource generation
                 CombatManager.Instance.resourceNum += 1;
                 SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
 
+                beatHitResultSpriteRender.sprite = greatHitSprite;
+                /*
                 beatResult.GetComponent<TMP_Text>().text = "great";
                 beatResult.GetComponent<TMP_Text>().fontSize = 45;
                 beatResult.GetComponent<TMP_Text>().color = Color.blue;
+                */
                 break;
             case _BeatResult.perfect:
                 // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
                 SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
 
+                beatHitResultSpriteRender.sprite = perfectHitSprite;
+                /*
                 beatResult.GetComponent<TMP_Text>().text = "perfect";
                 beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
+                */
                 break;
             default:
                 // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
                 SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
 
+                beatHitResultSpriteRender.sprite = perfectHitSprite;
+                /*
                 beatResult.GetComponent<TMP_Text>().text = "perfect";
                 beatResult.GetComponent<TMP_Text>().fontSize = 50;
                 beatResult.GetComponent<TMP_Text>().color = Color.green;
+                */
                 break;
         }
     }

@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
     // dynamic mover
     LayerMask tileMask;
     LayerMask obstacleMask;
+    public bool obstacleFound = false;
 
     //Animation
     public Animator animator;
@@ -67,6 +68,7 @@ public class Enemy : MonoBehaviour
         nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
 
         //animator = GetComponent<Animator>();
+        nextPosition = new Vector3(transform.position.x - 1f, 0.5f, transform.position.z);
     }
 
     // Update is called once per frame
@@ -137,17 +139,17 @@ public class Enemy : MonoBehaviour
                         _rand = 1f;
                     }
 
-                    nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + _rand);
+                    nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + _rand);
 
                     if(nextPosition.z >= 2.5f || nextPosition.z <= -4.5f)//if hit top of bottom of the map
                     {
-                        nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+                        nextPosition = new Vector3(transform.position.x - 1f, 0.5f, transform.position.z);
                     }
                     dontMove = false;
                 }
                 else
                 {
-                    nextPosition = new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z);
+                    nextPosition = new Vector3(transform.position.x - 2f, 0.5f, transform.position.z);
                     dontMove = false;
                 }
                 break;
@@ -226,22 +228,30 @@ public class Enemy : MonoBehaviour
 
             //If Tile above is a valid stage tile and the next tile in front isnt an obstacle
             if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward ), out hit, 1, tileMask) 
-                && !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out hit, 1, obstacleMask)))
+                /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out hit, 1, obstacleMask))*/)
             {
                 
                 Debug.Log("move up");
-                nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+                nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + 1);
+                dontMove = true;
                 return;
             }
             //If tile below is a valid stage tile
             else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask)
-                && !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out hit, 1, obstacleMask)))
+                /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out hit, 1, obstacleMask))*/)
             {
                 Debug.Log("move down");
-                nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+                nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z - 1);
+                dontMove = true;
                 return;
 
             }
+        }
+        else if(tileInFront != null && tileInFront.gameObject.CompareTag("StageTile"))
+        {
+            nextPosition = new Vector3(transform.position.x - 1, 0.5f, transform.position.z);
+            dontMove = true;
+            return;
         }
     }
 
@@ -303,7 +313,7 @@ public class Enemy : MonoBehaviour
         {
             gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet - 0.1f)
                 .SetEase(Ease.OutSine)
-                .onComplete = CallNextPosition;
+                .onComplete = EnemyDetection;
         }
         if (tileInFront != null && tileInFront.placedTower != null)
         {
@@ -312,12 +322,7 @@ public class Enemy : MonoBehaviour
             return;
         }
     }
-    void CallNextPosition()
-    {
-        dontMove = true;
-        nextPosition = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
-        EnemyDetection();
-    }
+    
 
     public void Damage(int damage)
     {

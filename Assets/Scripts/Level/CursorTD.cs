@@ -113,6 +113,8 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (pauseMovement || ConductorV2.instance.countingIn)
             return;
 
@@ -153,6 +155,10 @@ public class CursorTD : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(CheckOnBeat() == _BeatResult.great)
+        {
+            beatIsHit = false;
+        }
         //placingTower = false;
         //beatIsHit = false;
     }

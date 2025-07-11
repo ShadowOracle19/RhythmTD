@@ -54,6 +54,9 @@ public class Enemy : MonoBehaviour
     //Animation
     public Animator animator;
 
+    //Death
+    private bool isDead = false;
+    int deathCount = 0;
 
 
     // Start is called before the first frame update
@@ -74,6 +77,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+        {
+            if(deathCount == 2)
+            {
+                RemoveEnemy();
+            }
+
+            dontMove = true;
+            return;
+        }
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
@@ -109,7 +122,10 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        
+        if(isDead)
+        {
+            deathCount += 1;
+        }
 
         //enemy movement pattern handler
         switch (enemy.movementPattern)
@@ -332,6 +348,7 @@ public class Enemy : MonoBehaviour
         enemyDeathSFX.Play();
         if (currentHealth <= 0)
         {
+            isDead = true;
             Kill();
         }
     }
@@ -345,7 +362,6 @@ public class Enemy : MonoBehaviour
 
         animator.SetBool("IsKilled",true); //Play death animation
         
-        RemoveEnemy();
     }
 
 

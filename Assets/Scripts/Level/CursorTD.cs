@@ -543,6 +543,9 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().damageBoostUpgrade = true;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost1;
+
+                ClosePlacementMenu();
+
                 return;
             }
 
@@ -557,6 +560,9 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().multiShotUpgrade = true; 
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost2;
+                
+                ClosePlacementMenu();
+                
                 return;
             }
 
@@ -572,6 +578,8 @@ public class CursorTD : MonoBehaviour
                 tile.placedTower.GetComponent<Tower>().burningUpgrade = true;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost3;
 
+                ClosePlacementMenu();
+                
                 return;
             }
 
@@ -587,6 +595,8 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().rangeUpgrade = true;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost4;
+
+                ClosePlacementMenu();
 
                 return;
             }

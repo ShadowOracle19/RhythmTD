@@ -56,6 +56,7 @@ public class CursorTD : MonoBehaviour
     [Header("Placement Menu")]
     public GameObject placementMenu;
     public Animator radialMenuAnimator;
+
     public GameObject towerSlotW;
     public GameObject towerSlotA;
     public GameObject towerSlotS;
@@ -64,6 +65,11 @@ public class CursorTD : MonoBehaviour
     [Header ("Upgrade Menu")]
     public GameObject upgradeMenu;
     public bool upgradeTower = false;
+
+    public GameObject upgradeSlotW;
+    public GameObject upgradeSlotA;
+    public GameObject upgradeSlotS;
+    public GameObject upgradeSlotD;
 
     public GameObject cursorSprite;
     public Vector3 defaultSize;
@@ -835,44 +841,88 @@ public class CursorTD : MonoBehaviour
     void UpdateGreyscaleShader() 
     { 
         // Check if guitar tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-        if (TowerManager.Instance.guitarCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.resourceCost) 
+        if (upgradeTower)
         {
-            towerSlotW.GetComponent<Image>().material = greyscaleShader;
-        }
-        else
-        {
-            towerSlotW.GetComponent<Image>().material = null;
-        }
-        
-        // Check if drum tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-        if (TowerManager.Instance.drumCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.resourceCost) 
-        {
-            towerSlotD.GetComponent<Image>().material = greyscaleShader;
-        }
-        else
-        {
-            towerSlotD.GetComponent<Image>().material = null;
-        }
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost1 || tile.placedTower.GetComponent<Tower>().multiShotUpgrade) 
+            {
+                upgradeSlotW.GetComponent<Image>().material = greyscaleShader;
+            }
+            else
+            {
+                upgradeSlotW.GetComponent<Image>().material = null;
+            }
+            
+            // Check if drum tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost2 || tile.placedTower.GetComponent<Tower>().damageBoostUpgrade) 
+            {
+                upgradeSlotD.GetComponent<Image>().material = greyscaleShader;
+            }
+            else
+            {
+                upgradeSlotD.GetComponent<Image>().material = null;
+            }
 
-        // Check if bass tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-        if (TowerManager.Instance.bassCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.resourceCost) 
-        {
-            towerSlotS.GetComponent<Image>().material = greyscaleShader;
-        }
-        else
-        {
-            towerSlotS.GetComponent<Image>().material = null;
-        }
+            // Check if bass tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost3 || tile.placedTower.GetComponent<Tower>().burningUpgrade) 
+            {
+                upgradeSlotS.GetComponent<Image>().material = greyscaleShader;
+            }
+            else
+            {
+                upgradeSlotS.GetComponent<Image>().material = null;
+            }
 
-        // Check if piano tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-        if (TowerManager.Instance.pianoCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.resourceCost) 
-        {
-            towerSlotA.GetComponent<Image>().material = greyscaleShader;
+            // Check if piano tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost4 || tile.placedTower.GetComponent<Tower>().rangeUpgrade) 
+            {
+                towerSlotA.GetComponent<Image>().material = greyscaleShader;
+            }
+            else
+            {
+                towerSlotA.GetComponent<Image>().material = null;
+            }
         }
         else
         {
-            towerSlotA.GetComponent<Image>().material = null;
-        }
+            if (TowerManager.Instance.guitarCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.resourceCost) 
+            {
+                towerSlotW.GetComponent<Image>().material = greyscaleShader;
+            }
+            else
+            {
+                towerSlotW.GetComponent<Image>().material = null;
+            }
+            
+            // Check if drum tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+            if (TowerManager.Instance.drumCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.resourceCost) 
+            {
+                towerSlotD.GetComponent<Image>().material = greyscaleShader;
+            }
+            else
+            {
+                towerSlotD.GetComponent<Image>().material = null;
+            }
+
+            // Check if bass tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+            if (TowerManager.Instance.bassCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.resourceCost) 
+            {
+                towerSlotS.GetComponent<Image>().material = greyscaleShader;
+            }
+            else
+            {
+                towerSlotS.GetComponent<Image>().material = null;
+            }
+
+            // Check if piano tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+            if (TowerManager.Instance.pianoCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.resourceCost) 
+            {
+                towerSlotA.GetComponent<Image>().material = greyscaleShader;
+            }
+            else
+            {
+                towerSlotA.GetComponent<Image>().material = null;
+            }
+        }    
     }
 
 }

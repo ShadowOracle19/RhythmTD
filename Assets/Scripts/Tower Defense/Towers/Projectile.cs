@@ -120,6 +120,7 @@ public class Projectile : MonoBehaviour
     }
     public void RemoveProjectile()
     {
+        gameObject.transform.DOKill();
         ConductorV2.instance.triggerEvent.Remove(trigger);
         Destroy(gameObject);
     }

@@ -79,11 +79,12 @@ public class Enemy : MonoBehaviour
     {
         if (isDead)
         {
-            if(deathCount == 2)
+            gameObject.transform.DOKill();
+            if(deathCount == 6)
             {
                 RemoveEnemy();
             }
-
+            GetComponent<BoxCollider>().enabled = false;
             dontMove = true;
             return;
         }

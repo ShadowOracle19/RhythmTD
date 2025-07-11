@@ -2425,7 +2425,7 @@ GameObject:
   - component: {fileID: 915813790372602608}
   - component: {fileID: 7310983488600514090}
   m_Layer: 0
-  m_Name: Icon
+  m_Name: Tower 04 Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2720,7 +2720,7 @@ GameObject:
   - component: {fileID: 4160247103852847644}
   - component: {fileID: 8003032318625023438}
   m_Layer: 0
-  m_Name: Icon
+  m_Name: Tower 02 Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6040,7 +6040,7 @@ GameObject:
   - component: {fileID: 7205255605632365581}
   - component: {fileID: 3242015982915587435}
   m_Layer: 0
-  m_Name: Icon
+  m_Name: Tower 03 Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6377,7 +6377,7 @@ GameObject:
   - component: {fileID: 6381328117384651734}
   - component: {fileID: 1173800596394251854}
   m_Layer: 0
-  m_Name: Icon
+  m_Name: Tower 01 Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8632,18 +8632,29 @@ MonoBehaviour:
   desiredMovement: {x: 0, y: 0, z: 0}
   towerSelectMenuOpened: 0
   tile: {fileID: 0}
+  greyscaleShader: {fileID: 0}
   placementMenu: {fileID: 5160987716203054217}
   radialMenuAnimator: {fileID: 0}
-  SlotW: {fileID: 6135657101139273452}
-  SlotA: {fileID: 2895435951738694742}
-  SlotS: {fileID: 5951398245530843747}
-  SlotD: {fileID: 2821113016021592967}
+  towerSlotW: {fileID: 0}
+  towerSlotA: {fileID: 0}
+  towerSlotS: {fileID: 0}
+  towerSlotD: {fileID: 0}
   upgradeMenu: {fileID: 361012092614101553}
+  upgradeSlotW: {fileID: 0}
+  upgradeSlotA: {fileID: 0}
+  upgradeSlotS: {fileID: 0}
+  upgradeSlotD: {fileID: 0}
   upgradeTower: 0
   cursorSprite: {fileID: 6603615948797647222}
   defaultSize: {x: 0.275, y: 0.275, z: 1}
   pulseSize: {x: 0.325, y: 0.325, z: 1}
   beatHitResultPrefab: {fileID: 3747866841967708250, guid: ba1c4927a61132b44a9ce1140db4ea84, type: 3}
+  beatHitResultSpriteRender: {fileID: 0}
+  perfectHitSprite: {fileID: 0}
+  greatHitSprite: {fileID: 0}
+  earlyHitSprite: {fileID: 0}
+  lateHitSprite: {fileID: 0}
+  missHitSprite: {fileID: 0}
   pauseMovement: 0
   towerSwap: 0
   placingTower: 0

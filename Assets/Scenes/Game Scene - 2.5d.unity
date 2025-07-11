@@ -21311,11 +21311,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565368909}
   m_Mesh: {fileID: 3931546471491194837, guid: e9bee7da407ed094a81e5ab6c39b2feb, type: 3}
---- !u!1 &566313525 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9119095878806779633, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-  m_PrefabInstance: {fileID: 5775041512460051169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &567371496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31206,11 +31201,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846729354}
   m_Mesh: {fileID: 3931546471491194837, guid: e9bee7da407ed094a81e5ab6c39b2feb, type: 3}
---- !u!1 &848178705 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2197468773993504431, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-  m_PrefabInstance: {fileID: 5775041512460051169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &848939232
 GameObject:
   m_ObjectHideFlags: 0
@@ -38555,11 +38545,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: f07cbc11deb25214cae470da117aaedc, type: 2}
---- !u!1 &1045628157 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3771763811826045713, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-  m_PrefabInstance: {fileID: 5775041512460051169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1046553086
 GameObject:
   m_ObjectHideFlags: 0
@@ -55671,11 +55656,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528786208}
   m_Mesh: {fileID: 3931546471491194837, guid: e9bee7da407ed094a81e5ab6c39b2feb, type: 3}
---- !u!1 &1530733105 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4691573258662939163, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-  m_PrefabInstance: {fileID: 5775041512460051169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1531397835
 GameObject:
   m_ObjectHideFlags: 0
@@ -78943,6 +78923,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2807187939434408410}
     - target: {fileID: 7531125949545011699, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}
+      propertyPath: towerSlotA
+      value: 
+      objectReference: {fileID: 2641060377837648178}
+    - target: {fileID: 7531125949545011699, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}
+      propertyPath: towerSlotD
+      value: 
+      objectReference: {fileID: 3147684725513666275}
+    - target: {fileID: 7531125949545011699, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}
+      propertyPath: towerSlotS
+      value: 
+      objectReference: {fileID: 6782373690490695431}
+    - target: {fileID: 7531125949545011699, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}
+      propertyPath: towerSlotW
+      value: 
+      objectReference: {fileID: 6462228288727872392}
+    - target: {fileID: 7531125949545011699, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}
       propertyPath: lateHitSprite
       value: 
       objectReference: {fileID: -1125569545, guid: ea5cc17482d687c4dae9082b45291701, type: 3}
@@ -78958,6 +78954,10 @@ PrefabInstance:
       propertyPath: greatHitSprite
       value: 
       objectReference: {fileID: -87788155, guid: ea5cc17482d687c4dae9082b45291701, type: 3}
+    - target: {fileID: 7531125949545011699, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}
+      propertyPath: greyscaleShader
+      value: 
+      objectReference: {fileID: 2100000, guid: ea195610c6654e64b81c7eee2e749bcf, type: 2}
     - target: {fileID: 7531125949545011699, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}
       propertyPath: perfectHitSprite
       value: 
@@ -79884,10 +79884,10 @@ MonoBehaviour:
   completedLoops: 0
   loopPositionInBeats: 0
   loopPositionInAnalog: 0
-  missBeatThreshold: 0.05
-  earlyBeatThreshold: 0.1
-  greatBeatThreshold: 0.2
-  perfectBeatThreshold: 0.3
+  missBeatThreshold: 0.1
+  earlyBeatThreshold: 0.6
+  greatBeatThreshold: 0.7
+  perfectBeatThreshold: 0.8
   beatDuration: 0
   numberOfBeats: 0
   beatTrack: 1
@@ -86432,10 +86432,6 @@ MonoBehaviour:
   menuTower2: {fileID: 2641060377837648178}
   menuTower3: {fileID: 6782373690490695431}
   menuTower4: {fileID: 3147684725513666275}
-  sidebarTower1: {fileID: 848178705}
-  sidebarTower2: {fileID: 1530733105}
-  sidebarTower3: {fileID: 566313525}
-  sidebarTower4: {fileID: 1045628157}
   drumCooldownSlot: {fileID: 1521459889}
   drumCooldown: 0
   bassCooldownSlot: {fileID: 593172941}

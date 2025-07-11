@@ -49,7 +49,14 @@ public class Enemy : MonoBehaviour
     // dynamic mover
     LayerMask tileMask;
     LayerMask obstacleMask;
+    public bool obstacleFound = false;
 
+    //Animation
+    public Animator animator;
+
+    //Death
+    private bool isDead = false;
+    int deathCount = 0;
 
 
     // Start is called before the first frame update
@@ -62,11 +69,25 @@ public class Enemy : MonoBehaviour
         dontMove = true;
 
         nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+
+        //animator = GetComponent<Animator>();
+        nextPosition = new Vector3(transform.position.x - 1f, 0.5f, transform.position.z);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+        {
+            gameObject.transform.DOKill();
+            if(deathCount == 6)
+            {
+                RemoveEnemy();
+            }
+            GetComponent<BoxCollider>().enabled = false;
+            dontMove = true;
+            return;
+        }
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
@@ -102,7 +123,10 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        
+        if(isDead)
+        {
+            deathCount += 1;
+        }
 
         //enemy movement pattern handler
         switch (enemy.movementPattern)
@@ -132,17 +156,17 @@ public class Enemy : MonoBehaviour
                         _rand = 1f;
                     }
 
-                    nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + _rand);
+                    nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + _rand);
 
                     if(nextPosition.z >= 2.5f || nextPosition.z <= -4.5f)//if hit top of bottom of the map
                     {
-                        nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+                        nextPosition = new Vector3(transform.position.x - 1f, 0.5f, transform.position.z);
                     }
                     dontMove = false;
                 }
                 else
                 {
-                    nextPosition = new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z);
+                    nextPosition = new Vector3(transform.position.x - 2f, 0.5f, transform.position.z);
                     dontMove = false;
                 }
                 break;
@@ -221,22 +245,30 @@ public class Enemy : MonoBehaviour
 
             //If Tile above is a valid stage tile and the next tile in front isnt an obstacle
             if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward ), out hit, 1, tileMask) 
-                && !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out hit, 1, obstacleMask)))
+                /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out hit, 1, obstacleMask))*/)
             {
                 
                 Debug.Log("move up");
-                nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+                nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + 1);
+                dontMove = true;
                 return;
             }
             //If tile below is a valid stage tile
             else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask)
-                && !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out hit, 1, obstacleMask)))
+                /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out hit, 1, obstacleMask))*/)
             {
                 Debug.Log("move down");
-                nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+                nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z - 1);
+                dontMove = true;
                 return;
 
             }
+        }
+        else if(tileInFront != null && tileInFront.gameObject.CompareTag("StageTile"))
+        {
+            nextPosition = new Vector3(transform.position.x - 1, 0.5f, transform.position.z);
+            dontMove = true;
+            return;
         }
     }
 
@@ -293,12 +325,21 @@ public class Enemy : MonoBehaviour
 
     public void Movement()
     {
-       
-        if (!dontMove)
+
+        timer += Time.deltaTime * speed;
+        if (gameObject.transform.position != nextPosition && !dontMove)
         {
-            gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet - 0.1f)
-                .SetEase(Ease.OutSine)
-                .onComplete = CallNextPosition;
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, nextPosition, timer);
+        }
+        else
+        {
+            dontMove = true;
+            timer = 0;
+            nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+            EnemyDetection();
+            //gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet)
+            //    .SetEase(Ease.OutSine)
+            //    .onComplete = CallNextPosition;
         }
         if (tileInFront != null && tileInFront.placedTower != null)
         {
@@ -307,12 +348,7 @@ public class Enemy : MonoBehaviour
             return;
         }
     }
-    void CallNextPosition()
-    {
-        dontMove = true;
-        nextPosition = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
-        EnemyDetection();
-    }
+    
 
     public void Damage(int damage)
     {
@@ -322,6 +358,7 @@ public class Enemy : MonoBehaviour
         enemyDeathSFX.Play();
         if (currentHealth <= 0)
         {
+            isDead = true;
             Kill();
         }
     }
@@ -333,7 +370,8 @@ public class Enemy : MonoBehaviour
             enemyEffect.UseEffect();
         }
 
-        RemoveEnemy();
+        animator.SetBool("IsKilled",true); //Play death animation
+        
     }
 
 

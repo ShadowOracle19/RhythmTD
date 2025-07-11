@@ -280,7 +280,6 @@ public class ConductorV2 : MonoBehaviour
     {
         if(Mathf.FloorToInt(interval) != lastInterval)
         {
-            CursorTD.Instance.beatIsHit = false;
             lastInterval = Mathf.FloorToInt(interval);
             foreach(UnityEvent _event in triggerEvent.ToArray())
             {

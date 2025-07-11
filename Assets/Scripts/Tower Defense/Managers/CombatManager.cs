@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -107,6 +108,7 @@ public class CombatManager : MonoBehaviour
         //remove enemies
         foreach (Transform child in enemiesParent)
         {
+            child.gameObject.transform.DOKill();
             child.gameObject.GetComponent<Enemy>().RemoveEnemy();
         }
         //remove towers
@@ -117,6 +119,7 @@ public class CombatManager : MonoBehaviour
         //remove projectiles
         foreach (Transform child in projectilesParent)
         {
+            child.gameObject.transform.DOKill();
             child.gameObject.GetComponent<Projectile>().RemoveProjectile();
         }
         enemySpawners.startOnce = false;

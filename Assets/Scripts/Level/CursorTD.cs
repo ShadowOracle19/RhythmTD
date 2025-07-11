@@ -44,13 +44,22 @@ public class CursorTD : MonoBehaviour
 
     public Tile tile;
 
+    [Header("Shaders Materials")]
+    public Material greyscaleShader;
+    
+    [Header("Feedback SFX")]
+    public AudioSource upInvalidSfx;
+    public AudioSource rightInvalidSfx;
+    public AudioSource downInvalidSfx;
+    public AudioSource leftInvalidSfx;
+    
     [Header("Placement Menu")]
     public GameObject placementMenu;
     public Animator radialMenuAnimator;
-    public GameObject SlotW;
-    public GameObject SlotA;
-    public GameObject SlotS;
-    public GameObject SlotD;
+    public GameObject towerSlotW;
+    public GameObject towerSlotA;
+    public GameObject towerSlotS;
+    public GameObject towerSlotD;
 
     [Header ("Upgrade Menu")]
     public GameObject upgradeMenu;
@@ -159,6 +168,11 @@ public class CursorTD : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && TutorialManager.Instance.index == 11 && tile.placedTower == null)
         {
             TutorialManager.Instance.LoadPrevTutorialDialogue();
+        }
+
+        if (towerSelectMenuOpened)
+        {
+            UpdateGreyscaleShader();
         }
     }
 
@@ -273,23 +287,23 @@ public class CursorTD : MonoBehaviour
         isMoving = false;
         gameObject.transform.position = new Vector3(0.5f, 0.1f, -0.5f);
 
-        SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
-        SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
+        towerSlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
+        towerSlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
         TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[0].GetComponent<Tower>(), tower1Slider, tower1ResourceSprite);
 
 
-        SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
-        SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
+        towerSlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
+        towerSlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
         TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[1].GetComponent<Tower>(), tower2Slider, tower2ResourceSprite);
 
 
-        SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
-        SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+        towerSlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
+        towerSlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
         TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[2].GetComponent<Tower>(), tower3Slider, tower3ResourceSprite);
 
 
-        SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
-        SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
+        towerSlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
+        towerSlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
         TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[3].GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
 
         pauseMovement = false;
@@ -399,7 +413,7 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public void TryToPlaceTower(GameObject tower)
+    public void TryToPlaceTower(GameObject tower, AudioSource feedbackAudio)
     {
         //checks if resource is available and if the tower is on cooldown
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost 
@@ -417,8 +431,6 @@ public class CursorTD : MonoBehaviour
                 CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             }
 
-
-
             SpawnBeatHitResult();
             TogglePlacementMenu();
             placingTower = false;
@@ -427,6 +439,7 @@ public class CursorTD : MonoBehaviour
         else //if tower can't be placed
         {
             //TogglePlacementMenu();
+            PlacementFeedback(feedbackAudio);
 
             return;
         }    
@@ -480,58 +493,37 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null && !tile.canPlaceTower)
             {
-                TryToPlaceTower(SlotW.GetComponent<TowerButton>().tower);
-
-                //PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
+                TryToPlaceTower(towerSlotW.GetComponent<TowerButton>().tower, upInvalidSfx);
 
                 return;
             }
-
-            PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
-
         }
         else if (direction == Vector2.left)
         {
             if (towerSelectMenuOpened && tile.placedTower == null && !tile.canPlaceTower)
             {
-                TryToPlaceTower(SlotD.GetComponent<TowerButton>().tower);
-
-                //PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
+                TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx);
 
                 return;
             }
-
-            PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
-
         }
         else if (direction == Vector2.down)
         {
             if (towerSelectMenuOpened && tile.placedTower == null && !tile.canPlaceTower)
             {
-                TryToPlaceTower(SlotS.GetComponent<TowerButton>().tower);
-
-                //PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
+                TryToPlaceTower(towerSlotS.GetComponent<TowerButton>().tower, downInvalidSfx);
 
                 return;
             }
-
-            PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
-
         }
         else if (direction == Vector2.right)
         {
-
             if (towerSelectMenuOpened && tile.placedTower == null && !tile.canPlaceTower)
             {
-                TryToPlaceTower(SlotA.GetComponent<TowerButton>().tower);
-
-                //PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
+                TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx);
 
                 return;
             }
-
-            PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
-
         }
 
     }
@@ -554,7 +546,7 @@ public class CursorTD : MonoBehaviour
                 return;
             }
 
-            //PlacementFeedback(SlotW.GetComponent<AudioSource>(), "Check Slot 01");
+            PlacementFeedback(upInvalidSfx);
 
         }
         else if (direction == Vector2.right)//upgrade 2 multi shot
@@ -568,7 +560,7 @@ public class CursorTD : MonoBehaviour
                 return;
             }
 
-            //PlacementFeedback(SlotD.GetComponent<AudioSource>(), "Check Slot 04");
+            PlacementFeedback(rightInvalidSfx);
 
         }
         else if (direction == Vector2.down)//upgrade 3 burning bullet
@@ -583,7 +575,7 @@ public class CursorTD : MonoBehaviour
                 return;
             }
 
-            //PlacementFeedback(SlotS.GetComponent<AudioSource>(), "Check Slot 03");
+            PlacementFeedback(downInvalidSfx);
 
         }
         else if (direction == Vector2.left)//upgrade 4 range
@@ -599,7 +591,7 @@ public class CursorTD : MonoBehaviour
                 return;
             }
 
-            //PlacementFeedback(SlotA.GetComponent<AudioSource>(), "Check Slot 02");
+            PlacementFeedback(leftInvalidSfx);
 
         }
     }
@@ -711,9 +703,6 @@ public class CursorTD : MonoBehaviour
             default:
                 break;
         }
-
-
-        //SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
     }
 
     public void SpawnBeatHitResult()
@@ -727,64 +716,48 @@ public class CursorTD : MonoBehaviour
         {
             case _BeatResult.late:
                 
+                // Show LATE sprite
                 beatHitResultSpriteRender.sprite = lateHitSprite;
-                /*
-                beatResult.GetComponent<TMP_Text>().text = "late";//miss beat
-                beatResult.GetComponent<TMP_Text>().color = Color.grey;
-                */
+
                 break;
             case _BeatResult.miss:
                 
+                // Show MISS sprite
                 beatHitResultSpriteRender.sprite = missHitSprite;
-                /*
-                beatResult.GetComponent<TMP_Text>().text = "miss";//miss beat
-                beatResult.GetComponent<TMP_Text>().color = Color.red;
-                */
+
                 break;
             case _BeatResult.early:
                 
+                // Show EARLY sprite
                 beatHitResultSpriteRender.sprite = earlyHitSprite;
-                /*
-                beatResult.GetComponent<TMP_Text>().text = "early";
-                beatResult.GetComponent<TMP_Text>().fontSize = 40;
-                beatResult.GetComponent<TMP_Text>().color = Color.yellow;
-                */
+
                 break;
             case _BeatResult.great:
                 // Cursor resource generation
                 CombatManager.Instance.resourceNum += 1;
                 SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
 
+                // Show GREAT sprite
                 beatHitResultSpriteRender.sprite = greatHitSprite;
-                /*
-                beatResult.GetComponent<TMP_Text>().text = "great";
-                beatResult.GetComponent<TMP_Text>().fontSize = 45;
-                beatResult.GetComponent<TMP_Text>().color = Color.blue;
-                */
+
                 break;
             case _BeatResult.perfect:
                 // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
                 SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
 
+                // Show PERFECT sprite
                 beatHitResultSpriteRender.sprite = perfectHitSprite;
-                /*
-                beatResult.GetComponent<TMP_Text>().text = "perfect";
-                beatResult.GetComponent<TMP_Text>().fontSize = 50;
-                beatResult.GetComponent<TMP_Text>().color = Color.green;
-                */
+
                 break;
             default:
                 // Cursor resource generation
                 //CombatManager.Instance.resourceNum += 3;
                 //SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
 
-                //beatHitResultSpriteRender.sprite = perfectHitSprite;
-                /*
-                beatResult.GetComponent<TMP_Text>().text = "perfect";
-                beatResult.GetComponent<TMP_Text>().fontSize = 50;
-                beatResult.GetComponent<TMP_Text>().color = Color.green;
-                */
+                // Show MISS sprite
+                beatHitResultSpriteRender.sprite = missHitSprite;
+
                 break;
         }
     }
@@ -836,14 +809,60 @@ public class CursorTD : MonoBehaviour
         particlesInstance = Instantiate(particlesSource, transform.position, Quaternion.identity);
     }
 
-    private void PlacementFeedback(AudioSource invalidPlacementSFX, string invalidPlacementAnimation)
+    private void PlacementFeedback(AudioSource feedbackSound)
     {
+        //string invalidPlacementAnimation = 
         placingTower = false;
         Debug.Log("try to place tower");
+
         //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
-        invalidPlacementSFX.Play();
-        radialMenuAnimator.SetTrigger(invalidPlacementAnimation);
+        feedbackSound.Play();
+
+        //radialMenuAnimator.SetTrigger(invalidPlacementAnimation);
         //radialMenuAnimator.ResetTrigger(invalidPlacementAnimation);
+    }
+
+    void UpdateGreyscaleShader() 
+    { 
+        // Check if guitar tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+        if (TowerManager.Instance.guitarCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.resourceCost) 
+        {
+            towerSlotW.GetComponent<Image>().material = greyscaleShader;
+        }
+        else
+        {
+            towerSlotW.GetComponent<Image>().material = null;
+        }
+        
+        // Check if drum tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+        if (TowerManager.Instance.drumCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.resourceCost) 
+        {
+            towerSlotD.GetComponent<Image>().material = greyscaleShader;
+        }
+        else
+        {
+            towerSlotD.GetComponent<Image>().material = null;
+        }
+
+        // Check if bass tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+        if (TowerManager.Instance.bassCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.resourceCost) 
+        {
+            towerSlotS.GetComponent<Image>().material = greyscaleShader;
+        }
+        else
+        {
+            towerSlotS.GetComponent<Image>().material = null;
+        }
+
+        // Check if piano tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
+        if (TowerManager.Instance.pianoCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.resourceCost) 
+        {
+            towerSlotA.GetComponent<Image>().material = greyscaleShader;
+        }
+        else
+        {
+            towerSlotA.GetComponent<Image>().material = null;
+        }
     }
 
 }

@@ -54,6 +54,9 @@ public class Enemy : MonoBehaviour
     //Animation
     public Animator animator;
 
+    //Death
+    private bool isDead = false;
+    int deathCount = 0;
 
 
     // Start is called before the first frame update
@@ -74,6 +77,17 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+        {
+            gameObject.transform.DOKill();
+            if(deathCount == 6)
+            {
+                RemoveEnemy();
+            }
+            GetComponent<BoxCollider>().enabled = false;
+            dontMove = true;
+            return;
+        }
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
@@ -109,7 +123,10 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        
+        if(isDead)
+        {
+            deathCount += 1;
+        }
 
         //enemy movement pattern handler
         switch (enemy.movementPattern)
@@ -308,12 +325,21 @@ public class Enemy : MonoBehaviour
 
     public void Movement()
     {
-       
-        if (!dontMove)
+
+        timer += Time.deltaTime * speed;
+        if (gameObject.transform.position != nextPosition && !dontMove)
         {
-            gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet - 0.1f)
-                .SetEase(Ease.OutSine)
-                .onComplete = EnemyDetection;
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, nextPosition, timer);
+        }
+        else
+        {
+            dontMove = true;
+            timer = 0;
+            nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+            EnemyDetection();
+            //gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet)
+            //    .SetEase(Ease.OutSine)
+            //    .onComplete = CallNextPosition;
         }
         if (tileInFront != null && tileInFront.placedTower != null)
         {
@@ -332,6 +358,7 @@ public class Enemy : MonoBehaviour
         enemyDeathSFX.Play();
         if (currentHealth <= 0)
         {
+            isDead = true;
             Kill();
         }
     }
@@ -345,7 +372,6 @@ public class Enemy : MonoBehaviour
 
         animator.SetBool("IsKilled",true); //Play death animation
         
-        RemoveEnemy();
     }
 
 

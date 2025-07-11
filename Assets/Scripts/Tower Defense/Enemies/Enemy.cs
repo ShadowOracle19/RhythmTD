@@ -325,12 +325,21 @@ public class Enemy : MonoBehaviour
 
     public void Movement()
     {
-       
-        if (!dontMove)
+
+        timer += Time.deltaTime * speed;
+        if (gameObject.transform.position != nextPosition && !dontMove)
         {
-            gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet - 0.1f)
-                .SetEase(Ease.OutSine)
-                .onComplete = EnemyDetection;
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, nextPosition, timer);
+        }
+        else
+        {
+            dontMove = true;
+            timer = 0;
+            nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+            EnemyDetection();
+            //gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet)
+            //    .SetEase(Ease.OutSine)
+            //    .onComplete = CallNextPosition;
         }
         if (tileInFront != null && tileInFront.placedTower != null)
         {

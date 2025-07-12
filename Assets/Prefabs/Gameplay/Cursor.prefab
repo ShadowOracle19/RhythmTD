@@ -6189,7 +6189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 85, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1547600284263313964
@@ -6429,7 +6429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3859085651906464943
@@ -8421,6 +8421,7 @@ GameObject:
   - component: {fileID: 7531125949545011699}
   - component: {fileID: 6996911471215613202}
   - component: {fileID: 356452904980879838}
+  - component: {fileID: 7737840479698357038}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Player
@@ -8476,13 +8477,17 @@ MonoBehaviour:
   downInvalidSfx: {fileID: 0}
   leftInvalidSfx: {fileID: 0}
   placementMenu: {fileID: 5160987716203054217}
-  radialMenuAnimator: {fileID: 0}
+  radialMenuAnimator: {fileID: 7737840479698357038}
   towerSlotW: {fileID: 0}
   towerSlotA: {fileID: 0}
   towerSlotS: {fileID: 0}
   towerSlotD: {fileID: 0}
   upgradeMenu: {fileID: 361012092614101553}
   upgradeTower: 0
+  upgradeSlotW: {fileID: 0}
+  upgradeSlotA: {fileID: 0}
+  upgradeSlotS: {fileID: 0}
+  upgradeSlotD: {fileID: 0}
   cursorSprite: {fileID: 6603615948797647222}
   defaultSize: {x: 0.275, y: 0.275, z: 1}
   pulseSize: {x: 0.325, y: 0.325, z: 1}
@@ -8564,6 +8569,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &7737840479698357038
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691434883385984539}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5bf484d5e094fd24b84a1b330a1a184b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7786389055406624462
 GameObject:
   m_ObjectHideFlags: 0

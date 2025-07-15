@@ -340,13 +340,14 @@ public class Enemy : MonoBehaviour
             //gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet)
             //    .SetEase(Ease.OutSine)
             //    .onComplete = CallNextPosition;
+            if (tileInFront != null && tileInFront.placedTower != null)
+            {
+                Clash(enemy.clashStrength);
+                dontMove = true;
+                return;
+            }
         }
-        if (tileInFront != null && tileInFront.placedTower != null)
-        {
-            Clash(enemy.clashStrength);
-            dontMove = true;
-            return;
-        }
+        
     }
     
 
@@ -358,14 +359,14 @@ public class Enemy : MonoBehaviour
         enemyDeathSFX.Play();
         if (currentHealth <= 0)
         {
-            isDead = true;
             Kill();
         }
     }
 
     public void Kill()
     {
-        if(enemy.onDeathEffect)
+        isDead = true;
+        if (enemy.onDeathEffect)
         {
             enemyEffect.UseEffect();
         }

@@ -381,7 +381,7 @@ public class Enemy : MonoBehaviour
         if (playOnce) return;
         playOnce = true;
         CombatManager.Instance.enemyTotal -= 1;
-        ConductorV2.instance.triggerEvent.Remove(trigger);
+        ConductorV2.instance.enemyEvent.Remove(trigger);
         EnemySpawner.Instance.enemies.Remove(this);
         Destroy(gameObject);
     }

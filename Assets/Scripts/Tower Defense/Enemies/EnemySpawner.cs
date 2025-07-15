@@ -113,7 +113,7 @@ public class EnemySpawner : MonoBehaviour
         }
         
         
-        ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
+        ConductorV2.instance.enemyEvent.Add(enemy.GetComponent<Enemy>().trigger);
 
     }
 
@@ -155,7 +155,7 @@ public class EnemySpawner : MonoBehaviour
             spawnTiles[tileNum].GetComponent<Tile>().EnemySpawnEffect(spawnParticles);
             
 
-            ConductorV2.instance.triggerEvent.Add(enemy.GetComponent<Enemy>().trigger);
+            ConductorV2.instance.enemyEvent.Add(enemy.GetComponent<Enemy>().trigger);
 
             enemies.Add(enemy.GetComponent<Enemy>());
 
@@ -182,9 +182,10 @@ public class EnemySpawner : MonoBehaviour
 
     public void ForecastWave(int _wave)
     {
+        if (waveIndex == currentWaves.Count)
+            return;
         foreach (var enemyToForecast in currentWaves[_wave].enemies)
         {
-
             spawnTiles[enemyToForecast.tile - 1].GetComponent<Tile>().ForecastEnemy();
         }
            

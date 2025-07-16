@@ -36,12 +36,14 @@ public class TrillTower : Tower
     //charge shot
     public void UpgradeOne()
     {
+        LayerMask enemyLayer = LayerMask.GetMask("Enemy");
         RaycastHit hit;
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * towerRange, Color.yellow);
         //tower range
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, towerRange))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, towerRange, enemyLayer))
         {
+            Debug.Log(hit.transform.gameObject.name);
             //if enemy detected
             if(hit.transform.CompareTag("Enemy"))
             {
@@ -49,14 +51,9 @@ public class TrillTower : Tower
                 CreateBullet(currentDamage, transform.position);
                 chargeShotDamage = 0;
             }
-            //charge
-            else
-            {
-
-                chargeShotDamage += 1;
-                chargeShotDamage = Mathf.Clamp(chargeShotDamage, 0, 7);
-            }
         }
+        chargeShotDamage += 1;
+        chargeShotDamage = Mathf.Clamp(chargeShotDamage, 0, 7);
     }
 
     public override void CreateBullet(int damage, Vector3 position)

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6874018606574302444}
   - component: {fileID: 3188806682883541518}
   - component: {fileID: 1459013575433725132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lifter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -82,6 +82,7 @@ MonoBehaviour:
   burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
   teleported: 0
+  obstacleFound: 0
   animator: {fileID: 8037740004645850056}
 --- !u!82 &6874018606574302444
 AudioSource:
@@ -198,8 +199,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.5, y: 0.9695549, z: 0.5}
+  m_Center: {x: 0, y: 0.23477745, z: 0}
 --- !u!54 &1459013575433725132
 Rigidbody:
   m_ObjectHideFlags: 0

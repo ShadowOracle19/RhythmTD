@@ -208,7 +208,7 @@ public class Tower : MonoBehaviour
         }
             
 
-        ConductorV2.instance.triggerEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
         
         //if bullet is from extra shot

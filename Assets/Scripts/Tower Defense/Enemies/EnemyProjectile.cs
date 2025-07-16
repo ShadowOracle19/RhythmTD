@@ -62,7 +62,7 @@ public class EnemyProjectile : MonoBehaviour
     }
     public void RemoveProjectile()
     {
-        ConductorV2.instance.triggerEvent.Remove(trigger);
+        ConductorV2.instance.projectileEvent.Remove(trigger);
         Destroy(gameObject);
     }
 }

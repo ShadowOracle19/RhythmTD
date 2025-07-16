@@ -74,9 +74,11 @@ public class ConductorV2 : MonoBehaviour
     public Vector3 rotationRight;
     private Quaternion currentRotation;
     public Vector3 currentEulerAngles;
-    
 
+    [Header("Events")]
     public List<UnityEvent> triggerEvent = new List<UnityEvent>();
+    public List<UnityEvent> projectileEvent = new List<UnityEvent>();
+    public List<UnityEvent> enemyEvent = new List<UnityEvent>();
 
     public bool pauseConductor = false;
     public TextMeshProUGUI countInText;
@@ -282,6 +284,15 @@ public class ConductorV2 : MonoBehaviour
         {
             lastInterval = Mathf.FloorToInt(interval);
             foreach(UnityEvent _event in triggerEvent.ToArray())
+            {
+                _event.Invoke();
+            }
+            foreach (UnityEvent _event in projectileEvent.ToArray())
+            {
+                _event.Invoke();
+
+            }
+            foreach (UnityEvent _event in enemyEvent.ToArray())
             {
                 _event.Invoke();
             }

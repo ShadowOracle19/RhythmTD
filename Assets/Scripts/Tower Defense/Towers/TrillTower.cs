@@ -68,6 +68,8 @@ public class TrillTower : Tower
 
         if(chargeShotDamage > 0)
         {
+            float redLerp = chargeShotDamage / 7;
+            bullet.GetComponent<Projectile>().spriteRenderer.color = Color.Lerp(Color.white, Color.red, redLerp);
             bullet.GetComponent<Projectile>().spriteRenderer.sprite = increasedAttackSprite;
         }
     }

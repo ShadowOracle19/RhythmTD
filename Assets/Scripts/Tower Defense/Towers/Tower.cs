@@ -24,7 +24,8 @@ public class Tower : MonoBehaviour
     public float towerAudioVolumeIncrement = 0.05f;
 
     public TowerTypeCreator towerInfo;
-    
+
+    public TowerAttackPattern currentAttackPattern;
 
     public Transform firePoint;
     public GameObject projectile;
@@ -119,12 +120,15 @@ public class Tower : MonoBehaviour
     public int upgradeCost4;
     public bool rangeUpgrade = false;
 
+    [Header("Upgrade Modifiers")]
+    public bool feelingItNow = false;
+
 
     public virtual void Start()
     {
-
+        currentAttackPattern = towerInfo.attackPattern;
         currentHealth = towerInfo.towerHealth;
-
+        currentDamage = towerInfo.damage;
         //if(isPoweredUp && towerInfo.type == InstrumentType.Piano)
         //{
         //    currentHealth = currentHealth * 2;
@@ -235,9 +239,19 @@ public class Tower : MonoBehaviour
         //Audio SFX
         towerAttackSFX.Play();
         
-        int damage = currentDamage;
+        //if feeling it now is active
+        if(feelingItNow)
+        {
+            tempDamageHolder = currentDamage;
+            currentDamage = currentDamage * 2;
+        }
+        //feeling it now inactive
+        else
+        {
+            currentDamage = tempDamageHolder;
+        }
 
-        nextAttackSprite = defaultAttackSprite;
+            nextAttackSprite = defaultAttackSprite;
 
         //switch (towerInfo.projectileType)
         //{
@@ -264,9 +278,10 @@ public class Tower : MonoBehaviour
         //}
         
         //towerUpgradeUnlocked = false;
+        feelingItNow = false;
     }
 
-    public void Fire(float yPos) //Fire on specific ypos mainly for viola
+    public virtual void Fire(float yPos) //Fire on specific ypos mainly for viola
     {
 
         //Audio SFX
@@ -276,16 +291,16 @@ public class Tower : MonoBehaviour
 
         nextAttackSprite = defaultAttackSprite;
 
-        if (ChargedUp || FeverSystem.Instance.feverModeActive)
-        {
-            damage = damage * 5;
+        //if (ChargedUp || FeverSystem.Instance.feverModeActive)
+        //{
+        //    damage = damage * 5;
 
-            nextAttackSprite = increasedAttackSprite;
-        }
-        else if (burningBullet)
-        {
-            nextAttackSprite = flameAttackSprite;
-        }
+        //    nextAttackSprite = increasedAttackSprite;
+        //}
+        //else if (burningBullet)
+        //{
+        //    nextAttackSprite = flameAttackSprite;
+        //}
 
         CreateBullet(damage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
 

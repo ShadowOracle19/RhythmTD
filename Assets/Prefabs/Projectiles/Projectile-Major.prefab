@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5738086396080506955}
-  - component: {fileID: 2334316591883364122}
+  - component: {fileID: 1947160396788500435}
   - component: {fileID: 4727961330694019307}
   - component: {fileID: 366390443824338905}
   m_Layer: 0
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 5487076244844692249}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2334316591883364122
+--- !u!114 &1947160396788500435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2456792131810543251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ec7e2283cf0884290bd53e9b899b99, type: 3}
+  m_Script: {fileID: 11500000, guid: e55ddffc280c8b44c8c3661e161be9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1506309018840297455}
@@ -58,7 +58,7 @@ MonoBehaviour:
   trigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2334316591883364122}
+      - m_Target: {fileID: 1947160396788500435}
         m_TargetAssemblyTypeName: Projectile, Assembly-CSharp
         m_MethodName: OnTick
         m_Mode: 1

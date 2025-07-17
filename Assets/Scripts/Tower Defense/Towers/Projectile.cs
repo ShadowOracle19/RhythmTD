@@ -45,13 +45,13 @@ public class Projectile : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
        
         if (!canMove) return;
@@ -94,7 +94,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
+    public virtual void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {

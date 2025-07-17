@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlatTower : Tower
+public class MajorTower : Tower
 {
     // Start is called before the first frame update
     public override void Start()
@@ -15,18 +15,10 @@ public class FlatTower : Tower
     public override void Update()
     {
         base.Update();
-
-        //reduce flat attack speed to every 2 beats
-        if (upgradeOneActive)
-        {
-            currentAttackPattern = TowerAttackPattern.everyOtherBeat;
-        }
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
-        base.Fire();
-
-        AOE(towerInfo.damage);
+        base.Fire(yPos);
     }
 }

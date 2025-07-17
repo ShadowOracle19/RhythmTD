@@ -314,14 +314,14 @@ public class Tower : MonoBehaviour
 
     }
 
-    public void PlaceCharge(int chargeValue)
+    public void PlaceCharge(int chargeValue, Tower connectedTower)
     {
         colliders = Physics.OverlapSphere(transform.position, towerRange);
 
         int rand = Random.Range(0, colliders.Length - 1);
 
         GameObject charge = Instantiate(projectile, transform.position, transform.rotation, CombatManager.Instance.chargesParent);
-        charge.GetComponent<Charges>().initalizeCharge(chargeValue,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z));
+        charge.GetComponent<Charges>().initalizeCharge(chargeValue,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z), connectedTower);
     }
 
     public void AOE(int damage, bool towerUpgrades)

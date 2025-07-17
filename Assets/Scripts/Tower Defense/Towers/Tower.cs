@@ -304,7 +304,7 @@ public class Tower : MonoBehaviour
         
         if(towerInfo.isAOETower)
         {
-            AOE(currentDamage, false);
+            AOE(currentDamage);
             return;
         }
 
@@ -324,7 +324,7 @@ public class Tower : MonoBehaviour
         charge.GetComponent<Charges>().initalizeCharge(chargeValue,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z), connectedTower);
     }
 
-    public void AOE(int damage, bool towerUpgrades)
+    public virtual void AOE(int damage)
     {
         int tempRange = towerRange;
         //if(towerUpgrades)
@@ -385,6 +385,10 @@ public class Tower : MonoBehaviour
             {
                 item.transform.GetComponent<Enemy>().Damage(damage);
 
+                if(upgradeOneActive)
+                {
+                    item.transform.GetComponent<Enemy>().isStunned = true;
+                }
                 //if(towerUpgrades && burningUpgrade)
                 //{
                 //    item.transform.GetComponent<Enemy>().burnt = true;

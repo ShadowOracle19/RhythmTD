@@ -114,6 +114,8 @@ public class Enemy : MonoBehaviour
 
         if(isStunned)
         {
+            //temp stun effect
+            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity);
             isStunnedCounter += 1;
             if(isStunnedCounter > 2)
             {

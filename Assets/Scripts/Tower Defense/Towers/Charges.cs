@@ -7,6 +7,7 @@ public class Charges : MonoBehaviour
     public int resourceGain;
     public Vector3 placementLocation;
     public bool chargeActive = false;
+    private bool damageCharge = false;
 
     private void Update()
     {
@@ -23,17 +24,23 @@ public class Charges : MonoBehaviour
         }
     }
 
-    public void initalizeCharge(int _resourceGain, Vector3 _placementLocation)
+    public void initalizeCharge(int _resourceGain, Vector3 _placementLocation, Tower connectedTower)
     {
         resourceGain = _resourceGain;
         placementLocation = _placementLocation;
+        damageCharge = connectedTower.upgradeOneActive;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player") && chargeActive)
+        if(other.gameObject.CompareTag("Player") && chargeActive && !damageCharge)
         {
             CombatManager.Instance.resourceNum += resourceGain;
+            RemoveCharge();
+        }
+        else if(other.gameObject.CompareTag("Enemy") && chargeActive && damageCharge)
+        {
+            other.gameObject.GetComponent<Enemy>().Damage(resourceGain * 2);
             RemoveCharge();
         }
     }

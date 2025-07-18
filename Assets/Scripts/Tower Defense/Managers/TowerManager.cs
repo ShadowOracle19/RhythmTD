@@ -442,7 +442,7 @@ public class TowerManager : MonoBehaviour
                 continue;
             }
 
-            switch (tower.towerInfo.attackPattern)
+            switch (tower.currentAttackPattern)
             {
                 case TowerAttackPattern.everyBeat:
                     tower.towerAboutToFire = true;

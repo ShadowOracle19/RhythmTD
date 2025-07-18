@@ -441,10 +441,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6265875441098591601}
   - component: {fileID: 1361187514579878653}
-  - component: {fileID: 1969963013028165710}
   - component: {fileID: 6659272261018043613}
   - component: {fileID: 7437452897847904330}
   - component: {fileID: 6580299278994222789}
+  - component: {fileID: 363180401075249748}
   m_Layer: 0
   m_Name: Chromatic
   m_TagString: Tower
@@ -485,69 +485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664ff5a5327a6794d85ea68204c24c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1969963013028165710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5183850645279424415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ab0915b36e22647a7b0d506fe5cbb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerAttackSFX: {fileID: 6659272261018043613}
-  towerAudioVolumeIncrement: 0.1
-  towerInfo: {fileID: 11400000, guid: 001a12e674bb4c943b89583ba9b972b5, type: 2}
-  firePoint: {fileID: 3199641180352351627}
-  projectile: {fileID: 394137417092299375, guid: 0a5e299489ca5fe40bbb4b0c3afa9bb1, type: 3}
-  connectedTile: {fileID: 0}
-  beat: 0
-  everyOtherBeat: 0
-  currentHealth: 0
-  currentDamage: 0
-  tempDamageHolder: 0
-  towerRange: 0
-  burningBullet: 0
-  increaseBulletDamage: 0
-  multiAttack: 0
-  towerHover: 0
-  beatIndicator: {fileID: 1137120996435424628}
-  beatCircle: {fileID: 4305122640335676531}
-  towerAboutToFire: 0
-  shieldEffect: {fileID: 7144582491740819995}
-  isShielded: 0
-  currentState: 0
-  recordedBuffs: 
-  isInputtingBuffs: 0
-  beatRecordingStarted: 1
-  buffTimer: 0
-  buffIndex: 0
-  buffCountMeasure: 0
-  buffBeatCount: 1
-  isPoweredUp: 0
-  nonPoweredIcon: {fileID: 0}
-  poweredIcon: {fileID: 3312135199651036046}
-  defaultAttackSprite: {fileID: -2030509139168134438, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  increasedAttackSprite: {fileID: -2030509139168134438, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  multiAttackSprite: {fileID: -2030509139168134438, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  flameAttackSprite: {fileID: -2030509139168134438, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  aoeAttackParticles: {fileID: 5103615976187222216, guid: e8889e3cb260858418962975b4770ad7, type: 3}
-  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
-  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
-  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
-  burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
-  ChargedUp: 0
-  towerUpgradeUnlocked: 0
-  upgradeCost1: 0
-  damageBoostUpgrade: 0
-  upgradeCost2: 0
-  multiShotUpgrade: 0
-  upgradeCost3: 0
-  burningUpgrade: 0
-  upgradeCost4: 0
-  rangeUpgrade: 0
 --- !u!82 &6659272261018043613
 AudioSource:
   m_ObjectHideFlags: 0
@@ -686,6 +623,70 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &363180401075249748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183850645279424415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc22cb3d426935e48b21ef681de66c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerAttackSFX: {fileID: 6659272261018043613}
+  towerAudioVolumeIncrement: 0.1
+  towerInfo: {fileID: 11400000, guid: 001a12e674bb4c943b89583ba9b972b5, type: 2}
+  firePoint: {fileID: 3199641180352351627}
+  projectile: {fileID: 394137417092299375, guid: 0a5e299489ca5fe40bbb4b0c3afa9bb1, type: 3}
+  connectedTile: {fileID: 0}
+  beat: 0
+  everyOtherBeat: 0
+  currentHealth: 0
+  currentDamage: 0
+  tempDamageHolder: 0
+  towerRange: 0
+  burningBullet: 0
+  increaseBulletDamage: 0
+  multiAttack: 0
+  towerHover: 0
+  beatIndicator: {fileID: 1137120996435424628}
+  beatCircle: {fileID: 4305122640335676531}
+  towerAboutToFire: 0
+  shieldEffect: {fileID: 7144582491740819995}
+  isShielded: 0
+  currentState: 0
+  recordedBuffs: 
+  isInputtingBuffs: 0
+  beatRecordingStarted: 1
+  buffTimer: 0
+  buffIndex: 0
+  buffCountMeasure: 0
+  buffBeatCount: 1
+  isPoweredUp: 0
+  nonPoweredIcon: {fileID: 0}
+  poweredIcon: {fileID: 3312135199651036046}
+  defaultAttackSprite: {fileID: -2030509139168134438, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
+  increasedAttackSprite: {fileID: -2030509139168134438, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
+  multiAttackSprite: {fileID: -2030509139168134438, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
+  flameAttackSprite: {fileID: -2030509139168134438, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
+  aoeAttackParticles: {fileID: 0}
+  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
+  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
+  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
+  burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
+  ChargedUp: 0
+  towerUpgradeUnlocked: 0
+  upgradePurchased: 0
+  upgradeCost1: 0
+  upgradeOneActive: 0
+  upgradeCost2: 0
+  multiShotUpgrade: 0
+  upgradeCost3: 0
+  burningUpgrade: 0
+  upgradeCost4: 0
+  rangeUpgrade: 0
 --- !u!1 &7144582491740819995
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3121633194305466473
 Transform:
   m_ObjectHideFlags: 0

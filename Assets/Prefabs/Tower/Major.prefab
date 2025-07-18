@@ -426,7 +426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6265875441098591601}
-  - component: {fileID: 1969963013028165710}
+  - component: {fileID: 2873374926660198208}
   - component: {fileID: 3145858868990155513}
   - component: {fileID: 4236921641137822776}
   - component: {fileID: 8544919838374567590}
@@ -459,7 +459,7 @@ Transform:
   - {fileID: 309412583952537485}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1969963013028165710
+--- !u!114 &2873374926660198208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -468,12 +468,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5183850645279424415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ab0915b36e22647a7b0d506fe5cbb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3816b0b5ef6d3db48811aa106fc6faf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   towerAttackSFX: {fileID: 3145858868990155513}
   towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: 9544928b8077e224cb2516d9767e66a9, type: 2}
+  currentAttackPattern: 0
   firePoint: {fileID: 3199641180352351627}
   projectile: {fileID: 2456792131810543251, guid: a77cb059551aa414e9549713c6ebc95d, type: 3}
   connectedTile: {fileID: 0}
@@ -505,23 +506,25 @@ MonoBehaviour:
   poweredIcon: {fileID: 4963708498863254925}
   defaultAttackSprite: {fileID: -4176681958753459282, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   increasedAttackSprite: {fileID: 6517143435948619715, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  multiAttackSprite: {fileID: -4176681958753459282, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
+  multiAttackSprite: {fileID: 133965861252808440, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: 133965861252808440, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  aoeAttackParticles: {fileID: 5103615976187222216, guid: e8889e3cb260858418962975b4770ad7, type: 3}
+  aoeAttackParticles: {fileID: 0}
   aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
   shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   ChargedUp: 0
   towerUpgradeUnlocked: 0
+  upgradePurchased: 0
   upgradeCost1: 0
-  damageBoostUpgrade: 0
+  upgradeOneActive: 0
   upgradeCost2: 0
   multiShotUpgrade: 0
   upgradeCost3: 0
   burningUpgrade: 0
   upgradeCost4: 0
   rangeUpgrade: 0
+  feelingItNow: 0
 --- !u!82 &3145858868990155513
 AudioSource:
   m_ObjectHideFlags: 0

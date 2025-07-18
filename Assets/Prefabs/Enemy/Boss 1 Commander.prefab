@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4066651677582518194}
-  - component: {fileID: 5669857762305846285}
+  - component: {fileID: 8390355362121399815}
   - component: {fileID: 6874018606574302444}
   - component: {fileID: 3188806682883541518}
   - component: {fileID: 1459013575433725132}
@@ -37,7 +37,7 @@ Transform:
   - {fileID: 8311731309715431482}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5669857762305846285
+--- !u!114 &8390355362121399815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,13 +46,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 239132429429542008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03ad5d2c844a09d46bfd90e9270aa7c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b96fcacbab03674c928df00ab5369f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 11400000, guid: 5766a935811d27948977134265fff02b, type: 2}
+  enemy: {fileID: 0}
   enemyEffect: {fileID: 0}
   enemyDeathSFX: {fileID: 6874018606574302444}
   path: []
+  timer: 0
   currentPositionHolder: {x: 0, y: 0, z: 0}
   dontMove: 0
   barTracker: 0
@@ -60,8 +61,8 @@ MonoBehaviour:
   trigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5669857762305846285}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+      - m_Target: {fileID: 8390355362121399815}
+        m_TargetAssemblyTypeName: Boss_1_Commander, Assembly-CSharp
         m_MethodName: OnTick
         m_Mode: 1
         m_Arguments:
@@ -84,6 +85,13 @@ MonoBehaviour:
   teleported: 0
   obstacleFound: 0
   animator: {fileID: 8037740004645850056}
+  currentState: 0
+  currentStateIndex: 0
+  previousState: 0
+  damageThreshold: 0
+  lifter: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+  runner: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
+  sorter: {fileID: 239132429429542008, guid: ae22a1fb4d3728a45a8be833bb8a0027, type: 3}
 --- !u!82 &6874018606574302444
 AudioSource:
   m_ObjectHideFlags: 0

@@ -17,6 +17,9 @@ public class EncounterCreator : ScriptableObject
     [Header("Tutorial")]
     public bool isTutorial = false;
 
+    [Header("Boss Battle")]
+    public bool isBossBattle = false;
+
     [Header("Show Case Level")]
     public bool isShowcase = false;
 

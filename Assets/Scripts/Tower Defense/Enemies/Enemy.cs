@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
     public List<Vector3> path;
     private float speed = 1;
-    float timer;
+    public float timer;
     public Vector3 currentPositionHolder;
 
     public bool dontMove;
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         tileMask = LayerMask.GetMask("Stage");
         obstacleMask = LayerMask.GetMask("Obstacle");
@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         if (isDead)
         {
@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void OnTick()
+    public virtual void OnTick()
     {
         
         if (burnt)
@@ -325,7 +325,7 @@ public class Enemy : MonoBehaviour
     //}
     #endregion
 
-    public void Movement()
+    public virtual void Movement()
     {
 
         timer += Time.deltaTime * speed;
@@ -382,7 +382,12 @@ public class Enemy : MonoBehaviour
     {
         if (playOnce) return;
         playOnce = true;
-        CombatManager.Instance.enemyTotal -= 1;
+
+        if(!GameManager.Instance.currentEncounter.isBossBattle)
+        {
+            CombatManager.Instance.enemyTotal -= 1;
+        }
+        
         ConductorV2.instance.enemyEvent.Remove(trigger);
         EnemySpawner.Instance.enemies.Remove(this);
         Destroy(gameObject);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -8889972146457848405}
   - component: {fileID: 4717944194085053345}
   - component: {fileID: -7336854555350200192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Runner
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -82,6 +82,7 @@ MonoBehaviour:
   burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
   teleported: 0
+  obstacleFound: 0
   animator: {fileID: 7437052606740748146}
 --- !u!82 &-8889972146457848405
 AudioSource:
@@ -198,8 +199,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.5, y: 1.0978906, z: 0.5}
+  m_Center: {x: 0, y: 0.2989453, z: 0}
 --- !u!54 &-7336854555350200192
 Rigidbody:
   m_ObjectHideFlags: 0

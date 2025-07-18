@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
-public class TowerButton : MonoBehaviour
+public class TowerUpgradeIcon : MonoBehaviour
 {
-    [SerializeField] public GameObject tower;
-
     public Image icon;
+    
 
 }

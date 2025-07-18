@@ -29,19 +29,19 @@ public class Projectile : MonoBehaviour
 
     public bool teleported = false;
 
-    public void InitializeProjectile(int range, GameObject firedFrom, int _damage, bool isPiercing, bool isBurning)
+    public void InitializeProjectile(int range, GameObject firedFrom, int _damage, bool isPiercing)
     {
         bulletRange = range;
         towerFiredFrom = firedFrom;
         damage = _damage;
         piercing = isPiercing;
-        burningBullet = isBurning;
+        //burningBullet = isBurning;
 
-        if (isBurning)
-        {
-            //burningParticlesInstance = Instantiate(burningParticles, transform.position, Quaternion.identity);
-            spriteRenderer.sprite = flameAttackSprite;
-        }
+        //if (isBurning)
+        //{
+        //    //burningParticlesInstance = Instantiate(burningParticles, transform.position, Quaternion.identity);
+        //    spriteRenderer.sprite = flameAttackSprite;
+        //}
     }
 
     // Start is called before the first frame update

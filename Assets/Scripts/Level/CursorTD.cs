@@ -541,13 +541,15 @@ public class CursorTD : MonoBehaviour
         placingTower = true;
 
 
-        if (direction == Vector2.up)//upgrade 1 damage boost
+        if (direction == Vector2.up)//upgrade 1 
         {
+            //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased
             if (towerSelectMenuOpened && tile.placedTower != null && 
-                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost1 && 
-                !tile.placedTower.GetComponent<Tower>().damageBoostUpgrade)
+                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost1 &&
+                !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
-                tile.placedTower.GetComponent<Tower>().damageBoostUpgrade = true;
+                tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
+                tile.placedTower.GetComponent<Tower>().upgradeOneActive = true;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost1;
 
                 ClosePlacementMenu();
@@ -560,10 +562,12 @@ public class CursorTD : MonoBehaviour
         }
         else if (direction == Vector2.right)//upgrade 2 multi shot
         {
+            //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased
             if (towerSelectMenuOpened && tile.placedTower != null && 
                 CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost2 &&
-                !tile.placedTower.GetComponent<Tower>().multiShotUpgrade)
+                !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
+                tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().multiShotUpgrade = true; 
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost2;
                 
@@ -577,10 +581,12 @@ public class CursorTD : MonoBehaviour
         }
         else if (direction == Vector2.down)//upgrade 3 burning bullet
         {
+            //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased
             if (towerSelectMenuOpened && tile.placedTower != null && 
                 CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost3 &&
-                !tile.placedTower.GetComponent<Tower>().burningUpgrade)
+                !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
+                tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().burningUpgrade = true;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost3;
 
@@ -595,10 +601,12 @@ public class CursorTD : MonoBehaviour
         else if (direction == Vector2.left)//upgrade 4 range
         {
 
+            //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased
             if (towerSelectMenuOpened && tile.placedTower != null && 
                 CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost4 &&
-                !tile.placedTower.GetComponent<Tower>().rangeUpgrade)
+                !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
+                tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().rangeUpgrade = true;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost4;
 
@@ -841,7 +849,7 @@ public class CursorTD : MonoBehaviour
         // Check if guitar tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
         if (upgradeTower)
         {
-            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost1 || tile.placedTower.GetComponent<Tower>().damageBoostUpgrade) 
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost1 || tile.placedTower.GetComponent<Tower>().upgradeOneActive) 
             {
                 upgradeSlotW.GetComponent<Image>().material = greyscaleShader;
             }

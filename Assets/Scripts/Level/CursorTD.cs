@@ -47,11 +47,14 @@ public class CursorTD : MonoBehaviour
     [Header("Shaders Materials")]
     public Material greyscaleShader;
     
-    [Header("Feedback SFX")]
+    [Header("Menu SFX")]
     public AudioSource upInvalidSfx;
     public AudioSource rightInvalidSfx;
     public AudioSource downInvalidSfx;
     public AudioSource leftInvalidSfx;
+
+    [Header("Hit SFX")]
+    public AudioSource hitFirstSfx;
     
     [Header("Placement Menu")]
     public GameObject placementMenu;
@@ -389,6 +392,8 @@ public class CursorTD : MonoBehaviour
 
     public void TowerEmpowerment(BuffType buff)
     {
+        hitFirstSfx.Play();
+        
         if(tile.placedTower != null && !beatIsHit)
         {
 

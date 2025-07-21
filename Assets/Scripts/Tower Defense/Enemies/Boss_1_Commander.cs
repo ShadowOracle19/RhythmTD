@@ -10,8 +10,11 @@ public class Boss_1_Commander : Enemy
     [SerializeField] private PhaseIndex currentStateIndex;
     [SerializeField] private CommanderStates previousState;
     [SerializeField] private int damageThreshold;
+    private int currentDamage;
     [SerializeField] private GameObject lifter, runner, sorter;
     private bool phaseStarted = false;
+
+    [SerializeField] private Vector3 originPos;
 
     //movement
     private bool movementInProgress = false;
@@ -30,34 +33,126 @@ public class Boss_1_Commander : Enemy
         currentState = CommanderStates.phase1;
         currentStateIndex = PhaseIndex.A;
         previousState = currentState;
+
+        originPos = transform.position;
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        
+        Movement();
+
+        if(currentState == CommanderStates.damagePhase)
+        {
+            GetComponent<BoxCollider>().enabled = true;
+        }
+        else
+        {
+            GetComponent<BoxCollider>().enabled = false;
+        }
     }
 
     public override void OnTick()
     {
+        dontMove = false;
         switch (currentState)
         {
             case CommanderStates.phase1:
                 PhaseOne();
                 break;
             case CommanderStates.phase2:
+                PhaseTwo();
                 break;
             case CommanderStates.phase3:
                 break;
             case CommanderStates.phase4:
                 break;
             case CommanderStates.damagePhase:
+                DamagePhase();
                 break;
             case CommanderStates.winPhase:
                 GameManager.Instance.WinLevel();
                 break;
             case CommanderStates.lossPhase:
                 GameManager.Instance.GameOver();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void DamagePhase()
+    {
+        //once reached end of phase reset position back to origin
+        //if reached damage threshold auto go to next phase and to origin
+        switch (currentStateIndex)
+        {
+            //move to (6.5f, 0.5f, 1.5f)
+            case PhaseIndex.A:
+                MoveTo(new Vector3(6.5f, 0.5f, 1.5f));
+
+                //next phase
+                if(transform.position == new Vector3(6.5f, 0.5f, 1.5f))
+                {
+                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                    {
+                        measureCounter += 1;
+                        //change to phase 1B
+                        if (measureCounter == 2)
+                        {
+                            measureCounter = 0;
+                            currentStateIndex = PhaseIndex.B;
+                            return;
+                        }
+
+                    }
+                }
+                break;
+            //move to (6.5f, 0.5f, -3.5f)
+            case PhaseIndex.B:
+
+                MoveTo(new Vector3(6.5f, 0.5f, -3.5f));
+
+                //next phase
+                if (transform.position == new Vector3(6.5f, 0.5f, -3.5f))
+                {
+                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                    {
+                        measureCounter += 1;
+                        //change to phase 1B
+                        if (measureCounter == 2)
+                        {
+                            measureCounter = 0;
+                            currentStateIndex = PhaseIndex.C;
+                            return;
+                        }
+
+                    }
+                }
+                break;
+            //move to (10.5f, 0.5f, -3.5f)
+            case PhaseIndex.C:
+
+                MoveTo(new Vector3(10.5f, 0.5f, -3.5f));
+
+                //next phase and if damage threshold didnt get reached
+                if (transform.position == new Vector3(10.5f, 0.5f, -3.5f))
+                {
+                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                    {
+                        measureCounter += 1;
+                        //change to phase 1B
+                        if (measureCounter == 2)
+                        {
+                            MoveTo(originPos);
+                            measureCounter = 0;
+                            currentState = previousState;
+                            currentStateIndex = PhaseIndex.A;
+                            return;
+                        }
+
+                    }
+                }
                 break;
             default:
                 break;
@@ -86,9 +181,11 @@ public class Boss_1_Commander : Enemy
                     //change to phase 1B
                     if (measureCounter == 4)
                     {
+                        measureCounter = 0;
                         currentStateIndex = PhaseIndex.B;
                         phaseStarted = false;
                         Debug.Log("Phase 1 B");
+                        return;
                     }
 
                 }
@@ -107,6 +204,15 @@ public class Boss_1_Commander : Enemy
                 {
                     EnemySpawner.Instance.ForceEnemySpawnDynamic(FindEmptiestLane(), lifter);
                     measureCounter += 1;
+
+                    //change to phase 1B
+                    if (measureCounter == 4)
+                    {
+                        Debug.Log("Phase 1 C");
+                        currentStateIndex = PhaseIndex.C;
+                        phaseStarted = false;
+                        return;
+                    }
                 }
                 //if all lanes filled and its every 2 measures
                 else if(lanesFilled && ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
@@ -114,14 +220,18 @@ public class Boss_1_Commander : Enemy
                     EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
                     EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
                     measureCounter += 1;
+
+                    //change to phase 1B
+                    if (measureCounter == 4)
+                    {
+                        measureCounter = 0;
+                        Debug.Log("Phase 1 C");
+                        currentStateIndex = PhaseIndex.C;
+                        phaseStarted = false;
+                        return;
+                    }
                 }
-                //change to phase 1B
-                if (measureCounter == 4)
-                {
-                    Debug.Log("Phase 1 C");
-                    currentStateIndex = PhaseIndex.C;
-                    phaseStarted = false;
-                }
+                
                 break;
 
                 //spawns 6 enemies in each tile
@@ -137,16 +247,19 @@ public class Boss_1_Commander : Enemy
                     EnemySpawner.Instance.ForceEnemySpawnDynamic(-2.5f, lifter);
                     EnemySpawner.Instance.ForceEnemySpawnDynamic(-3.5f, lifter);
                     phaseStarted = true;
-                    
+                    MoveTo(new Vector3(10.5f, 0.5f, 1.5f));
                 }
-
+                Enemy[] children = CombatManager.Instance.enemiesParent.GetComponentsInChildren<Enemy>();
                 //player lives
-                if(CombatManager.Instance.enemyTotal == 1 && phaseStarted)
+                if(children.Length == 1 && phaseStarted)
                 {
+                    measureCounter = 0;
                     Debug.Log("Damage Phase");
                     currentStateIndex = PhaseIndex.A;
                     currentState = CommanderStates.damagePhase;
                     previousState = CommanderStates.phase1;
+                    phaseStarted = false;
+                    return;
                 }
                 
                 break;
@@ -156,38 +269,138 @@ public class Boss_1_Commander : Enemy
         }
     }
 
-    public override void Movement()
+    private void PhaseTwo()
     {
-        
+        switch (currentStateIndex)
+        {
+            //spawns 1 lifter or runner every two beats
+            case PhaseIndex.A:
+                if(ConductorV2.instance.beatTrack == 2)
+                {
+                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
+                }
+                else if(ConductorV2.instance.beatTrack == 4)
+                {
+                    EnemySpawner.Instance.SpawnUnitOnRandomTile(runner);
+                }
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                {
+                    measureCounter += 1;
+                    //change to phase 1B
+                    if (measureCounter == 4)
+                    {
+                        currentStateIndex = PhaseIndex.B;
+                        measureCounter = 0;
+                        return;
+                    }
+
+                }
+                break;
+            case PhaseIndex.B:
+                if (ConductorV2.instance.beatTrack == 2)
+                {
+                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
+                }
+                else if (ConductorV2.instance.beatTrack == 4)
+                {
+                    EnemySpawner.Instance.SpawnUnitOnRandomTile(runner);
+                }
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                {
+                    EnemySpawner.Instance.SpawnUnitOnRandomTile(sorter);
+                    measureCounter += 1;
+                    //change to phase 1B
+                    if (measureCounter == 4)
+                    {
+                        currentStateIndex = PhaseIndex.B;
+                        measureCounter = 0;
+                        return;
+                    }
+
+                }
+                break;
+            case PhaseIndex.C:
+                if (!phaseStarted)
+                {
+                    measureCounter = 0;
+                    phaseStarted = true;
+                    MoveTo(new Vector3(10.5f, 0.5f, 1.5f));
+                }
+
+                int rand = Random.Range(0, 3);
+
+                if(rand == 0)
+                {
+                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
+                }
+                else if(rand == 1)
+                {
+                    EnemySpawner.Instance.SpawnUnitOnRandomTile(sorter);
+                }
+                else
+                {
+                    EnemySpawner.Instance.SpawnUnitOnRandomTile(runner);
+                }
+
+                //player lives
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                {
+
+                    measureCounter += 1;
+                    //change to phase 1B
+                    if (measureCounter == 4)
+                    {
+                        Debug.Log("Damage Phase");
+                        currentStateIndex = PhaseIndex.A;
+                        currentState = CommanderStates.damagePhase;
+                        previousState = CommanderStates.phase2;
+                        phaseStarted = false;
+                        measureCounter = 0;
+                        return;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
-    public void MoveTo(Vector3 finalPos)
+    public override void Movement()
     {
-        Vector3 nextPosition = Vector3.zero;
-
-        if (!movementInProgress)
+        if(movementInProgress && !dontMove)
         {
-            movementInProgress = true;
-            nextPosition = transform.position + GetDirection(transform.position, finalPos);
-        }
-        
-
-        if (transform.position != nextPosition)
-        {
-            timer += Time.deltaTime * 1;
-            gameObject.transform.position = Vector3.Lerp(transform.position, nextPosition, timer);
-        }
-        else
-        {
-            nextPosition = transform.position + GetDirection(transform.position, finalPos);
-            timer = 0;
-
-            //if reached final position
-            if (transform.position == finalPos)
+            if (transform.position != nextPosition)
             {
-                movementInProgress = false;
+                timer += Time.deltaTime * 1;
+                gameObject.transform.position = Vector3.Lerp(transform.position, nextPosition, timer);
+            }
+            else
+            {
+                dontMove = true;
+                gameObject.transform.position = nextPosition;
+                Debug.Log(GetDirection(transform.position, finalPos));
+                nextPosition = transform.position + GetDirection(transform.position, finalPos);
+                timer = 0;
+
+                //if reached final position
+                if (transform.position == finalPos)
+                {
+                    movementInProgress = false;
+                }
             }
         }
+    }
+
+    public void MoveTo(Vector3 _finalPos)
+    {
+        if (!movementInProgress)
+        {
+            Debug.Log(GetDirection(transform.position, finalPos));
+            finalPos = _finalPos;
+            movementInProgress = true;
+            nextPosition = transform.position + GetDirection(transform.position, _finalPos);
+        }
+        
     }
 
     Vector3 GetDirection(Vector3 point_a, Vector3 point_b)
@@ -266,6 +479,42 @@ public class Boss_1_Commander : Enemy
         }
 
         return tMin;
+    }
+
+    public override void Damage(int damage)
+    {
+        enemyDeathSFX.Play();
+        currentDamage += damage;
+        //if hit to current damage threshold
+        if(currentDamage >= damageThreshold)
+        {
+            DamageThresholdMet();
+        }
+    }
+
+    public void DamageThresholdMet()
+    {
+        currentDamage = 0;
+        movementInProgress = false;
+        transform.position = originPos;
+        currentStateIndex = PhaseIndex.A;
+        switch (previousState)
+        {
+            case CommanderStates.phase1:
+                currentState = CommanderStates.phase2;
+                break;
+            case CommanderStates.phase2:
+                currentState = CommanderStates.phase3;
+                break;
+            case CommanderStates.phase3:
+                currentState = CommanderStates.phase4;
+                break;
+            case CommanderStates.phase4:
+                currentState = CommanderStates.winPhase;
+                break;
+            default:
+                break;
+        }
     }
 }
 

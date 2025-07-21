@@ -353,7 +353,7 @@ public class Enemy : MonoBehaviour
     }
     
 
-    public void Damage(int damage)
+    public virtual void Damage(int damage)
     {
         _renderer.color = Color.red;
         time = 1;

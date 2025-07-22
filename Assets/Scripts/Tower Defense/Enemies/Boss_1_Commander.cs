@@ -138,20 +138,11 @@ public class Boss_1_Commander : Enemy
                 //next phase and if damage threshold didnt get reached
                 if (transform.position == new Vector3(10.5f, 0.5f, -3.5f))
                 {
-                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
-                    {
-                        measureCounter += 1;
-                        //change to phase 1B
-                        if (measureCounter == 2)
-                        {
-                            MoveTo(originPos);
-                            measureCounter = 0;
-                            currentState = previousState;
-                            currentStateIndex = PhaseIndex.A;
-                            return;
-                        }
-
-                    }
+                    MoveTo(originPos);
+                    measureCounter = 0;
+                    currentState = previousState;
+                    currentStateIndex = PhaseIndex.A;
+                    
                 }
                 break;
             default:
@@ -363,6 +354,26 @@ public class Boss_1_Commander : Enemy
             default:
                 break;
         }
+    }
+
+    private void PhaseThree()
+    {
+        switch (currentStateIndex)
+        {
+            case PhaseIndex.A:
+                break;
+            case PhaseIndex.B:
+                break;
+            case PhaseIndex.C:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void PhaseFour()
+    {
+
     }
 
     public override void Movement()

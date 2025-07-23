@@ -14,7 +14,7 @@ public class Boss_1_Commander : Enemy
     [SerializeField] private GameObject lifter, runner, sorter;
     private bool phaseStarted = false;
 
-    [SerializeField] private Vector3 originPos;
+    private Vector3 originPos;
 
     //movement
     private bool movementInProgress = false;
@@ -25,6 +25,15 @@ public class Boss_1_Commander : Enemy
 
     //phase two
     bool lanesFilled = false;
+
+    //phase three
+    [SerializeField] private GameObject comandeerCursor;
+    [SerializeField]private bool phase3Start = false;
+    [SerializeField]private bool cursorMovementInProgress = false;
+    [SerializeField]private bool cursorDontMove = false;
+    [SerializeField]private Vector3 cursorFinalPos;
+    [SerializeField]private Vector3 cursorNextPos;
+    [SerializeField] private float cursorTimer = 0;
 
     // Start is called before the first frame update
     public override void Start()
@@ -42,6 +51,8 @@ public class Boss_1_Commander : Enemy
     {
         Movement();
 
+        CursorMovement();
+
         if(currentState == CommanderStates.damagePhase)
         {
             GetComponent<BoxCollider>().enabled = true;
@@ -55,6 +66,7 @@ public class Boss_1_Commander : Enemy
     public override void OnTick()
     {
         dontMove = false;
+        cursorDontMove = false;
         switch (currentState)
         {
             case CommanderStates.phase1:
@@ -64,8 +76,10 @@ public class Boss_1_Commander : Enemy
                 PhaseTwo();
                 break;
             case CommanderStates.phase3:
+                PhaseThree();
                 break;
             case CommanderStates.phase4:
+                PhaseFour();
                 break;
             case CommanderStates.damagePhase:
                 DamagePhase();
@@ -160,8 +174,9 @@ public class Boss_1_Commander : Enemy
                 if(!phaseStarted)
                 {
                     Debug.Log("Phase 1 A");
-                    float yPos = GetClosestTower().position.y;
-                    EnemySpawner.Instance.ForceEnemySpawnDynamic(yPos, lifter);
+                    //float yPos = GetClosestTower().position.y;
+                    //EnemySpawner.Instance.ForceEnemySpawnDynamic(yPos, lifter);
+                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
                     phaseStarted = true;
                 }
                 //check if measure is an even number
@@ -361,8 +376,21 @@ public class Boss_1_Commander : Enemy
         switch (currentStateIndex)
         {
             case PhaseIndex.A:
-                break;
+                if (!phase3Start)
+                {
+                    phase3Start = true;
+                    comandeerCursor.SetActive(true);
+                    CursorMoveTo(new Vector3(7.5f, -0.4f, -1.5f));
+                }
+
+                if(!cursorMovementInProgress)
+                {
+                    EnemySpawner.Instance.ForceEnemySpawnDynamic(comandeerCursor.transform.position.z, lifter);
+                    currentStateIndex = PhaseIndex.B;
+                }
+                    break;
             case PhaseIndex.B:
+                CursorMoveTo(new Vector3(7.5f, -0.4f, 1.5f));
                 break;
             case PhaseIndex.C:
                 break;
@@ -373,7 +401,52 @@ public class Boss_1_Commander : Enemy
 
     private void PhaseFour()
     {
+        switch (currentStateIndex)
+        {
+            case PhaseIndex.A:
+                break;
+            case PhaseIndex.B:
+                break;
+            case PhaseIndex.C:
+                break;
+            default:
+                break;
+        }
+    }
 
+    public void CursorMovement()
+    {
+        if(cursorMovementInProgress && !cursorDontMove)
+        {
+            if(comandeerCursor.transform.position != cursorNextPos)
+            {
+                cursorTimer += Time.deltaTime * 1;
+                comandeerCursor.transform.position = Vector3.Lerp(comandeerCursor.transform.position, cursorNextPos, cursorTimer);
+            }
+            else
+            {
+                cursorDontMove = true;
+                comandeerCursor.transform.position = cursorNextPos;
+
+                cursorNextPos = comandeerCursor.transform.position + GetDirection(comandeerCursor.transform.position, cursorFinalPos);
+                cursorTimer = 0;
+
+                if(comandeerCursor.transform.position == new Vector3(cursorFinalPos.x, comandeerCursor.transform.position.y, cursorFinalPos.z))
+                {
+                    cursorMovementInProgress = false;
+                }
+            }
+        }
+    }
+
+    public void CursorMoveTo(Vector3 _finalPos)
+    {
+        if(!cursorMovementInProgress)
+        {
+            cursorFinalPos = _finalPos;
+            cursorMovementInProgress = true;
+            cursorNextPos = comandeerCursor.transform.position + GetDirection(comandeerCursor.transform.position, _finalPos);
+        }
     }
 
     public override void Movement()
@@ -418,7 +491,18 @@ public class Boss_1_Commander : Enemy
     {
         Vector3 direction = point_b - point_a;
         direction.Normalize();
-        return direction;
+
+        //rounds the direction to -1, 0, or 1
+        Vector3 roundedDirection = new Vector3(Mathf.Round(direction.x), 0, Mathf.Round(direction.z));
+
+        //stops unit from going diagonally
+        if(roundedDirection.x != 0 && roundedDirection.z != 0)
+        {
+            roundedDirection.z = 0;
+        }
+
+        Debug.Log(roundedDirection);
+        return roundedDirection;
     }
 
     float FindEmptiestLane()
@@ -478,6 +562,11 @@ public class Boss_1_Commander : Enemy
         Transform tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
+
+        if (towerParent.childCount == 0)
+        {
+            return tMin;
+        }
 
         foreach (Transform tower in towerParent)
         {

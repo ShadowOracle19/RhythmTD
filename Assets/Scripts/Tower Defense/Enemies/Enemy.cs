@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
 
     public int currentHealth;
 
+    public int _currentDamage = 1;
+
     public UnityEvent trigger;
 
     public Vector3 nextPosition;
@@ -279,7 +281,7 @@ public class Enemy : MonoBehaviour
         switch (clashStrength)
         {
             case ClashStrength.Weak:
-                tileInFront.placedTower.GetComponent<Tower>().Damage(1);
+                tileInFront.placedTower.GetComponent<Tower>().Damage(_currentDamage);
                 clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
                 Kill();
                 break;

@@ -51,6 +51,8 @@ public class ConductorV2 : MonoBehaviour
 
     public int beatTrack;
 
+    public int measureTrack;
+
     public float _interval;
 
     public int lastInterval;
@@ -97,6 +99,7 @@ public class ConductorV2 : MonoBehaviour
         completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 0;
+        measureTrack = 0;
         beatDuration = 0;
         countingIn = true;
         //calculate the number of seconds in each beat
@@ -270,6 +273,7 @@ public class ConductorV2 : MonoBehaviour
     {
         if (beatTrack == 4)
         {
+            measureTrack += 1;
             beatTrack = 0;
         }
 

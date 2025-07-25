@@ -259,6 +259,7 @@ public class CombatManager : MonoBehaviour
         {
             allEnemiesSpawned = true;
         }
+        
 
         GameManager.Instance.enemyCounter.text = $"{enemyTotal}/{totalNumEnemies}";
 
@@ -296,7 +297,7 @@ public class CombatManager : MonoBehaviour
             GameManager.Instance.GameOver();
         }
 
-        else if(GameManager.Instance._currentHealth != 0 && allEnemiesSpawned && enemyTotal <= 0)
+        else if(GameManager.Instance._currentHealth != 0 && allEnemiesSpawned && enemyTotal <= 0 && !GameManager.Instance.currentEncounter.isBossBattle)
         {
             if (GameManager.Instance._currentHealth <= 0)
                 return;

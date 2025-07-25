@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 7437452897847904330}
   - component: {fileID: 6580299278994222789}
   - component: {fileID: 363180401075249748}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Chromatic
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -638,6 +638,7 @@ MonoBehaviour:
   towerAttackSFX: {fileID: 6659272261018043613}
   towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: 001a12e674bb4c943b89583ba9b972b5, type: 2}
+  currentAttackPattern: 0
   firePoint: {fileID: 3199641180352351627}
   projectile: {fileID: 394137417092299375, guid: 0a5e299489ca5fe40bbb4b0c3afa9bb1, type: 3}
   connectedTile: {fileID: 0}
@@ -687,6 +688,7 @@ MonoBehaviour:
   burningUpgrade: 0
   upgradeCost4: 0
   rangeUpgrade: 0
+  feelingItNow: 0
 --- !u!1 &7144582491740819995
 GameObject:
   m_ObjectHideFlags: 0

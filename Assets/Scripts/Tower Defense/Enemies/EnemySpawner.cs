@@ -2,6 +2,7 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -115,6 +116,50 @@ public class EnemySpawner : MonoBehaviour
         
         ConductorV2.instance.enemyEvent.Add(enemy.GetComponent<Enemy>().trigger);
 
+    }
+
+    public void ForceEnemySpawnDynamic(float yPos, GameObject enemy)
+    {
+        numberOfEnemiesToSpawn += 1;
+        currentNumberOfEnemiesSpawned += 1;
+
+        GameObject _enemy = null;
+
+        _enemy = Instantiate(enemy, new Vector3(transform.position.x, 0.5f, yPos), Quaternion.identity, enemyParent);
+        
+
+        ConductorV2.instance.enemyEvent.Add(_enemy.GetComponent<Enemy>().trigger);
+
+    }
+
+    public void ForceEnemySpawnOnTile(Transform pos, GameObject enemy)
+    {
+        numberOfEnemiesToSpawn += 1;
+        currentNumberOfEnemiesSpawned += 1;
+
+        GameObject _enemy = null;
+
+        _enemy = Instantiate(enemy, pos.position, Quaternion.identity, enemyParent);
+
+
+        ConductorV2.instance.enemyEvent.Add(_enemy.GetComponent<Enemy>().trigger);
+
+    }
+
+    public void SpawnUnitOnRandomTile(GameObject enemyPrefab)
+    {
+        numberOfEnemiesToSpawn += 1;
+        currentNumberOfEnemiesSpawned += 1;
+
+        GameObject _enemy = null;
+
+        int randSpawnTile = Random.Range(0, spawnTiles.Count - 1);
+
+        _enemy = Instantiate(enemyPrefab, new Vector3(transform.position.x, 0.5f,
+                spawnTiles[randSpawnTile].GetComponent<Tile>().zPos), Quaternion.identity, enemyParent);
+
+
+        ConductorV2.instance.enemyEvent.Add(_enemy.GetComponent<Enemy>().trigger);
     }
 
     public void StartSpawningEnemies()

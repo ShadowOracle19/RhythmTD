@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 2051579340026178359}
   - component: {fileID: 1039635829487946627}
   - component: {fileID: 3637877782725260547}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Flat
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -305,6 +305,7 @@ MonoBehaviour:
   towerAttackSFX: {fileID: 3091612715999862889}
   towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: c6827d0b3828b0c4ab69976db279f395, type: 2}
+  currentAttackPattern: 0
   firePoint: {fileID: 3492212302174833441}
   projectile: {fileID: 0}
   connectedTile: {fileID: 0}
@@ -354,6 +355,7 @@ MonoBehaviour:
   burningUpgrade: 0
   upgradeCost4: 0
   rangeUpgrade: 0
+  feelingItNow: 0
 --- !u!1 &2709377709178620609
 GameObject:
   m_ObjectHideFlags: 0

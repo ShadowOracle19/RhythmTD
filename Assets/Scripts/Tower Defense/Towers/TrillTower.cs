@@ -63,6 +63,7 @@ public class TrillTower : Tower
         //instatiate bullet
         GameObject bullet = Instantiate(projectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies);
+        bullet.GetComponent<Projectile>().spriteRenderer.sprite = defaultAttackSprite;
 
         ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
 

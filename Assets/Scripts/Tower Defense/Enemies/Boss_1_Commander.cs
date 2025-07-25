@@ -166,6 +166,7 @@ public class Boss_1_Commander : Enemy
 
     private void PhaseOne()
     {
+        animator.SetBool("IsHit",false); //Stop hurt animation
         switch (currentStateIndex)
         {
                 //Spawn enemy at nearest tower
@@ -277,6 +278,7 @@ public class Boss_1_Commander : Enemy
 
     private void PhaseTwo()
     {
+        animator.SetBool("IsHit",false); //Stop hurt animation
         switch (currentStateIndex)
         {
             //spawns 1 lifter or runner every two beats
@@ -373,6 +375,7 @@ public class Boss_1_Commander : Enemy
 
     private void PhaseThree()
     {
+        animator.SetBool("IsHit",false); //Stop hurt animation
         switch (currentStateIndex)
         {
             case PhaseIndex.A:
@@ -401,6 +404,7 @@ public class Boss_1_Commander : Enemy
 
     private void PhaseFour()
     {
+        animator.SetBool("IsHit",false); //Stop hurt animation
         switch (currentStateIndex)
         {
             case PhaseIndex.A:
@@ -457,6 +461,7 @@ public class Boss_1_Commander : Enemy
             {
                 timer += Time.deltaTime * 1;
                 gameObject.transform.position = Vector3.Lerp(transform.position, nextPosition, timer);
+                animator.SetBool("IsWalking",true); //Play walk animation
             }
             else
             {
@@ -469,6 +474,7 @@ public class Boss_1_Commander : Enemy
                 //if reached final position
                 if (transform.position == finalPos)
                 {
+                    animator.SetBool("IsWalking",false); //Stop walk animation
                     movementInProgress = false;
                 }
             }
@@ -596,6 +602,9 @@ public class Boss_1_Commander : Enemy
     {
         currentDamage = 0;
         movementInProgress = false;
+        animator.SetBool("IsHit",true); //Play hurt animation
+        animator.SetBool("IsWalking",false); //Stop walk animation
+        animator.SetBool("IsAngry",false); //Stop mad animation
         transform.position = originPos;
         currentStateIndex = PhaseIndex.A;
         switch (previousState)

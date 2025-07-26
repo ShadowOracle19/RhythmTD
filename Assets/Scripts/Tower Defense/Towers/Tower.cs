@@ -71,6 +71,13 @@ public class Tower : MonoBehaviour
     public int buffCountMeasure = 0;
     public int buffBeatCount = 1;
 
+    [Header("Record State Sprites")]
+    public GameObject recordingStatus;//RECORDING STATUS CODE
+    public SpriteRenderer recordingStatusSpr;//RECORDING STATUS CODE
+    public Sprite recordingSpr;//RECORDING STATUS CODE
+    public List<Sprite> repeatSprites = new List<Sprite>();
+    private int repeatSpritesIndex = 0;
+
     [Header("Powered UP Tower")]
     public bool isPoweredUp = false;
     public GameObject nonPoweredIcon;
@@ -144,6 +151,8 @@ public class Tower : MonoBehaviour
         upgradeCost2 = 50;
         upgradeCost3 = 25;
         upgradeCost4 = 75;
+
+        recordingStatus.SetActive(false); //RECORDING STATUS CODE
     }
 
     public virtual void Update()
@@ -531,6 +540,9 @@ public class Tower : MonoBehaviour
     {
         currentState = TowerState.Recording;
 
+        recordingStatus.SetActive(true); //RECORDING STATUS CODE
+        recordingStatusSpr.sprite = recordingSpr;//RECORDING STATUS CODE
+
         isInputtingBuffs = true;
 
         recordedBuffs.Add(buff);
@@ -561,6 +573,9 @@ public class Tower : MonoBehaviour
                 currentState = TowerState.Repeating;
                 buffTimer = 0;
                 isInputtingBuffs = false;
+
+                repeatSpritesIndex = 0; //RECORDING STATUS CODE
+                recordingStatusSpr.sprite = repeatSprites[repeatSpritesIndex]; //RECORDING STATUS CODE
             }
             return;
         }
@@ -573,9 +588,7 @@ public class Tower : MonoBehaviour
             else
             {
                 PlayBuffs(recordedBuffs[buffIndex]);
-
             }
-
 
             buffIndex += 1;
 
@@ -585,17 +598,28 @@ public class Tower : MonoBehaviour
             {
                 buffBeatCount = 0;
                 buffCountMeasure += 1;
+
+                repeatSpritesIndex += 1; //RECORDING STATUS CODE
+                if (repeatSpritesIndex <= (repeatSprites.Count-1))
+                {
+                    recordingStatusSpr.sprite = repeatSprites[repeatSpritesIndex];//RECORDING STATUS CODE
+                }
+
                 if(buffCountMeasure == 4)
                 {
                     buffCountMeasure = 0;
                     recordedBuffs.Clear();
                     currentState = TowerState.Default;
+
+                    repeatSpritesIndex = 0; //RECORDING STATUS CODE
+                    recordingStatus.SetActive(false); //RECORDING STATUS CODE
                 }
             }
 
             if (buffIndex >= 4)
             {
                 buffIndex = 0;
+
             }
         }
 

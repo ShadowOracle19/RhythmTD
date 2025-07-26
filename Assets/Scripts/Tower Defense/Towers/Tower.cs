@@ -29,6 +29,18 @@ public class Tower : MonoBehaviour
 
     public Transform firePoint;
     public GameObject projectile;
+    /* 
+    Hi Lucy. 
+    I made & added some more projectiles so that we could spawn ones with different sprites without having to use GetComponent. 
+    Idk how efficient this is so if we gotta change it later that's cool. 
+    - Em
+    */
+    public GameObject nextProjectile;
+    
+    public GameObject buffProjectile;
+    public GameObject upgradeProjectile01;
+    public GameObject upgradeProjectile02;
+    public GameObject upgradeProjectile03;
     
     public Tile connectedTile;
 
@@ -85,9 +97,13 @@ public class Tower : MonoBehaviour
 
     [Header("Projectile Sprites")]
     private Sprite nextAttackSprite;
-    
+
     public Sprite defaultAttackSprite;
-    public Sprite increasedAttackSprite;
+    public Sprite buffDefaultAttackSprite;
+    public Sprite upgradeAttackSprite01;
+    public Sprite upgradeAttackSprite02;
+    public Sprite upgradeAttackSprite03;
+
     public Sprite multiAttackSprite;
     public Sprite flameAttackSprite;
 
@@ -153,6 +169,8 @@ public class Tower : MonoBehaviour
         upgradeCost4 = 75;
 
         recordingStatus.SetActive(false); //RECORDING STATUS CODE
+
+        nextProjectile = projectile; // Set default projectile type
     }
 
     public virtual void Update()
@@ -198,7 +216,7 @@ public class Tower : MonoBehaviour
         int tempRange = towerRange;
 
         //instatiate bullet
-        GameObject bullet = Instantiate(projectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
+        GameObject bullet = Instantiate(nextProjectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
 
         /*
         if (upgradeActive)//upgrades are active
@@ -213,7 +231,7 @@ public class Tower : MonoBehaviour
             {
                 damage *= 2;
 
-                bullet.GetComponent<Projectile>().spriteRenderer.sprite = increasedAttackSprite;
+                bullet.GetComponent<Projectile>().spriteRenderer.sprite = buffDefaultAttackSprite;
             }
 
             bullet.GetComponent<Projectile>().InitializeProjectile(tempRange, gameObject, damage, towerInfo.projectilePiercesEnemies, burningUpgrade);
@@ -251,16 +269,23 @@ public class Tower : MonoBehaviour
         //if feeling it now is active
         if(feelingItNow)
         {
+            nextProjectile = buffProjectile;
+
             tempDamageHolder = currentDamage;
             currentDamage = currentDamage * 2;
         }
         //feeling it now inactive
+        else if (upgradeOneActive)
+        {
+            currentDamage = tempDamageHolder;
+            nextProjectile = upgradeProjectile01;
+        }
         else
         {
             currentDamage = tempDamageHolder;
+            nextProjectile = projectile;
         }
 
-            nextAttackSprite = defaultAttackSprite;
 
         //switch (towerInfo.projectileType)
         //{
@@ -298,17 +323,17 @@ public class Tower : MonoBehaviour
 
         int damage = currentDamage;
 
-        nextAttackSprite = defaultAttackSprite;
+        nextProjectile = projectile;
 
         //if (ChargedUp || FeverSystem.Instance.feverModeActive)
         //{
         //    damage = damage * 5;
 
-        //    nextAttackSprite = increasedAttackSprite;
+        //    nextProjectile = buffProjectile;
         //}
         //else if (burningBullet)
         //{
-        //    nextAttackSprite = flameAttackSprite;
+        //    nextProjectile = buffProjectile;
         //}
 
         CreateBullet(damage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
@@ -344,7 +369,7 @@ public class Tower : MonoBehaviour
 
         int rand = Random.Range(0, colliders.Length - 1);
 
-        GameObject charge = Instantiate(projectile, transform.position, transform.rotation, CombatManager.Instance.chargesParent);
+        GameObject charge = Instantiate(nextProjectile, transform.position, transform.rotation, CombatManager.Instance.chargesParent);
         charge.GetComponent<Charges>().initalizeCharge(chargeValue,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z), connectedTower);
     }
 
@@ -391,7 +416,7 @@ public class Tower : MonoBehaviour
                 }
                 else if(upgradeOneActive)
                 {
-                    SpawnParticles(item.transform, increasedAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
+                    SpawnParticles(item.transform, buffDefaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
                     //Debug.Log("[Tower.cs] DamageUpgrade");
                 }
                 else if(multiShotUpgrade)

@@ -279,6 +279,7 @@ public class Boss_1_Commander : Enemy
     private void PhaseTwo()
     {
         animator.SetBool("IsHit",false); //Stop hurt animation
+        animator.SetBool("IsAngry",true); //Start angry animation
         switch (currentStateIndex)
         {
             //spawns 1 lifter or runner every two beats
@@ -604,7 +605,7 @@ public class Boss_1_Commander : Enemy
         movementInProgress = false;
         animator.SetBool("IsHit",true); //Play hurt animation
         animator.SetBool("IsWalking",false); //Stop walk animation
-        animator.SetBool("IsAngry",false); //Stop mad animation
+        //animator.SetBool("IsAngry",false); //Stop mad animation
         transform.position = originPos;
         currentStateIndex = PhaseIndex.A;
         switch (previousState)

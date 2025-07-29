@@ -203,8 +203,6 @@ public class CombatManager : MonoBehaviour
         // set the list of waves in the spawner to those from the current encounter
         objectSpawners.currentWaves = currentEncounter.waves; 
 
-        objectSpawners.ResetSpawner();
-
 
         resourceNum = startingResources;
         enemyTimer = enemyTimerMax;

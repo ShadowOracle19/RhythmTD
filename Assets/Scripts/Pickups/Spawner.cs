@@ -191,6 +191,8 @@ public class Spawner : MonoBehaviour
         numPickupsInWave = 0;
         allEnemiesSpawned = false;
         allPickupsSpawned = false;
+        allEnemiesSpawnedFromWave = false;
+        allPickupsSpawnedFromWave = false;
         delay = 0;
     }
 
@@ -200,7 +202,6 @@ public class Spawner : MonoBehaviour
         if (!startOnce || GameManager.Instance.isGamePaused || allEnemiesSpawnedFromWave)
             return;
 
-        
         //once all enemies are spawned stop spawning them
         if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn) 
         {

@@ -338,7 +338,8 @@ public class GameManager : MonoBehaviour
         combatRoot.SetActive(true);
         CombatManager.Instance.allEnemiesSpawned = false;
         CombatManager.Instance.tutorialManager.SetActive(true);
-        EnemySpawner.Instance.allEnemiesSpawned = false;
+        //EnemySpawner.Instance.allEnemiesSpawned = false;
+        Spawner.Instance.allEnemiesSpawned = false;
         tutorialRunning = true;
         winState = false;
         winScreen.SetActive(false);
@@ -378,13 +379,18 @@ public class GameManager : MonoBehaviour
 
 
         List<Wave> empty = new List<Wave>();
-        EnemySpawner.Instance.currentWaves = empty;
-        EnemySpawner.Instance.numberOfEnemiesToSpawn = 7;
-        EnemySpawner.Instance.startOnce = false;
-        EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
 
-        EnemySpawner.Instance.currentNumberOfEnemiesSpawned = 0;
+        Spawner.Instance.currentWaves = empty;
 
+        Spawner.Instance.numberOfEnemiesToSpawn = 7;
+        Spawner.Instance.numberOfPickupsToSpawn = 0;
+
+        Spawner.Instance.startOnce = false;
+
+        Spawner.Instance.currentNumberOfEnemiesSpawned = 0;
+        Spawner.Instance.currentNumberOfPickupsSpawned = 0;
+
+        Spawner.Instance.ResetSpawner();
 
         TutorialManager.Instance.LoadTutorial();
 

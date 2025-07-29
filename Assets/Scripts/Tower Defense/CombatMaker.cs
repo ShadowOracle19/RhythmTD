@@ -15,7 +15,9 @@ public class Wave
 {
     public int delay;
     public List<EnemyInit> enemies = new List<EnemyInit>();
+    public List<PickupInit> pickups = new List<PickupInit>(); //added for pickups
     public bool killAllEnemiesWave;
+    public bool pickupsWave; //added for pickups
 }
 
 [System.Serializable]
@@ -24,5 +26,14 @@ public class EnemyInit
     public GameObject enemy;
 
     [Range(1,6)] public int tile;
+
+}
+
+[System.Serializable]
+public class PickupInit //added for pickups
+{
+    public GameObject pickup;
+
+    [Range(7,12)] public int tile;
 
 }

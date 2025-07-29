@@ -81,6 +81,7 @@ public class ConductorV2 : MonoBehaviour
     public List<UnityEvent> triggerEvent = new List<UnityEvent>();
     public List<UnityEvent> projectileEvent = new List<UnityEvent>();
     public List<UnityEvent> enemyEvent = new List<UnityEvent>();
+    public List<UnityEvent> pickupEvent = new List<UnityEvent>(); 
 
     public bool pauseConductor = false;
     public TextMeshProUGUI countInText;
@@ -297,6 +298,10 @@ public class ConductorV2 : MonoBehaviour
 
             }
             foreach (UnityEvent _event in enemyEvent.ToArray())
+            {
+                _event.Invoke();
+            }
+            foreach (UnityEvent _event in pickupEvent.ToArray()) 
             {
                 _event.Invoke();
             }

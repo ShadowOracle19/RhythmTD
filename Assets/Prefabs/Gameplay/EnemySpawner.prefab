@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6407878059398462264}
   - component: {fileID: 9184057652051296940}
+  - component: {fileID: 7685969812972765685}
   - component: {fileID: 5314118494258792361}
   m_Layer: 0
   m_Name: EnemySpawner
@@ -125,7 +126,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6855828711236915027}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb1fb3fc0506d184283b66cc13cf0540, type: 3}
   m_Name: 
@@ -153,6 +154,43 @@ MonoBehaviour:
   waveIndex: 0
   allEnemiesSpawnedFromWave: 0
   numEnemiesInWave: 0
+  delay: 0
+  walkerEnemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+  wispEnemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
+--- !u!114 &7685969812972765685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6855828711236915027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276324886ee36d0479f039b2a4a5fbef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWaves: []
+  startOnce: 0
+  numberOfEnemiesToSpawn: 0
+  currentNumberOfEnemiesSpawned: 0
+  currentNumberOfPickupsSpawned: 0
+  allEnemiesSpawned: 0
+  enemyParent: {fileID: 0}
+  pickupParent: {fileID: 0}
+  lastRandomSpawn: 0
+  spawnTiles: []
+  enemies: []
+  pickups: []
+  killAllEnemiesBeforeNextWave: 0
+  forecastEndsIn: 4
+  forecastingActive: 0
+  spawnParticles: {fileID: 3700797917211557132, guid: 199938363afe6174bbdb59b2af9062be, type: 3}
+  timeRemainingToWaveStart: 0
+  waveIndex: 0
+  allEnemiesSpawnedFromWave: 0
+  numEnemiesInWave: 0
+  allPickupsSpawnedFromWave: 0
+  numPickupsInWave: 0
   delay: 0
   walkerEnemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
   wispEnemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}

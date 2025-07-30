@@ -226,13 +226,11 @@ public class Spawner : MonoBehaviour
 
             return;
         }
-        
-        Debug.Log(currentWaves[waveIndex].enemies.Count);
 
         //spawn all enemies in the current wave
         for (int i = 0; i < currentWaves[waveIndex].enemies.Count; i++)
         {
-            int tileNum = currentWaves[waveIndex].enemies[i].tile-1;
+            int tileNum = currentWaves[waveIndex].enemies[i].tile;
 
             GameObject enemy = Instantiate(currentWaves[waveIndex].enemies[i].enemy, new Vector3(transform.position.x, 0.5f, 
                 spawnTiles[tileNum].GetComponent<Tile>().zPos), Quaternion.identity, enemyParent);
@@ -299,11 +297,10 @@ public class Spawner : MonoBehaviour
         //spawn all pickups in the current wave
         for (int i = 0; i < currentWaves[waveIndex].pickups.Count; i++)
         {
-            Debug.Log("Woah, pickup)");
-            int pickupTileNum = currentWaves[waveIndex].pickups[i].tile -1;
+            int pickupTileNum = currentWaves[waveIndex].pickups[i].tile;
 
-            GameObject pickup = Instantiate(currentWaves[waveIndex].pickups[i].pickup, new Vector3(spawnTiles[pickupTileNum].GetComponent<Tile>().xPos, spawnTiles[pickupTileNum].GetComponent<Tile>().yPos, 
-                spawnTiles[pickupTileNum].GetComponent<Tile>().zPos), Quaternion.identity, pickupParent);
+            GameObject pickup = Instantiate(currentWaves[waveIndex].pickups[i].pickup, new Vector3(pickupSpawnTiles[pickupTileNum].GetComponent<Tile>().xPos, pickupSpawnTiles[pickupTileNum].GetComponent<Tile>().yPos, 
+                pickupSpawnTiles[pickupTileNum].GetComponent<Tile>().zPos), Quaternion.identity, pickupParent);
 
             ConductorV2.instance.pickupEvent.Add(pickup.GetComponent<Pickup>().trigger);
 
@@ -342,7 +339,7 @@ public class Spawner : MonoBehaviour
             return;
         foreach (var enemyToForecast in currentWaves[_wave].enemies)
         {
-            spawnTiles[enemyToForecast.tile - 1].GetComponent<Tile>().ForecastEnemy();
+            spawnTiles[enemyToForecast.tile].GetComponent<Tile>().ForecastEnemy();
         }
            
     }
@@ -352,7 +349,7 @@ public class Spawner : MonoBehaviour
     {
         foreach (var _enemyToForecast in currentWaves[_wave].enemies)
         {
-            spawnTiles[_enemyToForecast.tile - 1].GetComponent<Tile>().StopForecasting();
+            spawnTiles[_enemyToForecast.tile].GetComponent<Tile>().StopForecasting();
         }
     }
 }

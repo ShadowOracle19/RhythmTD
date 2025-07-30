@@ -25,7 +25,7 @@ public class EnemyInit
 {
     public GameObject enemy;
 
-    [Range(1,6)] public int tile;
+    [Range(0,5)] public int tile;
 
 }
 
@@ -34,6 +34,6 @@ public class PickupInit //added for pickups
 {
     public GameObject pickup;
 
-    [Range(7,12)] public int tile;
+    [Range(0,5)] public int tile;
 
 }

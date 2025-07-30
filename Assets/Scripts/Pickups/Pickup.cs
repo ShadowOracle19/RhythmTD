@@ -17,6 +17,9 @@ public class Pickup : MonoBehaviour
     private bool otherBeatMove = false;
     public int barTracker = 0;
 
+    public int deathTimer = 0;
+    public int deathTime = 16;
+
     public UnityEvent trigger;
 
     public Vector3 nextPosition;
@@ -102,6 +105,15 @@ public class Pickup : MonoBehaviour
                 break;
         }
 
+        if (!dontMove)
+        {
+            deathTimer += 1;
+        }
+
+        if (deathTimer >= deathTime)
+        {
+            RemovePickup();
+        } 
     }
 
     // Collision with cursor

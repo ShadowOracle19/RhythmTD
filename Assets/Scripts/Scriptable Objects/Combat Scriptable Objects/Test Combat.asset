@@ -15,12 +15,14 @@ MonoBehaviour:
   dynamicSong: {fileID: 11400000, guid: a54dc68b453ac694fb274d5d37e43853, type: 2}
   waves:
   - delay: 4
-    enemies: []
+    enemies:
+    - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+      tile: 0
     pickups:
     - pickup: {fileID: 8934297664530455703, guid: 38b151c30b81c924d8f74864eef72ceb, type: 3}
       tile: 7
     killAllEnemiesWave: 0
-    pickupsWave: 1
+    pickupsWave: 0
   - delay: 4
     enemies: []
     pickups:

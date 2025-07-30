@@ -45,6 +45,7 @@ public class Spawner : MonoBehaviour
     public int lastRandomSpawn;
 
     public List<GameObject> spawnTiles = new List<GameObject>();
+    public List<GameObject> pickupSpawnTiles = new List<GameObject>();
 
     public List<Enemy> enemies = new List<Enemy>();
     public List<Pickup> pickups = new List<Pickup>();
@@ -226,6 +227,8 @@ public class Spawner : MonoBehaviour
             return;
         }
         
+        Debug.Log(currentWaves[waveIndex].enemies.Count);
+
         //spawn all enemies in the current wave
         for (int i = 0; i < currentWaves[waveIndex].enemies.Count; i++)
         {
@@ -335,7 +338,7 @@ public class Spawner : MonoBehaviour
     // Telegraph wave
     public void ForecastWave(int _wave)
     {
-        if (waveIndex == currentWaves.Count)
+        if (waveIndex == currentWaves.Count - 1)
             return;
         foreach (var enemyToForecast in currentWaves[_wave].enemies)
         {
@@ -344,8 +347,8 @@ public class Spawner : MonoBehaviour
            
     }
 
-    // Stop telegreaphing wave
-    public void StopForecastingWave(int _wave)
+    // Stop telegraphing wave
+    public void StopForecastingWave(int _wave) 
     {
         foreach (var _enemyToForecast in currentWaves[_wave].enemies)
         {

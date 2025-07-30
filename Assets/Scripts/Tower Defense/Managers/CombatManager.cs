@@ -31,6 +31,7 @@ public class CombatManager : MonoBehaviour
     public bool spawnerDelayRunning = false;
     public bool allEnemiesSpawned = false;
     public bool allPickupsSpawned = false;
+    public int enemiesDefeated = 0;
     public int enemyTotal = 0;
     public int pickupTotal = 0;
     [SerializeField] private Spawner objectSpawners;
@@ -174,6 +175,7 @@ public class CombatManager : MonoBehaviour
         allPickupsSpawned = false;
 
         // set enemy & pickup totals back to 0 temporarily before counting
+        enemiesDefeated = 0;
         enemyTotal = 0;
         pickupTotal = 0;
 
@@ -304,8 +306,8 @@ public class CombatManager : MonoBehaviour
             allPickupsSpawned = true;
         }
         
-
-        GameManager.Instance.enemyCounter.text = $"{enemyTotal}/{totalNumEnemies}";
+        //enemies defeated text
+        GameManager.Instance.enemyCounter.text = $"{enemiesDefeated}/{totalNumEnemies}";
 
 
         //delays enemy spawning

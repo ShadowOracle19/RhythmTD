@@ -388,6 +388,7 @@ public class Enemy : MonoBehaviour
         if(!GameManager.Instance.currentEncounter.isBossBattle)
         {
             CombatManager.Instance.enemyTotal -= 1;
+            CombatManager.Instance.enemiesDefeated += 1;
         }
         
         ConductorV2.instance.enemyEvent.Remove(trigger);

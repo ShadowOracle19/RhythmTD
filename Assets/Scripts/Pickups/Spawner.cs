@@ -71,12 +71,14 @@ public class Spawner : MonoBehaviour
     public GameObject walkerEnemy;
     public GameObject wispEnemy;
 
+    /*
     private void Update()
     {
         WaveCounter();
     }
+    */
 
-    private void WaveCounter()
+    public void WaveCounter()
     {
         GameManager.Instance.waveCounter.text = "Wave " + waveIndex + "/" + currentWaves.Count;
         
@@ -101,7 +103,8 @@ public class Spawner : MonoBehaviour
             else
             {
                 ForecastWave(waveIndex);
-                timeRemainingToWaveStart += Time.deltaTime;
+                //timeRemainingToWaveStart += Time.deltaTime;
+                timeRemainingToWaveStart += 1;
             }
         }
     }
@@ -205,7 +208,21 @@ public class Spawner : MonoBehaviour
         //once all enemies are spawned stop spawning them
         if (currentNumberOfEnemiesSpawned >= numberOfEnemiesToSpawn) 
         {
+            Debug.Log("All Enemies Spawned");
+            
+            allEnemiesSpawnedFromWave = true;
             allEnemiesSpawned = true;
+
+            
+
+            if (allEnemiesSpawnedFromWave && allPickupsSpawnedFromWave  && (waveIndex != currentWaves.Count-1))
+            {
+                waveIndex += 1;
+                numEnemiesInWave = 0;
+                numPickupsInWave = 0;
+                delay = currentWaves[waveIndex].delay;
+            } 
+
             return;
         }
         
@@ -256,17 +273,30 @@ public class Spawner : MonoBehaviour
         //if enemies haven't started spawning  or  game is paused  or  all pickups have been spawned in the current wave
         if (!startOnce || GameManager.Instance.isGamePaused || allPickupsSpawnedFromWave)
             return;
-
+        
         //once all pickups are spawned stop spawning them
         if (currentNumberOfPickupsSpawned >= numberOfPickupsToSpawn) 
         {
+            Debug.Log("All Pickups Spawned");
+
+            allPickupsSpawnedFromWave = true;
             allPickupsSpawned = true;
+
+            if (allEnemiesSpawnedFromWave && allPickupsSpawnedFromWave && (waveIndex != currentWaves.Count-1))
+            {
+                waveIndex += 1;
+                numEnemiesInWave = 0;
+                numPickupsInWave = 0;
+                delay = currentWaves[waveIndex].delay;
+            }
+
             return;
         }
 
         //spawn all pickups in the current wave
         for (int i = 0; i < currentWaves[waveIndex].pickups.Count; i++)
         {
+            Debug.Log("Woah, pickup)");
             int pickupTileNum = currentWaves[waveIndex].pickups[i].tile -1;
 
             GameObject pickup = Instantiate(currentWaves[waveIndex].pickups[i].pickup, new Vector3(spawnTiles[pickupTileNum].GetComponent<Tile>().xPos, spawnTiles[pickupTileNum].GetComponent<Tile>().yPos, 

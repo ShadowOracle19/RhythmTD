@@ -33,7 +33,6 @@ public class CombatManager : MonoBehaviour
     public bool allPickupsSpawned = false;
     public int enemyTotal = 0;
     public int pickupTotal = 0;
-    //[SerializeField] private EnemySpawner enemySpawners;
     [SerializeField] private Spawner objectSpawners;
 
     public CombatMaker currentEncounter;

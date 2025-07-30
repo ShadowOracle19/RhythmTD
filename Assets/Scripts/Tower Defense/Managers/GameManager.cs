@@ -338,7 +338,6 @@ public class GameManager : MonoBehaviour
         combatRoot.SetActive(true);
         CombatManager.Instance.allEnemiesSpawned = false;
         CombatManager.Instance.tutorialManager.SetActive(true);
-        //EnemySpawner.Instance.allEnemiesSpawned = false;
         Spawner.Instance.allEnemiesSpawned = false;
         tutorialRunning = true;
         winState = false;

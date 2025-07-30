@@ -10,7 +10,7 @@ public class UndoingEffect : EnemyEffect
         int randSpawn = Random.Range(0, 3);
         for (int i = 0; i < randSpawn; i++)
         {
-            EnemySpawner.Instance.ForceEnemySpawn(EnemySpawner.Instance.spawnTiles[i].transform.position.y, EnemyType.Wisp);
+            Spawner.Instance.ForceEnemySpawn(Spawner.Instance.spawnTiles[i].transform.position.y, EnemyType.Wisp);
             CombatManager.Instance.enemyTotal += 1;
         }
         

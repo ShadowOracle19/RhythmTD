@@ -36,9 +36,9 @@ public class Pickup : MonoBehaviour
     {
         dontMove = true;
 
-        nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+        nextPosition = new Vector3(transform.position.x - pickup.moveSpeed, transform.position.y, transform.position.z);
 
-        nextPosition = new Vector3(transform.position.x - 1f, 0.5f, transform.position.z);
+        nextPosition = new Vector3(transform.position.x - pickup.moveSpeed, 0.5f, transform.position.z);
     }
 
     // Update is called once per frame
@@ -176,7 +176,7 @@ public class Pickup : MonoBehaviour
         {
             dontMove = true;
             timer = 0;
-            nextPosition = new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z);
+            nextPosition = new Vector3(transform.position.x + pickup.moveSpeed, transform.position.y, transform.position.z);
         }
     }
 }

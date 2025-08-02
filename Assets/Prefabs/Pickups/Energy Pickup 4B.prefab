@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: -832148691820441168, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
+  m_Sprite: {fileID: -3103257749704704410, guid: 7839c0d0b8977b943b8283ecc2ebdf1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: -8923255095013001764}
   - component: {fileID: 8335922695079152621}
   m_Layer: 0
-  m_Name: Energy Pickup
+  m_Name: Energy Pickup 4B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,12 +145,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d45180d052f7a84db5636f5b2d015d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickup: {fileID: 11400000, guid: 51ef27c94fb860f4cb23119ba62751f4, type: 2}
+  pickup: {fileID: 11400000, guid: 2006af2fb4521af4797fb0cb662833ad, type: 2}
   path: []
   timer: 0
   currentPositionHolder: {x: 0, y: 0, z: 0}
   dontMove: 0
   barTracker: 0
+  deathTimer: 0
+  deathTime: 16
   trigger:
     m_PersistentCalls:
       m_Calls:

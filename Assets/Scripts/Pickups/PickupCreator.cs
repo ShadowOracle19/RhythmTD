@@ -16,6 +16,7 @@ public class PickupCreator : ScriptableObject
     public int health;
     public int energy;
     public PickupMovementPattern movementPattern;
+    public int moveSpeed;
     public PickupType pickupType;
 }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1255453834031781943}
   - component: {fileID: -5661224473916200758}
   m_Layer: 0
-  m_Name: Health Pickup
+  m_Name: Health Pickup 1B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,6 +53,8 @@ MonoBehaviour:
   currentPositionHolder: {x: 0, y: 0, z: 0}
   dontMove: 0
   barTracker: 0
+  deathTimer: 0
+  deathTime: 16
   trigger:
     m_PersistentCalls:
       m_Calls:
@@ -193,7 +195,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: -832148691820441168, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
+  m_Sprite: {fileID: 2344039559581742090, guid: 7839c0d0b8977b943b8283ecc2ebdf1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

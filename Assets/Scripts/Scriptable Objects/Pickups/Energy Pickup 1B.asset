@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0deff9c8cde67a4f8b1de63296c65cf, type: 3}
-  m_Name: Score Pickup
+  m_Name: Energy Pickup 1B
   m_EditorClassIdentifier: 
   pickupName: 
-  pickupDescription: 
-  pickupSprite: {fileID: -832148691820441168, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  score: 200
+  pickupDescription: Gives energy on collection. Moves 1 tile per beat.
+  pickupSprite: {fileID: -3103257749704704410, guid: 7839c0d0b8977b943b8283ecc2ebdf1b, type: 3}
+  score: 0
   health: 0
-  energy: 0
+  energy: 5
   movementPattern: 0
-  pickupType: 0
+  moveSpeed: 1
+  pickupType: 2

@@ -33,12 +33,12 @@ public class Charges : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player") && chargeActive && !damageCharge)
+        if(other.gameObject.CompareTag("Player") && !damageCharge)
         {
             CombatManager.Instance.resourceNum += resourceGain;
             RemoveCharge();
         }
-        else if(other.gameObject.CompareTag("Enemy") && chargeActive && damageCharge)
+        else if(other.gameObject.CompareTag("Enemy") && damageCharge)
         {
             other.gameObject.GetComponent<Enemy>().Damage(resourceGain * 2);
             RemoveCharge();

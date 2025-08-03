@@ -365,7 +365,7 @@ public class Tower : MonoBehaviour
 
     public void PlaceCharge(int chargeValue, Tower connectedTower)
     {
-        colliders = Physics.OverlapSphere(transform.position, towerRange);
+        colliders = Physics.OverlapSphere(transform.position, towerRange, LayerMask.GetMask("Stage"));
 
         int rand = Random.Range(0, colliders.Length - 1);
 

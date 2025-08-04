@@ -388,10 +388,12 @@ public class Enemy : MonoBehaviour
         if(!GameManager.Instance.currentEncounter.isBossBattle)
         {
             CombatManager.Instance.enemyTotal -= 1;
+            CombatManager.Instance.enemiesDefeated += 1;
         }
         
         ConductorV2.instance.enemyEvent.Remove(trigger);
-        EnemySpawner.Instance.enemies.Remove(this);
+        //EnemySpawner.Instance.enemies.Remove(this);
+        Spawner.Instance.enemies.Remove(this);
         Destroy(gameObject);
     }
 }

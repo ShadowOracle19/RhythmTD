@@ -30,8 +30,11 @@ public class CombatManager : MonoBehaviour
 
     public bool spawnerDelayRunning = false;
     public bool allEnemiesSpawned = false;
+    public bool allPickupsSpawned = false;
+    public int enemiesDefeated = 0;
     public int enemyTotal = 0;
-    [SerializeField] private EnemySpawner enemySpawners;
+    public int pickupTotal = 0;
+    [SerializeField] private Spawner objectSpawners;
 
     public CombatMaker currentEncounter;
 
@@ -39,6 +42,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public Transform towersParent;
     [SerializeField] public Transform projectilesParent;
     [SerializeField] public Transform chargesParent;
+    [SerializeField] public Transform pickupsParent;
 
     public TextMeshProUGUI enemiesSpawnIn;
     public int enemyTimerMax = 30;
@@ -47,6 +51,7 @@ public class CombatManager : MonoBehaviour
 
     [Header("Round Info")]
     public int totalNumEnemies;
+    public int totalNumPickups;
 
     [Header("Resources")]
     public int resourceNum;
@@ -122,7 +127,14 @@ public class CombatManager : MonoBehaviour
             child.gameObject.transform.DOKill();
             child.gameObject.GetComponent<Projectile>().RemoveProjectile();
         }
-        enemySpawners.startOnce = false;
+        //remove pickups
+        foreach (Transform child in pickupsParent)
+        {
+            child.gameObject.GetComponent<Pickup>().RemovePickup();
+        }
+
+        objectSpawners.startOnce = false; // stop spawning
+
         CursorTD.Instance.isMoving = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -158,22 +170,40 @@ public class CombatManager : MonoBehaviour
 
         currentEncounter = encounter;
 
-
-
-
+        // set the flags for all objects having been spawned back to false
         allEnemiesSpawned = false;
+        allPickupsSpawned = false;
 
+        // set enemy & pickup totals back to 0 temporarily before counting
+        enemiesDefeated = 0;
         enemyTotal = 0;
+        pickupTotal = 0;
+
+        // for each wave, get the total number of enemies & pickups and add them to the enemy & pickup totalsfor this encounter
         foreach (var item in currentEncounter.waves)
         {
             enemyTotal += item.enemies.Count;
+            pickupTotal += item.pickups.Count;
         }
-        totalNumEnemies = enemyTotal;
 
-        enemySpawners.numberOfEnemiesToSpawn = enemyTotal;
-        enemySpawners.startOnce = false;
-        enemySpawners.currentNumberOfEnemiesSpawned = 0;
-        enemySpawners.currentWaves = currentEncounter.waves;
+        // set the total number of enemies & pickups to the counted totals
+        totalNumEnemies = enemyTotal;
+        totalNumPickups = pickupTotal;
+        
+        // set the total number of objects to spawn to the object totals
+        objectSpawners.numberOfEnemiesToSpawn = enemyTotal;
+        objectSpawners.numberOfPickupsToSpawn = pickupTotal;
+
+        // set objects to not spawn
+        objectSpawners.startOnce = false;
+
+        // set the current total number of objects spawned to 0
+        objectSpawners.currentNumberOfEnemiesSpawned = 0;
+        objectSpawners.currentNumberOfPickupsSpawned = 0;
+
+        // set the list of waves in the spawner to those from the current encounter
+        objectSpawners.currentWaves = currentEncounter.waves; 
+
 
         resourceNum = startingResources;
         enemyTimer = enemyTimerMax;
@@ -216,7 +246,16 @@ public class CombatManager : MonoBehaviour
         {
             child.gameObject.GetComponent<Charges>().RemoveCharge();
         }
-        enemySpawners.startOnce = false;
+        //remove pickups
+        foreach (Transform child in pickupsParent)
+        {
+            child.gameObject.GetComponent<Pickup>().RemovePickup();
+        }
+        
+        // reset spawner activity
+        objectSpawners.startOnce = false;
+        objectSpawners.ResetSpawner();
+
         CursorTD.Instance.pauseMovement = true;
         CursorTD.Instance.isMoving = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -246,22 +285,29 @@ public class CombatManager : MonoBehaviour
 
 
         ResourceBar();
-        
 
-
-        //checks if all enemies have spawned
-        if (!enemySpawners.allEnemiesSpawned)
+        //checks if not all enemies have been spawned
+        if (!objectSpawners.allEnemiesSpawned)
         {
             allEnemiesSpawned = false;
-            
         }
         else
         {
             allEnemiesSpawned = true;
         }
-        
 
-        GameManager.Instance.enemyCounter.text = $"{enemyTotal}/{totalNumEnemies}";
+        //checks if not all pickups have been spawned
+        if (!objectSpawners.allPickupsSpawned)
+        {
+            allPickupsSpawned = false; 
+        }
+        else
+        {
+            allPickupsSpawned = true;
+        }
+        
+        //enemies defeated text
+        GameManager.Instance.enemyCounter.text = $"{enemiesDefeated}/{totalNumEnemies}";
 
 
         //delays enemy spawning
@@ -324,10 +370,12 @@ public class CombatManager : MonoBehaviour
         if (enemyTimer <= 0)
         {
             enemiesSpawnIn.gameObject.SetActive(false);
-            enemySpawners.StartSpawningEnemies();
+
+            objectSpawners.StartSpawningEnemies();
             return;
         }
-        EnemySpawner.Instance.ForecastWave(0);//forecast the first wave
+
+        //Spawner.Instance.ForecastWave(0);//forecast the first wave
 
         enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
         //Start spawning enemies on the 10th bar

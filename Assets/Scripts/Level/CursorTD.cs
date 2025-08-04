@@ -555,6 +555,7 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeOneActive = true;
+                //tile.placedTower.GetComponent<Tower>().nextProjectile = tile.placedTower.GetComponent<Tower>().upgradeProjectile01;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost1;
 
                 ClosePlacementMenu();

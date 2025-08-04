@@ -176,14 +176,14 @@ public class Boss_1_Commander : Enemy
                 {
                     Debug.Log("Phase 1 A");
                     //float yPos = GetClosestTower().position.y;
-                    //EnemySpawner.Instance.ForceEnemySpawnDynamic(yPos, lifter);
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
+                    //Spawner.Instance.ForceEnemySpawnDynamic(yPos, lifter);
+                    Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                     phaseStarted = true;
                 }
                 //check if measure is an even number
                 if(ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
+                    Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                     measureCounter += 1;
                     //change to phase 1B
                     if (measureCounter == 4)
@@ -209,7 +209,7 @@ public class Boss_1_Commander : Enemy
                 //if not all lanes filled and its every 2 measure
                 if(!lanesFilled && ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                 {
-                    EnemySpawner.Instance.ForceEnemySpawnDynamic(FindEmptiestLane(), lifter);
+                    Spawner.Instance.ForceEnemySpawnDynamic(FindEmptiestLane(), lifter);
                     measureCounter += 1;
 
                     //change to phase 1B
@@ -224,8 +224,8 @@ public class Boss_1_Commander : Enemy
                 //if all lanes filled and its every 2 measures
                 else if(lanesFilled && ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
+                    Spawner.Instance.SpawnUnitOnRandomTile(lifter);
+                    Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                     measureCounter += 1;
 
                     //change to phase 1B
@@ -247,12 +247,12 @@ public class Boss_1_Commander : Enemy
                 if (!phaseStarted)
                 {
                     measureCounter = 0;
-                    EnemySpawner.Instance.ForceEnemySpawnDynamic(1.5f, lifter);
-                    EnemySpawner.Instance.ForceEnemySpawnDynamic(0.5f, lifter);
-                    EnemySpawner.Instance.ForceEnemySpawnDynamic(-0.5f, lifter);
-                    EnemySpawner.Instance.ForceEnemySpawnDynamic(-1.5f, lifter);
-                    EnemySpawner.Instance.ForceEnemySpawnDynamic(-2.5f, lifter);
-                    EnemySpawner.Instance.ForceEnemySpawnDynamic(-3.5f, lifter);
+                    Spawner.Instance.ForceEnemySpawnDynamic(1.5f, lifter);
+                    Spawner.Instance.ForceEnemySpawnDynamic(0.5f, lifter);
+                    Spawner.Instance.ForceEnemySpawnDynamic(-0.5f, lifter);
+                    Spawner.Instance.ForceEnemySpawnDynamic(-1.5f, lifter);
+                    Spawner.Instance.ForceEnemySpawnDynamic(-2.5f, lifter);
+                    Spawner.Instance.ForceEnemySpawnDynamic(-3.5f, lifter);
                     phaseStarted = true;
                     MoveTo(new Vector3(10.5f, 0.5f, 1.5f));
                 }
@@ -286,11 +286,11 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.A:
                 if(ConductorV2.instance.beatTrack == 2)
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
+                    Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                 }
                 else if(ConductorV2.instance.beatTrack == 4)
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(runner);
+                    Spawner.Instance.SpawnUnitOnRandomTile(runner);
                 }
                 if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
                 {
@@ -308,15 +308,15 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.B:
                 if (ConductorV2.instance.beatTrack == 2)
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
+                    Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                 }
                 else if (ConductorV2.instance.beatTrack == 4)
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(runner);
+                    Spawner.Instance.SpawnUnitOnRandomTile(runner);
                 }
                 if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(sorter);
+                    Spawner.Instance.SpawnUnitOnRandomTile(sorter);
                     measureCounter += 1;
                     //change to phase 1B
                     if (measureCounter == 4)
@@ -340,15 +340,15 @@ public class Boss_1_Commander : Enemy
 
                 if(rand == 0)
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(lifter);
+                    Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                 }
                 else if(rand == 1)
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(sorter);
+                    Spawner.Instance.SpawnUnitOnRandomTile(sorter);
                 }
                 else
                 {
-                    EnemySpawner.Instance.SpawnUnitOnRandomTile(runner);
+                    Spawner.Instance.SpawnUnitOnRandomTile(runner);
                 }
 
                 //player lives
@@ -389,7 +389,7 @@ public class Boss_1_Commander : Enemy
 
                 if(!cursorMovementInProgress)
                 {
-                    EnemySpawner.Instance.ForceEnemySpawnDynamic(comandeerCursor.transform.position.z, lifter);
+                    Spawner.Instance.ForceEnemySpawnDynamic(comandeerCursor.transform.position.z, lifter);
                     currentStateIndex = PhaseIndex.B;
                 }
                     break;
@@ -538,7 +538,7 @@ public class Boss_1_Commander : Enemy
         laneCheck = Physics.RaycastAll(new Vector3(9.5f, 0.5f, -3.5f), Vector3.left, Mathf.Infinity, layer);
         array[5] = laneCheck.Length;
 
-        emptiestLane = EnemySpawner.Instance.spawnTiles[GetIndexOfLowestValue(array)].GetComponent<Tile>().zPos;
+        emptiestLane = Spawner.Instance.spawnTiles[GetIndexOfLowestValue(array)].GetComponent<Tile>().zPos;
 
         if (array[GetIndexOfLowestValue(array)] > 0)
         {

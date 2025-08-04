@@ -8,6 +8,8 @@ public class Pickup : MonoBehaviour
 {
     public PickupCreator pickup;
 
+    public AudioClip pickupSound;
+
     public List<Vector3> path;
     private float speed = 1;
     public float timer;
@@ -146,6 +148,12 @@ public class Pickup : MonoBehaviour
                 default:
                     break;
             }
+
+            GameObject pickupAudio = GameObject.Find("Pickup SFX");
+            AudioSource pickupSfx = pickupAudio.GetComponent<AudioSource>();
+            
+            pickupSfx.clip = pickupSound;
+            pickupSfx.Play(); 
 
             RemovePickup();
         }

@@ -29,6 +29,9 @@ public class Pickup : MonoBehaviour
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
 
+    [SerializeField] private ParticleSystem pickupParticles;
+    private ParticleSystem pickupParticlesInstance;
+
     public Tile tileInFront;
 
     bool playOnce = false;
@@ -155,6 +158,8 @@ public class Pickup : MonoBehaviour
             pickupSfx.clip = pickupSound;
             pickupSfx.Play(); 
 
+            pickupParticlesInstance = Instantiate(pickupParticles, transform.position, Quaternion.identity);
+            
             RemovePickup();
         }
     }

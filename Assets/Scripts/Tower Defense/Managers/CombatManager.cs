@@ -202,7 +202,9 @@ public class CombatManager : MonoBehaviour
         objectSpawners.currentNumberOfPickupsSpawned = 0;
 
         // set the list of waves in the spawner to those from the current encounter
-        objectSpawners.currentWaves = currentEncounter.waves; 
+        objectSpawners.currentWaves = currentEncounter.waves;
+
+        objectSpawners.ForecastWave(0);
 
 
         resourceNum = startingResources;

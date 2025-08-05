@@ -231,6 +231,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < currentWaves[waveIndex].enemies.Count; i++)
         {
             int tileNum = currentWaves[waveIndex].enemies[i].tile;
+            tileNum = Mathf.Clamp(tileNum, 0, 5);
 
             GameObject enemy = Instantiate(currentWaves[waveIndex].enemies[i].enemy, new Vector3(transform.position.x, 0.5f, 
                 spawnTiles[tileNum].GetComponent<Tile>().zPos), Quaternion.identity, enemyParent);
@@ -298,6 +299,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < currentWaves[waveIndex].pickups.Count; i++)
         {
             int pickupTileNum = currentWaves[waveIndex].pickups[i].tile;
+            pickupTileNum = Mathf.Clamp(pickupTileNum, 0, 5);
 
             GameObject pickup = Instantiate(currentWaves[waveIndex].pickups[i].pickup, new Vector3(pickupSpawnTiles[pickupTileNum].GetComponent<Tile>().xPos, pickupSpawnTiles[pickupTileNum].GetComponent<Tile>().yPos, 
                 pickupSpawnTiles[pickupTileNum].GetComponent<Tile>().zPos), Quaternion.identity, pickupParent);

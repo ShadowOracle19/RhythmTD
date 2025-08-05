@@ -339,7 +339,9 @@ public class Spawner : MonoBehaviour
             return;
         foreach (var enemyToForecast in currentWaves[_wave].enemies)
         {
-            spawnTiles[enemyToForecast.tile].GetComponent<Tile>().ForecastEnemy();
+            int tileNum = enemyToForecast.tile;
+            tileNum = Mathf.Clamp(tileNum, 0, 5);
+            spawnTiles[tileNum].GetComponent<Tile>().ForecastEnemy();
         }
            
     }
@@ -349,7 +351,9 @@ public class Spawner : MonoBehaviour
     {
         foreach (var _enemyToForecast in currentWaves[_wave].enemies)
         {
-            spawnTiles[_enemyToForecast.tile].GetComponent<Tile>().StopForecasting();
+            int tileNum = _enemyToForecast.tile;
+            tileNum = Mathf.Clamp(tileNum, 0, 5);
+            spawnTiles[tileNum].GetComponent<Tile>().StopForecasting();
         }
     }
 }

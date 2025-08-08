@@ -33,7 +33,10 @@ public class Boss_1_Commander : Enemy
     [SerializeField]private bool cursorDontMove = false;
     [SerializeField]private Vector3 cursorFinalPos;
     [SerializeField]private Vector3 cursorNextPos;
+    [SerializeField]private Vector3 cursorOriginPos;
     [SerializeField] private float cursorTimer = 0;
+    int spawnTileOffset = 0;
+
 
     // Start is called before the first frame update
     public override void Start()
@@ -44,6 +47,7 @@ public class Boss_1_Commander : Enemy
         previousState = currentState;
 
         originPos = transform.position;
+        cursorOriginPos = comandeerCursor.transform.position;
     }
 
     // Update is called once per frame
@@ -108,7 +112,7 @@ public class Boss_1_Commander : Enemy
                 //next phase
                 if(transform.position == new Vector3(6.5f, 0.5f, 1.5f))
                 {
-                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                     {
                         measureCounter += 1;
                         //change to phase 1B
@@ -130,7 +134,7 @@ public class Boss_1_Commander : Enemy
                 //next phase
                 if (transform.position == new Vector3(6.5f, 0.5f, -3.5f))
                 {
-                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                     {
                         measureCounter += 1;
                         //change to phase 1B
@@ -292,7 +296,7 @@ public class Boss_1_Commander : Enemy
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(runner);
                 }
-                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                 {
                     measureCounter += 1;
                     //change to phase 1B
@@ -314,14 +318,14 @@ public class Boss_1_Commander : Enemy
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(runner);
                 }
-                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(sorter);
                     measureCounter += 1;
                     //change to phase 1B
                     if (measureCounter == 4)
                     {
-                        currentStateIndex = PhaseIndex.B;
+                        currentStateIndex = PhaseIndex.C;
                         measureCounter = 0;
                         return;
                     }
@@ -352,12 +356,12 @@ public class Boss_1_Commander : Enemy
                 }
 
                 //player lives
-                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                 {
 
                     measureCounter += 1;
                     //change to phase 1B
-                    if (measureCounter == 4)
+                    if (measureCounter == 2)
                     {
                         Debug.Log("Damage Phase");
                         currentStateIndex = PhaseIndex.A;
@@ -389,14 +393,99 @@ public class Boss_1_Commander : Enemy
 
                 if(!cursorMovementInProgress)
                 {
-                    Spawner.Instance.ForceEnemySpawnDynamic(comandeerCursor.transform.position.z, lifter);
-                    currentStateIndex = PhaseIndex.B;
+                    int randNum = Random.Range(0, 5);
+
+
+
+                    Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[randNum].GetComponent<Tile>().zPos, lifter);
+                    CursorMoveTo(new Vector3(7.5f, -0.4f, Spawner.Instance.spawnTiles[randNum].GetComponent<Tile>().zPos));
                 }
-                    break;
+
+                //player lives
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
+                {
+
+                    measureCounter += 1;
+                    //change to phase 3B
+                    if (measureCounter == 2)
+                    {
+                        currentStateIndex = PhaseIndex.B;
+                        phaseStarted = false;
+                        measureCounter = 0;
+                        return;
+                    }
+                }
+
+                break;
             case PhaseIndex.B:
-                CursorMoveTo(new Vector3(7.5f, -0.4f, 1.5f));
+                if(ConductorV2.instance.beatTrack == 2)
+                {
+                    if(spawnTileOffset == 5)//end of current phase
+                    {
+                        currentStateIndex = PhaseIndex.C;
+                        phaseStarted = false;
+                        measureCounter = 0;
+                        spawnTileOffset = 0;
+                        return;
+                    }
+
+
+                    //spawns lifters going down each tile on a 2 beat offset on the last tile it ends the phase
+                    spawnTileOffset = Mathf.Clamp(spawnTileOffset, 0, 5);
+                    Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, lifter);
+                    CursorMoveTo(new Vector3(7.5f, -0.4f, Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos));
+                    spawnTileOffset += 1;
+
+
+                }
+
                 break;
             case PhaseIndex.C:
+                if (ConductorV2.instance.beatTrack == 2)
+                {
+                    if (!phaseStarted) 
+                    {
+                        phaseStarted = true;
+                        spawnTileOffset = 0;
+                        comandeerCursor.transform.parent = GameManager.Instance.combatRoot.transform;
+                        MoveTo(new Vector3(10.5f, 0.5f, 1.5f));
+                    }
+
+                    if (spawnTileOffset == 5) //end of current phase
+                    {
+                        Debug.Log("Damage Phase");
+                        currentStateIndex = PhaseIndex.A;
+                        currentState = CommanderStates.damagePhase;
+                        previousState = CommanderStates.phase3;
+                        phaseStarted = false;
+                        phase3Start = false;
+                        measureCounter = 0;
+                        spawnTileOffset = 0;
+
+                        //disable cursor for damage phase
+                        comandeerCursor.transform.parent = this.transform;
+                        cursorMovementInProgress = false;
+                        comandeerCursor.transform.position = cursorOriginPos;
+                        comandeerCursor.SetActive(false);
+                        return;
+                    }
+
+                    //get a random number between 0 and 1 either lifter or runner and spawn it going down the offset of each spawn tile for the zpos
+                    spawnTileOffset = Mathf.Clamp(spawnTileOffset, 0, 5);
+
+                    int rand = Random.Range(0, 2);
+
+                    if (rand == 0)
+                    {
+                        Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, lifter);
+                    }
+                    else if (rand == 1)
+                    {
+                        Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, runner);
+                    }
+                    CursorMoveTo(new Vector3(7.5f, -0.4f, Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos));
+                    spawnTileOffset += 1;
+                }
                 break;
             default:
                 break;
@@ -409,6 +498,48 @@ public class Boss_1_Commander : Enemy
         switch (currentStateIndex)
         {
             case PhaseIndex.A:
+                if (!phaseStarted)
+                {
+                    phaseStarted = true;
+                    spawnTileOffset = 0;
+                }
+
+                if (spawnTileOffset == 5) //end of current phase
+                {
+                    spawnTileOffset = 0;
+                    return;
+                }
+
+                //get a random number between 0 and 1 either lifter or runner and spawn it going down the offset of each spawn tile for the zpos
+                spawnTileOffset = Mathf.Clamp(spawnTileOffset, 0, 5);
+
+                int rand = Random.Range(0, 2);
+
+                if (rand == 0)
+                {
+                    Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, lifter);
+                }
+                else if (rand == 1)
+                {
+                    Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, runner);
+                }
+                CursorMoveTo(new Vector3(7.5f, -0.4f, Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos));
+                spawnTileOffset += 1;
+
+                //player lives
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
+                {
+
+                    measureCounter += 1;
+                    
+                }
+                //only commandeer remaining after 4 measures (measure counter checks every even measure)
+                if(CombatManager.Instance.enemiesParent.childCount == 1 && measureCounter == 2)
+                {
+                    currentState = CommanderStates.winPhase;
+                    return;
+                }
+
                 break;
             case PhaseIndex.B:
                 break;

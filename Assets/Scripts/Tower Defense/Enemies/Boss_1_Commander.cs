@@ -734,8 +734,8 @@ public class Boss_1_Commander : Enemy
     {
         currentDamage = 0;
         movementInProgress = false;
+        animator.SetBool("IsWalking", false); //Stop walk animation
         animator.SetBool("IsHit",true); //Play hurt animation
-        animator.SetBool("IsWalking",false); //Stop walk animation
         //animator.SetBool("IsAngry",false); //Stop mad animation
         transform.position = originPos;
         currentStateIndex = PhaseIndex.A;

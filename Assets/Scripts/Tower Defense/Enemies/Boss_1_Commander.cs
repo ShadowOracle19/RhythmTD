@@ -89,7 +89,7 @@ public class Boss_1_Commander : Enemy
                 DamagePhase();
                 break;
             case CommanderStates.winPhase:
-                GameManager.Instance.WinLevel();
+                WinState();
                 break;
             case CommanderStates.lossPhase:
                 GameManager.Instance.GameOver();
@@ -536,6 +536,7 @@ public class Boss_1_Commander : Enemy
                 //only commandeer remaining after 4 measures (measure counter checks every even measure)
                 if(CombatManager.Instance.enemiesParent.childCount == 1 && measureCounter == 2)
                 {
+                    phaseStarted = false;
                     currentState = CommanderStates.winPhase;
                     return;
                 }
@@ -548,6 +549,22 @@ public class Boss_1_Commander : Enemy
             default:
                 break;
         }
+    }
+
+    private void WinState()
+    {
+        if(!phaseStarted)
+        {
+            phaseStarted = true;
+            MoveTo(new Vector3(6.5f, 0.5f, -1.5f));
+        }
+
+        if(!movementInProgress)
+        {
+            GameManager.Instance.WinLevel();
+
+        }
+
     }
 
     public void CursorMovement()

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8029970338645538899}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.921, y: 1.13, z: -1.51}
+  m_LocalPosition: {x: 5.151, y: 1.13, z: -2.837}
   m_LocalScale: {x: 0.38699806, y: 0.38699806, z: 0.38699806}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -169,7 +169,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.45
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -664,12 +664,12 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 17
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
-    donutRadius: 0.2
+    donutRadius: 1
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
@@ -751,7 +751,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.35
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
@@ -1308,7 +1308,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.8446704, g: 0, b: 0.9622642, a: 1}
+        key0: {r: 0.96707743, g: 0.7311321, b: 1, a: 1}
         key1: {r: 0.92155284, g: 0.19215685, b: 1, a: 1}
         key2: {r: 0.8412065, g: 0.3915094, b: 1, a: 0}
         key3: {r: 0.8431373, g: 0, b: 0.9607844, a: 0}

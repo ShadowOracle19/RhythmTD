@@ -110,7 +110,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void ForceEnemySpawn(float ypos, EnemyType enemyType)
+    public void ForceEnemySpawn(float zpos, EnemyType enemyType)
     {
         numberOfEnemiesToSpawn += 1;
         currentNumberOfEnemiesSpawned += 1;
@@ -118,10 +118,10 @@ public class Spawner : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Wisp:
-                enemy = Instantiate(wispEnemy, new Vector3(transform.position.x, 0.5f, ypos), Quaternion.identity, enemyParent);
+                enemy = Instantiate(wispEnemy, new Vector3(transform.position.x, 0.5f, zpos), Quaternion.identity, enemyParent);
                 break;
             case EnemyType.Walker:
-                enemy = Instantiate(walkerEnemy, new Vector3(transform.position.x, 0.5f, ypos), Quaternion.identity, enemyParent);
+                enemy = Instantiate(walkerEnemy, new Vector3(transform.position.x, 0.5f, zpos), Quaternion.identity, enemyParent);
                 break;
             default:
                 break;
@@ -132,14 +132,14 @@ public class Spawner : MonoBehaviour
 
     }
 
-    public void ForceEnemySpawnDynamic(float yPos, GameObject enemy)
+    public void ForceEnemySpawnDynamic(float zPos, GameObject enemy)
     {
         numberOfEnemiesToSpawn += 1;
         currentNumberOfEnemiesSpawned += 1;
 
         GameObject _enemy = null;
 
-        _enemy = Instantiate(enemy, new Vector3(transform.position.x, 0.5f, yPos), Quaternion.identity, enemyParent);
+        _enemy = Instantiate(enemy, new Vector3(transform.position.x, 0.5f, zPos), Quaternion.identity, enemyParent);
         
 
         ConductorV2.instance.enemyEvent.Add(_enemy.GetComponent<Enemy>().trigger);

@@ -208,6 +208,13 @@ public class ConductorV2 : MonoBehaviour
 
     public void Conduct()
     {
+        if(songPosition < 0.1f)
+        {
+            Debug.Log("reset completedLoops");
+            completedLoops = 0;
+            numberOfBeats = 0;
+        }
+
         //determine how many seconds since the song started
         //possibly another place to offset 
         songPosition = (musicSource.time) ;

@@ -10,7 +10,7 @@ public class Boss_1_Commander : Enemy
     [SerializeField] private PhaseIndex currentStateIndex;
     [SerializeField] private CommanderStates previousState;
     [SerializeField] private int damageThreshold;
-    private int currentDamage;
+    public int currentDamage;
     [SerializeField] private GameObject lifter, runner, sorter;
     private bool phaseStarted = false;
 
@@ -20,20 +20,38 @@ public class Boss_1_Commander : Enemy
     private bool movementInProgress = false;
     private Vector3 finalPos;
 
-    //phase one
-    int measureCounter;
+    [Header("Phase One")]
+    public int measureCounter;
+    public CombatDialogue[] phaseOneIntroDialogue;
+    public CombatDialogue[] phaseOneCStartDialogue;
+    public CombatDialogue[] phaseOneCEndDialogue;
 
-    //phase two
-    bool lanesFilled = false;
+    [Header("Phase Two")]
+    public bool lanesFilled = false;
+    public CombatDialogue[] phaseTwoIntroDialogue;
+    public CombatDialogue[] phaseTwoBIntroDialogue;
 
-    //phase three
+    [Header("Phase Three")]
+    public CombatDialogue[] phaseThreeIntroDialogue;
+    public CombatDialogue[] phaseThreeCIntroDialogue;
     [SerializeField] private GameObject comandeerCursor;
-    [SerializeField]private bool phase3Start = false;
-    [SerializeField]private bool cursorMovementInProgress = false;
-    [SerializeField]private bool cursorDontMove = false;
-    [SerializeField]private Vector3 cursorFinalPos;
-    [SerializeField]private Vector3 cursorNextPos;
+    [SerializeField] private bool phase3Start = false;
+    [SerializeField] private bool cursorMovementInProgress = false;
+    [SerializeField] private bool cursorDontMove = false;
+    [SerializeField] private Vector3 cursorFinalPos;
+    [SerializeField] private Vector3 cursorNextPos;
+    [SerializeField] private Vector3 cursorOriginPos;
     [SerializeField] private float cursorTimer = 0;
+    int spawnTileOffset = 0;
+
+
+    [Header("Phase Four")]
+    public CombatDialogue[] phaseFourIntroDialogue;
+
+    [Header("Win Phase")]
+    public CombatDialogue[] winDialogue;
+    bool winOnce = false;
+
 
     // Start is called before the first frame update
     public override void Start()
@@ -44,6 +62,7 @@ public class Boss_1_Commander : Enemy
         previousState = currentState;
 
         originPos = transform.position;
+        cursorOriginPos = comandeerCursor.transform.position;
     }
 
     // Update is called once per frame
@@ -67,6 +86,10 @@ public class Boss_1_Commander : Enemy
     {
         dontMove = false;
         cursorDontMove = false;
+
+        if (CombatDialogueManager.Instance.combatDialogueActive)
+            return;
+
         switch (currentState)
         {
             case CommanderStates.phase1:
@@ -85,7 +108,7 @@ public class Boss_1_Commander : Enemy
                 DamagePhase();
                 break;
             case CommanderStates.winPhase:
-                GameManager.Instance.WinLevel();
+                WinState();
                 break;
             case CommanderStates.lossPhase:
                 GameManager.Instance.GameOver();
@@ -108,7 +131,7 @@ public class Boss_1_Commander : Enemy
                 //next phase
                 if(transform.position == new Vector3(6.5f, 0.5f, 1.5f))
                 {
-                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                     {
                         measureCounter += 1;
                         //change to phase 1B
@@ -130,7 +153,7 @@ public class Boss_1_Commander : Enemy
                 //next phase
                 if (transform.position == new Vector3(6.5f, 0.5f, -3.5f))
                 {
-                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                    if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                     {
                         measureCounter += 1;
                         //change to phase 1B
@@ -174,11 +197,13 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.A:
                 if(!phaseStarted)
                 {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseOneIntroDialogue);
                     Debug.Log("Phase 1 A");
                     //float yPos = GetClosestTower().position.y;
                     //Spawner.Instance.ForceEnemySpawnDynamic(yPos, lifter);
-                    Spawner.Instance.SpawnUnitOnRandomTile(lifter);
+                    //Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                     phaseStarted = true;
+                    return;
                 }
                 //check if measure is an even number
                 if(ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
@@ -246,6 +271,7 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.C:
                 if (!phaseStarted)
                 {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseOneCStartDialogue);
                     measureCounter = 0;
                     Spawner.Instance.ForceEnemySpawnDynamic(1.5f, lifter);
                     Spawner.Instance.ForceEnemySpawnDynamic(0.5f, lifter);
@@ -256,10 +282,11 @@ public class Boss_1_Commander : Enemy
                     phaseStarted = true;
                     MoveTo(new Vector3(10.5f, 0.5f, 1.5f));
                 }
-                Enemy[] children = CombatManager.Instance.enemiesParent.GetComponentsInChildren<Enemy>();
+
                 //player lives
-                if(children.Length == 1 && phaseStarted)
+                if(CombatManager.Instance.enemiesParent.childCount == 1 && phaseStarted)
                 {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseOneCEndDialogue);
                     measureCounter = 0;
                     Debug.Log("Damage Phase");
                     currentStateIndex = PhaseIndex.A;
@@ -284,6 +311,13 @@ public class Boss_1_Commander : Enemy
         {
             //spawns 1 lifter or runner every two beats
             case PhaseIndex.A:
+                if(!phaseStarted)
+                {
+                    phaseStarted = true;
+                    CombatDialogueManager.Instance.PlayDialogue(phaseTwoIntroDialogue);
+                    return;
+                }
+
                 if(ConductorV2.instance.beatTrack == 2)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(lifter);
@@ -292,7 +326,7 @@ public class Boss_1_Commander : Enemy
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(runner);
                 }
-                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                 {
                     measureCounter += 1;
                     //change to phase 1B
@@ -300,12 +334,20 @@ public class Boss_1_Commander : Enemy
                     {
                         currentStateIndex = PhaseIndex.B;
                         measureCounter = 0;
+                        phaseStarted = false;
                         return;
                     }
 
                 }
                 break;
             case PhaseIndex.B:
+                if (!phaseStarted)
+                {
+                    phaseStarted = true;
+                    CombatDialogueManager.Instance.PlayDialogue(phaseTwoBIntroDialogue);
+                    return;
+                }
+
                 if (ConductorV2.instance.beatTrack == 2)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(lifter);
@@ -314,14 +356,15 @@ public class Boss_1_Commander : Enemy
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(runner);
                 }
-                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(sorter);
                     measureCounter += 1;
                     //change to phase 1B
                     if (measureCounter == 4)
                     {
-                        currentStateIndex = PhaseIndex.B;
+                        phaseStarted = false;
+                        currentStateIndex = PhaseIndex.C;
                         measureCounter = 0;
                         return;
                     }
@@ -352,12 +395,12 @@ public class Boss_1_Commander : Enemy
                 }
 
                 //player lives
-                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
                 {
 
                     measureCounter += 1;
                     //change to phase 1B
-                    if (measureCounter == 4)
+                    if (measureCounter == 2)
                     {
                         Debug.Log("Damage Phase");
                         currentStateIndex = PhaseIndex.A;
@@ -382,6 +425,7 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.A:
                 if (!phase3Start)
                 {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseThreeIntroDialogue);
                     phase3Start = true;
                     comandeerCursor.SetActive(true);
                     CursorMoveTo(new Vector3(7.5f, -0.4f, -1.5f));
@@ -389,14 +433,100 @@ public class Boss_1_Commander : Enemy
 
                 if(!cursorMovementInProgress)
                 {
-                    Spawner.Instance.ForceEnemySpawnDynamic(comandeerCursor.transform.position.z, lifter);
-                    currentStateIndex = PhaseIndex.B;
+                    int randNum = Random.Range(0, 5);
+
+
+
+                    Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[randNum].GetComponent<Tile>().zPos, lifter);
+                    CursorMoveTo(new Vector3(7.5f, -0.4f, Spawner.Instance.spawnTiles[randNum].GetComponent<Tile>().zPos));
                 }
-                    break;
+
+                //player lives
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
+                {
+
+                    measureCounter += 1;
+                    //change to phase 3B
+                    if (measureCounter == 2)
+                    {
+                        currentStateIndex = PhaseIndex.B;
+                        phaseStarted = false;
+                        measureCounter = 0;
+                        return;
+                    }
+                }
+
+                break;
             case PhaseIndex.B:
-                CursorMoveTo(new Vector3(7.5f, -0.4f, 1.5f));
+                if(ConductorV2.instance.beatTrack == 2)
+                {
+                    if(spawnTileOffset == 5)//end of current phase
+                    {
+                        currentStateIndex = PhaseIndex.C;
+                        phaseStarted = false;
+                        measureCounter = 0;
+                        spawnTileOffset = 0;
+                        return;
+                    }
+
+
+                    //spawns lifters going down each tile on a 2 beat offset on the last tile it ends the phase
+                    spawnTileOffset = Mathf.Clamp(spawnTileOffset, 0, 5);
+                    Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, lifter);
+                    CursorMoveTo(new Vector3(7.5f, -0.4f, Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos));
+                    spawnTileOffset += 1;
+
+
+                }
+
                 break;
             case PhaseIndex.C:
+                if (ConductorV2.instance.beatTrack == 2)
+                {
+                    if (!phaseStarted)
+                    {
+                        CombatDialogueManager.Instance.PlayDialogue(phaseThreeCIntroDialogue);
+                        phaseStarted = true;
+                        spawnTileOffset = 0;
+                        comandeerCursor.transform.parent = GameManager.Instance.combatRoot.transform;
+                        MoveTo(new Vector3(10.5f, 0.5f, 1.5f));
+                    }
+
+                    if (spawnTileOffset == 5) //end of current phase
+                    {
+                        Debug.Log("Damage Phase");
+                        currentStateIndex = PhaseIndex.A;
+                        currentState = CommanderStates.damagePhase;
+                        previousState = CommanderStates.phase3;
+                        phaseStarted = false;
+                        phase3Start = false;
+                        measureCounter = 0;
+                        spawnTileOffset = 0;
+
+                        //disable cursor for damage phase
+                        comandeerCursor.transform.parent = this.transform;
+                        cursorMovementInProgress = false;
+                        comandeerCursor.transform.position = cursorOriginPos;
+                        comandeerCursor.SetActive(false);
+                        return;
+                    }
+
+                    //get a random number between 0 and 1 either lifter or runner and spawn it going down the offset of each spawn tile for the zpos
+                    spawnTileOffset = Mathf.Clamp(spawnTileOffset, 0, 5);
+
+                    int rand = Random.Range(0, 2);
+
+                    if (rand == 0)
+                    {
+                        Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, lifter);
+                    }
+                    else if (rand == 1)
+                    {
+                        Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, runner);
+                    }
+                    CursorMoveTo(new Vector3(7.5f, -0.4f, Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos));
+                    spawnTileOffset += 1;
+                }
                 break;
             default:
                 break;
@@ -409,14 +539,86 @@ public class Boss_1_Commander : Enemy
         switch (currentStateIndex)
         {
             case PhaseIndex.A:
+                if (!phaseStarted)
+                {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseFourIntroDialogue);
+                    phaseStarted = true;
+                    spawnTileOffset = 0;
+                }
+
+                //only commandeer remaining after 4 measures (measure counter checks every even measure)
+                if (CombatManager.Instance.enemiesParent.childCount == 1 && measureCounter >= 2)
+                {
+                    phaseStarted = false;
+                    currentState = CommanderStates.winPhase;
+                    return;
+                }
+
+                if(measureCounter >= 2)
+                {
+                    return;
+                }
+
+                if (spawnTileOffset == 5) //end of current phase
+                {
+                    spawnTileOffset = 0;
+                    return;
+                }
+
+                //get a random number between 0 and 1 either lifter or runner and spawn it going down the offset of each spawn tile for the zpos
+                spawnTileOffset = Mathf.Clamp(spawnTileOffset, 0, 5);
+
+                int rand = Random.Range(0, 2);
+
+                if (rand == 0)
+                {
+                    Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, lifter);
+                }
+                else if (rand == 1)
+                {
+                    Spawner.Instance.ForceEnemySpawnDynamic(Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos, runner);
+                }
+                CursorMoveTo(new Vector3(7.5f, -0.4f, Spawner.Instance.spawnTiles[spawnTileOffset].GetComponent<Tile>().zPos));
+                spawnTileOffset += 1;
+
+                //player lives
+                if (ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 1)
+                {
+
+                    measureCounter += 1;
+                    
+                }
+                
+
                 break;
+            //within phase b and c auto set to phase A
             case PhaseIndex.B:
+                currentStateIndex = PhaseIndex.A;
                 break;
             case PhaseIndex.C:
+                currentStateIndex = PhaseIndex.A;
                 break;
             default:
                 break;
         }
+    }
+
+    private void WinState()
+    {
+        if(!phaseStarted)
+        {
+            phaseStarted = true;
+            MoveTo(new Vector3(6.5f, 0.5f, -1.5f));
+            CombatDialogueManager.Instance.PlayDialogue(winDialogue);
+            return;
+        }
+
+        if(!movementInProgress && !CombatDialogueManager.Instance.combatDialogueActive)
+        {
+            GameManager.Instance.WinLevel();
+            return;
+        }
+
     }
 
     public void CursorMovement()
@@ -603,8 +805,8 @@ public class Boss_1_Commander : Enemy
     {
         currentDamage = 0;
         movementInProgress = false;
+        animator.SetBool("IsWalking", false); //Stop walk animation
         animator.SetBool("IsHit",true); //Play hurt animation
-        animator.SetBool("IsWalking",false); //Stop walk animation
         //animator.SetBool("IsAngry",false); //Stop mad animation
         transform.position = originPos;
         currentStateIndex = PhaseIndex.A;

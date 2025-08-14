@@ -10,7 +10,7 @@ public class Boss_1_Commander : Enemy
     [SerializeField] private PhaseIndex currentStateIndex;
     [SerializeField] private CommanderStates previousState;
     [SerializeField] private int damageThreshold;
-    private int currentDamage;
+    public int currentDamage;
     [SerializeField] private GameObject lifter, runner, sorter;
     private bool phaseStarted = false;
 
@@ -20,23 +20,37 @@ public class Boss_1_Commander : Enemy
     private bool movementInProgress = false;
     private Vector3 finalPos;
 
-    //phase one
-    int measureCounter;
+    [Header("Phase One")]
+    public int measureCounter;
     public CombatDialogue[] phaseOneIntroDialogue;
+    public CombatDialogue[] phaseOneCStartDialogue;
+    public CombatDialogue[] phaseOneCEndDialogue;
 
-    //phase two
-    bool lanesFilled = false;
+    [Header("Phase Two")]
+    public bool lanesFilled = false;
+    public CombatDialogue[] phaseTwoIntroDialogue;
+    public CombatDialogue[] phaseTwoBIntroDialogue;
 
-    //phase three
+    [Header("Phase Three")]
+    public CombatDialogue[] phaseThreeIntroDialogue;
+    public CombatDialogue[] phaseThreeCIntroDialogue;
     [SerializeField] private GameObject comandeerCursor;
-    [SerializeField]private bool phase3Start = false;
-    [SerializeField]private bool cursorMovementInProgress = false;
-    [SerializeField]private bool cursorDontMove = false;
-    [SerializeField]private Vector3 cursorFinalPos;
-    [SerializeField]private Vector3 cursorNextPos;
-    [SerializeField]private Vector3 cursorOriginPos;
+    [SerializeField] private bool phase3Start = false;
+    [SerializeField] private bool cursorMovementInProgress = false;
+    [SerializeField] private bool cursorDontMove = false;
+    [SerializeField] private Vector3 cursorFinalPos;
+    [SerializeField] private Vector3 cursorNextPos;
+    [SerializeField] private Vector3 cursorOriginPos;
     [SerializeField] private float cursorTimer = 0;
     int spawnTileOffset = 0;
+
+
+    [Header("Phase Four")]
+    public CombatDialogue[] phaseFourIntroDialogue;
+
+    [Header("Win Phase")]
+    public CombatDialogue[] winDialogue;
+    bool winOnce = false;
 
 
     // Start is called before the first frame update
@@ -257,6 +271,7 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.C:
                 if (!phaseStarted)
                 {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseOneCStartDialogue);
                     measureCounter = 0;
                     Spawner.Instance.ForceEnemySpawnDynamic(1.5f, lifter);
                     Spawner.Instance.ForceEnemySpawnDynamic(0.5f, lifter);
@@ -267,10 +282,11 @@ public class Boss_1_Commander : Enemy
                     phaseStarted = true;
                     MoveTo(new Vector3(10.5f, 0.5f, 1.5f));
                 }
-                Enemy[] children = CombatManager.Instance.enemiesParent.GetComponentsInChildren<Enemy>();
+
                 //player lives
-                if(children.Length == 1 && phaseStarted)
+                if(CombatManager.Instance.enemiesParent.childCount == 1 && phaseStarted)
                 {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseOneCEndDialogue);
                     measureCounter = 0;
                     Debug.Log("Damage Phase");
                     currentStateIndex = PhaseIndex.A;
@@ -295,6 +311,13 @@ public class Boss_1_Commander : Enemy
         {
             //spawns 1 lifter or runner every two beats
             case PhaseIndex.A:
+                if(!phaseStarted)
+                {
+                    phaseStarted = true;
+                    CombatDialogueManager.Instance.PlayDialogue(phaseTwoIntroDialogue);
+                    return;
+                }
+
                 if(ConductorV2.instance.beatTrack == 2)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(lifter);
@@ -311,12 +334,20 @@ public class Boss_1_Commander : Enemy
                     {
                         currentStateIndex = PhaseIndex.B;
                         measureCounter = 0;
+                        phaseStarted = false;
                         return;
                     }
 
                 }
                 break;
             case PhaseIndex.B:
+                if (!phaseStarted)
+                {
+                    phaseStarted = true;
+                    CombatDialogueManager.Instance.PlayDialogue(phaseTwoBIntroDialogue);
+                    return;
+                }
+
                 if (ConductorV2.instance.beatTrack == 2)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(lifter);
@@ -332,6 +363,7 @@ public class Boss_1_Commander : Enemy
                     //change to phase 1B
                     if (measureCounter == 4)
                     {
+                        phaseStarted = false;
                         currentStateIndex = PhaseIndex.C;
                         measureCounter = 0;
                         return;
@@ -393,6 +425,7 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.A:
                 if (!phase3Start)
                 {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseThreeIntroDialogue);
                     phase3Start = true;
                     comandeerCursor.SetActive(true);
                     CursorMoveTo(new Vector3(7.5f, -0.4f, -1.5f));
@@ -450,8 +483,9 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.C:
                 if (ConductorV2.instance.beatTrack == 2)
                 {
-                    if (!phaseStarted) 
+                    if (!phaseStarted)
                     {
+                        CombatDialogueManager.Instance.PlayDialogue(phaseThreeCIntroDialogue);
                         phaseStarted = true;
                         spawnTileOffset = 0;
                         comandeerCursor.transform.parent = GameManager.Instance.combatRoot.transform;
@@ -507,8 +541,22 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.A:
                 if (!phaseStarted)
                 {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseFourIntroDialogue);
                     phaseStarted = true;
                     spawnTileOffset = 0;
+                }
+
+                //only commandeer remaining after 4 measures (measure counter checks every even measure)
+                if (CombatManager.Instance.enemiesParent.childCount == 1 && measureCounter >= 2)
+                {
+                    phaseStarted = false;
+                    currentState = CommanderStates.winPhase;
+                    return;
+                }
+
+                if(measureCounter >= 2)
+                {
+                    return;
                 }
 
                 if (spawnTileOffset == 5) //end of current phase
@@ -540,13 +588,7 @@ public class Boss_1_Commander : Enemy
                     measureCounter += 1;
                     
                 }
-                //only commandeer remaining after 4 measures (measure counter checks every even measure)
-                if(CombatManager.Instance.enemiesParent.childCount == 1 && measureCounter == 2)
-                {
-                    phaseStarted = false;
-                    currentState = CommanderStates.winPhase;
-                    return;
-                }
+                
 
                 break;
             //within phase b and c auto set to phase A
@@ -567,12 +609,14 @@ public class Boss_1_Commander : Enemy
         {
             phaseStarted = true;
             MoveTo(new Vector3(6.5f, 0.5f, -1.5f));
+            CombatDialogueManager.Instance.PlayDialogue(winDialogue);
+            return;
         }
 
-        if(!movementInProgress)
+        if(!movementInProgress && !CombatDialogueManager.Instance.combatDialogueActive)
         {
             GameManager.Instance.WinLevel();
-
+            return;
         }
 
     }

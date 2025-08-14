@@ -31,7 +31,7 @@ public class CombatDialogueManager : MonoBehaviour
     public bool combatDialogueActive = false;
 
     //dialogue gameobjects
-    [SerializeField] private GameObject dialogueBox;
+    [SerializeField] public GameObject dialogueBox;
     [SerializeField] private TextMeshProUGUI dialogueTextMesh;
     [SerializeField] private Image dialogueImage;
 
@@ -85,7 +85,7 @@ public class CombatDialogueManager : MonoBehaviour
             //all text has been typed
             if(visibleCount > totalVisibleCharacters)
             {
-                yield return new WaitForSeconds(5);
+                yield return new WaitForSeconds(2);
                 typeText = false;
                 NextLine();
                 yield return null;

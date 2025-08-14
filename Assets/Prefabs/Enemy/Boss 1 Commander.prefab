@@ -94,12 +94,34 @@ MonoBehaviour:
   lifter: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
   runner: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
   sorter: {fileID: 239132429429542008, guid: ae22a1fb4d3728a45a8be833bb8a0027, type: 3}
+  measureCounter: 0
   phaseOneIntroDialogue:
   - text: Welcome defects
     characterSprite: {fileID: 1575713077, guid: b5ee91d05fc65cd4fa356f9bde6c7ebe, type: 3}
   - text: Prepare to be reset
     characterSprite: {fileID: 2050180683, guid: 7e3a76538a16bc34aa4e7e7a94b1df75, type: 3}
   - text: Lifters! get them!
+    characterSprite: {fileID: -1910383033, guid: a49365ca4cd45c246b0ca1a3e09a7a24, type: 3}
+  phaseOneCStartDialogue:
+  - text: "Ok. I don\u2019t care how you get it done! Just get them! It\u2019s just
+      4 bots, they can\u2019t take all of you at once!"
+    characterSprite: {fileID: -1910383033, guid: a49365ca4cd45c246b0ca1a3e09a7a24, type: 3}
+  phaseOneCEndDialogue:
+  - text: "This isn\u2019t working!"
+    characterSprite: {fileID: -1910383033, guid: a49365ca4cd45c246b0ca1a3e09a7a24, type: 3}
+  lanesFilled: 0
+  phaseTwoIntroDialogue:
+  - text: "If we can\u2019t make it past you well then... just try and fend against
+      this!"
+    characterSprite: {fileID: 1575713077, guid: b5ee91d05fc65cd4fa356f9bde6c7ebe, type: 3}
+  phaseTwoBIntroDialogue:
+  - text: "UGH! Just get in there! I don\u2019t care how you do it!"
+    characterSprite: {fileID: -1910383033, guid: a49365ca4cd45c246b0ca1a3e09a7a24, type: 3}
+  phaseThreeIntroDialogue:
+  - text: Clearly you all need help
+    characterSprite: {fileID: 1575713077, guid: b5ee91d05fc65cd4fa356f9bde6c7ebe, type: 3}
+  phaseThreeCIntroDialogue:
+  - text: Urgh! Stop moving around so much I can't buff you!
     characterSprite: {fileID: -1910383033, guid: a49365ca4cd45c246b0ca1a3e09a7a24, type: 3}
   comandeerCursor: {fileID: 5748367705680876883}
   phase3Start: 0
@@ -109,6 +131,16 @@ MonoBehaviour:
   cursorNextPos: {x: 0, y: 0, z: 0}
   cursorOriginPos: {x: 0, y: 0, z: 0}
   cursorTimer: 0
+  phaseFourIntroDialogue:
+  - text: Send in everything we got!
+    characterSprite: {fileID: -1910383033, guid: a49365ca4cd45c246b0ca1a3e09a7a24, type: 3}
+  winDialogue:
+  - text: I..I am out of units
+    characterSprite: {fileID: 21300000, guid: 87538135c93057641b917b43d3394a76, type: 3}
+  - text: How did I lose to these defects?
+    characterSprite: {fileID: 21300000, guid: bd1a848de1a715c4080a50d4c236efa8, type: 3}
+  - text: You win . . . for now
+    characterSprite: {fileID: 21300000, guid: bd1a848de1a715c4080a50d4c236efa8, type: 3}
 --- !u!82 &6874018606574302444
 AudioSource:
   m_ObjectHideFlags: 0

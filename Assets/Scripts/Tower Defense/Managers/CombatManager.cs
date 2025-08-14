@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Android.Types;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -278,6 +279,10 @@ public class CombatManager : MonoBehaviour
 
         ConductorV2.instance.StopMusic();
         GameManager.Instance.tutorialRunning = false;
+
+        CombatDialogueManager.Instance.combatDialogueActive = false;
+        CombatDialogueManager.Instance.Clear();
+        CombatDialogueManager.Instance.dialogueBox.SetActive(false);
     }
 
     // Update is called once per frame

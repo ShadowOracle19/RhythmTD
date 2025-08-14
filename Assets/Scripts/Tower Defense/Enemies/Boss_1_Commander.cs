@@ -22,6 +22,7 @@ public class Boss_1_Commander : Enemy
 
     //phase one
     int measureCounter;
+    public CombatDialogue[] phaseOneIntroDialogue;
 
     //phase two
     bool lanesFilled = false;
@@ -71,6 +72,10 @@ public class Boss_1_Commander : Enemy
     {
         dontMove = false;
         cursorDontMove = false;
+
+        if (CombatDialogueManager.Instance.combatDialogueActive)
+            return;
+
         switch (currentState)
         {
             case CommanderStates.phase1:
@@ -178,11 +183,13 @@ public class Boss_1_Commander : Enemy
             case PhaseIndex.A:
                 if(!phaseStarted)
                 {
+                    CombatDialogueManager.Instance.PlayDialogue(phaseOneIntroDialogue);
                     Debug.Log("Phase 1 A");
                     //float yPos = GetClosestTower().position.y;
                     //Spawner.Instance.ForceEnemySpawnDynamic(yPos, lifter);
-                    Spawner.Instance.SpawnUnitOnRandomTile(lifter);
+                    //Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                     phaseStarted = true;
+                    return;
                 }
                 //check if measure is an even number
                 if(ConductorV2.instance.measureTrack % 2 == 0 && ConductorV2.instance.beatTrack == 4)
@@ -542,9 +549,12 @@ public class Boss_1_Commander : Enemy
                 }
 
                 break;
+            //within phase b and c auto set to phase A
             case PhaseIndex.B:
+                currentStateIndex = PhaseIndex.A;
                 break;
             case PhaseIndex.C:
+                currentStateIndex = PhaseIndex.A;
                 break;
             default:
                 break;

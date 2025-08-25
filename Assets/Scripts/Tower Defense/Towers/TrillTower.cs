@@ -71,7 +71,7 @@ public class TrillTower : Tower
         {
             int rand = colliders.Length;
 
-            if (!colliders[rand].GetComponent<Tile>().canPlaceTower)
+            if (!colliders[rand].GetComponent<Tile>().cantPlaceTower)
             {
                 connectedTile.placedTower = null;
                 connectedTile = colliders[rand].GetComponent<Tile>();

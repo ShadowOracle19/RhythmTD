@@ -336,7 +336,7 @@ public class Tower : MonoBehaviour
         //    nextProjectile = buffProjectile;
         //}
 
-        CreateBullet(damage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
+        
 
         
         //if(isPoweredUp && towerInfo.type == InstrumentType.Bass)

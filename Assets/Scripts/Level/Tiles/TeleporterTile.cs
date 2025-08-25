@@ -7,6 +7,11 @@ public class TeleporterTile : Tile
 {
     public TeleporterTile connectedTile;
 
+    private void Update()
+    {
+        cantPlaceTower = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Projectile_Tower") && !other.gameObject.GetComponent<Projectile>().teleported)

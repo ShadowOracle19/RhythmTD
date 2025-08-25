@@ -504,7 +504,7 @@ public class CursorTD : MonoBehaviour
 
         if (direction == Vector2.up)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null && !tile.canPlaceTower)
+            if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
             {
                 TryToPlaceTower(towerSlotW.GetComponent<TowerButton>().tower, upInvalidSfx, "Check Slot 01");
 
@@ -513,7 +513,7 @@ public class CursorTD : MonoBehaviour
         }
         else if (direction == Vector2.left)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null && !tile.canPlaceTower)
+            if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
             {
                 TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04");
 
@@ -522,7 +522,7 @@ public class CursorTD : MonoBehaviour
         }
         else if (direction == Vector2.down)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null && !tile.canPlaceTower)
+            if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
             {
                 TryToPlaceTower(towerSlotS.GetComponent<TowerButton>().tower, downInvalidSfx, "Check Slot 03");
 
@@ -531,7 +531,7 @@ public class CursorTD : MonoBehaviour
         }
         else if (direction == Vector2.right)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null && !tile.canPlaceTower)
+            if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
             {
                 TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02");
 

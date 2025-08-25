@@ -39,7 +39,7 @@ public class ChromaticTower : Tower
         //Power Charge
         if (upgradeThreeActive)
         {
-            chargeValue = 15;
+            chargeValue = 10;
         }
 
         PlaceCharge(chargeValue, this);

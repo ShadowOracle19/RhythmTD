@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public float speed = 1;
-    float timer;
+    public float timer;
     public bool canMove = false;
     public Vector3 nextPosition;
     public int bulletRange = 0;

@@ -17,6 +17,12 @@ public class TrillTower : Tower
     public override void Update()
     {
         base.Update();
+
+        if(upgradeThreeActive)
+        {
+            towerRange = 4;
+            currentDamage = 10;
+        }
     }
 
     public override void Fire()
@@ -54,6 +60,27 @@ public class TrillTower : Tower
         }
         chargeShotDamage += 1;
         chargeShotDamage = Mathf.Clamp(chargeShotDamage, 0, 7);
+    }
+
+    //Coward
+    public void UpgradeFour()
+    {
+        colliders = Physics.OverlapSphere(transform.position, towerRange, LayerMask.GetMask("Stage"));
+
+        while(true)
+        {
+            int rand = colliders.Length;
+
+            if (!colliders[rand].GetComponent<Tile>().canPlaceTower)
+            {
+                connectedTile.placedTower = null;
+                connectedTile = colliders[rand].GetComponent<Tile>();
+
+                transform.position = 
+                    new Vector3(connectedTile.transform.position.x, transform.position.y, connectedTile.transform.position.z);
+                return;
+            }
+        }
     }
 
     public override void CreateBullet(int damage, Vector3 position)

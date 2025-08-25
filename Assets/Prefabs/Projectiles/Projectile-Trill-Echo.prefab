@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5738086396080506955}
-  - component: {fileID: -390069721152075091}
+  - component: {fileID: 2676683739750539523}
   - component: {fileID: 4727961330694019307}
   - component: {fileID: 366390443824338905}
   m_Layer: 0
-  m_Name: Projectile-Trill-Buff
+  m_Name: Projectile-Trill-Echo
   m_TagString: Projectile_Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,14 +28,14 @@ Transform:
   m_GameObject: {fileID: 2456792131810543251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.41, y: -1.51, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5487076244844692249}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-390069721152075091
+--- !u!114 &2676683739750539523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,10 +44,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2456792131810543251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c30be5542671004fbee4b8fba176e44, type: 3}
+  m_Script: {fileID: 11500000, guid: 275a9bf8067e4244497b076b34620740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 1506309018840297455, guid: 82e74bb6a8b71694492c1b44441edd0c, type: 3}
+  spriteRenderer: {fileID: 1506309018840297455}
   speed: 1
   timer: 0
   canMove: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   trigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -390069721152075091}
+      - m_Target: {fileID: 2676683739750539523}
         m_TargetAssemblyTypeName: Projectile, Assembly-CSharp
         m_MethodName: OnTick
         m_Mode: 1
@@ -75,7 +75,7 @@ MonoBehaviour:
   flameAttackSprite: {fileID: -6656982175730374425, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: 5a5e0451539e329458d3e78e22edd094, type: 3}
   teleported: 0
-  echoProjectile: {fileID: 2456792131810543251, guid: c1f3fc31c6483ed45945cacf9ca2a1a3, type: 3}
+  direction: 0
 --- !u!135 &4727961330694019307
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -134,7 +134,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5487076244844692249}
   - component: {fileID: 1506309018840297455}
-  - component: {fileID: 6117141509368687780}
   m_Layer: 13
   m_Name: Square
   m_TagString: Untagged
@@ -150,13 +149,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8185038734171295255}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.27059805, y: -0.27059805, z: 0.6532815, w: 0.6532815}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5738086396080506955}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 90}
 --- !u!212 &1506309018840297455
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -198,7 +197,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2118342034045875315, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
+  m_Sprite: {fileID: 383071095746508678, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -209,16 +208,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6117141509368687780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8185038734171295255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f9f71264e77bc04baf632f936244fd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  freezeXZAxis: 1

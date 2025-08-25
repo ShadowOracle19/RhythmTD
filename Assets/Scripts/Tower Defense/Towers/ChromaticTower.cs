@@ -15,13 +15,32 @@ public class ChromaticTower : Tower
     public override void Update()
     {
         base.Update();
+        if(upgradeThreeActive)
+        {
+            currentAttackPattern = TowerAttackPattern.everyMeasure;
+        }
     }
 
     public override void Fire()
     {
+        //passive income
+        if(upgradeTwoActive)
+        {
+            CombatManager.Instance.resourceNum += towerInfo.resourceGain;
+            return;
+        }
+
+        
+
         base.Fire();
 
         int chargeValue = towerInfo.resourceGain;
+
+        //Power Charge
+        if (upgradeThreeActive)
+        {
+            chargeValue = 15;
+        }
 
         PlaceCharge(chargeValue, this);
     }

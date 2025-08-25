@@ -326,7 +326,9 @@ public class CursorTD : MonoBehaviour
     public void MoveCursor(Vector2 direction)
     {
         if (isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) return;
-        
+
+        Debug.Log(ConductorV2.instance.beatDuration);
+
         //get the angle
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 

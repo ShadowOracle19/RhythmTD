@@ -252,7 +252,6 @@ public class Enemy : MonoBehaviour
                 /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out hit, 1, obstacleMask))*/)
             {
                 
-                Debug.Log("move up");
                 nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + 1);
                 dontMove = true;
                 return;
@@ -261,7 +260,6 @@ public class Enemy : MonoBehaviour
             else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask)
                 /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out hit, 1, obstacleMask))*/)
             {
-                Debug.Log("move down");
                 nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z - 1);
                 dontMove = true;
                 return;

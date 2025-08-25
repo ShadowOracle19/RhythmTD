@@ -22,7 +22,7 @@ public class CalibratorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        StartCalibrator();
     }
 
     // Update is called once per frame

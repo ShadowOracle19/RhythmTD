@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public bool canPlaceTower = false;
+    public bool cantPlaceTower = false;
     [SerializeField] public GameObject placedTower;
 
     private ParticleSystem spawnInstance;

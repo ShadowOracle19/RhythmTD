@@ -279,7 +279,6 @@ public class Spawner : MonoBehaviour
         //once all pickups are spawned stop spawning them
         if (currentNumberOfPickupsSpawned >= numberOfPickupsToSpawn) 
         {
-            Debug.Log("All Pickups Spawned");
 
             allPickupsSpawnedFromWave = true;
             allPickupsSpawned = true;

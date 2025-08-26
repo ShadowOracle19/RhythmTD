@@ -48,6 +48,9 @@ public class Enemy : MonoBehaviour
 
     public bool teleported = false;
 
+    //confusing order
+    public bool confusingOrderActive = false;
+
     // dynamic mover
     LayerMask tileMask;
     LayerMask obstacleMask;
@@ -130,6 +133,45 @@ public class Enemy : MonoBehaviour
         if(isDead)
         {
             deathCount += 1;
+        }
+
+        if(confusingOrderActive)
+        {
+            int rand = Random.Range(0, 4);
+            
+            switch(rand)
+            {
+                case 0:
+
+                    nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + 1);
+
+                    if (nextPosition.z >= 2.5f)//if hit top of the map
+                    {
+                        nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z - 1);
+                    }
+                    break;
+
+                case 1:
+
+                    nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z - 1);
+
+                    if (nextPosition.z <= -3.5f)//if hit bottom of the map
+                    {
+                        nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + 1);
+                    }
+                    break;
+
+                case 2:
+                    nextPosition = new Vector3(transform.position.x + 1, 0.5f, transform.position.z);
+                    break;
+
+                case 3:
+                    nextPosition = new Vector3(transform.position.x - 1, 0.5f, transform.position.z);
+                    break;
+            }
+            confusingOrderActive = false;
+            dontMove = false;
+            return;
         }
 
         //enemy movement pattern handler
@@ -252,7 +294,6 @@ public class Enemy : MonoBehaviour
                 /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out hit, 1, obstacleMask))*/)
             {
                 
-                Debug.Log("move up");
                 nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + 1);
                 dontMove = true;
                 return;
@@ -261,7 +302,6 @@ public class Enemy : MonoBehaviour
             else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask)
                 /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out hit, 1, obstacleMask))*/)
             {
-                Debug.Log("move down");
                 nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z - 1);
                 dontMove = true;
                 return;

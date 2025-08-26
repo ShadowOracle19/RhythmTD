@@ -44,7 +44,7 @@ public class Tower : MonoBehaviour
     
     public Tile connectedTile;
 
-    private Collider[] colliders;
+    public Collider[] colliders;
     //public RaycastHit[] colliders;
 
     public int beat;
@@ -133,15 +133,15 @@ public class Tower : MonoBehaviour
 
     //upgrade 2 multiple projectile
     public int upgradeCost2;
-    public bool multiShotUpgrade = false;
+    public bool upgradeTwoActive = false;
 
     //upgrade 3 burning
     public int upgradeCost3;
-    public bool burningUpgrade = false;
+    public bool upgradeThreeActive = false;
 
     //upgrade 4 range
     public int upgradeCost4;
-    public bool rangeUpgrade = false;
+    public bool upgradeFourActive = false;
 
     [Header("Upgrade Modifiers")]
     public bool feelingItNow = false;
@@ -164,9 +164,9 @@ public class Tower : MonoBehaviour
         towerRange = towerInfo.range;
 
         upgradeCost1 = 25;
-        upgradeCost2 = 50;
+        upgradeCost2 = 25;
         upgradeCost3 = 25;
-        upgradeCost4 = 75;
+        upgradeCost4 = 25;
 
         recordingStatus.SetActive(false); //RECORDING STATUS CODE
 
@@ -275,7 +275,7 @@ public class Tower : MonoBehaviour
             currentDamage = currentDamage * 2;
         }
         //feeling it now inactive
-        else if (upgradeOneActive)
+        else if (upgradePurchased)
         {
             currentDamage = tempDamageHolder;
             nextProjectile = upgradeProjectile01;
@@ -336,7 +336,7 @@ public class Tower : MonoBehaviour
         //    nextProjectile = buffProjectile;
         //}
 
-        CreateBullet(damage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
+        
 
         
         //if(isPoweredUp && towerInfo.type == InstrumentType.Bass)
@@ -404,29 +404,14 @@ public class Tower : MonoBehaviour
                 //item.transform.GetComponent<Tile>().Pulse(Color.blue);
 
                 //Depending on the upgrade, change the sprite
-                if (burningUpgrade)
+                if (upgradePurchased)
                 {
-                    SpawnParticles(item.transform, flameAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
+                    SpawnParticles(item.transform, flameAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, true);
                     //Debug.Log("[Tower.cs] BurnUpgrade");
-                }
-                else if(rangeUpgrade)
-                {
-                    SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
-                    //Debug.Log("[Tower.cs] RangeUpgrade");
-                }
-                else if(upgradeOneActive)
-                {
-                    SpawnParticles(item.transform, buffDefaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
-                    //Debug.Log("[Tower.cs] DamageUpgrade");
-                }
-                else if(multiShotUpgrade)
-                {
-                    SpawnParticles(item.transform, multiAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
-                    //Debug.Log("[Tower.cs] MultiUpgrade");
                 }
                 else
                 {
-                    SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, burningUpgrade);
+                    SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, false);
                     //Debug.LogWarning("[Tower.cs] AOE sprite display broke :(");
                 }
             }
@@ -655,7 +640,7 @@ public class Tower : MonoBehaviour
         if(towerUpgradeUnlocked)
         {
             
-            if (burning || upgradeOneActive)
+            if (upgradeOneActive)
             {
                 // Set sprite
                 burningParticlesInstance = Instantiate(burningParticles, tileTransform.position, Quaternion.identity);

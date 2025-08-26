@@ -19,8 +19,16 @@ public class MajorProjectile : Projectile
 
     public override void OnTriggerEnter(Collider collision)
     {
-        base.OnTriggerEnter(collision);
+        //confusing orders
+        if(collision.gameObject.CompareTag("Enemy")
+            && towerFiredFrom.GetComponent<Tower>().upgradeTwoActive)
+        {
+            collision.GetComponent<Enemy>().confusingOrderActive = true;
+        }
 
+            base.OnTriggerEnter(collision);
+
+        //are you feeling it now comandeer
         //if collide with friendly tower and are you feeling it now is active
         if(collision.gameObject.CompareTag("Tower") 
             && towerFiredFrom.GetComponent<Tower>().upgradeOneActive)

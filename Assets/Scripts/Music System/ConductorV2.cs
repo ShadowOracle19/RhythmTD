@@ -116,7 +116,6 @@ public class ConductorV2 : MonoBehaviour
         countInText.gameObject.SetActive(true);
         for (int i = 1; i <= 4; i++)
         {
-            Debug.Log("count in " + i);
             countInText.text = i.ToString();
             _ping.Play();
             yield return new WaitForSeconds(crotchet);
@@ -134,7 +133,6 @@ public class ConductorV2 : MonoBehaviour
 
         pauseConductor = false;
         countInText.gameObject.SetActive(false);
-        Debug.Log("Conductor Start");
 
 
 
@@ -210,7 +208,6 @@ public class ConductorV2 : MonoBehaviour
     {
         if(songPosition < 0.1f)
         {
-            Debug.Log("reset completedLoops");
             completedLoops = 0;
             numberOfBeats = 0;
         }

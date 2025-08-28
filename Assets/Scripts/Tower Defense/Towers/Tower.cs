@@ -467,7 +467,7 @@ public class Tower : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Damage(int damage)
+    public virtual void Damage(int damage)
     {
         if(isShielded)
         {

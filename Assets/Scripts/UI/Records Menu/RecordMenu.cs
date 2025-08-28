@@ -88,12 +88,12 @@ public class RecordMenu : MonoBehaviour
             }
             else
             {
-                currentSelectionIndex == 0;
+                currentSelectionIndex = 0;
             }
 
             for (int i = 0; i < numberOfRecords; i++)
             {
-                recordsList[i].RotateRecord(ringRotationAngle);
+                recordsList[i].GetComponent<RecordElement>().RotateRecord(ringRotationAngle);
             }      
         }
         else if (direction == "left")
@@ -111,12 +111,12 @@ public class RecordMenu : MonoBehaviour
             }
             else
             {
-                currentSelectionIndex == numberOfRecords - 1;
+                currentSelectionIndex = numberOfRecords - 1;
             }
 
             for (int i = 0; i < numberOfRecords; i++)
             {
-                recordsList[i].RotateRecord(ringRotationAngle * -1);
+                recordsList[i].GetComponent<RecordElement>().RotateRecord(ringRotationAngle * -1);
             }
         }
         

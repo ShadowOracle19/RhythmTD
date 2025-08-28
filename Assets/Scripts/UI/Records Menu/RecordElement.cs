@@ -22,19 +22,21 @@ public class RecordElement : MonoBehaviour
     }
 
     // Used to make the record bigger/smaller when selected/deselected
-    void UpdateScale(Vector3 scaleDifference)
+    /*
+    public void UpdateScale(Vector3 scaleDifference)
     {
         transform.localScale += scaleDifference;
     }
+    */
 
     // Used to make the rotate the records to stay facing forward when rotating the record selection object
-    void RotateRecord(float rotationAngle)
+    public void RotateRecord(float rotationAngle)
     {
         rotationTarget = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y + rotationAngle + sideTargetRotation, transform.localRotation.z);
     }
 
     // Used to flip the record between its front and remix sides
-    void FlipRecord()
+    public void FlipRecord()
     {
         if (!flipped)
         {

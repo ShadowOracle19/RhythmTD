@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_GlowingShaderGraph
-  m_Shader: {fileID: -6465566751694194690, guid: 5dce58e44242ad14ca8775d0e054edcf, type: 3}
+  m_Name: OutlineV2Mat
+  m_Shader: {fileID: -6465566751694194690, guid: 6a8a0d28c922ec74f9f62a119a766159, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -37,18 +37,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BottomLine: 0.437
-    - _Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.257
-    - _TopLine: 0.473
+    - _Size: 0.002
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 0.39215687}
-    - _BottomColor: {r: 0, g: 15.104688, b: 9.765377, a: 0.43137255}
-    - _TopColor: {r: 1.7089043, g: 0, b: 39.396626, a: 0.3764706}
+    - _Color: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &3725936280190250250
+--- !u!114 &5116915979254244789
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

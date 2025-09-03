@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class RecordMenu : MonoBehaviour
 {
@@ -19,12 +22,14 @@ public class RecordMenu : MonoBehaviour
     public List<GameObject> recordsList = new List<GameObject>();
     public int numberOfRecords;
 
+
     public int currentSelectionIndex;
+
+    public TextMeshProUGUI currentSongTitle;
+    public TextMeshProUGUI currentSongTracksRecorded;
     
     void Start()
     {
-        rotationTarget = transform.localRotation;
-        
         // Set the currently selected record to the first record in the list
         currentSelectionIndex = 0;
 
@@ -44,8 +49,8 @@ public class RecordMenu : MonoBehaviour
             // Calculate the angle of the next record in radians
             float angleToRecord = ((2 * Mathf.PI / numberOfRecords) * i);
 
-            float recordX = Mathf.Sin(angleToRecord);
-            float recordZ = Mathf.Cos(angleToRecord);
+            float recordX = ringRadius * Mathf.Sin(angleToRecord);
+            float recordZ = ringRadius * Mathf.Cos(angleToRecord);
 
             Vector3 recordPosition = new Vector3(recordsList[i].transform.position.x + recordX, recordsList[i].transform.position.y, recordsList[i].transform.position.z - recordZ);
 

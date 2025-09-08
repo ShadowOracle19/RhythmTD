@@ -24,11 +24,15 @@ public class Charges : MonoBehaviour
         }
     }
 
-    public void initalizeCharge(int _resourceGain, Vector3 _placementLocation, Tower connectedTower)
+    public void initalizeCharge(int _resourceGain, Vector3 _placementLocation, Tower connectedTower, bool fromTower)
     {
         resourceGain = _resourceGain;
         placementLocation = _placementLocation;
-        damageCharge = connectedTower.upgradeOneActive;
+        if(fromTower)
+        {
+            damageCharge = connectedTower.upgradeOneActive;
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)

@@ -69,7 +69,11 @@ public class DialogueManager : MonoBehaviour
     public GameObject descriptiveDialogueBox;
     public GameObject previousTalkingDialogueBox;
     public Color fadedColor;
+
+    public Sprite characterSprite;
+    public RuntimeAnimatorController characterSpriteAnimator;
     public Sprite previousCharacter;
+    public RuntimeAnimatorController previousCharacterAnimator;
     public string currentCharacterName;
     public string previousCharacterLabel;
     public string previousCharacterName;
@@ -312,9 +316,10 @@ public class DialogueManager : MonoBehaviour
     public void LoadCharacterSprite()
     {
         // Loads the character sprite from the JSON using their name and emotion tags
-        var characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].character}/SPR-DS_{myDialogue.dialogue[index].character}-{myDialogue.dialogue[index].emotion}");
+        characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].character}/SPR-DS_{myDialogue.dialogue[index].character}-{myDialogue.dialogue[index].emotion}");
+        characterSpriteAnimator = Resources.Load<RuntimeAnimatorController>($"Characters/{myDialogue.dialogue[index].character}/{myDialogue.dialogue[index].character}_{myDialogue.dialogue[index].emotion}");
 
-        if (characterSprite == null)//if no character sprite is loaded
+        if (characterSpriteAnimator == null && characterSprite == null)//if no character sprite is loaded
         {
             descriptiveDialogueBox.SetActive(true);
             talkingDialogueBox.SetActive(false);
@@ -326,9 +331,11 @@ public class DialogueManager : MonoBehaviour
             previousCharacterLabel = string.Empty;
             previousCharacterTalking = false;
 
+            characterImage.GetComponent<Animator>().runtimeAnimatorController = null;
             characterImage.sprite = null;
             characterImage.color = Color.clear;
 
+            secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = null;
             secondCharacterImage.sprite = null;
             secondCharacterImage.color = Color.clear;
         }
@@ -346,23 +353,59 @@ public class DialogueManager : MonoBehaviour
                 previousTalkingDialogueBox.SetActive(true);
                 talkingDialogueBox.SetActive(false);
                 _previousSpeakerName.text = previousCharacterName;
+
                 previousCharacter = Resources.Load<Sprite>($"Characters/{previousCharacterLabel}/SPR-DS_{previousCharacterLabel}-{previousEmotion}");
+                previousCharacterAnimator = Resources.Load<RuntimeAnimatorController>($"Characters/{previousCharacterLabel}/{previousCharacterLabel}_{previousEmotion}");
+
+                //load either animator or sprite
+                if (characterSpriteAnimator == null)
+                {
+                    secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = null;
+                    secondCharacterImage.sprite = characterSprite;
+
+                    secondCharacterImage.transform.localScale = new Vector3(0.5f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
+
+                }
+                else
+                {
+                    secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = characterSpriteAnimator;
+
+                    secondCharacterImage.transform.localScale = new Vector3(-0.5f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
+                }
+
                 return;
             }
 
             if(index != 0 && myDialogue.dialogue[index].character != myDialogue.dialogue[index - 1].character && myDialogue.dialogue[index].character != string.Empty) //if the previous character is not talking and a new character is
             {
                 previousCharacterTalking = false;
-                secondCharacterImage.sprite = previousCharacter;
+
+                //load either animator or sprite
+                if (previousCharacterAnimator == null)
+                {
+                    secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = null;
+                    secondCharacterImage.sprite = previousCharacter;
+
+                    secondCharacterImage.transform.localScale = new Vector3(0.5f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
+
+                }
+                else
+                {
+                    secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = previousCharacterAnimator;
+
+                    secondCharacterImage.transform.localScale = new Vector3(-0.5f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
+                }
+
+
                 secondCharacterImage.color = fadedColor;
                 previousCharacterName = myDialogue.dialogue[index - 1].name;
                 previousCharacterLabel = myDialogue.dialogue[index - 1].character;
                 previousEmotion = myDialogue.dialogue[index - 1].emotion;
 
-                if (secondCharacterImage.sprite == null)
-                {
-                    secondCharacterImage.color = Color.clear;
-                }
+                //if (secondCharacterImage.sprite == null)
+                //{
+                //    secondCharacterImage.color = Color.clear;
+                //}
             }
             //else
             //{
@@ -371,9 +414,27 @@ public class DialogueManager : MonoBehaviour
             previousCharacterTalking = false;
             previousTalkingDialogueBox.SetActive(false);
             characterImage.color = Color.white;
-            characterImage.sprite = characterSprite;
+
+            //load either animator or sprite
+            if (characterSpriteAnimator == null)
+            {
+                characterImage.GetComponent<Animator>().runtimeAnimatorController = null;
+                characterImage.sprite = characterSprite;
+
+                characterImage.transform.localScale = new Vector3(-0.5f, secondCharacterImage.transform.localScale.y, characterImage.transform.localScale.z);
+
+            }
+            else
+            {
+                characterImage.GetComponent<Animator>().runtimeAnimatorController = characterSpriteAnimator;
+
+                characterImage.transform.localScale = new Vector3(0.5f, characterImage.transform.localScale.y, characterImage.transform.localScale.z);
+
+            }
+
         }
         previousCharacter = characterSprite;
+        previousCharacterAnimator = characterSpriteAnimator;
     }
     private void PlayCharacterAudio()
     {

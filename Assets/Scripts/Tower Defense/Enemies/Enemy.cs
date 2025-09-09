@@ -285,7 +285,7 @@ public class Enemy : MonoBehaviour
     public void EnemyDetection()
     {
         //if enemy is infront of a obstacle tile
-        if(tileInFront != null && tileInFront.gameObject.CompareTag("Obstacle"))
+        if(tileInFront != null && tileInFront.gameObject.layer == obstacleMask)
         {
             RaycastHit hit;
 

@@ -1796,6 +1796,7 @@ GameObject:
   - component: {fileID: 9099624919380350090}
   - component: {fileID: 8391513475295359371}
   - component: {fileID: 1329658780773032541}
+  - component: {fileID: 3313539866749474695}
   m_Layer: 5
   m_Name: Speaker Sprite 02
   m_TagString: Untagged
@@ -1860,6 +1861,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &3313539866749474695
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4122526455193802456}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4667344059488015107
 GameObject:
   m_ObjectHideFlags: 0
@@ -3761,6 +3783,7 @@ GameObject:
   - component: {fileID: 576039265559121232}
   - component: {fileID: 2696306324978971557}
   - component: {fileID: 5875663201242985825}
+  - component: {fileID: 1887596645386196536}
   m_Layer: 5
   m_Name: Speaker Sprite 01
   m_TagString: Untagged
@@ -3825,6 +3848,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &1887596645386196536
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8648244782189202868}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8785097379774849544
 GameObject:
   m_ObjectHideFlags: 0
@@ -4118,7 +4162,10 @@ MonoBehaviour:
   descriptiveDialogueBox: {fileID: 709971411308650486}
   previousTalkingDialogueBox: {fileID: 1943102943867653088}
   fadedColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  characterSprite: {fileID: 0}
+  characterSpriteAnimator: {fileID: 0}
   previousCharacter: {fileID: 0}
+  previousCharacterAnimator: {fileID: 0}
   currentCharacterName: 
   previousCharacterLabel: 
   previousCharacterName: 

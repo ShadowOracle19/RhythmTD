@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2676683739750539523}
   - component: {fileID: 4727961330694019307}
   - component: {fileID: 366390443824338905}
+  - component: {fileID: 6765580955772427365}
   m_Layer: 0
   m_Name: Projectile-Trill-Echo
   m_TagString: Projectile_Tower
@@ -124,6 +125,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &6765580955772427365
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456792131810543251}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dbc83711655f8cf468778257b3c0bd0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8185038734171295255
 GameObject:
   m_ObjectHideFlags: 0

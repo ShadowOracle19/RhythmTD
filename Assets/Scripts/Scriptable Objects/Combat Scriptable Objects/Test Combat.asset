@@ -23,8 +23,9 @@ MonoBehaviour:
       tile: 1
     - pickup: {fileID: 8934297664530455703, guid: 1beab2ab7455e6d4b85e265908ffbc76, type: 3}
       tile: 2
-    killAllEnemiesWave: 0
-    pickupsWave: 0
+    killAllEnemiesWave: 1
+    collectAllPickupsWave: 0
+    pickupsWave: 1
   - delay: 0
     enemies: []
     pickups:
@@ -35,7 +36,8 @@ MonoBehaviour:
     - pickup: {fileID: 4306803411578690102, guid: 9b50e18cb935b594f9df0695e18399c0, type: 3}
       tile: 2
     killAllEnemiesWave: 0
-    pickupsWave: 0
+    collectAllPickupsWave: 0
+    pickupsWave: 1
   - delay: 0
     enemies: []
     pickups:
@@ -46,11 +48,13 @@ MonoBehaviour:
     - pickup: {fileID: 3680046174730677813, guid: 3f20554db12b73b4881efc85348b34d0, type: 3}
       tile: 2
     killAllEnemiesWave: 0
-    pickupsWave: 0
+    collectAllPickupsWave: 1
+    pickupsWave: 1
   - delay: 0
     enemies:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 0
     pickups: []
     killAllEnemiesWave: 0
+    collectAllPickupsWave: 0
     pickupsWave: 0

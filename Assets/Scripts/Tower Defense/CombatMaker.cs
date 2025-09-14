@@ -17,6 +17,7 @@ public class Wave
     public List<EnemyInit> enemies = new List<EnemyInit>();
     public List<PickupInit> pickups = new List<PickupInit>(); //added for pickups
     public bool killAllEnemiesWave;
+    public bool collectAllPickupsWave;
     public bool pickupsWave; //added for pickups
 }
 

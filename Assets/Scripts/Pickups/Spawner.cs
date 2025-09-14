@@ -51,6 +51,9 @@ public class Spawner : MonoBehaviour
     public List<Pickup> pickups = new List<Pickup>();
 
     public bool killAllEnemiesBeforeNextWave = false;
+    public bool collectAllPickupsBeforeNextWave = false;
+    public bool isPickupWave = false; //trigger for camera and cursor animation transitions
+    public bool pickupPhaseEnded = false;
 
     //to be changed to using beats once it's been proven to work
     public float forecastEndsIn = 4;
@@ -58,6 +61,10 @@ public class Spawner : MonoBehaviour
     public bool forecastingActive = false;
 
     [SerializeField] private ParticleSystem spawnParticles;
+
+    //camera & cursor animation
+    public Animator cameraAnimator;
+    public Animator cursorAnimator;
 
     [Header("Wave info")]
     public float timeRemainingToWaveStart = 0;
@@ -72,20 +79,19 @@ public class Spawner : MonoBehaviour
     public GameObject walkerEnemy;
     public GameObject wispEnemy;
 
-    /*
+
     private void Update()
     {
         WaveCounter();
     }
-    */
 
     public void WaveCounter()
     {
-        GameManager.Instance.waveCounter.text = "Wave " + waveIndex + "/" + currentWaves.Count;
+        //GameManager.Instance.waveCounter.text = "Wave " + waveIndex + "/" + currentWaves.Count;
         
         if (startOnce && allEnemiesSpawnedFromWave && allPickupsSpawnedFromWave)
         {
-            if (killAllEnemiesBeforeNextWave && enemies.Count != 0)
+            if ((killAllEnemiesBeforeNextWave && enemies.Count != 0) || collectAllPickupsBeforeNextWave && pickups.Count != 0)
                 return;
             if (timeRemainingToWaveStart >= delay) //reset delay
             {
@@ -100,6 +106,7 @@ public class Spawner : MonoBehaviour
                 allPickupsSpawnedFromWave = false;
                 StopForecastingWave(waveIndex);
                 killAllEnemiesBeforeNextWave = currentWaves[waveIndex].killAllEnemiesWave;
+                collectAllPickupsBeforeNextWave = currentWaves[waveIndex].collectAllPickupsWave;
             }
             else
             {
@@ -183,6 +190,8 @@ public class Spawner : MonoBehaviour
             startOnce = true;
             ResetSpawner();
             killAllEnemiesBeforeNextWave = currentWaves[waveIndex].killAllEnemiesWave;
+            collectAllPickupsBeforeNextWave = currentWaves[waveIndex].collectAllPickupsWave;
+            isPickupWave = currentWaves[waveIndex].pickupsWave;
             StopForecastingWave(0);
         }
     }
@@ -276,6 +285,20 @@ public class Spawner : MonoBehaviour
         if (!startOnce || GameManager.Instance.isGamePaused || allPickupsSpawnedFromWave)
             return;
         
+        //Animation
+        isPickupWave = currentWaves[waveIndex].pickupsWave;
+
+        if (isPickupWave)
+        {
+            StartPickupPhase();
+            pickupPhaseEnded = false;
+        }
+        else if (!pickupPhaseEnded)
+        {
+            EndPickupPhase();
+            pickupPhaseEnded = true;
+        }
+
         //once all pickups are spawned stop spawning them
         if (currentNumberOfPickupsSpawned >= numberOfPickupsToSpawn) 
         {
@@ -357,4 +380,25 @@ public class Spawner : MonoBehaviour
             spawnTiles[tileNum].GetComponent<Tile>().StopForecasting();
         }
     }
+
+    public void StartPickupPhase()
+    {
+        cameraAnimator.ResetTrigger("Pickup Phase End");
+        cameraAnimator.SetTrigger("Pickup Phase Start");
+
+        cursorAnimator.ResetTrigger("Horizontal");
+        cursorAnimator.SetTrigger("Vertical");
+    }
+
+    public void EndPickupPhase()
+    {
+        cameraAnimator.ResetTrigger("Pickup Phase Start");
+        cameraAnimator.SetTrigger("Pickup Phase End");
+
+        cursorAnimator.ResetTrigger("Vertical");
+        cursorAnimator.SetTrigger("Horizontal");
+    }
 }
+
+
+//pickupsWave && pickups.Count != 0

@@ -6746,11 +6746,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760402593}
   m_CullTransparentMesh: 1
---- !u!1 &772112781 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8252390111283821131, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
-  m_PrefabInstance: {fileID: 302608501}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &780253638 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6026861394526953110, guid: 87a3802f738b78040bfdfed40292f6ba, type: 3}
@@ -11793,6 +11788,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2553720419617110559, guid: c5ff5e6bb1612774bb2f035e87cd0ab0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2597316570309825890, guid: c5ff5e6bb1612774bb2f035e87cd0ab0, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -12473,6 +12472,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8259814085122982318, guid: c5ff5e6bb1612774bb2f035e87cd0ab0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8267191515971412477, guid: c5ff5e6bb1612774bb2f035e87cd0ab0, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -12535,7 +12538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091263931038544310, guid: c5ff5e6bb1612774bb2f035e87cd0ab0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9162053991200906424, guid: c5ff5e6bb1612774bb2f035e87cd0ab0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22807,7 +22810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9088167558878582843, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9099624919380350090, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_LocalScale.x
@@ -24921,7 +24924,7 @@ PrefabInstance:
     - target: {fileID: 1792896251010581641, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 772112781}
+      objectReference: {fileID: 0}
     - target: {fileID: 1821815779158772576, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: _onSelectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 

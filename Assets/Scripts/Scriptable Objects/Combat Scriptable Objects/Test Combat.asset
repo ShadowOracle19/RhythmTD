@@ -17,35 +17,44 @@ MonoBehaviour:
   - delay: 0
     enemies: []
     pickups:
-    - pickup: {fileID: 8934297664530455703, guid: 1beab2ab7455e6d4b85e265908ffbc76, type: 3}
+    - pickup: {fileID: 8934297664530455703, guid: 38b151c30b81c924d8f74864eef72ceb, type: 3}
       tile: 0
-    killAllEnemiesWave: 0
-    pickupsWave: 0
-  - delay: 0
-    enemies: []
-    pickups:
-    - pickup: {fileID: 8934297664530455703, guid: 1beab2ab7455e6d4b85e265908ffbc76, type: 3}
+    - pickup: {fileID: 8934297664530455703, guid: e0d9d911009325249a4d733fe493bab3, type: 3}
       tile: 1
-    killAllEnemiesWave: 0
-    pickupsWave: 0
-  - delay: 0
-    enemies: []
-    pickups:
     - pickup: {fileID: 8934297664530455703, guid: 1beab2ab7455e6d4b85e265908ffbc76, type: 3}
       tile: 2
-    killAllEnemiesWave: 0
-    pickupsWave: 0
+    killAllEnemiesWave: 1
+    collectAllPickupsWave: 0
+    pickupsWave: 1
   - delay: 0
     enemies: []
     pickups:
-    - pickup: {fileID: 8934297664530455703, guid: 1beab2ab7455e6d4b85e265908ffbc76, type: 3}
-      tile: 3
+    - pickup: {fileID: 4306803411578690102, guid: 2acd2a6977743454ab08af9df4905e14, type: 3}
+      tile: 0
+    - pickup: {fileID: 4306803411578690102, guid: 81b4e532d450422429fd107002b09c06, type: 3}
+      tile: 1
+    - pickup: {fileID: 4306803411578690102, guid: 9b50e18cb935b594f9df0695e18399c0, type: 3}
+      tile: 2
     killAllEnemiesWave: 0
-    pickupsWave: 0
-  - delay: 4
+    collectAllPickupsWave: 0
+    pickupsWave: 1
+  - delay: 0
+    enemies: []
+    pickups:
+    - pickup: {fileID: 3680046174730677813, guid: b001d37724ddc604dac5ed785c9e84cc, type: 3}
+      tile: 0
+    - pickup: {fileID: 3680046174730677813, guid: 8aec23426de3fa4458119cf55870253e, type: 3}
+      tile: 1
+    - pickup: {fileID: 3680046174730677813, guid: 3f20554db12b73b4881efc85348b34d0, type: 3}
+      tile: 2
+    killAllEnemiesWave: 0
+    collectAllPickupsWave: 1
+    pickupsWave: 1
+  - delay: 0
     enemies:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 0
     pickups: []
     killAllEnemiesWave: 0
+    collectAllPickupsWave: 0
     pickupsWave: 0

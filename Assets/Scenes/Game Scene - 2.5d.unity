@@ -3958,6 +3958,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6026861394526949736, guid: 87a3802f738b78040bfdfed40292f6ba, type: 3}
   m_PrefabInstance: {fileID: 1874531002}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &427909360 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1891488082759501072, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}
+  m_PrefabInstance: {fileID: 903052831418258788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &455326685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26561,6 +26566,14 @@ PrefabInstance:
       propertyPath: pickupParent
       value: 
       objectReference: {fileID: 886537953}
+    - target: {fileID: 7685969812972765685, guid: 6c8a19852cc476141bde27e7b138af60, type: 3}
+      propertyPath: cameraAnimator
+      value: 
+      objectReference: {fileID: 519420036}
+    - target: {fileID: 7685969812972765685, guid: 6c8a19852cc476141bde27e7b138af60, type: 3}
+      propertyPath: cursorAnimator
+      value: 
+      objectReference: {fileID: 427909360}
     - target: {fileID: 7685969812972765685, guid: 6c8a19852cc476141bde27e7b138af60, type: 3}
       propertyPath: spawnTiles.Array.size
       value: 6

@@ -290,7 +290,7 @@ public class GameManager : MonoBehaviour
 
             //conductor.SetActive(false);
         }
-        //Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
         isGamePaused = true;
         pauseMenuRoot.SetActive(true);
         MenuEventManager.Instance.PauseMenuOpen();
@@ -428,7 +428,7 @@ public class GameManager : MonoBehaviour
         winScreen.SetActive(true);
         winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(false, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo, false, false);
 
-        //Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
         CombatManager.Instance.EndEncounter();
         //gameOverScreen.SetActive(true);
         MenuEventManager.Instance.WinScreenOpen();
@@ -470,7 +470,7 @@ public class GameManager : MonoBehaviour
 
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
-        //Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
 
         //winScreen.SetActive(true);
         //conductor.SetActive(false);

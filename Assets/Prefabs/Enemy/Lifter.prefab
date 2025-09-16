@@ -53,10 +53,12 @@ MonoBehaviour:
   enemyEffect: {fileID: 0}
   enemyDeathSFX: {fileID: 6874018606574302444}
   path: []
+  timer: 0
   currentPositionHolder: {x: 0, y: 0, z: 0}
   dontMove: 0
   barTracker: 0
   currentHealth: 0
+  _currentDamage: 1
   trigger:
     m_PersistentCalls:
       m_Calls:
@@ -82,6 +84,7 @@ MonoBehaviour:
   burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
   teleported: 0
+  confusingOrderActive: 0
   obstacleFound: 0
   animator: {fileID: 8037740004645850056}
 --- !u!82 &6874018606574302444
@@ -239,6 +242,7 @@ GameObject:
   - component: {fileID: 3640185771209548449}
   - component: {fileID: 4566146585311110797}
   - component: {fileID: 8037740004645850056}
+  - component: {fileID: 5643728127747892018}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -254,13 +258,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036417653324047309}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9238797, z: 0.38268322, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.114, z: 0.271}
   m_LocalScale: {x: 0.20582938, y: 0.20582938, z: 0.20582938}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4066651677582518194}
-  m_LocalEulerAnglesHint: {x: -45, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4566146585311110797
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -304,7 +308,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_Sprite: {fileID: 1571664545, guid: 2d75c847e2f9dea4cb7d1dcbaea33960, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 7.680842, y: 7.77}
@@ -334,6 +338,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5643728127747892018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036417653324047309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f71264e77bc04baf632f936244fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 1
 --- !u!1 &6298202153938650124
 GameObject:
   m_ObjectHideFlags: 0

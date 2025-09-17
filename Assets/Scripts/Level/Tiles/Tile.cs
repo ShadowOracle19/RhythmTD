@@ -15,9 +15,9 @@ public class Tile : MonoBehaviour
     public GameObject forecastingObject;
 
     [Header("Spawn Tile Info")]
-    public float xPos = -5.5f;
-    public float yPos = 0.5f;
-    public float zPos = 0;
+    public float xPos;
+    public float yPos;
+    public float zPos;
 
     [Header("Target Tile Info")]
     public Transform targetPos;
@@ -29,7 +29,7 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
-        xPos = -5.5f;
+        xPos = this.gameObject.transform.position.x;
         yPos = 0.5f;
         zPos = this.gameObject.transform.position.z;
     }

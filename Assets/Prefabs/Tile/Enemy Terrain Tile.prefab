@@ -291,15 +291,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c87ab4710db37e4ea02ddf1ef3f9d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPlaceTower: 0
+  cantPlaceTower: 1
   placedTower: {fileID: 0}
   forecastingActive: 0
   forecastingObject: {fileID: 0}
+  xPos: -5.5
+  yPos: 0.5
   zPos: 0
   targetPos: {fileID: 0}
   glowObject: {fileID: 53756728613767783}
-  glowMaterial: {fileID: 2100000, guid: 4a1595b25a3b7f2458c63b904d191e16, type: 2}
-  unglowMaterial: {fileID: 2100000, guid: 2ec21231e53307c4188e6eb496190e00, type: 2}
+  glowMaterial: {fileID: 2100000, guid: 075799b7ae6806040845e0ce9fc6dbdb, type: 2}
+  unglowMaterial: {fileID: 2100000, guid: 075799b7ae6806040845e0ce9fc6dbdb, type: 2}
 --- !u!65 &8675062456483755191
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -410,7 +412,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2ec21231e53307c4188e6eb496190e00, type: 2}
+  - {fileID: 2100000, guid: 075799b7ae6806040845e0ce9fc6dbdb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

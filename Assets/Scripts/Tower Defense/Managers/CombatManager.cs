@@ -43,6 +43,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public Transform projectilesParent;
     [SerializeField] public Transform chargesParent;
     [SerializeField] public Transform pickupsParent;
+    [SerializeField] public Transform stageParent;
 
     public TextMeshProUGUI enemiesSpawnIn;
     public int enemyTimerMax = 30;
@@ -160,6 +161,14 @@ public class CombatManager : MonoBehaviour
         {
             GameManager.Instance.combatRunning = true;
         }
+
+        //Instantiate stage
+        var stage = Instantiate(encounter.stagePrefab, stageParent);
+
+        //add spawn and pickup tile call to spawner
+        Spawner.Instance.spawnTiles = stage.GetComponent<StageObject>().spawnTiles;
+        Spawner.Instance.pickupSpawnTiles = stage.GetComponent<StageObject>().pickupTiles;
+
         GameManager.Instance.playerInputManager.SetActive(true);
         GameManager.Instance.menuMusic.Stop();
         GameManager.Instance.winScreen.SetActive(false);
@@ -224,6 +233,8 @@ public class CombatManager : MonoBehaviour
             return;
         TowerManager.Instance.ResetTowerManager();
         ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
+
+
     }
 
     public void EndEncounter()
@@ -282,6 +293,11 @@ public class CombatManager : MonoBehaviour
         CombatDialogueManager.Instance.combatDialogueActive = false;
         CombatDialogueManager.Instance.Clear();
         CombatDialogueManager.Instance.dialogueBox.SetActive(false);
+
+        Spawner.Instance.spawnTiles.Clear();
+        Spawner.Instance.pickupSpawnTiles.Clear();
+
+        stageParent.GetComponentInChildren<StageObject>().DestroyStage();
     }
 
     // Update is called once per frame

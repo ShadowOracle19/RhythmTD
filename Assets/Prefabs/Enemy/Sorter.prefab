@@ -54,10 +54,12 @@ MonoBehaviour:
   enemyEffect: {fileID: 393065736643684831}
   enemyDeathSFX: {fileID: -8889972146457848405}
   path: []
+  timer: 0
   currentPositionHolder: {x: 0, y: 0, z: 0}
   dontMove: 0
   barTracker: 0
   currentHealth: 0
+  _currentDamage: 1
   trigger:
     m_PersistentCalls:
       m_Calls:
@@ -83,6 +85,7 @@ MonoBehaviour:
   burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
   teleported: 0
+  confusingOrderActive: 0
   obstacleFound: 0
   animator: {fileID: 2191527927414244448}
 --- !u!82 &-8889972146457848405
@@ -318,6 +321,7 @@ GameObject:
   - component: {fileID: 5780768365302221928}
   - component: {fileID: 802919734216119659}
   - component: {fileID: 2191527927414244448}
+  - component: {fileID: 8474372555899213218}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -333,13 +337,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6990879968843177822}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.92387956, z: 0.38268343, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.112, z: 0.136}
   m_LocalScale: {x: 0.2125589, y: 0.2125589, z: 0.2125589}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4066651677582518194}
-  m_LocalEulerAnglesHint: {x: -45, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &802919734216119659
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -383,7 +387,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_Sprite: {fileID: 708679853, guid: 4ab7a8bd52a3f284f94b79a40bb89939, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 4.1, y: 3.91}
@@ -413,3 +417,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8474372555899213218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6990879968843177822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f71264e77bc04baf632f936244fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 1

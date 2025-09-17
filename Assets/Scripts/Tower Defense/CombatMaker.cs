@@ -7,6 +7,7 @@ public class CombatMaker : ScriptableObject
 {
     
     public DynamicSongCreator dynamicSong;
+    public GameObject stagePrefab;
     public List<Wave> waves = new List<Wave>();
 }
 
@@ -38,3 +39,5 @@ public class PickupInit //added for pickups
     [Range(0,5)] public int tile;
 
 }
+
+

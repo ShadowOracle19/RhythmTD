@@ -96,8 +96,8 @@ public class Enemy : MonoBehaviour
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
-        
-        
+
+
         Movement();
 
     }
@@ -285,13 +285,16 @@ public class Enemy : MonoBehaviour
     public void EnemyDetection()
     {
         //if enemy is infront of a obstacle tile
-        if(tileInFront != null && tileInFront.gameObject.layer == obstacleMask)
+        if(obstacleFound)
         {
             RaycastHit hit;
+            RaycastHit diagHit;
+
+            Debug.Log("Obstacle in front");
 
             //If Tile above is a valid stage tile and the next tile in front isnt an obstacle
             if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward ), out hit, 1, tileMask) 
-                /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out hit, 1, obstacleMask))*/)
+                && !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out diagHit, 1, obstacleMask)))
             {
                 
                 nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + 1);
@@ -299,20 +302,14 @@ public class Enemy : MonoBehaviour
                 return;
             }
             //If tile below is a valid stage tile
-            else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask)
-                /*&& !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out hit, 1, obstacleMask))*/)
+            else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask) &&
+                !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out diagHit, 1, obstacleMask)))
             {
                 nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z - 1);
                 dontMove = true;
                 return;
 
             }
-        }
-        else if(tileInFront != null && tileInFront.gameObject.CompareTag("StageTile"))
-        {
-            nextPosition = new Vector3(transform.position.x - 1, 0.5f, transform.position.z);
-            dontMove = true;
-            return;
         }
     }
 
@@ -380,6 +377,7 @@ public class Enemy : MonoBehaviour
             dontMove = true;
             timer = 0;
             nextPosition = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+
             EnemyDetection();
             //gameObject.transform.DOMove(nextPosition, ConductorV2.instance.crotchet)
             //    .SetEase(Ease.OutSine)

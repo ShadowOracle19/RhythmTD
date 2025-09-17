@@ -431,7 +431,7 @@ public class CursorTD : MonoBehaviour
         //checks if resource is available and if the tower is on cooldown
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost 
             && !TowerManager.Instance.CheckIfOnCoolDown(tower.GetComponent<Tower>().towerInfo.type) &&
-            tile != null && tile.placedTower == null) 
+            tile != null && tile.placedTower == null && !tile.cantPlaceTower) 
         {
             if(CombatManager.Instance.resourceNum >= 150)
             {

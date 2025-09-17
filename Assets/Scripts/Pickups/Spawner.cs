@@ -44,8 +44,8 @@ public class Spawner : MonoBehaviour
 
     public int lastRandomSpawn;
 
-    public List<GameObject> spawnTiles = new List<GameObject>();
-    public List<GameObject> pickupSpawnTiles = new List<GameObject>();
+    public List<Tile> spawnTiles = new List<Tile>();
+    public List<Tile> pickupSpawnTiles = new List<Tile>();
 
     public List<Enemy> enemies = new List<Enemy>();
     public List<Pickup> pickups = new List<Pickup>();
@@ -82,7 +82,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        WaveCounter();
+        //WaveCounter();
     }
 
     public void WaveCounter()
@@ -242,7 +242,7 @@ public class Spawner : MonoBehaviour
             int tileNum = currentWaves[waveIndex].enemies[i].tile;
             tileNum = Mathf.Clamp(tileNum, 0, 5);
 
-            GameObject enemy = Instantiate(currentWaves[waveIndex].enemies[i].enemy, new Vector3(transform.position.x, 0.5f, 
+            GameObject enemy = Instantiate(currentWaves[waveIndex].enemies[i].enemy, new Vector3(spawnTiles[tileNum].GetComponent<Tile>().xPos, 0.5f, 
                 spawnTiles[tileNum].GetComponent<Tile>().zPos), Quaternion.identity, enemyParent);
 
 

@@ -14,28 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dynamicSong: {fileID: 11400000, guid: 081313c7fc029ae40b25b701583f33ec, type: 2}
   waves:
-  - delay: 0
+  - delay: 8
     enemies:
-    - enemy: {fileID: 0}
+    - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+      tile: 1
+    - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+      tile: 3
+    pickups: []
+    killAllEnemiesWave: 0
+    collectAllPickupsWave: 0
+    pickupsWave: 0
+  - delay: 4
+    enemies:
+    - enemy: {fileID: 239132429429542008, guid: ae22a1fb4d3728a45a8be833bb8a0027, type: 3}
+      tile: 2
+    pickups: []
+    killAllEnemiesWave: 0
+    collectAllPickupsWave: 0
+    pickupsWave: 0
+  - delay: 0
+    enemies: []
+    pickups:
+    - pickup: {fileID: 0}
       tile: 0
+    - pickup: {fileID: 8934297664530455703, guid: 1beab2ab7455e6d4b85e265908ffbc76, type: 3}
+      tile: 1
+    - pickup: {fileID: 8934297664530455703, guid: 1beab2ab7455e6d4b85e265908ffbc76, type: 3}
+      tile: 2
+    - pickup: {fileID: 8934297664530455703, guid: 1beab2ab7455e6d4b85e265908ffbc76, type: 3}
+      tile: 3
+    killAllEnemiesWave: 0
+    collectAllPickupsWave: 1
+    pickupsWave: 1
+  - delay: 8
+    enemies:
+    - enemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
+      tile: 1
+    - enemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
+      tile: 3
     pickups: []
     killAllEnemiesWave: 0
     collectAllPickupsWave: 0
     pickupsWave: 0
-  - delay: 0
-    enemies: []
-    pickups: []
-    killAllEnemiesWave: 0
-    collectAllPickupsWave: 0
-    pickupsWave: 0
-  - delay: 0
-    enemies: []
-    pickups: []
-    killAllEnemiesWave: 0
-    collectAllPickupsWave: 0
-    pickupsWave: 0
-  - delay: 0
-    enemies: []
+  - delay: 8
+    enemies:
+    - enemy: {fileID: 239132429429542008, guid: ae22a1fb4d3728a45a8be833bb8a0027, type: 3}
+      tile: 2
     pickups: []
     killAllEnemiesWave: 0
     collectAllPickupsWave: 0

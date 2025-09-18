@@ -466,6 +466,11 @@ public class CursorTD : MonoBehaviour
 
         if (tile != null && tile.placedTower != null)//tower on tile
         {
+            upgradeSlotW.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade1;
+            upgradeSlotD.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade2;
+            upgradeSlotS.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade3;
+            upgradeSlotA.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade4;
+
             upgradeTower = true;
             upgradeMenu.SetActive(towerSelectMenuOpened);
             return;

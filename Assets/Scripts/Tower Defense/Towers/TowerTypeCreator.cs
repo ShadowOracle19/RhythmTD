@@ -39,6 +39,11 @@ public class TowerTypeCreator : ScriptableObject
     public bool isResourceTower = false;
     public int resourceGain = 5;
 
+    [Header("Upgrade Icons")]
+    public Sprite upgrade1;
+    public Sprite upgrade2;
+    public Sprite upgrade3;
+    public Sprite upgrade4;
 }
 
 public enum TowerAttackPattern

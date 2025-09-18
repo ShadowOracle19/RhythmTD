@@ -6,6 +6,11 @@ public class TrillTower : Tower
 {
     public int chargeShotDamage = 0;
 
+    public AudioSource TrillDamage;
+    public AudioSource TrillDeath;
+    public AudioSource TrillUpgrade;
+    public AudioSource TrillPlacement;
+
     // Start is called before the first frame update
     public override void Start()
     {

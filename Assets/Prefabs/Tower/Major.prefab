@@ -547,6 +547,13 @@ MonoBehaviour:
   upgradeCost4: 0
   upgradeFourActive: 0
   feelingItNow: 0
+  damageSFX: {fileID: -4788740010970564138}
+  deathSFX: {fileID: 7132763588566841731}
+  upgradeSFX: {fileID: -6589731058869758109}
+  MajorDamage: {fileID: 0}
+  MajorDeath: {fileID: 0}
+  MajorPlacement: {fileID: 0}
+  MajorUpgrade: {fileID: 0}
 --- !u!82 &3145858868990155513
 AudioSource:
   m_ObjectHideFlags: 0
@@ -708,8 +715,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 9195169410856658724, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
   m_audioClip: {fileID: 8300000, guid: 355f170f24f57ed4a88150870c735268, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -804,8 +811,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 9195169410856658724, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
   m_audioClip: {fileID: 8300000, guid: a6e9d7e8f8e137f4a86970b8c51a6a94, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -901,7 +908,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 9195169410856658724, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
   m_audioClip: {fileID: 8300000, guid: 1a2e560924fd0014499f1b8cf0d97f4e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -996,8 +1003,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 9195169410856658724, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
   m_audioClip: {fileID: 8300000, guid: 15d2033861e329c4e9c0395efcb8dfe0, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

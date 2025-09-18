@@ -562,6 +562,7 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeOneActive = true;
+                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
                 //tile.placedTower.GetComponent<Tower>().nextProjectile = tile.placedTower.GetComponent<Tower>().upgradeProjectile01;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost1;
 
@@ -581,7 +582,8 @@ public class CursorTD : MonoBehaviour
                 !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
-                tile.placedTower.GetComponent<Tower>().upgradeTwoActive = true; 
+                tile.placedTower.GetComponent<Tower>().upgradeTwoActive = true;
+                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost2;
                 
                 ClosePlacementMenu();
@@ -601,6 +603,7 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeThreeActive = true;
+                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost3;
 
                 ClosePlacementMenu();
@@ -621,6 +624,7 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeFourActive = true;
+                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost4;
 
                 ClosePlacementMenu();

@@ -8,10 +8,6 @@ public class FlatTower : Tower
     bool firstTimeShieldPurchase = false;
     int upgradeTwoRecharge;
 
-    public AudioSource FlatsDamage;
-    public AudioSource FlatsDeath;
-    public AudioSource FlatsUpgrade;
-    public AudioSource FlatsPlacement;
 
     // Start is called before the first frame update
     public override void Start()

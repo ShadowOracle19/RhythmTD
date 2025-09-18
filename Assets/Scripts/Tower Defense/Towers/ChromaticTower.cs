@@ -6,10 +6,7 @@ public class ChromaticTower : Tower
 {
     // Start is called before the first frame update
 
-    public AudioSource ChromaticDamage;
-    public AudioSource ChromaticDeath;
-    public AudioSource ChromaticUpgrade;
-    public AudioSource ChromaticPlacement;
+    
 
     public override void Start()
     {
@@ -50,4 +47,11 @@ public class ChromaticTower : Tower
 
         PlaceCharge(chargeValue, this);
     }
+
+    public override void Damage(int damage)
+    {
+        base.Damage(damage);
+    }
+
+    
 }

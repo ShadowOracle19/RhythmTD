@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class MajorTower : Tower
 {
-    public AudioSource MajorDamage;
-    public AudioSource MajorDeath;
-    public AudioSource MajorPlacement;
-    public AudioSource MajorUpgrade;
 
     // Start is called before the first frame update
     public override void Start()

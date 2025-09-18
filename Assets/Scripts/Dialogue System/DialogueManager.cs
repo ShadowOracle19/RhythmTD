@@ -363,14 +363,14 @@ public class DialogueManager : MonoBehaviour
                     secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = null;
                     secondCharacterImage.sprite = characterSprite;
 
-                    secondCharacterImage.transform.localScale = new Vector3(0.5f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
+                    secondCharacterImage.transform.localScale = new Vector3(1f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
 
                 }
                 else
                 {
                     secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = characterSpriteAnimator;
 
-                    secondCharacterImage.transform.localScale = new Vector3(-0.5f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
+                    secondCharacterImage.transform.localScale = new Vector3(-1f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
                 }
 
                 return;
@@ -386,14 +386,14 @@ public class DialogueManager : MonoBehaviour
                     secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = null;
                     secondCharacterImage.sprite = previousCharacter;
 
-                    secondCharacterImage.transform.localScale = new Vector3(0.5f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
+                    secondCharacterImage.transform.localScale = new Vector3(1f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
 
                 }
                 else
                 {
                     secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = previousCharacterAnimator;
 
-                    secondCharacterImage.transform.localScale = new Vector3(-0.5f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
+                    secondCharacterImage.transform.localScale = new Vector3(-1f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
                 }
 
 
@@ -421,14 +421,14 @@ public class DialogueManager : MonoBehaviour
                 characterImage.GetComponent<Animator>().runtimeAnimatorController = null;
                 characterImage.sprite = characterSprite;
 
-                characterImage.transform.localScale = new Vector3(-0.5f, secondCharacterImage.transform.localScale.y, characterImage.transform.localScale.z);
+                characterImage.transform.localScale = new Vector3(-1f, secondCharacterImage.transform.localScale.y, characterImage.transform.localScale.z);
 
             }
             else
             {
                 characterImage.GetComponent<Animator>().runtimeAnimatorController = characterSpriteAnimator;
 
-                characterImage.transform.localScale = new Vector3(0.5f, characterImage.transform.localScale.y, characterImage.transform.localScale.z);
+                characterImage.transform.localScale = new Vector3(1f, characterImage.transform.localScale.y, characterImage.transform.localScale.z);
 
             }
 

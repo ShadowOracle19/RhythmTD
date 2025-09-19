@@ -371,10 +371,6 @@ public class GameManager : MonoBehaviour
         CursorTD.Instance.InitializeCursor();
 
         TowerManager.Instance.ResetTowerManager();
-        TowerManager.Instance.SetupResourceBars();
-
-
-
 
         CombatManager.Instance.enemyTotal = 7;
 

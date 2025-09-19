@@ -113,19 +113,7 @@ public class TowerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Cooldown();
-        //UpdateCooldownShader();
-
-        /*
-        if (FeverSystem.Instance.feverModeActive == true)
-        {
-           stageBackground.GetComponent<Image>().material = feverModeShader; 
-        }
-        else
-        {
-            stageBackground.GetComponent<Image>().material = null; 
-        }
-        */
+        
     }
 
     public void SetResourceBarSprite(Tower tower, Slider resourceSlider, Image resourceImage)
@@ -153,112 +141,7 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    public void TowerCost()
-    {
-        //tower1Slider.value = CombatManager.Instance.resourceNum;
-        //tower2Slider.value = CombatManager.Instance.resourceNum;
-        //tower3Slider.value = CombatManager.Instance.resourceNum;
-        //tower4Slider.value = CombatManager.Instance.resourceNum;
-
-        //if (!towerSwap)
-        //{
-        //    tower1Cost.text = towers[0].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    tower2Cost.text = towers[1].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    tower3Cost.text = towers[2].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    tower4Cost.text = towers[3].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-
-        //    towerCost1PM.text = towers[0].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    towerCost2PM.text = towers[1].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    towerCost3PM.text = towers[2].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    towerCost4PM.text = towers[3].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //}
-        //else
-        //{
-        //    tower1Cost.text = towers[4].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    tower2Cost.text = towers[5].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    tower3Cost.text = towers[6].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    tower4Cost.text = towers[7].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-
-        //    towerCost1PM.text = towers[4].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    towerCost2PM.text = towers[5].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    towerCost3PM.text = towers[6].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //    towerCost4PM.text = towers[7].GetComponent<Tower>().towerInfo.resourceCost.ToString();
-        //}
-        
-    }
-
-    public void Cooldown()
-    {
-        //drumCooldownSlot.SetActive(drumCooldown);
-        //bassCooldownSlot.SetActive(bassCooldown);
-        //pianoCooldownSlot.SetActive(pianoCooldown);
-        //guitarCooldownSlot.SetActive(guitarCooldown);
-
-        ////front slots
-        //if (drumCooldown)
-        //{
-        //    drumCooldownTime += Time.deltaTime;
-
-        //    //cooldown effect
-        //    drumCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(drumCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((drumCooldownTime / drumCooldownTimeRemaining) * 100));
-        //    drumCooldownSlotPM.GetComponent<RectTransform>().offsetMax = new Vector2(-2, -(((drumCooldownTime / drumCooldownTimeRemaining) * 100))-120);
-        //    //drumCooldownSlotPM.transform.localScale = new Vector3(1, drumCooldownTime / drumCooldownTimeRemaining, 1);
-
-        //    if(drumCooldownTime >= drumCooldownTimeRemaining)
-        //    {
-        //        drumCooldown = false;
-        //        drumCooldownTime = 0;
-        //    }
-            
-        //}
-        //if(bassCooldown)
-        //{
-        //    bassCooldownTime += Time.deltaTime;
-
-        //    //cooldown effect
-        //    bassCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(bassCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((bassCooldownTime / bassCooldownTimeRemaining) * 100));
-        //    bassCooldownSlotPM.GetComponent<RectTransform>().offsetMax = new Vector2(-120, -(((bassCooldownTime / bassCooldownTimeRemaining) * 100))-232);
-        //    //bassCooldownSlotPM.transform.localScale = new Vector3(1, bassCooldownTime / bassCooldownTimeRemaining, 1);
-
-        //    if (bassCooldownTime >= bassCooldownTimeRemaining)
-        //    {
-        //        bassCooldown = false;
-        //        bassCooldownTime = 0;
-        //    }
-        //}
-        //if(guitarCooldown)
-        //{
-        //    guitarCooldownTime += Time.deltaTime;
-
-        //    //cooldown effect
-        //    guitarCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(guitarCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((guitarCooldownTime / guitarCooldownTimeRemaining) * 100));
-        //    guitarCooldownSlotPM.GetComponent<RectTransform>().offsetMax = new Vector2(-120, -(((guitarCooldownTime / guitarCooldownTimeRemaining) * 100))-9);
-        //    //guitarCooldownSlotPM.transform.localScale = new Vector3(1, guitarCooldownTime / guitarCooldownTimeRemaining, 1);
-
-        //    if (guitarCooldownTime >= guitarCooldownTimeRemaining)
-        //    {
-        //        guitarCooldown = false;
-        //        guitarCooldownTime = 0;
-        //    }
-        //}
-        //if(pianoCooldown)
-        //{
-        //    pianoCooldownTime += Time.deltaTime;
-
-        //    //cooldown effect
-        //    pianoCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(pianoCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((pianoCooldownTime / pianoCooldownTimeRemaining) * 100));
-        //    pianoCooldownSlotPM.GetComponent<RectTransform>().offsetMax = new Vector2(-223, -(((pianoCooldownTime / pianoCooldownTimeRemaining) * 100))-120);
-        //    //pianoCooldownSlotPM.transform.localScale = new Vector3(1, pianoCooldownTime / pianoCooldownTimeRemaining, 1);
-
-
-        //    if (pianoCooldownTime >= pianoCooldownTimeRemaining)
-        //    { 
-        //        pianoCooldown = false;
-        //        pianoCooldownTime = 0;
-        //    }
-        //}
-    }
-
+    
     public void SwapTowers()
     {
         //(drumCooldown, drumCooldownBack) = (drumCooldownBack, drumCooldown);
@@ -279,27 +162,7 @@ public class TowerManager : MonoBehaviour
         //towerSwap = !towerSwap;
     }
 
-    //public bool CheckIfOnCoolDown(InstrumentType type)
-    //{
-    //    switch (type)
-    //    {
-    //        case InstrumentType.Drums:
-    //            return drumCooldown;
-
-    //        case InstrumentType.Guitar:
-    //            return guitarCooldown;
-
-    //        case InstrumentType.Vocal:
-    //            return bassCooldown;
-
-    //        case InstrumentType.Piano:
-    //            return pianoCooldown;
-
-    //        default:
-    //            return true;
-    //    }
-    //}
-
+    
     public bool CheckIfOnCoolDown(int towerNum)
     {
         switch (towerNum)
@@ -551,64 +414,7 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    /*
-    void UpdateCooldownShader() 
-    { 
-        
-        //GameObject menuTower, GameObject sidebarTower, bool shaderToggle
-        if (shaderToggle)
-        {
-            menuTower.GetComponent<Image>().material = greyscaleShader;
-            //sidebarTower.GetComponent<Image>().material = greyscaleShader;
-        }
-        else
-        {
-            menuTower.GetComponent<Image>().material = null;
-            //sidebarTower.GetComponent<Image>().material = null;
-        }
-        
-
-        // Check if guitar tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-        if (guitarCooldown || CombatManager.Instance.resourceNum < towers[0].GetComponent<Tower>().towerInfo.resourceCost) 
-        {
-            menuTower1.GetComponent<Image>().material = greyscaleShader;
-        }
-        else if (!guitarCooldown && CombatManager.Instance.resourceNum >= towers[0].GetComponent<Tower>().towerInfo.resourceCost)
-        {
-            menuTower1.GetComponent<Image>().material = null;
-        }
-        
-        // Check if drum tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-        if (drumCooldown || CombatManager.Instance.resourceNum < towers[1].GetComponent<Tower>().towerInfo.resourceCost) 
-        {
-            menuTower2.GetComponent<Image>().material = greyscaleShader;
-        }
-        else if (!drumCooldown && CombatManager.Instance.resourceNum >= towers[1].GetComponent<Tower>().towerInfo.resourceCost)
-        {
-            menuTower2.GetComponent<Image>().material = null;
-        }
-
-        // Check if bass tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-        if (bassCooldown || CombatManager.Instance.resourceNum < towers[2].GetComponent<Tower>().towerInfo.resourceCost) 
-        {
-            menuTower3.GetComponent<Image>().material = greyscaleShader;
-        }
-        else if (!bassCooldown && CombatManager.Instance.resourceNum >= towers[2].GetComponent<Tower>().towerInfo.resourceCost)
-        {
-            menuTower3.GetComponent<Image>().material = null;
-        }
-
-        // Check if piano tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-        if (pianoCooldown || CombatManager.Instance.resourceNum < towers[3].GetComponent<Tower>().towerInfo.resourceCost) 
-        {
-            menuTower4.GetComponent<Image>().material = greyscaleShader;
-        }
-        else if (!pianoCooldown && CombatManager.Instance.resourceNum >= towers[3].GetComponent<Tower>().towerInfo.resourceCost)
-        {
-            menuTower4.GetComponent<Image>().material = null;
-        }
-    */
-
+   
 }
 
 [System.Serializable]

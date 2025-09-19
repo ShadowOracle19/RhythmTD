@@ -225,7 +225,6 @@ public class CombatManager : MonoBehaviour
 
         BeatIndicatorManager.Instance.ResetBeatIndicator();
 
-        TowerManager.Instance.SetupResourceBars();
 
         Cursor.lockState = CursorLockMode.Locked;
 

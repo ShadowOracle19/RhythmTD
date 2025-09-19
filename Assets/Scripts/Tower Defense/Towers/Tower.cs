@@ -465,7 +465,7 @@ public class Tower : MonoBehaviour
             default:
                 break;
         }
-        TowerManager.Instance.towers.Remove(gameObject);
+        //TowerManager.Instance.towerList.Remove(this);
         connectedTile.placedTower = null;
         Destroy(gameObject);
     }

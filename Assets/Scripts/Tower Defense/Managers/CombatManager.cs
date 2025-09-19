@@ -302,9 +302,6 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TowerManager.Instance.TowerCost();
-
-
         ResourceBar();
 
         //checks if not all enemies have been spawned

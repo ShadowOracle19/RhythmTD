@@ -146,6 +146,9 @@ public class Tower : MonoBehaviour
     [Header("Upgrade Modifiers")]
     public bool feelingItNow = false;
 
+    public AudioSource damageSFX;
+    public AudioSource deathSFX;
+    public AudioSource upgradeSFX;
 
     public virtual void Start()
     {
@@ -462,13 +465,14 @@ public class Tower : MonoBehaviour
             default:
                 break;
         }
-        TowerManager.Instance.towers.Remove(gameObject);
+        //TowerManager.Instance.towerList.Remove(this);
         connectedTile.placedTower = null;
         Destroy(gameObject);
     }
 
     public virtual void Damage(int damage)
     {
+        damageSFX.Play();
         if(isShielded)
         {
             SpawnParticles(this.transform, defaultAttackSprite, shieldDestructionParticles, shieldDestructionParticlesInstance, true, false);
@@ -480,6 +484,7 @@ public class Tower : MonoBehaviour
 
         if(currentHealth <= 0)
         {
+            deathSFX.Play();
             clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the tower clash particle effect
             RemoveTower();
         }

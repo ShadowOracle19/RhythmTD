@@ -8,6 +8,7 @@ public class FlatTower : Tower
     bool firstTimeShieldPurchase = false;
     int upgradeTwoRecharge;
 
+
     // Start is called before the first frame update
     public override void Start()
     {

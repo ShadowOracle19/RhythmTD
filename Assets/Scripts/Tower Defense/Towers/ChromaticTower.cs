@@ -5,6 +5,9 @@ using UnityEngine;
 public class ChromaticTower : Tower
 {
     // Start is called before the first frame update
+
+    
+
     public override void Start()
     {
         base.Start();
@@ -44,4 +47,11 @@ public class ChromaticTower : Tower
 
         PlaceCharge(chargeValue, this);
     }
+
+    public override void Damage(int damage)
+    {
+        base.Damage(damage);
+    }
+
+    
 }

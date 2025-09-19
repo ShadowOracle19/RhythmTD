@@ -303,24 +303,24 @@ public class CursorTD : MonoBehaviour
         isMoving = false;
         gameObject.transform.position = new Vector3(0.5f, 0.1f, -0.5f);
 
-        towerSlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
-        towerSlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
-        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[0].GetComponent<Tower>(), tower1Slider, tower1ResourceSprite);
+        towerSlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0].tower;
+        towerSlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[0].tower.GetComponent<Tower>(), tower1Slider, tower1ResourceSprite);
 
 
-        towerSlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
-        towerSlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
-        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[1].GetComponent<Tower>(), tower2Slider, tower2ResourceSprite);
+        towerSlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1].tower;
+        towerSlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[1].tower.GetComponent<Tower>(), tower2Slider, tower2ResourceSprite);
 
 
-        towerSlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
-        towerSlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
-        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[2].GetComponent<Tower>(), tower3Slider, tower3ResourceSprite);
+        towerSlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2].tower;
+        towerSlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[2].tower.GetComponent<Tower>(), tower3Slider, tower3ResourceSprite);
 
 
-        towerSlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
-        towerSlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
-        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[3].GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
+        towerSlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3].tower;
+        towerSlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[3].tower.GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
 
         pauseMovement = false;
         towerSwap = false;
@@ -437,21 +437,21 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public void TryToPlaceTower(GameObject tower, AudioSource feedbackAudio, string feedbackVisual)
+    public void TryToPlaceTower(GameObject tower, AudioSource feedbackAudio, string feedbackVisual, int towerNum)
     {
         //checks if resource is available and if the tower is on cooldown
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost 
-            && !TowerManager.Instance.CheckIfOnCoolDown(tower.GetComponent<Tower>().towerInfo.type) &&
+            && !TowerManager.Instance.CheckIfOnCoolDown(towerNum) &&
             tile != null && tile.placedTower == null && !tile.cantPlaceTower) 
         {
             if(CombatManager.Instance.resourceNum >= 150)
             {
-                TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), true);
+                TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), true);
                 CombatManager.Instance.resourceNum -= 150;
             }
             else if(CombatManager.Instance.resourceNum < 149)
             {
-                TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, tower.GetComponent<Tower>().towerInfo.type, CheckOnBeat(), false);
+                TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), false);
                 CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
             }
 
@@ -477,6 +477,11 @@ public class CursorTD : MonoBehaviour
 
         if (tile != null && tile.placedTower != null)//tower on tile
         {
+            upgradeSlotW.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade1;
+            upgradeSlotD.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade2;
+            upgradeSlotS.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade3;
+            upgradeSlotA.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade4;
+
             upgradeTower = true;
             upgradeMenu.SetActive(towerSelectMenuOpened);
             return;
@@ -517,7 +522,7 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
             {
-                TryToPlaceTower(towerSlotW.GetComponent<TowerButton>().tower, upInvalidSfx, "Check Slot 01");
+                TryToPlaceTower(towerSlotW.GetComponent<TowerButton>().tower, upInvalidSfx, "Check Slot 01", 0);
 
                 return;
             }
@@ -526,7 +531,7 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
             {
-                TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04");
+                TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 1);
 
                 return;
             }
@@ -535,7 +540,7 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
             {
-                TryToPlaceTower(towerSlotS.GetComponent<TowerButton>().tower, downInvalidSfx, "Check Slot 03");
+                TryToPlaceTower(towerSlotS.GetComponent<TowerButton>().tower, downInvalidSfx, "Check Slot 03", 2);
 
                 return;
             }
@@ -544,7 +549,7 @@ public class CursorTD : MonoBehaviour
         {
             if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
             {
-                TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02");
+                TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 3);
 
                 return;
             }
@@ -568,6 +573,7 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeOneActive = true;
+                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
                 //tile.placedTower.GetComponent<Tower>().nextProjectile = tile.placedTower.GetComponent<Tower>().upgradeProjectile01;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost1;
 
@@ -587,7 +593,8 @@ public class CursorTD : MonoBehaviour
                 !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
-                tile.placedTower.GetComponent<Tower>().upgradeTwoActive = true; 
+                tile.placedTower.GetComponent<Tower>().upgradeTwoActive = true;
+                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost2;
                 
                 ClosePlacementMenu();
@@ -607,6 +614,7 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeThreeActive = true;
+                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost3;
 
                 ClosePlacementMenu();
@@ -627,6 +635,7 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeFourActive = true;
+                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost4;
 
                 ClosePlacementMenu();
@@ -909,7 +918,8 @@ public class CursorTD : MonoBehaviour
         }
         else
         {
-            if (TowerManager.Instance.guitarCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.resourceCost) 
+
+            if (TowerManager.Instance.towers[0].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
                 towerSlotW.GetComponent<Image>().material = greyscaleShader;
             }
@@ -918,8 +928,7 @@ public class CursorTD : MonoBehaviour
                 towerSlotW.GetComponent<Image>().material = null;
             }
             
-            // Check if drum tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-            if (TowerManager.Instance.drumCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.resourceCost) 
+            if (TowerManager.Instance.towers[1].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
                 towerSlotD.GetComponent<Image>().material = greyscaleShader;
             }
@@ -928,8 +937,7 @@ public class CursorTD : MonoBehaviour
                 towerSlotD.GetComponent<Image>().material = null;
             }
 
-            // Check if bass tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-            if (TowerManager.Instance.bassCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.resourceCost) 
+            if (TowerManager.Instance.towers[2].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
                 towerSlotS.GetComponent<Image>().material = greyscaleShader;
             }
@@ -938,8 +946,7 @@ public class CursorTD : MonoBehaviour
                 towerSlotS.GetComponent<Image>().material = null;
             }
 
-            // Check if piano tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-            if (TowerManager.Instance.pianoCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.resourceCost) 
+            if (TowerManager.Instance.towers[3].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
                 towerSlotA.GetComponent<Image>().material = greyscaleShader;
             }

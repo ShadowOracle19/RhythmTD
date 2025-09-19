@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    #region level buttons
     private void LoadLevelButtons()
     {
         EncounterCreator[] encounters = Resources.LoadAll<EncounterCreator>("Encounters/");
@@ -160,7 +161,7 @@ public class GameManager : MonoBehaviour
         gameObject = Instantiate(levelButtons, Vector3.zero, Quaternion.identity);
         gameObject.transform.SetParent(levelParent);
 
-        gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        gameObject.transform.localScale = new Vector3(1f, 1f, 1);
         
         gameObject.name = encounter.name;
 
@@ -252,6 +253,7 @@ public class GameManager : MonoBehaviour
 
         return item.GetComponent<Selectable>();
     }
+    #endregion
 
     #region pause function
     public void HandlePauseMenuInput()
@@ -369,10 +371,6 @@ public class GameManager : MonoBehaviour
         CursorTD.Instance.InitializeCursor();
 
         TowerManager.Instance.ResetTowerManager();
-        TowerManager.Instance.SetupResourceBars();
-
-
-
 
         CombatManager.Instance.enemyTotal = 7;
 

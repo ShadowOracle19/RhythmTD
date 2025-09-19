@@ -6,6 +6,7 @@ public class TrillTower : Tower
 {
     public int chargeShotDamage = 0;
 
+
     // Start is called before the first frame update
     public override void Start()
     {

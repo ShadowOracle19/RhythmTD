@@ -446,6 +446,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b017c841652d5fb45bffabc29f71d225, type: 3}
   m_PrefabInstance: {fileID: 73367390}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &79708976 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 746901203092204707, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+  m_PrefabInstance: {fileID: 5140289844780695287}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &95886777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8571,6 +8576,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeXZAxis: 1
+--- !u!114 &1337495101 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7753690042788845237, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+  m_PrefabInstance: {fileID: 5140289844780695287}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1344550342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17247,6 +17263,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1036729813113359282, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: textBoxAnimator
+      value: 
+      objectReference: {fileID: 79708976}
+    - target: {fileID: 1036729813113359282, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: _previousSpeakerName
+      value: 
+      objectReference: {fileID: 1337495101}
     - target: {fileID: 1100459882380725920, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_Volume
       value: 0.2
@@ -17297,7 +17321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9088167558878582843, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9099624919380350090, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_LocalScale.x

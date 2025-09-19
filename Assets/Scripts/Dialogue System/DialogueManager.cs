@@ -85,6 +85,17 @@ public class DialogueManager : MonoBehaviour
 
     public float textSpeed = 0.05f;
     public float defaultTextSpeed = 0.05f;
+
+    [SerializeField] private Animator textBoxAnimator;
+    // HI LUCY. I PUT ALL OF THE ANIMATION TRIGGER CODE HERE SO HOPEFULLY YOU CAN USE IT FOR IMPLEMENTATION. <3
+    /*
+    textBoxAnimator.SetTrigger("Left Speaker");
+    textBoxAnimator.SetTrigger("Right Speaker");
+    textBoxAnimator.SetTrigger("Middle Speaker");
+    textBoxAnimator.ResetTrigger("Left Speaker");
+    textBoxAnimator.ResetTrigger("Right Speaker");
+    textBoxAnimator.ResetTrigger("Middle Speaker");
+    */
        
     // Contains a reference to the object last selected before opening a dialogue sequence
     public GameObject lastActiveObject;
@@ -117,7 +128,6 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         eventSystem = EventSystem.current;
-
     }
 
 

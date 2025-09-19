@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MajorProjectile : Projectile
 {
+    [Header("Buff PFX")]
+    [SerializeField] private ParticleSystem buffMajorPfx;
+    private ParticleSystem buffMajorPfxInstance;
+    
     // Start is called before the first frame update
     public override void Start()
     {
@@ -33,6 +37,7 @@ public class MajorProjectile : Projectile
         if(collision.gameObject.CompareTag("Tower") 
             && towerFiredFrom.GetComponent<Tower>().upgradeOneActive)
         {
+            buffMajorPfxInstance = Instantiate(buffMajorPfx, collision.gameObject.transform.position, Quaternion.identity);
             collision.GetComponent<Tower>().feelingItNow = true;
             RemoveProjectile();
         }

@@ -46,6 +46,13 @@ public class CursorTD : MonoBehaviour
 
     [Header("Shaders Materials")]
     public Material greyscaleShader;
+
+    [Header("Buff PFX")]
+    [SerializeField] private ParticleSystem buffGreatPfx;
+    private ParticleSystem buffGreatPfxInstance;
+
+    [SerializeField] private ParticleSystem buffPerfectPfx;
+    private ParticleSystem buffPerfectPfxInstance;
     
     [Header("Menu SFX")]
     public AudioSource upInvalidSfx;
@@ -407,10 +414,14 @@ public class CursorTD : MonoBehaviour
                     break;
                 case _BeatResult.great:
                     
+                    buffGreatPfxInstance = Instantiate(buffGreatPfx, tile.placedTower.transform.position, Quaternion.identity);
+
                     ComboManager.Instance.IncreaseCombo();
                     tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
                     break;
                 case _BeatResult.perfect:
+                    
+                    buffPerfectPfxInstance = Instantiate(buffPerfectPfx, tile.placedTower.transform.position, Quaternion.identity);
                     
                     ComboManager.Instance.IncreaseCombo();
                     tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);

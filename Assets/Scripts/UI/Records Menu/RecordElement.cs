@@ -6,6 +6,9 @@ public class RecordElement : MonoBehaviour
 {
     public float smooth = 5.0f;
     public Quaternion rotationTarget;
+    public float rotationTargetX = 0.0f;
+    public float rotationTargetY = 180.0f;
+    public float rotationTargetZ = 0.0f;
     public float flipTargetRotation;
 
     public bool flipped;
@@ -18,7 +21,7 @@ public class RecordElement : MonoBehaviour
     void Start()
     {
         //rotationTarget = transform.localRotation;
-        rotationTarget = Quaternion.Euler(transform.localRotation.x + 90 + 12.5f, transform.localRotation.y + flipTargetRotation + 12.5f, transform.localRotation.z);
+        rotationTarget = Quaternion.Euler(rotationTargetX, rotationTargetY, rotationTargetZ);
     }
 
     // Update is called once per frame
@@ -38,7 +41,9 @@ public class RecordElement : MonoBehaviour
     // Used to make the rotate the records to stay facing forward when rotating the record selection object
     public void RotateRecord(float rotationAngle)
     {
-        rotationTarget = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y + rotationAngle + flipTargetRotation, transform.localRotation.z);
+        rotationTargetX += rotationAngle;
+        
+        rotationTarget = Quaternion.Euler(rotationTargetX + flipTargetRotation, rotationTargetY, rotationTargetZ);
     }
 
     // Used to flip the record between its front and remix sides

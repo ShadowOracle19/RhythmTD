@@ -13,6 +13,9 @@ public class RecordMenu : MonoBehaviour
     public float rotationTargetX = 0.0f;
     public float rotationTargetY = 0.0f;
     public float rotationTargetZ = 0.0f;
+
+    public GameObject recordOutline;
+    public GameObject prevRecordOutline;
     
     public float ringRadius;
     public Vector3 ringCenter;
@@ -29,7 +32,9 @@ public class RecordMenu : MonoBehaviour
     public int currentSelectionIndex;
 
     public TextMeshProUGUI currentSongTitle;
+    public TextMeshProUGUI currentSongShadow;
     public TextMeshProUGUI currentSongTracksRecorded;
+    public TextMeshProUGUI currentSongTracksShadow;
     
     void Start()
     {
@@ -88,6 +93,9 @@ public class RecordMenu : MonoBehaviour
 
     public void SelectNextRecord(string direction)
     {
+        recordOutline = recordsList[currentSelectionIndex].transform.GetChild(0).gameObject;
+        recordOutline.SetActive(false);
+        
         if (direction == "right")
         {
             // Rotate record selector
@@ -134,8 +142,16 @@ public class RecordMenu : MonoBehaviour
                 recordsList[i].GetComponent<RecordElement>().RotateRecord(ringRotationAngle * -1);
             }
         }
-        
+
         // Make active record bigger
-        recordsList[currentSelectionIndex].transform.localScale -= scaleChange;   
+        recordsList[currentSelectionIndex].transform.localScale -= scaleChange; 
+
+        recordOutline = recordsList[currentSelectionIndex].transform.GetChild(0).gameObject;
+        recordOutline.SetActive(true);
+
+        currentSongTitle.text = recordsList[currentSelectionIndex].GetComponent<RecordElement>().songTitle;
+        currentSongShadow.text = recordsList[currentSelectionIndex].GetComponent<RecordElement>().songTitle;
+        currentSongTracksRecorded.text = $"{recordsList[currentSelectionIndex].GetComponent<RecordElement>().songTracksRecorded}/12";
+        currentSongTracksShadow.text = $"{recordsList[currentSelectionIndex].GetComponent<RecordElement>().songTracksRecorded}/12";
     }
 }

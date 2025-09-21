@@ -30,7 +30,7 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
 
     public void OnSelect(BaseEventData eventData)
     {
-        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(250, 800);
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(243, 588);
         _onSelectEvent.Invoke(this);
     }
 
@@ -47,7 +47,7 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
 
     public void OnDeselect(BaseEventData eventData)
     {
-        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(250, 700);
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(243, 588);
     }
 }
 

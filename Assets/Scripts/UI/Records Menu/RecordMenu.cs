@@ -10,6 +10,9 @@ public class RecordMenu : MonoBehaviour
     // VARIABLES
     public float smooth = 5.0f;
     public Quaternion rotationTarget;
+    public float rotationTargetX = 0.0f;
+    public float rotationTargetY = 0.0f;
+    public float rotationTargetZ = 0.0f;
     
     public float ringRadius;
     public Vector3 ringCenter;
@@ -40,7 +43,10 @@ public class RecordMenu : MonoBehaviour
         ringCenter = this.transform.position;
 
         //
-        ringRotationAngle = (360 / numberOfRecords);
+        ringRotationAngle = 360 / numberOfRecords;
+
+        //
+        rotationTarget = Quaternion.Euler(rotationTargetX, rotationTargetY, rotationTargetZ);
 
         // For each record in the menu, set its starting position
         for (int i = 0; i < numberOfRecords; i++)
@@ -71,12 +77,16 @@ public class RecordMenu : MonoBehaviour
         transform.localRotation = Quaternion.Slerp(transform.localRotation, rotationTarget,  Time.deltaTime * smooth);
     }
 
-    void RotateAllRecords(int movement)
+    public void RotateAllRecords(int movement)
     {
-        rotationTarget = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, transform.localRotation.z + (ringRotationAngle * movement));
+        rotationTargetZ += (ringRotationAngle * movement);
+        
+        rotationTarget = Quaternion.Euler(rotationTargetX, rotationTargetY, rotationTargetZ);
+        
+        //transform.Rotate(0.0f, 0.0f, this.transform.rotation.z + (ringRotationAngle * movement), Space.Self);
     }
 
-    void SelectNextRecord(string direction)
+    public void SelectNextRecord(string direction)
     {
         if (direction == "right")
         {

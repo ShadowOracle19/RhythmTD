@@ -80,6 +80,8 @@ public class ConductorV2 : MonoBehaviour
     public TextMeshProUGUI countInText;
     public bool countingIn = false;
 
+    bool perfectBeatReset = false;
+
 
 
     public void CountUsIn(int _bpm)
@@ -194,7 +196,18 @@ public class ConductorV2 : MonoBehaviour
         //    _ping.Play();
         //}
 
-        beatTrack = Mathf.Clamp(beatTrack, 0, 4);
+        if(beatDuration >= perfectBeatThreshold && !perfectBeatReset)
+        {
+            perfectBeatReset = true;
+            Debug.Log("Perfect");
+            _ping.Play();
+        }
+        else if(beatDuration < perfectBeatThreshold)
+        {
+            perfectBeatReset = false;
+        }
+
+            beatTrack = Mathf.Clamp(beatTrack, 0, 4);
     }
 
     private void FixedUpdate()
@@ -276,7 +289,7 @@ public class ConductorV2 : MonoBehaviour
             beatTrack = 0;
         }
 
-        _ping.Play();
+        //_ping.Play();
 
         beatTrack += 1;
 

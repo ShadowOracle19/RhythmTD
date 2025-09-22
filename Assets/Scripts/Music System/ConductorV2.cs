@@ -69,14 +69,6 @@ public class ConductorV2 : MonoBehaviour
     public AudioClip bpmTrack1; //80
     public AudioClip bpmTrack2; //100
 
-    [Header("Metronome")]
-    public GameObject ticker;
-    public bool ping = false;//true left, false right
-    public Vector3 rotationLeft;
-    public Vector3 rotationRight;
-    private Quaternion currentRotation;
-    public Vector3 currentEulerAngles;
-
     [Header("Events")]
     public List<UnityEvent> triggerEvent = new List<UnityEvent>();
     public List<UnityEvent> projectileEvent = new List<UnityEvent>();
@@ -96,7 +88,7 @@ public class ConductorV2 : MonoBehaviour
 
         pauseConductor = true;
         //load the audio source attached to the conductor gameobject
-        musicSource = GetComponent<AudioSource>();
+        //musicSource = GetComponent<AudioSource>();
         bpm = _bpm;
         completedLoops = 0;
         numberOfBeats = 0;
@@ -141,6 +133,12 @@ public class ConductorV2 : MonoBehaviour
         beatTrack = 1;
         beatDuration = 0;
 
+        drums.time = 0;
+        bass.time = 0;
+        piano.time = 0;
+        guitarH.time = 0;
+        guitarM.time = 0;
+
 
         if (GameManager.Instance.tutorialRunning)
         {
@@ -149,7 +147,7 @@ public class ConductorV2 : MonoBehaviour
         }
 
         //Start the song
-        musicSource.Play();
+        //musicSource.Play();
     }
 
     public void DynamicSongInit(DynamicSongCreator song)
@@ -248,11 +246,6 @@ public class ConductorV2 : MonoBehaviour
         TriggerBeatEvent(songPositionInBeats);
     }
 
-    public void Tick()
-    {
-        ping = !ping;
-    }
-
     public bool InThreshHold()
     {
         if(beatDuration >= perfectBeatThreshold)
@@ -282,6 +275,8 @@ public class ConductorV2 : MonoBehaviour
             measureTrack += 1;
             beatTrack = 0;
         }
+
+        _ping.Play();
 
         beatTrack += 1;
 

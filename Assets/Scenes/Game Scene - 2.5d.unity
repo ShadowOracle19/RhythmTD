@@ -17956,7 +17956,7 @@ MonoBehaviour:
   songPosition: 0
   songPositionInBeats: 0
   dspSongTime: 0
-  musicSource: {fileID: 4037810051154580063}
+  musicSource: {fileID: 4403314348635615938}
   beatsPerLoop: 4
   completedLoops: 0
   loopPositionInBeats: 0
@@ -17979,11 +17979,6 @@ MonoBehaviour:
   _ping: {fileID: 7782164477171100126}
   bpmTrack1: {fileID: 8300000, guid: 8b1c59e2211f69c419e85146647e90c2, type: 3}
   bpmTrack2: {fileID: 8300000, guid: d8f72b88495da984c90f1e87393c3cda, type: 3}
-  ticker: {fileID: 5790063578339626260}
-  ping: 0
-  rotationLeft: {x: 0, y: 0, z: 45}
-  rotationRight: {x: 0, y: 0, z: -45}
-  currentEulerAngles: {x: 0, y: 0, z: 0}
   triggerEvent:
   - m_PersistentCalls:
       m_Calls:
@@ -19483,7 +19478,7 @@ AudioSource:
   m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -20190,11 +20185,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
---- !u!1 &5790063578339626260 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 35854583558090741, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-  m_PrefabInstance: {fileID: 5775041512460051169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5896263209683615630
 GameObject:
   m_ObjectHideFlags: 0
@@ -22136,7 +22126,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3360534741566044467, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
-  m_audioClip: {fileID: 8300000, guid: aacee094186844e419bc49d7b600e494, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f50bd931ade4e214bbeaa2d46f2a349c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.25
   m_Pitch: 1

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Test Combat
   m_EditorClassIdentifier: 
   dynamicSong: {fileID: 11400000, guid: a54dc68b453ac694fb274d5d37e43853, type: 2}
+  stagePrefab: {fileID: 0}
   waves:
   - delay: 0
     enemies: []
@@ -23,7 +24,7 @@ MonoBehaviour:
       tile: 1
     - pickup: {fileID: 8934297664530455703, guid: 1beab2ab7455e6d4b85e265908ffbc76, type: 3}
       tile: 2
-    killAllEnemiesWave: 1
+    killAllEnemiesWave: 0
     collectAllPickupsWave: 0
     pickupsWave: 1
   - delay: 0

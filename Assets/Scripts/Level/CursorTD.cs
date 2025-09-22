@@ -160,10 +160,10 @@ public class CursorTD : MonoBehaviour
 
         
 
-        if(tile != null && tile.placedTower != null)
-        {
-            tile.placedTower.GetComponent<Tower>().towerHover = true;
-        }
+        //if(tile != null && tile.placedTower != null)
+        //{
+        //    tile.placedTower.GetComponent<Tower>().towerHover = true;
+        //}
 
         PlacementResourceBar();
 
@@ -334,7 +334,6 @@ public class CursorTD : MonoBehaviour
     {
         if (isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) return;
 
-        Debug.Log(ConductorV2.instance.beatDuration);
 
         //get the angle
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -728,6 +727,14 @@ public class CursorTD : MonoBehaviour
 
                 }
 
+            }
+            else if(tile != null && tile ==  collision.gameObject.GetComponent<Tile>())
+            {
+                if (tile.placedTower != null)
+                {
+                    tile.placedTower.GetComponent<Tower>().towerHover = true;
+
+                }
             }
             tile = collision.gameObject.GetComponent<Tile>();
         }

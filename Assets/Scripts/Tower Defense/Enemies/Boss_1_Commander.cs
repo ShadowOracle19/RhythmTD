@@ -12,7 +12,7 @@ public class Boss_1_Commander : Enemy
     [SerializeField] private int damageThreshold;
     public int currentDamage;
     [SerializeField] private GameObject lifter, runner, sorter;
-    private bool phaseStarted = false;
+    public bool phaseStarted = false;
 
     private Vector3 originPos;
 
@@ -175,7 +175,7 @@ public class Boss_1_Commander : Enemy
                 //next phase and if damage threshold didnt get reached
                 if (transform.position == new Vector3(10.5f, 0.5f, -3.5f))
                 {
-                    MoveTo(originPos);
+                    transform.position = originPos;
                     measureCounter = 0;
                     currentState = previousState;
                     currentStateIndex = PhaseIndex.A;
@@ -311,18 +311,18 @@ public class Boss_1_Commander : Enemy
         {
             //spawns 1 lifter or runner every two beats
             case PhaseIndex.A:
-                if(!phaseStarted)
+                if (!phaseStarted)
                 {
                     phaseStarted = true;
                     CombatDialogueManager.Instance.PlayDialogue(phaseTwoIntroDialogue);
                     return;
                 }
 
-                if(ConductorV2.instance.beatTrack == 2)
+                if (ConductorV2.instance.beatTrack == 2)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                 }
-                else if(ConductorV2.instance.beatTrack == 4)
+                else if (ConductorV2.instance.beatTrack == 4)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(runner);
                 }
@@ -381,11 +381,11 @@ public class Boss_1_Commander : Enemy
 
                 int rand = Random.Range(0, 3);
 
-                if(rand == 0)
+                if (rand == 0)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(lifter);
                 }
-                else if(rand == 1)
+                else if (rand == 1)
                 {
                     Spawner.Instance.SpawnUnitOnRandomTile(sorter);
                 }

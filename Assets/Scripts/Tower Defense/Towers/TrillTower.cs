@@ -46,7 +46,6 @@ public class TrillTower : Tower
         LayerMask enemyLayer = LayerMask.GetMask("Enemy");
         RaycastHit hit;
 
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * towerRange, Color.yellow);
         //tower range
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, towerRange, enemyLayer))
         {
@@ -96,6 +95,7 @@ public class TrillTower : Tower
 
         if(chargeShotDamage > 2 && upgradeOneActive)
         {
+            Debug.Log("is this happening?");
             float redLerp = chargeShotDamage / 7;
             bullet.GetComponent<Projectile>().spriteRenderer.color = Color.Lerp(Color.white, Color.red, redLerp);
             bullet.GetComponent<Projectile>().spriteRenderer.sprite = upgradeAttackSprite01;

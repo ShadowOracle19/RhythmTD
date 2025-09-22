@@ -26,6 +26,7 @@ public class TrillProjectile : Projectile
             && towerFiredFrom.GetComponent<Tower>().upgradeTwoActive)
         {
             Debug.Log("Echo");
+            collision.GetComponent<Enemy>().Damage(damage);
 
             //create two echo bullets
             GameObject bullet = Instantiate(echoProjectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 1)
@@ -51,6 +52,7 @@ public class TrillProjectile : Projectile
             RemoveProjectile();
             return;
         }
+        
         base.OnTriggerEnter(collision);
 
         

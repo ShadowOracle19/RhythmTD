@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20599c7cee95274eaeb438403b60787, type: 3}
   m_Name: Test Combat
   m_EditorClassIdentifier: 
-  dynamicSong: {fileID: 11400000, guid: a54dc68b453ac694fb274d5d37e43853, type: 2}
-  stagePrefab: {fileID: 0}
+  dynamicSong: {fileID: 11400000, guid: 3e546aa358e051d489847b41fa46f0ca, type: 2}
+  stagePrefab: {fileID: 1787472173279516074, guid: 753c1979509b2de4a82cbd64c41d65e1, type: 3}
   waves:
   - delay: 0
     enemies: []
@@ -51,9 +51,35 @@ MonoBehaviour:
     killAllEnemiesWave: 0
     collectAllPickupsWave: 1
     pickupsWave: 1
-  - delay: 0
+  - delay: 8
     enemies:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+      tile: 0
+    pickups: []
+    killAllEnemiesWave: 0
+    collectAllPickupsWave: 0
+    pickupsWave: 0
+  - delay: 8
+    enemies:
+    - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+      tile: 0
+    pickups: []
+    killAllEnemiesWave: 0
+    collectAllPickupsWave: 0
+    pickupsWave: 0
+  - delay: 8
+    enemies:
+    - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+      tile: 0
+    pickups: []
+    killAllEnemiesWave: 0
+    collectAllPickupsWave: 0
+    pickupsWave: 0
+  - delay: 8
+    enemies:
+    - enemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
+      tile: 0
+    - enemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
       tile: 0
     pickups: []
     killAllEnemiesWave: 0

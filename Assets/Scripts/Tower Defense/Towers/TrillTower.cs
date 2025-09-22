@@ -94,7 +94,7 @@ public class TrillTower : Tower
 
         ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
-        if(chargeShotDamage > 2)
+        if(chargeShotDamage > 2 && upgradeOneActive)
         {
             float redLerp = chargeShotDamage / 7;
             bullet.GetComponent<Projectile>().spriteRenderer.color = Color.Lerp(Color.white, Color.red, redLerp);

@@ -605,7 +605,8 @@ public class CursorTD : MonoBehaviour
             PlacementFeedback(rightInvalidSfx, "Upgrade Slot 04");
 
         }
-        else if (direction == Vector2.down)//upgrade 3 
+        //note:change this back to down if we need four upgrades in the future
+        else if (direction == Vector2.left)//upgrade 3 
         {
             //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased
             if (towerSelectMenuOpened && tile.placedTower != null && 
@@ -625,7 +626,7 @@ public class CursorTD : MonoBehaviour
             PlacementFeedback(downInvalidSfx, "Upgrade Slot 03");
 
         }
-        else if (direction == Vector2.left)//upgrade 4 
+        else if (direction == Vector2.down)//upgrade 4 
         {
 
             //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased

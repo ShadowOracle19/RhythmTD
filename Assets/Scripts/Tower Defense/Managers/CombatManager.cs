@@ -223,7 +223,7 @@ public class CombatManager : MonoBehaviour
 
         CursorTD.Instance.InitializeCursor();
 
-        BeatIndicatorManager.Instance.ResetBeatIndicator();
+        //BeatIndicatorManager.Instance.ResetBeatIndicator();
 
 
         Cursor.lockState = CursorLockMode.Locked;

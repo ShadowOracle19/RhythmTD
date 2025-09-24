@@ -221,46 +221,12 @@ public class Tower : MonoBehaviour
         //instatiate bullet
         GameObject bullet = Instantiate(nextProjectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
 
-        /*
-        if (upgradeActive)//upgrades are active
-        {
-            if (rangeUpgrade)
-            {
-                tempRange *= 2;
-            }
-
-
-            if(damageBoostUpgrade)
-            {
-                damage *= 2;
-
-                bullet.GetComponent<Projectile>().spriteRenderer.sprite = buffDefaultAttackSprite;
-            }
-
-            bullet.GetComponent<Projectile>().InitializeProjectile(tempRange, gameObject, damage, towerInfo.projectilePiercesEnemies, burningUpgrade);
-        }
-        else //upgrades inactive
-        {
-            
-        }
-        */
         
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies);
 
         ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
         
-        //if bullet is from extra shot
-        //if(isTheMultiShot)
-        //{
-        //    bullet.GetComponent<Projectile>().spriteRenderer.sprite = multiAttackSprite;
-        //}
-
-        //if (upgradeActive && multiShotUpgrade)
-        //{
-        //    ExtraFire();
-
-        //}
     }
 
 
@@ -289,30 +255,6 @@ public class Tower : MonoBehaviour
             nextProjectile = projectile;
         }
 
-
-        //switch (towerInfo.projectileType)
-        //{
-        //    case ProjectileType.Bullet:
-        //        CreateBullet(damage, towerUpgradeUnlocked, false, transform.position);
-        //        break;
-
-        //    case ProjectileType.AOE:
-        //        AOE(damage, towerUpgradeUnlocked);
-        //        break;
-
-        //    case ProjectileType.Charges:
-        //        int chargeValue = towerInfo.resourceGain;
-        //        if (increaseBulletDamage || ChargedUp)
-        //        {
-        //            chargeValue = chargeValue * 2;
-        //        }
-
-        //        PlaceCharge(chargeValue);
-        //        break;
-
-        //    default:
-        //        break;
-        //}
         
         //towerUpgradeUnlocked = false;
         feelingItNow = false;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20599c7cee95274eaeb438403b60787, type: 3}
   m_Name: 1-1 Combat Normal
   m_EditorClassIdentifier: 
-  dynamicSong: {fileID: 11400000, guid: 081313c7fc029ae40b25b701583f33ec, type: 2}
+  dynamicSong: {fileID: 11400000, guid: 3e546aa358e051d489847b41fa46f0ca, type: 2}
   stagePrefab: {fileID: 772534621516438449, guid: a66e53b980c53084dba5edda3ec4595f, type: 3}
   waves:
   - delay: 8
@@ -20,7 +20,7 @@ MonoBehaviour:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 1
     pickups: []
-    killAllEnemiesWave: 0
+    killAllEnemiesWave: 1
     collectAllPickupsWave: 0
     pickupsWave: 0
   - delay: 8
@@ -28,7 +28,7 @@ MonoBehaviour:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 3
     pickups: []
-    killAllEnemiesWave: 0
+    killAllEnemiesWave: 1
     collectAllPickupsWave: 0
     pickupsWave: 0
   - delay: 4
@@ -36,17 +36,15 @@ MonoBehaviour:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 2
     pickups: []
-    killAllEnemiesWave: 0
+    killAllEnemiesWave: 1
     collectAllPickupsWave: 0
     pickupsWave: 0
   - delay: 12
     enemies:
     - enemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
       tile: 3
-    - enemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
-      tile: 3
     pickups: []
-    killAllEnemiesWave: 0
+    killAllEnemiesWave: 1
     collectAllPickupsWave: 0
     pickupsWave: 0
   - delay: 12
@@ -56,7 +54,7 @@ MonoBehaviour:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 3
     pickups: []
-    killAllEnemiesWave: 0
+    killAllEnemiesWave: 1
     collectAllPickupsWave: 0
     pickupsWave: 0
   - delay: 12
@@ -70,7 +68,7 @@ MonoBehaviour:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 6
     pickups: []
-    killAllEnemiesWave: 0
+    killAllEnemiesWave: 1
     collectAllPickupsWave: 0
     pickupsWave: 0
   - delay: 16
@@ -80,7 +78,7 @@ MonoBehaviour:
     - enemy: {fileID: 239132429429542008, guid: ae22a1fb4d3728a45a8be833bb8a0027, type: 3}
       tile: 3
     pickups: []
-    killAllEnemiesWave: 0
+    killAllEnemiesWave: 1
     collectAllPickupsWave: 0
     pickupsWave: 0
   - delay: 4

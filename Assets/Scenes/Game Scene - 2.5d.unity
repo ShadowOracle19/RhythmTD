@@ -13741,6 +13741,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6772ce031601df34b9b41df9cbf2d3a6, type: 2}
+    - target: {fileID: 419824190599041610, guid: 9d746b7fea28e254d86303e4a157c9d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9
+      objectReference: {fileID: 0}
     - target: {fileID: 474162035240402082, guid: 9d746b7fea28e254d86303e4a157c9d1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -13905,6 +13909,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6772ce031601df34b9b41df9cbf2d3a6, type: 2}
+    - target: {fileID: 2620511240409853073, guid: 9d746b7fea28e254d86303e4a157c9d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9
+      objectReference: {fileID: 0}
     - target: {fileID: 2643804385267521218, guid: 9d746b7fea28e254d86303e4a157c9d1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -14053,6 +14061,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6772ce031601df34b9b41df9cbf2d3a6, type: 2}
+    - target: {fileID: 4947273887718087928, guid: 9d746b7fea28e254d86303e4a157c9d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9
+      objectReference: {fileID: 0}
     - target: {fileID: 5141607587212710656, guid: 9d746b7fea28e254d86303e4a157c9d1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -14161,6 +14173,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6772ce031601df34b9b41df9cbf2d3a6, type: 2}
+    - target: {fileID: 6210264384077127269, guid: 9d746b7fea28e254d86303e4a157c9d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6217549790843180753, guid: 9d746b7fea28e254d86303e4a157c9d1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -17729,8 +17745,8 @@ MonoBehaviour:
   pickupsParent: {fileID: 886537953}
   stageParent: {fileID: 8954601326441955595}
   enemiesSpawnIn: {fileID: 5409566660305168033}
-  enemyTimerMax: 4
-  enemyTimer: 4
+  enemyTimerMax: 60
+  enemyTimer: 60
   totalNumEnemies: 0
   totalNumPickups: 0
   resourceNum: 0
@@ -17739,7 +17755,7 @@ MonoBehaviour:
   resourceSlider2: {fileID: 2139687889}
   resourceSlider3: {fileID: 2139687888}
   resourceSlider4: {fileID: 1032427851599122294}
-  startingResources: 50
+  startingResources: 150
   overchargeSlider: {fileID: 7050037042659679118}
   canPlaceEmpoweredTower: 0
   enemyTimerObject: {fileID: 283964733734025437}
@@ -17962,9 +17978,9 @@ MonoBehaviour:
   loopPositionInBeats: 0
   loopPositionInAnalog: 0
   missBeatThreshold: 0.1
-  earlyBeatThreshold: 0.6
-  greatBeatThreshold: 0.7
-  perfectBeatThreshold: 0.8
+  earlyBeatThreshold: 0.2
+  greatBeatThreshold: 0.3
+  perfectBeatThreshold: 0.5
   beatDuration: 0
   numberOfBeats: 0
   beatTrack: 1
@@ -19473,7 +19489,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3360534741566044467, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 5b1779a8fe179ed4ab51d69bf4770191, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8b1c59e2211f69c419e85146647e90c2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.75
   m_Pitch: 1

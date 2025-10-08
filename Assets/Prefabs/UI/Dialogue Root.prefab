@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 2081138105026959544}
   - component: {fileID: 8674760341448016386}
   m_Layer: 5
-  m_Name: Dialogue Text
+  m_Name: Dialogue Option Text 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -743,7 +743,7 @@ GameObject:
   - component: {fileID: 1825146876107574523}
   - component: {fileID: 4895609252825938539}
   m_Layer: 5
-  m_Name: Scrolling BG
+  m_Name: Scrolling Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -830,7 +830,7 @@ GameObject:
   - component: {fileID: 6648990073853160811}
   - component: {fileID: 8522161227146883936}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Text Wheel Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,7 +905,7 @@ GameObject:
   - component: {fileID: 5573855713340729925}
   - component: {fileID: 6702265540300926285}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Text Wheel Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1017,7 +1017,7 @@ GameObject:
   - component: {fileID: 7630285653418837058}
   - component: {fileID: 4379693329794426238}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: Dialogue Menu Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1644,7 +1644,7 @@ GameObject:
   - component: {fileID: 7272545283959748071}
   - component: {fileID: 1663531215007328556}
   m_Layer: 5
-  m_Name: Dialogue Text (1)
+  m_Name: Dialogue Option Text 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1916,7 +1916,7 @@ GameObject:
   - component: {fileID: 799148140577998152}
   - component: {fileID: 4362750678635888133}
   m_Layer: 5
-  m_Name: UI
+  m_Name: Dialogue UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2135,7 +2135,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1384056048821014569}
   - {fileID: 5232787918450034864}
   - {fileID: 5674038056082658498}
   - {fileID: 4422642259401487479}
@@ -2167,7 +2166,7 @@ GameObject:
   - component: {fileID: 7342387774625777277}
   - component: {fileID: 2900263424189988087}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Text Wheel Highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2242,7 +2241,7 @@ GameObject:
   - component: {fileID: 821178319561855271}
   - component: {fileID: 1103991077900463242}
   m_Layer: 5
-  m_Name: Image (5)
+  m_Name: Text Wheel Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2666,81 +2665,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &3703538413307127466
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1384056048821014569}
-  - component: {fileID: 3218837621687689930}
-  - component: {fileID: 9000907449360078414}
-  m_Layer: 0
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1384056048821014569
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3703538413307127466}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4275978730484094935}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3218837621687689930
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3703538413307127466}
-  m_CullTransparentMesh: 1
---- !u!114 &9000907449360078414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3703538413307127466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -2295941663752381193, guid: 3f7824c93cc24a349a941a7465626cff, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3728278368006334057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,7 +2675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8454946243204444189}
   m_Layer: 5
-  m_Name: Text Wheel Middle
+  m_Name: Text Wheel Middle Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4089,7 +4013,7 @@ GameObject:
   - component: {fileID: 647613055566980786}
   - component: {fileID: 1100459882380725920}
   m_Layer: 0
-  m_Name: Dialogue Music
+  m_Name: Dialogue BGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4449,7 +4373,6 @@ RectTransform:
   - {fileID: 7083096836376985413}
   - {fileID: 3752386388417222608}
   - {fileID: 2874217983689705111}
-  - {fileID: 5581509552879017968}
   - {fileID: 8454946243204444189}
   - {fileID: 7769207824634927361}
   m_Father: {fileID: 799148140577998152}
@@ -4771,7 +4694,7 @@ GameObject:
   - component: {fileID: 4284391899179922524}
   - component: {fileID: 8425171614975562179}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Text Wheel Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5129,7 +5052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5674038056082658498
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5327,7 +5250,7 @@ GameObject:
   - component: {fileID: 8203018584688311708}
   - component: {fileID: 6895388431453609937}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Project Overture Banner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5811,83 +5734,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &8590257972047665817
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5581509552879017968}
-  - component: {fileID: 245793143144428521}
-  - component: {fileID: 6397278569451000833}
-  m_Layer: 5
-  m_Name: Image (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5581509552879017968
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590257972047665817}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7097011754011786833}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 538, y: 538}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &245793143144428521
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590257972047665817}
-  m_CullTransparentMesh: 1
---- !u!114 &6397278569451000833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590257972047665817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -8868251750969332662, guid: 865d1c910fcef0541b00ca31254e8e40, type: 3}
-  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6079,7 +5927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2961231511689982985}
   m_Layer: 5
-  m_Name: Highlight
+  m_Name: Text Wheel Option Highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6214,8 +6062,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9143459534949628981}
   - {fileID: 647613055566980786}
+  - {fileID: 9143459534949628981}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1036729813113359282

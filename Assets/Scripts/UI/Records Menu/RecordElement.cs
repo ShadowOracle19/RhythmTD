@@ -59,5 +59,7 @@ public class RecordElement : MonoBehaviour
             flipTargetRotation += 180;
             flipped = false;
         }
+
+        rotationTarget = Quaternion.Euler(rotationTargetX + flipTargetRotation, rotationTargetY, rotationTargetZ);
     }
 }

@@ -154,4 +154,9 @@ public class RecordMenu : MonoBehaviour
         currentSongTracksRecorded.text = $"{recordsList[currentSelectionIndex].GetComponent<RecordElement>().songTracksRecorded}/12";
         currentSongTracksShadow.text = $"{recordsList[currentSelectionIndex].GetComponent<RecordElement>().songTracksRecorded}/12";
     }
+
+    public void FlipCurrentRecord()
+    {
+        recordsList[currentSelectionIndex].GetComponent<RecordElement>().FlipRecord();
+    }
 }

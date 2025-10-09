@@ -103,6 +103,10 @@ public class GameManager : MonoBehaviour
     public List<Image> intelImages;
     public int imageIndex = 0;
 
+    [Header("Tower Loadout")]
+    public List<TowerPlacementInfo> towers = new List<TowerPlacementInfo>();
+
+
 
     // Start is called before the first frame update
     void Start()

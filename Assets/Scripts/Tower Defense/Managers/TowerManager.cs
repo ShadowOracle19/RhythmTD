@@ -31,8 +31,6 @@ public class TowerManager : MonoBehaviour
     public GameObject towerToPlace;
     public bool isTowerHovering = false;
     
-    //list of current towers the player has
-    public List<TowerPlacementInfo> towers = new List<TowerPlacementInfo>();
 
     //Tower background shader management
     /*
@@ -168,16 +166,16 @@ public class TowerManager : MonoBehaviour
         switch (towerNum)
         {
             case 0:
-                return towers[0].towerCooldownInfo.towerCooldown;
+                return GameManager.Instance.towers[0].towerCooldownInfo.towerCooldown;
 
             case 1:
-                return towers[1].towerCooldownInfo.towerCooldown;
+                return GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown;
 
             case 2:
-                return towers[2].towerCooldownInfo.towerCooldown;
+                return GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown;
 
             case 3:
-                return towers[3].towerCooldownInfo.towerCooldown;
+                return GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown;
 
             default:
                 return true;
@@ -231,30 +229,30 @@ public class TowerManager : MonoBehaviour
         {
             case 0:
 
-                towers[0].towerCooldownInfo.towerCooldown = true;
-                towers[0].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-                towers[0].towerCooldownInfo.towerCooldownTime = 0;
+                GameManager.Instance.towers[0].towerCooldownInfo.towerCooldown = true;
+                GameManager.Instance.towers[0].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
+                GameManager.Instance.towers[0].towerCooldownInfo.towerCooldownTime = 0;
                 break;
 
             case 1:
 
-                towers[1].towerCooldownInfo.towerCooldown = true;
-                towers[1].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-                towers[1].towerCooldownInfo.towerCooldownTime = 0;
+                GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown = true;
+                GameManager.Instance.towers[1].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
+                GameManager.Instance.towers[1].towerCooldownInfo.towerCooldownTime = 0;
                 break;
 
             case 2:
 
-                towers[2].towerCooldownInfo.towerCooldown = true;
-                towers[2].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-                towers[2].towerCooldownInfo.towerCooldownTime = 0;
+                GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown = true;
+                GameManager.Instance.towers[2].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
+                GameManager.Instance.towers[2].towerCooldownInfo.towerCooldownTime = 0;
                 break;
 
             case 3:
 
-                towers[3].towerCooldownInfo.towerCooldown = true;
-                towers[3].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-                towers[3].towerCooldownInfo.towerCooldownTime = 0;
+                GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown = true;
+                GameManager.Instance.towers[3].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
+                GameManager.Instance.towers[3].towerCooldownInfo.towerCooldownTime = 0;
                 break;
 
             default:
@@ -307,10 +305,10 @@ public class TowerManager : MonoBehaviour
 
     public void ResetTowerManager()
     {
-        towers[0].towerCooldownInfo.towerCooldown = false;
-        towers[1].towerCooldownInfo.towerCooldown = false;
-        towers[2].towerCooldownInfo.towerCooldown = false;
-        towers[3].towerCooldownInfo.towerCooldown = false;
+        GameManager.Instance.towers[0].towerCooldownInfo.towerCooldown = false;
+        GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown = false;
+        GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown = false;
+        GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown = false;
 
         towerList.Clear();
     }

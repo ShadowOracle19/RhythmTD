@@ -1446,6 +1446,15 @@ MonoBehaviour:
   - {fileID: 2074664442}
   - {fileID: 1458905193}
   imageIndex: 0
+  towers:
+  - tower: {fileID: 5183850645279424415, guid: 69a1dfa3c7fec1241b466e6b587e3655, type: 3}
+    towerCooldownInfo: {fileID: 2060772130}
+  - tower: {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
+    towerCooldownInfo: {fileID: 914470684}
+  - tower: {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
+    towerCooldownInfo: {fileID: 1491215307}
+  - tower: {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
+    towerCooldownInfo: {fileID: 2018128322}
 --- !u!4 &263461693
 Transform:
   m_ObjectHideFlags: 0
@@ -1710,7 +1719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 327780051814350791, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 797479417816672411, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_text
@@ -19604,7 +19613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2737315247605731274, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4035973514619479261, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -22016,15 +22025,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerToPlace: {fileID: 0}
   isTowerHovering: 0
-  towers:
-  - tower: {fileID: 5183850645279424415, guid: 69a1dfa3c7fec1241b466e6b587e3655, type: 3}
-    towerCooldownInfo: {fileID: 2060772130}
-  - tower: {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
-    towerCooldownInfo: {fileID: 914470684}
-  - tower: {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
-    towerCooldownInfo: {fileID: 1491215307}
-  - tower: {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
-    towerCooldownInfo: {fileID: 2018128322}
   greyscaleShader: {fileID: 2100000, guid: ea195610c6654e64b81c7eee2e749bcf, type: 2}
   towerSwap: 0
   audioSource: {fileID: 7375087823833580385}

@@ -28,7 +28,6 @@ public class RecordMenu : MonoBehaviour
     public List<GameObject> recordsList = new List<GameObject>();
     public int numberOfRecords;
 
-
     public int currentSelectionIndex;
 
     public TextMeshProUGUI currentSongTitle;

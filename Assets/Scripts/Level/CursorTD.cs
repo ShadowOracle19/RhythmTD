@@ -61,7 +61,11 @@ public class CursorTD : MonoBehaviour
     public AudioSource leftInvalidSfx;
 
     [Header("Hit SFX")]
-    public AudioSource hitFirstSfx;
+    public AudioClip hitFirstSfx;
+
+    [Header("Hit SFX")]
+    public AudioClip soundNameSound;
+    public AudioClip[] soundNameSounds;
     
     [Header("Placement Menu")]
     public GameObject placementMenu;
@@ -400,7 +404,7 @@ public class CursorTD : MonoBehaviour
 
     public void TowerEmpowerment(BuffType buff)
     {
-        hitFirstSfx.Play();
+        SoundEffectsManager.instance.PlaySound(hitFirstSfx, this.gameObject.transform, 1.0f);
         
         if(tile.placedTower != null && !beatIsHit)
         {

@@ -19,11 +19,11 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private TextMeshProUGUI sfxVolumeText;
 
-    [SerializeField] private Slider hitVolumeSlider;
-    [SerializeField] private TextMeshProUGUI hitVolumeText;
+    //[SerializeField] private Slider hitVolumeSlider;
+    //[SerializeField] private TextMeshProUGUI hitVolumeText;
 
-    [SerializeField] private Slider metronomeVolumeSlider;
-    [SerializeField] private TextMeshProUGUI metronomeVolumeText;
+    //[SerializeField] private Slider metronomeVolumeSlider;
+    //[SerializeField] private TextMeshProUGUI metronomeVolumeText;
 
     [Header("Latency")]
     [SerializeField] private Slider audioLatencySlider;
@@ -82,11 +82,11 @@ public class SettingsManager : MonoBehaviour
         float sfxVolume = Mathf.RoundToInt(sfxVolumeSlider.value * 100);
         sfxVolumeText.text = sfxVolume + "%";
 
-        masterAudioMixer.SetFloat("_hitSFXVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
-        hitVolumeText.text = Mathf.RoundToInt(hitVolumeSlider.value * 100) + "%";
+        //masterAudioMixer.SetFloat("_hitSFXVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
+        //hitVolumeText.text = Mathf.RoundToInt(hitVolumeSlider.value * 100) + "%";
 
-        masterAudioMixer.SetFloat("_metronomeVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
-        metronomeVolumeText.text = Mathf.RoundToInt(metronomeVolumeSlider.value * 100) + "%";
+        //masterAudioMixer.SetFloat("_metronomeVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
+        //metronomeVolumeText.text = Mathf.RoundToInt(metronomeVolumeSlider.value * 100) + "%";
     }
 
     void Latency()

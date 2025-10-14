@@ -55,17 +55,13 @@ public class CursorTD : MonoBehaviour
     private ParticleSystem buffPerfectPfxInstance;
     
     [Header("Menu SFX")]
-    public AudioSource upInvalidSfx;
-    public AudioSource rightInvalidSfx;
-    public AudioSource downInvalidSfx;
-    public AudioSource leftInvalidSfx;
+    public AudioClip upInvalidSfx;
+    public AudioClip rightInvalidSfx;
+    public AudioClip downInvalidSfx;
+    public AudioClip leftInvalidSfx;
 
     [Header("Hit SFX")]
-    public AudioClip hitFirstSfx;
-
-    [Header("Hit SFX")]
-    public AudioClip soundNameSound;
-    public AudioClip[] soundNameSounds;
+    public AudioClip hitSfx;
     
     [Header("Placement Menu")]
     public GameObject placementMenu;
@@ -404,7 +400,7 @@ public class CursorTD : MonoBehaviour
 
     public void TowerEmpowerment(BuffType buff)
     {
-        SoundEffectsManager.instance.PlaySound(hitFirstSfx, this.gameObject.transform, 1.0f);
+        SoundEffectsManager.instance.PlaySound(hitSfx, this.gameObject.transform, 1.0f);
         
         if(tile.placedTower != null && !beatIsHit)
         {
@@ -440,7 +436,7 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public void TryToPlaceTower(GameObject tower, AudioSource feedbackAudio, string feedbackVisual, int towerNum)
+    public void TryToPlaceTower(GameObject tower, AudioClip feedbackAudio, string feedbackVisual, int towerNum)
     {
         //checks if resource is available and if the tower is on cooldown
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost 
@@ -873,15 +869,16 @@ public class CursorTD : MonoBehaviour
         particlesInstance = Instantiate(particlesSource, transform.position, Quaternion.identity);
     }
 
-    private void PlacementFeedback(AudioSource feedbackSound, string feedbackAnimation)
+    private void PlacementFeedback(AudioClip feedbackSound, string feedbackAnimation)
     {
         placingTower = false;
         Debug.Log("try to place tower");
 
-        //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
+        //play the sound & animation on the corresponding tower slot when the tower cannot be placed
         radialMenuAnimator.SetTrigger(feedbackAnimation);
 
-        feedbackSound.Play();
+        //play feedback sound
+        SoundEffectsManager.instance.PlaySound(feedbackSound, this.gameObject.transform, 1.0f);
     }
 
     void UpdateGreyscaleShader() 

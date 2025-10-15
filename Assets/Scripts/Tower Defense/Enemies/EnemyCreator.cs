@@ -14,7 +14,7 @@ public class EnemyCreator : ScriptableObject
     [Header("Enemy Stats")]
     public int maxHealth;
     public EnemyMovementPattern movementPattern;
-    public ClashStrength clashStrength;
+    //public ClashStrength clashStrength;
     public int deathIncome;
     public bool onDeathEffect;
 }
@@ -24,7 +24,7 @@ public enum EnemyMovementPattern
     everyBeat, everyOtherBeat, random, moveThenCast, dontMove, everyTwoBeats, oncePerBar, onceEveryTwoBars
 }
 
-public enum ClashStrength
-{
-    Weak, Medium, High, Immune
-}
+//public enum ClashStrength
+//{
+//    Weak, Medium, High, Immune
+//}

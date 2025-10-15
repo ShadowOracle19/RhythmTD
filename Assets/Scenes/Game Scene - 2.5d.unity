@@ -1039,6 +1039,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 327780051814350791, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
   m_PrefabInstance: {fileID: 302608501}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &210811173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8421742420447605853, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+  m_PrefabInstance: {fileID: 302608501}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210811172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06175898d0364fb4d83c4c7697fccf07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &228213987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1761,6 +1772,70 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -129.6421
       objectReference: {fileID: 0}
+    - target: {fileID: 4269278360376200088, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269278360376200088, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269278360376200088, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 210811173}
+    - target: {fileID: 4269278360376200088, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269278360376200088, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectTowerToLoadout
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269278360376200088, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TowerLoadoutManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269278360376200088, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
+    - target: {fileID: 4269278360376200088, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591858438779111449, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591858438779111449, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591858438779111449, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 210811173}
+    - target: {fileID: 6591858438779111449, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591858438779111449, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectTowerToLoadout
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591858438779111449, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TowerLoadoutManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591858438779111449, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 5183850645279424415, guid: 69a1dfa3c7fec1241b466e6b587e3655, type: 3}
+    - target: {fileID: 6591858438779111449, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7073667190474413766, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1800,6 +1875,70 @@ PrefabInstance:
     - target: {fileID: 7073667190474413766, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179498521123418783, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179498521123418783, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179498521123418783, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 210811173}
+    - target: {fileID: 7179498521123418783, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179498521123418783, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectTowerToLoadout
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179498521123418783, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TowerLoadoutManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179498521123418783, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
+    - target: {fileID: 7179498521123418783, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575954595131352172, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575954595131352172, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575954595131352172, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 210811173}
+    - target: {fileID: 7575954595131352172, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575954595131352172, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectTowerToLoadout
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575954595131352172, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TowerLoadoutManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575954595131352172, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
+    - target: {fileID: 7575954595131352172, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7713174023965051994, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_text

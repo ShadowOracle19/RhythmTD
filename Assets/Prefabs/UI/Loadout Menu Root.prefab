@@ -383,6 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7073667190474413766}
   - component: {fileID: 1436041138924074547}
+  - component: {fileID: 8421742420447605853}
   m_Layer: 0
   m_Name: Loadout Menu Root
   m_TagString: Untagged
@@ -418,6 +419,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf26cd054d32d5d4db7ea3a7208a5a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8421742420447605853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327780051814350791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06175898d0364fb4d83c4c7697fccf07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerObjects:
+  - {fileID: 5183850645279424415, guid: 69a1dfa3c7fec1241b466e6b587e3655, type: 3}
+  - {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
+  - {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
+  - {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
 --- !u!1 &485615989104572526
 GameObject:
   m_ObjectHideFlags: 0
@@ -6083,7 +6101,7 @@ MonoBehaviour:
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 6591858438779111449}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:

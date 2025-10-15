@@ -226,35 +226,35 @@ public class CursorTD : MonoBehaviour
         //towerSwap = !towerSwap;
         //if (towerSwap)
         //{
-        //    SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[4];
-        //    SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[4].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotW.GetComponent<TowerButton>().tower = GameManager.Instance.towers[4];
+        //    SlotW.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[4].GetComponent<Tower>().towerInfo.towerImage;
 
-        //    SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[5];
-        //    SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[5].GetComponent<Tower>().towerInfo.towerImage;
-
-
-        //    SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[6];
-        //    SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[6].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotA.GetComponent<TowerButton>().tower = GameManager.Instance.towers[5];
+        //    SlotA.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[5].GetComponent<Tower>().towerInfo.towerImage;
 
 
-        //    SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[7];
-        //    SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[7].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotS.GetComponent<TowerButton>().tower = GameManager.Instance.towers[6];
+        //    SlotS.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[6].GetComponent<Tower>().towerInfo.towerImage;
+
+
+        //    SlotD.GetComponent<TowerButton>().tower = GameManager.Instance.towers[7];
+        //    SlotD.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[7].GetComponent<Tower>().towerInfo.towerImage;
         //}
         //else
         //{
-        //    SlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0];
-        //    SlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotW.GetComponent<TowerButton>().tower = GameManager.Instance.towers[0];
+        //    SlotW.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[0].GetComponent<Tower>().towerInfo.towerImage;
 
-        //    SlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1];
-        //    SlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
-
-
-        //    SlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2];
-        //    SlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotA.GetComponent<TowerButton>().tower = GameManager.Instance.towers[1];
+        //    SlotA.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[1].GetComponent<Tower>().towerInfo.towerImage;
 
 
-        //    SlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3];
-        //    SlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
+        //    SlotS.GetComponent<TowerButton>().tower = GameManager.Instance.towers[2];
+        //    SlotS.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[2].GetComponent<Tower>().towerInfo.towerImage;
+
+
+        //    SlotD.GetComponent<TowerButton>().tower = GameManager.Instance.towers[3];
+        //    SlotD.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[3].GetComponent<Tower>().towerInfo.towerImage;
         //}
 
         //TowerManager.Instance.SwapTowers();
@@ -303,24 +303,24 @@ public class CursorTD : MonoBehaviour
         isMoving = false;
         gameObject.transform.position = new Vector3(0.5f, 0.1f, -0.5f);
 
-        towerSlotW.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[0].tower;
-        towerSlotW.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.towerImage;
-        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[0].tower.GetComponent<Tower>(), tower1Slider, tower1ResourceSprite);
+        towerSlotW.GetComponent<TowerButton>().tower = GameManager.Instance.towers[0].tower;
+        towerSlotW.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(GameManager.Instance.towers[0].tower.GetComponent<Tower>(), tower1Slider, tower1ResourceSprite);
 
 
-        towerSlotD.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[1].tower;
-        towerSlotD.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.towerImage;
-        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[1].tower.GetComponent<Tower>(), tower2Slider, tower2ResourceSprite);
+        towerSlotD.GetComponent<TowerButton>().tower = GameManager.Instance.towers[1].tower;
+        towerSlotD.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(GameManager.Instance.towers[1].tower.GetComponent<Tower>(), tower2Slider, tower2ResourceSprite);
 
 
-        towerSlotS.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[2].tower;
-        towerSlotS.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.towerImage;
-        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[2].tower.GetComponent<Tower>(), tower3Slider, tower3ResourceSprite);
+        towerSlotS.GetComponent<TowerButton>().tower = GameManager.Instance.towers[2].tower;
+        towerSlotS.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(GameManager.Instance.towers[2].tower.GetComponent<Tower>(), tower3Slider, tower3ResourceSprite);
 
 
-        towerSlotA.GetComponent<TowerButton>().tower = TowerManager.Instance.towers[3].tower;
-        towerSlotA.GetComponent<TowerButton>().icon.sprite = TowerManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.towerImage;
-        TowerManager.Instance.SetResourceBarSprite(TowerManager.Instance.towers[3].tower.GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
+        towerSlotA.GetComponent<TowerButton>().tower = GameManager.Instance.towers[3].tower;
+        towerSlotA.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.towerImage;
+        TowerManager.Instance.SetResourceBarSprite(GameManager.Instance.towers[3].tower.GetComponent<Tower>(), tower4Slider, tower4ResourceSprite);
 
         pauseMovement = false;
         towerSwap = false;
@@ -927,7 +927,7 @@ public class CursorTD : MonoBehaviour
         else
         {
 
-            if (TowerManager.Instance.towers[0].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.resourceCost) 
+            if (GameManager.Instance.towers[0].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
                 towerSlotW.GetComponent<Image>().material = greyscaleShader;
             }
@@ -936,7 +936,7 @@ public class CursorTD : MonoBehaviour
                 towerSlotW.GetComponent<Image>().material = null;
             }
             
-            if (TowerManager.Instance.towers[1].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.resourceCost) 
+            if (GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
                 towerSlotD.GetComponent<Image>().material = greyscaleShader;
             }
@@ -945,7 +945,7 @@ public class CursorTD : MonoBehaviour
                 towerSlotD.GetComponent<Image>().material = null;
             }
 
-            if (TowerManager.Instance.towers[2].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.resourceCost) 
+            if (GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
                 towerSlotS.GetComponent<Image>().material = greyscaleShader;
             }
@@ -954,7 +954,7 @@ public class CursorTD : MonoBehaviour
                 towerSlotS.GetComponent<Image>().material = null;
             }
 
-            if (TowerManager.Instance.towers[3].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < TowerManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.resourceCost) 
+            if (GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
                 towerSlotA.GetComponent<Image>().material = greyscaleShader;
             }

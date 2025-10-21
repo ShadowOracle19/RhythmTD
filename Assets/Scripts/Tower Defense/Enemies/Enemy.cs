@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public EnemyCreator enemy;
     public EnemyEffect enemyEffect;
 
+    public EnemyState enemyState;
+
     public List<Vector3> path;
     private float speed = 1;
     public float timer;
@@ -177,6 +179,22 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        switch (enemyState)
+        {
+            case EnemyState.Walk:
+                EnemyPathingPatterns();
+                break;
+            case EnemyState.Attack:
+                Clash();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void EnemyPathingPatterns()
+    {
         //enemy movement pattern handler
         switch (enemy.movementPattern)
         {
@@ -192,11 +210,11 @@ public class Enemy : MonoBehaviour
             case EnemyMovementPattern.random:
                 otherBeatMove = Random.value < 0.5f;
 
-                if(otherBeatMove)
+                if (otherBeatMove)
                 {
                     int randYPos = Random.Range(0, 2) * 2 - 1;
                     float _rand;
-                    if(randYPos == -1)
+                    if (randYPos == -1)
                     {
                         _rand = -1f;
                     }
@@ -207,7 +225,7 @@ public class Enemy : MonoBehaviour
 
                     nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + _rand);
 
-                    if(nextPosition.z >= 2.5f || nextPosition.z <= -3.5f)//if hit top of bottom of the map
+                    if (nextPosition.z >= 2.5f || nextPosition.z <= -3.5f)//if hit top of bottom of the map
                     {
                         nextPosition = new Vector3(transform.position.x - 1f, 0.5f, transform.position.z);
                     }
@@ -221,9 +239,9 @@ public class Enemy : MonoBehaviour
                 break;
 
             case EnemyMovementPattern.moveThenCast:
-                if(ConductorV2.instance.beatTrack == 2 || ConductorV2.instance.beatTrack == 4)
+                if (ConductorV2.instance.beatTrack == 2 || ConductorV2.instance.beatTrack == 4)
                 {
-                   dontMove = false;
+                    dontMove = false;
                 }
                 if (ConductorV2.instance.beatTrack == 4)
                 {
@@ -233,7 +251,7 @@ public class Enemy : MonoBehaviour
                 break;
 
             case EnemyMovementPattern.dontMove:
-                if(!playOnce)
+                if (!playOnce)
                 {
                     playOnce = true;
                     int rand = Random.Range(0, GridManager.Instance.tiles.Count - 1);
@@ -246,7 +264,7 @@ public class Enemy : MonoBehaviour
             case EnemyMovementPattern.everyTwoBeats:
                 if (ConductorV2.instance.beatTrack == 2 || ConductorV2.instance.beatTrack == 4)
                 {
-                    if(tileInFront != null && tileInFront.placedTower != null)
+                    if (tileInFront != null && tileInFront.placedTower != null)
                     {
                         dontMove = true;
                         enemyEffect.UseEffect();
@@ -267,10 +285,10 @@ public class Enemy : MonoBehaviour
                 break;
 
             case EnemyMovementPattern.onceEveryTwoBars:
-                if(ConductorV2.instance.beatTrack == 4)
+                if (ConductorV2.instance.beatTrack == 4)
                 {
                     barTracker += 1;
-                    if(barTracker == 2)
+                    if (barTracker == 2)
                     {
                         dontMove = false;
                         barTracker = 0;
@@ -281,7 +299,6 @@ public class Enemy : MonoBehaviour
             default:
                 break;
         }
-
     }
 
     //Enemies eyes to see if a tile or obstacle is around them
@@ -316,27 +333,39 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Clash(ClashStrength clashStrength)
+    //public void Clash(ClashStrength clashStrength)
+    //{
+    //    switch (clashStrength)
+    //    {
+    //        case ClashStrength.Weak:
+    //            tileInFront.placedTower.GetComponent<Tower>().Damage(_currentDamage);
+    //            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
+    //            Kill();
+    //            break;
+    //        case ClashStrength.Medium:
+    //            tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
+    //            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
+    //            Kill();
+    //            break;
+    //        case ClashStrength.High:
+    //            tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
+    //            break;
+    //        case ClashStrength.Immune:
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
+
+    public void Clash()
     {
-        switch (clashStrength)
+        tileInFront.placedTower.GetComponent<Tower>().Damage(1);
+
+        if (tileInFront != null && tileInFront.placedTower == null)
         {
-            case ClashStrength.Weak:
-                tileInFront.placedTower.GetComponent<Tower>().Damage(_currentDamage);
-                clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
-                Kill();
-                break;
-            case ClashStrength.Medium:
-                tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
-                clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
-                Kill();
-                break;
-            case ClashStrength.High:
-                tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
-                break;
-            case ClashStrength.Immune:
-                break;
-            default:
-                break;
+            enemyState = EnemyState.Walk;
+            dontMove = true;
+            return;
         }
     }
 
@@ -387,10 +416,12 @@ public class Enemy : MonoBehaviour
             //    .onComplete = CallNextPosition;
             if (tileInFront != null && tileInFront.placedTower != null)
             {
-                Clash(enemy.clashStrength);
+                //Clash(enemy.clashStrength);
+                enemyState = EnemyState.Attack;
                 dontMove = true;
                 return;
             }
+            
         }
         
     }
@@ -443,4 +474,9 @@ public class Enemy : MonoBehaviour
         Spawner.Instance.enemies.Remove(this);
         Destroy(gameObject);
     }
+}
+
+public enum EnemyState
+{
+    Walk, Attack
 }

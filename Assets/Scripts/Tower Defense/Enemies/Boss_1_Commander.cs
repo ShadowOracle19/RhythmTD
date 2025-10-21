@@ -792,7 +792,9 @@ public class Boss_1_Commander : Enemy
 
     public override void Damage(int damage)
     {
-        enemyDeathSFX.Play();
+        //play hurt sound
+        SoundEffectsManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
+
         currentDamage += damage;
         //if hit to current damage threshold
         if(currentDamage >= damageThreshold)

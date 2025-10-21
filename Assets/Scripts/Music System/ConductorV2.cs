@@ -66,9 +66,6 @@ public class ConductorV2 : MonoBehaviour
 
     public AudioSource _ping;
 
-    public AudioClip bpmTrack1; //80
-    public AudioClip bpmTrack2; //100
-
     [Header("Events")]
     public List<UnityEvent> triggerEvent = new List<UnityEvent>();
     public List<UnityEvent> projectileEvent = new List<UnityEvent>();

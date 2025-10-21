@@ -586,7 +586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba7717c78f9f6b647995eb9a7b7465d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerAttackSFX: {fileID: -8906736978416925348}
   towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: 217bf25f71e65b344b96c7253cb7c51f, type: 2}
   currentAttackPattern: 0
@@ -640,11 +639,6 @@ MonoBehaviour:
   upgradeAttackSprite03: {fileID: -6656982175730374425, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   multiAttackSprite: {fileID: 3497122241814166007, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: 3497122241814166007, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  aoeAttackParticles: {fileID: 0}
-  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
-  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
-  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
-  burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   ChargedUp: 0
   towerUpgradeUnlocked: 0
   upgradePurchased: 0
@@ -657,14 +651,16 @@ MonoBehaviour:
   upgradeCost4: 0
   upgradeFourActive: 0
   feelingItNow: 0
-  damageSFX: {fileID: 1652352790959730927}
-  deathSFX: {fileID: 3004406881675943244}
-  upgradeSFX: {fileID: 1022313844452487590}
+  towerAttackSfx: {fileID: 8300000, guid: 64e6bfc065fb6404da83cf5259f7f894, type: 3}
+  towerHurtSfx: {fileID: 8300000, guid: 8ff81b02ac943f64b926033665f891aa, type: 3}
+  towerDeathSfx: {fileID: 8300000, guid: 53dec87046647b94189a904e84192675, type: 3}
+  towerUpgradeSfx: {fileID: 8300000, guid: 748333af800b15f48b8e6674e006355c, type: 3}
+  aoeAttackParticles: {fileID: 0}
+  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
+  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
+  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
+  burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   chargeShotDamage: 0
-  TrillDamage: {fileID: 0}
-  TrillDeath: {fileID: 0}
-  TrillUpgrade: {fileID: 0}
-  TrillPlacement: {fileID: 0}
 --- !u!82 &-8906736978416925348
 AudioSource:
   m_ObjectHideFlags: 0

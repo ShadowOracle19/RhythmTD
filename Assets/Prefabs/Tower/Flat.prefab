@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd8a809dd198cc49b7e3bb3961b79d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerAttackSFX: {fileID: 3091612715999862889}
   towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: c6827d0b3828b0c4ab69976db279f395, type: 2}
   currentAttackPattern: 0
@@ -222,11 +221,6 @@ MonoBehaviour:
   upgradeAttackSprite03: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   multiAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  aoeAttackParticles: {fileID: 5103615976187222216, guid: 863485c7b148fdc4d8eee70a3cc74e80, type: 3}
-  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
-  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
-  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
-  burningParticles: {fileID: 6363840329039339684, guid: 6222a6e473313534e8aa98e3b7911378, type: 3}
   ChargedUp: 0
   towerUpgradeUnlocked: 0
   upgradePurchased: 0
@@ -239,9 +233,15 @@ MonoBehaviour:
   upgradeCost4: 0
   upgradeFourActive: 0
   feelingItNow: 0
-  damageSFX: {fileID: 8207311787082713463}
-  deathSFX: {fileID: 2322212470406944789}
-  upgradeSFX: {fileID: 2446543734746047815}
+  towerAttackSfx: {fileID: 8300000, guid: 64e6bfc065fb6404da83cf5259f7f894, type: 3}
+  towerHurtSfx: {fileID: 8300000, guid: 0f6221cd989c4a74a9ed126be6baab7f, type: 3}
+  towerDeathSfx: {fileID: 8300000, guid: 39bc06ae949154b4582c5fa4f63321a7, type: 3}
+  towerUpgradeSfx: {fileID: 8300000, guid: 61a9f707937ea26458ad4164621095c6, type: 3}
+  aoeAttackParticles: {fileID: 5103615976187222216, guid: 863485c7b148fdc4d8eee70a3cc74e80, type: 3}
+  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
+  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
+  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
+  burningParticles: {fileID: 6363840329039339684, guid: 6222a6e473313534e8aa98e3b7911378, type: 3}
 --- !u!82 &3091612715999862889
 AudioSource:
   m_ObjectHideFlags: 0

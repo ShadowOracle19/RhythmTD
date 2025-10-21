@@ -46,22 +46,6 @@ public class CursorTD : MonoBehaviour
 
     [Header("Shaders Materials")]
     public Material greyscaleShader;
-
-    [Header("Buff PFX")]
-    [SerializeField] private ParticleSystem buffGreatPfx;
-    private ParticleSystem buffGreatPfxInstance;
-
-    [SerializeField] private ParticleSystem buffPerfectPfx;
-    private ParticleSystem buffPerfectPfxInstance;
-    
-    [Header("Menu SFX")]
-    public AudioSource upInvalidSfx;
-    public AudioSource rightInvalidSfx;
-    public AudioSource downInvalidSfx;
-    public AudioSource leftInvalidSfx;
-
-    [Header("Hit SFX")]
-    public AudioSource hitFirstSfx;
     
     [Header("Placement Menu")]
     public GameObject placementMenu;
@@ -128,26 +112,39 @@ public class CursorTD : MonoBehaviour
     [Header("Piano resource gain")]
     public int pianoMod = 0;
 
-    // PFX
+    [Header("SFX")]
+    public AudioClip upInvalidSfx;
+    public AudioClip rightInvalidSfx;
+    public AudioClip downInvalidSfx;
+    public AudioClip leftInvalidSfx;
+    public AudioClip hitSfx;
+
+    [Header("PFX")]
+    [SerializeField] private ParticleSystem buffGreatPfx;
+    private ParticleSystem buffGreatPfxInstance;
+
+    [SerializeField] private ParticleSystem buffPerfectPfx;
+    private ParticleSystem buffPerfectPfxInstance;
+
     [SerializeField] private ParticleSystem pianoResourceGenParticles;
     private ParticleSystem pianoResourceGenParticlesInstance;
 
     [SerializeField] private ParticleSystem cursorResourceGenParticles;
     private ParticleSystem cursorResourceGenParticlesInstance;
 
-    // Start is called before the first frame update
+
+
     void Start()
     {
         radialMenuAnimator = placementMenu.GetComponent<Animator>();
 
-        // Get reference to the hit judgement sprite renderer
+        //get reference to the hit judgement sprite renderer
         beatHitResultSpriteRender = beatHitResultPrefab.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
 
         if (pauseMovement || ConductorV2.instance.countingIn)
             return;
@@ -191,6 +188,8 @@ public class CursorTD : MonoBehaviour
             UpdateGreyscaleShader();
         }
     }
+
+
 
     private void FixedUpdate()
     {
@@ -264,6 +263,7 @@ public class CursorTD : MonoBehaviour
 
     public void DestroyMode()
     {
+        //
         if(!towerSelectMenuOpened)
         {
             destructMode = !destructMode;
@@ -282,7 +282,6 @@ public class CursorTD : MonoBehaviour
                 cursorSprite.GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
-
     }
 
     public void DestroyTower()
@@ -400,7 +399,7 @@ public class CursorTD : MonoBehaviour
 
     public void TowerEmpowerment(BuffType buff)
     {
-        hitFirstSfx.Play();
+        SoundEffectsManager.instance.PlaySound(hitSfx, this.gameObject.transform, 1.0f);
         
         if(tile.placedTower != null && !beatIsHit)
         {
@@ -436,7 +435,7 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public void TryToPlaceTower(GameObject tower, AudioSource feedbackAudio, string feedbackVisual, int towerNum)
+    public void TryToPlaceTower(GameObject tower, AudioClip feedbackAudio, string feedbackVisual, int towerNum)
     {
         //checks if resource is available and if the tower is on cooldown
         if(CombatManager.Instance.resourceNum >= tower.GetComponent<Tower>().towerInfo.resourceCost 
@@ -572,7 +571,10 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeOneActive = true;
-                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
+
+                //play upgrade sound
+                SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
+
                 //tile.placedTower.GetComponent<Tower>().nextProjectile = tile.placedTower.GetComponent<Tower>().upgradeProjectile01;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost1;
 
@@ -593,7 +595,10 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeTwoActive = true;
-                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
+                
+                //play upgrade sound
+                SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
+
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost2;
                 
                 ClosePlacementMenu();
@@ -614,7 +619,10 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeThreeActive = true;
-                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
+                
+                //play upgrade sound
+                SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
+
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost3;
 
                 ClosePlacementMenu();
@@ -635,7 +643,10 @@ public class CursorTD : MonoBehaviour
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
                 tile.placedTower.GetComponent<Tower>().upgradeFourActive = true;
-                tile.placedTower.GetComponent<Tower>().upgradeSFX.Play();
+                
+                //play upgrade sound
+                SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
+
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost4;
 
                 ClosePlacementMenu();
@@ -869,15 +880,16 @@ public class CursorTD : MonoBehaviour
         particlesInstance = Instantiate(particlesSource, transform.position, Quaternion.identity);
     }
 
-    private void PlacementFeedback(AudioSource feedbackSound, string feedbackAnimation)
+    private void PlacementFeedback(AudioClip feedbackSound, string feedbackAnimation)
     {
         placingTower = false;
         Debug.Log("try to place tower");
 
-        //Play the sound & animation on the corresponding tower slot when the tower cannot be placed
+        //play the sound & animation on the corresponding tower slot when the tower cannot be placed
         radialMenuAnimator.SetTrigger(feedbackAnimation);
 
-        feedbackSound.Play();
+        //play feedback sound
+        SoundEffectsManager.instance.PlaySound(feedbackSound, this.gameObject.transform, 1.0f);
     }
 
     void UpdateGreyscaleShader() 

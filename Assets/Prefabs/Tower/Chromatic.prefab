@@ -682,7 +682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc22cb3d426935e48b21ef681de66c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerAttackSFX: {fileID: 6659272261018043613}
   towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: 001a12e674bb4c943b89583ba9b972b5, type: 2}
   currentAttackPattern: 0
@@ -736,11 +735,6 @@ MonoBehaviour:
   upgradeAttackSprite03: {fileID: -2797596922211243301, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   multiAttackSprite: {fileID: -2797596922211243301, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: -2797596922211243301, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  aoeAttackParticles: {fileID: 0}
-  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
-  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
-  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
-  burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   ChargedUp: 0
   towerUpgradeUnlocked: 0
   upgradePurchased: 0
@@ -753,9 +747,15 @@ MonoBehaviour:
   upgradeCost4: 0
   upgradeFourActive: 0
   feelingItNow: 0
-  damageSFX: {fileID: 6632998354899154970}
-  deathSFX: {fileID: 8854456517519017388}
-  upgradeSFX: {fileID: 5988710659036509844}
+  towerAttackSfx: {fileID: 8300000, guid: 9c629428577b1a34781b87d062751106, type: 3}
+  towerHurtSfx: {fileID: 8300000, guid: a1f776b05d53d9d4eb91b9c578907118, type: 3}
+  towerDeathSfx: {fileID: 8300000, guid: 00bcab48a620c044d94e2518eb39e418, type: 3}
+  towerUpgradeSfx: {fileID: 8300000, guid: 4439c41b6ddb51c4aa71261b0652f09e, type: 3}
+  aoeAttackParticles: {fileID: 0}
+  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
+  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
+  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
+  burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
 --- !u!95 &7437452897847904330
 Animator:
   serializedVersion: 5

@@ -51,7 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 5766a935811d27948977134265fff02b, type: 2}
   enemyEffect: {fileID: 0}
-  enemyDeathSFX: {fileID: 6874018606574302444}
   path: []
   timer: 0
   currentPositionHolder: {x: 0, y: 0, z: 0}
@@ -81,12 +80,14 @@ MonoBehaviour:
   burnt: 0
   isStunned: 0
   isStunnedCounter: 0
-  burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
-  clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
   teleported: 0
   confusingOrderActive: 0
   obstacleFound: 0
   animator: {fileID: 8037740004645850056}
+  enemyHurtSfx: {fileID: 8300000, guid: adbad1b0ee84c3b44987f8df8f486474, type: 3}
+  enemyDeathSfx: {fileID: 8300000, guid: adbad1b0ee84c3b44987f8df8f486474, type: 3}
+  burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
+  clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
 --- !u!82 &6874018606574302444
 AudioSource:
   m_ObjectHideFlags: 0

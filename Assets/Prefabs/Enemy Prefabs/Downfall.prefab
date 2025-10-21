@@ -52,12 +52,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 15e37155218e691469ea833bbdae7f96, type: 2}
   enemyEffect: {fileID: 8671263623215796113}
-  enemyDeathSFX: {fileID: -8889972146457848405}
   path: []
+  timer: 0
   currentPositionHolder: {x: 0, y: 0, z: 0}
   dontMove: 0
   barTracker: 0
   currentHealth: 0
+  _currentDamage: 1
   trigger:
     m_PersistentCalls:
       m_Calls:
@@ -80,6 +81,12 @@ MonoBehaviour:
   burnt: 0
   isStunned: 0
   isStunnedCounter: 0
+  teleported: 0
+  confusingOrderActive: 0
+  obstacleFound: 0
+  animator: {fileID: 0}
+  enemyHurtSfx: {fileID: 8300000, guid: adbad1b0ee84c3b44987f8df8f486474, type: 3}
+  enemyDeathSfx: {fileID: 8300000, guid: adbad1b0ee84c3b44987f8df8f486474, type: 3}
   burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
 --- !u!61 &79028663795836632
@@ -345,7 +352,7 @@ SpriteRenderer:
   m_Size: {x: 0.36, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6646207447257291053

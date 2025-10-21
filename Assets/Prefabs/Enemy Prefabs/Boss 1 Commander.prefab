@@ -52,7 +52,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   enemyEffect: {fileID: 0}
-  enemyDeathSFX: {fileID: 6874018606574302444}
   path: []
   timer: 0
   currentPositionHolder: {x: 0, y: 0, z: 0}
@@ -82,18 +81,23 @@ MonoBehaviour:
   burnt: 0
   isStunned: 0
   isStunnedCounter: 0
-  burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
-  clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
   teleported: 0
+  confusingOrderActive: 0
   obstacleFound: 0
   animator: {fileID: 8037740004645850056}
+  enemyHurtSfx: {fileID: 8300000, guid: adbad1b0ee84c3b44987f8df8f486474, type: 3}
+  enemyDeathSfx: {fileID: 8300000, guid: adbad1b0ee84c3b44987f8df8f486474, type: 3}
+  burnParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
+  clashParticles: {fileID: 7350168317149746366, guid: 689fa7f58cb1fbe43bdb4dcdc7b87799, type: 3}
   currentState: 0
   currentStateIndex: 0
   previousState: 0
   damageThreshold: 10
+  currentDamage: 0
   lifter: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
   runner: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
   sorter: {fileID: 239132429429542008, guid: ae22a1fb4d3728a45a8be833bb8a0027, type: 3}
+  phaseStarted: 0
   measureCounter: 0
   phaseOneIntroDialogue:
   - text: Welcome defects

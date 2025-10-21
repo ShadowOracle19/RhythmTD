@@ -20,7 +20,6 @@ public enum TowerState
 
 public class Tower : MonoBehaviour
 {
-    public AudioSource towerAttackSFX;
     public float towerAudioVolumeIncrement = 0.05f;
 
     public TowerTypeCreator towerInfo;
@@ -107,20 +106,6 @@ public class Tower : MonoBehaviour
     public Sprite multiAttackSprite;
     public Sprite flameAttackSprite;
 
-    [Header("Attack PFX")]
-    [SerializeField] private ParticleSystem aoeAttackParticles;
-    private ParticleSystem aoeAttackParticlesInstance;
-    public Color aoeAttackColour;
-
-    [SerializeField] private ParticleSystem shieldDestructionParticles;
-    private ParticleSystem shieldDestructionParticlesInstance;
-
-    [SerializeField] private ParticleSystem clashParticles;
-    private ParticleSystem clashParticlesInstance;
-
-    [SerializeField] private ParticleSystem burningParticles;
-    private ParticleSystem burningParticlesInstance;
-
     [Header("Tile Interactions")]
     public bool ChargedUp = false;
 
@@ -146,9 +131,27 @@ public class Tower : MonoBehaviour
     [Header("Upgrade Modifiers")]
     public bool feelingItNow = false;
 
-    public AudioSource damageSFX;
-    public AudioSource deathSFX;
-    public AudioSource upgradeSFX;
+    [Header("SFX")]
+    public AudioClip towerAttackSfx;
+    public AudioClip towerHurtSfx;
+    public AudioClip towerDeathSfx;
+    public AudioClip towerUpgradeSfx;
+
+    [Header("PFX")]
+    [SerializeField] private ParticleSystem aoeAttackParticles;
+    private ParticleSystem aoeAttackParticlesInstance;
+    public Color aoeAttackColour;
+
+    [SerializeField] private ParticleSystem shieldDestructionParticles;
+    private ParticleSystem shieldDestructionParticlesInstance;
+
+    [SerializeField] private ParticleSystem clashParticles;
+    private ParticleSystem clashParticlesInstance;
+
+    [SerializeField] private ParticleSystem burningParticles;
+    private ParticleSystem burningParticlesInstance;
+
+
 
     public virtual void Start()
     {
@@ -200,6 +203,8 @@ public class Tower : MonoBehaviour
 
     }
 
+
+
     public void towerEffectVisual()
     {
         if (towerHover && towerAboutToFire)
@@ -232,8 +237,8 @@ public class Tower : MonoBehaviour
 
     public virtual void Fire() //default fire
     {
-        //Audio SFX
-        towerAttackSFX.Play();
+        //play attack sound
+        SoundEffectsManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
         
         //if feeling it now is active
         if(feelingItNow)
@@ -263,8 +268,8 @@ public class Tower : MonoBehaviour
     public virtual void Fire(float yPos) //Fire on specific ypos mainly for viola
     {
 
-        //Audio SFX
-        towerAttackSFX.Play();
+        //play attack sound
+        SoundEffectsManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
 
         int damage = currentDamage;
 
@@ -414,7 +419,9 @@ public class Tower : MonoBehaviour
 
     public virtual void Damage(int damage)
     {
-        damageSFX.Play();
+        //play hurt sound
+        SoundEffectsManager.instance.PlaySound(towerHurtSfx, this.gameObject.transform, 1.0f);
+
         if(isShielded)
         {
             SpawnParticles(this.transform, defaultAttackSprite, shieldDestructionParticles, shieldDestructionParticlesInstance, true, false);
@@ -426,7 +433,9 @@ public class Tower : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            deathSFX.Play();
+            //play death sound
+            SoundEffectsManager.instance.PlaySound(towerDeathSfx, this.gameObject.transform, 1.0f);
+
             clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the tower clash particle effect
             RemoveTower();
         }

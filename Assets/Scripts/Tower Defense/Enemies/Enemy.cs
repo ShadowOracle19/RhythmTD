@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
 {
     public EnemyCreator enemy;
     public EnemyEffect enemyEffect;
-    public AudioSource enemyDeathSFX;
 
     public List<Vector3> path;
     private float speed = 1;
@@ -39,13 +38,6 @@ public class Enemy : MonoBehaviour
     public bool isStunned = false;
     public int isStunnedCounter = 0;
 
-    // PFX
-    [SerializeField] private ParticleSystem burnParticles;
-    private ParticleSystem burnParticlesInstance;
-
-    [SerializeField] private ParticleSystem clashParticles;
-    private ParticleSystem clashParticlesInstance;
-
     public bool teleported = false;
 
     //confusing order
@@ -63,8 +55,19 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
     int deathCount = 0;
 
+    [Header("SFX")]
+    public AudioClip enemyHurtSfx;
+    public AudioClip enemyDeathSfx;
 
-    // Start is called before the first frame update
+    [Header("PFX")]
+    [SerializeField] private ParticleSystem burnParticles;
+    private ParticleSystem burnParticlesInstance;
+
+    [SerializeField] private ParticleSystem clashParticles;
+    private ParticleSystem clashParticlesInstance;
+
+
+
     public virtual void Start()
     {
         tileMask = LayerMask.GetMask("Stage");
@@ -398,7 +401,10 @@ public class Enemy : MonoBehaviour
         _renderer.color = Color.red;
         time = 1;
         currentHealth -= damage;
-        enemyDeathSFX.Play();
+        
+        //play hurt sound 
+        SoundEffectsManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
+
         if (currentHealth <= 0)
         {
             Kill();
@@ -412,6 +418,9 @@ public class Enemy : MonoBehaviour
         {
             enemyEffect.UseEffect();
         }
+
+        //play death sound 
+        SoundEffectsManager.instance.PlaySound(enemyDeathSfx, this.gameObject.transform, 1.0f);
 
         animator.SetBool("IsKilled",true); //Play death animation
         

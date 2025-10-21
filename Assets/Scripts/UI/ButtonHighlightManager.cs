@@ -9,23 +9,24 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
     // VARIABLES
     //public GameObject menuCursor;
 
-    public GameObject buttonHighlightAudio;
-    AudioSource buttonHighlightAudioSource;
+    [Header("SFX")]
+    public AudioClip buttonHighlightSfx;
 
-    public Vector3 highlightScale = new Vector3(0.25f, 0.25f, 0.0f); //change in scale
+    private Vector3 highlightScale = new Vector3(1.25f, 1.25f, 1.0f);
 
     // Start is called before the first frame update
     void Start()
     {
-        //buttonHighlightAudioSource = buttonHighlightAudio.GetComponent<AudioSource>();
+        //
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        GameManager.Instance.buttonHighlightSFX.Play();
-
         // Make button larger
-        this.gameObject.transform.localScale += highlightScale;
+        this.gameObject.transform.localScale = highlightScale;
+
+        //play highlight sound
+        SoundEffectsManager.instance.PlaySound(buttonHighlightSfx, this.gameObject.transform, 1.0f);
 
         //menuCursor.GetComponent<MenuCursorMovement>().SetActiveElement(this.gameObject);
     }
@@ -33,7 +34,7 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
     public void OnDeselect(BaseEventData eventData)
     {
         // Make button smaller
-        this.gameObject.transform.localScale -= highlightScale;
+        this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         
         //menuCursor.GetComponent<MenuCursorMovement>().SetPreviousElement(this.gameObject);
     }

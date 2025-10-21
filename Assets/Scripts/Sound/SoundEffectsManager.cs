@@ -20,6 +20,10 @@ public class SoundEffectsManager : MonoBehaviour
 
     public void PlaySound(AudioClip audioClip, Transform spawnTransform, float volume)
     {
+        if (audioClip == null) {
+            return;
+        }
+
         //spawn sound effect gameObject
         AudioSource audioSource = Instantiate(soundEffectObject, spawnTransform.position, Quaternion.identity);
 
@@ -41,6 +45,10 @@ public class SoundEffectsManager : MonoBehaviour
 
     public void PlayRandSound(AudioClip[] audioClip, Transform spawnTransform, float volume)
     {
+        if (audioClip == null) {
+            return;
+        }
+        
         //assign a random index
         int rand = Random.Range(0, audioClip.Length);
         

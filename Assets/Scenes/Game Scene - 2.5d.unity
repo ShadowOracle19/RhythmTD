@@ -4120,7 +4120,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 24cf9722a68d7b244a837c8b4eb760e2, type: 2}
   m_CullingMode: 0
@@ -18868,6 +18868,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2906749929272580904}
     - target: {fileID: 805011822647951630, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: buttonHighlightSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 4be236449ec49984189bae20b548f8ff, type: 3}
+    - target: {fileID: 805011822647951630, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: buttonHighlightAudio
       value: 
       objectReference: {fileID: 1013587931}
@@ -18879,6 +18883,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 7.95
       objectReference: {fileID: 0}
+    - target: {fileID: 2209030831098385332, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: highlightScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2209030831098385332, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: highlightScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2209030831098385332, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: highlightScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2209030831098385332, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: buttonHighlightSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 4be236449ec49984189bae20b548f8ff, type: 3}
     - target: {fileID: 2209030831098385332, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: buttonHighlightAudio
       value: 
@@ -18995,6 +19015,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5027214220673436862, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660901716555994628, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -960.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660901716555994628, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.96
+      objectReference: {fileID: 0}
     - target: {fileID: 5767397332131304705, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 4
@@ -19096,9 +19128,17 @@ PrefabInstance:
       value: Title Menu Background
       objectReference: {fileID: 0}
     - target: {fileID: 8042250286729693877, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: buttonHighlightSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 4be236449ec49984189bae20b548f8ff, type: 3}
+    - target: {fileID: 8042250286729693877, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: buttonHighlightAudio
       value: 
       objectReference: {fileID: 1013587931}
+    - target: {fileID: 8166965900130452826, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
+      propertyPath: buttonHighlightSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 4be236449ec49984189bae20b548f8ff, type: 3}
     - target: {fileID: 8166965900130452826, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: buttonHighlightAudio
       value: 

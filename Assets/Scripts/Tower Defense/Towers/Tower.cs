@@ -130,6 +130,7 @@ public class Tower : MonoBehaviour
 
     [Header("Upgrade Modifiers")]
     public bool feelingItNow = false;
+    public bool synthBuff = false;
 
     [Header("SFX")]
     public AudioClip towerAttackSfx;
@@ -263,6 +264,7 @@ public class Tower : MonoBehaviour
         
         //towerUpgradeUnlocked = false;
         feelingItNow = false;
+        synthBuff = false;
     }
 
     public virtual void Fire(float yPos) //Fire on specific ypos mainly for viola
@@ -591,7 +593,7 @@ public class Tower : MonoBehaviour
 
     }
 
-    private void SpawnParticles(Transform tileTransform, Sprite projectileSprite, ParticleSystem pfxSource, ParticleSystem pfxInstance, bool shielded, bool burning)
+    public void SpawnParticles(Transform tileTransform, Sprite projectileSprite, ParticleSystem pfxSource, ParticleSystem pfxInstance, bool shielded, bool burning)
     {
         if(towerUpgradeUnlocked)
         {

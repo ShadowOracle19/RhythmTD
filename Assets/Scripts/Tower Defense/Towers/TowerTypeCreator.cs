@@ -24,16 +24,10 @@ public class TowerTypeCreator : ScriptableObject
     public int range = 0;
     [Tooltip("Set to true if projectile can pierce through enemies")]
     public bool projectilePiercesEnemies = false;
-    [Tooltip("Also changes color of AOE attack")]
-    public Color projectileColor;
 
     [Header("AOE")]
     [Tooltip("Set to true if you want tower to be AOE")]
     public bool isAOETower = false;
-
-    [Header("Projectile Type")]
-    [Tooltip("Set to desired firing type")]
-    public ProjectileType projectileType;
 
     [Header("Resource Tower")]
     public bool isResourceTower = false;

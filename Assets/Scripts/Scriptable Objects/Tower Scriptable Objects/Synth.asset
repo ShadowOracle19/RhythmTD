@@ -10,25 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18102bcf76c94404eafc40143c5c6aad, type: 3}
-  m_Name: Major
+  m_Name: Synth
   m_EditorClassIdentifier: 
-  towerName: Major
-  towerDescription: Shoots projectiles in a pattern from top to bottom
-  towerImage: {fileID: -7699115586588543095, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
-  type: 2
+  towerName: Synth
+  towerDescription: 'AOE based buffing tower
+
+'
+  towerImage: {fileID: -3126412101584182516, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
+  type: 3
   resourceCost: 75
   cost: 2
   cooldownTime: 8
   cooldown: 1
   towerHealth: 5
-  attackPattern: 4
-  damage: 2
-  range: 9
+  attackPattern: 0
+  damage: 4
+  range: 2
   projectilePiercesEnemies: 0
-  isAOETower: 0
+  isAOETower: 1
   isResourceTower: 0
   resourceGain: 5
-  upgrade1: {fileID: -6037673426074501938, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
-  upgrade2: {fileID: -5384197578389128986, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
-  upgrade3: {fileID: -8384982287457754926, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
+  upgrade1: {fileID: 0}
+  upgrade2: {fileID: 0}
+  upgrade3: {fileID: 0}
   upgrade4: {fileID: 0}

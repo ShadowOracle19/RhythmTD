@@ -15,11 +15,6 @@ public class SynthTower : Tower
     {
         base.Update();
 
-        if (upgradeThreeActive)
-        {
-            towerRange = 4;
-            currentDamage = 10;
-        }
     }
 
     public override void Fire()

@@ -196,7 +196,7 @@ public class TowerManager : MonoBehaviour
 
         Tower placingTower = _tower.GetComponent<Tower>();
         placingTower.connectedTile = tile;
-        placingTower.isPoweredUp = isEmpowered;
+        //placingTower.isPoweredUp = isEmpowered;
         audioSource.Play();
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 

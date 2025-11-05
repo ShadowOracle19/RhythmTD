@@ -26,7 +26,6 @@ public class Tower : MonoBehaviour
 
     public TowerAttackPattern currentAttackPattern;
 
-    public Transform firePoint;
     public GameObject projectile;
     /* 
     Hi Lucy. 
@@ -36,10 +35,6 @@ public class Tower : MonoBehaviour
     */
     public GameObject nextProjectile;
     
-    public GameObject buffProjectile;
-    public GameObject upgradeProjectile01;
-    public GameObject upgradeProjectile02;
-    public GameObject upgradeProjectile03;
     
     public Tile connectedTile;
 
@@ -47,19 +42,12 @@ public class Tower : MonoBehaviour
     //public RaycastHit[] colliders;
 
     public int beat;
-    public bool everyOtherBeat = false;
 
     [Header("Tower Stats")]
-    public int currentHealth = 0;
+    private int currentHealth = 0;
     public int currentDamage;
     public int tempDamageHolder;
     public int towerRange;
-
-    [Header("Buff Triggers")]
-    public bool burningBullet = false;
-    public bool increaseBulletDamage = false;
-    public bool multiAttack = false;
-
 
     [Header("Tower Empower Indicator")]
     public bool towerHover = false;
@@ -89,21 +77,18 @@ public class Tower : MonoBehaviour
     public List<Sprite> repeatSprites = new List<Sprite>();
     private int repeatSpritesIndex = 0;
 
-    [Header("Powered UP Tower")]
-    public bool isPoweredUp = false;
-    public GameObject nonPoweredIcon;
-    public GameObject poweredIcon;
+    //[Header("Powered UP Tower")]
+    //public bool isPoweredUp = false;
+    //public GameObject nonPoweredIcon;
+    //public GameObject poweredIcon;
 
     [Header("Projectile Sprites")]
-    private Sprite nextAttackSprite;
-
     public Sprite defaultAttackSprite;
     public Sprite buffDefaultAttackSprite;
     public Sprite upgradeAttackSprite01;
     public Sprite upgradeAttackSprite02;
     public Sprite upgradeAttackSprite03;
 
-    public Sprite multiAttackSprite;
     public Sprite flameAttackSprite;
 
     [Header("Tile Interactions")]
@@ -113,19 +98,19 @@ public class Tower : MonoBehaviour
     public bool towerUpgradeUnlocked = false;
     public bool upgradePurchased = false;
     //upgrade 1 damage boost
-    public int upgradeCost1;
+    //public int upgradeCost1;
     public bool upgradeOneActive = false;
 
-    //upgrade 2 multiple projectile
-    public int upgradeCost2;
+    ////upgrade 2 multiple projectile
+    //public int upgradeCost2;
     public bool upgradeTwoActive = false;
 
-    //upgrade 3 burning
-    public int upgradeCost3;
+    ////upgrade 3 burning
+    //public int upgradeCost3;
     public bool upgradeThreeActive = false;
 
-    //upgrade 4 range
-    public int upgradeCost4;
+    ////upgrade 4 range
+    //public int upgradeCost4;
     public bool upgradeFourActive = false;
 
     [Header("Upgrade Modifiers")]
@@ -169,11 +154,6 @@ public class Tower : MonoBehaviour
         currentState = TowerState.Default;
 
         towerRange = towerInfo.range;
-
-        upgradeCost1 = 25;
-        upgradeCost2 = 25;
-        upgradeCost3 = 25;
-        upgradeCost4 = 25;
 
         recordingStatus.SetActive(false); //RECORDING STATUS CODE
 
@@ -231,8 +211,10 @@ public class Tower : MonoBehaviour
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies);
 
         ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        //towerUpgradeUnlocked = false;
+        feelingItNow = false;
+        synthBuff = false;
 
-        
     }
 
 
@@ -244,7 +226,7 @@ public class Tower : MonoBehaviour
         //if feeling it now is active
         if(feelingItNow)
         {
-            nextProjectile = buffProjectile;
+            nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = buffDefaultAttackSprite;
 
             tempDamageHolder = currentDamage;
             currentDamage = currentDamage * 2;
@@ -253,7 +235,7 @@ public class Tower : MonoBehaviour
         else if (upgradePurchased)
         {
             currentDamage = tempDamageHolder;
-            nextProjectile = upgradeProjectile01;
+            nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = upgradeAttackSprite01;
         }
         else
         {
@@ -262,9 +244,7 @@ public class Tower : MonoBehaviour
         }
 
         
-        //towerUpgradeUnlocked = false;
-        feelingItNow = false;
-        synthBuff = false;
+        
     }
 
     public virtual void Fire(float yPos) //Fire on specific ypos mainly for viola
@@ -323,6 +303,8 @@ public class Tower : MonoBehaviour
 
         GameObject charge = Instantiate(nextProjectile, transform.position, transform.rotation, CombatManager.Instance.chargesParent);
         charge.GetComponent<Charges>().initalizeCharge(chargeValue,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z), connectedTower, true);
+        feelingItNow = false;
+        synthBuff = false;
     }
 
     public virtual void AOE(int damage)
@@ -383,6 +365,9 @@ public class Tower : MonoBehaviour
             }
         }
         colliders = null;
+        //towerUpgradeUnlocked = false;
+        feelingItNow = false;
+        synthBuff = false;
     }
 
     public void RemoveTower()
@@ -488,7 +473,7 @@ public class Tower : MonoBehaviour
                 break;
 
             case BuffType.Burn://Burn Buff
-                burningBullet = true;
+                //burningBullet = true;
                 break;
 
             case BuffType.Shield: //Shield Buff

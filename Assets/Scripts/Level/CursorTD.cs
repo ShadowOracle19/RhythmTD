@@ -566,7 +566,7 @@ public class CursorTD : MonoBehaviour
         {
             //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased
             if (towerSelectMenuOpened && tile.placedTower != null && 
-                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost1 &&
+                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost1 &&
                 !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
@@ -576,7 +576,7 @@ public class CursorTD : MonoBehaviour
                 SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
 
                 //tile.placedTower.GetComponent<Tower>().nextProjectile = tile.placedTower.GetComponent<Tower>().upgradeProjectile01;
-                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost1;
+                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost1;
 
                 ClosePlacementMenu();
 
@@ -590,7 +590,7 @@ public class CursorTD : MonoBehaviour
         {
             //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased
             if (towerSelectMenuOpened && tile.placedTower != null && 
-                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost2 &&
+                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost2 &&
                 !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
@@ -599,7 +599,7 @@ public class CursorTD : MonoBehaviour
                 //play upgrade sound
                 SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
 
-                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost2;
+                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost2;
                 
                 ClosePlacementMenu();
                 
@@ -614,7 +614,7 @@ public class CursorTD : MonoBehaviour
         {
             //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased
             if (towerSelectMenuOpened && tile.placedTower != null && 
-                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost3 &&
+                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost3 &&
                 !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
@@ -623,7 +623,7 @@ public class CursorTD : MonoBehaviour
                 //play upgrade sound
                 SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
 
-                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost3;
+                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost3;
 
                 ClosePlacementMenu();
                 
@@ -638,7 +638,7 @@ public class CursorTD : MonoBehaviour
 
             //checks if over tower, if sufficent resources, if upgrade hasnt already been purchased
             if (towerSelectMenuOpened && tile.placedTower != null && 
-                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().upgradeCost4 &&
+                CombatManager.Instance.resourceNum >= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost4 &&
                 !tile.placedTower.GetComponent<Tower>().upgradePurchased)
             {
                 tile.placedTower.GetComponent<Tower>().upgradePurchased = true;
@@ -647,7 +647,7 @@ public class CursorTD : MonoBehaviour
                 //play upgrade sound
                 SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
 
-                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().upgradeCost4;
+                CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost4;
 
                 ClosePlacementMenu();
 
@@ -897,7 +897,7 @@ public class CursorTD : MonoBehaviour
         // Check if guitar tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
         if (upgradeTower)
         {
-            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost1 || tile.placedTower.GetComponent<Tower>().upgradeOneActive) 
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost1 || tile.placedTower.GetComponent<Tower>().upgradeOneActive) 
             {
                 upgradeSlotW.GetComponent<Image>().material = greyscaleShader;
             }
@@ -907,7 +907,7 @@ public class CursorTD : MonoBehaviour
             }
             
             // Check if drum tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost2 || tile.placedTower.GetComponent<Tower>().upgradeTwoActive) 
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost2 || tile.placedTower.GetComponent<Tower>().upgradeTwoActive) 
             {
                 upgradeSlotD.GetComponent<Image>().material = greyscaleShader;
             }
@@ -917,7 +917,7 @@ public class CursorTD : MonoBehaviour
             }
 
             // Check if bass tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost3 || tile.placedTower.GetComponent<Tower>().upgradeThreeActive) 
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost3 || tile.placedTower.GetComponent<Tower>().upgradeThreeActive) 
             {
                 upgradeSlotS.GetComponent<Image>().material = greyscaleShader;
             }
@@ -927,7 +927,7 @@ public class CursorTD : MonoBehaviour
             }
 
             // Check if piano tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().upgradeCost4 || tile.placedTower.GetComponent<Tower>().upgradeFourActive) 
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost4 || tile.placedTower.GetComponent<Tower>().upgradeFourActive) 
             {
                 upgradeSlotA.GetComponent<Image>().material = greyscaleShader;
             }

@@ -226,7 +226,7 @@ public class Tower : MonoBehaviour
         //if feeling it now is active
         if(feelingItNow)
         {
-            nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = buffDefaultAttackSprite;
+            //nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = buffDefaultAttackSprite;
 
             tempDamageHolder = currentDamage;
             currentDamage = currentDamage * 2;
@@ -235,7 +235,7 @@ public class Tower : MonoBehaviour
         else if (upgradePurchased)
         {
             currentDamage = tempDamageHolder;
-            nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = upgradeAttackSprite01;
+            //nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = upgradeAttackSprite01;
         }
         else
         {

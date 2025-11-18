@@ -289,7 +289,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 706195339, guid: 20afd52492da45745a712fc6b056d8c0, type: 3}
+  m_Sprite: {fileID: 200572557, guid: ba60fa024d954264e8b1e17e8224a346, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -310,7 +310,7 @@ Animator:
   m_GameObject: {fileID: 2749843575367313791}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 934ee4a1fb4e7b3408981eb4d0754e7a, type: 2}
+  m_Controller: {fileID: 9100000, guid: f6823d046ba2fdd4ab4422e3339d6ada, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 8304471611877133185}
   - component: {fileID: 5988710659036509844}
   m_Layer: 13
-  m_Name: Chromatic Synth
+  m_Name: Legato
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -589,24 +589,14 @@ MonoBehaviour:
   towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: 948494f9b21c3a84a92c8e82289bf578, type: 2}
   currentAttackPattern: 0
-  firePoint: {fileID: 0}
   projectile: {fileID: 0}
   nextProjectile: {fileID: 0}
-  buffProjectile: {fileID: 0}
-  upgradeProjectile01: {fileID: 0}
-  upgradeProjectile02: {fileID: 0}
-  upgradeProjectile03: {fileID: 0}
   connectedTile: {fileID: 0}
   colliders: []
   beat: 0
-  everyOtherBeat: 0
-  currentHealth: 0
   currentDamage: 0
   tempDamageHolder: 0
   towerRange: 0
-  burningBullet: 0
-  increaseBulletDamage: 0
-  multiAttack: 0
   towerHover: 0
   beatIndicator: {fileID: 0}
   beatCircle: {fileID: 0}
@@ -629,26 +619,18 @@ MonoBehaviour:
   - {fileID: 5265426146554181437, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   - {fileID: -5627175594756509676, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   - {fileID: -6773711629030542441, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  isPoweredUp: 0
-  nonPoweredIcon: {fileID: 0}
-  poweredIcon: {fileID: 0}
   defaultAttackSprite: {fileID: 0}
   buffDefaultAttackSprite: {fileID: 0}
   upgradeAttackSprite01: {fileID: 0}
   upgradeAttackSprite02: {fileID: 0}
   upgradeAttackSprite03: {fileID: 0}
-  multiAttackSprite: {fileID: 0}
   flameAttackSprite: {fileID: 0}
   ChargedUp: 0
   towerUpgradeUnlocked: 0
   upgradePurchased: 0
-  upgradeCost1: 0
   upgradeOneActive: 0
-  upgradeCost2: 0
   upgradeTwoActive: 0
-  upgradeCost3: 0
   upgradeThreeActive: 0
-  upgradeCost4: 0
   upgradeFourActive: 0
   feelingItNow: 0
   synthBuff: 0

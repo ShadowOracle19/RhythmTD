@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Major
   m_EditorClassIdentifier: 
   towerName: Major
-  towerDescription: AOE based tower that deals 1 damage in its radius
+  towerDescription: Shoots projectiles in a pattern from top to bottom
   towerImage: {fileID: -7699115586588543095, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
   type: 2
   resourceCost: 75
@@ -25,12 +25,14 @@ MonoBehaviour:
   damage: 2
   range: 9
   projectilePiercesEnemies: 0
-  projectileColor: {r: 0.004316493, g: 0.9150943, b: 0.04689455, a: 1}
   isAOETower: 0
-  projectileType: 0
   isResourceTower: 0
   resourceGain: 5
   upgrade1: {fileID: -6037673426074501938, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
+  upgradeCost1: 25
   upgrade2: {fileID: -5384197578389128986, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
+  upgradeCost2: 25
   upgrade3: {fileID: -8384982287457754926, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
+  upgradeCost3: 25
   upgrade4: {fileID: 0}
+  upgradeCost4: 25

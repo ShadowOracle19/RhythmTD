@@ -27,6 +27,12 @@ public class TowerLoadoutManager : MonoBehaviour
             towerObjects.Add(towerObject);
             return;
         }
+        else
+        {
+            towerObjects.RemoveAt(3);
+            towerObjects.Add(towerObject);
+            return;
+        }
     }
 
 

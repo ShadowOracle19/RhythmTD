@@ -29,7 +29,10 @@ public class TowerLoadoutManager : MonoBehaviour
         }
         else
         {
-            towerObjects.RemoveAt(3);
+            towerObjects.RemoveAt(0);
+
+            //towerObjects.Sort();
+
             towerObjects.Add(towerObject);
             return;
         }

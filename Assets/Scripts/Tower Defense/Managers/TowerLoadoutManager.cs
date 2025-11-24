@@ -35,5 +35,12 @@ public class TowerLoadoutManager : MonoBehaviour
         }
     }
 
+    public void ApplyLoadoutChanges()
+    {
+        GameManager.Instance.towers[0].tower = towerObjects[0];
+        GameManager.Instance.towers[1].tower = towerObjects[1];
+        GameManager.Instance.towers[2].tower = towerObjects[2];
+        GameManager.Instance.towers[3].tower = towerObjects[3];
+    }
 
 }

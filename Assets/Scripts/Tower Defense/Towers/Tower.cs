@@ -35,7 +35,6 @@ public class Tower : MonoBehaviour
     */
     public GameObject nextProjectile;
     
-    
     public Tile connectedTile;
 
     public Collider[] colliders;
@@ -60,26 +59,21 @@ public class Tower : MonoBehaviour
     public bool isShielded = false;
 
     [Header("Record Buff Input")]
-    public TowerState currentState = TowerState.Default;
-    public List<BuffType> recordedBuffs = new List<BuffType>();
-    public bool isInputtingBuffs = false;
-    public int beatRecordingStarted = 1;
-    public int buffTimer = 0;
+    private TowerState currentState = TowerState.Default;
+    private List<BuffType> recordedBuffs = new List<BuffType>();
+    private bool isInputtingBuffs = false;
+    private int beatRecordingStarted = 1;
+    private int buffTimer = 0;
     int buffTimerMax = 2;
-    public int buffIndex = 0;
-    public int buffCountMeasure = 0;
-    public int buffBeatCount = 1;
+    private int buffIndex = 0;
+    private int buffCountMeasure = 0;
+    private int buffBeatCount = 1;
 
     [Header("Record State Sprites")]
     public GameObject recordingStatus;//RECORDING STATUS CODE
     public Sprite recordingSpr;//RECORDING STATUS CODE
     public List<Sprite> repeatSprites = new List<Sprite>();
     private int repeatSpritesIndex = 0;
-
-    //[Header("Powered UP Tower")]
-    //public bool isPoweredUp = false;
-    //public GameObject nonPoweredIcon;
-    //public GameObject poweredIcon;
 
     [Header("Projectile Sprites")]
     public Sprite defaultAttackSprite;
@@ -97,19 +91,15 @@ public class Tower : MonoBehaviour
     public bool towerUpgradeUnlocked = false;
     public bool upgradePurchased = false;
     //upgrade 1 damage boost
-    //public int upgradeCost1;
     public bool upgradeOneActive = false;
 
     ////upgrade 2 multiple projectile
-    //public int upgradeCost2;
     public bool upgradeTwoActive = false;
 
     ////upgrade 3 burning
-    //public int upgradeCost3;
     public bool upgradeThreeActive = false;
 
     ////upgrade 4 range
-    //public int upgradeCost4;
     public bool upgradeFourActive = false;
 
     [Header("Upgrade Modifiers")]

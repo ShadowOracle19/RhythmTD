@@ -72,7 +72,6 @@ public class Tower : MonoBehaviour
 
     [Header("Record State Sprites")]
     public GameObject recordingStatus;//RECORDING STATUS CODE
-    public SpriteRenderer recordingStatusSpr;//RECORDING STATUS CODE
     public Sprite recordingSpr;//RECORDING STATUS CODE
     public List<Sprite> repeatSprites = new List<Sprite>();
     private int repeatSpritesIndex = 0;
@@ -494,7 +493,7 @@ public class Tower : MonoBehaviour
         currentState = TowerState.Recording;
 
         recordingStatus.SetActive(true); //RECORDING STATUS CODE
-        recordingStatusSpr.sprite = recordingSpr;//RECORDING STATUS CODE
+        recordingStatus.GetComponent<SpriteRenderer>().sprite = recordingSpr;//RECORDING STATUS CODE
 
         isInputtingBuffs = true;
 
@@ -528,7 +527,7 @@ public class Tower : MonoBehaviour
                 isInputtingBuffs = false;
 
                 repeatSpritesIndex = 0; //RECORDING STATUS CODE
-                recordingStatusSpr.sprite = repeatSprites[repeatSpritesIndex]; //RECORDING STATUS CODE
+                recordingStatus.GetComponent<SpriteRenderer>().sprite = repeatSprites[repeatSpritesIndex]; //RECORDING STATUS CODE
             }
             return;
         }
@@ -555,7 +554,7 @@ public class Tower : MonoBehaviour
                 repeatSpritesIndex += 1; //RECORDING STATUS CODE
                 if (repeatSpritesIndex <= (repeatSprites.Count-1))
                 {
-                    recordingStatusSpr.sprite = repeatSprites[repeatSpritesIndex];//RECORDING STATUS CODE
+                    recordingStatus.GetComponent<SpriteRenderer>().sprite = repeatSprites[repeatSpritesIndex];//RECORDING STATUS CODE
                 }
 
                 if(buffCountMeasure == 4)

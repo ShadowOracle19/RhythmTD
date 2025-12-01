@@ -10,24 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18102bcf76c94404eafc40143c5c6aad, type: 3}
-  m_Name: Synth
+  m_Name: Allegro
   m_EditorClassIdentifier: 
-  towerName: Synth
-  towerDescription: 'AOE based buffing tower
-
-'
-  towerImage: {fileID: -3126412101584182516, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
-  type: 3
-  resourceCost: 75
-  cost: 2
+  towerName: Allegro
+  towerDescription: Shoots up and down 3 blocks
+  towerImage: {fileID: -355604896125230801, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
+  type: 1
+  resourceCost: 50
+  cost: 1
   cooldownTime: 8
   cooldown: 1
   towerHealth: 5
   attackPattern: 0
   damage: 4
-  range: 2
-  projectilePiercesEnemies: 0
-  isAOETower: 1
+  range: 3
+  projectilePiercesEnemies: 1
+  isAOETower: 0
   isResourceTower: 0
   resourceGain: 5
   upgrade1: {fileID: 0}

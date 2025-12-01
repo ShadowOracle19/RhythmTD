@@ -29,11 +29,21 @@ public class TowerLoadoutManager : MonoBehaviour
         }
         else
         {
-            towerObjects.RemoveAt(3);
+            towerObjects.RemoveAt(0);
+
+            //towerObjects.Sort();
+
             towerObjects.Add(towerObject);
             return;
         }
     }
 
+    public void ApplyLoadoutChanges()
+    {
+        GameManager.Instance.towers[0].tower = towerObjects[0];
+        GameManager.Instance.towers[1].tower = towerObjects[1];
+        GameManager.Instance.towers[2].tower = towerObjects[2];
+        GameManager.Instance.towers[3].tower = towerObjects[3];
+    }
 
 }

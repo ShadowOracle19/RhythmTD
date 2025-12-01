@@ -93,6 +93,9 @@ public class Tower : MonoBehaviour
     [Header("Tile Interactions")]
     public bool ChargedUp = false;
 
+    [Header("Animation")]
+    public Animator animationController;
+
     [Header("Tower Upgrade")]
     public bool towerUpgradeUnlocked = false;
     public bool upgradePurchased = false;
@@ -180,6 +183,28 @@ public class Tower : MonoBehaviour
         //}
 
         towerEffectVisual();
+
+        //Animation switches
+        if (upgradeOneActive)
+        {
+            // Set animation
+            animationController.SetBool("Upgrade1", true);
+        }
+        else if (upgradeTwoActive)
+        {
+            // Set animation
+            animationController.SetBool("Upgrade2", true);
+        }
+        else if (upgradeThreeActive)
+        {
+            // Set animation
+            animationController.SetBool("Upgrade3", true);
+        }
+        else if (upgradeFourActive)
+        {
+            // Set animation
+            animationController.SetBool("Upgrade4", true);
+        }
 
     }
 

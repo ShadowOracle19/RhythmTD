@@ -171,24 +171,14 @@ MonoBehaviour:
   towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: c6827d0b3828b0c4ab69976db279f395, type: 2}
   currentAttackPattern: 0
-  firePoint: {fileID: 3492212302174833441}
   projectile: {fileID: 0}
   nextProjectile: {fileID: 0}
-  buffProjectile: {fileID: 0}
-  upgradeProjectile01: {fileID: 0}
-  upgradeProjectile02: {fileID: 0}
-  upgradeProjectile03: {fileID: 0}
   connectedTile: {fileID: 0}
   colliders: []
   beat: 0
-  everyOtherBeat: 0
-  currentHealth: 0
   currentDamage: 0
   tempDamageHolder: 0
   towerRange: 0
-  burningBullet: 0
-  increaseBulletDamage: 0
-  multiAttack: 0
   towerHover: 0
   beatIndicator: {fileID: 4686513911658087842}
   beatCircle: {fileID: 31395926951258363}
@@ -204,35 +194,28 @@ MonoBehaviour:
   buffCountMeasure: 0
   buffBeatCount: 1
   recordingStatus: {fileID: 2928146528420797377}
-  recordingStatusSpr: {fileID: 3140774106403753288}
   recordingSpr: {fileID: 225626922569687567, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   repeatSprites:
   - {fileID: 4322246438330693900, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   - {fileID: 5265426146554181437, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   - {fileID: -5627175594756509676, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   - {fileID: -6773711629030542441, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  isPoweredUp: 0
-  nonPoweredIcon: {fileID: 0}
-  poweredIcon: {fileID: 2709377709178620609}
   defaultAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   buffDefaultAttackSprite: {fileID: 2772374194179931834, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite01: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite02: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite03: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  multiAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   ChargedUp: 0
+  animationController: {fileID: 7412888328530383611}
   towerUpgradeUnlocked: 0
   upgradePurchased: 0
-  upgradeCost1: 0
   upgradeOneActive: 0
-  upgradeCost2: 0
   upgradeTwoActive: 0
-  upgradeCost3: 0
   upgradeThreeActive: 0
-  upgradeCost4: 0
   upgradeFourActive: 0
   feelingItNow: 0
+  synthBuff: 0
   towerAttackSfx: {fileID: 8300000, guid: 64e6bfc065fb6404da83cf5259f7f894, type: 3}
   towerHurtSfx: {fileID: 8300000, guid: 0f6221cd989c4a74a9ed126be6baab7f, type: 3}
   towerDeathSfx: {fileID: 8300000, guid: 39bc06ae949154b4582c5fa4f63321a7, type: 3}

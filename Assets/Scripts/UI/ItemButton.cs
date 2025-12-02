@@ -12,6 +12,10 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
     public EncounterCreator heldEncounter;
     public Image fill;
 
+    //[Header("Level Selection")]
+    //public Transform levelMapTransform;
+    //public GameObject cameraObject;
+
     [SerializeField] private ItemButtonEvent _onSelectEvent;
     [SerializeField] private ItemButtonEvent _onSubmitEvent;
 
@@ -32,6 +36,8 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
     {
         gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(243, 588);
         _onSelectEvent.Invoke(this);
+
+        //cameraObject.GetComponent<CameraMovement>().SetCameraTarget(levelMapTransform);
     }
 
     public void OnSubmit(BaseEventData eventData)

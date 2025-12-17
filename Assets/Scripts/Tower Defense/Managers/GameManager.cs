@@ -106,6 +106,10 @@ public class GameManager : MonoBehaviour
     [Header("Tower Loadout")]
     public List<TowerPlacementInfo> towers = new List<TowerPlacementInfo>();
 
+    [Header("Recording Assets")]
+    public Sprite recordingSpr;//RECORDING STATUS CODE
+    public List<Sprite> repeatSprites = new List<Sprite>();
+
 
 
     // Start is called before the first frame update

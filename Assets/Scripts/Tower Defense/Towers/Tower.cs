@@ -69,10 +69,8 @@ public class Tower : MonoBehaviour
     private int buffCountMeasure = 0;
     private int buffBeatCount = 1;
 
-    [Header("Record State Sprites")]
+    [Header("Record State Sprites")] //moved recording sprites to game manager
     public GameObject recordingStatus;//RECORDING STATUS CODE
-    public Sprite recordingSpr;//RECORDING STATUS CODE
-    public List<Sprite> repeatSprites = new List<Sprite>();
     private int repeatSpritesIndex = 0;
 
     [Header("Projectile Sprites")]
@@ -508,7 +506,7 @@ public class Tower : MonoBehaviour
         currentState = TowerState.Recording;
 
         recordingStatus.SetActive(true); //RECORDING STATUS CODE
-        recordingStatus.GetComponent<SpriteRenderer>().sprite = recordingSpr;//RECORDING STATUS CODE
+        recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.recordingSpr;//RECORDING STATUS CODE
 
         isInputtingBuffs = true;
 
@@ -542,7 +540,7 @@ public class Tower : MonoBehaviour
                 isInputtingBuffs = false;
 
                 repeatSpritesIndex = 0; //RECORDING STATUS CODE
-                recordingStatus.GetComponent<SpriteRenderer>().sprite = repeatSprites[repeatSpritesIndex]; //RECORDING STATUS CODE
+                recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[repeatSpritesIndex]; //RECORDING STATUS CODE
             }
             return;
         }
@@ -567,9 +565,9 @@ public class Tower : MonoBehaviour
                 buffCountMeasure += 1;
 
                 repeatSpritesIndex += 1; //RECORDING STATUS CODE
-                if (repeatSpritesIndex <= (repeatSprites.Count-1))
+                if (repeatSpritesIndex <= (GameManager.Instance.repeatSprites.Count-1))
                 {
-                    recordingStatus.GetComponent<SpriteRenderer>().sprite = repeatSprites[repeatSpritesIndex];//RECORDING STATUS CODE
+                    recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[repeatSpritesIndex];//RECORDING STATUS CODE
                 }
 
                 if(buffCountMeasure == 4)

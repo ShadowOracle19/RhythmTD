@@ -110,6 +110,10 @@ public class GameManager : MonoBehaviour
     public Sprite recordingSpr;//RECORDING STATUS CODE
     public List<Sprite> repeatSprites = new List<Sprite>();
 
+    [Header("Level Scoring")]
+    public List<int> pointHolder = new List<int>();
+    public int healthRemainingPointGain = 100;
+
 
 
     // Start is called before the first frame update
@@ -449,7 +453,7 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
         ConductorV2.instance.StopMusic();
-
+        pointHolder.Add(healthRemainingPointGain * _currentHealth);
 
         if (currentEncounter.endDialogue == null)
         {
@@ -459,6 +463,8 @@ public class GameManager : MonoBehaviour
             MenuEventManager.Instance.WinScreenOpen();
             return;
         }
+
+        
 
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);

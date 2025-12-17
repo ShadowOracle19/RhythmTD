@@ -276,6 +276,7 @@ public class CombatManager : MonoBehaviour
 
         GameManager.Instance.menuMusic.Play();
         GameManager.Instance.playerInputManager.SetActive(false);
+        GameManager.Instance.pointHolder.Clear();
         ConductorV2.instance.drums.volume = 0;
         ConductorV2.instance.bass.volume = 0;
         ConductorV2.instance.piano.volume = 0;

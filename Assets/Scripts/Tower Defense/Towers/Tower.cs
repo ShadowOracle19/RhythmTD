@@ -20,54 +20,18 @@ public enum TowerState
 
 public class Tower : MonoBehaviour
 {
-    public float towerAudioVolumeIncrement = 0.05f;
-
     public TowerTypeCreator towerInfo;
-
-    public TowerAttackPattern currentAttackPattern;
-
     public GameObject projectile;
-    /* 
-    Hi Lucy. 
-    I made & added some more projectiles so that we could spawn ones with different sprites without having to use GetComponent. 
-    Idk how efficient this is so if we gotta change it later that's cool. 
-    - Em
-    */
-    public GameObject nextProjectile;
-    
-    public Tile connectedTile;
-
-    public Collider[] colliders;
-    //public RaycastHit[] colliders;
-
-    public int beat;
-
-    [Header("Tower Stats")]
-    private int currentHealth = 0;
-    public int currentDamage;
-    public int tempDamageHolder;
-    public int towerRange;
 
     [Header("Tower Empower Indicator")]
-    public bool towerHover = false;
     public GameObject beatIndicator;
     public GameObject beatCircle;
     public bool towerAboutToFire = false;
+    public bool towerHover = false;
 
     [Header("Shield")]
     public GameObject shieldEffect;
     public bool isShielded = false;
-
-    [Header("Record Buff Input")]
-    private TowerState currentState = TowerState.Default;
-    private List<BuffType> recordedBuffs = new List<BuffType>();
-    private bool isInputtingBuffs = false;
-    private int beatRecordingStarted = 1;
-    private int buffTimer = 0;
-    int buffTimerMax = 2;
-    private int buffIndex = 0;
-    private int buffCountMeasure = 0;
-    private int buffBeatCount = 1;
 
     [Header("Record State Sprites")] //moved recording sprites to game manager
     public GameObject recordingStatus;//RECORDING STATUS CODE
@@ -75,37 +39,14 @@ public class Tower : MonoBehaviour
 
     [Header("Projectile Sprites")]
     public Sprite defaultAttackSprite;
-    public Sprite buffDefaultAttackSprite;
+    //public Sprite buffDefaultAttackSprite;
     public Sprite upgradeAttackSprite01;
     public Sprite upgradeAttackSprite02;
     public Sprite upgradeAttackSprite03;
-
     public Sprite flameAttackSprite;
-
-    [Header("Tile Interactions")]
-    public bool ChargedUp = false;
 
     [Header("Animation")]
     public Animator animationController;
-
-    [Header("Tower Upgrade")]
-    public bool towerUpgradeUnlocked = false;
-    public bool upgradePurchased = false;
-    //upgrade 1 damage boost
-    public bool upgradeOneActive = false;
-
-    ////upgrade 2 multiple projectile
-    public bool upgradeTwoActive = false;
-
-    ////upgrade 3 burning
-    public bool upgradeThreeActive = false;
-
-    ////upgrade 4 range
-    public bool upgradeFourActive = false;
-
-    [Header("Upgrade Modifiers")]
-    public bool feelingItNow = false;
-    public bool synthBuff = false;
 
     [Header("SFX")]
     public AudioClip towerAttackSfx;
@@ -127,6 +68,53 @@ public class Tower : MonoBehaviour
     [SerializeField] private ParticleSystem burningParticles;
     private ParticleSystem burningParticlesInstance;
 
+    [Header ("--------- Don't need to touch ---------")]
+
+    public TowerAttackPattern currentAttackPattern;
+    public Tile connectedTile;
+    public Collider[] colliders;
+    public GameObject nextProjectile;
+    public float towerAudioVolumeIncrement = 0.05f;
+    public int beat;
+
+    [Header("Tower Stats")]
+    private int currentHealth = 0;
+    public int currentDamage;
+    public int tempDamageHolder;
+    public int towerRange;
+
+    [Header("Tile Interactions")]
+    public bool ChargedUp = false;
+
+    [Header("Tower Upgrade")]
+    public bool towerUpgradeUnlocked = false;
+    public bool upgradePurchased = false;
+    //upgrade 1 damage boost
+    public bool upgradeOneActive = false;
+
+    ////upgrade 2 multiple projectile
+    public bool upgradeTwoActive = false;
+
+    ////upgrade 3 burning
+    public bool upgradeThreeActive = false;
+
+    ////upgrade 4 range
+    public bool upgradeFourActive = false;
+
+    [Header("Upgrade Modifiers")]
+    public bool feelingItNow = false;
+    public bool synthBuff = false;
+
+    [Header("Record Buff Input")]
+    private TowerState currentState = TowerState.Default;
+    private List<BuffType> recordedBuffs = new List<BuffType>();
+    private bool isInputtingBuffs = false;
+    private int beatRecordingStarted = 1;
+    private int buffTimer = 0;
+    int buffTimerMax = 2;
+    private int buffIndex = 0;
+    private int buffCountMeasure = 0;
+    private int buffBeatCount = 1;
 
 
     public virtual void Start()

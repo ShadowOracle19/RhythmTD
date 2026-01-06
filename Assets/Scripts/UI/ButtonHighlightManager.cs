@@ -13,7 +13,7 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
     public AudioClip buttonHighlightSfx; //sound that plays when the button is highlighted
 
     [Header("Selection Scale")]
-    private Vector3 highlightScale = new Vector3(1.25f, 1.25f, 1.0f); //scale of the button when highlighted
+    public Vector3 highlightScale = new Vector3(1.25f, 1.25f, 1.0f); //scale of the button when highlighted
 
     // Start is called before the first frame update
     void Start()

@@ -29,23 +29,45 @@ public class MenuEventManager : MonoBehaviour
     #endregion
     EventSystem eventSystem;
 
-    public GameObject pauseMenuFirstObject;
-    public GameObject pauseMenuSecondObject;
-    public GameObject titleMenuFirstObject;
-    public GameObject titleMenuSecondObject;
-    public GameObject DialogueMenuFirstObject;
-    public GameObject mainMenuFirstObject;
-    public GameObject winScreenFirstObject;
-    //public GameObject winScreenSecondObject;
-    public GameObject loseScreenObject;
-    public GameObject exitConfirmationObject;
-    public GameObject logFirstObject;
-    public GameObject showcaseCreditsObject;
-
-    public TextMeshProUGUI exitConfirmationText;
-
     [Header("Last Selected Object")]
     public GameObject lastSelectedObject;
+
+
+
+    [Header("Title Menu")]
+    public GameObject titleMenuObject01;
+    public GameObject titleMenuObject02;
+    public GameObject titleMenuObject03;
+    public GameObject titleMenuObject04;
+    public GameObject titleMenuObject05;
+    public GameObject titleMenuObject06;
+
+    [Header("Pause Menu")]
+    public GameObject pauseMenuFirstObject;
+    public GameObject pauseMenuSecondObject;
+
+    [Header("Dialogue Menu")]
+    public GameObject dialogueMenuFirstObject;
+    public GameObject logFirstObject;
+
+    [Header("Main Menu")]
+    public GameObject mainMenuFirstObject;
+
+    [Header("Win Menu")]
+    public GameObject winScreenFirstObject;
+    //public GameObject winScreenSecondObject;
+
+    [Header("Lose Menu")]
+    public GameObject loseScreenObject;
+
+    [Header("Exit Confirmation Menu")]
+    public GameObject exitConfirmationObject;
+    public TextMeshProUGUI exitConfirmationText;
+    
+    [Header("Other")]
+    public GameObject showcaseCreditsObject;
+
+
 
     private void Start()
     {
@@ -75,10 +97,11 @@ public class MenuEventManager : MonoBehaviour
         }
         else if(GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleMenuFirstObject);
+            eventSystem.SetSelectedGameObject(titleMenuObject02);
         }
     }
 
+    // open exit confirmation menu and set text
     public void OpenConfirmation()
     {
         if (GameManager.Instance.titleRoot.activeSelf)
@@ -91,7 +114,7 @@ public class MenuEventManager : MonoBehaviour
         }
         else if (GameManager.Instance.combatRoot.activeSelf)
         {
-            exitConfirmationText.text = "Exit to level select?";
+            exitConfirmationText.text = "Exit to stage select?";
 
             if (GameManager.Instance.currentEncounter.isShowcase)
             {
@@ -102,6 +125,7 @@ public class MenuEventManager : MonoBehaviour
         eventSystem.SetSelectedGameObject(exitConfirmationObject);
     }
 
+    // close exit confirmation menu & set text
     public void CloseConfirmation()
     {
         if (GameManager.Instance.pauseMenuRoot.activeSelf)
@@ -110,7 +134,7 @@ public class MenuEventManager : MonoBehaviour
         }
         else if(GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleMenuSecondObject);
+            eventSystem.SetSelectedGameObject(titleMenuObject04);
         }
         /*
         else if(GameManager.Instance.winScreen.activeSelf)
@@ -122,7 +146,7 @@ public class MenuEventManager : MonoBehaviour
 
     public void DialogueOpen()
     {
-        eventSystem.SetSelectedGameObject(DialogueMenuFirstObject);
+        eventSystem.SetSelectedGameObject(dialogueMenuFirstObject);
     }
 
     public void PauseMenuOpen()
@@ -134,7 +158,7 @@ public class MenuEventManager : MonoBehaviour
     {
         if (GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleMenuFirstObject);
+            eventSystem.SetSelectedGameObject(titleMenuObject01);
         }
         else if(GameManager.Instance.menuRoot.activeSelf)
         {
@@ -142,11 +166,11 @@ public class MenuEventManager : MonoBehaviour
         }
         else if(GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleMenuFirstObject);
+            eventSystem.SetSelectedGameObject(titleMenuObject01);
         }
         else if(GameManager.Instance.dialogueRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(DialogueMenuFirstObject);
+            eventSystem.SetSelectedGameObject(dialogueMenuFirstObject);
         }
         else if(GameManager.Instance.combatRoot.activeSelf)
         {

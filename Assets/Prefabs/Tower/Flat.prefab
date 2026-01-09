@@ -107,7 +107,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2149819386208914413}
-  - component: {fileID: 4596024338730863550}
   - component: {fileID: 3637877782725260547}
   - component: {fileID: 3091612715999862889}
   - component: {fileID: 2051579340026178359}
@@ -144,18 +143,6 @@ Transform:
   - {fileID: 4265638836486659012}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4596024338730863550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2167625354041566739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 664ff5a5327a6794d85ea68204c24c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3637877782725260547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,54 +155,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd8a809dd198cc49b7e3bb3961b79d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: c6827d0b3828b0c4ab69976db279f395, type: 2}
-  currentAttackPattern: 0
   projectile: {fileID: 0}
-  nextProjectile: {fileID: 0}
-  connectedTile: {fileID: 0}
-  colliders: []
-  beat: 0
-  currentDamage: 0
-  tempDamageHolder: 0
-  towerRange: 0
-  towerHover: 0
   beatIndicator: {fileID: 4686513911658087842}
   beatCircle: {fileID: 31395926951258363}
   towerAboutToFire: 0
+  towerHover: 0
   shieldEffect: {fileID: 5223548057794400369}
   isShielded: 0
-  currentState: 0
-  recordedBuffs: 
-  isInputtingBuffs: 0
-  beatRecordingStarted: 1
-  buffTimer: 0
-  buffIndex: 0
-  buffCountMeasure: 0
-  buffBeatCount: 1
   recordingStatus: {fileID: 2928146528420797377}
-  recordingSpr: {fileID: 225626922569687567, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  repeatSprites:
-  - {fileID: 4322246438330693900, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  - {fileID: 5265426146554181437, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  - {fileID: -5627175594756509676, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  - {fileID: -6773711629030542441, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   defaultAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  buffDefaultAttackSprite: {fileID: 2772374194179931834, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite01: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite02: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite03: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  ChargedUp: 0
   animationController: {fileID: 7412888328530383611}
-  towerUpgradeUnlocked: 0
-  upgradePurchased: 0
-  upgradeOneActive: 0
-  upgradeTwoActive: 0
-  upgradeThreeActive: 0
-  upgradeFourActive: 0
-  feelingItNow: 0
-  synthBuff: 0
   towerAttackSfx: {fileID: 8300000, guid: 64e6bfc065fb6404da83cf5259f7f894, type: 3}
   towerHurtSfx: {fileID: 8300000, guid: 0f6221cd989c4a74a9ed126be6baab7f, type: 3}
   towerDeathSfx: {fileID: 8300000, guid: 39bc06ae949154b4582c5fa4f63321a7, type: 3}
@@ -225,6 +179,24 @@ MonoBehaviour:
   shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: 6222a6e473313534e8aa98e3b7911378, type: 3}
+  currentAttackPattern: 0
+  connectedTile: {fileID: 0}
+  colliders: []
+  nextProjectile: {fileID: 0}
+  towerAudioVolumeIncrement: 0.1
+  beat: 0
+  currentDamage: 0
+  tempDamageHolder: 0
+  towerRange: 0
+  ChargedUp: 0
+  towerUpgradeUnlocked: 0
+  upgradePurchased: 0
+  upgradeOneActive: 0
+  upgradeTwoActive: 0
+  upgradeThreeActive: 0
+  upgradeFourActive: 0
+  feelingItNow: 0
+  synthBuff: 0
 --- !u!82 &3091612715999862889
 AudioSource:
   m_ObjectHideFlags: 0

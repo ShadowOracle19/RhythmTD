@@ -20,104 +20,33 @@ public enum TowerState
 
 public class Tower : MonoBehaviour
 {
-    public float towerAudioVolumeIncrement = 0.05f;
-
     public TowerTypeCreator towerInfo;
-
-    public TowerAttackPattern currentAttackPattern;
-
     public GameObject projectile;
-    /* 
-    Hi Lucy. 
-    I made & added some more projectiles so that we could spawn ones with different sprites without having to use GetComponent. 
-    Idk how efficient this is so if we gotta change it later that's cool. 
-    - Em
-    */
-    public GameObject nextProjectile;
-    
-    
-    public Tile connectedTile;
-
-    public Collider[] colliders;
-    //public RaycastHit[] colliders;
-
-    public int beat;
-
-    [Header("Tower Stats")]
-    private int currentHealth = 0;
-    public int currentDamage;
-    public int tempDamageHolder;
-    public int towerRange;
 
     [Header("Tower Empower Indicator")]
-    public bool towerHover = false;
     public GameObject beatIndicator;
     public GameObject beatCircle;
     public bool towerAboutToFire = false;
+    public bool towerHover = false;
 
     [Header("Shield")]
     public GameObject shieldEffect;
     public bool isShielded = false;
 
-    [Header("Record Buff Input")]
-    public TowerState currentState = TowerState.Default;
-    public List<BuffType> recordedBuffs = new List<BuffType>();
-    public bool isInputtingBuffs = false;
-    public int beatRecordingStarted = 1;
-    public int buffTimer = 0;
-    int buffTimerMax = 2;
-    public int buffIndex = 0;
-    public int buffCountMeasure = 0;
-    public int buffBeatCount = 1;
-
-    [Header("Record State Sprites")]
+    [Header("Record State Sprites")] //moved recording sprites to game manager
     public GameObject recordingStatus;//RECORDING STATUS CODE
-    public Sprite recordingSpr;//RECORDING STATUS CODE
-    public List<Sprite> repeatSprites = new List<Sprite>();
     private int repeatSpritesIndex = 0;
-
-    //[Header("Powered UP Tower")]
-    //public bool isPoweredUp = false;
-    //public GameObject nonPoweredIcon;
-    //public GameObject poweredIcon;
 
     [Header("Projectile Sprites")]
     public Sprite defaultAttackSprite;
-    public Sprite buffDefaultAttackSprite;
+    //public Sprite buffDefaultAttackSprite;
     public Sprite upgradeAttackSprite01;
     public Sprite upgradeAttackSprite02;
     public Sprite upgradeAttackSprite03;
-
     public Sprite flameAttackSprite;
-
-    [Header("Tile Interactions")]
-    public bool ChargedUp = false;
 
     [Header("Animation")]
     public Animator animationController;
-
-    [Header("Tower Upgrade")]
-    public bool towerUpgradeUnlocked = false;
-    public bool upgradePurchased = false;
-    //upgrade 1 damage boost
-    //public int upgradeCost1;
-    public bool upgradeOneActive = false;
-
-    ////upgrade 2 multiple projectile
-    //public int upgradeCost2;
-    public bool upgradeTwoActive = false;
-
-    ////upgrade 3 burning
-    //public int upgradeCost3;
-    public bool upgradeThreeActive = false;
-
-    ////upgrade 4 range
-    //public int upgradeCost4;
-    public bool upgradeFourActive = false;
-
-    [Header("Upgrade Modifiers")]
-    public bool feelingItNow = false;
-    public bool synthBuff = false;
 
     [Header("SFX")]
     public AudioClip towerAttackSfx;
@@ -126,8 +55,8 @@ public class Tower : MonoBehaviour
     public AudioClip towerUpgradeSfx;
 
     [Header("PFX")]
-    [SerializeField] private ParticleSystem aoeAttackParticles;
-    private ParticleSystem aoeAttackParticlesInstance;
+    [SerializeField] public ParticleSystem aoeAttackParticles;
+    public ParticleSystem aoeAttackParticlesInstance;
     public Color aoeAttackColour;
 
     [SerializeField] private ParticleSystem shieldDestructionParticles;
@@ -139,6 +68,53 @@ public class Tower : MonoBehaviour
     [SerializeField] private ParticleSystem burningParticles;
     private ParticleSystem burningParticlesInstance;
 
+    [Header ("--------- Don't need to touch ---------")]
+
+    public TowerAttackPattern currentAttackPattern;
+    public Tile connectedTile;
+    public Collider[] colliders;
+    public GameObject nextProjectile;
+    public float towerAudioVolumeIncrement = 0.05f;
+    public int beat;
+
+    [Header("Tower Stats")]
+    private int currentHealth = 0;
+    public int currentDamage;
+    public int tempDamageHolder;
+    public int towerRange;
+
+    [Header("Tile Interactions")]
+    public bool ChargedUp = false;
+
+    [Header("Tower Upgrade")]
+    public bool towerUpgradeUnlocked = false;
+    public bool upgradePurchased = false;
+    //upgrade 1 damage boost
+    public bool upgradeOneActive = false;
+
+    ////upgrade 2 multiple projectile
+    public bool upgradeTwoActive = false;
+
+    ////upgrade 3 burning
+    public bool upgradeThreeActive = false;
+
+    ////upgrade 4 range
+    public bool upgradeFourActive = false;
+
+    [Header("Upgrade Modifiers")]
+    public bool feelingItNow = false;
+    public bool synthBuff = false;
+
+    [Header("Record Buff Input")]
+    private TowerState currentState = TowerState.Default;
+    private List<BuffType> recordedBuffs = new List<BuffType>();
+    private bool isInputtingBuffs = false;
+    private int beatRecordingStarted = 1;
+    private int buffTimer = 0;
+    int buffTimerMax = 2;
+    private int buffIndex = 0;
+    private int buffCountMeasure = 0;
+    private int buffBeatCount = 1;
 
 
     public virtual void Start()
@@ -518,7 +494,7 @@ public class Tower : MonoBehaviour
         currentState = TowerState.Recording;
 
         recordingStatus.SetActive(true); //RECORDING STATUS CODE
-        recordingStatus.GetComponent<SpriteRenderer>().sprite = recordingSpr;//RECORDING STATUS CODE
+        recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.recordingSpr;//RECORDING STATUS CODE
 
         isInputtingBuffs = true;
 
@@ -552,7 +528,7 @@ public class Tower : MonoBehaviour
                 isInputtingBuffs = false;
 
                 repeatSpritesIndex = 0; //RECORDING STATUS CODE
-                recordingStatus.GetComponent<SpriteRenderer>().sprite = repeatSprites[repeatSpritesIndex]; //RECORDING STATUS CODE
+                recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[repeatSpritesIndex]; //RECORDING STATUS CODE
             }
             return;
         }
@@ -577,9 +553,9 @@ public class Tower : MonoBehaviour
                 buffCountMeasure += 1;
 
                 repeatSpritesIndex += 1; //RECORDING STATUS CODE
-                if (repeatSpritesIndex <= (repeatSprites.Count-1))
+                if (repeatSpritesIndex <= (GameManager.Instance.repeatSprites.Count-1))
                 {
-                    recordingStatus.GetComponent<SpriteRenderer>().sprite = repeatSprites[repeatSpritesIndex];//RECORDING STATUS CODE
+                    recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[repeatSpritesIndex];//RECORDING STATUS CODE
                 }
 
                 if(buffCountMeasure == 4)

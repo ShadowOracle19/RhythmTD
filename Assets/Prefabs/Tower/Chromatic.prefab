@@ -525,7 +525,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6265875441098591601}
-  - component: {fileID: 1361187514579878653}
   - component: {fileID: 6659272261018043613}
   - component: {fileID: 363180401075249748}
   - component: {fileID: 7437452897847904330}
@@ -562,18 +561,6 @@ Transform:
   - {fileID: 6548897409101901140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1361187514579878653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5183850645279424415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 664ff5a5327a6794d85ea68204c24c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &6659272261018043613
 AudioSource:
   m_ObjectHideFlags: 0
@@ -682,54 +669,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc22cb3d426935e48b21ef681de66c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerAudioVolumeIncrement: 0.1
   towerInfo: {fileID: 11400000, guid: 001a12e674bb4c943b89583ba9b972b5, type: 2}
-  currentAttackPattern: 0
   projectile: {fileID: 394137417092299375, guid: 0a5e299489ca5fe40bbb4b0c3afa9bb1, type: 3}
-  nextProjectile: {fileID: 0}
-  connectedTile: {fileID: 0}
-  colliders: []
-  beat: 0
-  currentDamage: 0
-  tempDamageHolder: 0
-  towerRange: 0
-  towerHover: 0
   beatIndicator: {fileID: 1137120996435424628}
   beatCircle: {fileID: 4305122640335676531}
   towerAboutToFire: 0
+  towerHover: 0
   shieldEffect: {fileID: 7144582491740819995}
   isShielded: 0
-  currentState: 0
-  recordedBuffs: 
-  isInputtingBuffs: 0
-  beatRecordingStarted: 1
-  buffTimer: 0
-  buffIndex: 0
-  buffCountMeasure: 0
-  buffBeatCount: 1
   recordingStatus: {fileID: 2453344505474159094}
-  recordingSpr: {fileID: 225626922569687567, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  repeatSprites:
-  - {fileID: 4322246438330693900, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  - {fileID: 5265426146554181437, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  - {fileID: -5627175594756509676, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
-  - {fileID: -6773711629030542441, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   defaultAttackSprite: {fileID: -2797596922211243301, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  buffDefaultAttackSprite: {fileID: -832148691820441168, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite01: {fileID: -1697301350949874078, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite02: {fileID: -832148691820441168, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite03: {fileID: -2797596922211243301, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: -2797596922211243301, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  ChargedUp: 0
   animationController: {fileID: 2537126866813456904}
-  towerUpgradeUnlocked: 0
-  upgradePurchased: 0
-  upgradeOneActive: 0
-  upgradeTwoActive: 0
-  upgradeThreeActive: 0
-  upgradeFourActive: 0
-  feelingItNow: 0
-  synthBuff: 0
   towerAttackSfx: {fileID: 8300000, guid: 9c629428577b1a34781b87d062751106, type: 3}
   towerHurtSfx: {fileID: 8300000, guid: a1f776b05d53d9d4eb91b9c578907118, type: 3}
   towerDeathSfx: {fileID: 8300000, guid: 00bcab48a620c044d94e2518eb39e418, type: 3}
@@ -739,6 +693,24 @@ MonoBehaviour:
   shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
+  currentAttackPattern: 0
+  connectedTile: {fileID: 0}
+  colliders: []
+  nextProjectile: {fileID: 0}
+  towerAudioVolumeIncrement: 0.1
+  beat: 0
+  currentDamage: 0
+  tempDamageHolder: 0
+  towerRange: 0
+  ChargedUp: 0
+  towerUpgradeUnlocked: 0
+  upgradePurchased: 0
+  upgradeOneActive: 0
+  upgradeTwoActive: 0
+  upgradeThreeActive: 0
+  upgradeFourActive: 0
+  feelingItNow: 0
+  synthBuff: 0
 --- !u!95 &7437452897847904330
 Animator:
   serializedVersion: 5

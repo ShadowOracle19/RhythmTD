@@ -453,6 +453,7 @@ public class Enemy : MonoBehaviour
         //play death sound 
         SoundEffectsManager.instance.PlaySound(enemyDeathSfx, this.gameObject.transform, 1.0f);
 
+
         animator.SetBool("IsKilled",true); //Play death animation
         
     }
@@ -468,6 +469,8 @@ public class Enemy : MonoBehaviour
             CombatManager.Instance.enemyTotal -= 1;
             CombatManager.Instance.enemiesDefeated += 1;
         }
+
+        GameManager.Instance.pointHolder.Add(enemy.onDeathPoints);
         
         ConductorV2.instance.enemyEvent.Remove(trigger);
         //EnemySpawner.Instance.enemies.Remove(this);

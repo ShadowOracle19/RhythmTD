@@ -1629,7 +1629,7 @@ MonoBehaviour:
   towers:
   - tower: {fileID: 5183850645279424415, guid: 69a1dfa3c7fec1241b466e6b587e3655, type: 3}
     towerCooldownInfo: {fileID: 2060772130}
-  - tower: {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
+  - tower: {fileID: 5183850645279424415, guid: 148c7a40957dfb64794d1793982bf1d3, type: 3}
     towerCooldownInfo: {fileID: 914470684}
   - tower: {fileID: 5183850645279424415, guid: 52f2dbf2ef102754fac14a407478fb70, type: 3}
     towerCooldownInfo: {fileID: 1491215307}
@@ -1641,6 +1641,8 @@ MonoBehaviour:
   - {fileID: 5265426146554181437, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   - {fileID: -5627175594756509676, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   - {fileID: -6773711629030542441, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
+  pointHolder: 
+  healthRemainingPointGain: 100
 --- !u!4 &263461693
 Transform:
   m_ObjectHideFlags: 0
@@ -18752,8 +18754,8 @@ MonoBehaviour:
   pickupsParent: {fileID: 886537953}
   stageParent: {fileID: 8954601326441955595}
   enemiesSpawnIn: {fileID: 5409566660305168033}
-  enemyTimerMax: 60
-  enemyTimer: 60
+  enemyTimerMax: 5
+  enemyTimer: 5
   totalNumEnemies: 0
   totalNumPickups: 0
   resourceNum: 0

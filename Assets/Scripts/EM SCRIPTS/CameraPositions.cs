@@ -5,13 +5,16 @@ using UnityEngine;
 public class CameraPositions : MonoBehaviour
 {
     // This script is used to record camera positions for different scenes for reference use
-    
-    //Start Menu
-    //public float posX;
-    //public float posY;
-    //public float posZ;
 
-    //Title Menu
+    //Start Menu
+    //public float posX = 0.0f;
+    //public float posY = 0.0f;
+    //public float posZ = 0.0f;
+    //public float rotX = 0.0;
+    //public float rotY = 0.0f;
+    //public float rotZ = 0.0f;
+
+    //Main Menu
     //public float posX = 4.5f;
     //public float posY = 15.0f;
     //public float posZ = -1.0f;

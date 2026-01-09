@@ -19,6 +19,7 @@ public class ChangeScene : MonoBehaviour
 
     public void QuitGame()
     {
+        // if in combat return to main menu
         if(GameManager.Instance.combatRoot.activeSelf || GameManager.Instance.dialogueRoot.activeSelf)
         {
             if (GameManager.Instance.currentEncounter.isShowcase)
@@ -29,21 +30,24 @@ public class ChangeScene : MonoBehaviour
                 GameManager.Instance.ResumeGame();
                 return;
             }
+
             CombatManager.Instance.EndEncounter();
             GameManager.Instance.combatRoot.SetActive(false);
             GameManager.Instance.menuRoot.SetActive(true);
             GameManager.Instance.ResumeGame();
         }
+        // if in main menu return to title menu
         else if(GameManager.Instance.menuRoot.activeSelf)
         {
             GameManager.Instance.menuRoot.SetActive(false);
             GameManager.Instance.titleRoot.SetActive(true);
+            GameManager.Instance.titleRoot.GetComponent<Animator>().SetTrigger("Return To Title");
             GameManager.Instance.ResumeGame();
         }
+        // if in title menu close application
         else
         {
             Application.Quit();
-
         }
 
     }

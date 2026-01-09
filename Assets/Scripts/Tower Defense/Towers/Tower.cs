@@ -55,8 +55,8 @@ public class Tower : MonoBehaviour
     public AudioClip towerUpgradeSfx;
 
     [Header("PFX")]
-    [SerializeField] private ParticleSystem aoeAttackParticles;
-    private ParticleSystem aoeAttackParticlesInstance;
+    [SerializeField] public ParticleSystem aoeAttackParticles;
+    public ParticleSystem aoeAttackParticlesInstance;
     public Color aoeAttackColour;
 
     [SerializeField] private ParticleSystem shieldDestructionParticles;

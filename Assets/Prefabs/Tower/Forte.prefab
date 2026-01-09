@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2149819386208914413}
-  - component: {fileID: 3637877782725260547}
+  - component: {fileID: 8567030546911866016}
   - component: {fileID: 3091612715999862889}
   - component: {fileID: 2051579340026178359}
   - component: {fileID: 1039635829487946627}
@@ -143,7 +143,7 @@ Transform:
   - {fileID: 4265638836486659012}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3637877782725260547
+--- !u!114 &8567030546911866016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,10 +152,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2167625354041566739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd8a809dd198cc49b7e3bb3961b79d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 59ba68a7604f56e47b7580d6824bc409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerInfo: {fileID: 11400000, guid: c6827d0b3828b0c4ab69976db279f395, type: 2}
+  towerInfo: {fileID: 11400000, guid: 761424146060887449230b3945ff8d13, type: 2}
   projectile: {fileID: 0}
   beatIndicator: {fileID: 4686513911658087842}
   beatCircle: {fileID: 31395926951258363}
@@ -165,25 +165,26 @@ MonoBehaviour:
   isShielded: 0
   recordingStatus: {fileID: 2928146528420797377}
   defaultAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  upgradeAttackSprite01: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  upgradeAttackSprite02: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  upgradeAttackSprite03: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  flameAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  animationController: {fileID: 7412888328530383611}
-  towerAttackSfx: {fileID: 8300000, guid: 64e6bfc065fb6404da83cf5259f7f894, type: 3}
+  upgradeAttackSprite01: {fileID: 0}
+  upgradeAttackSprite02: {fileID: 0}
+  upgradeAttackSprite03: {fileID: 0}
+  flameAttackSprite: {fileID: 0}
+  animationController: {fileID: 0}
+  towerAttackSfx: {fileID: 8300000, guid: 3f9453c1b5d34574abc2fdba8162b2b1, type: 3}
   towerHurtSfx: {fileID: 8300000, guid: 0f6221cd989c4a74a9ed126be6baab7f, type: 3}
   towerDeathSfx: {fileID: 8300000, guid: 39bc06ae949154b4582c5fa4f63321a7, type: 3}
   towerUpgradeSfx: {fileID: 8300000, guid: 61a9f707937ea26458ad4164621095c6, type: 3}
   aoeAttackParticles: {fileID: 5103615976187222216, guid: 863485c7b148fdc4d8eee70a3cc74e80, type: 3}
+  aoeAttackParticlesInstance: {fileID: 0}
   aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
-  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
-  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
-  burningParticles: {fileID: 6363840329039339684, guid: 6222a6e473313534e8aa98e3b7911378, type: 3}
+  shieldDestructionParticles: {fileID: 0}
+  clashParticles: {fileID: 0}
+  burningParticles: {fileID: 0}
   currentAttackPattern: 0
   connectedTile: {fileID: 0}
   colliders: []
   nextProjectile: {fileID: 0}
-  towerAudioVolumeIncrement: 0.1
+  towerAudioVolumeIncrement: 0.05
   beat: 0
   currentDamage: 0
   tempDamageHolder: 0

@@ -421,14 +421,25 @@ public class GameManager : MonoBehaviour
 
         if (currentEncounter.introDialogue == null)
         {
-            combatRoot.SetActive(true);
-            CombatManager.Instance.tutorialManager.SetActive(false);
-            combatRunning = true;
-            CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter);
+            LoadCombat();
+
             return;
         }
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
+    }
+
+    public void LoadCombat()
+    {
+        combatRoot.SetActive(true);
+        CombatManager.Instance.tutorialManager.SetActive(false);
+        combatRunning = true;
+        CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter);
+        StageManager.Instance.SetStage(currentEncounter.stage);
+
+        Camera.main.transform.position = Camera.main.GetComponent<CameraPositions>().CombatCameraPos;
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(60,0,0));
+        Camera.main.fieldOfView = 60;
     }
 
     public void GameOver()

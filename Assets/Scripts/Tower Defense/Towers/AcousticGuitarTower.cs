@@ -36,6 +36,8 @@ public class AcousticGuitarTower : Tower
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies);
         bullet.GetComponent<AcousticGuitarProjectile>().isUp = false;
 
+        ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
+
         //instatiate bullet 2 upwards
         GameObject bullet2 = Instantiate(nextProjectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
 

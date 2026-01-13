@@ -8,8 +8,21 @@ public class AcousticGuitarProjectile : Projectile
     // Start is called before the first frame update
     public override void Start()
     {
-        base.Start();
+        NextPosition();
+        
+    }
 
+    void NextPosition()
+    {
+        if (isUp)
+        {
+            nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+        }
+        else
+        {
+            nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+
+        }
     }
 
     // Update is called once per frame
@@ -28,20 +41,7 @@ public class AcousticGuitarProjectile : Projectile
         }
         else
         {
-            //if isUp is true the bullet will move up on the z axis
-            if(isUp)
-            {
-                nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-            }
-            else
-            {
-                nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
-
-                //flip sprite downwards
-                spriteRenderer.gameObject.transform.localScale = new Vector3(-spriteRenderer.gameObject.transform.localScale.x,
-                spriteRenderer.gameObject.transform.localScale.y,
-                spriteRenderer.gameObject.transform.localScale.z);
-            }
+            NextPosition();
                 
             canMove = false;
         }

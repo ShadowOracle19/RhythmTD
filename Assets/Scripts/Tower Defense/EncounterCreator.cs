@@ -8,6 +8,7 @@ public class EncounterCreator : ScriptableObject
     [Header("Encounter Info")]
     public string encounterName;
     public string LevelLabel;
+    public LevelSelection stage;
 
     [Header("Base Encounter Creator")]
     public TextAsset introDialogue;

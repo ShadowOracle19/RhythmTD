@@ -529,10 +529,8 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.LoadTutorial();
                 return;
             }
-            GameManager.Instance.combatRoot.SetActive(true);
-            GameManager.Instance.combatRunning = true;
-            CombatManager.Instance.LoadEncounter(GameManager.Instance.currentEncounter.combatEncounter);
-            CombatManager.Instance.tutorialManager.SetActive(false);
+            GameManager.Instance.LoadCombat();
+
             GameManager.Instance.dialogueRoot.SetActive(false);
 
             CombatManager.Instance.enemyTimerObject.SetActive(true);

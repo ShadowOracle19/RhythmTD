@@ -89,6 +89,13 @@ public class CombatManager : MonoBehaviour
         //LoadEncounter(currentEncounter);
     }
 
+    private void OnDisable()
+    {
+        Camera.main.transform.position = Vector3.zero;
+        Camera.main.transform.rotation = Quaternion.Euler(Vector3.zero);
+        Camera.main.fieldOfView = 40;
+    }
+
 
     public void RestartEncounter()
     {

@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
 
     private ItemButton CreateButton(EncounterCreator encounter)
     {
-        Debug.Log(encounter);
+        //Debug.Log(encounter);
 
         GameObject gameObject;
         ItemButton item;

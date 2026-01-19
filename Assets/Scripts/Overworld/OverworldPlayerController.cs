@@ -104,7 +104,7 @@ public class OverworldPlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        body.velocity = axis * speed;
+        body.linearVelocity = axis * speed;
     }
 
 

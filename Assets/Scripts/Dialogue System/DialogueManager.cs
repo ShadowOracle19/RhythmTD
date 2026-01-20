@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Linq;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -123,6 +126,11 @@ public class DialogueManager : MonoBehaviour
     private bool projectOvertureMention = false;
     [SerializeField] private AudioSource overtureAudio;
 
+    [Header("Preloaded Assets")]
+    private Dictionary<string, Sprite> loadedSprites = new Dictionary<string, Sprite>();
+    private Dictionary<string, RuntimeAnimatorController> loadedControllers = new Dictionary<string, RuntimeAnimatorController>();
+    private Dictionary<string, AudioClip> loadedAudioClips = new Dictionary<string, AudioClip>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -152,7 +160,12 @@ public class DialogueManager : MonoBehaviour
         secondCharacterImage.sprite = null;
         secondCharacterImage.color = Color.clear;
         previousCharacterTalking = false;
+
+        loadedSprites.Clear();
+        loadedControllers.Clear();
+        loadedAudioClips.Clear();
     }
+
 
     public void LoadDialogue(TextAsset desiredDialogue)
     {
@@ -167,6 +180,32 @@ public class DialogueManager : MonoBehaviour
 
         dialogueMusic.Play();
         //MenuEventManager.Instance.DialogueOpen();
+
+        StartCoroutine(PreloadAssets());
+
+    }
+
+    IEnumerator PreloadAssets()
+    {
+        foreach (Dialogue dialogue in myDialogue.dialogue)
+        {
+            Sprite characterSprite = Resources.Load<Sprite>($"Characters/{dialogue.character}/SPR-DS_{dialogue.character}-{dialogue.emotion}");
+            RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>($"Characters/{dialogue.character}/{dialogue.character}_{dialogue.emotion}");
+
+            if(characterSprite != null && !loadedSprites.TryGetValue(characterSprite.name, out Sprite value))
+            {
+                Debug.Log($"Sprite Loaded {characterSprite.name}");
+                loadedSprites.Add(characterSprite.name, characterSprite);
+            }
+            if(controller != null && !loadedControllers.ContainsKey(controller.name))
+            {
+                loadedControllers.Add(controller.name, controller);
+            }
+            yield return null;
+        }
+        Debug.Log($"Number of sprites loaded {loadedSprites.Count}");
+        Debug.Log($"Number of controllers loaded {loadedControllers.Count}");
+        yield return null;
 
         typing = StartCoroutine(TypeLine());
     }
@@ -246,7 +285,7 @@ public class DialogueManager : MonoBehaviour
 
             currentTextBox.maxVisibleCharacters = visibleCount;
 
-            PlayCharacterAudio();
+            //PlayCharacterAudio();
             visibleCount += 1; 
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
@@ -323,13 +362,73 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    public Sprite RetrieveSprite(string key)
+    {
+        Sprite sprite = null;
+        Debug.Log($"Try to load {key} sprite");
+        if (loadedSprites.TryGetValue(key, out sprite))
+        {
+            return sprite = loadedSprites[key];
+        }
+        else
+        {
+            Debug.Log("Could not retrieve sprite");
+            return null;
+        }
+    }
+
+    public RuntimeAnimatorController RetrieveController(string key)
+    {
+        RuntimeAnimatorController controller = null;
+        Debug.Log($"Try to load {key} controller");
+        if (loadedControllers.TryGetValue(key, out controller))
+        {
+            return controller = loadedControllers[key];
+        }
+        else
+        {
+            Debug.Log("Could not retrieve controller");
+            return null;
+        }
+
+    }
+
+    public string ToPascalCase(string original)
+    {
+        Regex invalidCharsRgx = new Regex("[^_a-zA-Z0-9]");
+        Regex whiteSpace = new Regex(@"(?<=\s)");
+        Regex startsWithLowerCaseChar = new Regex("^[a-z]");
+        Regex firstCharFollowedByUpperCasesOnly = new Regex("(?<=[A-Z])[A-Z0-9]+$");
+        Regex lowerCaseNextToNumber = new Regex("(?<=[0-9])[a-z]");
+        Regex upperCaseInside = new Regex("(?<=[A-Z])[A-Z]+?((?=[A-Z][a-z])|(?=[0-9]))");
+
+        // replace white spaces with undescore, then replace all invalid chars with empty string
+        var pascalCase = invalidCharsRgx.Replace(whiteSpace.Replace(original, "_"), string.Empty)
+            // split by underscores
+            .Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries)
+            // set first letter to uppercase
+            .Select(w => startsWithLowerCaseChar.Replace(w, m => m.Value.ToUpper()))
+            // replace second and all following upper case letters to lower if there is no next lower (ABC -> Abc)
+            .Select(w => firstCharFollowedByUpperCasesOnly.Replace(w, m => m.Value.ToLower()))
+            // set upper case the first lower case following a number (Ab9cd -> Ab9Cd)
+            .Select(w => lowerCaseNextToNumber.Replace(w, m => m.Value.ToUpper()))
+            // lower second and next upper case letters except the last if it follows by any lower (ABcDEf -> AbcDef)
+            .Select(w => upperCaseInside.Replace(w, m => m.Value.ToLower()));
+
+        return string.Concat(pascalCase);
+    }
+
     public void LoadCharacterSprite()
     {
         // Loads the character sprite from the JSON using their name and emotion tags
-        characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].character}/SPR-DS_{myDialogue.dialogue[index].character}-{myDialogue.dialogue[index].emotion}");
-        characterSpriteAnimator = Resources.Load<RuntimeAnimatorController>($"Characters/{myDialogue.dialogue[index].character}/{myDialogue.dialogue[index].character}_{myDialogue.dialogue[index].emotion}");
+        //characterSprite = Resources.Load<Sprite>($"Characters/{myDialogue.dialogue[index].character}/SPR-DS_{myDialogue.dialogue[index].character}-{myDialogue.dialogue[index].emotion}");
+        //characterSpriteAnimator = Resources.Load<RuntimeAnimatorController>($"Characters/{myDialogue.dialogue[index].character}/{myDialogue.dialogue[index].character}_{myDialogue.dialogue[index].emotion}");
 
-        if (characterSpriteAnimator == null && characterSprite == null)//if no character sprite is loaded
+        characterSprite = RetrieveSprite($"SPR-DS_{ToPascalCase(myDialogue.dialogue[index].character)}-{myDialogue.dialogue[index].emotion}");
+        characterSpriteAnimator = RetrieveController($"{ToPascalCase(myDialogue.dialogue[index].character)}_{myDialogue.dialogue[index].emotion}");
+
+        //if no character sprite is loaded
+        if (characterSpriteAnimator == null && characterSprite == null)
         {
             descriptiveDialogueBox.SetActive(true);
             talkingDialogueBox.SetActive(false);
@@ -349,7 +448,9 @@ public class DialogueManager : MonoBehaviour
             secondCharacterImage.sprite = null;
             secondCharacterImage.color = Color.clear;
         }
-        else//if a character sprite is loaded
+        
+        //if a character sprite is loaded
+        else
         {
             descriptiveDialogueBox.SetActive(false);
             talkingDialogueBox.SetActive(true);
@@ -364,8 +465,15 @@ public class DialogueManager : MonoBehaviour
                 talkingDialogueBox.SetActive(false);
                 _previousSpeakerName.text = previousCharacterName;
 
-                previousCharacter = Resources.Load<Sprite>($"Characters/{previousCharacterLabel}/SPR-DS_{previousCharacterLabel}-{previousEmotion}");
-                previousCharacterAnimator = Resources.Load<RuntimeAnimatorController>($"Characters/{previousCharacterLabel}/{previousCharacterLabel}_{previousEmotion}");
+                //previousCharacter = Resources.Load<Sprite>($"Characters/{previousCharacterLabel}/SPR-DS_{previousCharacterLabel}-{previousEmotion}");
+                //previousCharacterAnimator = Resources.Load<RuntimeAnimatorController>($"Characters/{previousCharacterLabel}/{previousCharacterLabel}_{previousEmotion}");
+
+                //loadedSprites.TryGetValue($"SPR-DS_{previousCharacterLabel}-{previousEmotion}", out previousCharacter);
+                //loadedControllers.TryGetValue($"{previousCharacterLabel}_{previousEmotion}", out previousCharacterAnimator);
+
+                previousCharacter = RetrieveSprite($"SPR-DS_{ToPascalCase(previousCharacterLabel)}-{previousEmotion}");
+                previousCharacterAnimator = RetrieveController($"{ToPascalCase(previousCharacterLabel)}_{previousEmotion}");
+
 
                 //load either animator or sprite
                 if (characterSpriteAnimator == null)
@@ -412,15 +520,7 @@ public class DialogueManager : MonoBehaviour
                 previousCharacterLabel = myDialogue.dialogue[index - 1].character;
                 previousEmotion = myDialogue.dialogue[index - 1].emotion;
 
-                //if (secondCharacterImage.sprite == null)
-                //{
-                //    secondCharacterImage.color = Color.clear;
-                //}
             }
-            //else
-            //{
-            //    previousCharacterTalking = false;
-            //}
             previousCharacterTalking = false;
             previousTalkingDialogueBox.SetActive(false);
             characterImage.color = Color.white;
@@ -450,11 +550,11 @@ public class DialogueManager : MonoBehaviour
     {
         if (audioSource.isPlaying)
             return;
-        int randNum = Random.Range(1, 6); //gets random number between 1 and 5
+        int randNum = UnityEngine.Random.Range(1, 6); //gets random number between 1 and 5
 
         while (previousCharacterAudioCue == randNum)
         {
-            randNum = Random.Range(1, 6);
+            randNum = UnityEngine.Random.Range(1, 6);
         }
         //if(previousCharacterAudioCue == randNum)//respins random character audio cue
         //{
@@ -490,7 +590,7 @@ public class DialogueManager : MonoBehaviour
                 Debug.LogError("[DialogueManager] Dialogue Audio Speed is Broken :(");
             } */
 
-            audioSource.pitch = Random.Range(0.9f, 1.1f); //Get rid of this line if you wanna use the code above.
+            audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f); //Get rid of this line if you wanna use the code above.
             audioSource.Play();
         }
     }

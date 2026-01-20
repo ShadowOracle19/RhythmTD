@@ -208,6 +208,7 @@ public class DialogueManager : MonoBehaviour
         yield return null;
 
         typing = StartCoroutine(TypeLine());
+        LoadingScreenManager.Instance.EndLoading();
     }
 
     IEnumerator TypeLine()
@@ -623,6 +624,7 @@ public class DialogueManager : MonoBehaviour
         //dialogue if its going into a combat
         if (GameManager.Instance.encounterRunning)
         {
+            LoadingScreenManager.Instance.StartLoading();
             if (GameManager.Instance.tutorialRunning)
             {
                 GameManager.Instance.dialogueRoot.SetActive(false);

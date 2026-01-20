@@ -408,16 +408,15 @@ public class GameManager : MonoBehaviour
         Spawner.Instance.ResetSpawner();
 
         TutorialManager.Instance.LoadTutorial();
+        StageManager.Instance.SetStage(currentEncounter.stage);
 
         ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
     }
 
     public void LoadEncounter(EncounterCreator encounter)
     {
+        LoadingScreenManager.Instance.StartLoading();
         tutorialRunning = encounter.isTutorial;
-
-        
-
         currentEncounter = encounter;
         encounterRunning = true;
         winState = false;

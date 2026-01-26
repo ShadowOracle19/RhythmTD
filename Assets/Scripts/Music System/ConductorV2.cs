@@ -104,6 +104,7 @@ public class ConductorV2 : MonoBehaviour
 
     IEnumerator CountIn()
     {
+        LoadingScreenManager.Instance.EndLoading();
         countInText.gameObject.SetActive(true);
         for (int i = 1; i <= 4; i++)
         {

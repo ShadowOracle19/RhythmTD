@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using System.Linq;
-using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +15,7 @@ public class GameManager : MonoBehaviour
             if (_instance is null)
             {
                 Debug.LogError("GameManager is NULL");
+                
             }
 
             return _instance;
@@ -27,6 +25,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     #endregion
 
@@ -113,6 +112,8 @@ public class GameManager : MonoBehaviour
     [Header("Level Scoring")]
     public List<int> pointHolder = new List<int>();
     public int healthRemainingPointGain = 100;
+
+    
 
 
 
@@ -347,6 +348,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadTutorial()
     {
+
+        Camera.main.transform.position = Camera.main.GetComponent<CameraPositions>().CombatCameraPos;
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(60, 0, 0));
+        Camera.main.fieldOfView = 60;
+
         _currentHealth = _maxHealth;
         menuMusic.Stop();
         combatRoot.SetActive(true);
@@ -402,16 +408,15 @@ public class GameManager : MonoBehaviour
         Spawner.Instance.ResetSpawner();
 
         TutorialManager.Instance.LoadTutorial();
+        StageManager.Instance.SetStage(currentEncounter.stage);
 
         ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
     }
 
     public void LoadEncounter(EncounterCreator encounter)
     {
+        LoadingScreenManager.Instance.StartLoading();
         tutorialRunning = encounter.isTutorial;
-
-        
-
         currentEncounter = encounter;
         encounterRunning = true;
         winState = false;

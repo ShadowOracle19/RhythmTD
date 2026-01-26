@@ -10,6 +10,7 @@ public class TowerTypeCreator : ScriptableObject
     [TextArea(5,20)]
     public string towerDescription;
     public Sprite towerImage;
+    public GameObject towerLoadoutUIPrefab;
 
     [Header("Tower Stats")]
     public InstrumentType type;

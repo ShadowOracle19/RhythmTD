@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CooldownObject : MonoBehaviour
 {
+    public Transform cooldownParent;
+    public GameObject towerLoadoutObject;
     public GameObject towerCooldownSlot;
     public Animator towerCooldownAnimation;
     public bool towerCooldown;
@@ -36,5 +38,21 @@ public class CooldownObject : MonoBehaviour
                 towerCooldownTime = 0;
             }
         }
+    }
+
+    public void SpawnCooldownLoadoutObject(GameObject loadoutObjectPrefab)
+    {
+        towerLoadoutObject = Instantiate(loadoutObjectPrefab, cooldownParent);
+    }
+
+    public void RemoveTowerLoadoutObject()
+    {
+        Destroy(towerLoadoutObject);
+    }
+
+    public void ResetCooldownObject()
+    {
+        towerCooldown = false;
+        RemoveTowerLoadoutObject();
     }
 }

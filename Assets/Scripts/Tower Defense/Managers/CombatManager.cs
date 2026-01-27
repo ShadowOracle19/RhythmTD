@@ -235,6 +235,7 @@ public class CombatManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
+
         if (GameManager.Instance.tutorialRunning)
             return;
         TowerManager.Instance.ResetTowerManager();

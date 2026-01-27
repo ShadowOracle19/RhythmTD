@@ -84,6 +84,7 @@ public class ConductorV2 : MonoBehaviour
     public void CountUsIn(int _bpm)
     {
 
+        TowerManager.Instance.InstantiateTowerCooldown();
 
         pauseConductor = true;
         //load the audio source attached to the conductor gameobject

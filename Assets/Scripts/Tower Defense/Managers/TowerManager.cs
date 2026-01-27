@@ -108,6 +108,17 @@ public class TowerManager : MonoBehaviour
 
     public List<Tower> towerList;
 
+    public void InstantiateTowerCooldown()
+    {
+        GameManager.Instance.towers[0].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        GameManager.Instance.towers[1].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        GameManager.Instance.towers[2].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        GameManager.Instance.towers[3].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -304,10 +315,14 @@ public class TowerManager : MonoBehaviour
 
     public void ResetTowerManager()
     {
-        GameManager.Instance.towers[0].towerCooldownInfo.towerCooldown = false;
-        GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown = false;
-        GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown = false;
-        GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown = false;
+        GameManager.Instance.towers[0].towerCooldownInfo.ResetCooldownObject();
+
+        GameManager.Instance.towers[1].towerCooldownInfo.ResetCooldownObject();
+
+        GameManager.Instance.towers[2].towerCooldownInfo.ResetCooldownObject();
+
+        GameManager.Instance.towers[3].towerCooldownInfo.ResetCooldownObject();
+
 
         towerList.Clear();
     }

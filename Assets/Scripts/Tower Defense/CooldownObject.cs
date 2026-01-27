@@ -11,6 +11,9 @@ public class CooldownObject : MonoBehaviour
     public Animator towerCooldownAnimation;
 
     [HideInInspector]
+    public Tower currentConnectedTower;
+
+    [HideInInspector]
     public bool towerCooldown;
 
     [HideInInspector]
@@ -31,6 +34,8 @@ public class CooldownObject : MonoBehaviour
         towerCooldownSlot.SetActive(towerCooldown);
 
         towerCooldownAnimation.SetBool("Cooldown", towerCooldown);
+        towerCooldownAnimation.SetBool("NoPurchase", CheckIfCanPurchase());
+
 
         if(towerCooldown)
         {
@@ -47,14 +52,29 @@ public class CooldownObject : MonoBehaviour
         }
     }
 
-    public void SpawnCooldownLoadoutObject(GameObject loadoutObjectPrefab)
+    public bool CheckIfCanPurchase()
+    {
+        if(currentConnectedTower.towerInfo.resourceCost >= CombatManager.Instance.resourceNum && !towerCooldown)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void SpawnCooldownLoadoutObject(GameObject loadoutObjectPrefab, Tower tower)
     {
         towerLoadoutObject = Instantiate(loadoutObjectPrefab, cooldownParent);
+        towerCooldownAnimation = towerLoadoutObject.GetComponentInChildren<Animator>();
+        currentConnectedTower = tower;
     }
 
     public void RemoveTowerLoadoutObject()
     {
         Destroy(towerLoadoutObject);
+        currentConnectedTower = null;
     }
 
     public void ResetCooldownObject()

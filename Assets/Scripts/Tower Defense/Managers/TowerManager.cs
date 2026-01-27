@@ -70,7 +70,7 @@ public class TowerManager : MonoBehaviour
 
         for (int i = 0; i < GameManager.Instance.towers.Count; i++)
         {
-            GameManager.Instance.towers[i].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[i].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+            GameManager.Instance.towers[i].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[i].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab, GameManager.Instance.towers[i].tower.GetComponent<Tower>());
         }
     }
 
@@ -292,7 +292,6 @@ public class TowerManager : MonoBehaviour
 
         for (int i = 0; i < GameManager.Instance.towers.Count; i++)
         {
-            Debug.LogWarning($"reset tower manager {i}");
             GameManager.Instance.towers[i].towerCooldownInfo.ResetCooldownObject();
         }
 

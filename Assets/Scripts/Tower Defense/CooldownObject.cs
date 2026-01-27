@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class CooldownObject : MonoBehaviour
 {
+    public Transform cooldownParent;
+    [HideInInspector]
+    public GameObject towerLoadoutObject;
     public GameObject towerCooldownSlot;
     public Animator towerCooldownAnimation;
+
+    [HideInInspector]
     public bool towerCooldown;
+
+    [HideInInspector]
     public float towerCooldownTimeRemaining = 0;
+
+    [HideInInspector]
     public float towerCooldownTime = 0;
 
     // Start is called before the first frame update
@@ -36,5 +45,21 @@ public class CooldownObject : MonoBehaviour
                 towerCooldownTime = 0;
             }
         }
+    }
+
+    public void SpawnCooldownLoadoutObject(GameObject loadoutObjectPrefab)
+    {
+        towerLoadoutObject = Instantiate(loadoutObjectPrefab, cooldownParent);
+    }
+
+    public void RemoveTowerLoadoutObject()
+    {
+        Destroy(towerLoadoutObject);
+    }
+
+    public void ResetCooldownObject()
+    {
+        towerCooldown = false;
+        RemoveTowerLoadoutObject();
     }
 }

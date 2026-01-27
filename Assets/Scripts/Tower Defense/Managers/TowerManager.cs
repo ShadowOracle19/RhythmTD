@@ -41,65 +41,7 @@ public class TowerManager : MonoBehaviour
     
     //Tower menu shader management
     public Material greyscaleShader;
-    //public Material overchargeShader;
-
-
-    //Note: After this sprint replace to be more dynamic
-    //public GameObject towerOneCooldownSlot;
-    //public bool towerOneCooldown;
-    //private float towerOneCooldownTimeRemaining = 0;
-    //private float towerOneCooldownTime = 0;
-
-    //public GameObject towerTwoCooldownSlot;
-    //public bool towerTwoCooldown;
-    //private float towerTwoCooldownTimeRemaining = 0;
-    //private float towerTwoCooldownTime = 0;
-
-    //public GameObject towerThreeCooldownSlot;
-    //public bool towerThreeCooldown;
-    //private float towerThreeCooldownTimeRemaining = 0;
-    //private float towerThreeCooldownTime = 0;
-
-    //public GameObject towerFourCooldownSlot;
-    //public bool towerFourCooldown;
-    //private float towerFourCooldownTimeRemaining = 0;
-    //private float towerFourCooldownTime = 0;
-
-
-
-    //public GameObject drumCooldownSlotPM;
-    //public GameObject bassCooldownSlotPM;
-    //public GameObject pianoCooldownSlotPM;
-    //public GameObject guitarCooldownSlotPM;
-
-
-    //[Header("Tower Cost Labels")]
-    //public Sprite oneBar;
-    //public Sprite twoBar;
-    //public Sprite threeBar;
-    //public Sprite fourBar;
-
-    //public Slider tower1Slider;
-    //public Image tower1ResourceSprite;
-
-    //public Slider tower2Slider;
-    //public Image tower2ResourceSprite;
-
-    //public Slider tower3Slider;
-    //public Image tower3ResourceSprite;
-
-    //public Slider tower4Slider;
-    //public Image tower4ResourceSprite;
-
-    //public TextMeshProUGUI tower1Cost;
-    //public TextMeshProUGUI tower2Cost;
-    //public TextMeshProUGUI tower3Cost;
-    //public TextMeshProUGUI tower4Cost;
-
-    //public TextMeshPro towerCost1PM;
-    //public TextMeshPro towerCost2PM;
-    //public TextMeshPro towerCost3PM;
-    //public TextMeshPro towerCost4PM;
+   
 
     public bool towerSwap;
 
@@ -107,6 +49,30 @@ public class TowerManager : MonoBehaviour
     public float towerAudioVolumeIncrement = 0.05f;
 
     public List<Tower> towerList;
+
+    public void InstantiateTowerCooldown()
+    {
+        //GameManager.Instance.towers[0].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        //GameManager.Instance.towers[1].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        //GameManager.Instance.towers[2].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        //GameManager.Instance.towers[3].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        //GameManager.Instance.towers[4].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[4].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        //GameManager.Instance.towers[5].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[5].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        //GameManager.Instance.towers[6].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[6].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        //GameManager.Instance.towers[7].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[7].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+
+        for (int i = 0; i < GameManager.Instance.towers.Count; i++)
+        {
+            GameManager.Instance.towers[i].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[i].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -176,6 +142,18 @@ public class TowerManager : MonoBehaviour
 
             case 3:
                 return GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown;
+
+            case 4:
+                return GameManager.Instance.towers[4].towerCooldownInfo.towerCooldown;
+
+            case 5:
+                return GameManager.Instance.towers[5].towerCooldownInfo.towerCooldown;
+
+            case 6:
+                return GameManager.Instance.towers[6].towerCooldownInfo.towerCooldown;
+
+            case 7:
+                return GameManager.Instance.towers[7].towerCooldownInfo.towerCooldown;
 
             default:
                 return true;
@@ -304,10 +282,20 @@ public class TowerManager : MonoBehaviour
 
     public void ResetTowerManager()
     {
-        GameManager.Instance.towers[0].towerCooldownInfo.towerCooldown = false;
-        GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown = false;
-        GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown = false;
-        GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown = false;
+        //GameManager.Instance.towers[0].towerCooldownInfo.ResetCooldownObject();
+
+        //GameManager.Instance.towers[1].towerCooldownInfo.ResetCooldownObject();
+
+        //GameManager.Instance.towers[2].towerCooldownInfo.ResetCooldownObject();
+
+        //GameManager.Instance.towers[3].towerCooldownInfo.ResetCooldownObject();
+
+        for (int i = 0; i < GameManager.Instance.towers.Count; i++)
+        {
+            Debug.LogWarning($"reset tower manager {i}");
+            GameManager.Instance.towers[i].towerCooldownInfo.ResetCooldownObject();
+        }
+
 
         towerList.Clear();
     }

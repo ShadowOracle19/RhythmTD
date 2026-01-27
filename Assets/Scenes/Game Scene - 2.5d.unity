@@ -1648,6 +1648,14 @@ MonoBehaviour:
     towerCooldownInfo: {fileID: 1491215307}
   - tower: {fileID: 5183850645279424415, guid: 30dc88e441bcc2647aea0fff9fbd830a, type: 3}
     towerCooldownInfo: {fileID: 2018128322}
+  - tower: {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
+    towerCooldownInfo: {fileID: 5775041512460051173}
+  - tower: {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
+    towerCooldownInfo: {fileID: 5775041512460051172}
+  - tower: {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
+    towerCooldownInfo: {fileID: 5775041512460051171}
+  - tower: {fileID: 5183850645279424415, guid: 69a1dfa3c7fec1241b466e6b587e3655, type: 3}
+    towerCooldownInfo: {fileID: 5775041512460051170}
   recordingSpr: {fileID: 225626922569687567, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   repeatSprites:
   - {fileID: 4322246438330693900, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
@@ -21732,18 +21740,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2511851498983287690, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2791068028362746151, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2882591195357954017, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3230751219439761012, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -21856,10 +21852,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6303446359457548691, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7600447306239037272, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -21885,6 +21877,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+--- !u!114 &5775041512460051170 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2162732362055273157, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686437cf69a40ba4b843d9260622a6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CooldownObject
+--- !u!114 &5775041512460051171 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6923808447926960962, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686437cf69a40ba4b843d9260622a6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CooldownObject
+--- !u!114 &5775041512460051172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2799522989879314108, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686437cf69a40ba4b843d9260622a6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CooldownObject
+--- !u!114 &5775041512460051173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3250650214922997761, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686437cf69a40ba4b843d9260622a6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CooldownObject
 --- !u!1 &5896263209683615630
 GameObject:
   m_ObjectHideFlags: 0

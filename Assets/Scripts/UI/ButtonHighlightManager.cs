@@ -13,7 +13,7 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
     public AudioClip buttonHighlightSfx; //sound that plays when the button is highlighted
 
     [Header("Animation")]
-    public Animator buttonAnimator;
+    //public Animator buttonAnimator;
 
     [Header("Visual Changes")]
     public bool showCharacter;
@@ -34,7 +34,7 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
         SoundEffectsManager.instance.PlaySound(buttonHighlightSfx, this.gameObject.transform, 1.0f);
         
         //play select animation
-        buttonAnimator.SetBool("Highlighted", true);
+        //buttonAnimator.SetBool("Highlighted", true);
 
         //change shown character (title screen only)
         if (showCharacter) 
@@ -52,7 +52,7 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
     public void OnDeselect(BaseEventData eventData)
     {
         //play deselect animation
-        buttonAnimator.SetBool("Highlighted", false);
+        //buttonAnimator.SetBool("Highlighted", false);
 
         //change shown character (title screen only)
         if (showCharacter) 

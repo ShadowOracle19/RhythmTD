@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6576763199844712381}
   - component: {fileID: 8747570911135947741}
   - component: {fileID: 6062631489662132505}
+  - component: {fileID: 3084783424941443690}
   m_Layer: 5
   m_Name: Load Screen
   m_TagString: Untagged
@@ -75,6 +76,30 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3084783424941443690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139701243669183528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3760416b997ac394ba0ac13ea1a34657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  animator: {fileID: 6602064943522643436}
+  transitionPlaying: 0
+  shaderMaterial: {fileID: 2100000, guid: a358a16c1f69f6641a7304f45b613623, type: 2}
+  texDimensions: {x: 0, y: 0}
+  progress: 0
+  startPosition: {x: 0, y: 0}
+  inverted: 1
+  transparent: 1
+  effectGradient: 0
+  effectRotation: 0
+  dots: 10
+  outlineThickness: 0
 --- !u!1 &917871011350336456
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +160,7 @@ GameObject:
   - component: {fileID: 3571831892117388356}
   - component: {fileID: 7227197377714047791}
   - component: {fileID: 8717562925423046988}
+  - component: {fileID: 6602064943522643436}
   m_Layer: 5
   m_Name: Load Screen Canvas
   m_TagString: Untagged
@@ -225,6 +251,28 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!95 &6602064943522643436
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060302424171134550}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2bb02a6b1af8de846a171a28e5cffca9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2517246051185941492
 GameObject:
   m_ObjectHideFlags: 0

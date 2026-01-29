@@ -13,6 +13,11 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
     public AudioClip buttonHighlightSfx; //sound that plays when the button is highlighted
 
     [Header("Animation")]
+    //public Animator buttonAnimator;
+
+    [Header("Visual Changes")]
+    public bool showCharacter;
+    public GameObject characterObject;
 
     [Header("Selection Scale")]
     public Vector3 highlightScale = new Vector3(1.25f, 1.25f, 1.0f); //scale of the button when highlighted
@@ -29,6 +34,13 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
         SoundEffectsManager.instance.PlaySound(buttonHighlightSfx, this.gameObject.transform, 1.0f);
         
         //play select animation
+        //buttonAnimator.SetBool("Highlighted", true);
+
+        //change shown character (title screen only)
+        if (showCharacter) 
+        {
+            characterObject.SetActive(true);
+        }
         
         //set button scale to large
         //this.gameObject.transform.localScale = highlightScale;
@@ -40,6 +52,13 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
     public void OnDeselect(BaseEventData eventData)
     {
         //play deselect animation
+        //buttonAnimator.SetBool("Highlighted", false);
+
+        //change shown character (title screen only)
+        if (showCharacter) 
+        {
+            characterObject.SetActive(false);
+        }
         
         //set button scale to default
         //this.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);

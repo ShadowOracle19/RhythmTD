@@ -187,6 +187,12 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator PreloadAssets()
     {
+        // While transition timer is running in LoadingScreenManager, prevent next process step
+        while (LoadingScreenManager.Instance.transitionActive)
+        {
+            yield return null;
+        }
+        
         foreach (Dialogue dialogue in myDialogue.dialogue)
         {
             Sprite characterSprite = Resources.Load<Sprite>($"Characters/{dialogue.character}/SPR-DS_{dialogue.character}-{dialogue.emotion}");
@@ -209,6 +215,16 @@ public class DialogueManager : MonoBehaviour
 
         typing = StartCoroutine(TypeLine());
         LoadingScreenManager.Instance.EndLoading();
+
+        // While transition timer is running in LoadingScreenManager, prevent next process step
+        while (LoadingScreenManager.Instance.transitionActive)
+        {
+            yield return null;
+        }
+        
+
+        LoadingScreenManager.Instance.loadingScreen.SetActive(false);
+        LoadingScreenManager.Instance.loadingScreenVisual.SetActive(false);
     }
 
     IEnumerator TypeLine()

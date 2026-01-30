@@ -42,8 +42,8 @@ public class LoadingScreenManager : MonoBehaviour
         // Trigger opening transition
         animator.ResetTrigger("Load End");
         animator.SetTrigger("Load Start");
-
-        StartCoroutine(StartTransition(1.5f));
+        
+        StartCoroutine(SetTimer(1.5f));
     }
 
     public void EndLoading()
@@ -52,10 +52,10 @@ public class LoadingScreenManager : MonoBehaviour
         animator.ResetTrigger("Load Start");
         animator.SetTrigger("Load End");
         
-        StartCoroutine(EndTransition(1.5f));
+        StartCoroutine(SetTimer(1.5f));
     }
 
-    public IEnumerator StartTransition(float timerLength)
+    public IEnumerator SetTimer(float timerLength)
     {
         transitionActive = true;
         
@@ -68,24 +68,5 @@ public class LoadingScreenManager : MonoBehaviour
         }
 
         transitionActive = false;
-    }
-    
-    public IEnumerator EndTransition(float timerLength)
-    {
-        while (transitionActive)
-        {
-            yield return null;
-        }
-
-        transitionTimer = 0.0f;
-        
-        while (transitionTimer <= timerLength)
-        {
-            yield return null;
-            transitionTimer += Time.deltaTime;
-        }
-
-        loadingScreen.SetActive(false);
-        loadingScreenVisual.SetActive(false);
     }
 }

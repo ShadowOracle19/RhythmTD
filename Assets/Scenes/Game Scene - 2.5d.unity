@@ -18508,6 +18508,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 360330490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2137869202 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3392972771959435838, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+  m_PrefabInstance: {fileID: 2235631389244900773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2139687888 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4635788451929707120, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
@@ -19231,6 +19242,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: artwork
+      value: 
+      objectReference: {fileID: 2137869202}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1374616917}
@@ -19254,6 +19269,42 @@ PrefabInstance:
       propertyPath: loadingScreenTexture
       value: 
       objectReference: {fileID: 411145573}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: artworkList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: toolTipsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: 'artworkList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b10a5220ab1e3e4d98dda3811585b7e, type: 3}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: 'artworkList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: c1d09651ca3b2b74b8131d8cd7e92313, type: 3}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: 'artworkList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 319a1e008b40bc84096f61476a9bf4da, type: 3}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: 'artworkList.Array.data[3]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 319a1e008b40bc84096f61476a9bf4da, type: 3}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: 'toolTipsList.Array.data[0]'
+      value: Test tool tip #1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: 'toolTipsList.Array.data[1]'
+      value: Test tool tip #2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117395845204861494, guid: 8485acc5bec906040b48d710f769af03, type: 3}
+      propertyPath: 'toolTipsList.Array.data[2]'
+      value: Test tool tip #3
+      objectReference: {fileID: 0}
     - target: {fileID: 3571831892117388356, guid: 8485acc5bec906040b48d710f769af03, type: 3}
       propertyPath: m_Camera
       value: 

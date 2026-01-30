@@ -222,7 +222,6 @@ public class DialogueManager : MonoBehaviour
             yield return null;
         }
         
-
         LoadingScreenManager.Instance.loadingScreen.SetActive(false);
         LoadingScreenManager.Instance.loadingScreenVisual.SetActive(false);
     }

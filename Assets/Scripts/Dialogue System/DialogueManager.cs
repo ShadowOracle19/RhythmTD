@@ -192,7 +192,8 @@ public class DialogueManager : MonoBehaviour
         {
             yield return null;
         }
-        
+
+        //
         foreach (Dialogue dialogue in myDialogue.dialogue)
         {
             Sprite characterSprite = Resources.Load<Sprite>($"Characters/{dialogue.character}/SPR-DS_{dialogue.character}-{dialogue.emotion}");
@@ -213,7 +214,10 @@ public class DialogueManager : MonoBehaviour
         Debug.Log($"Number of controllers loaded {loadedControllers.Count}");
         yield return null;
 
+        //
         typing = StartCoroutine(TypeLine());
+
+        //
         LoadingScreenManager.Instance.EndLoading();
 
         // While transition timer is running in LoadingScreenManager, prevent next process step
@@ -222,6 +226,7 @@ public class DialogueManager : MonoBehaviour
             yield return null;
         }
         
+        // Disable load screen visuals
         LoadingScreenManager.Instance.loadingScreen.SetActive(false);
         LoadingScreenManager.Instance.loadingScreenVisual.SetActive(false);
     }

@@ -27,6 +27,11 @@ public class LoadingScreenManager : MonoBehaviour
     }
     #endregion
 
+    public TextMeshProUGUI loadingText;
+    public string[] loadingTextArray = new string[3];
+    public int loadingTextIndex = 0;
+    public bool loading = true;
+    
     public TextMeshProUGUI toolTips;
     public List<string> toolTipsList = new List<string>();
 
@@ -53,6 +58,9 @@ public class LoadingScreenManager : MonoBehaviour
         SetArtwork();
         SetToolTips();
 
+        loading = true;
+        StartCoroutine(UpdateLoadingText());
+
         // Trigger opening transition
         animator.ResetTrigger("Load End");
         animator.SetTrigger("Load Start");
@@ -62,6 +70,9 @@ public class LoadingScreenManager : MonoBehaviour
 
     public void EndLoading()
     {
+        loading = false;
+        StopCoroutine(UpdateLoadingText());
+        
         // Trigger closing transition
         animator.ResetTrigger("Load Start");
         animator.SetTrigger("Load End");
@@ -92,5 +103,17 @@ public class LoadingScreenManager : MonoBehaviour
     public void SetToolTips()
     {
         toolTips.text = toolTipsList[Random.Range(0, toolTipsList.Count-1)];
+    }
+
+    public IEnumerator UpdateLoadingText()
+    {
+        while (loading)
+        {
+            loadingText.text = loadingTextArray[loadingTextIndex % 3];
+
+            loadingTextIndex += 1;
+
+            yield return null;
+        }
     }
 }

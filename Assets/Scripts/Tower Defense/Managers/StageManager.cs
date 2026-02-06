@@ -74,6 +74,8 @@ public class StageManager : MonoBehaviour
             default:
                 break;
         }
+
+        CombatManager.Instance.SpawnStagePlatform(GameManager.Instance.currentEncounter.combatEncounter);
     }
 
 }

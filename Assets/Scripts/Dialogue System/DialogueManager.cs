@@ -366,14 +366,14 @@ public class DialogueManager : MonoBehaviour
     public Sprite RetrieveSprite(string key)
     {
         Sprite sprite = null;
-        Debug.Log($"Try to load {key} sprite");
+        //Debug.Log($"Try to load {key} sprite");
         if (loadedSprites.TryGetValue(key, out sprite))
         {
             return sprite = loadedSprites[key];
         }
         else
         {
-            Debug.Log("Could not retrieve sprite");
+            //Debug.Log("Could not retrieve sprite");
             return null;
         }
     }
@@ -381,14 +381,14 @@ public class DialogueManager : MonoBehaviour
     public RuntimeAnimatorController RetrieveController(string key)
     {
         RuntimeAnimatorController controller = null;
-        Debug.Log($"Try to load {key} controller");
+        //Debug.Log($"Try to load {key} controller");
         if (loadedControllers.TryGetValue(key, out controller))
         {
             return controller = loadedControllers[key];
         }
         else
         {
-            Debug.Log("Could not retrieve controller");
+            //Debug.Log("Could not retrieve controller");
             return null;
         }
 
@@ -547,6 +547,7 @@ public class DialogueManager : MonoBehaviour
         previousCharacter = characterSprite;
         previousCharacterAnimator = characterSpriteAnimator;
     }
+
     private void PlayCharacterAudio()
     {
         if (audioSource.isPlaying)
@@ -659,11 +660,8 @@ public class DialogueManager : MonoBehaviour
                 return;
             }
 
-            GameManager.Instance.winScreen.SetActive(true);
-            GameManager.Instance.winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen
-                (true, GameManager.Instance.currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, GameManager.Instance._currentHealth == GameManager.Instance._maxHealth, false);
+            GameManager.Instance.StartWinLevelProcess();
 
-            MenuEventManager.Instance.WinScreenOpen();
             GameManager.Instance.dialogueRoot.SetActive(false);
         }
         // Sets the active object to the object last active before dialogue started

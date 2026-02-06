@@ -29,7 +29,7 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
 
     private void Update()
     {
-        
+        gameObject.SetActive(!heldEncounter.isLevelLocked);
     }
 
     public void OnSelect(BaseEventData eventData)

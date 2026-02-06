@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -161,6 +162,15 @@ public class CombatManager : MonoBehaviour
         
     }
 
+    public void SpawnStagePlatform(CombatMaker encounter)
+    {
+        var stage = Instantiate(encounter.stagePrefab, stageParent);
+        //add spawn and pickup tile call to spawner
+        Spawner.Instance.spawnTiles = stage.GetComponent<StageObject>().spawnTiles;
+        Spawner.Instance.pickupSpawnTiles = stage.GetComponent<StageObject>().pickupTiles;
+
+    }
+
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
@@ -168,13 +178,6 @@ public class CombatManager : MonoBehaviour
         {
             GameManager.Instance.combatRunning = true;
         }
-
-        //Instantiate stage
-        var stage = Instantiate(encounter.stagePrefab, stageParent);
-
-        //add spawn and pickup tile call to spawner
-        Spawner.Instance.spawnTiles = stage.GetComponent<StageObject>().spawnTiles;
-        Spawner.Instance.pickupSpawnTiles = stage.GetComponent<StageObject>().pickupTiles;
 
         GameManager.Instance.playerInputManager.SetActive(true);
         GameManager.Instance.menuMusic.Stop();

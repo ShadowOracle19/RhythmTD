@@ -27,6 +27,8 @@ public class EncounterCreator : ScriptableObject
     [Header("Encounter Data")]
     public EncounterData data;
     public Color fillColor;
+    public bool isLevelLocked = true;
+    public EncounterCreator levelThatUnlocks;
 }
 
 [System.Serializable]

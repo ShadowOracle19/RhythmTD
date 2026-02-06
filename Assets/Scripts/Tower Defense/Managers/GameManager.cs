@@ -230,6 +230,14 @@ public class GameManager : MonoBehaviour
             navigation.selectOnUp = returnToMainMenuButton;
 
             item.gameObject.GetComponent<Button>().navigation = navigation;
+
+            //level locking functions
+            item.heldEncounter.levelThatUnlocks = GetNextEncounter(i, children.Length);
+
+            if(item.heldEncounter.isLevelLocked)
+            {
+                item.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -266,6 +274,24 @@ public class GameManager : MonoBehaviour
 
         return item.GetComponent<Selectable>();
     }
+
+    private EncounterCreator GetNextEncounter(int indexCurrent, int length)
+    {
+        ItemButton item;
+
+        if (indexCurrent == length - 1) //last item
+        {
+            //looping dont set anything here
+            return null;
+        }
+        else
+        {
+            item = levelParent.GetChild(indexCurrent + 1).GetComponent<ItemButton>();
+        }
+
+        return item.heldEncounter;
+    }
+
     #endregion
 
     #region pause function
@@ -408,7 +434,9 @@ public class GameManager : MonoBehaviour
         Spawner.Instance.ResetSpawner();
 
         TutorialManager.Instance.LoadTutorial();
+
         StageManager.Instance.SetStage(currentEncounter.stage);
+
 
         ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
     }
@@ -473,10 +501,8 @@ public class GameManager : MonoBehaviour
 
         if (currentEncounter.endDialogue == null)
         {
-            winScreen.SetActive(true);
-            winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
+            StartWinLevelProcess();
 
-            MenuEventManager.Instance.WinScreenOpen();
             return;
         }
 
@@ -487,6 +513,23 @@ public class GameManager : MonoBehaviour
         //conductor.SetActive(false);
         //MenuEventManager.Instance.WinScreenOpen();
         ConductorV2.instance.StopMusic();
+    }
+
+    public void StartWinLevelProcess()
+    {
+        winScreen.SetActive(true);
+        UnlockLevel(currentEncounter);
+        winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
+
+        MenuEventManager.Instance.WinScreenOpen();
+    }
+
+    public void UnlockLevel(EncounterCreator wonLevel)
+    {
+        if (wonLevel.levelThatUnlocks != null)
+        {
+            wonLevel.levelThatUnlocks.isLevelLocked = false;
+        }
     }
 
     public void TutorialWinState()

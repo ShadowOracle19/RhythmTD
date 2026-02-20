@@ -61,8 +61,8 @@ public class MenuEventManager : MonoBehaviour
     public GameObject loseScreenObject;
 
     [Header("Exit Confirmation Menu")]
-    public GameObject exitConfirmationObject;
-    public TextMeshProUGUI exitConfirmationText;
+    public GameObject exitMenuObject01;
+    public TextMeshProUGUI exitMenuText;
     
     [Header("Other")]
     public GameObject showcaseCreditsObject;
@@ -106,23 +106,23 @@ public class MenuEventManager : MonoBehaviour
     {
         if (GameManager.Instance.titleRoot.activeSelf)
         {
-            exitConfirmationText.text = "Quit to desktop?";
+            exitMenuText.text = "Quit to desktop?";
         }
         else if (GameManager.Instance.menuRoot.activeSelf)
         {
-            exitConfirmationText.text = "Exit to title screen?";
+            exitMenuText.text = "Exit to title screen?";
         }
         else if (GameManager.Instance.combatRoot.activeSelf)
         {
-            exitConfirmationText.text = "Exit to stage select?";
+            exitMenuText.text = "Exit to stage select?";
 
             if (GameManager.Instance.currentEncounter.isShowcase)
             {
-                exitConfirmationText.text = "Exit to title screen?";
+                exitMenuText.text = "Exit to title screen?";
             }
         }
 
-        eventSystem.SetSelectedGameObject(exitConfirmationObject);
+        eventSystem.SetSelectedGameObject(exitMenuObject01);
     }
 
     // close exit confirmation menu & set text

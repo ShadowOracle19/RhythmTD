@@ -1640,21 +1640,21 @@ MonoBehaviour:
   - {fileID: 1458905193}
   imageIndex: 0
   towers:
-  - tower: {fileID: 2167625354041566739, guid: 283a31c5650f09c4fade4fbc660c0497, type: 3}
-    towerCooldownInfo: {fileID: 2060772130}
-  - tower: {fileID: 5183850645279424415, guid: 148c7a40957dfb64794d1793982bf1d3, type: 3}
-    towerCooldownInfo: {fileID: 914470684}
-  - tower: {fileID: 5183850645279424415, guid: 52f2dbf2ef102754fac14a407478fb70, type: 3}
-    towerCooldownInfo: {fileID: 1491215307}
-  - tower: {fileID: 5183850645279424415, guid: 30dc88e441bcc2647aea0fff9fbd830a, type: 3}
-    towerCooldownInfo: {fileID: 2018128322}
-  - tower: {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
-    towerCooldownInfo: {fileID: 5775041512460051173}
-  - tower: {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
-    towerCooldownInfo: {fileID: 5775041512460051172}
   - tower: {fileID: 5183850645279424415, guid: c47158c723e85dd429c17cf43ee4762a, type: 3}
-    towerCooldownInfo: {fileID: 5775041512460051171}
+    towerCooldownInfo: {fileID: 2060772130}
+  - tower: {fileID: 5183850645279424415, guid: 52010156f30d2d54c96a88f504b702ef, type: 3}
+    towerCooldownInfo: {fileID: 914470684}
+  - tower: {fileID: 2167625354041566739, guid: e7c16345a24762445aa7e830b7f4a157, type: 3}
+    towerCooldownInfo: {fileID: 1491215307}
   - tower: {fileID: 5183850645279424415, guid: 69a1dfa3c7fec1241b466e6b587e3655, type: 3}
+    towerCooldownInfo: {fileID: 2018128322}
+  - tower: {fileID: 5183850645279424415, guid: 148c7a40957dfb64794d1793982bf1d3, type: 3}
+    towerCooldownInfo: {fileID: 5775041512460051173}
+  - tower: {fileID: 5183850645279424415, guid: 30dc88e441bcc2647aea0fff9fbd830a, type: 3}
+    towerCooldownInfo: {fileID: 5775041512460051172}
+  - tower: {fileID: 2167625354041566739, guid: 283a31c5650f09c4fade4fbc660c0497, type: 3}
+    towerCooldownInfo: {fileID: 5775041512460051171}
+  - tower: {fileID: 5183850645279424415, guid: 52f2dbf2ef102754fac14a407478fb70, type: 3}
     towerCooldownInfo: {fileID: 5775041512460051170}
   recordingSpr: {fileID: 225626922569687567, guid: d2f03cd164e9e524cb5dd4162daffe96, type: 3}
   repeatSprites:
@@ -20947,7 +20947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2737315247605731274, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2985573084392977531, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -22025,6 +22025,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1064367408825563405, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1100459882380725920, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_Volume
       value: 0.2
@@ -22135,7 +22139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5228919314964157108, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_SortingOrder
-      value: 4
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5228919314964157108, guid: 70f02191d5b465a4fbfe6ec8feedbe88, type: 3}
       propertyPath: m_PlaneDistance
@@ -23426,9 +23430,9 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5307179497126049676, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
-      propertyPath: heldEncounter
+      propertyPath: connectedLevel
       value: 
-      objectReference: {fileID: 11400000, guid: 3540afcf836b467409d322512b762f04, type: 2}
+      objectReference: {fileID: 11400000, guid: 33d37f0763bd59e4c8a07805f8b7cab0, type: 2}
     - target: {fileID: 5307179497126049676, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: _onSelectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 

@@ -44,8 +44,11 @@ public class FlatTower : Tower
 
     public override void Fire()
     {
+        if (!enemyInRange)
+            return;
+
         //increase shield recharge time
-        if(upgradeTwoActive && !isShielded)
+        if (upgradeTwoActive && !isShielded)
         {
             upgradeTwoRecharge += 1;
         }

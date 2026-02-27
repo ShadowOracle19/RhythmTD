@@ -19,6 +19,9 @@ public class ForteTower : Tower
 
     public override void Fire()
     {
+        if (!enemyInRange)
+            return;
+
         base.Fire();
 
         AOE(currentDamage);

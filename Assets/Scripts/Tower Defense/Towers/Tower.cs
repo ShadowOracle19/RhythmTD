@@ -23,6 +23,8 @@ public class Tower : MonoBehaviour
     public TowerTypeCreator towerInfo;
     public GameObject projectile;
 
+    public bool enemyInRange = false;
+
     [Header("Tower Empower Indicator")]
     public GameObject beatIndicator;
     public GameObject beatCircle;
@@ -183,7 +185,6 @@ public class Tower : MonoBehaviour
         }
 
     }
-
 
 
     public void towerEffectVisual()

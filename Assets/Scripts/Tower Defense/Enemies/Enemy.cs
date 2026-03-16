@@ -475,7 +475,16 @@ public class Enemy : MonoBehaviour
         ConductorV2.instance.enemyEvent.Remove(trigger);
         //EnemySpawner.Instance.enemies.Remove(this);
         Spawner.Instance.enemies.Remove(this);
-        Destroy(gameObject);
+        GetComponent<BoxCollider>().enabled = false;
+        gameObject.transform.position = new Vector3(1000, 1000, 1000);
+
+        DestroyEnemy();
+    }
+
+    public void DestroyEnemy()
+    {
+        Destroy(gameObject, 1);
+
     }
 }
 

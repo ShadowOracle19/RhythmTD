@@ -33,8 +33,10 @@ public class LoadingScreenManager : MonoBehaviour
     public bool transitionActive = false;
     public float transitionTimer = 0.0f;
     
-    public void StartLoading()
+    public void StartLoading(GameObject loadInto, GameObject loadFrom)
     {
+
+        loadInto.SetActive(true);
         // Enable loading screen visuals
         loadingScreen.SetActive(true);
         loadingScreenVisual.SetActive(true);
@@ -43,7 +45,7 @@ public class LoadingScreenManager : MonoBehaviour
         animator.ResetTrigger("Load End");
         animator.SetTrigger("Load Start");
 
-        StartCoroutine(StartTransition(1.5f));
+        StartCoroutine(StartTransition(1.5f, loadInto, loadFrom));
     }
 
     public void EndLoading()
@@ -55,7 +57,7 @@ public class LoadingScreenManager : MonoBehaviour
         StartCoroutine(EndTransition(1.5f));
     }
 
-    public IEnumerator StartTransition(float timerLength)
+    public IEnumerator StartTransition(float timerLength, GameObject loadInto, GameObject loadFrom)
     {
         transitionActive = true;
         
@@ -67,6 +69,8 @@ public class LoadingScreenManager : MonoBehaviour
             transitionTimer += Time.deltaTime;
         }
 
+
+        loadFrom.SetActive(false);
         transitionActive = false;
     }
     

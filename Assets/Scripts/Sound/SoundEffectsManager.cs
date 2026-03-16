@@ -24,23 +24,25 @@ public class SoundEffectsManager : MonoBehaviour
             return;
         }
 
-        //spawn sound effect gameObject
-        AudioSource audioSource = Instantiate(soundEffectObject, spawnTransform.position, Quaternion.identity);
+        ////spawn sound effect gameObject
+        //AudioSource audioSource = Instantiate(soundEffectObject, spawnTransform.position, Quaternion.identity);
 
-        //assign audioClip
-        audioSource.clip = audioClip;
+        ////assign audioClip
+        //audioSource.clip = audioClip;
 
-        //assign audioSource volume
-        audioSource.volume = volume;
+        ////assign audioSource volume
+        //audioSource.volume = volume;
 
-        //play audioClip
-        audioSource.Play();
+        ////play audioClip
+        //audioSource.Play();
 
-        //get audioClip length
-        float clipLength = audioSource.clip.length;
+        ////get audioClip length
+        //float clipLength = audioSource.clip.length;
 
-        //destroy audioClip after it finishes playing
-        Destroy(audioSource.gameObject, clipLength);
+        ////destroy audioClip after it finishes playing
+        //Destroy(audioSource.gameObject, clipLength);
+
+        AudioSource.PlayClipAtPoint(audioClip, Vector2.zero, volume);
     }
 
     public void PlayRandSound(AudioClip[] audioClip, Transform spawnTransform, float volume)

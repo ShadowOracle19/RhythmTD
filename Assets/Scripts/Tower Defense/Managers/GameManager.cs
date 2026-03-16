@@ -443,7 +443,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadEncounter(EncounterCreator encounter)
     {
-        LoadingScreenManager.Instance.StartLoading();
         tutorialRunning = encounter.isTutorial;
         currentEncounter = encounter;
         encounterRunning = true;
@@ -458,7 +457,9 @@ public class GameManager : MonoBehaviour
 
             return;
         }
-        dialogueRoot.SetActive(true);
+
+        LoadingScreenManager.Instance.StartLoading(dialogueRoot, menuRoot);
+        //dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
     }
 

@@ -20,6 +20,9 @@ public class MajorTower : Tower
 
     public override void Fire(float yPos)
     {
+        if (!enemyInRange)
+            return;
+
         base.Fire(yPos);
 
         if(upgradeThreeActive)

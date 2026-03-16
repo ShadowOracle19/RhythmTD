@@ -950,11 +950,11 @@ public class CursorTD : MonoBehaviour
             
             if (GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
-                towerSlotD.GetComponent<Image>().material = greyscaleShader;
+                towerSlotA.GetComponent<Image>().material = greyscaleShader;
             }
             else
             {
-                towerSlotD.GetComponent<Image>().material = null;
+                towerSlotA.GetComponent<Image>().material = null;
             }
 
             if (GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.resourceCost) 
@@ -968,11 +968,11 @@ public class CursorTD : MonoBehaviour
 
             if (GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
-                towerSlotA.GetComponent<Image>().material = greyscaleShader;
+                towerSlotD.GetComponent<Image>().material = greyscaleShader;
             }
             else
             {
-                towerSlotA.GetComponent<Image>().material = null;
+                towerSlotD.GetComponent<Image>().material = null;
             }
         }    
     }

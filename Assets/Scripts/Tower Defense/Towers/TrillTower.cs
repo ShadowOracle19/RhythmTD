@@ -28,6 +28,9 @@ public class TrillTower : Tower
 
     public override void Fire()
     {
+        if (!enemyInRange)
+            return;
+
         base.Fire();
 
         //Charge shot upgrade active

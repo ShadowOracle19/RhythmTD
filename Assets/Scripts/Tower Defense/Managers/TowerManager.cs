@@ -52,22 +52,6 @@ public class TowerManager : MonoBehaviour
 
     public void InstantiateTowerCooldown()
     {
-        //GameManager.Instance.towers[0].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
-
-        //GameManager.Instance.towers[1].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
-
-        //GameManager.Instance.towers[2].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
-
-        //GameManager.Instance.towers[3].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
-
-        //GameManager.Instance.towers[4].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[4].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
-
-        //GameManager.Instance.towers[5].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[5].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
-
-        //GameManager.Instance.towers[6].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[6].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
-
-        //GameManager.Instance.towers[7].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[7].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab);
-
         for (int i = 0; i < GameManager.Instance.towers.Count; i++)
         {
             GameManager.Instance.towers[i].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[i].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab, GameManager.Instance.towers[i].tower.GetComponent<Tower>());

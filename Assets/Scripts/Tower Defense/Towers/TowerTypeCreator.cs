@@ -23,6 +23,8 @@ public class TowerTypeCreator : ScriptableObject
     public TowerAttackPattern attackPattern;
     public int damage = 0;
     public int range = 0;
+    [Tooltip("Allows the tower to attack regardless of enemy in range")]
+    public bool canAttackWhenever = false;
     [Tooltip("Set to true if projectile can pierce through enemies")]
     public bool projectilePiercesEnemies = false;
 

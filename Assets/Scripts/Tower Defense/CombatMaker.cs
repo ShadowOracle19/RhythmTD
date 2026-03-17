@@ -5,10 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Combat", menuName = "ScriptableObjects/CombatCreator")]
 public class CombatMaker : ScriptableObject
 {
-    
     public DynamicSongCreator dynamicSong;
     public GameObject stagePrefab;
     public List<Wave> waves = new List<Wave>();
+
+    [Header("Tower Limitation")]
+    [Tooltip("Enable this to limit tower placement")]
+    public bool enableTowerLimit = false;
+    public int towerLimit = 1;
 }
 
 [System.Serializable]

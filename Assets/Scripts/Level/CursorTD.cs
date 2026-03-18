@@ -442,16 +442,25 @@ public class CursorTD : MonoBehaviour
             && !TowerManager.Instance.CheckIfOnCoolDown(towerNum) &&
             tile != null && tile.placedTower == null && !tile.cantPlaceTower) 
         {
-            if(CombatManager.Instance.resourceNum >= 150)
+            //if tower limit is enabled and tower limit is reached use this if statement to stop tower placement
+            if (!GameManager.Instance.tutorialRunning && CombatManager.Instance.currentEncounter.enableTowerLimit && TowerManager.Instance.CheckIfTowerAtLimit(towerNum))
             {
-                TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), true);
-                CombatManager.Instance.resourceNum -= 150;
+                Debug.Log($"{tower.name} at limit cannot be placed. Please try another tower!");
+                return;
             }
-            else if(CombatManager.Instance.resourceNum < 149)
-            {
-                TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), false);
-                CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
-            }
+
+            TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), false);
+            CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
+
+            //if (CombatManager.Instance.resourceNum >= 150)
+            //{
+            //    TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), true);
+            //    CombatManager.Instance.resourceNum -= 150;
+            //}
+            //else if(CombatManager.Instance.resourceNum < 149)
+            //{
+                
+            //}
 
             SpawnBeatHitResult();
             TogglePlacementMenu();
@@ -515,43 +524,85 @@ public class CursorTD : MonoBehaviour
 
         placingTower = true;
 
-
-        if (direction == Vector2.up)
+        if(!towerSwap)
         {
-            if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+            if (direction == Vector2.up)
             {
-                TryToPlaceTower(towerSlotW.GetComponent<TowerButton>().tower, upInvalidSfx, "Check Slot 01", 0);
+                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+                {
+                    TryToPlaceTower(towerSlotW.GetComponent<TowerButton>().tower, upInvalidSfx, "Check Slot 01", 0);
 
-                return;
+                    return;
+                }
+            }
+            else if (direction == Vector2.left)
+            {
+                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+                {
+                    TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 1);
+
+                    return;
+                }
+            }
+            else if (direction == Vector2.down)
+            {
+                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+                {
+                    TryToPlaceTower(towerSlotS.GetComponent<TowerButton>().tower, downInvalidSfx, "Check Slot 03", 2);
+
+                    return;
+                }
+            }
+            else if (direction == Vector2.right)
+            {
+                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+                {
+                    TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 3);
+
+                    return;
+                }
             }
         }
-        else if (direction == Vector2.left)
+        else
         {
-            if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+            if (direction == Vector2.up)
             {
-                TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 1);
+                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+                {
+                    TryToPlaceTower(towerSlotW.GetComponent<TowerButton>().tower, upInvalidSfx, "Check Slot 01", 4);
 
-                return;
+                    return;
+                }
+            }
+            else if (direction == Vector2.left)
+            {
+                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+                {
+                    TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 5);
+
+                    return;
+                }
+            }
+            else if (direction == Vector2.down)
+            {
+                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+                {
+                    TryToPlaceTower(towerSlotS.GetComponent<TowerButton>().tower, downInvalidSfx, "Check Slot 03", 6);
+
+                    return;
+                }
+            }
+            else if (direction == Vector2.right)
+            {
+                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+                {
+                    TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 7);
+
+                    return;
+                }
             }
         }
-        else if (direction == Vector2.down)
-        {
-            if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-            {
-                TryToPlaceTower(towerSlotS.GetComponent<TowerButton>().tower, downInvalidSfx, "Check Slot 03", 2);
-
-                return;
-            }
-        }
-        else if (direction == Vector2.right)
-        {
-            if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-            {
-                TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 3);
-
-                return;
-            }
-        }
+        
 
     }
 

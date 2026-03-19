@@ -9,6 +9,7 @@ public class CooldownObject : MonoBehaviour
     public GameObject towerLoadoutObject;
     public GameObject towerCooldownSlot;
     public Animator towerCooldownAnimation;
+    private float AnimationBPM;
 
     [HideInInspector]
     public Tower currentConnectedTower;
@@ -38,6 +39,10 @@ public class CooldownObject : MonoBehaviour
 
         towerCooldownAnimation.SetBool("Cooldown", towerCooldown);
         towerCooldownAnimation.SetBool("NoPurchase", CheckIfCanPurchase());
+
+        //Set Animation BPM
+        AnimationBPM = (float)(2*(ConductorV2.instance.bpm*0.0125));
+        towerCooldownAnimation.SetFloat("Speed", AnimationBPM);
 
 
         if(towerCooldown)

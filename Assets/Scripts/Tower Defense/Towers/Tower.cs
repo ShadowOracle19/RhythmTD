@@ -49,6 +49,7 @@ public class Tower : MonoBehaviour
 
     [Header("Animation")]
     public Animator animationController;
+    private float AnimationBPM;
 
     [Header("SFX")]
     public AudioClip towerAttackSfx;
@@ -138,6 +139,10 @@ public class Tower : MonoBehaviour
         recordingStatus.SetActive(false); //RECORDING STATUS CODE
 
         nextProjectile = projectile; // Set default projectile type
+
+        //Set Animation BPM
+        AnimationBPM = (float)(2*(ConductorV2.instance.bpm*0.0125));
+        animationController.SetFloat("Speed", AnimationBPM);
     }
 
     public virtual void Update()

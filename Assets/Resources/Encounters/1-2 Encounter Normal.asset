@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounterName: Circuits!
   LevelLabel: 1-2
+  stage: 0
   introDialogue: {fileID: 4900000, guid: 7782402a0ded0304a979afd2c437f5d0, type: 3}
-  combatEncounter: {fileID: 11400000, guid: e279f93de6c82fd48a4c27bbe8524cff, type: 2}
+  combatEncounter: {fileID: 11400000, guid: e8967129458fbcd408f25fe44adfa1fa, type: 2}
   endDialogue: {fileID: 4900000, guid: 748e7b6af8178464486950b1872d31b5, type: 3}
   isTutorial: 0
   isBossBattle: 0
@@ -29,3 +30,5 @@ MonoBehaviour:
     objectiveCompleteIcon: {fileID: -7819960312215746830, guid: 8e0a445c9acc08545894b42210756b5c, type: 3}
     intelIcons: []
   fillColor: {r: 0.0107040405, g: 0, b: 1, a: 1}
+  isLevelLocked: 1
+  levelThatUnlocks: {fileID: 0}

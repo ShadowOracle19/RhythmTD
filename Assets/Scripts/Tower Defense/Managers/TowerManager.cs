@@ -55,6 +55,7 @@ public class TowerManager : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.towers.Count; i++)
         {
             GameManager.Instance.towers[i].towerCooldownInfo.SpawnCooldownLoadoutObject(GameManager.Instance.towers[i].tower.GetComponent<Tower>().towerInfo.towerLoadoutUIPrefab, GameManager.Instance.towers[i].tower.GetComponent<Tower>());
+            GameManager.Instance.towers[i].towerCooldownInfo.currentNumberPlaced = 0;
         }
     }
 
@@ -113,38 +114,30 @@ public class TowerManager : MonoBehaviour
     
     public bool CheckIfOnCoolDown(int towerNum)
     {
-        switch (towerNum)
-        {
-            case 0:
-                return GameManager.Instance.towers[0].towerCooldownInfo.towerCooldown;
-
-            case 1:
-                return GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown;
-
-            case 2:
-                return GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown;
-
-            case 3:
-                return GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown;
-
-            case 4:
-                return GameManager.Instance.towers[4].towerCooldownInfo.towerCooldown;
-
-            case 5:
-                return GameManager.Instance.towers[5].towerCooldownInfo.towerCooldown;
-
-            case 6:
-                return GameManager.Instance.towers[6].towerCooldownInfo.towerCooldown;
-
-            case 7:
-                return GameManager.Instance.towers[7].towerCooldownInfo.towerCooldown;
-
-            default:
-                return true;
-        }
+        return GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown;
+        
     }
 
+    public bool CheckIfTowerAtLimit(int towerNum)
+    {
+        return GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced >= CombatManager.Instance.currentEncounter.towerLimit;
+        
+    }
 
+    public void PlacedTower(int towerNum)
+    {
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced += 1;
+        
+    }
+
+    public void SetCooldown(int towerNum, Tower placingTower)
+    {
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown = true;
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTime = 0;
+        
+        
+    }
 
     public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, int towerNum, _BeatResult result, bool isEmpowered)
     {
@@ -186,39 +179,7 @@ public class TowerManager : MonoBehaviour
         DynamicMusicVolume(tower.GetComponent<Tower>().towerInfo.type);
 
         //set cooldown
-        switch (towerNum)
-        {
-            case 0:
-
-                GameManager.Instance.towers[0].towerCooldownInfo.towerCooldown = true;
-                GameManager.Instance.towers[0].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-                GameManager.Instance.towers[0].towerCooldownInfo.towerCooldownTime = 0;
-                break;
-
-            case 1:
-
-                GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown = true;
-                GameManager.Instance.towers[1].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-                GameManager.Instance.towers[1].towerCooldownInfo.towerCooldownTime = 0;
-                break;
-
-            case 2:
-
-                GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown = true;
-                GameManager.Instance.towers[2].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-                GameManager.Instance.towers[2].towerCooldownInfo.towerCooldownTime = 0;
-                break;
-
-            case 3:
-
-                GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown = true;
-                GameManager.Instance.towers[3].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-                GameManager.Instance.towers[3].towerCooldownInfo.towerCooldownTime = 0;
-                break;
-
-            default:
-                break;
-        }
+        SetCooldown(towerNum, placingTower);
 
 
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerPlaceSequence)
@@ -227,6 +188,11 @@ public class TowerManager : MonoBehaviour
             CursorTD.Instance.towerPlaceSequence = false;
             CursorTD.Instance.towerBuffSequence = true;
             Spawner.Instance.ForceEnemySpawn(-0.5f, EnemyType.Walker);
+        }
+
+        if(CombatManager.Instance.currentEncounter.enableTowerLimit)
+        {
+            PlacedTower(towerNum);
         }
     }
 
@@ -266,14 +232,7 @@ public class TowerManager : MonoBehaviour
 
     public void ResetTowerManager()
     {
-        //GameManager.Instance.towers[0].towerCooldownInfo.ResetCooldownObject();
-
-        //GameManager.Instance.towers[1].towerCooldownInfo.ResetCooldownObject();
-
-        //GameManager.Instance.towers[2].towerCooldownInfo.ResetCooldownObject();
-
-        //GameManager.Instance.towers[3].towerCooldownInfo.ResetCooldownObject();
-
+    
         for (int i = 0; i < GameManager.Instance.towers.Count; i++)
         {
             GameManager.Instance.towers[i].towerCooldownInfo.ResetCooldownObject();
@@ -390,4 +349,5 @@ public class TowerPlacementInfo
 {
     public GameObject tower;
     public CooldownObject towerCooldownInfo;
+
 }

@@ -53,7 +53,6 @@ public class DialogueManager : MonoBehaviour
 
     public TextAsset currentDialogue;
     public AudioSource dialogueMusic;
-    public AudioSource titleMenuMusic;
 
     public Transform mainTextBox;
     public Transform secondaryTextBox;
@@ -117,8 +116,8 @@ public class DialogueManager : MonoBehaviour
     
     public AudioSource audioSource;
 
-    private int totalVisibleCharacters;
-    private int visibleCount;
+    public int totalVisibleCharacters;
+    public int visibleCount;
 
     private int previousCharacterAudioCue;
 
@@ -132,11 +131,15 @@ public class DialogueManager : MonoBehaviour
     private Dictionary<string, RuntimeAnimatorController> loadedControllers = new Dictionary<string, RuntimeAnimatorController>();
     private Dictionary<string, AudioClip> loadedAudioClips = new Dictionary<string, AudioClip>();
 
+    public GameObject dialogueCanvas;
+    public DialogueInputHandler dialogueInputHandler;
+
 
     // Start is called before the first frame update
     void Start()
     {
         eventSystem = EventSystem.current;
+        dialogueInputHandler = GetComponent<DialogueInputHandler>();
     }
 
 
@@ -170,17 +173,17 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadDialogue(TextAsset desiredDialogue)
     {
+
+        Clear();
         //set log to inactive so it doesnt show when dialogue is loaded
         log.SetActive(false);
 
         currentDialogue = desiredDialogue;
         myDialogue = JsonUtility.FromJson<DialogueList>(currentDialogue.text);
         index = 0;
+        dialogueInputHandler.enabled = false;
+        dialogueCanvas.SetActive(false);
 
-        Clear();
-
-        titleMenuMusic.Stop(); // REMOVING THIS WILL MAKE THE TITLE MENU MUSIC PLAY AGAIN DURING DIALOGUE
-        dialogueMusic.Play();
         //MenuEventManager.Instance.DialogueOpen();
 
         StartCoroutine(PreloadAssets());
@@ -189,13 +192,6 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator PreloadAssets()
     {
-        // While transition timer is running in LoadingScreenManager, prevent next process step
-        while (LoadingScreenManager.Instance.transitionActive)
-        {
-            yield return null;
-        }
-
-        //
         foreach (Dialogue dialogue in myDialogue.dialogue)
         {
             Sprite characterSprite = Resources.Load<Sprite>($"Characters/{dialogue.character}/SPR-DS_{dialogue.character}-{dialogue.emotion}");
@@ -210,27 +206,19 @@ public class DialogueManager : MonoBehaviour
             {
                 loadedControllers.Add(controller.name, controller);
             }
-            yield return null;
         }
         Debug.Log($"Number of sprites loaded {loadedSprites.Count}");
         Debug.Log($"Number of controllers loaded {loadedControllers.Count}");
-        yield return null;
+        yield return new WaitForSeconds(1);
 
-        //
+
+
+        dialogueMusic.Play();
+        dialogueCanvas.SetActive(true);
         typing = StartCoroutine(TypeLine());
-
-        //
         LoadingScreenManager.Instance.EndLoading();
+        dialogueInputHandler.enabled = true;
 
-        // While transition timer is running in LoadingScreenManager, prevent next process step
-        while (LoadingScreenManager.Instance.transitionActive)
-        {
-            yield return null;
-        }
-        
-        // Disable load screen visuals
-        LoadingScreenManager.Instance.loadingScreen.SetActive(false);
-        LoadingScreenManager.Instance.loadingScreenVisual.SetActive(false);
     }
 
     IEnumerator TypeLine()
@@ -334,28 +322,22 @@ public class DialogueManager : MonoBehaviour
         if(projectOvertureMention) //load project overture animation
         {
             Clear();
-            //hide all visible text boxes
             descriptiveDialogueBox.SetActive(false);
             talkingDialogueBox.SetActive(false);
             previousTalkingDialogueBox.SetActive(false);
 
-            //set previous speaker name to blank
             _previousSpeakerName.text = string.Empty;
-            //set current speaker name to blank
             _speakerName.text = string.Empty;
-            //set previous character name & label to blank
             previousCharacterName = string.Empty;
             previousCharacterLabel = string.Empty;
             previousCharacterTalking = false;
 
-            //hide visible character sprites
             characterImage.sprite = null;
             characterImage.color = Color.clear;
 
             secondCharacterImage.sprite = null;
             secondCharacterImage.color = Color.clear;
 
-            //trigger project overture banner drop down animation 
             animator.SetTrigger("Trigger Overture");
             projectOvertureMention = false;
             
@@ -447,6 +429,7 @@ public class DialogueManager : MonoBehaviour
         return string.Concat(pascalCase);
     }
 
+
     public void LoadCharacterSprite()
     {
         // Loads the character sprite from the JSON using their name and emotion tags
@@ -515,6 +498,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
+                    //StartCoroutine(SwitchAnimController(characterSpriteAnimator, secondCharacterImage.GetComponent<Animator>()));
                     secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = characterSpriteAnimator;
 
                     secondCharacterImage.transform.localScale = new Vector3(-1f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
@@ -538,6 +522,8 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
+
+                    //StartCoroutine(SwitchAnimController(previousCharacterAnimator, secondCharacterImage.GetComponent<Animator>()));
                     secondCharacterImage.GetComponent<Animator>().runtimeAnimatorController = previousCharacterAnimator;
 
                     secondCharacterImage.transform.localScale = new Vector3(-1f, secondCharacterImage.transform.localScale.y, secondCharacterImage.transform.localScale.z);
@@ -565,6 +551,7 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
+                //StartCoroutine(SwitchAnimController(characterSpriteAnimator, characterImage.GetComponent<Animator>()));
                 characterImage.GetComponent<Animator>().runtimeAnimatorController = characterSpriteAnimator;
 
                 characterImage.transform.localScale = new Vector3(1f, characterImage.transform.localScale.y, characterImage.transform.localScale.z);
@@ -653,16 +640,16 @@ public class DialogueManager : MonoBehaviour
         //dialogue if its going into a combat
         if (GameManager.Instance.encounterRunning)
         {
-            LoadingScreenManager.Instance.StartLoading();
+            LoadingScreenManager.Instance.StartLoading(GameManager.Instance.combatRoot, GameManager.Instance.dialogueRoot);
             if (GameManager.Instance.tutorialRunning)
             {
-                GameManager.Instance.dialogueRoot.SetActive(false);
+                //GameManager.Instance.dialogueRoot.SetActive(false);
                 GameManager.Instance.LoadTutorial();
                 return;
             }
             GameManager.Instance.LoadCombat();
 
-            GameManager.Instance.dialogueRoot.SetActive(false);
+            //GameManager.Instance.dialogueRoot.SetActive(false);
 
             CombatManager.Instance.enemyTimerObject.SetActive(true);
             CombatManager.Instance.healthBar.SetActive(true);

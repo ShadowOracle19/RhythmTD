@@ -22,6 +22,9 @@ public class CooldownObject : MonoBehaviour
     [HideInInspector]
     public float towerCooldownTime = 0;
 
+    [HideInInspector]
+    public int currentNumberPlaced = 0;
+
     // Start is called before the first frame update
     void Start()
     {

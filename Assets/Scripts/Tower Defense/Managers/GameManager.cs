@@ -447,7 +447,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadEncounter(EncounterCreator encounter)
     {
-        LoadingScreenManager.Instance.StartLoading();
         tutorialRunning = encounter.isTutorial;
         currentEncounter = encounter;
         encounterRunning = true;
@@ -458,11 +457,23 @@ public class GameManager : MonoBehaviour
 
         if (currentEncounter.introDialogue == null)
         {
+
             LoadCombat();
+            CombatManager.Instance.enemyTimerObject.SetActive(true);
+            CombatManager.Instance.healthBar.SetActive(true);
+            //CombatManager.Instance.controls.SetActive(true);
+            CombatManager.Instance.resources.SetActive(true);
+            CombatManager.Instance.towerDisplay.SetActive(true);
+            CombatManager.Instance.feverBar.SetActive(true);
+            CombatManager.Instance.metronome.SetActive(true);
+            CombatManager.Instance.waveCounter.SetActive(true);
+            CombatManager.Instance.combo.SetActive(true);
 
             return;
         }
-        dialogueRoot.SetActive(true);
+
+        LoadingScreenManager.Instance.StartLoading(dialogueRoot, menuRoot);
+        //dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
     }
 
@@ -471,8 +482,8 @@ public class GameManager : MonoBehaviour
         combatRoot.SetActive(true);
         CombatManager.Instance.tutorialManager.SetActive(false);
         combatRunning = true;
-        CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter);
         StageManager.Instance.SetStage(currentEncounter.stage);
+        CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter);
 
         Camera.main.transform.position = Camera.main.GetComponent<CameraPositions>().CombatCameraPos;
         Camera.main.transform.rotation = Quaternion.Euler(new Vector3(60,0,0));

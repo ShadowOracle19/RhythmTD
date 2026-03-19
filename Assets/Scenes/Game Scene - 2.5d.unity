@@ -23838,17 +23838,69 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 263461692}
     - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1572544206}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 369347601}
     - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 369347601}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadEncounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.AudioSource, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 3540afcf836b467409d322512b762f04, type: 2}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: EncounterCreator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3534098791425463613, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: _onSelectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 

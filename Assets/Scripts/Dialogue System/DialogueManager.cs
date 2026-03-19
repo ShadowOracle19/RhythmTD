@@ -53,6 +53,7 @@ public class DialogueManager : MonoBehaviour
 
     public TextAsset currentDialogue;
     public AudioSource dialogueMusic;
+    public AudioSource titleMenuMusic;
 
     public Transform mainTextBox;
     public Transform secondaryTextBox;
@@ -178,6 +179,7 @@ public class DialogueManager : MonoBehaviour
 
         Clear();
 
+        titleMenuMusic.Stop(); // REMOVING THIS WILL MAKE THE TITLE MENU MUSIC PLAY AGAIN DURING DIALOGUE
         dialogueMusic.Play();
         //MenuEventManager.Instance.DialogueOpen();
 
@@ -332,22 +334,28 @@ public class DialogueManager : MonoBehaviour
         if(projectOvertureMention) //load project overture animation
         {
             Clear();
+            //hide all visible text boxes
             descriptiveDialogueBox.SetActive(false);
             talkingDialogueBox.SetActive(false);
             previousTalkingDialogueBox.SetActive(false);
 
+            //set previous speaker name to blank
             _previousSpeakerName.text = string.Empty;
+            //set current speaker name to blank
             _speakerName.text = string.Empty;
+            //set previous character name & label to blank
             previousCharacterName = string.Empty;
             previousCharacterLabel = string.Empty;
             previousCharacterTalking = false;
 
+            //hide visible character sprites
             characterImage.sprite = null;
             characterImage.color = Color.clear;
 
             secondCharacterImage.sprite = null;
             secondCharacterImage.color = Color.clear;
 
+            //trigger project overture banner drop down animation 
             animator.SetTrigger("Trigger Overture");
             projectOvertureMention = false;
             

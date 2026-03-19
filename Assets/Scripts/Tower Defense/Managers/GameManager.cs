@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
     public void HandleEventItemOnSubmit(ItemButton item)
     {
         menuRoot.SetActive(false);
-        menuMusic.Pause();
+        menuMusic.Stop();
         buttonHighlightSFX.Play();
         LoadEncounter(item.heldEncounter);
     }
@@ -380,7 +380,11 @@ public class GameManager : MonoBehaviour
         Camera.main.fieldOfView = 60;
 
         _currentHealth = _maxHealth;
+        
+        // MUSIC MANAGEMENT
         menuMusic.Stop();
+
+        // ROOT & VARIABLE MANAGEMENT
         combatRoot.SetActive(true);
         CombatManager.Instance.allEnemiesSpawned = false;
         CombatManager.Instance.tutorialManager.SetActive(true);

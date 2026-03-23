@@ -58,11 +58,14 @@ public class ConductorV2 : MonoBehaviour
     public int lastInterval;
 
     //Dynamic Music tracks
-    public AudioSource drums;
-    public AudioSource bass;
-    public AudioSource piano;
-    public AudioSource guitarH;
-    public AudioSource guitarM;
+    public AudioSource flats;
+    public AudioSource major;
+    public AudioSource allegro;
+    public AudioSource trill;
+    public AudioSource chromatic;
+    public AudioSource poco;
+    public AudioSource legato;
+    public AudioSource forte;
 
     public AudioSource _ping;
 
@@ -133,11 +136,14 @@ public class ConductorV2 : MonoBehaviour
         beatTrack = 1;
         beatDuration = 0;
 
-        drums.time = 0;
-        bass.time = 0;
-        piano.time = 0;
-        guitarH.time = 0;
-        guitarM.time = 0;
+        flats.time = 0;
+        major.time = 0;
+        allegro.time = 0;
+        trill.time = 0;
+        chromatic.time = 0;
+        poco.time = 0;
+        forte.time = 0;
+        legato.time = 0;
 
 
         if (GameManager.Instance.tutorialRunning)
@@ -152,21 +158,27 @@ public class ConductorV2 : MonoBehaviour
 
     public void DynamicSongInit(DynamicSongCreator song)
     {
-        drums.volume = 0;
-        bass.volume = 0;
-        piano.volume = 0;
-        guitarH.volume = 0;
-        guitarM.volume = 0;
+        flats.volume = 0;
+        major.volume = 0;
+        allegro.volume = 0;
+        trill.volume = 0;
+        chromatic.volume = 0;
+        poco.volume = 0;
+        forte.volume = 0;
+        legato.volume = 0;
 
-        drums.clip = song.drums;
-        bass.clip = song.bass;
-        piano.clip = song.piano;
-        guitarH.clip = song.guitarHarmony;
-        guitarM.clip = song.guitarMelody;
+        flats.clip = song.flats;
+        major.clip = song.major;
+        allegro.clip = song.allegro;
+        trill.clip = song.trill;
+        chromatic.clip = song.chromatic;
+        poco.clip = song.poco;
+        forte.clip = song.forte;
+        legato.clip = song.legato;
 
-        if(song.guitarMelody == null)
+        if(song.chromatic == null)
         {
-            guitarM.clip = null;
+            chromatic.clip = null;
         }
 
         PlayMusic();
@@ -326,43 +338,54 @@ public class ConductorV2 : MonoBehaviour
     public void PauseMusic()
     {
         musicSource.Pause();
-        drums.Pause();
-        bass.Pause();
-        piano.Pause();
-        guitarH.Pause();
-        guitarM.Pause();
+        flats.Pause();
+        major.Pause();
+        allegro.Pause();
+        trill.Pause();
+        chromatic.Pause();
+        poco.Pause();
+        legato.Pause();
+        forte.Pause();
     }
 
     public void ResumeMusic()
     {
         musicSource.UnPause();
-        drums.UnPause();
-        bass.UnPause();
-        piano.UnPause();
-        guitarH.UnPause();
-        guitarM.UnPause();
+        flats.UnPause();
+        major.UnPause();
+        allegro.UnPause();
+        trill.UnPause();
+        chromatic.UnPause();
+        poco.UnPause();
+        legato.UnPause();
+        forte.UnPause();    
     }
 
     public void StopMusic()
     {
         musicSource.Stop();
-        drums.Stop();
-        bass.Stop();
-        piano.Stop();
-        guitarH.Stop();
-        guitarM.Stop();
+        flats.Stop();
+        major.Stop();
+        allegro.Stop();
+        trill.Stop();
+        chromatic.Stop();
+        poco.Stop();    
+        legato.Stop();  
+        forte.Stop();
     }
 
     public void PlayMusic()
     {
         Debug.Log("music started");
-        drums.Play();
-        bass.Play();
-        piano.Play();
-        guitarH.Play();
-        guitarM.Play();
-
-        
+        flats.Play();
+        major.Play();
+        allegro.Play();
+        trill.Play();
+        chromatic.Play();
+        poco.Play();
+        legato.Play();
+        forte.Play();
+      
     }
 }
 

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public enum InstrumentType
 {
-    Drums, Guitar, Vocal, Piano
+    Flats, Trill, Major, Chromatic, Forte, Poco, Legato, Allegro
 }
 
 public enum BuffType
@@ -380,26 +380,44 @@ public class Tower : MonoBehaviour
     {
         switch (towerInfo.type)
         {
-            case InstrumentType.Drums:
-                ConductorV2.instance.drums.volume -= towerAudioVolumeIncrement;
-                ConductorV2.instance.drums.volume = Mathf.Clamp(ConductorV2.instance.drums.volume, 0, 0.5f);
+            case InstrumentType.Flats:
+                ConductorV2.instance.flats.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.flats.volume = Mathf.Clamp(ConductorV2.instance.flats.volume, 0, 0.5f);
                 break;
 
-            case InstrumentType.Guitar:
-                ConductorV2.instance.guitarH.volume -= towerAudioVolumeIncrement;
-                ConductorV2.instance.guitarM.volume -= towerAudioVolumeIncrement;
-                ConductorV2.instance.guitarH.volume = Mathf.Clamp(ConductorV2.instance.guitarH.volume, 0, 0.5f);
-                ConductorV2.instance.guitarM.volume = Mathf.Clamp(ConductorV2.instance.guitarM.volume, 0, 0.5f);
+            case InstrumentType.Trill:
+                ConductorV2.instance.trill.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.trill.volume = Mathf.Clamp(ConductorV2.instance.trill.volume, 0, 0.5f);
                 break;
 
-            case InstrumentType.Vocal:
-                ConductorV2.instance.bass.volume -= towerAudioVolumeIncrement;
-                ConductorV2.instance.bass.volume = Mathf.Clamp(ConductorV2.instance.bass.volume, 0, 0.5f);
+            case InstrumentType.Major:
+                ConductorV2.instance.major.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.major.volume = Mathf.Clamp(ConductorV2.instance.major.volume, 0, 0.5f);
                 break;
 
-            case InstrumentType.Piano:
-                ConductorV2.instance.piano.volume -= towerAudioVolumeIncrement;
-                ConductorV2.instance.piano.volume = Mathf.Clamp(ConductorV2.instance.piano.volume, 0, 0.5f);
+            case InstrumentType.Chromatic:
+                ConductorV2.instance.chromatic.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.chromatic.volume = Mathf.Clamp(ConductorV2.instance.chromatic.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Allegro:
+                ConductorV2.instance.allegro.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.allegro.volume = Mathf.Clamp(ConductorV2.instance.allegro.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Poco:
+                ConductorV2.instance.poco.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.poco.volume = Mathf.Clamp(ConductorV2.instance.poco.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Forte:
+                ConductorV2.instance.forte.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.forte.volume = Mathf.Clamp(ConductorV2.instance.forte.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Legato:
+                ConductorV2.instance.legato.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.legato.volume = Mathf.Clamp(ConductorV2.instance.legato.volume, 0, 0.5f);
                 break;
 
             default:

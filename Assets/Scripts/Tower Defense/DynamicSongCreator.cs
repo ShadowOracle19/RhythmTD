@@ -9,9 +9,13 @@ public class DynamicSongCreator : ScriptableObject
     public int bpm;
 
     [Header("Tracks")]
-    public AudioClip bass;
-    public AudioClip drums;
-    public AudioClip guitarHarmony;
-    public AudioClip guitarMelody;
-    public AudioClip piano;
+    public AudioClip major; //bass
+    public AudioClip flats; //drums
+    public AudioClip trill; //guitarharmony
+    public AudioClip chromatic; //guitarmelody
+    public AudioClip allegro; //piano
+    public AudioClip poco;
+    public AudioClip forte;
+    public AudioClip legato;
+
 }

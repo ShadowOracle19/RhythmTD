@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundEffectsManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     // Code from Sasquatch B Studios @ https://youtu.be/DU7cgVsU2rM?si=9FW1TVGFbVxKq9-X&t=262
 
-    public static SoundEffectsManager instance;
+    public static AudioManager instance;
 
     [SerializeField] private AudioSource soundEffectObject;
 
@@ -24,25 +24,27 @@ public class SoundEffectsManager : MonoBehaviour
             return;
         }
 
-        ////spawn sound effect gameObject
-        //AudioSource audioSource = Instantiate(soundEffectObject, spawnTransform.position, Quaternion.identity);
-
-        ////assign audioClip
-        //audioSource.clip = audioClip;
-
-        ////assign audioSource volume
-        //audioSource.volume = volume;
-
-        ////play audioClip
-        //audioSource.Play();
-
-        ////get audioClip length
-        //float clipLength = audioSource.clip.length;
-
-        ////destroy audioClip after it finishes playing
-        //Destroy(audioSource.gameObject, clipLength);
-
         AudioSource.PlayClipAtPoint(audioClip, Vector2.zero, volume);
+
+        /*
+        //spawn sound effect gameObject
+        AudioSource audioSource = Instantiate(soundEffectObject, spawnTransform.position, Quaternion.identity);
+
+        //assign audioClip
+        audioSource.clip = audioClip;
+
+        //assign audioSource volume
+        audioSource.volume = volume;
+
+        //play audioClip
+        audioSource.Play();
+
+        //get audioClip length
+        float clipLength = audioSource.clip.length;
+
+        //destroy audioClip after it finishes playing
+        Destroy(audioSource.gameObject, clipLength);
+        */  
     }
 
     public void PlayRandSound(AudioClip[] audioClip, Transform spawnTransform, float volume)

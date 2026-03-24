@@ -197,16 +197,19 @@ public class GameManager : MonoBehaviour
     public void HandleEventItemOnSelect(ItemButton item)
     {
         levelScrollView.HandleOnSelect(item);
+        MenuEventManager.Instance.UpdateLastSelectedLevel();
     }
 
+    // Close main menu (level select) & load encounter when level button is pressed
     public void HandleEventItemOnSubmit(ItemButton item)
     {
-        menuRoot.SetActive(false);
-        menuMusic.Pause();
-        buttonHighlightSFX.Play();
-        LoadEncounter(item.heldEncounter);
+        buttonHighlightSFX.Play(); //play button feedback sfx
+        MenuEventManager.Instance.UpdateLastSelectedLevel();
+        MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
+        LoadEncounter(item.heldEncounter); //load encounter
     }
 
+    // 
     private void UpdateAllLevelSelectButtonNavigationReferences()
     {
         ItemButton[] children = levelParent.GetComponentsInChildren<ItemButton>();
@@ -380,7 +383,11 @@ public class GameManager : MonoBehaviour
         Camera.main.fieldOfView = 60;
 
         _currentHealth = _maxHealth;
+        
+        // MUSIC MANAGEMENT
         menuMusic.Stop();
+
+        // ROOT & VARIABLE MANAGEMENT
         combatRoot.SetActive(true);
         CombatManager.Instance.allEnemiesSpawned = false;
         CombatManager.Instance.tutorialManager.SetActive(true);
@@ -475,12 +482,17 @@ public class GameManager : MonoBehaviour
 
     public void LoadCombat()
     {
-        combatRoot.SetActive(true);
-        CombatManager.Instance.tutorialManager.SetActive(false);
-        combatRunning = true;
-        StageManager.Instance.SetStage(currentEncounter.stage);
-        CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter);
+        combatRoot.SetActive(true); //enable combat scene
 
+        CombatManager.Instance.tutorialManager.SetActive(false); //disable tutorial manager
+
+        combatRunning = true; //set game state to combat
+
+        StageManager.Instance.SetStage(currentEncounter.stage); //load encounter grid data
+
+        CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter); //load encounter data
+
+        //reset camera position, rotation, & FOV
         Camera.main.transform.position = Camera.main.GetComponent<CameraPositions>().CombatCameraPos;
         Camera.main.transform.rotation = Quaternion.Euler(new Vector3(60,0,0));
         Camera.main.fieldOfView = 60;
@@ -490,49 +502,46 @@ public class GameManager : MonoBehaviour
     {
         if (loseState) return;
         loseState = true;
-        winScreen.SetActive(true);
-        winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(false, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo, false, false);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        CombatManager.Instance.EndEncounter();
-        //gameOverScreen.SetActive(true);
-        MenuEventManager.Instance.WinScreenOpen();
-        //conductor.SetActive(false);
-        //ConductorV2.instance.StopMusic();
+        Cursor.lockState = CursorLockMode.Locked; //lock player cursor movement
+
+        CombatManager.Instance.EndEncounter(); //end current encounter
+
+        MenuEventManager.Instance.OpenFailScreen(); //open fail screen and set active object
     }
 
     public void WinLevel()
     {
         if (winState) return;
         winState = true;
+
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
+
         ConductorV2.instance.StopMusic();
         pointHolder.Add(healthRemainingPointGain * _currentHealth);
 
         if (currentEncounter.endDialogue == null)
         {
             StartWinLevelProcess();
-
             return;
         }
-
-        
 
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         //conductor.SetActive(false);
-        //MenuEventManager.Instance.WinScreenOpen();
+        //MenuEventManager.Instance.OpenWinScreen(0);
         ConductorV2.instance.StopMusic();
     }
 
     public void StartWinLevelProcess()
     {
-        winScreen.SetActive(true);
-        UnlockLevel(currentEncounter);
-        winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
+        MenuEventManager.Instance.OpenWinScreen(); //open win screen and set active object
+        
+        UnlockLevel(currentEncounter); //unlock next level
 
-        MenuEventManager.Instance.WinScreenOpen();
+        // TEMPORARILY DISABLED UNTIL NEW WIN SCREEN IS CONNECTED
+        //winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
     }
 
     public void UnlockLevel(EncounterCreator wonLevel)
@@ -556,7 +565,7 @@ public class GameManager : MonoBehaviour
 
         //winScreen.SetActive(true);
         //conductor.SetActive(false);
-        //MenuEventManager.Instance.WinScreenOpen();
+        //MenuEventManager.Instance.OpenWinScreen(0);
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         ConductorV2.instance.StopMusic();

@@ -80,28 +80,31 @@ public class MenuEventManager : MonoBehaviour
         eventSystem = EventSystem.current;
     }
 
+    #region active object tracking
     public void UpdateLastSelectedObject()
     {
         lastSelectedObject = eventSystem.currentSelectedGameObject;
-    }
-
-    // Updates a reference to the most recent level the player entered
-    public void UpdateLastSelectedLevel()
-    {
-        lastSelectedLevelObject = eventSystem.currentSelectedGameObject;
     }
 
     public void SelectLastSelectedObject()
     {
         eventSystem.SetSelectedGameObject(lastSelectedObject);
     }
-
+    
+    // Updates a reference to the most recent level the player entered
+    public void UpdateLastSelectedLevel()
+    {
+        lastSelectedLevelObject = eventSystem.currentSelectedGameObject;
+    }
+    
     // Sets the currently selected menu element to the button of the most recent level the player entered
     public void SelectLastSelectedLevel()
     {
         eventSystem.SetSelectedGameObject(lastSelectedLevelObject);
     }
-
+    #endregion
+    
+    #region main menu
     public void OpenMainMenu()
     {
         mainScreen.SetActive(true); //enable main menu (level select)
@@ -124,7 +127,9 @@ public class MenuEventManager : MonoBehaviour
 
         mainScreen.SetActive(false);
     }
+    #endregion
 
+    #region settings menu
     public void CloseSettings()
     {
         //
@@ -135,13 +140,15 @@ public class MenuEventManager : MonoBehaviour
         //
         else if(GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleScreenInteractables[1]);
+            eventSystem.SetSelectedGameObject(titleScreenInteractables[2]);
         }
 
         settingsScreen.SetActive(false);
     }
+    #endregion
 
-    // open exit confirmation menu & set text
+    #region exit confirmation menu
+    //Open exit confirmation menu & set text
     public void OpenConfirmation()
     {
         exitScreen.SetActive(true);
@@ -170,7 +177,7 @@ public class MenuEventManager : MonoBehaviour
         eventSystem.SetSelectedGameObject(exitScreenInteractables[0]);
     }
 
-    // close exit confirmation menu
+    //Close exit confirmation menu
     public void CloseConfirmation()
     {
         if (GameManager.Instance.pauseMenuRoot.activeSelf)
@@ -179,58 +186,10 @@ public class MenuEventManager : MonoBehaviour
         }
         else if(GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleScreenInteractables[3]);
+            eventSystem.SetSelectedGameObject(titleScreenInteractables[4]);
         }
 
         exitScreen.SetActive(false);
-    }
-
-    public void DialogueOpen()
-    {
-        OpenMenu(dialogueScreen, dialogueScreenInteractables[0]);
-    }
-
-    public void OpenLog()
-    {
-        OpenMenu(logScreen, logScreenInteractables[0]);
-    }
-
-    public void PauseMenuOpen()
-    {
-        OpenMenu(pauseScreen, pauseScreenInteractables[0]);
-    }
-
-    public void PauseMenuClose()
-    {
-        //set title menu active object if in title menu
-        if (GameManager.Instance.titleRoot.activeSelf)
-        {
-            eventSystem.SetSelectedGameObject(titleScreenInteractables[0]);
-        }
-        //set main menu active object if in main menu
-        else if(GameManager.Instance.menuRoot.activeSelf)
-        {
-            if (lastSelectedLevelObject == null) 
-            {
-                eventSystem.SetSelectedGameObject(mainScreenInteractables[0]);
-            }
-            else
-            {
-                SelectLastSelectedLevel();
-            }
-        }
-        //set dialogue active object if in dialogue scene
-        else if(GameManager.Instance.dialogueRoot.activeSelf)
-        {
-            eventSystem.SetSelectedGameObject(dialogueScreenInteractables[0]);
-        }
-        //set no active object if in combat
-        else if(GameManager.Instance.combatRoot.activeSelf)
-        {
-            eventSystem.SetSelectedGameObject(null);
-        }
-
-        pauseScreen.SetActive(false);
     }
 
     public void QuitGame()
@@ -269,7 +228,61 @@ public class MenuEventManager : MonoBehaviour
         }
 
     }
+    #endregion
 
+    #region dialogue menu
+    public void DialogueOpen()
+    {
+        OpenMenu(dialogueScreen, dialogueScreenInteractables[0]);
+    }
+
+    public void OpenLog()
+    {
+        OpenMenu(logScreen, logScreenInteractables[0]);
+    }
+    #end region
+
+    #region pause menu
+    public void PauseMenuOpen()
+    {
+        OpenMenu(pauseScreen, pauseScreenInteractables[0]);
+    }
+
+    public void PauseMenuClose()
+    {
+        //set title menu active object if in title menu
+        if (GameManager.Instance.titleRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(titleScreenInteractables[0]);
+        }
+        //set main menu active object if in main menu
+        else if(GameManager.Instance.menuRoot.activeSelf)
+        {
+            if (lastSelectedLevelObject == null) 
+            {
+                eventSystem.SetSelectedGameObject(mainScreenInteractables[0]);
+            }
+            else
+            {
+                SelectLastSelectedLevel();
+            }
+        }
+        //set dialogue active object if in dialogue scene
+        else if(GameManager.Instance.dialogueRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(dialogueScreenInteractables[0]);
+        }
+        //set no active object if in combat
+        else if(GameManager.Instance.combatRoot.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(null);
+        }
+
+        pauseScreen.SetActive(false);
+    }
+    #endregion
+    
+    #region game end menus
     // Open the fail screen 
     public void OpenFailScreen()
     {
@@ -280,6 +293,7 @@ public class MenuEventManager : MonoBehaviour
     {
         OpenMenu(winScreen, winScreenInteractables[0]);
     }
+    #endregion
 
     /*
     public void OpenShowcaseCredits()
@@ -290,6 +304,14 @@ public class MenuEventManager : MonoBehaviour
 
     public void OpenMenu(GameObject menuRoot, GameObject activeObject)
     {
+        //menuMusic.Play();
+        menuRoot.SetActive(true); //enable root
+        eventSystem.SetSelectedGameObject(activeObject); //set active object
+    }
+
+    public void OpenMenu(GameObject menuRoot, GameObject activeObject)
+    {
+        //menuMusic.Stop();
         menuRoot.SetActive(true); //enable root
         eventSystem.SetSelectedGameObject(activeObject); //set active object
     }

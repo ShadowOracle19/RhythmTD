@@ -52,8 +52,6 @@ public class ChangeScene : MonoBehaviour
 
     }
 
-    
-
     //[MenuItem("SonorantStudios/Scenes/Main Menu")]
     //static void LoadMainMenuScene()
     //{
@@ -71,8 +69,5 @@ public class ChangeScene : MonoBehaviour
     //        EditorSceneManager.OpenScene($"Assets/Scenes/Game Scene.unity", OpenSceneMode.Single);
     //    }
     //}
-
-
-
 
 }

@@ -29,44 +29,48 @@ public class MenuEventManager : MonoBehaviour
     #endregion
     EventSystem eventSystem;
 
-    [Header("Last Selected Object")]
+    [Header("Active Object Tracking")]
     public GameObject lastSelectedObject;
 
-
-
     [Header("Title Menu")]
-    public GameObject titleMenuObject01;
-    public GameObject titleMenuObject02;
-    public GameObject titleMenuObject03;
-    public GameObject titleMenuObject04;
-    public GameObject titleMenuObject05;
-    public GameObject titleMenuObject06;
+    public GameObject titleScreen;
+    public List<GameObject> titleScreenInteractables;
 
     [Header("Pause Menu")]
-    public GameObject pauseMenuFirstObject;
-    public GameObject pauseMenuSecondObject;
+    public GameObject pauseScreen;
+    public List<GameObject> pauseScreenInteractables;
+
+    [Header("Settings Menu")]
+    public GameObject settingsScreen;
+    public List<GameObject> settingsScreenInteractables;
 
     [Header("Dialogue Menu")]
-    public GameObject dialogueMenuFirstObject;
-    public GameObject logFirstObject;
+    public GameObject dialogueScreen;
+    public List<GameObject> dialogueScreenInteractables;
+
+    public GameObject logScreen;
+    public List<GameObject> logScreenInteractables;
 
     [Header("Main Menu")]
-    public GameObject mainMenuFirstObject;
+    public GameObject mainScreen;
+    public List<GameObject> mainScreenInteractables;
 
-    [Header("Win Menu")]
-    public GameObject winScreenFirstObject;
-    //public GameObject winScreenSecondObject;
+    [Header("Win Screen")]
+    public GameObject winScreen;
+    public List<GameObject> winScreenInteractables;
 
-    [Header("Lose Menu")]
-    public GameObject loseScreenObject;
+    [Header("Fail Screen")]
+    public GameObject failScreen;
+    public List<GameObject> failScreenInteractables;
 
     [Header("Exit Confirmation Menu")]
-    public GameObject exitMenuObject01;
+    public GameObject exitScreen;
+    public List<GameObject> exitScreenInteractables;
     public TextMeshProUGUI exitMenuText;
     
     [Header("Other")]
-    public GameObject showcaseCreditsObject;
-
+    public GameObject showcaseCreditsScreen;
+    public List<GameObject> showcaseCreditsScreenInteractables;
 
 
     private void Start()
@@ -74,7 +78,7 @@ public class MenuEventManager : MonoBehaviour
         eventSystem = EventSystem.current;
     }
 
-    public void RecordLastSelectedObject()
+    public void UpdateLastSelectedObject()
     {
         lastSelectedObject = eventSystem.currentSelectedGameObject;
     }
@@ -86,24 +90,31 @@ public class MenuEventManager : MonoBehaviour
 
     public void OpenLog()
     {
-        eventSystem.SetSelectedGameObject(logFirstObject);
+        OpenMenu(logScreen, logScreenInteractables[0]);
     }
 
     public void CloseSettings()
     {
+        //
         if (GameManager.Instance.pauseMenuRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(pauseMenuFirstObject);
+            eventSystem.SetSelectedGameObject(pauseScreenInteractables[0]);
         }
+        //
         else if(GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleMenuObject02);
+            eventSystem.SetSelectedGameObject(titleScreenInteractables[1]);
         }
+
+        settingsScreen.SetActive(false);
     }
 
-    // open exit confirmation menu and set text
+    // open exit confirmation menu & set text
     public void OpenConfirmation()
     {
+        exitScreen.SetActive(true);
+        
+        //set exit confirmation text
         if (GameManager.Instance.titleRoot.activeSelf)
         {
             exitMenuText.text = "Quit to desktop?";
@@ -116,81 +127,90 @@ public class MenuEventManager : MonoBehaviour
         {
             exitMenuText.text = "Exit to stage select?";
 
+            /*
             if (GameManager.Instance.currentEncounter.isShowcase)
             {
                 exitMenuText.text = "Exit to title screen?";
             }
+            */
         }
 
-        eventSystem.SetSelectedGameObject(exitMenuObject01);
+        eventSystem.SetSelectedGameObject(exitScreenInteractables[0]);
     }
 
-    // close exit confirmation menu & set text
+    // close exit confirmation menu
     public void CloseConfirmation()
     {
         if (GameManager.Instance.pauseMenuRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(pauseMenuSecondObject);
+            eventSystem.SetSelectedGameObject(pauseScreenInteractables[1]);
         }
         else if(GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleMenuObject04);
+            eventSystem.SetSelectedGameObject(titleScreenInteractables[3]);
         }
-        /*
-        else if(GameManager.Instance.winScreen.activeSelf)
-        {
-            eventSystem.SetSelectedGameObject(winScreenSecondObject);
-        }
-        */
+
+        exitScreen.SetActive(false);
     }
 
     public void DialogueOpen()
     {
-        eventSystem.SetSelectedGameObject(dialogueMenuFirstObject);
+        OpenMenu(dialogueScreen, dialogueScreenInteractables[0]);
     }
 
     public void PauseMenuOpen()
     {
-        eventSystem.SetSelectedGameObject(pauseMenuFirstObject);
+        OpenMenu(pauseScreen, pauseScreenInteractables[0]);
     }
 
     public void PauseMenuClose()
     {
+        //set title menu active object if in title menu
         if (GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleMenuObject01);
+            eventSystem.SetSelectedGameObject(titleScreenInteractables[0]);
         }
+        //set main menu active object if in main menu
         else if(GameManager.Instance.menuRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(mainMenuFirstObject);
+            eventSystem.SetSelectedGameObject(mainScreenInteractables[0]);
         }
-        else if(GameManager.Instance.titleRoot.activeSelf)
-        {
-            eventSystem.SetSelectedGameObject(titleMenuObject01);
-        }
+        //set dialogue active object if in dialogue scene
         else if(GameManager.Instance.dialogueRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(dialogueMenuFirstObject);
+            eventSystem.SetSelectedGameObject(dialogueScreenInteractables[0]);
         }
+        //set no active object if in combat
         else if(GameManager.Instance.combatRoot.activeSelf)
         {
             eventSystem.SetSelectedGameObject(null);
         }
+
+        pauseScreen.SetActive(false);
     }
 
-    public void LoseScreenOpen()
+    // Open the fail screen 
+    public void OpenFailScreen()
     {
-        eventSystem.SetSelectedGameObject(loseScreenObject);
+        OpenMenu(failScreen, failScreenInteractables[0]);
     }
 
-    public void WinScreenOpen()
+    public void OpenWinScreen()
     {
-        eventSystem.SetSelectedGameObject(winScreenFirstObject);
+        OpenMenu(winScreen, winScreenInteractables[0]);
     }
 
+    /*
     public void OpenShowcaseCredits()
     {
-        eventSystem.SetSelectedGameObject(showcaseCreditsObject);
+        OpenMenu(showcaseCreditsScreen, showcaseCreditsScreenInteractables[0]);
+    }
+    */
+
+    public void OpenMenu(GameObject menuRoot, GameObject activeObject)
+    {
+        menuRoot.SetActive(true); //enable root
+        eventSystem.SetSelectedGameObject(activeObject); //set active object
     }
 
     /*

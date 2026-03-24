@@ -434,7 +434,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         
         //play hurt sound 
-        SoundEffectsManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
+        AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
 
         if (currentHealth <= 0)
         {
@@ -451,7 +451,7 @@ public class Enemy : MonoBehaviour
         }
 
         //play death sound 
-        SoundEffectsManager.instance.PlaySound(enemyDeathSfx, this.gameObject.transform, 1.0f);
+        AudioManager.instance.PlaySound(enemyDeathSfx, this.gameObject.transform, 1.0f);
 
 
         animator.SetBool("IsKilled",true); //Play death animation

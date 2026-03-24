@@ -31,7 +31,7 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
     public void OnSelect(BaseEventData eventData)
     {
         //play select sound
-        SoundEffectsManager.instance.PlaySound(buttonHighlightSfx, this.gameObject.transform, 1.0f);
+        AudioManager.instance.PlaySound(buttonHighlightSfx, this.gameObject.transform, 1.0f);
         
         //play select animation
         //buttonAnimator.SetBool("Highlighted", true);

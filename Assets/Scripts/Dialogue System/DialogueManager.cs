@@ -52,6 +52,7 @@ public class DialogueManager : MonoBehaviour
     #endregion
 
     public TextAsset currentDialogue;
+    public AudioSource titleMenuMusic;
     public AudioSource dialogueMusic;
 
     public Transform mainTextBox;
@@ -212,7 +213,7 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
 
-
+        titleMenuMusic.Stop();
         dialogueMusic.Play();
         dialogueCanvas.SetActive(true);
         typing = StartCoroutine(TypeLine());
@@ -370,7 +371,6 @@ public class DialogueManager : MonoBehaviour
         }
 
         EndDialogue();
-
     }
 
     public Sprite RetrieveSprite(string key)
@@ -669,7 +669,7 @@ public class DialogueManager : MonoBehaviour
             if(GameManager.Instance.currentEncounter.isShowcase)
             {
                 GameManager.Instance.showcaseCredits.SetActive(true);
-                MenuEventManager.Instance.OpenShowcaseCredits();
+                //MenuEventManager.Instance.OpenShowcaseCredits();
                 GameManager.Instance.dialogueRoot.SetActive(false);
                 GameManager.Instance.combatRoot.SetActive(false);
                 return;

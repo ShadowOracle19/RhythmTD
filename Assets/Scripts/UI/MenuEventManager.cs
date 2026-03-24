@@ -217,7 +217,7 @@ public class MenuEventManager : MonoBehaviour
         else if(GameManager.Instance.menuRoot.activeSelf)
         {
             CloseMainMenu();
-            OpenMenu(titleScreen, titleScreenInteractables[0]);
+            OpenMenu(titleScreen, titleScreenInteractables[1]);
             GameManager.Instance.titleRoot.GetComponent<Animator>().SetTrigger("Return To Title");
             GameManager.Instance.ResumeGame(); //unpause
         }
@@ -253,7 +253,7 @@ public class MenuEventManager : MonoBehaviour
         //set title menu active object if in title menu
         if (GameManager.Instance.titleRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(titleScreenInteractables[0]);
+            eventSystem.SetSelectedGameObject(titleScreenInteractables[1]);
         }
         //set main menu active object if in main menu
         else if(GameManager.Instance.menuRoot.activeSelf)

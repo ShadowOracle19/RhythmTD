@@ -240,7 +240,7 @@ public class MenuEventManager : MonoBehaviour
     {
         OpenMenu(logScreen, logScreenInteractables[0]);
     }
-    #end region
+    #endregion
 
     #region pause menu
     public void PauseMenuOpen()
@@ -305,13 +305,6 @@ public class MenuEventManager : MonoBehaviour
     public void OpenMenu(GameObject menuRoot, GameObject activeObject)
     {
         //menuMusic.Play();
-        menuRoot.SetActive(true); //enable root
-        eventSystem.SetSelectedGameObject(activeObject); //set active object
-    }
-
-    public void OpenMenu(GameObject menuRoot, GameObject activeObject)
-    {
-        //menuMusic.Stop();
         menuRoot.SetActive(true); //enable root
         eventSystem.SetSelectedGameObject(activeObject); //set active object
     }

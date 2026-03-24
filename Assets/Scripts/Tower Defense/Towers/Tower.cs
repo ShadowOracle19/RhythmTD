@@ -227,7 +227,7 @@ public class Tower : MonoBehaviour
     public virtual void Fire() //default fire
     {
         //play attack sound
-        SoundEffectsManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
+        AudioManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
         
         //if feeling it now is active
         if(feelingItNow)
@@ -257,7 +257,7 @@ public class Tower : MonoBehaviour
     {
 
         //play attack sound
-        SoundEffectsManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
+        AudioManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
 
         int damage = currentDamage;
 
@@ -413,7 +413,7 @@ public class Tower : MonoBehaviour
     public virtual void Damage(int damage)
     {
         //play hurt sound
-        SoundEffectsManager.instance.PlaySound(towerHurtSfx, this.gameObject.transform, 1.0f);
+        AudioManager.instance.PlaySound(towerHurtSfx, this.gameObject.transform, 1.0f);
 
         if(isShielded)
         {
@@ -427,7 +427,7 @@ public class Tower : MonoBehaviour
         if(currentHealth <= 0)
         {
             //play death sound
-            SoundEffectsManager.instance.PlaySound(towerDeathSfx, this.gameObject.transform, 1.0f);
+            AudioManager.instance.PlaySound(towerDeathSfx, this.gameObject.transform, 1.0f);
 
             clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the tower clash particle effect
             RemoveTower();

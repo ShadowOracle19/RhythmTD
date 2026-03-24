@@ -197,16 +197,19 @@ public class GameManager : MonoBehaviour
     public void HandleEventItemOnSelect(ItemButton item)
     {
         levelScrollView.HandleOnSelect(item);
+        MenuEventManager.Instance.UpdateLastSelectedLevel();
     }
 
+    // Close main menu (level select) & load encounter when level button is pressed
     public void HandleEventItemOnSubmit(ItemButton item)
     {
-        menuRoot.SetActive(false);
-        menuMusic.Stop();
-        buttonHighlightSFX.Play();
-        LoadEncounter(item.heldEncounter);
+        buttonHighlightSFX.Play(); //play button feedback sfx
+        MenuEventManager.Instance.UpdateLastSelectedLevel();
+        MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
+        LoadEncounter(item.heldEncounter); //load encounter
     }
 
+    // 
     private void UpdateAllLevelSelectButtonNavigationReferences()
     {
         ItemButton[] children = levelParent.GetComponentsInChildren<ItemButton>();

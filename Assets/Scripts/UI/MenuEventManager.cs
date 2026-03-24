@@ -55,6 +55,7 @@ public class MenuEventManager : MonoBehaviour
     [Header("Main Menu")]
     public GameObject mainScreen;
     public List<GameObject> mainScreenInteractables;
+    public AudioSource menuMusic;
 
     [Header("Win Screen")]
     public GameObject winScreen;
@@ -107,24 +108,19 @@ public class MenuEventManager : MonoBehaviour
 
         if (lastSelectedLevelObject == null) 
         {
-            eventSystem.SetSelectedGameObject(winScreenInteractables[0]);
+            eventSystem.SetSelectedGameObject(mainScreenInteractables[0]);
         }
         else
         {
             SelectLastSelectedLevel();
         }
 
-        //SET UP NEW AUDIO MANAGER FOR THIS AND CALL METHODS FROM IT
-        //stop music 
-        //start new music
+        menuMusic.Play();
     }
 
     public void CloseMainMenu()
     {
-        //SET UP NEW AUDIO MANAGER FOR THIS AND CALL METHODS FROM IT
-        //stop music
-        
-        UpdateLastSelectedLevel();
+        menuMusic.Stop();
 
         mainScreen.SetActive(false);
     }
@@ -214,7 +210,14 @@ public class MenuEventManager : MonoBehaviour
         //set main menu active object if in main menu
         else if(GameManager.Instance.menuRoot.activeSelf)
         {
-            eventSystem.SetSelectedGameObject(mainScreenInteractables[0]);
+            if (lastSelectedLevelObject == null) 
+            {
+                eventSystem.SetSelectedGameObject(mainScreenInteractables[0]);
+            }
+            else
+            {
+                SelectLastSelectedLevel();
+            }
         }
         //set dialogue active object if in dialogue scene
         else if(GameManager.Instance.dialogueRoot.activeSelf)
@@ -228,6 +231,43 @@ public class MenuEventManager : MonoBehaviour
         }
 
         pauseScreen.SetActive(false);
+    }
+
+    public void QuitGame()
+    {
+        // if in combat return to main menu
+        if(GameManager.Instance.combatRoot.activeSelf || GameManager.Instance.dialogueRoot.activeSelf)
+        {
+            /*
+            if (GameManager.Instance.currentEncounter.isShowcase)
+            {
+                CombatManager.Instance.EndEncounter();
+                GameManager.Instance.combatRoot.SetActive(false);
+                GameManager.Instance.titleRoot.SetActive(true);
+                GameManager.Instance.ResumeGame();
+                return;
+            }
+            */
+
+            CombatManager.Instance.EndEncounter();
+            GameManager.Instance.combatRoot.SetActive(false);
+            OpenMainMenu();
+            GameManager.Instance.ResumeGame(); //unpause
+        }
+        // if in main menu return to title menu
+        else if(GameManager.Instance.menuRoot.activeSelf)
+        {
+            CloseMainMenu();
+            OpenMenu(titleScreen, titleScreenInteractables[0]);
+            GameManager.Instance.titleRoot.GetComponent<Animator>().SetTrigger("Return To Title");
+            GameManager.Instance.ResumeGame(); //unpause
+        }
+        // if in title menu close application
+        else
+        {
+            Application.Quit();
+        }
+
     }
 
     // Open the fail screen 

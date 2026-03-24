@@ -397,7 +397,6 @@ GameObject:
   - component: {fileID: 7419586636902261230}
   - component: {fileID: 1235903148115472388}
   - component: {fileID: 2543504597868320354}
-  - component: {fileID: 1150942419556551779}
   m_Layer: 5
   m_Name: Exit Confirmation Canvas
   m_TagString: Untagged
@@ -491,18 +490,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1150942419556551779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2667404730071827777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf26cd054d32d5d4db7ea3a7208a5a0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3306094424878889745
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +612,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1150942419556551779}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1

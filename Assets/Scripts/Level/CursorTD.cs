@@ -399,7 +399,7 @@ public class CursorTD : MonoBehaviour
 
     public void TowerEmpowerment(BuffType buff)
     {
-        SoundEffectsManager.instance.PlaySound(hitSfx, this.gameObject.transform, 1.0f);
+        AudioManager.instance.PlaySound(hitSfx, this.gameObject.transform, 1.0f);
         
         if(tile.placedTower != null && !beatIsHit)
         {
@@ -624,7 +624,7 @@ public class CursorTD : MonoBehaviour
                 tile.placedTower.GetComponent<Tower>().upgradeOneActive = true;
 
                 //play upgrade sound
-                SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
+                AudioManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
 
                 //tile.placedTower.GetComponent<Tower>().nextProjectile = tile.placedTower.GetComponent<Tower>().upgradeProjectile01;
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost1;
@@ -648,7 +648,7 @@ public class CursorTD : MonoBehaviour
                 tile.placedTower.GetComponent<Tower>().upgradeTwoActive = true;
                 
                 //play upgrade sound
-                SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
+                AudioManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
 
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost2;
                 
@@ -672,7 +672,7 @@ public class CursorTD : MonoBehaviour
                 tile.placedTower.GetComponent<Tower>().upgradeThreeActive = true;
                 
                 //play upgrade sound
-                SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
+                AudioManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
 
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost3;
 
@@ -696,7 +696,7 @@ public class CursorTD : MonoBehaviour
                 tile.placedTower.GetComponent<Tower>().upgradeFourActive = true;
                 
                 //play upgrade sound
-                SoundEffectsManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
+                AudioManager.instance.PlaySound(tile.placedTower.GetComponent<Tower>().towerUpgradeSfx, this.gameObject.transform, 1.0f);
 
                 CombatManager.Instance.resourceNum -= tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost4;
 
@@ -940,7 +940,7 @@ public class CursorTD : MonoBehaviour
         radialMenuAnimator.SetTrigger(feedbackAnimation);
 
         //play feedback sound
-        SoundEffectsManager.instance.PlaySound(feedbackSound, this.gameObject.transform, 1.0f);
+        AudioManager.instance.PlaySound(feedbackSound, this.gameObject.transform, 1.0f);
     }
 
     void UpdateGreyscaleShader() 

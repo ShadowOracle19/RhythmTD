@@ -31,6 +31,7 @@ public class MenuEventManager : MonoBehaviour
 
     [Header("Active Object Tracking")]
     public GameObject lastSelectedObject;
+    public GameObject lastSelectedLevelObject;
 
     [Header("Title Menu")]
     public GameObject titleScreen;
@@ -83,14 +84,49 @@ public class MenuEventManager : MonoBehaviour
         lastSelectedObject = eventSystem.currentSelectedGameObject;
     }
 
+    // Updates a reference to the most recent level the player entered
+    public void UpdateLastSelectedLevel()
+    {
+        lastSelectedLevelObject = eventSystem.currentSelectedGameObject;
+    }
+
     public void SelectLastSelectedObject()
     {
         eventSystem.SetSelectedGameObject(lastSelectedObject);
     }
 
-    public void OpenLog()
+    // Sets the currently selected menu element to the button of the most recent level the player entered
+    public void SelectLastSelectedLevel()
     {
-        OpenMenu(logScreen, logScreenInteractables[0]);
+        eventSystem.SetSelectedGameObject(lastSelectedLevelObject);
+    }
+
+    public void OpenMainMenu()
+    {
+        mainScreen.SetActive(true); //enable main menu (level select)
+
+        if (lastSelectedLevelObject == null) 
+        {
+            eventSystem.SetSelectedGameObject(winScreenInteractables[0]);
+        }
+        else
+        {
+            SelectLastSelectedLevel();
+        }
+
+        //SET UP NEW AUDIO MANAGER FOR THIS AND CALL METHODS FROM IT
+        //stop music 
+        //start new music
+    }
+
+    public void CloseMainMenu()
+    {
+        //SET UP NEW AUDIO MANAGER FOR THIS AND CALL METHODS FROM IT
+        //stop music
+        
+        UpdateLastSelectedLevel();
+
+        mainScreen.SetActive(false);
     }
 
     public void CloseSettings()
@@ -156,6 +192,11 @@ public class MenuEventManager : MonoBehaviour
     public void DialogueOpen()
     {
         OpenMenu(dialogueScreen, dialogueScreenInteractables[0]);
+    }
+
+    public void OpenLog()
+    {
+        OpenMenu(logScreen, logScreenInteractables[0]);
     }
 
     public void PauseMenuOpen()

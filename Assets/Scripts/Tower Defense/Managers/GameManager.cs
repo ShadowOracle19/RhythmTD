@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
         viewPortOffset += levelScrollView.viewportOffsetValue;
 
         //add event listeners
-        //gameObject.GetComponent<Button>().onClick.AddListener(LoadEncounter(encounter));
+        //gameObject.GetComponent<Button>().onClick.AddListener(LoadLevel(encounter));
         item.OnSubmitEvent.AddListener((ItemButton) => { HandleEventItemOnSubmit(item); });
         item.OnSelectEvent.AddListener((ItemButton) => { HandleEventItemOnSelect(item); });
 
@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
         buttonHighlightSFX.Play(); //play button feedback sfx
         MenuEventManager.Instance.UpdateLastSelectedLevel();
         MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
-        LoadEncounter(item.heldEncounter); //load encounter
+        LoadLevel(item.heldEncounter); //load encounter
     }
 
     // 
@@ -448,11 +448,14 @@ public class GameManager : MonoBehaviour
         ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
     }
 
-    public void LoadEncounter(EncounterCreator encounter)
+    public void LoadLevel(EncounterCreator encounter)
     {
-        tutorialRunning = encounter.isTutorial;
         currentEncounter = encounter;
+
+        tutorialRunning = encounter.isTutorial;
+
         encounterRunning = true;
+
         winState = false;
         winScreen.SetActive(false);
         loseState = false;

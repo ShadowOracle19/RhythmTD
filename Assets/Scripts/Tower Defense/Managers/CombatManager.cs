@@ -118,6 +118,7 @@ public class CombatManager : MonoBehaviour
         }
 
         EndEncounter();
+        StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage);
         LoadEncounter(currentEncounter);
     }
 
@@ -233,6 +234,7 @@ public class CombatManager : MonoBehaviour
 
         objectSpawners.ForecastWave(0);
 
+        // set starting resources
         if (overrideStartingResources)
         {
             resourceNum = startingResourcesOverride;
@@ -242,16 +244,14 @@ public class CombatManager : MonoBehaviour
             resourceNum = currentEncounter.startingResources;
         }
 
-        enemyTimer = enemyTimerMax;
-        enemiesSpawnIn.gameObject.SetActive(true);
+        enemyTimer = enemyTimerMax; // reset enemy spawn countdown timer
+        enemiesSpawnIn.gameObject.SetActive(true); // enable enemy spawn countdown text object
 
-
-        CursorTD.Instance.InitializeCursor();
+        CursorTD.Instance.InitializeCursor(); // initialize the player cursor
 
         //BeatIndicatorManager.Instance.ResetBeatIndicator();
 
-
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked; // lock cursor movement 
 
         if (GameManager.Instance.tutorialRunning)
             return;

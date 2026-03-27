@@ -7,6 +7,7 @@ public class CombatMaker : ScriptableObject
 {
     public DynamicSongCreator dynamicSong;
     public GameObject stagePrefab;
+    public int startingResources = 50;
     public List<Wave> waves = new List<Wave>();
 
     [Header("Tower Limitation")]

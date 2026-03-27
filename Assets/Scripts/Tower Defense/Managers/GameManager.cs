@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI waveCounter;
     public TextMeshProUGUI enemyCounter;
     public GameObject playerInputManager;
+    public bool lostHealth = false;
 
     [Header("Pause Menu")]
     [SerializeField] public bool isGamePaused = false;
@@ -362,6 +363,8 @@ public class GameManager : MonoBehaviour
     public void Damage()
     {
         _currentHealth -= 1;
+
+        lostHealth = true; //set flag for failing objective 02
     }
 
     void Health()
@@ -460,6 +463,7 @@ public class GameManager : MonoBehaviour
         winScreen.SetActive(false);
         loseState = false;
         gameOverScreen.SetActive(false);
+        lostHealth = false;
 
         if (currentEncounter.introDialogue == null)
         {
@@ -517,13 +521,22 @@ public class GameManager : MonoBehaviour
     {
         if (winState) return;
         winState = true;
-
+        
         CombatManager.Instance.EndEncounter();
         encounterRunning = false;
 
-        ConductorV2.instance.StopMusic();
-        pointHolder.Add(healthRemainingPointGain * _currentHealth);
+        // OBJECTIVES
+        // level cleared
+        currentEncounter.clearedObjective01 = true;
 
+        // level cleared without losing health
+        if (lostHealth == false) {
+            currentEncounter.clearedObjective02 = true;
+        }
+
+        // SCORE
+        pointHolder.Add(healthRemainingPointGain * _currentHealth);
+        
         if (currentEncounter.endDialogue == null)
         {
             StartWinLevelProcess();

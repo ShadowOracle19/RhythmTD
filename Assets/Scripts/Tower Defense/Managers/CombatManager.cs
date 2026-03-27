@@ -71,7 +71,6 @@ public class CombatManager : MonoBehaviour
     public Slider overchargeSlider;
     public bool canPlaceEmpoweredTower = false;
 
-
     [Header("Combat UI")]
     public GameObject enemyTimerObject;
     public GameObject healthBar;
@@ -103,12 +102,12 @@ public class CombatManager : MonoBehaviour
 
     public void RestartEncounter()
     {
-        /*
         GameManager.Instance.winScreen.SetActive(false);
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
-        */
+
+        GameManager.Instance.lostHealth = false; //reset flag for failing objective 02
 
         if (GameManager.Instance.tutorialRunning || GameManager.Instance.currentEncounter.isShowcase)
         {
@@ -265,27 +264,27 @@ public class CombatManager : MonoBehaviour
 
     public void EndEncounter()
     {
-        //remove enemies
+        // remove enemies
         foreach (Transform child in enemiesParent)
         {
             child.gameObject.GetComponent<Enemy>().RemoveEnemy();
         }
-        //remove towers
+        // remove towers
         foreach (Transform child in towersParent)
         {
             child.gameObject.GetComponent<Tower>().RemoveTower();
         }
-        //remove Projectiles
+        // remove projectiles
         foreach (Transform child in projectilesParent)
         {
             child.gameObject.GetComponent<Projectile>().RemoveProjectile();
         }
-        //remove Projectiles
+        // remove charges
         foreach (Transform child in chargesParent)
         {
             child.gameObject.GetComponent<Charges>().RemoveCharge();
         }
-        //remove pickups
+        // remove pickups
         foreach (Transform child in pickupsParent)
         {
             child.gameObject.GetComponent<Pickup>().RemovePickup();
@@ -295,15 +294,18 @@ public class CombatManager : MonoBehaviour
         objectSpawners.startOnce = false;
         objectSpawners.ResetSpawner();
 
+        // lock player movement
         CursorTD.Instance.pauseMovement = true;
         CursorTD.Instance.isMoving = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         BeatIndicatorManager.Instance.ResetBeatIndicator();
 
-        GameManager.Instance.menuMusic.Play();
+        //GameManager.Instance.menuMusic.Play();
         GameManager.Instance.playerInputManager.SetActive(false);
         GameManager.Instance.pointHolder.Clear();
+
+        // mute all tower tracks
         ConductorV2.instance.flats.volume = 0;
         ConductorV2.instance.major.volume = 0;
         ConductorV2.instance.allegro.volume = 0;
@@ -313,21 +315,25 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.forte.volume = 0;  
         ConductorV2.instance.legato.volume = 0; 
 
+        // reset fever bar, combo, and highest combo
         FeverSystem.Instance.feverBarNum = 0;
         ComboManager.Instance.ResetCombo();
         ComboManager.Instance.highestCombo = 0;
 
         ConductorV2.instance.StopMusic();
+
         GameManager.Instance.tutorialRunning = false;
 
+        // clear all dialogue pop-ups
         CombatDialogueManager.Instance.combatDialogueActive = false;
         CombatDialogueManager.Instance.Clear();
         CombatDialogueManager.Instance.dialogueBox.SetActive(false);
 
+        // clear spawn tile list data
         Spawner.Instance.spawnTiles.Clear();
         Spawner.Instance.pickupSpawnTiles.Clear();
 
-        stageParent.GetComponentInChildren<StageObject>().DestroyStage();
+        stageParent.GetComponentInChildren<StageObject>().DestroyStage(); // remove stage
     }
 
     // Update is called once per frame

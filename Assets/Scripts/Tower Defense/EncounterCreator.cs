@@ -29,6 +29,11 @@ public class EncounterCreator : ScriptableObject
     public Color fillColor;
     public bool isLevelLocked = true;
     public EncounterCreator levelThatUnlocks;
+
+    [Header("Objectives")]
+    public bool clearedObjective01; //cleared the level
+    public bool clearedObjective02; //cleared the level without losing health (does not count if the player lost and regained health)
+    public bool clearedObjective03; //unique level objective
 }
 
 [System.Serializable]

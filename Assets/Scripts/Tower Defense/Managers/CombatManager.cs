@@ -102,6 +102,7 @@ public class CombatManager : MonoBehaviour
 
     public void RestartEncounter()
     {
+        // close win & fail screens
         GameManager.Instance.winScreen.SetActive(false);
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
@@ -109,16 +110,23 @@ public class CombatManager : MonoBehaviour
 
         GameManager.Instance.lostHealth = false; //reset flag for failing objective 02
 
+        // restart encounter differently for tutorials & showcases
         if (GameManager.Instance.tutorialRunning || GameManager.Instance.currentEncounter.isShowcase)
         {
             EndEncounter();
+
+            StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage);
+
             RestartTutorialEncounter();
+
             return;
         }
 
         EndEncounter();
-        StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage);
-        LoadEncounter(currentEncounter);
+
+        StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage); // rebuild stage
+
+        LoadEncounter(currentEncounter); 
     }
 
     public void RestartTutorialEncounter()
@@ -324,7 +332,6 @@ public class CombatManager : MonoBehaviour
 
         GameManager.Instance.tutorialRunning = false;
 
-        // clear all dialogue pop-ups
         CombatDialogueManager.Instance.combatDialogueActive = false;
         CombatDialogueManager.Instance.Clear();
         CombatDialogueManager.Instance.dialogueBox.SetActive(false);

@@ -55,6 +55,10 @@ public class CombatManager : MonoBehaviour
     public int totalNumEnemies;
     public int totalNumPickups;
 
+    [Header("Resources Testing")]
+    public bool overrideStartingResources = false;
+    public int startingResourcesOverride = 100;
+    
     [Header("Resources")]
     public int resourceNum;
     public int maxResource = 100;
@@ -62,7 +66,6 @@ public class CombatManager : MonoBehaviour
     public Slider resourceSlider2;
     public Slider resourceSlider3;
     public Slider resourceSlider4;
-    public int startingResources;
 
     [Header("Overcharge Resources")]
     public Slider overchargeSlider;
@@ -100,10 +103,12 @@ public class CombatManager : MonoBehaviour
 
     public void RestartEncounter()
     {
+        /*
         GameManager.Instance.winScreen.SetActive(false);
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
+        */
 
         if (GameManager.Instance.tutorialRunning || GameManager.Instance.currentEncounter.isShowcase)
         {
@@ -113,6 +118,7 @@ public class CombatManager : MonoBehaviour
         }
 
         EndEncounter();
+        StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage);
         LoadEncounter(currentEncounter);
     }
 
@@ -183,11 +189,14 @@ public class CombatManager : MonoBehaviour
         }
 
         GameManager.Instance.playerInputManager.SetActive(true);
+
         GameManager.Instance.menuMusic.Stop();
+
         GameManager.Instance.winScreen.SetActive(false);
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
+
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
 
         currentEncounter = encounter;
@@ -201,7 +210,7 @@ public class CombatManager : MonoBehaviour
         enemyTotal = 0;
         pickupTotal = 0;
 
-        // for each wave, get the total number of enemies & pickups and add them to the enemy & pickup totalsfor this encounter
+        // for each wave, get the total number of enemies & pickups and add them to the enemy & pickup totals for this encounter
         foreach (var item in currentEncounter.waves)
         {
             enemyTotal += item.enemies.Count;
@@ -228,26 +237,30 @@ public class CombatManager : MonoBehaviour
 
         objectSpawners.ForecastWave(0);
 
+        // set starting resources
+        if (overrideStartingResources)
+        {
+            resourceNum = startingResourcesOverride;
+        }
+        else
+        {
+            resourceNum = currentEncounter.startingResources;
+        }
 
-        resourceNum = startingResources;
-        enemyTimer = enemyTimerMax;
-        enemiesSpawnIn.gameObject.SetActive(true);
+        enemyTimer = enemyTimerMax; // reset enemy spawn countdown timer
+        enemiesSpawnIn.gameObject.SetActive(true); // enable enemy spawn countdown text object
 
-
-        CursorTD.Instance.InitializeCursor();
+        CursorTD.Instance.InitializeCursor(); // initialize the player cursor
 
         //BeatIndicatorManager.Instance.ResetBeatIndicator();
 
-
-        Cursor.lockState = CursorLockMode.Locked;
-
+        Cursor.lockState = CursorLockMode.Locked; // lock cursor movement 
 
         if (GameManager.Instance.tutorialRunning)
             return;
+
         TowerManager.Instance.ResetTowerManager();
         ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
-
-
     }
 
     public void EndEncounter()

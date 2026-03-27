@@ -89,8 +89,7 @@ public class ConductorV2 : MonoBehaviour
         TowerManager.Instance.InstantiateTowerCooldown();
 
         pauseConductor = true;
-        //load the audio source attached to the conductor gameobject
-        //musicSource = GetComponent<AudioSource>();
+
         bpm = _bpm;
         completedLoops = 0;
         numberOfBeats = 0;
@@ -98,8 +97,8 @@ public class ConductorV2 : MonoBehaviour
         measureTrack = 0;
         beatDuration = 0;
         countingIn = true;
-        //calculate the number of seconds in each beat
-        crotchet = 60 / bpm;
+        
+        crotchet = 60 / bpm; //calculate the number of seconds in each beat
 
         DynamicSongInit(GameManager.Instance.currentEncounter.combatEncounter.dynamicSong);
         StartCoroutine(CountIn());
@@ -108,28 +107,30 @@ public class ConductorV2 : MonoBehaviour
     IEnumerator CountIn()
     {
         LoadingScreenManager.Instance.EndLoading();
+
         countInText.gameObject.SetActive(true);
+
         for (int i = 1; i <= 4; i++)
         {
             countInText.text = i.ToString();
+
             _ping.Play();
-            yield return new WaitForSeconds(crotchet);
+
+            yield return new WaitForSecondsRealtime(crotchet);
         }
+
         StartConductor();
         yield return null;
     }
 
     public void StartConductor()
     {
-
         countingIn = false;
         //CombatManager.Instance.knockEmDead.SetActive(true);
         //CombatManager.Instance.knockEmDead.GetComponent<Animator>().SetTrigger("KnockEmDead");
 
         pauseConductor = false;
         countInText.gameObject.SetActive(false);
-
-
 
         completedLoops = 0;
         numberOfBeats = 0;
@@ -227,6 +228,12 @@ public class ConductorV2 : MonoBehaviour
 
     public void Conduct()
     {
+        //if the track assigned to the conductor music source is null, throw an error and return
+        if (musicSource.clip == null) {
+            Debug.Log("Music tracks not found. Please check the dynamic song assigned to the current encounter.");
+            return;
+        }
+        
         if(songPosition < 0.1f)
         {
             completedLoops = 0;
@@ -287,8 +294,6 @@ public class ConductorV2 : MonoBehaviour
             return false;
 
         }
-
-
     }
 
     public void Beat()

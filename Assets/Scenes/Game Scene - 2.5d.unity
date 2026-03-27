@@ -16630,6 +16630,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3543775720064958237, guid: e8ea7ddf3aaeb6b468c0bbf880905309, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543775720064958237, guid: e8ea7ddf3aaeb6b468c0bbf880905309, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
@@ -20051,13 +20055,14 @@ MonoBehaviour:
   enemyTimer: 5
   totalNumEnemies: 0
   totalNumPickups: 0
+  overrideStartingResources: 0
+  startingResourcesOverride: 100
   resourceNum: 0
   maxResource: 150
   resourceSlider1: {fileID: 2139687890}
   resourceSlider2: {fileID: 2139687889}
   resourceSlider3: {fileID: 2139687888}
   resourceSlider4: {fileID: 1032427851599122294}
-  startingResources: 150
   overchargeSlider: {fileID: 7050037042659679118}
   canPlaceEmpoweredTower: 0
   enemyTimerObject: {fileID: 283964733734025437}
@@ -22864,7 +22869,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131022232610937893}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3360534741566044467, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
   m_audioClip: {fileID: 0}
@@ -24414,7 +24419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: LoadEncounter
+      value: LoadLevel
       objectReference: {fileID: 0}
     - target: {fileID: 3521430621545154564, guid: 4d78d0100c6823b489dd69ee0851bd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName

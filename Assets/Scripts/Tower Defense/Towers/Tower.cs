@@ -119,6 +119,8 @@ public class Tower : MonoBehaviour
     private int buffCountMeasure = 0;
     private int buffBeatCount = 1;
 
+    [HideInInspector]
+    public int towerNum;
 
     public virtual void Start()
     {
@@ -423,6 +425,8 @@ public class Tower : MonoBehaviour
             default:
                 break;
         }
+
+        TowerManager.Instance.RemovedTower(towerNum);
         //TowerManager.Instance.towerList.Remove(this);
         connectedTile.placedTower = null;
         Destroy(gameObject);

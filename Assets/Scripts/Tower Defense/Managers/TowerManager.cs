@@ -130,6 +130,11 @@ public class TowerManager : MonoBehaviour
         
     }
 
+    public void RemovedTower(int towerNum)
+    {
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced -= 1;
+    }
+
     public void SetCooldown(int towerNum, Tower placingTower)
     {
         GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown = true;
@@ -143,6 +148,8 @@ public class TowerManager : MonoBehaviour
     {
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
         _tower.GetComponent<BoxCollider>().enabled = true;
+
+        _tower.GetComponent<Tower>().towerNum = towerNum;
 
         _tower.transform.position = tilePosition;
 

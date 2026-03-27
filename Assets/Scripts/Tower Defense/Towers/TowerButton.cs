@@ -9,6 +9,5 @@ public class TowerButton : MonoBehaviour
 
     public Image icon;
 
-    public int towerNum;
 
 }

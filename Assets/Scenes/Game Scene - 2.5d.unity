@@ -1882,6 +1882,7 @@ MonoBehaviour:
   waveCounter: {fileID: 8999282464804729699}
   enemyCounter: {fileID: 782079785}
   playerInputManager: {fileID: 611689253}
+  lostHealth: 0
   isGamePaused: 0
   restartEncounterButton: {fileID: 336209612}
   currentEncounter: {fileID: 0}
@@ -16511,11 +16512,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1689064071857096589, guid: e8ea7ddf3aaeb6b468c0bbf880905309, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1689064071857096589, guid: e8ea7ddf3aaeb6b468c0bbf880905309, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1689064071857096589, guid: e8ea7ddf3aaeb6b468c0bbf880905309, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -16747,7 +16748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5122017628349205832, guid: e8ea7ddf3aaeb6b468c0bbf880905309, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6720839245807680836, guid: e8ea7ddf3aaeb6b468c0bbf880905309, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

@@ -24,7 +24,7 @@ ScriptedImporter:
     flipGreenChannel: 0
     swizzle: 50462976
     isReadable: 0
-    streamingMipmaps: 1
+    streamingMipmaps: 0
     streamingMipmapsPriority: 0
     vTOnly: 0
     ignoreMipmapLimit: 0
@@ -50,12 +50,12 @@ ScriptedImporter:
     flipbookColumns: 0
     ignorePngGamma: 0
     cookieMode: 0
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
     normalMap: 0
     textureFormat: 0
     maxTextureSize: 0
@@ -83,7 +83,7 @@ ScriptedImporter:
       y: 0
       width: 0
       height: 0
-    spriteID: 
+    spriteID: 26cd94d0c3ea0d9419a2af86e854bef9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -95,7 +95,7 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   multiSpriteImportData: []
   layeredSpriteImportData:
-  - name: UI-SPR_Next-Icon
+  - name: button_unselected_next
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -103,11 +103,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 7988
-      y: 1008
+      x: 7898
+      y: 634
       width: 159
       height: 180
-    spriteID: 5ce93ae4629a8244999bed66ddf1de56
+    spriteID: 88d9d961d5b864543af93aa83ff5c986
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -115,9 +115,9 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 7988, y: 1008}
-    spritePosition: {x: 43, y: 960}
-  - name: UI-SPR_Exit-Back-Icon
+    uvTransform: {x: 7898, y: 634}
+    spritePosition: {x: 56, y: 2170}
+  - name: button_highlighted_next
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -125,11 +125,99 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 7568
+      x: 8008
       y: 1008
+      width: 167
+      height: 193
+    spriteID: f604a047eee85dd4a8f7a29bcfa17f5e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 8008, y: 1008}
+    spritePosition: {x: 53, y: 2157}
+  - name: button_selected_next
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 8016
+      y: 1262
+      width: 167
+      height: 193
+    spriteID: ffeeacf93fa08e74ab3289e6d449be73
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 8016, y: 1262}
+    spritePosition: {x: 53, y: 2157}
+  - name: button_pressed_next
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7898
+      y: 232
+      width: 167
+      height: 193
+    spriteID: a84d8352bc0cddb43bc25ccc6aa2bf81
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7898, y: 232}
+    spritePosition: {x: 53, y: 2157}
+  - name: button_disabled_next
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7898
+      y: 433
+      width: 167
+      height: 193
+    spriteID: 20f6240a9ac42c145b74e009e4102ca9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7898, y: 433}
+    spritePosition: {x: 53, y: 2157}
+  - name: button_unselected_exit-back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7682
+      y: 727
       width: 204
       height: 220
-    spriteID: 2a0dda8014f837b4396efda2405b6d3b
+    spriteID: 036d4188b155ed2408980046e914b45a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -137,9 +225,9 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 7568, y: 1008}
-    spritePosition: {x: 24, y: 940}
-  - name: UI-SPR_Exit-To-Icon
+    uvTransform: {x: 7682, y: 727}
+    spritePosition: {x: 35, y: 2152}
+  - name: button_highlighted_exit-back
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -147,11 +235,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 7780
-      y: 1008
-      width: 200
-      height: 220
-    spriteID: 461b42daf56870d488305c4650cc0555
+      x: 7576
+      y: 1262
+      width: 212
+      height: 233
+    spriteID: 5f0cad478e770854da7d880a1ee39af7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -159,9 +247,207 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 7780, y: 1008}
-    spritePosition: {x: 23, y: 940}
-  - name: UI-SPR_Restart-Icon
+    uvTransform: {x: 7576, y: 1262}
+    spritePosition: {x: 34, y: 2137}
+  - name: button_unselected_exit-back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7796
+      y: 1262
+      width: 212
+      height: 233
+    spriteID: 4b20f5bdc2b49d049ab4d242995c5408
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7796, y: 1262}
+    spritePosition: {x: 34, y: 2137}
+  - name: button_pressed_exit-back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7462
+      y: 4
+      width: 212
+      height: 233
+    spriteID: 6a639a3ca88aad84aa0d389fa85331ee
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7462, y: 4}
+    spritePosition: {x: 34, y: 2137}
+  - name: button_disabled_exit-back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7462
+      y: 245
+      width: 212
+      height: 233
+    spriteID: d35195fecfb25f34f908d550e8d96840
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7462, y: 245}
+    spritePosition: {x: 34, y: 2137}
+  - name: button_unselected_exit-to
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7898
+      y: 4
+      width: 200
+      height: 220
+    spriteID: 939c798072f130c44a154b0314b4d053
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7898, y: 4}
+    spritePosition: {x: 36, y: 2153}
+  - name: button_highlighted_exit-to
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7462
+      y: 486
+      width: 208
+      height: 233
+    spriteID: ba0f84a97183e6245bdb7fdccbb34073
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7462, y: 486}
+    spritePosition: {x: 33, y: 2137}
+  - name: button_selected_exit-to
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7462
+      y: 727
+      width: 208
+      height: 233
+    spriteID: 175d5d93af21fee45ae89bd50d9a775b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7462, y: 727}
+    spritePosition: {x: 33, y: 2137}
+  - name: button_pressed_exit-to
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7682
+      y: 4
+      width: 208
+      height: 233
+    spriteID: 018361bcfc9c2354fa8eb405e185c453
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7682, y: 4}
+    spritePosition: {x: 33, y: 2137}
+  - name: button_disabled_exit-to
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7682
+      y: 245
+      width: 208
+      height: 233
+    spriteID: ba9cc571649e1514f8ddc6b6b6dce5cc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7682, y: 245}
+    spritePosition: {x: 33, y: 2137}
+  - name: button_unselected_restart
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7682
+      y: 486
+      width: 200
+      height: 233
+    spriteID: cc410be1ccaaccb4ba044f28b38a5a84
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7682, y: 486}
+    spritePosition: {x: 20, y: 2130}
+  - name: button_highlighted_restart
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -171,9 +457,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 7360
       y: 1008
-      width: 200
-      height: 233
-    spriteID: 426b0805e0843a54fba4d1766cf5e250
+      width: 208
+      height: 246
+    spriteID: 97a4cd740ffdcd64bac88e6ffec9b5e4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -182,7 +468,73 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 7360, y: 1008}
-    spritePosition: {x: 23, y: 934}
+    spritePosition: {x: 33, y: 2131}
+  - name: button_selected_restart
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7576
+      y: 1008
+      width: 208
+      height: 246
+    spriteID: c3d24af7d7770b74190dd75041fbbe7a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7576, y: 1008}
+    spritePosition: {x: 33, y: 2131}
+  - name: button_pressed_restart
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7792
+      y: 1008
+      width: 208
+      height: 246
+    spriteID: 79ca9c1f96594ae4f8199db984b5211e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7792, y: 1008}
+    spritePosition: {x: 33, y: 2131}
+  - name: button_disabled_restart
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7360
+      y: 1262
+      width: 208
+      height: 246
+    spriteID: d817c1b0136f30e408dff3a656200303
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7360, y: 1262}
+    spritePosition: {x: 33, y: 2131}
   - name: UI_Accuracy-Indicator
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -195,7 +547,7 @@ ScriptedImporter:
       y: 4
       width: 934
       height: 996
-    spriteID: fe1667d561f637244a5a7413ebd7ffc1
+    spriteID: 9548ab9572df16540bad54ecb53453c9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -217,7 +569,7 @@ ScriptedImporter:
       y: 4
       width: 3250
       height: 3250
-    spriteID: 1fabf8f10ddf45a418ebcd7922c3277e
+    spriteID: 6083daada0841c643b3a3d44bf91f525
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -239,7 +591,7 @@ ScriptedImporter:
       y: 1637
       width: 3100
       height: 1019
-    spriteID: ae8c6550db8e77f44a8e8f91a1f4728f
+    spriteID: 5554510664acae3418d9a70b5d1fc444
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -251,8 +603,8 @@ ScriptedImporter:
     spritePosition: {x: 1210, y: 1131}
   - name: UI_Record-Shadow-Win
     originalName: 
-    pivot: {x: 0.5, y: 1}
-    alignment: 2
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -261,7 +613,7 @@ ScriptedImporter:
       y: 3262
       width: 3250
       height: 1625
-    spriteID: 9ffa3907fbd243f46a691dba8f17d305
+    spriteID: 2e604c905a99f2e45b0ba4986191a602
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -273,8 +625,8 @@ ScriptedImporter:
     spritePosition: {x: 1135, y: 0}
   - name: UI_Record-Accuracy-Top
     originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -283,7 +635,7 @@ ScriptedImporter:
       y: 1008
       width: 832
       height: 417
-    spriteID: 9c5cc6bbcc8897642a0514173f7e8e7e
+    spriteID: 28381fc991f5c674daaf05adc9abda7e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -295,17 +647,17 @@ ScriptedImporter:
     spritePosition: {x: 2344, y: 1624}
   - name: UI_Record-Accuracy-Bottom
     originalName: 
-    pivot: {x: 0.5, y: 1}
-    alignment: 2
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
       x: 6216
-      y: 3858
+      y: 4518
       width: 832
       height: 415
-    spriteID: 599d06f929c0e7440ac72527b960606c
+    spriteID: 5b7be2bc9bc3394479143f367bfac18c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -313,7 +665,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 6216, y: 3858}
+    uvTransform: {x: 6216, y: 4518}
     spritePosition: {x: 2344, y: 1209}
   - name: UI_Record-Middle
     originalName: 
@@ -327,7 +679,7 @@ ScriptedImporter:
       y: 2664
       width: 832
       height: 832
-    spriteID: 88f9b2b532ff7284fa84c72a0f227330
+    spriteID: 39850ed21a28e994b96e6ba3cd76e21d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -339,17 +691,17 @@ ScriptedImporter:
     spritePosition: {x: 2344, y: 1209}
   - name: UI_Record-Gold-Win
     originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 0
+      x: 4
       y: 4895
       width: 3250
       height: 1625
-    spriteID: aadafe3d9c1673f4e98b8bbb91042fad
+    spriteID: 073757f36f743a746970adf1036d08a2
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -361,8 +713,8 @@ ScriptedImporter:
     spritePosition: {x: 1135, y: 1625}
   - name: UI_Record-Silver-Win
     originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -371,7 +723,7 @@ ScriptedImporter:
       y: 2664
       width: 2372
       height: 1186
-    spriteID: 97bee805d0bc98242a71dd6f8fead79f
+    spriteID: ac2b6c86d2d52724d97b5569293de684
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -383,8 +735,8 @@ ScriptedImporter:
     spritePosition: {x: 1574, y: 1625}
   - name: UI_Record-Bronze-Win
     originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -393,7 +745,7 @@ ScriptedImporter:
       y: 1637
       width: 1648
       height: 824
-    spriteID: bf37c653081de4a408d65d136364d2f7
+    spriteID: 1f915100b257db847bdf1f29fe6009cc
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -405,8 +757,8 @@ ScriptedImporter:
     spritePosition: {x: 1936, y: 1625}
   - name: UI_Record-Remix-Win
     originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -415,7 +767,7 @@ ScriptedImporter:
       y: 6528
       width: 3250
       height: 1625
-    spriteID: 64184f8f81aef5744b9b4dbe175c900f
+    spriteID: 31f719e614a29254eafa4d4244883c64
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -427,8 +779,8 @@ ScriptedImporter:
     spritePosition: {x: 1135, y: 1625}
   - name: UI_Record-Black-Win
     originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -437,7 +789,7 @@ ScriptedImporter:
       y: 4
       width: 3250
       height: 1625
-    spriteID: 20ef3889fb0c52a41bbf0c861e30392c
+    spriteID: f0a35d94ad0047e44bf3d2f6fd7cb6ac
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -458,8 +810,8 @@ ScriptedImporter:
       x: 3262
       y: 3858
       width: 2946
-      height: 651
-    spriteID: 5f46e639e6579084681527f6dfba2f2e
+      height: 652
+    spriteID: 469ceeeae7b371048be24e00197f41e5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -468,383 +820,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 3262, y: 3858}
-    spritePosition: {x: 0, y: 2414}
-  spriteImportData:
-  - name: 
-    originalName: 
-    pivot: {x: 0, y: 0}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-    spriteID: 
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-    spritePosition: {x: 0, y: 0}
-  rigSpriteImportData:
-  - name: UI-SPR_Next-Icon
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 7988
-      y: 1008
-      width: 159
-      height: 180
-    spriteID: 5ce93ae4629a8244999bed66ddf1de56
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 7988, y: 1008}
-    spritePosition: {x: 43, y: 960}
-  - name: UI-SPR_Exit-Back-Icon
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 7568
-      y: 1008
-      width: 204
-      height: 220
-    spriteID: 2a0dda8014f837b4396efda2405b6d3b
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 7568, y: 1008}
-    spritePosition: {x: 24, y: 940}
-  - name: UI-SPR_Exit-To-Icon
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 7780
-      y: 1008
-      width: 200
-      height: 220
-    spriteID: 461b42daf56870d488305c4650cc0555
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 7780, y: 1008}
-    spritePosition: {x: 23, y: 940}
-  - name: UI-SPR_Restart-Icon
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 7360
-      y: 1008
-      width: 200
-      height: 233
-    spriteID: 426b0805e0843a54fba4d1766cf5e250
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 7360, y: 1008}
-    spritePosition: {x: 23, y: 934}
-  - name: UI_Accuracy-Indicator
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 6520
-      y: 4
-      width: 934
-      height: 996
-    spriteID: fe1667d561f637244a5a7413ebd7ffc1
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 6520, y: 4}
-    spritePosition: {x: 2293, y: 1158}
-  - name: UI_Record-Outline-Win
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 4
-      width: 3250
-      height: 3250
-    spriteID: 1fabf8f10ddf45a418ebcd7922c3277e
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 4}
-    spritePosition: {x: 1135, y: 0}
-  - name: UI_Record-Highlight-Win
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 3262
-      y: 1637
-      width: 3100
-      height: 1019
-    spriteID: ae8c6550db8e77f44a8e8f91a1f4728f
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 3262, y: 1637}
-    spritePosition: {x: 1210, y: 1131}
-  - name: UI_Record-Shadow-Win
-    originalName: 
-    pivot: {x: 0.5, y: 1}
-    alignment: 2
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 3262
-      width: 3250
-      height: 1625
-    spriteID: 9ffa3907fbd243f46a691dba8f17d305
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 3262}
-    spritePosition: {x: 1135, y: 0}
-  - name: UI_Record-Accuracy-Top
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 6520
-      y: 1008
-      width: 832
-      height: 417
-    spriteID: 9c5cc6bbcc8897642a0514173f7e8e7e
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 6520, y: 1008}
-    spritePosition: {x: 2344, y: 1624}
-  - name: UI_Record-Accuracy-Bottom
-    originalName: 
-    pivot: {x: 0.5, y: 1}
-    alignment: 2
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 6216
-      y: 3858
-      width: 832
-      height: 415
-    spriteID: 599d06f929c0e7440ac72527b960606c
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 6216, y: 3858}
-    spritePosition: {x: 2344, y: 1209}
-  - name: UI_Record-Middle
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 5642
-      y: 2664
-      width: 832
-      height: 832
-    spriteID: 88f9b2b532ff7284fa84c72a0f227330
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 5642, y: 2664}
-    spritePosition: {x: 2344, y: 1209}
-  - name: UI_Record-Gold-Win
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 0
-      y: 4895
-      width: 3250
-      height: 1625
-    spriteID: aadafe3d9c1673f4e98b8bbb91042fad
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 4895}
-    spritePosition: {x: 1135, y: 1625}
-  - name: UI_Record-Silver-Win
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 3262
-      y: 2664
-      width: 2372
-      height: 1186
-    spriteID: 97bee805d0bc98242a71dd6f8fead79f
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 3262, y: 2664}
-    spritePosition: {x: 1574, y: 1625}
-  - name: UI_Record-Bronze-Win
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 6370
-      y: 1637
-      width: 1648
-      height: 824
-    spriteID: bf37c653081de4a408d65d136364d2f7
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 6370, y: 1637}
-    spritePosition: {x: 1936, y: 1625}
-  - name: UI_Record-Remix-Win
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 6528
-      width: 3250
-      height: 1625
-    spriteID: 64184f8f81aef5744b9b4dbe175c900f
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 6528}
-    spritePosition: {x: 1135, y: 1625}
-  - name: UI_Record-Black-Win
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 3262
-      y: 4
-      width: 3250
-      height: 1625
-    spriteID: 20ef3889fb0c52a41bbf0c861e30392c
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 3262, y: 4}
-    spritePosition: {x: 1135, y: 1625}
+    spritePosition: {x: 0, y: 2413}
   - name: UI-DEC_Top-Bar-Win
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -854,10 +830,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 3262
-      y: 3858
+      y: 4518
       width: 2946
       height: 651
-    spriteID: 5f46e639e6579084681527f6dfba2f2e
+    spriteID: 7cd79f75f368ace4b9eb14f7d7efb358
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -865,8 +841,10 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 3262, y: 3858}
+    uvTransform: {x: 3262, y: 4518}
     spritePosition: {x: 0, y: 2414}
+  spriteImportData: []
+  rigSpriteImportData: []
   sharedRigSpriteImportData: []
   mosaicSpriteImportData: []
   sharedRigCharacterData:
@@ -883,31 +861,7 @@ ScriptedImporter:
     characterGroups: []
     pivot: {x: 0, y: 0}
     boneReadOnly: 0
-  platformSettings:
-  - name: DefaultTexturePlatform
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 8192
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
+  platformSettings: []
   mosaicLayers: 1
   characterMode: 1
   documentPivot: {x: 0, y: 0}
@@ -936,43 +890,213 @@ ScriptedImporter:
   resliceFromLayer: 0
   pSDLayerImportSetting: []
   psdLayers:
-  - name: UI-SPR_Next-Icon
-    spriteName: UI-SPR_Next-Icon
-    isGroup: 0
+  - name: UI-Buttons
+    spriteName: 
+    isGroup: 1
     parentIndex: -1
-    spriteID: 5ce93ae4629a8244999bed66ddf1de56
+    spriteID: 4762cecb260d9774a837878c637d5aab
     layerID: 0
-    mosaicPosition: {x: 7988, y: 1008}
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: button_unselected_next
+    spriteName: button_unselected_next
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 88d9d961d5b864543af93aa83ff5c986
+    layerID: 787803155
+    mosaicPosition: {x: 7898, y: 634}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: UI-SPR_Exit-Back-Icon
-    spriteName: UI-SPR_Exit-Back-Icon
+  - name: button_highlighted_next
+    spriteName: button_highlighted_next
     isGroup: 0
-    parentIndex: -1
-    spriteID: 2a0dda8014f837b4396efda2405b6d3b
-    layerID: -1063245985
-    mosaicPosition: {x: 7568, y: 1008}
+    parentIndex: 0
+    spriteID: f604a047eee85dd4a8f7a29bcfa17f5e
+    layerID: 858007920
+    mosaicPosition: {x: 8008, y: 1008}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: UI-SPR_Exit-To-Icon
-    spriteName: UI-SPR_Exit-To-Icon
+  - name: button_selected_next
+    spriteName: button_selected_next
     isGroup: 0
-    parentIndex: -1
-    spriteID: 461b42daf56870d488305c4650cc0555
-    layerID: 636736867
-    mosaicPosition: {x: 7780, y: 1008}
+    parentIndex: 0
+    spriteID: ffeeacf93fa08e74ab3289e6d449be73
+    layerID: -1213213738
+    mosaicPosition: {x: 8016, y: 1262}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: UI-SPR_Restart-Icon
-    spriteName: UI-SPR_Restart-Icon
+  - name: button_pressed_next
+    spriteName: button_pressed_next
     isGroup: 0
-    parentIndex: -1
-    spriteID: 426b0805e0843a54fba4d1766cf5e250
-    layerID: -1270014260
+    parentIndex: 0
+    spriteID: a84d8352bc0cddb43bc25ccc6aa2bf81
+    layerID: -915437633
+    mosaicPosition: {x: 7898, y: 232}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_disabled_next
+    spriteName: button_disabled_next
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 20f6240a9ac42c145b74e009e4102ca9
+    layerID: -675645383
+    mosaicPosition: {x: 7898, y: 433}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_unselected_exit-back
+    spriteName: button_unselected_exit-back
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 036d4188b155ed2408980046e914b45a
+    layerID: -1269445606
+    mosaicPosition: {x: 7682, y: 727}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_highlighted_exit-back
+    spriteName: button_highlighted_exit-back
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 5f0cad478e770854da7d880a1ee39af7
+    layerID: -1559067619
+    mosaicPosition: {x: 7576, y: 1262}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_unselected_exit-back
+    spriteName: button_unselected_exit-back
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 4b20f5bdc2b49d049ab4d242995c5408
+    layerID: 1911591106
+    mosaicPosition: {x: 7796, y: 1262}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_pressed_exit-back
+    spriteName: button_pressed_exit-back
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 6a639a3ca88aad84aa0d389fa85331ee
+    layerID: -1507541948
+    mosaicPosition: {x: 7462, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_disabled_exit-back
+    spriteName: button_disabled_exit-back
+    isGroup: 0
+    parentIndex: 0
+    spriteID: d35195fecfb25f34f908d550e8d96840
+    layerID: -511927696
+    mosaicPosition: {x: 7462, y: 245}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_unselected_exit-to
+    spriteName: button_unselected_exit-to
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 939c798072f130c44a154b0314b4d053
+    layerID: 873745336
+    mosaicPosition: {x: 7898, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_highlighted_exit-to
+    spriteName: button_highlighted_exit-to
+    isGroup: 0
+    parentIndex: 0
+    spriteID: ba0f84a97183e6245bdb7fdccbb34073
+    layerID: 1620874449
+    mosaicPosition: {x: 7462, y: 486}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_selected_exit-to
+    spriteName: button_selected_exit-to
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 175d5d93af21fee45ae89bd50d9a775b
+    layerID: -1644343103
+    mosaicPosition: {x: 7462, y: 727}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_pressed_exit-to
+    spriteName: button_pressed_exit-to
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 018361bcfc9c2354fa8eb405e185c453
+    layerID: -554677442
+    mosaicPosition: {x: 7682, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_disabled_exit-to
+    spriteName: button_disabled_exit-to
+    isGroup: 0
+    parentIndex: 0
+    spriteID: ba9cc571649e1514f8ddc6b6b6dce5cc
+    layerID: -1727011490
+    mosaicPosition: {x: 7682, y: 245}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_unselected_restart
+    spriteName: button_unselected_restart
+    isGroup: 0
+    parentIndex: 0
+    spriteID: cc410be1ccaaccb4ba044f28b38a5a84
+    layerID: -543113077
+    mosaicPosition: {x: 7682, y: 486}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_highlighted_restart
+    spriteName: button_highlighted_restart
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 97a4cd740ffdcd64bac88e6ffec9b5e4
+    layerID: -1173820340
     mosaicPosition: {x: 7360, y: 1008}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_selected_restart
+    spriteName: button_selected_restart
+    isGroup: 0
+    parentIndex: 0
+    spriteID: c3d24af7d7770b74190dd75041fbbe7a
+    layerID: 1800232434
+    mosaicPosition: {x: 7576, y: 1008}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_pressed_restart
+    spriteName: button_pressed_restart
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 79ca9c1f96594ae4f8199db984b5211e
+    layerID: -1317929209
+    mosaicPosition: {x: 7792, y: 1008}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: button_disabled_restart
+    spriteName: button_disabled_restart
+    isGroup: 0
+    parentIndex: 0
+    spriteID: d817c1b0136f30e408dff3a656200303
+    layerID: -1524495147
+    mosaicPosition: {x: 7360, y: 1262}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -980,7 +1104,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-    spriteID: 97b3a025b1170c244871185c323bab17
+    spriteID: 124755d2368bf594ab5faafdabafffaa
     layerID: -684594097
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -989,8 +1113,8 @@ ScriptedImporter:
   - name: UI_Accuracy-Indicator
     spriteName: UI_Accuracy-Indicator
     isGroup: 0
-    parentIndex: 4
-    spriteID: fe1667d561f637244a5a7413ebd7ffc1
+    parentIndex: 21
+    spriteID: 9548ab9572df16540bad54ecb53453c9
     layerID: 1944261552
     mosaicPosition: {x: 6520, y: 4}
     flatten: 0
@@ -999,8 +1123,8 @@ ScriptedImporter:
   - name: UI_Record-Outline-Win
     spriteName: UI_Record-Outline-Win
     isGroup: 0
-    parentIndex: 4
-    spriteID: 1fabf8f10ddf45a418ebcd7922c3277e
+    parentIndex: 21
+    spriteID: 6083daada0841c643b3a3d44bf91f525
     layerID: 1449587172
     mosaicPosition: {x: 4, y: 4}
     flatten: 0
@@ -1009,8 +1133,8 @@ ScriptedImporter:
   - name: UI_Record-Highlight-Win
     spriteName: UI_Record-Highlight-Win
     isGroup: 0
-    parentIndex: 4
-    spriteID: ae8c6550db8e77f44a8e8f91a1f4728f
+    parentIndex: 21
+    spriteID: 5554510664acae3418d9a70b5d1fc444
     layerID: 797834630
     mosaicPosition: {x: 3262, y: 1637}
     flatten: 0
@@ -1019,8 +1143,8 @@ ScriptedImporter:
   - name: UI_Record-Shadow-Win
     spriteName: UI_Record-Shadow-Win
     isGroup: 0
-    parentIndex: 4
-    spriteID: 9ffa3907fbd243f46a691dba8f17d305
+    parentIndex: 21
+    spriteID: 2e604c905a99f2e45b0ba4986191a602
     layerID: 1720361336
     mosaicPosition: {x: 4, y: 3262}
     flatten: 0
@@ -1029,8 +1153,8 @@ ScriptedImporter:
   - name: UI_Record-Accuracy-Top
     spriteName: UI_Record-Accuracy-Top
     isGroup: 0
-    parentIndex: 4
-    spriteID: 9c5cc6bbcc8897642a0514173f7e8e7e
+    parentIndex: 21
+    spriteID: 28381fc991f5c674daaf05adc9abda7e
     layerID: -466139752
     mosaicPosition: {x: 6520, y: 1008}
     flatten: 0
@@ -1039,18 +1163,18 @@ ScriptedImporter:
   - name: UI_Record-Accuracy-Bottom
     spriteName: UI_Record-Accuracy-Bottom
     isGroup: 0
-    parentIndex: 4
-    spriteID: 599d06f929c0e7440ac72527b960606c
+    parentIndex: 21
+    spriteID: 5b7be2bc9bc3394479143f367bfac18c
     layerID: -1338854414
-    mosaicPosition: {x: 6216, y: 3858}
+    mosaicPosition: {x: 6216, y: 4518}
     flatten: 0
     isImported: 1
     isVisible: 1
   - name: UI_Record-Middle
     spriteName: UI_Record-Middle
     isGroup: 0
-    parentIndex: 4
-    spriteID: 88f9b2b532ff7284fa84c72a0f227330
+    parentIndex: 21
+    spriteID: 39850ed21a28e994b96e6ba3cd76e21d
     layerID: 691847894
     mosaicPosition: {x: 5642, y: 2664}
     flatten: 0
@@ -1059,8 +1183,8 @@ ScriptedImporter:
   - name: UI_Record-Gold-Win
     spriteName: UI_Record-Gold-Win
     isGroup: 0
-    parentIndex: 4
-    spriteID: aadafe3d9c1673f4e98b8bbb91042fad
+    parentIndex: 21
+    spriteID: 073757f36f743a746970adf1036d08a2
     layerID: 1813596670
     mosaicPosition: {x: 4, y: 4895}
     flatten: 0
@@ -1069,8 +1193,8 @@ ScriptedImporter:
   - name: UI_Record-Silver-Win
     spriteName: UI_Record-Silver-Win
     isGroup: 0
-    parentIndex: 4
-    spriteID: 97bee805d0bc98242a71dd6f8fead79f
+    parentIndex: 21
+    spriteID: ac2b6c86d2d52724d97b5569293de684
     layerID: 602033581
     mosaicPosition: {x: 3262, y: 2664}
     flatten: 0
@@ -1079,8 +1203,8 @@ ScriptedImporter:
   - name: UI_Record-Bronze-Win
     spriteName: UI_Record-Bronze-Win
     isGroup: 0
-    parentIndex: 4
-    spriteID: bf37c653081de4a408d65d136364d2f7
+    parentIndex: 21
+    spriteID: 1f915100b257db847bdf1f29fe6009cc
     layerID: 191419964
     mosaicPosition: {x: 6370, y: 1637}
     flatten: 0
@@ -1089,8 +1213,8 @@ ScriptedImporter:
   - name: UI_Record-Remix-Win
     spriteName: UI_Record-Remix-Win
     isGroup: 0
-    parentIndex: 4
-    spriteID: 64184f8f81aef5744b9b4dbe175c900f
+    parentIndex: 21
+    spriteID: 31f719e614a29254eafa4d4244883c64
     layerID: -1610838991
     mosaicPosition: {x: 4, y: 6528}
     flatten: 0
@@ -1099,10 +1223,30 @@ ScriptedImporter:
   - name: UI_Record-Black-Win
     spriteName: UI_Record-Black-Win
     isGroup: 0
-    parentIndex: 4
-    spriteID: 20ef3889fb0c52a41bbf0c861e30392c
+    parentIndex: 21
+    spriteID: f0a35d94ad0047e44bf3d2f6fd7cb6ac
     layerID: 1644864253
     mosaicPosition: {x: 3262, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: UI-DEC_Top-Bar-Win
+    spriteName: 
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6c84ed9eb6e8b2a44ac3495a377681a3
+    layerID: 980213950
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: UI-DEC_Top-Bar-Win
+    spriteName: UI-DEC_Top-Bar-Win
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 469ceeeae7b371048be24e00197f41e5
+    layerID: 527988718
+    mosaicPosition: {x: 3262, y: 3858}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -1110,197 +1254,17 @@ ScriptedImporter:
     spriteName: UI-DEC_Top-Bar-Win
     isGroup: 0
     parentIndex: -1
-    spriteID: 5f46e639e6579084681527f6dfba2f2e
-    layerID: 980213950
-    mosaicPosition: {x: 3262, y: 3858}
+    spriteID: 7cd79f75f368ace4b9eb14f7d7efb358
+    layerID: 527988719
+    mosaicPosition: {x: 3262, y: 4518}
     flatten: 0
     isImported: 1
     isVisible: 1
   mosaicPSDLayers: []
-  rigPSDLayers:
-  - name: UI-SPR_Next-Icon
-    spriteName: UI-SPR_Next-Icon
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 5ce93ae4629a8244999bed66ddf1de56
-    layerID: 0
-    mosaicPosition: {x: 7988, y: 1008}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI-SPR_Exit-Back-Icon
-    spriteName: UI-SPR_Exit-Back-Icon
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 2a0dda8014f837b4396efda2405b6d3b
-    layerID: -1063245985
-    mosaicPosition: {x: 7568, y: 1008}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI-SPR_Exit-To-Icon
-    spriteName: UI-SPR_Exit-To-Icon
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 461b42daf56870d488305c4650cc0555
-    layerID: 636736867
-    mosaicPosition: {x: 7780, y: 1008}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI-SPR_Restart-Icon
-    spriteName: UI-SPR_Restart-Icon
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 426b0805e0843a54fba4d1766cf5e250
-    layerID: -1270014260
-    mosaicPosition: {x: 7360, y: 1008}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Win
-    spriteName: 
-    isGroup: 1
-    parentIndex: -1
-    spriteID: 97b3a025b1170c244871185c323bab17
-    layerID: -684594097
-    mosaicPosition: {x: 0, y: 0}
-    flatten: 0
-    isImported: 0
-    isVisible: 1
-  - name: UI_Accuracy-Indicator
-    spriteName: UI_Accuracy-Indicator
-    isGroup: 0
-    parentIndex: 4
-    spriteID: fe1667d561f637244a5a7413ebd7ffc1
-    layerID: 1944261552
-    mosaicPosition: {x: 6520, y: 4}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Outline-Win
-    spriteName: UI_Record-Outline-Win
-    isGroup: 0
-    parentIndex: 4
-    spriteID: 1fabf8f10ddf45a418ebcd7922c3277e
-    layerID: 1449587172
-    mosaicPosition: {x: 4, y: 4}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Highlight-Win
-    spriteName: UI_Record-Highlight-Win
-    isGroup: 0
-    parentIndex: 4
-    spriteID: ae8c6550db8e77f44a8e8f91a1f4728f
-    layerID: 797834630
-    mosaicPosition: {x: 3262, y: 1637}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Shadow-Win
-    spriteName: UI_Record-Shadow-Win
-    isGroup: 0
-    parentIndex: 4
-    spriteID: 9ffa3907fbd243f46a691dba8f17d305
-    layerID: 1720361336
-    mosaicPosition: {x: 4, y: 3262}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Accuracy-Top
-    spriteName: UI_Record-Accuracy-Top
-    isGroup: 0
-    parentIndex: 4
-    spriteID: 9c5cc6bbcc8897642a0514173f7e8e7e
-    layerID: -466139752
-    mosaicPosition: {x: 6520, y: 1008}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Accuracy-Bottom
-    spriteName: UI_Record-Accuracy-Bottom
-    isGroup: 0
-    parentIndex: 4
-    spriteID: 599d06f929c0e7440ac72527b960606c
-    layerID: -1338854414
-    mosaicPosition: {x: 6216, y: 3858}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Middle
-    spriteName: UI_Record-Middle
-    isGroup: 0
-    parentIndex: 4
-    spriteID: 88f9b2b532ff7284fa84c72a0f227330
-    layerID: 691847894
-    mosaicPosition: {x: 5642, y: 2664}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Gold-Win
-    spriteName: UI_Record-Gold-Win
-    isGroup: 0
-    parentIndex: 4
-    spriteID: aadafe3d9c1673f4e98b8bbb91042fad
-    layerID: 1813596670
-    mosaicPosition: {x: 4, y: 4895}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Silver-Win
-    spriteName: UI_Record-Silver-Win
-    isGroup: 0
-    parentIndex: 4
-    spriteID: 97bee805d0bc98242a71dd6f8fead79f
-    layerID: 602033581
-    mosaicPosition: {x: 3262, y: 2664}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Bronze-Win
-    spriteName: UI_Record-Bronze-Win
-    isGroup: 0
-    parentIndex: 4
-    spriteID: bf37c653081de4a408d65d136364d2f7
-    layerID: 191419964
-    mosaicPosition: {x: 6370, y: 1637}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Remix-Win
-    spriteName: UI_Record-Remix-Win
-    isGroup: 0
-    parentIndex: 4
-    spriteID: 64184f8f81aef5744b9b4dbe175c900f
-    layerID: -1610838991
-    mosaicPosition: {x: 4, y: 6528}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI_Record-Black-Win
-    spriteName: UI_Record-Black-Win
-    isGroup: 0
-    parentIndex: 4
-    spriteID: 20ef3889fb0c52a41bbf0c861e30392c
-    layerID: 1644864253
-    mosaicPosition: {x: 3262, y: 4}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: UI-DEC_Top-Bar-Win
-    spriteName: UI-DEC_Top-Bar-Win
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 5f46e639e6579084681527f6dfba2f2e
-    layerID: 980213950
-    mosaicPosition: {x: 3262, y: 3858}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
+  rigPSDLayers: []
   sharedRigPSDLayers: []
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638935419513784522
+  platformSettingsDirtyTick: 0
   spriteSizeExpandChanged: 0
   generateGOHierarchy: 0
   textureAssetName: 

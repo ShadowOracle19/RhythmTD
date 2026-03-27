@@ -147,11 +147,14 @@ public class CombatManager : MonoBehaviour
         CursorTD.Instance.isMoving = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        ConductorV2.instance.drums.volume = 0;
-        ConductorV2.instance.bass.volume = 0;
-        ConductorV2.instance.piano.volume = 0;
-        ConductorV2.instance.guitarH.volume = 0;
-        ConductorV2.instance.guitarM.volume = 0;
+        ConductorV2.instance.flats.volume = 0;
+        ConductorV2.instance.major.volume = 0;
+        ConductorV2.instance.allegro.volume = 0;
+        ConductorV2.instance.trill.volume = 0;
+        ConductorV2.instance.chromatic.volume = 0;
+        ConductorV2.instance.poco.volume = 0;
+        ConductorV2.instance.forte.volume = 0;
+        ConductorV2.instance.legato.volume = 0;
 
         FeverSystem.Instance.feverBarNum = 0;
         ComboManager.Instance.ResetCombo();
@@ -288,11 +291,14 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.menuMusic.Play();
         GameManager.Instance.playerInputManager.SetActive(false);
         GameManager.Instance.pointHolder.Clear();
-        ConductorV2.instance.drums.volume = 0;
-        ConductorV2.instance.bass.volume = 0;
-        ConductorV2.instance.piano.volume = 0;
-        ConductorV2.instance.guitarH.volume = 0;
-        ConductorV2.instance.guitarM.volume = 0;
+        ConductorV2.instance.flats.volume = 0;
+        ConductorV2.instance.major.volume = 0;
+        ConductorV2.instance.allegro.volume = 0;
+        ConductorV2.instance.trill.volume = 0;
+        ConductorV2.instance.chromatic.volume = 0;
+        ConductorV2.instance.poco.volume = 0;
+        ConductorV2.instance.forte.volume = 0;  
+        ConductorV2.instance.legato.volume = 0; 
 
         FeverSystem.Instance.feverBarNum = 0;
         ComboManager.Instance.ResetCombo();

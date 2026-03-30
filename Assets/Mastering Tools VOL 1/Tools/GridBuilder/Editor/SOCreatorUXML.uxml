@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Mastering%20Tools%20VOL%201/Tools/GridBuilder/Editor/EditorStyles.uss?fileID=7433441132597879392&amp;guid=06b003ac1d8ff214c8eb1375fe881962&amp;type=3#EditorStyles" />
+    <ui:VisualElement name="container" class="borderbox" style="flex-grow: 1;">
+        <ui:Label text="Create configurations here!" name="header" class="header" />
+        <ui:EnumField label="Difficulty" value="Center" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" name="difficulty" binding-path="Difficulty" />
+        <uie:ObjectField label="Prefab" name="prefab" binding-path="UnitPrefab" data-source-type="UnityEngine.GameObject, UnityEngine.CoreModule" />
+        <ui:IntegerField label="Multiplier" value="42" name="multiplier" binding-path="BaseMultiplier" />
+        <ui:Label name="notes" text="Notes" class="header borderbox" />
+        <ui:Button text="Create" name="create" class="spacer" />
+    </ui:VisualElement>
+</ui:UXML>

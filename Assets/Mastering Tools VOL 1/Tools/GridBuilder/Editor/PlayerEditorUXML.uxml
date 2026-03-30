@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Mastering%20Tools%20VOL%201/Tools/GridBuilder/Editor/EditorStyles.uss?fileID=7433441132597879392&amp;guid=06b003ac1d8ff214c8eb1375fe881962&amp;type=3#EditorStyles" />
+    <ui:Label text="Configure player settings" name="header" class="header" />
+    <ui:TextField label="Username" placeholder-text="filler text" name="username" binding-path="Username" />
+    <ui:EnumField label="Level" value="Center" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" name="level" binding-path="Level" />
+    <ui:Toggle label="Season Pass" name="hasSeasonPass" binding-path="HasSeasonPass" />
+    <ui:Label text="Notes" name="notes" class="borderbox" />
+</ui:UXML>

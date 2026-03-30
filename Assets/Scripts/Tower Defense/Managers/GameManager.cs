@@ -114,9 +114,6 @@ public class GameManager : MonoBehaviour
     public List<int> pointHolder = new List<int>();
     public int healthRemainingPointGain = 100;
 
-    
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -592,4 +589,25 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void UnlockUpgrade(Tower tower, UpgradeNum upgrade)
+    {
+        switch (upgrade)
+        {
+            case UpgradeNum.One:
+                tower.towerInfo.isUpgradeOneLocked = false;
+                break;
+            case UpgradeNum.Two:
+                tower.towerInfo.isUpgradeTwoLocked = false;
+                break;
+            case UpgradeNum.Three:
+                tower.towerInfo.isUpgradeThreeLocked = false;
+                break;
+        }
+    }
+
+}
+
+public enum UpgradeNum
+{
+    One, Two, Three
 }

@@ -522,7 +522,7 @@ public class GameManager : MonoBehaviour
         if (winState) return;
         winState = true;
         
-        CombatManager.Instance.EndEncounter();
+        //CombatManager.Instance.EndEncounter();
         encounterRunning = false;
 
         // OBJECTIVES

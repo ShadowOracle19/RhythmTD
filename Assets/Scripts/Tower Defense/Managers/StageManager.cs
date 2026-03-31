@@ -60,7 +60,7 @@ public class StageManager : MonoBehaviour
         switch (stage)
         {
             case LevelSelection.Default_Environment:
-                outside.SetActive(true);
+                default_environment.SetActive(true);
                 break;
             case LevelSelection.Outside:
                 outside.SetActive(true);

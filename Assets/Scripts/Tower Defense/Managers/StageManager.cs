@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum LevelSelection
 {
+    Default_Environment,
     Outside,
     Outside_InfoHub,
     Inside_InfoHub,
@@ -33,6 +34,7 @@ public class StageManager : MonoBehaviour
         _instance = this;
     }
     #endregion
+    public GameObject default_environment;
     public GameObject outside;
     public GameObject outside_InfoHub;
     public GameObject inside_InfoHub;
@@ -57,6 +59,9 @@ public class StageManager : MonoBehaviour
 
         switch (stage)
         {
+            case LevelSelection.Default_Environment:
+                outside.SetActive(true);
+                break;
             case LevelSelection.Outside:
                 outside.SetActive(true);
                 break;

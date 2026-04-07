@@ -51,6 +51,7 @@ public class TowerManager : MonoBehaviour
 
     public List<Tower> towerList;
 
+
     public static event Action FireTower;
 
     public void InstantiateTowerCooldown()
@@ -208,6 +209,16 @@ public class TowerManager : MonoBehaviour
 
     public void DynamicMusicVolume(InstrumentType type)
     {
+        if(CombatManager.Instance.currentEncounter.enableTowerLimit)
+        {
+            towerAudioVolumeIncrement = 1 / CombatManager.Instance.currentEncounter.towerLimit;
+
+        }
+        else
+        {
+            towerAudioVolumeIncrement = 0.05f;
+        }
+
         switch (type)
         {
             case InstrumentType.Flats:
@@ -218,7 +229,7 @@ public class TowerManager : MonoBehaviour
 
             case InstrumentType.Trill:
                 ConductorV2.instance.trill.volume += towerAudioVolumeIncrement;
-                ConductorV2.instance.trill.volume = Mathf.Clamp(ConductorV2.instance.trill.volume, 0, 0.5f);           
+                ConductorV2.instance.trill.volume = Mathf.Clamp(ConductorV2.instance.trill.volume, 0, 0.5f);
 
                 break;
 

@@ -228,32 +228,32 @@ public class CursorTD : MonoBehaviour
             towerSlotW.GetComponent<TowerButton>().tower = GameManager.Instance.towers[4].tower;
             towerSlotW.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[4].tower.GetComponent<Tower>().towerInfo.towerImage;
 
-            towerSlotA.GetComponent<TowerButton>().tower = GameManager.Instance.towers[5].tower;
-            towerSlotA.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[5].tower.GetComponent<Tower>().towerInfo.towerImage;
+            towerSlotD.GetComponent<TowerButton>().tower = GameManager.Instance.towers[5].tower;
+            towerSlotD.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[5].tower.GetComponent<Tower>().towerInfo.towerImage;
 
 
             towerSlotS.GetComponent<TowerButton>().tower = GameManager.Instance.towers[6].tower;
             towerSlotS.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[6].tower.GetComponent<Tower>().towerInfo.towerImage;
 
 
-            towerSlotD.GetComponent<TowerButton>().tower = GameManager.Instance.towers[7].tower;
-            towerSlotD.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[7].tower.GetComponent<Tower>().towerInfo.towerImage;
+            towerSlotA.GetComponent<TowerButton>().tower = GameManager.Instance.towers[7].tower;
+            towerSlotA.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[7].tower.GetComponent<Tower>().towerInfo.towerImage;
         }
         else
         {
             towerSlotW.GetComponent<TowerButton>().tower = GameManager.Instance.towers[0].tower;
             towerSlotW.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.towerImage;
 
-            towerSlotA.GetComponent<TowerButton>().tower = GameManager.Instance.towers[1].tower;
-            towerSlotA.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.towerImage;
+            towerSlotD.GetComponent<TowerButton>().tower = GameManager.Instance.towers[1].tower;
+            towerSlotD.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.towerImage;
 
 
             towerSlotS.GetComponent<TowerButton>().tower = GameManager.Instance.towers[2].tower;
             towerSlotS.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.towerImage;
 
 
-            towerSlotD.GetComponent<TowerButton>().tower = GameManager.Instance.towers[3].tower;
-            towerSlotD.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.towerImage;
+            towerSlotA.GetComponent<TowerButton>().tower = GameManager.Instance.towers[3].tower;
+            towerSlotA.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.towerImage;
         }
 
         TowerManager.Instance.SwapTowers();
@@ -535,12 +535,11 @@ public class CursorTD : MonoBehaviour
                     return;
                 }
             }
-            else if (direction == Vector2.left) //A
+            else if (direction == Vector2.right) //D
             {
-                
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
                 {
-                    TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 3);
+                    TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 1);
 
                     return;
                 }
@@ -554,11 +553,12 @@ public class CursorTD : MonoBehaviour
                     return;
                 }
             }
-            else if (direction == Vector2.right) //D
+            else if (direction == Vector2.left) //A
             {
-                if(towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
+
+                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
                 {
-                    TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 1);
+                    TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 3);
 
                     return;
                 }
@@ -566,7 +566,7 @@ public class CursorTD : MonoBehaviour
         }
         else
         {
-            if (direction == Vector2.up)
+            if (direction == Vector2.up) //W
             {
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
                 {
@@ -575,16 +575,16 @@ public class CursorTD : MonoBehaviour
                     return;
                 }
             }
-            else if (direction == Vector2.left)
+            else if (direction == Vector2.right) //D
             {
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
                 {
-                    TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 5);
+                    TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 5);
 
                     return;
                 }
             }
-            else if (direction == Vector2.down)
+            else if (direction == Vector2.down) //S
             {
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
                 {
@@ -593,15 +593,16 @@ public class CursorTD : MonoBehaviour
                     return;
                 }
             }
-            else if (direction == Vector2.right)
+            else if (direction == Vector2.left) //A
             {
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
                 {
-                    TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 7);
+                    TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 7);
 
                     return;
                 }
             }
+
         }
         
 
@@ -1002,11 +1003,11 @@ public class CursorTD : MonoBehaviour
             
             if (GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
-                towerSlotA.GetComponent<Image>().material = greyscaleShader;
+                towerSlotD.GetComponent<Image>().material = greyscaleShader;
             }
             else
             {
-                towerSlotA.GetComponent<Image>().material = null;
+                towerSlotD.GetComponent<Image>().material = null;
             }
 
             if (GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.resourceCost) 
@@ -1020,11 +1021,11 @@ public class CursorTD : MonoBehaviour
 
             if (GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.resourceCost) 
             {
-                towerSlotD.GetComponent<Image>().material = greyscaleShader;
+                towerSlotA.GetComponent<Image>().material = greyscaleShader;
             }
             else
             {
-                towerSlotD.GetComponent<Image>().material = null;
+                towerSlotA.GetComponent<Image>().material = null;
             }
         }    
     }

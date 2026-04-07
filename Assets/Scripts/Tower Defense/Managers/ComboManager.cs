@@ -29,19 +29,24 @@ public class ComboManager : MonoBehaviour
     public int currentCombo;
     public int highestCombo;
     public int currentMultiplier;
-    public int streak;
-
+    public int streakIncrement;
     public int score;
 
+    [Header ("Score Points")]
+
+    [Header ("UI Elements")]
     public TextMeshProUGUI currentComboText;
-    public TextMeshProUGUI streakText;
     public TextMeshProUGUI currentMultiplierText;
-    public TextMeshProUGUI highestComboText;
+    public TextMeshProUGUI scoreText;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentCombo = 0;
+        highestCombo = 0;
         currentMultiplier = 1;
+        streakIncrement = 50;
+        score = 0;
     }
 
     // Update is called once per frame
@@ -50,22 +55,23 @@ public class ComboManager : MonoBehaviour
         currentMultiplier = Mathf.Clamp(currentMultiplier, 1, 5);
 
         currentComboText.text = "COMBO " + currentCombo;
-        streakText.text = "STREAK " + streak;
         currentMultiplierText.text = "MULTIPLIER X" + currentMultiplier;
-        highestComboText.text = "SCORE " + highestCombo;
+        scoreText.text = "SCORE " + score;
     }
 
     public void IncreaseCombo()
     {
-        
+        currentCombo += 1; //increase combo
 
-        streak += 1;
-        if(streak == 10)
+        if(currentCombo % streakIncrement == 0)
         {
             currentMultiplier += 1;
-            streak = 0;
         }
-        currentCombo += 1 * currentMultiplier;
+    }
+
+    public void IncreaseScore(int points)
+    {
+        score += points * currentMultiplier;
     }
 
     public void ResetCombo()
@@ -74,9 +80,8 @@ public class ComboManager : MonoBehaviour
         {
             highestCombo = currentCombo;
         }
-        score += currentCombo;
-        currentCombo = 0;
-        streak = 0;
-        currentMultiplier = 1;
+
+        currentCombo = 0; //reset combo
+        currentMultiplier = 1; //reset multiplier
     }
 }

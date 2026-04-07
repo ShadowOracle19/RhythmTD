@@ -39,15 +39,17 @@ public class ConductorV2 : MonoBehaviour
     //Beat Thresholds
     //Note:
     //When checking beat threshold check late, miss, early, great, and then perfect
-    public float missBeatThreshold = 0.45f;
-    public float earlyBeatThreshold = 0.45f;
-    public float greatBeatThreshold = 0.45f;
-    public float perfectBeatThreshold = 0.61f;
+    [Header ("Beat Judgement Thresholds")]
+    public float lateGreatBeatThreshold = 0.125f;
+    public float lateBeatThreshold = 0.250f;  
+    public float missBeatThreshold = 0.375f;
+    public float earlyBeatThreshold = 0.625f;
+    public float earlyGreatBeatThreshold = 0.750f;
+    public float perfectBeatThreshold = 0.875f;
 
+    [Header ("Beat Tracking")]
     public float beatDuration;
     public int numberOfBeats;
-
-    //public bool threshold;
 
     public int beatTrack;
 
@@ -149,7 +151,7 @@ public class ConductorV2 : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning)
         {
-            CombatManager.Instance.metronome.SetActive(true);
+            //CombatManager.Instance.metronome.SetActive(true);
             CursorTD.Instance.movementSequence = true;
         }
 
@@ -188,6 +190,7 @@ public class ConductorV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //PAUSING
         if (GameManager.Instance.isGamePaused)
         {
             PauseMusic();
@@ -200,25 +203,22 @@ public class ConductorV2 : MonoBehaviour
 
         if (pauseConductor) return;
 
+        //CONDUCTING
         Conduct();
 
-        //if(beatDuration == perfectBeatThreshold)
-        //{
-        //    _ping.Play();
-        //}
-
+        /*
         if(beatDuration >= perfectBeatThreshold && !perfectBeatReset)
         {
             perfectBeatReset = true;
             Debug.Log("Perfect");
-            _ping.Play();
         }
         else if(beatDuration < perfectBeatThreshold)
         {
             perfectBeatReset = false;
         }
+        */
 
-            beatTrack = Mathf.Clamp(beatTrack, 0, 4);
+        beatTrack = Mathf.Clamp(beatTrack, 0, 4);
     }
 
     private void FixedUpdate()
@@ -241,10 +241,7 @@ public class ConductorV2 : MonoBehaviour
         }
 
         //determine how many seconds since the song started
-        //possibly another place to offset 
         songPosition = (musicSource.time) ;
-        //songPosition = (musicSource.time - dspSongTime) - offset;
-        //songPosition = (float)(AudioSettings.dspTime - dspSongTime - offset);
 
         //determine how many beats since the song started
         songPositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
@@ -259,6 +256,7 @@ public class ConductorV2 : MonoBehaviour
         if (songPositionInBeats >= numberOfBeats + 1 * 1)
         {
             numberOfBeats++;
+            _ping.Play();
         }
 
         //beat duration is what you need to offset if you wanna change the "latency" of the input
@@ -278,21 +276,40 @@ public class ConductorV2 : MonoBehaviour
 
     public bool InThreshHold()
     {
-        if(beatDuration >= perfectBeatThreshold)
+        if(beatDuration >= perfectBeatThreshold) //perfect
         {
-            Debug.Log("perfect Beat Hit");
+            Debug.Log("Perfect Beat Hit");
             return true;
         }
-        else if (beatDuration >= earlyBeatThreshold)//good beat hit
+        else if (beatDuration >= earlyGreatBeatThreshold) //great
         {
-            Debug.Log("early Beat Hit");
+            Debug.Log("Great [Early] Beat Hit");
+            return true;
+        }
+        else if (beatDuration >= earlyGreatBeatThreshold)
+        {
+            Debug.Log("Early Beat Hit");
+            return true;
+        }
+        else if (beatDuration >= missBeatThreshold)
+        {
+            Debug.Log("Miss Beat Hit");
+            return false;
+        }
+        else if (beatDuration >= lateBeatThreshold)
+        {
+            Debug.Log("Late Beat Hit");
+            return true;
+        }
+        else if (beatDuration >= lateGreatBeatThreshold)
+        {
+            Debug.Log("Great [Late] Beat Hit");
             return true;
         }
         else
         {
-            Debug.Log("miss Beat Hit");
-            return false;
-
+            Debug.Log("Perfect Beat Hit");
+            return true;
         }
     }
 
@@ -396,6 +413,6 @@ public class ConductorV2 : MonoBehaviour
 
 public enum _BeatResult
 {
-    late, miss, early, great, perfect
+    nohit, late, miss, early, great, perfect
 }
 

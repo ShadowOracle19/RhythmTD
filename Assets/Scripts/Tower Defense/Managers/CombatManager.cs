@@ -62,6 +62,7 @@ public class CombatManager : MonoBehaviour
     [Header("Resources")]
     public int resourceNum;
     public int maxResource = 100;
+    /*
     public Slider resourceSlider1;
     public Slider resourceSlider2;
     public Slider resourceSlider3;
@@ -70,13 +71,15 @@ public class CombatManager : MonoBehaviour
     [Header("Overcharge Resources")]
     public Slider overchargeSlider;
     public bool canPlaceEmpoweredTower = false;
+    */
 
     [Header("Combat UI")]
     public GameObject enemyTimerObject;
     public GameObject healthBar;
     //public GameObject controls;
     public GameObject resources;
-    public GameObject overchargeResources;
+    public TextMeshProUGUI resourceNumText;
+    //public GameObject overchargeResources;
     public GameObject towerDisplay;
     public GameObject feverBar;
     public GameObject metronome;
@@ -377,13 +380,13 @@ public class CombatManager : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning)
         {
-            overchargeResources.SetActive(false);
+            //overchargeResources.SetActive(false);
             resourceNum = Mathf.Clamp(resourceNum, 0, 100);
             return;
 
         }
 
-
+        /*
         overchargeSlider.value = resourceNum - 100;
 
         if (resourceNum > 100)
@@ -396,6 +399,7 @@ public class CombatManager : MonoBehaviour
         }
 
         if (resourceNum == 150) canPlaceEmpoweredTower = true;
+        */
     }
 
     private void FixedUpdate()
@@ -419,10 +423,15 @@ public class CombatManager : MonoBehaviour
     {
         //resource stuff
         resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
+        
+        resourceNumText.text = resourceNum.ToString();
+
+        /*
         resourceSlider1.value = resourceNum;
         resourceSlider2.value = resourceNum - 25;
         resourceSlider3.value = resourceNum - 50;
         resourceSlider4.value = resourceNum - 75;
+        */
     }
 
     void DelayTimer()
@@ -461,7 +470,7 @@ public class CombatManager : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning && resourceNum >= 25 && !CursorTD.Instance.towerPlaceSequence && !CursorTD.Instance.towerBuffSequence && !CursorTD.Instance.feverModeSequence && !CursorTD.Instance.towerPlacementMenuSequencePassed)
         {
-            // Make sure index is set to whichever text says "Moving on-beat gives magic"
+            // Make sure index is set to whichever text says "Moving on-beat gives energy"
             if (TutorialManager.Instance.index == 4)
                 TutorialManager.Instance.LoadNextTutorialDialogue();
             CursorTD.Instance.towerPlacementMenuSequence = true;

@@ -360,6 +360,8 @@ public class GameManager : MonoBehaviour
     public void Damage()
     {
         _currentHealth -= 1;
+        
+        ComboManager.Instance.ResetCombo();
 
         lostHealth = true; //set flag for failing objective 02
     }

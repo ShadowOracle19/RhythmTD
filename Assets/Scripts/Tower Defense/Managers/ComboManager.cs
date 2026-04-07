@@ -32,6 +32,9 @@ public class ComboManager : MonoBehaviour
     public int streakIncrement;
     public int score;
 
+    [Header ("Score Points")]
+
+    [Header ("UI Elements")]
     public TextMeshProUGUI currentComboText;
     public TextMeshProUGUI currentMultiplierText;
     public TextMeshProUGUI scoreText;

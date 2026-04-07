@@ -144,25 +144,27 @@ public class CursorTD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (pauseMovement || ConductorV2.instance.countingIn)
-            return;
+        if (pauseMovement || ConductorV2.instance.countingIn) return;
 
         //return cursor sprite to origin size
         cursorSprite.transform.localScale = Vector3.Lerp(cursorSprite.transform.localScale, defaultSize, Time.deltaTime * 5);
-        
 
         if (GameManager.Instance.winState) return;
 
-        
+        /*
+        if(tile != null && tile.placedTower != null)
+        {
+            tile.placedTower.GetComponent<Tower>().towerHover = true;
+        }
+        */
 
-        //if(tile != null && tile.placedTower != null)
-        //{
-        //    tile.placedTower.GetComponent<Tower>().towerHover = true;
-        //}
+        //TOWER MENUING FEEDBACK
+        if (towerSelectMenuOpened)
+        {
+            UpdateGreyscaleShader();
+        }
 
-        PlacementResourceBar();
-
+        //TUTORIAL
         // Make sure index is set to whichever text says "Press ARROW KEYS to place a tower"
         if (GameManager.Instance.tutorialRunning && TutorialManager.Instance.index == 6 && !towerSelectMenuOpened)
         {
@@ -180,32 +182,15 @@ public class CursorTD : MonoBehaviour
         if (GameManager.Instance.tutorialRunning && TutorialManager.Instance.index == 11 && tile.placedTower == null)
         {
             TutorialManager.Instance.LoadPrevTutorialDialogue();
-        }
-
-        if (towerSelectMenuOpened)
-        {
-            UpdateGreyscaleShader();
-        }
+        }  
     }
-
-
 
     private void FixedUpdate()
     {
-        if(CheckOnBeat() == _BeatResult.miss)
+        if(CheckOnBeat() == _BeatResult.nohit)
         {
             beatIsHit = false;
         }
-        //placingTower = false;
-        //beatIsHit = false;
-    }
-
-    public void PlacementResourceBar()
-    {
-        tower1Slider.value = CombatManager.Instance.resourceNum;
-        tower2Slider.value = CombatManager.Instance.resourceNum;
-        tower3Slider.value = CombatManager.Instance.resourceNum;
-        tower4Slider.value = CombatManager.Instance.resourceNum;
     }
 
     public void HandleFeverModeInput()
@@ -255,8 +240,6 @@ public class CursorTD : MonoBehaviour
         }
 
         TowerManager.Instance.SwapTowers();
-
-
     }
 
     public void DestroyMode()
@@ -323,15 +306,13 @@ public class CursorTD : MonoBehaviour
         towerSwap = false;
 
         placementMenu.SetActive(false);
-
-
     }
 
     public void MoveCursor(Vector2 direction)
     {
         if (isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) return;
 
-
+        //MOVEMENT CALCULATION
         //get the angle
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -348,25 +329,55 @@ public class CursorTD : MonoBehaviour
 
         desiredMovement = direction;
 
-        SpawnBeatHitResult();
-
-        
-
+        //TOWER MENUING
         if(towerSelectMenuOpened && upgradeTower) //upgrade tower
         {
-            UpgradeTower(desiredMovement);    
+            UpgradeTower(desiredMovement); 
+            return;   
         }
         else if(towerSelectMenuOpened) //place tower
         {
             HighlightPlacementSlot(desiredMovement);
-        }
-        else //move
-        {
-            Move(desiredMovement);
+            return;
         }
 
-        
-        
+        //BEAT JUDGEMENT
+        SpawnBeatHitResult();
+
+        //RESOURCES
+        switch (CheckOnBeat())
+        {
+            case _BeatResult.miss:
+
+                ComboManager.Instance.ResetCombo();
+
+                break;
+            case _BeatResult.great:
+                //COMBO & SCORE
+                ComboManager.Instance.IncreaseCombo();
+                //ComboManager.Instance.IncreaseScore();
+
+                // Cursor resource generation
+                CombatManager.Instance.resourceNum += 1;
+                SpawnParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
+                break;
+            case _BeatResult.perfect:
+                //COMBO & SCORE
+                ComboManager.Instance.IncreaseCombo();
+                //ComboManager.Instance.IncreaseScore();
+                
+                // Cursor resource generation
+                CombatManager.Instance.resourceNum += 3;
+                SpawnParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
+
+                break;
+            default:
+                break;
+        }
+
+        //MOVEMENT
+        Move(desiredMovement);
     }
 
     public void Buff1Trigger()
@@ -391,36 +402,49 @@ public class CursorTD : MonoBehaviour
     public void Buff4Trigger()
     {
         if (towerSelectMenuOpened) return;
+
         TowerEmpowerment(BuffType.Normal);
         SpawnBeatHitResult();
     }
 
     public void TowerEmpowerment(BuffType buff)
     {
+        //FEEDBACK
         AudioManager.instance.PlaySound(hitSfx, this.gameObject.transform, 1.0f);
         
-        if(tile.placedTower != null && !beatIsHit) //if tile has a placed tower and beat is not hit
+        //BUFFING & COMBO MANAGEMENT
+        if(tile.placedTower != null && !beatIsHit) //if tile is not empty and beat is not hit already
         {
-
             switch (CheckOnBeat())
             {
                 case _BeatResult.miss:
-                    
-                    ComboManager.Instance.ResetCombo();
+                    //FEEDBACK
+
+
+                    //COMBO
+                    ComboManager.Instance.ResetCombo(); // reset combo on miss
                     break;
                 case _BeatResult.great:
-                    
-                    buffGreatPfxInstance = Instantiate(buffGreatPfx, tile.placedTower.transform.position, Quaternion.identity);
+                    //FEEDBACK
+                    buffGreatPfxInstance = Instantiate(buffGreatPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
 
-                    ComboManager.Instance.IncreaseCombo();
-                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
+                    //COMBO & SCORE
+                    ComboManager.Instance.IncreaseCombo(); // increase combo on great
+                    //ComboManager.Instance.IncreaseScore();
+
+                    //BUFFING
+                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff); // activate buff
                     break;
-                case _BeatResult.perfect:
-                    
-                    buffPerfectPfxInstance = Instantiate(buffPerfectPfx, tile.placedTower.transform.position, Quaternion.identity);
-                    
-                    ComboManager.Instance.IncreaseCombo();
-                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
+                case _BeatResult.perfect:      
+                    //FEEDBACK
+                    buffPerfectPfxInstance = Instantiate(buffPerfectPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
+
+                    //COMBO & SCORE
+                    ComboManager.Instance.IncreaseCombo(); // increase combo on perfect
+                    //ComboManager.Instance.IncreaseScore();
+
+                    //BUFFING
+                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff); // activate buff
                     break;
                 default:
                     break;
@@ -428,7 +452,6 @@ public class CursorTD : MonoBehaviour
         }
         else
         {
-            SpawnBeatHitResult();
             return;
         }
     }
@@ -450,16 +473,6 @@ public class CursorTD : MonoBehaviour
             TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), false);
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
 
-            //if (CombatManager.Instance.resourceNum >= 150)
-            //{
-            //    TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), true);
-            //    CombatManager.Instance.resourceNum -= 150;
-            //}
-            //else if(CombatManager.Instance.resourceNum < 149)
-            //{
-                
-            //}
-
             SpawnBeatHitResult();
             TogglePlacementMenu();
             placingTower = false;
@@ -467,9 +480,7 @@ public class CursorTD : MonoBehaviour
         }
         else //if tower can't be placed
         {
-            //TogglePlacementMenu();
             PlacementFeedback(feedbackAudio, feedbackVisual);
-
             return;
         }    
     }
@@ -806,7 +817,6 @@ public class CursorTD : MonoBehaviour
     {
         //Debug.Log("pulse");
         cursorSprite.transform.localScale = pulseSize;
-        //beatIsHit = false;
     }
 
     public void CheckPianoResult(Tower tower)
@@ -814,12 +824,16 @@ public class CursorTD : MonoBehaviour
         switch (CheckOnBeat())
         {
             case _BeatResult.great:
-                CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain;
-                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
+                //FEEDBACK
+                SpawnParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance); // resource gen pfx
+                //RESOURCES
+                CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain; // increase resources  
                 break;
             case _BeatResult.perfect:
-                CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain;
-                SpawnResourceGenParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance);
+                //FEEDBACK
+                SpawnParticles(pianoResourceGenParticles, pianoResourceGenParticlesInstance); // resource gen pfx
+                //RESOURCES
+                CombatManager.Instance.resourceNum += tower.towerInfo.resourceGain; // increase resources
                 break;
             default:
                 break;
@@ -835,50 +849,23 @@ public class CursorTD : MonoBehaviour
 
         switch (CheckOnBeat())
         {
-            case _BeatResult.late:
-                
-                // Show LATE sprite
-                beatHitResultSpriteRender.sprite = lateHitSprite;
-
+            case _BeatResult.late:               
+                beatHitResultSpriteRender.sprite = lateHitSprite; // Show LATE sprite
                 break;
-            case _BeatResult.miss:
-                
-                // Show MISS sprite
-                beatHitResultSpriteRender.sprite = missHitSprite;
-
+            case _BeatResult.miss:               
+                beatHitResultSpriteRender.sprite = missHitSprite; // Show MISS sprite
                 break;
-            case _BeatResult.early:
-                
-                // Show EARLY sprite
-                beatHitResultSpriteRender.sprite = earlyHitSprite;
-
+            case _BeatResult.early:                
+                beatHitResultSpriteRender.sprite = earlyHitSprite; // Show EARLY sprite
                 break;
-            case _BeatResult.great:
-                // Cursor resource generation
-                CombatManager.Instance.resourceNum += 1;
-                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
-
-                // Show GREAT sprite
-                beatHitResultSpriteRender.sprite = greatHitSprite;
-
+            case _BeatResult.great:               
+                beatHitResultSpriteRender.sprite = greatHitSprite; // Show GREAT sprite
                 break;
             case _BeatResult.perfect:
-                // Cursor resource generation
-                CombatManager.Instance.resourceNum += 3;
-                SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
-
-                // Show PERFECT sprite
-                beatHitResultSpriteRender.sprite = perfectHitSprite;
-
+                beatHitResultSpriteRender.sprite = perfectHitSprite; // Show PERFECT sprite
                 break;
             default:
-                // Cursor resource generation
-                //CombatManager.Instance.resourceNum += 3;
-                //SpawnResourceGenParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
-
-                // Show MISS sprite
-                beatHitResultSpriteRender.sprite = missHitSprite;
-
+                //consider disabling the sprite here instead
                 break;
         }
     }
@@ -892,40 +879,31 @@ public class CursorTD : MonoBehaviour
         ////Debug.Log($"Time Pressed:{ConductorV2.instance.songPositionInBeats}    Adjusted Input Time:{adjustedInputTime}   TimingError:{timingError}    beat duration: {ConductorV2.instance.beatDuration}");
         //Debug.Log($"TimingError:{timingError}    beat duration: {ConductorV2.instance.beatDuration}");
 
-        if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold)//perfect beat hit 
-        {
-            ComboManager.Instance.IncreaseCombo();
-            return _BeatResult.perfect;
-            
+        if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold) {
+            return _BeatResult.perfect; 
         }
-        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.greatBeatThreshold)//great beat hit
-        {
-            ComboManager.Instance.IncreaseCombo();
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyGreatBeatThreshold) {
             return _BeatResult.great;
         }
-        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold)//early beat hit
-        {
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold) {
             return _BeatResult.early;
-
         }
-        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.missBeatThreshold)//miss beat hit
-        {
-            ComboManager.Instance.ResetCombo();
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.missBeatThreshold) {
             return _BeatResult.miss;
-
         }
-        else if (ConductorV2.instance.beatDuration < ConductorV2.instance.missBeatThreshold)//late beat hit
-        {
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.lateBeatThreshold) {
             return _BeatResult.late;
         }
-        else
-        {
-            return _BeatResult.miss;
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.lateGreatBeatThreshold) {
+            return _BeatResult.great;
+        }
+        else {
+            return _BeatResult.nohit;
         }
     }
 
 
-    private void SpawnResourceGenParticles(ParticleSystem particlesSource, ParticleSystem particlesInstance)
+    private void SpawnParticles(ParticleSystem particlesSource, ParticleSystem particlesInstance)
     {
         particlesInstance = Instantiate(particlesSource, transform.position, Quaternion.identity);
     }

@@ -149,7 +149,7 @@ public class ConductorV2 : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning)
         {
-            CombatManager.Instance.metronome.SetActive(true);
+            //CombatManager.Instance.metronome.SetActive(true);
             CursorTD.Instance.movementSequence = true;
         }
 
@@ -202,16 +202,11 @@ public class ConductorV2 : MonoBehaviour
 
         Conduct();
 
-        //if(beatDuration == perfectBeatThreshold)
-        //{
-        //    _ping.Play();
-        //}
-
         if(beatDuration >= perfectBeatThreshold && !perfectBeatReset)
         {
             perfectBeatReset = true;
             Debug.Log("Perfect");
-            _ping.Play();
+            //_ping.Play();
         }
         else if(beatDuration < perfectBeatThreshold)
         {
@@ -259,6 +254,7 @@ public class ConductorV2 : MonoBehaviour
         if (songPositionInBeats >= numberOfBeats + 1 * 1)
         {
             numberOfBeats++;
+            _ping.Play();
         }
 
         //beat duration is what you need to offset if you wanna change the "latency" of the input

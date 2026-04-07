@@ -138,8 +138,7 @@ public class CursorTD : MonoBehaviour
     {
         radialMenuAnimator = placementMenu.GetComponent<Animator>();
 
-        //get reference to the hit judgement sprite renderer
-        beatHitResultSpriteRender = beatHitResultPrefab.GetComponent<SpriteRenderer>();
+        beatHitResultSpriteRender = beatHitResultPrefab.GetComponent<SpriteRenderer>(); //get reference to the hit judgement sprite renderer
     }
 
     // Update is called once per frame
@@ -204,7 +203,6 @@ public class CursorTD : MonoBehaviour
     public void PlacementResourceBar()
     {
         tower1Slider.value = CombatManager.Instance.resourceNum;
-
         tower2Slider.value = CombatManager.Instance.resourceNum;
         tower3Slider.value = CombatManager.Instance.resourceNum;
         tower4Slider.value = CombatManager.Instance.resourceNum;
@@ -401,7 +399,7 @@ public class CursorTD : MonoBehaviour
     {
         AudioManager.instance.PlaySound(hitSfx, this.gameObject.transform, 1.0f);
         
-        if(tile.placedTower != null && !beatIsHit)
+        if(tile.placedTower != null && !beatIsHit) //if tile has a placed tower and beat is not hit
         {
 
             switch (CheckOnBeat())

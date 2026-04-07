@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -49,6 +50,9 @@ public class TowerManager : MonoBehaviour
     public float towerAudioVolumeIncrement = 0.05f;
 
     public List<Tower> towerList;
+
+
+    public static event Action FireTower;
 
     public void InstantiateTowerCooldown()
     {
@@ -205,6 +209,16 @@ public class TowerManager : MonoBehaviour
 
     public void DynamicMusicVolume(InstrumentType type)
     {
+        if(CombatManager.Instance.currentEncounter.enableTowerLimit)
+        {
+            towerAudioVolumeIncrement = 1 / CombatManager.Instance.currentEncounter.towerLimit;
+
+        }
+        else
+        {
+            towerAudioVolumeIncrement = 0.05f;
+        }
+
         switch (type)
         {
             case InstrumentType.Flats:
@@ -215,7 +229,7 @@ public class TowerManager : MonoBehaviour
 
             case InstrumentType.Trill:
                 ConductorV2.instance.trill.volume += towerAudioVolumeIncrement;
-                ConductorV2.instance.trill.volume = Mathf.Clamp(ConductorV2.instance.trill.volume, 0, 0.5f);           
+                ConductorV2.instance.trill.volume = Mathf.Clamp(ConductorV2.instance.trill.volume, 0, 0.5f);
 
                 break;
 
@@ -273,100 +287,102 @@ public class TowerManager : MonoBehaviour
     
     public void FireTowers()
     {
-        if (towerList.Count == 0) return;
+        gameObject.BroadcastMessage("FireTower");
 
-        foreach (Tower tower in towerList.ToArray())
-        {
-            tower.BuffPlayback(ConductorV2.instance.beatTrack);
+        //if (towerList.Count == 0) return;
 
-            if(tower == null)
-            {
-                towerList.Remove(tower);
-                continue;
-            }
+        //foreach (Tower tower in towerList.ToArray())
+        //{
+        //    tower.BuffPlayback(ConductorV2.instance.beatTrack);
 
-            switch (tower.currentAttackPattern)
-            {
-                case TowerAttackPattern.everyBeat:
-                    tower.towerAboutToFire = true;
-                    tower.Fire();
-                    break;
+        //    if(tower == null)
+        //    {
+        //        towerList.Remove(tower);
+        //        continue;
+        //    }
 
-                case TowerAttackPattern.everyMeasure:
-                    if (ConductorV2.instance.beatTrack == 4)
-                    {
-                        tower.Fire();
-                        tower.towerAboutToFire = false;
-                    }
-                    else if (ConductorV2.instance.beatTrack == 3)
-                    {
-                        tower.towerAboutToFire = true;
-                    }
-                    break;
+        //    switch (tower.currentAttackPattern)
+        //    {
+        //        case TowerAttackPattern.everyBeat:
+        //            tower.towerAboutToFire = true;
+        //            tower.Fire();
+        //            break;
 
-                case TowerAttackPattern.everyOtherBeat:
+        //        case TowerAttackPattern.everyMeasure:
+        //            if (ConductorV2.instance.beatTrack == 4)
+        //            {
+        //                tower.Fire();
+        //                tower.towerAboutToFire = false;
+        //            }
+        //            else if (ConductorV2.instance.beatTrack == 3)
+        //            {
+        //                tower.towerAboutToFire = true;
+        //            }
+        //            break;
 
-                    switch (ConductorV2.instance.beatTrack)
-                    {
-                        case 1:
-                            tower.towerAboutToFire = true;
-                            break;
-                        case 2:
-                            tower.Fire();
-                            tower.towerAboutToFire = false;
-                            break;
-                        case 3:
-                            tower.towerAboutToFire = true;
-                            break;
-                        case 4:
-                            tower.Fire();
-                            tower.towerAboutToFire = false;
-                            break;
-                    }
-                    break;
+        //        case TowerAttackPattern.everyOtherBeat:
 
-                case TowerAttackPattern.everyBeatButOne:
-                    tower.beat += 1;
-                    if (ConductorV2.instance.beatTrack < 4)
-                    {
-                        tower.towerAboutToFire = true;
-                        tower.Fire();
+        //            switch (ConductorV2.instance.beatTrack)
+        //            {
+        //                case 1:
+        //                    tower.towerAboutToFire = true;
+        //                    break;
+        //                case 2:
+        //                    tower.Fire();
+        //                    tower.towerAboutToFire = false;
+        //                    break;
+        //                case 3:
+        //                    tower.towerAboutToFire = true;
+        //                    break;
+        //                case 4:
+        //                    tower.Fire();
+        //                    tower.towerAboutToFire = false;
+        //                    break;
+        //            }
+        //            break;
 
-                    }
-                    else if (ConductorV2.instance.beatTrack == 4)
-                    {
-                        tower.towerAboutToFire = false;
-                        tower.beat = 1;
-                    }
-                    break;
+        //        case TowerAttackPattern.everyBeatButOne:
+        //            tower.beat += 1;
+        //            if (ConductorV2.instance.beatTrack < 4)
+        //            {
+        //                tower.towerAboutToFire = true;
+        //                tower.Fire();
 
-                case TowerAttackPattern.snakePatternFire:
+        //            }
+        //            else if (ConductorV2.instance.beatTrack == 4)
+        //            {
+        //                tower.towerAboutToFire = false;
+        //                tower.beat = 1;
+        //            }
+        //            break;
+
+        //        case TowerAttackPattern.snakePatternFire:
                     
-                    tower.towerAboutToFire = true;
-                    float yPosition = 0f;
+        //            tower.towerAboutToFire = true;
+        //            float yPosition = 0f;
                     
-                    switch (ConductorV2.instance.beatTrack) 
-                    {
-                        case 1:
-                            yPosition = 0;
-                            break;
-                        case 2:
-                            yPosition = 1f;
-                            break;
-                        case 3:
-                            yPosition = 0;
-                            break;
-                        case 4:
-                            yPosition = -1f;
-                            break;
-                    }
-                    tower.Fire(yPosition);
-                    break; 
+        //            switch (ConductorV2.instance.beatTrack) 
+        //            {
+        //                case 1:
+        //                    yPosition = 0;
+        //                    break;
+        //                case 2:
+        //                    yPosition = 1f;
+        //                    break;
+        //                case 3:
+        //                    yPosition = 0;
+        //                    break;
+        //                case 4:
+        //                    yPosition = -1f;
+        //                    break;
+        //            }
+        //            tower.Fire(yPosition);
+        //            break; 
 
-                default:
-                    break;
-            }
-        }
+        //        default:
+        //            break;
+        //    }
+        //}
     }
 
    

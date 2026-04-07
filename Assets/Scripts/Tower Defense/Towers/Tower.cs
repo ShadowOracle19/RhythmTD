@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,7 @@ public enum TowerState
 
 public class Tower : MonoBehaviour
 {
+    #region Variables
     public TowerTypeCreator towerInfo;
     public GameObject projectile;
 
@@ -121,6 +123,9 @@ public class Tower : MonoBehaviour
 
     [HideInInspector]
     public int towerNum;
+    #endregion
+
+    
 
     public virtual void Start()
     {
@@ -225,6 +230,100 @@ public class Tower : MonoBehaviour
 
     }
 
+    public void FireTower()
+    {
+        switch (currentAttackPattern)
+        {
+            case TowerAttackPattern.everyBeat:
+                towerAboutToFire = true;
+                Fire();
+                break;
+
+            case TowerAttackPattern.everyMeasure:
+                if (ConductorV2.instance.beatTrack == 4)
+                {
+                    Fire();
+                    towerAboutToFire = false;
+                }
+                else if (ConductorV2.instance.beatTrack == 3)
+                {
+                    towerAboutToFire = true;
+                }
+                break;
+
+            case TowerAttackPattern.everyOtherBeat:
+                if(ConductorV2.instance.beatTrack % 2 == 0)
+                {
+                    Fire();
+                    towerAboutToFire = false;
+                }
+                else
+                {
+                    towerAboutToFire = true;
+                }
+
+                //switch (ConductorV2.instance.beatTrack)
+                //{
+                //    case 1:
+                //        towerAboutToFire = true;
+                //        break;
+                //    case 2:
+                //        Fire();
+                //        towerAboutToFire = false;
+                //        break;
+                //    case 3:
+                //        towerAboutToFire = true;
+                //        break;
+                //    case 4:
+                //        Fire();
+                //        towerAboutToFire = false;
+                //        break;
+                //}
+                break;
+
+            case TowerAttackPattern.everyBeatButOne:
+                beat += 1;
+                if (ConductorV2.instance.beatTrack < 4)
+                {
+                    towerAboutToFire = true;
+                    Fire();
+
+                }
+                else if (ConductorV2.instance.beatTrack == 4)
+                {
+                    towerAboutToFire = false;
+                    beat = 1;
+                }
+                break;
+
+            case TowerAttackPattern.snakePatternFire:
+
+                towerAboutToFire = true;
+                float yPosition = 0f;
+
+                switch (ConductorV2.instance.beatTrack)
+                {
+                    case 1:
+                        yPosition = 0;
+                        break;
+                    case 2:
+                        yPosition = 1f;
+                        break;
+                    case 3:
+                        yPosition = 0;
+                        break;
+                    case 4:
+                        yPosition = -1f;
+                        break;
+                }
+                Fire(yPosition);
+                break;
+
+            default:
+                break;
+        }
+    }
+
 
     public virtual void Fire() //default fire
     {
@@ -307,7 +406,7 @@ public class Tower : MonoBehaviour
     {
         colliders = Physics.OverlapSphere(transform.position, towerRange, LayerMask.GetMask("Stage"));
 
-        int rand = Random.Range(0, colliders.Length - 1);
+        int rand = UnityEngine.Random.Range(0, colliders.Length - 1);
 
         GameObject charge = Instantiate(nextProjectile, transform.position, transform.rotation, CombatManager.Instance.chargesParent);
         charge.GetComponent<Charges>().initalizeCharge(chargeValue,  new Vector3(colliders[rand].transform.position.x, 0.5f, colliders[rand].transform.position.z), connectedTower, true);

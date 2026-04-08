@@ -122,6 +122,9 @@ public class ConductorV2 : MonoBehaviour
         }
 
         StartConductor();
+
+        _ping.Play();
+
         yield return null;
     }
 
@@ -147,7 +150,6 @@ public class ConductorV2 : MonoBehaviour
         poco.time = 0;
         forte.time = 0;
         legato.time = 0;
-
 
         if (GameManager.Instance.tutorialRunning)
         {

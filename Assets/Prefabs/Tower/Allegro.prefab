@@ -611,6 +611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerInfo: {fileID: 11400000, guid: 12124ddac89b8474a90d86516cda148b, type: 2}
   projectile: {fileID: 2456792131810543251, guid: 2f56632d53c22b04ca89e2a7e96ac4f0, type: 3}
+  enemyInRange: 0
   beatIndicator: {fileID: 2499767275724444200}
   beatCircle: {fileID: 1205972593765645086}
   towerAboutToFire: 0
@@ -624,6 +625,7 @@ MonoBehaviour:
   upgradeAttackSprite03: {fileID: 383071095746508678, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: 383071095746508678, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   animationController: {fileID: 1130818630121725999}
+  towerBaseAnimationController: {fileID: 5935154881351082000}
   towerAttackSfx: {fileID: 0}
   towerHurtSfx: {fileID: 0}
   towerDeathSfx: {fileID: 0}
@@ -652,6 +654,7 @@ MonoBehaviour:
   upgradeFourActive: 0
   feelingItNow: 0
   synthBuff: 0
+  towerNum: 0
 --- !u!82 &-8906736978416925348
 AudioSource:
   m_ObjectHideFlags: 0

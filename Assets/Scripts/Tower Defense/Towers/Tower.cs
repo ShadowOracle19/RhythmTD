@@ -51,6 +51,7 @@ public class Tower : MonoBehaviour
 
     [Header("Animation")]
     public Animator animationController;
+    public Animator towerBaseAnimationController;
     private float AnimationBPM;
 
     [Header("SFX")]
@@ -150,6 +151,8 @@ public class Tower : MonoBehaviour
         //Set Animation BPM
         AnimationBPM = (float)(2*(ConductorV2.instance.bpm*0.0125));
         animationController.SetFloat("Speed", AnimationBPM);
+
+        AnimationManager.instance.SetAnimSpeed(towerBaseAnimationController, 60);
     }
 
     public virtual void Update()

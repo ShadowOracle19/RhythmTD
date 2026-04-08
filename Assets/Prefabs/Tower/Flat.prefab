@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDetection
   connectedTower: {fileID: 3637877782725260547}
+  detectedEnemies: []
 --- !u!54 &8611734867533662789
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -274,6 +275,7 @@ MonoBehaviour:
   upgradeAttackSprite03: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   animationController: {fileID: 7412888328530383611}
+  towerBaseAnimationController: {fileID: 2051579340026178359}
   towerAttackSfx: {fileID: 8300000, guid: 64e6bfc065fb6404da83cf5259f7f894, type: 3}
   towerHurtSfx: {fileID: 8300000, guid: 0f6221cd989c4a74a9ed126be6baab7f, type: 3}
   towerDeathSfx: {fileID: 8300000, guid: 39bc06ae949154b4582c5fa4f63321a7, type: 3}
@@ -302,6 +304,7 @@ MonoBehaviour:
   upgradeFourActive: 0
   feelingItNow: 0
   synthBuff: 0
+  towerNum: 0
 --- !u!82 &3091612715999862889
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1029,7 +1032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4265638836486659012
 Transform:
   m_ObjectHideFlags: 0

@@ -14103,7 +14103,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1506831602}
   - component: {fileID: 1506831601}
-  - component: {fileID: 1506831603}
   m_Layer: 0
   m_Name: Animation Manager
   m_TagString: Untagged
@@ -14123,6 +14122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5977f70ee118ac74590405352cfb6fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationManager
+  towerLoadoutAnimators: []
 --- !u!4 &1506831602
 Transform:
   m_ObjectHideFlags: 0
@@ -14138,23 +14138,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &1506831603
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506831599}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: de7739b30ac020d4aa14892715a6854e, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!1001 &1509081921
 PrefabInstance:
   m_ObjectHideFlags: 0

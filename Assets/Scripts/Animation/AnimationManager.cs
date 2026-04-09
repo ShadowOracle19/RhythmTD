@@ -1,4 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AnimationManager : MonoBehaviour
 {
@@ -10,8 +14,9 @@ public class AnimationManager : MonoBehaviour
     }
     
     //VARIABLES
+    public List<Animator> towerLoadoutAnimators = new List<Animator>();
     
-    
+    /*
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,9 +28,12 @@ public class AnimationManager : MonoBehaviour
     {
         
     }
+    */
 
     public float CalculateAnimSpeed(Animator animator, float animBpm)
     {
+        Debug.Log(ConductorV2.instance.crotchet);
+
         float animCrotchet = 60.0f / animBpm;
 
         float speedMultiplier = animCrotchet/ConductorV2.instance.crotchet;
@@ -35,15 +43,19 @@ public class AnimationManager : MonoBehaviour
         return targetAnimSpeed;
     }
 
-    public void SetAnimSpeed(Animator animator, float animBpm)
+    public void SetAnimSpeed(Animator animator, float animBpm) //requires programmers atm to know the animation BPMs and hardcode them when calling this function which could be improved later
     {
         animator.speed = CalculateAnimSpeed(animator, animBpm);
     }
 
-    /*
-    public void SetCombatAnimationSpeed()
+    public void SetCombatAnimSpeed() //rn this isn't flexible enough to account for differing animation speeds across UI elements
     {
-
+        foreach (Animator animator in towerLoadoutAnimators)
+        {
+            if (animator == null) {
+                continue;
+            }
+            SetAnimSpeed(animator, 40);
+        }
     }
-    */
 }

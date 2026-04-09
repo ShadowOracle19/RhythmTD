@@ -149,9 +149,7 @@ public class Tower : MonoBehaviour
         nextProjectile = projectile; // Set default projectile type
 
         //Set Animation BPM
-        AnimationBPM = (float)(2*(ConductorV2.instance.bpm*0.0125));
-        animationController.SetFloat("Speed", AnimationBPM);
-
+        AnimationManager.instance.SetAnimSpeed(animationController, 80);
         AnimationManager.instance.SetAnimSpeed(towerBaseAnimationController, 60);
     }
 

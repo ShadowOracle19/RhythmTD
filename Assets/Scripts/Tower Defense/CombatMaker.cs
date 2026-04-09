@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Combat", menuName = "ScriptableObjects/CombatCreator")]
 public class CombatMaker : ScriptableObject
 {
+    [Header("<b><size=15>Combat Encounter Data</size></b>")]
     public DynamicSongCreator dynamicSong;
     public GameObject stagePrefab;
     public int startingResources = 50;
@@ -14,6 +15,14 @@ public class CombatMaker : ScriptableObject
     [Tooltip("Enable this to limit tower placement")]
     public bool enableTowerLimit = false;
     public int towerLimit = 1;
+
+    [Space(20)]
+    [Header("End Level Text")]
+    [Line(255, 255, 255)]
+    [TextArea(2, 4)]
+    public string wonGame = "Congrats on winning rockstar!";
+    [TextArea(2, 4)]
+    public string lostGame = "Commander is winning!";
 }
 
 [System.Serializable]

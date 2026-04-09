@@ -333,7 +333,8 @@ public class CombatManager : MonoBehaviour
 
         ConductorV2.instance.StopMusic();
 
-        GameManager.Instance.tutorialRunning = false;
+        GameManager.Instance.tutorialRunning = false; 
+        GameManager.Instance.combatRunning = false;
 
         CombatDialogueManager.Instance.combatDialogueActive = false;
         CombatDialogueManager.Instance.Clear();

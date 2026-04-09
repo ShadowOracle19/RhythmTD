@@ -58,7 +58,7 @@ public class CursorTD : MonoBehaviour
 
     [Header ("Upgrade Menu")]
     public GameObject upgradeMenu;
-    public bool upgradeTower = false;
+    public bool upgradingTower = false;
 
     public GameObject upgradeSlotW;
     public GameObject upgradeSlotA;
@@ -330,7 +330,7 @@ public class CursorTD : MonoBehaviour
         desiredMovement = direction;
 
         //TOWER MENUING
-        if(towerSelectMenuOpened && upgradeTower) //upgrade tower
+        if(towerSelectMenuOpened && upgradingTower) //upgrade tower
         {
             UpgradeTower(desiredMovement); 
             return;   
@@ -341,9 +341,6 @@ public class CursorTD : MonoBehaviour
             return;
         }
 
-        //BEAT JUDGEMENT
-        SpawnBeatHitResult();
-
         //RESOURCES
         switch (CheckOnBeat())
         {
@@ -351,11 +348,15 @@ public class CursorTD : MonoBehaviour
 
                 ComboManager.Instance.ResetCombo();
 
+                SpawnBeatHitResult(_BeatResult.miss);
+
                 break;
             case _BeatResult.great:
                 //COMBO & SCORE
                 ComboManager.Instance.IncreaseCombo();
                 //ComboManager.Instance.IncreaseScore();
+
+                SpawnBeatHitResult(_BeatResult.great);
 
                 // Cursor resource generation
                 CombatManager.Instance.resourceNum += 1;
@@ -366,6 +367,8 @@ public class CursorTD : MonoBehaviour
                 //COMBO & SCORE
                 ComboManager.Instance.IncreaseCombo();
                 //ComboManager.Instance.IncreaseScore();
+
+                SpawnBeatHitResult(_BeatResult.perfect);
                 
                 // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
@@ -404,7 +407,7 @@ public class CursorTD : MonoBehaviour
         if (towerSelectMenuOpened) return;
 
         TowerEmpowerment(BuffType.Normal);
-        SpawnBeatHitResult();
+        SpawnBeatHitResult(CheckOnBeat());
     }
 
     public void TowerEmpowerment(BuffType buff)
@@ -473,7 +476,7 @@ public class CursorTD : MonoBehaviour
             TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), false);
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
 
-            SpawnBeatHitResult();
+            SpawnBeatHitResult(CheckOnBeat());
             TogglePlacementMenu();
             placingTower = false;
             return;
@@ -498,7 +501,7 @@ public class CursorTD : MonoBehaviour
             upgradeSlotS.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade3;
             //upgradeSlotA.GetComponent<TowerButton>().icon.sprite = tile.placedTower.GetComponent<Tower>().towerInfo.upgrade4;
 
-            upgradeTower = true;
+            upgradingTower = true;
             upgradeMenu.SetActive(towerSelectMenuOpened);
             return;
         }
@@ -520,7 +523,7 @@ public class CursorTD : MonoBehaviour
 
     public void ClosePlacementMenu()
     {
-        upgradeTower = false;
+        upgradingTower = false;
         placingTower = false;
         towerSelectMenuOpened = false;
         placementMenu.SetActive(towerSelectMenuOpened);
@@ -619,7 +622,7 @@ public class CursorTD : MonoBehaviour
 
     public void UpgradeTower(Vector2 direction)
     {
-        if (!towerSelectMenuOpened || placingTower || !upgradeTower) return;
+        if (!towerSelectMenuOpened || placingTower || !upgradingTower) return;
 
         placingTower = true;
         Tower hoveredTower = tile.placedTower.GetComponent<Tower>();
@@ -841,32 +844,34 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public void SpawnBeatHitResult()
+    public void SpawnBeatHitResult(_BeatResult result)
     {
         if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused || beatIsHit) return;
         
         beatIsHit = true;
-        GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
 
-        switch (CheckOnBeat())
+        GameObject beatResult = Instantiate(beatHitResultPrefab, new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z), Quaternion.identity);
+        SpriteRenderer beatJudgementSpriteRenderer = beatResult.GetComponent<SpriteRenderer>();
+
+        switch (result)
         {
             case _BeatResult.late:               
-                beatHitResultSpriteRender.sprite = lateHitSprite; // Show LATE sprite
+                beatJudgementSpriteRenderer.sprite = lateHitSprite; // Show LATE sprite
                 break;
             case _BeatResult.miss:               
-                beatHitResultSpriteRender.sprite = missHitSprite; // Show MISS sprite
+                beatJudgementSpriteRenderer.sprite = missHitSprite; // Show MISS sprite
                 break;
             case _BeatResult.early:                
-                beatHitResultSpriteRender.sprite = earlyHitSprite; // Show EARLY sprite
+                beatJudgementSpriteRenderer.sprite = earlyHitSprite; // Show EARLY sprite
                 break;
             case _BeatResult.great:               
-                beatHitResultSpriteRender.sprite = greatHitSprite; // Show GREAT sprite
+                beatJudgementSpriteRenderer.sprite = greatHitSprite; // Show GREAT sprite
                 break;
             case _BeatResult.perfect:
-                beatHitResultSpriteRender.sprite = perfectHitSprite; // Show PERFECT sprite
+                beatJudgementSpriteRenderer.sprite = perfectHitSprite; // Show PERFECT sprite
                 break;
             default:
-                //consider disabling the sprite here instead
+                beatJudgementSpriteRenderer.sprite = missHitSprite; //consider disabling the sprite here instead
                 break;
         }
     }
@@ -924,7 +929,7 @@ public class CursorTD : MonoBehaviour
     void UpdateGreyscaleShader() 
     { 
         // Check if guitar tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-        if (upgradeTower)
+        if (upgradingTower)
         {
             if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost1 || tile.placedTower.GetComponent<Tower>().upgradeOneActive) 
             {

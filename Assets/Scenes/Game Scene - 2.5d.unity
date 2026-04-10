@@ -14103,7 +14103,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1506831602}
   - component: {fileID: 1506831601}
-  - component: {fileID: 1506831603}
   m_Layer: 0
   m_Name: Animation Manager
   m_TagString: Untagged
@@ -14123,6 +14122,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5977f70ee118ac74590405352cfb6fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationManager
+  towerLoadoutAnimators: []
+  combatSceneAnimators:
+  - animator: {fileID: 1693339556}
+    animationBpm: 80
+  - animator: {fileID: 244352146}
+    animationBpm: 80
+  - animator: {fileID: 1414303877}
+    animationBpm: 80
+  - animator: {fileID: 1041028995}
+    animationBpm: 80
+  - animator: {fileID: 2036201142}
+    animationBpm: 80
+  - animator: {fileID: 866750528}
+    animationBpm: 60
+  - animator: {fileID: 1928640452}
+    animationBpm: 60
 --- !u!4 &1506831602
 Transform:
   m_ObjectHideFlags: 0
@@ -14138,23 +14153,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &1506831603
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506831599}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: de7739b30ac020d4aa14892715a6854e, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!1001 &1509081921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16585,6 +16583,11 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2137947922625640549, guid: 0a503b7c627a3bf4fb603323466346a7, type: 3}
   m_PrefabInstance: {fileID: 258486959100792172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1693339556 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1299841123790921470, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1702141191
 PrefabInstance:
@@ -22336,7 +22339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2737315247605731274, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2985573084392977531, guid: 857a08224405b704dac455f36c4fcad6, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -23735,15 +23738,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 768939829410093965, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 768939829410093965, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1150535449710288723, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2521768178749273193, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
       propertyPath: m_IsActive
@@ -26642,7 +26645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9117658308685687412
 Transform:
   m_ObjectHideFlags: 0

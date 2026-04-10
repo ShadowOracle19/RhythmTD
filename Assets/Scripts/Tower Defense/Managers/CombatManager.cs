@@ -271,6 +271,9 @@ public class CombatManager : MonoBehaviour
 
         TowerManager.Instance.ResetTowerManager();
         ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
+
+        //Set Animation BPM
+        AnimationManager.instance.SetCombatAnimSpeed();
     }
 
     public void EndEncounter()

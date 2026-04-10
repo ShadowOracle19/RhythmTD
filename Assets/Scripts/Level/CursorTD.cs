@@ -70,7 +70,7 @@ public class CursorTD : MonoBehaviour
     public Vector3 pulseSize;
 
     public GameObject beatHitResultPrefab;
-    public SpriteRenderer beatHitResultSpriteRender;
+    //public SpriteRenderer beatHitResultSpriteRenderer;
     public Sprite perfectHitSprite;
     public Sprite greatHitSprite;
     public Sprite earlyHitSprite;
@@ -95,6 +95,7 @@ public class CursorTD : MonoBehaviour
     public int buffCounter = 0;
 
     public bool beatIsHit = false;
+    public bool beatHasReset = false;
 
     [Header("Resource Bar")]
     public Slider tower1Slider;
@@ -138,7 +139,7 @@ public class CursorTD : MonoBehaviour
     {
         radialMenuAnimator = placementMenu.GetComponent<Animator>();
 
-        beatHitResultSpriteRender = beatHitResultPrefab.GetComponent<SpriteRenderer>(); //get reference to the hit judgement sprite renderer
+        //beatHitResultSpriteRenderer = beatHitResultPrefab.GetComponent<SpriteRenderer>(); //get reference to the hit judgement sprite renderer
     }
 
     // Update is called once per frame
@@ -187,9 +188,14 @@ public class CursorTD : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(CheckOnBeat() == _BeatResult.nohit)
+        if(ConductorV2.instance.beatDuration >= 0.500f && !beatHasReset)
         {
             beatIsHit = false;
+            beatHasReset = true;
+        }
+        else if (ConductorV2.instance.beatDuration < 0.500f && beatHasReset)
+        {
+            beatHasReset = false;
         }
     }
 
@@ -310,7 +316,16 @@ public class CursorTD : MonoBehaviour
 
     public void MoveCursor(Vector2 direction)
     {
-        if (isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) return;
+        if (GameManager.Instance.winState || GameManager.Instance.loseState) return;
+
+        if (beatIsHit)
+        {
+            SpawnBeatHitResult(_BeatResult.miss);
+            ComboManager.Instance.ResetCombo();
+            return;
+        }
+
+        if (isMoving) return;
 
         //MOVEMENT CALCULATION
         //get the angle
@@ -350,6 +365,12 @@ public class CursorTD : MonoBehaviour
 
                 SpawnBeatHitResult(_BeatResult.miss);
 
+                break;
+            case _BeatResult.late:
+                SpawnBeatHitResult(_BeatResult.late);
+                break;
+            case _BeatResult.early:
+                SpawnBeatHitResult(_BeatResult.early);
                 break;
             case _BeatResult.great:
                 //COMBO & SCORE

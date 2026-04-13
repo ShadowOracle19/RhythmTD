@@ -655,9 +655,9 @@ public class DialogueManager : MonoBehaviour
             CombatManager.Instance.healthBar.SetActive(true);
             //CombatManager.Instance.controls.SetActive(true);
             CombatManager.Instance.resources.SetActive(true);
-            CombatManager.Instance.towerDisplay.SetActive(true);
+            //CombatManager.Instance.towerDisplay.SetActive(true);
             CombatManager.Instance.feverBar.SetActive(true);
-            CombatManager.Instance.metronome.SetActive(true);
+            //CombatManager.Instance.metronome.SetActive(true);
             CombatManager.Instance.waveCounter.SetActive(true);
             CombatManager.Instance.combo.SetActive(true);
 

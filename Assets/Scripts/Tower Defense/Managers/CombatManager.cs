@@ -2,7 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SceneManagement;
+//using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -80,9 +80,9 @@ public class CombatManager : MonoBehaviour
     public GameObject resources;
     public TextMeshProUGUI resourceNumText;
     //public GameObject overchargeResources;
-    public GameObject towerDisplay;
+    //public GameObject towerDisplay;
     public GameObject feverBar;
-    public GameObject metronome;
+    //public GameObject metronome;
     public GameObject waveCounter;
     public GameObject combo;
     //public GameObject knockEmDead;
@@ -336,7 +336,8 @@ public class CombatManager : MonoBehaviour
 
         ConductorV2.instance.StopMusic();
 
-        GameManager.Instance.tutorialRunning = false;
+        GameManager.Instance.tutorialRunning = false; 
+        GameManager.Instance.combatRunning = false;
 
         CombatDialogueManager.Instance.combatDialogueActive = false;
         CombatDialogueManager.Instance.Clear();

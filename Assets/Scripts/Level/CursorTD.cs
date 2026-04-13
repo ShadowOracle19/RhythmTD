@@ -523,7 +523,7 @@ public class CursorTD : MonoBehaviour
                 TutorialManager.Instance.LoadNextTutorialDialogue();
                 towerPlacementMenuSequence = false;
                 towerPlaceSequence = true;
-                CombatManager.Instance.towerDisplay.SetActive(true);
+                //CombatManager.Instance.towerDisplay.SetActive(true);
             }
         }
 

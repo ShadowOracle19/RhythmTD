@@ -404,9 +404,9 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.enemyTimerObject.SetActive(false);
         //CombatManager.Instance.healthBar.SetActive(false);
         CombatManager.Instance.resources.SetActive(false);
-        CombatManager.Instance.towerDisplay.SetActive(false);
+        //CombatManager.Instance.towerDisplay.SetActive(false);
         CombatManager.Instance.feverBar.SetActive(false);
-        CombatManager.Instance.metronome.SetActive(false);
+        //CombatManager.Instance.metronome.SetActive(false);
         CombatManager.Instance.waveCounter.SetActive(false);
         CombatManager.Instance.combo.SetActive(false);
 
@@ -472,9 +472,9 @@ public class GameManager : MonoBehaviour
             CombatManager.Instance.healthBar.SetActive(true);
             //CombatManager.Instance.controls.SetActive(true);
             CombatManager.Instance.resources.SetActive(true);
-            CombatManager.Instance.towerDisplay.SetActive(true);
+            //CombatManager.Instance.towerDisplay.SetActive(true);
             CombatManager.Instance.feverBar.SetActive(true);
-            CombatManager.Instance.metronome.SetActive(true);
+            //CombatManager.Instance.metronome.SetActive(true);
             CombatManager.Instance.waveCounter.SetActive(true);
             CombatManager.Instance.combo.SetActive(true);
 

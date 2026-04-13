@@ -360,11 +360,8 @@ public class CursorTD : MonoBehaviour
         switch (CheckOnBeat())
         {
             case _BeatResult.miss:
-
-                ComboManager.Instance.ResetCombo();
-
                 SpawnBeatHitResult(_BeatResult.miss);
-
+                ComboManager.Instance.ResetCombo();
                 break;
             case _BeatResult.late:
                 SpawnBeatHitResult(_BeatResult.late);
@@ -373,28 +370,18 @@ public class CursorTD : MonoBehaviour
                 SpawnBeatHitResult(_BeatResult.early);
                 break;
             case _BeatResult.great:
-                //COMBO & SCORE
+                SpawnBeatHitResult(_BeatResult.great);
                 ComboManager.Instance.IncreaseCombo();
                 //ComboManager.Instance.IncreaseScore();
-
-                SpawnBeatHitResult(_BeatResult.great);
-
-                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 1;
                 SpawnParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
-
                 break;
             case _BeatResult.perfect:
-                //COMBO & SCORE
+                SpawnBeatHitResult(_BeatResult.perfect);
                 ComboManager.Instance.IncreaseCombo();
                 //ComboManager.Instance.IncreaseScore();
-
-                SpawnBeatHitResult(_BeatResult.perfect);
-                
-                // Cursor resource generation
                 CombatManager.Instance.resourceNum += 3;
                 SpawnParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
-
                 break;
             default:
                 break;
@@ -906,7 +893,7 @@ public class CursorTD : MonoBehaviour
         ////Debug.Log($"Time Pressed:{ConductorV2.instance.songPositionInBeats}    Adjusted Input Time:{adjustedInputTime}   TimingError:{timingError}    beat duration: {ConductorV2.instance.beatDuration}");
         //Debug.Log($"TimingError:{timingError}    beat duration: {ConductorV2.instance.beatDuration}");
 
-        if (ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold) {
+        if ((ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold) || ConductorV2.instance.beatDuration < ConductorV2.instance.lateGreatBeatThreshold) {
             return _BeatResult.perfect; 
         }
         else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyGreatBeatThreshold) {

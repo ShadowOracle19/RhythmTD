@@ -195,6 +195,7 @@ public class TowerManager : MonoBehaviour
 
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerPlaceSequence)
         {
+            Debug.Log("Placed tower in tutorial");
             TutorialManager.Instance.LoadNextTutorialDialogue();
             CursorTD.Instance.towerPlaceSequence = false;
             CursorTD.Instance.towerBuffSequence = true;
@@ -209,15 +210,20 @@ public class TowerManager : MonoBehaviour
 
     public void DynamicMusicVolume(InstrumentType type)
     {
-        if(CombatManager.Instance.currentEncounter.enableTowerLimit)
+        if (!GameManager.Instance.tutorialRunning)
         {
-            towerAudioVolumeIncrement = 1 / CombatManager.Instance.currentEncounter.towerLimit;
+            if (CombatManager.Instance.currentEncounter.enableTowerLimit)
+            {
+                towerAudioVolumeIncrement = 1 / CombatManager.Instance.currentEncounter.towerLimit;
 
+            }
+            else
+            {
+                towerAudioVolumeIncrement = 0.05f;
+            }
         }
-        else
-        {
-            towerAudioVolumeIncrement = 0.05f;
-        }
+
+        
 
         switch (type)
         {

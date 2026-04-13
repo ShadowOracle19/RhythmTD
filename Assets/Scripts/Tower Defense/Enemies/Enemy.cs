@@ -82,6 +82,9 @@ public class Enemy : MonoBehaviour
 
         //animator = GetComponent<Animator>();
         nextPosition = new Vector3(transform.position.x - 1f, 0.5f, transform.position.z);
+
+        //Set Animation BPM
+        AnimationManager.instance.SetAnimSpeed(animator, 80);
     }
 
     // Update is called once per frame

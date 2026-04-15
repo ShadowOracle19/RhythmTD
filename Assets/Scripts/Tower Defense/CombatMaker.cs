@@ -6,9 +6,11 @@ using UnityEngine;
 public class CombatMaker : ScriptableObject
 {
     [Header("<b><size=15>Combat Encounter Data</size></b>")]
+    [Line(255, 255, 255)]
     public DynamicSongCreator dynamicSong;
     public GameObject stagePrefab;
     public int startingResources = 50;
+    [Space(20)]
     public List<Wave> waves = new List<Wave>();
 
     [Header("Tower Limitation")]
@@ -52,6 +54,12 @@ public class PickupInit //added for pickups
 
     [Range(0,5)] public int tile;
 
+}
+
+
+public enum MoreLevelObjectives
+{
+    ClearWithFourTowers
 }
 
 

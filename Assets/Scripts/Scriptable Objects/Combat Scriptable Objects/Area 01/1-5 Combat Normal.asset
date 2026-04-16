@@ -16,7 +16,7 @@ MonoBehaviour:
   stagePrefab: {fileID: 772534621516438449, guid: a66e53b980c53084dba5edda3ec4595f, type: 3}
   startingResources: 50
   waves:
-  - delay: 8
+  - delay: 12
     enemies:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 1
@@ -40,7 +40,7 @@ MonoBehaviour:
     enemies:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 0
-    - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    - enemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
       tile: 1
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 2
@@ -52,7 +52,7 @@ MonoBehaviour:
     enemies:
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 5
-    - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
+    - enemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
       tile: 4
     - enemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
       tile: 3
@@ -410,3 +410,5 @@ MonoBehaviour:
     pickupsWave: 0
   enableTowerLimit: 0
   towerLimit: 1
+  wonGame: Congrats on winning rockstar!
+  lostGame: Commander is winning!

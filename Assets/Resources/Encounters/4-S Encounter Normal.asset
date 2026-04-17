@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounterName: 4-S
   LevelLabel: 4-S
+  stage: 0
   introDialogue: {fileID: 0}
   combatEncounter: {fileID: 11400000, guid: b5818fc594fbcc347bcf654ce09e8dbf, type: 2}
   endDialogue: {fileID: 0}
@@ -24,8 +25,14 @@ MonoBehaviour:
     objectiveDesc01: 
     objectiveDesc02: 
     objectiveDesc03: 
+    uniqueLevel3Objective: 0
     levelPreview: {fileID: 0}
     objectiveIncompleteIcon: {fileID: -7819960312215746830, guid: 8e0a445c9acc08545894b42210756b5c, type: 3}
     objectiveCompleteIcon: {fileID: -7819960312215746830, guid: 8e0a445c9acc08545894b42210756b5c, type: 3}
     intelIcons: []
   fillColor: {r: 0.0107040405, g: 0, b: 1, a: 1}
+  isLevelLocked: 1
+  levelThatUnlocks: {fileID: 11400000, guid: 8fd5319a7841e3c478fcd0fe93072649, type: 2}
+  clearedObjective01: 0
+  clearedObjective02: 0
+  clearedObjective03: 0

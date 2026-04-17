@@ -557,13 +557,19 @@ public class GameManager : MonoBehaviour
         currentEncounter.clearedObjective01 = true;
 
         // level cleared without losing health
-        if (lostHealth == false) {
-            currentEncounter.clearedObjective02 = true;
-        }
+        currentEncounter.clearedObjective02 = (_currentHealth == _maxHealth);
+
+        //if (lostHealth == false) {
+        //    currentEncounter.clearedObjective02 = true;
+        //}
+
+        //check if unique level objective was cleared
+        //currentEncounter.clearedObjective03 = LevelObjectiveManager.Instance.CheckIfObjectiveWasCompleted(currentEncounter.data.uniqueLevel3Objective);
 
         // SCORE
         pointHolder.Add(healthRemainingPointGain * _currentHealth);
-        
+
+        UnlockLevel(currentEncounter); //unlock next level
         if (currentEncounter.endDialogue == null)
         {
             StartWinLevelProcess();
@@ -581,7 +587,6 @@ public class GameManager : MonoBehaviour
     {
         MenuEventManager.Instance.OpenWinScreen(); //open win screen and set active object
         
-        UnlockLevel(currentEncounter); //unlock next level
 
         // TEMPORARILY DISABLED UNTIL NEW WIN SCREEN IS CONNECTED
         //winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);

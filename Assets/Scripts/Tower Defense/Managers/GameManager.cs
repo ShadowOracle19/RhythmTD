@@ -131,8 +131,8 @@ public class GameManager : MonoBehaviour
 
         QualitySettings.maxQueuedFrames = 1;
 
-        Debug.Log(QualitySettings.maxQueuedFrames + " frame");
-        Debug.Log(QualitySettings.vSyncCount + " Vsync");
+        //Debug.Log(QualitySettings.maxQueuedFrames + " frame");
+        //Debug.Log(QualitySettings.vSyncCount + " Vsync");
         Cursor.lockState = CursorLockMode.Locked;
         playerInputManager.SetActive(false);
 
@@ -217,34 +217,34 @@ public class GameManager : MonoBehaviour
             return; //must have at least 2 buttons
         }
 
-        ItemButton item;
+        ItemButton itemRef;
         Navigation navigation;
 
         for (int i = 0; i < children.Length; i++)
         {
-            item = children[i];
+            itemRef = children[i];
 
-            navigation = item.gameObject.GetComponent<Button>().navigation;
+            navigation = itemRef.gameObject.GetComponent<Button>().navigation;
 
             navigation.selectOnLeft = GetNavigationLeft(i, children.Length);
             navigation.selectOnRight = GetNavigationRight(i, children.Length);
             navigation.selectOnUp = returnToMainMenuButton;
 
-            item.gameObject.GetComponent<Button>().navigation = navigation;
+            itemRef.gameObject.GetComponent<Button>().navigation = navigation;
 
             //level locking functions
-            item.heldEncounter.levelThatUnlocks = GetNextEncounter(i, children.Length);
+            itemRef.heldEncounter.levelThatUnlocks = GetNextEncounter(i, children.Length);
 
-            if(item.heldEncounter.isLevelLocked)
+            if(itemRef.heldEncounter.isLevelLocked)//when level is declared locked
             {
-                item.gameObject.SetActive(false);
+                itemRef.gameObject.SetActive(false);
             }
         }
     }
 
     private Selectable GetNavigationRight(int indexCurrent, int length)
     {
-        ItemButton item;
+        ItemButton itemRight;
 
         if (indexCurrent == length - 1) //last item
         {
@@ -253,15 +253,43 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            item = levelParent.GetChild(indexCurrent + 1).GetComponent<ItemButton>();
+            itemRight = levelParent.GetChild(indexCurrent + 1).GetComponent<ItemButton>();
+
+            //testing only remove this when testing is done
+            if (itemRight.heldEncounter.isLevelLocked) //in testing if a button is unlocked but the next is locked this will look for the next available selectable
+            {
+                return GetNextActiveNavigation(indexCurrent, length, itemRight);
+            }
         }
 
-        return item.GetComponent<Selectable>();
+        return itemRight.GetComponent<Selectable>();
     }
+
+    //TESTING ONLY
+    private Selectable GetNextActiveNavigation(int indexCurrent, int length, ItemButton ifAllSelectablesAreLocked)
+    {
+        ItemButton itemActive = null;
+        ItemButton[] children = levelParent.GetComponentsInChildren<ItemButton>();
+
+        for (int i = indexCurrent + 1; i < children.Length; i++)
+        {
+            if (children[i].heldEncounter.isLevelLocked == false)
+            {
+                itemActive = children[i];
+                return itemActive.GetComponent<Selectable>();
+            }
+
+            else
+                itemActive = ifAllSelectablesAreLocked;
+        }
+        //Debug.Log(itemActive.gameObject);
+        return itemActive.GetComponent<Selectable>();
+    }
+
 
     private Selectable GetNavigationLeft(int indexCurrent, int length)
     {
-        ItemButton item;
+        ItemButton itemLeft;
 
         if (indexCurrent == 0)
         {
@@ -270,15 +298,15 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            item = levelParent.GetChild(indexCurrent - 1).GetComponent<ItemButton>();
+            itemLeft = levelParent.GetChild(indexCurrent - 1).GetComponent<ItemButton>();
         }
 
-        return item.GetComponent<Selectable>();
+        return itemLeft.GetComponent<Selectable>();
     }
 
     private EncounterCreator GetNextEncounter(int indexCurrent, int length)
     {
-        ItemButton item;
+        ItemButton itemNext;
 
         if (indexCurrent == length - 1) //last item
         {
@@ -287,10 +315,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            item = levelParent.GetChild(indexCurrent + 1).GetComponent<ItemButton>();
+            itemNext = levelParent.GetChild(indexCurrent + 1).GetComponent<ItemButton>();
         }
 
-        return item.heldEncounter;
+        return itemNext.heldEncounter;
     }
 
     #endregion

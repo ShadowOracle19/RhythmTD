@@ -40,9 +40,13 @@ public class EncounterCreator : ScriptableObject
 public class EncounterData
 {
     // Level Info
-    public string objectiveDesc01;
-    public string objectiveDesc02;
+    public string objectiveDesc01 = "Complete level";
+    public string objectiveDesc02 = "Complete level without losing health";
     public string objectiveDesc03;
+    [Tooltip("This sets the actual unique combat objective")]
+    public MoreLevelObjectives uniqueLevel3Objective;
+
+    [Space(10)]
     public Sprite levelPreview;
     public Sprite objectiveIncompleteIcon;
     public Sprite objectiveCompleteIcon;

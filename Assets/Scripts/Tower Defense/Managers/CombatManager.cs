@@ -350,6 +350,7 @@ public class CombatManager : MonoBehaviour
         stageParent.GetComponentInChildren<StageObject>().DestroyStage(); // remove stage
     }
 
+
     // Update is called once per frame
     void Update()
     {

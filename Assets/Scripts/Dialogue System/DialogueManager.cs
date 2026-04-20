@@ -297,7 +297,7 @@ public class DialogueManager : MonoBehaviour
 
             currentTextBox.maxVisibleCharacters = visibleCount;
 
-            //PlayCharacterAudio();
+            PlayCharacterAudio();
             visibleCount += 1; 
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }

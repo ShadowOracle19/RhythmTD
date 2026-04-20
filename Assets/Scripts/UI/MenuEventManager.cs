@@ -309,6 +309,11 @@ public class MenuEventManager : MonoBehaviour
         eventSystem.SetSelectedGameObject(activeObject); //set active object
     }
 
+    public void WinScreenToLevelSelect()
+    {
+        eventSystem.SetSelectedGameObject(GameManager.Instance.currentSelectedButton);
+    }
+
     /*
     void OnSelect(BaseEventData eventData) 
     {

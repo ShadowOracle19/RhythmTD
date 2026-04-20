@@ -12,6 +12,8 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
     public EncounterCreator heldEncounter;
     public Image fill;
 
+    public GameObject nextButton;
+
     //[Header("Level Selection")]
     //public Transform levelMapTransform;
     //public GameObject cameraObject;

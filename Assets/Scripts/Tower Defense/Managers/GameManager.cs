@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
     private ItemButtonEvent _eventItemOnSelect;
     private ItemButtonEvent _eventItemOnSubmit;
     [SerializeField] private Selectable returnToMainMenuButton;
+    public GameObject currentSelectedButton;
 
     [Header("Info Panel Connections")]
     public GameObject infoPanel;
@@ -204,6 +205,7 @@ public class GameManager : MonoBehaviour
         buttonHighlightSFX.Play(); //play button feedback sfx
         MenuEventManager.Instance.UpdateLastSelectedLevel();
         MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
+        currentSelectedButton = item.gameObject;
         LoadLevel(item.heldEncounter); //load encounter
     }
 
@@ -228,6 +230,9 @@ public class GameManager : MonoBehaviour
 
             navigation.selectOnLeft = GetNavigationLeft(i, children.Length);
             navigation.selectOnRight = GetNavigationRight(i, children.Length);
+
+            itemRef.nextButton = navigation.selectOnRight.gameObject;
+
             navigation.selectOnUp = returnToMainMenuButton;
 
             itemRef.gameObject.GetComponent<Button>().navigation = navigation;
@@ -557,13 +562,19 @@ public class GameManager : MonoBehaviour
         currentEncounter.clearedObjective01 = true;
 
         // level cleared without losing health
-        if (lostHealth == false) {
-            currentEncounter.clearedObjective02 = true;
-        }
+        currentEncounter.clearedObjective02 = (_currentHealth == _maxHealth);
+
+        //if (lostHealth == false) {
+        //    currentEncounter.clearedObjective02 = true;
+        //}
+
+        //check if unique level objective was cleared
+        //currentEncounter.clearedObjective03 = LevelObjectiveManager.Instance.CheckIfObjectiveWasCompleted(currentEncounter.data.uniqueLevel3Objective);
 
         // SCORE
         pointHolder.Add(healthRemainingPointGain * _currentHealth);
-        
+
+        UnlockLevel(currentEncounter); //unlock next level
         if (currentEncounter.endDialogue == null)
         {
             StartWinLevelProcess();
@@ -581,7 +592,6 @@ public class GameManager : MonoBehaviour
     {
         MenuEventManager.Instance.OpenWinScreen(); //open win screen and set active object
         
-        UnlockLevel(currentEncounter); //unlock next level
 
         // TEMPORARILY DISABLED UNTIL NEW WIN SCREEN IS CONNECTED
         //winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
@@ -591,6 +601,7 @@ public class GameManager : MonoBehaviour
     {
         if (wonLevel.levelThatUnlocks != null)
         {
+            currentSelectedButton.GetComponent<ItemButton>().nextButton.SetActive(true);
             wonLevel.levelThatUnlocks.isLevelLocked = false;
         }
     }

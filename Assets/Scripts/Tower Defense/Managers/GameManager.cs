@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
     private ItemButtonEvent _eventItemOnSelect;
     private ItemButtonEvent _eventItemOnSubmit;
     [SerializeField] private Selectable returnToMainMenuButton;
+    public GameObject currentSelectedButton;
 
     [Header("Info Panel Connections")]
     public GameObject infoPanel;
@@ -204,6 +205,7 @@ public class GameManager : MonoBehaviour
         buttonHighlightSFX.Play(); //play button feedback sfx
         MenuEventManager.Instance.UpdateLastSelectedLevel();
         MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
+        currentSelectedButton = item.gameObject;
         LoadLevel(item.heldEncounter); //load encounter
     }
 
@@ -228,6 +230,9 @@ public class GameManager : MonoBehaviour
 
             navigation.selectOnLeft = GetNavigationLeft(i, children.Length);
             navigation.selectOnRight = GetNavigationRight(i, children.Length);
+
+            itemRef.nextButton = navigation.selectOnRight.gameObject;
+
             navigation.selectOnUp = returnToMainMenuButton;
 
             itemRef.gameObject.GetComponent<Button>().navigation = navigation;
@@ -596,6 +601,7 @@ public class GameManager : MonoBehaviour
     {
         if (wonLevel.levelThatUnlocks != null)
         {
+            currentSelectedButton.GetComponent<ItemButton>().nextButton.SetActive(true);
             wonLevel.levelThatUnlocks.isLevelLocked = false;
         }
     }

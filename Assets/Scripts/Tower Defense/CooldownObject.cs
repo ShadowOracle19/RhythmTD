@@ -60,6 +60,10 @@ public class CooldownObject : MonoBehaviour
 
     public bool CheckIfCanPurchase()
     {
+        if (currentConnectedTower == null)
+        {
+            return false;
+        }
         if(currentConnectedTower.towerInfo.resourceCost >= CombatManager.Instance.resourceNum && !towerCooldown)
         {
             return true;

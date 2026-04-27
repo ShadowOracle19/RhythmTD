@@ -74,6 +74,7 @@ public class CombatManager : MonoBehaviour
     */
 
     [Header("Combat UI")]
+    public GameObject combatInterface;
     public GameObject enemyTimerObject;
     public GameObject healthBar;
     //public GameObject controls;
@@ -97,9 +98,11 @@ public class CombatManager : MonoBehaviour
 
     private void OnDisable()
     {
+        /*
         Camera.main.transform.position = Vector3.zero;
         Camera.main.transform.rotation = Quaternion.Euler(Vector3.zero);
         Camera.main.fieldOfView = 40;
+        */
     }
 
 
@@ -176,36 +179,39 @@ public class CombatManager : MonoBehaviour
         ComboManager.Instance.ResetCombo();
         ComboManager.Instance.highestCombo = 0;
 
-        //ConductorV2.instance.StopMusic();
-
-        
+        //ConductorV2.instance.StopMusic(); 
     }
 
     public void SpawnStagePlatform(CombatMaker encounter)
     {
         var stage = Instantiate(encounter.stagePrefab, stageParent);
+
         //add spawn and pickup tile call to spawner
         Spawner.Instance.spawnTiles = stage.GetComponent<StageObject>().spawnTiles;
         Spawner.Instance.pickupSpawnTiles = stage.GetComponent<StageObject>().pickupTiles;
-
     }
 
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
+        /*
         if (GameManager.Instance.tutorialRunning)
         {
             GameManager.Instance.combatRunning = true;
         }
-
-        GameManager.Instance.playerInputManager.SetActive(true);
+        */
 
         GameManager.Instance.menuMusic.Stop();
 
+        GameManager.Instance.playerInputManager.SetActive(true);
+
+        /*
         GameManager.Instance.winScreen.SetActive(false);
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
+        GameManager.Instance.lostHealth = false;
+        */
 
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
 
@@ -270,10 +276,11 @@ public class CombatManager : MonoBehaviour
             return;
 
         TowerManager.Instance.ResetTowerManager();
-        ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
 
         //Set Animation BPM
         AnimationManager.instance.SetCombatAnimSpeed();
+
+        ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
     }
 
     public void EndEncounter()

@@ -202,10 +202,12 @@ public class GameManager : MonoBehaviour
     // Close main menu (level select) & load encounter when level button is pressed
     public void HandleEventItemOnSubmit(ItemButton item)
     {
+        //combatRoot.SetActive(true); //enable combat scene
         buttonHighlightSFX.Play(); //play button feedback sfx
-        MenuEventManager.Instance.UpdateLastSelectedLevel();
+        MenuEventManager.Instance.UpdateLastSelectedLevel(); //record last selected level button
         MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
         currentSelectedButton = item.gameObject;
+
         LoadLevel(item.heldEncounter); //load encounter
     }
 
@@ -497,10 +499,13 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(false);
         lostHealth = false;
 
+        LoadCombatScene();
+
         if (currentEncounter.introDialogue == null)
         {
-
-            LoadCombat();
+            MenuEventManager.Instance.OpenLoadoutMenu();
+            
+            /*
             CombatManager.Instance.enemyTimerObject.SetActive(true);
             CombatManager.Instance.healthBar.SetActive(true);
             //CombatManager.Instance.controls.SetActive(true);
@@ -510,6 +515,7 @@ public class GameManager : MonoBehaviour
             //CombatManager.Instance.metronome.SetActive(true);
             CombatManager.Instance.waveCounter.SetActive(true);
             CombatManager.Instance.combo.SetActive(true);
+            */
 
             return;
         }
@@ -519,22 +525,28 @@ public class GameManager : MonoBehaviour
         DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
     }
 
-    public void LoadCombat()
+    public void LoadCombatScene()
     {
         combatRoot.SetActive(true); //enable combat scene
-
-        CombatManager.Instance.tutorialManager.SetActive(false); //disable tutorial manager
-
-        combatRunning = true; //set game state to combat
+        CombatManager.Instance.combatInterface.SetActive(false); //disable combat UI
 
         StageManager.Instance.SetStage(currentEncounter.stage); //load encounter grid data
 
-        CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter); //load encounter data
-
+        /*
         //reset camera position, rotation, & FOV
         Camera.main.transform.position = Camera.main.GetComponent<CameraPositions>().CombatCameraPos;
         Camera.main.transform.rotation = Quaternion.Euler(new Vector3(60,0,0));
         Camera.main.fieldOfView = 60;
+        */
+    }
+    
+    public void LoadCombat()
+    {
+        combatRunning = true; //set game state to combat
+
+        CombatManager.Instance.tutorialManager.SetActive(false); //disable tutorial manager
+
+        CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter); //load encounter data
     }
 
     public void GameOver()

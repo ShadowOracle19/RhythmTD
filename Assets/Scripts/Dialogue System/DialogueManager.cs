@@ -90,6 +90,8 @@ public class DialogueManager : MonoBehaviour
     public float textSpeed = 0.05f;
     public float defaultTextSpeed = 0.05f;
 
+    public Animator cameraAnimator;
+
     [SerializeField] private Animator textBoxAnimator;
     // HI LUCY. I PUT ALL OF THE ANIMATION TRIGGER CODE HERE SO HOPEFULLY YOU CAN USE IT FOR IMPLEMENTATION. <3
     /*
@@ -188,7 +190,6 @@ public class DialogueManager : MonoBehaviour
         //MenuEventManager.Instance.DialogueOpen();
 
         StartCoroutine(PreloadAssets());
-
     }
 
     IEnumerator PreloadAssets()
@@ -640,17 +641,20 @@ public class DialogueManager : MonoBehaviour
         //dialogue if its going into a combat
         if (GameManager.Instance.encounterRunning)
         {
-            LoadingScreenManager.Instance.StartLoading(GameManager.Instance.combatRoot, GameManager.Instance.dialogueRoot);
+            //LoadingScreenManager.Instance.StartLoading(GameManager.Instance.combatRoot, GameManager.Instance.dialogueRoot);
             if (GameManager.Instance.tutorialRunning)
             {
                 //GameManager.Instance.dialogueRoot.SetActive(false);
                 GameManager.Instance.LoadTutorial();
                 return;
             }
+            
+            GameManager.Instance.dialogueRoot.SetActive(false);
+
+            MenuEventManager.Instance.OpenLoadoutMenu();
+            
+            /*
             GameManager.Instance.LoadCombat();
-
-            //GameManager.Instance.dialogueRoot.SetActive(false);
-
             CombatManager.Instance.enemyTimerObject.SetActive(true);
             CombatManager.Instance.healthBar.SetActive(true);
             //CombatManager.Instance.controls.SetActive(true);
@@ -660,6 +664,7 @@ public class DialogueManager : MonoBehaviour
             //CombatManager.Instance.metronome.SetActive(true);
             CombatManager.Instance.waveCounter.SetActive(true);
             CombatManager.Instance.combo.SetActive(true);
+            */
 
             return;
         }

@@ -22,6 +22,8 @@ public class MenuEventManager : MonoBehaviour
         }
     }
 
+    public Animator cameraAnimator;
+
     private void Awake()
     {
         _instance = this;
@@ -56,6 +58,10 @@ public class MenuEventManager : MonoBehaviour
     public GameObject mainScreen;
     public List<GameObject> mainScreenInteractables;
     public AudioSource menuMusic;
+
+    [Header("Loadout Menu")]
+    public GameObject loadoutScreen;
+    public List<GameObject> loadoutScreenInteractables;
 
     [Header("Win Screen")]
     public GameObject winScreen;
@@ -107,6 +113,9 @@ public class MenuEventManager : MonoBehaviour
     #region main menu
     public void OpenMainMenu()
     {
+        cameraAnimator.SetTrigger("Enter Menu");
+        cameraAnimator.ResetTrigger("Enter Menu");
+
         mainScreen.SetActive(true); //enable main menu (level select)
 
         if (lastSelectedLevelObject == null) 
@@ -126,6 +135,43 @@ public class MenuEventManager : MonoBehaviour
         menuMusic.Stop();
 
         mainScreen.SetActive(false);
+    }
+    #endregion
+
+    #region loadout menu
+    public void OpenLoadoutMenu()
+    {
+        loadoutScreen.SetActive(true); //enable loadout menu
+
+        //cameraAnimator.ResetTrigger("Enter Loadout");
+        cameraAnimator.SetTrigger("Enter Loadout");
+
+        eventSystem.SetSelectedGameObject(loadoutScreenInteractables[0]);
+    }
+
+    public void CloseLoadoutMenu()
+    {
+        loadoutScreen.SetActive(false);
+    }
+
+    public void ConfirmLoadout()
+    {
+        LoadingScreenManager.Instance.StartLoading(GameManager.Instance.combatRoot, GameManager.Instance.dialogueRoot);
+        
+        GameManager.Instance.LoadCombat();
+
+        CombatManager.Instance.combatInterface.SetActive(true);
+        /*
+        CombatManager.Instance.enemyTimerObject.SetActive(true);
+        CombatManager.Instance.healthBar.SetActive(true);
+        CombatManager.Instance.resources.SetActive(true);
+        CombatManager.Instance.feverBar.SetActive(true);
+        CombatManager.Instance.waveCounter.SetActive(true);
+        CombatManager.Instance.combo.SetActive(true);
+        */
+
+        //cameraAnimator.ResetTrigger("Combat Start");
+        cameraAnimator.SetTrigger("Combat Start");
     }
     #endregion
 

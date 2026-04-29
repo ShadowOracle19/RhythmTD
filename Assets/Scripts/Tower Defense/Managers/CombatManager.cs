@@ -75,6 +75,7 @@ public class CombatManager : MonoBehaviour
 
     [Header("Combat UI")]
     public GameObject combatInterface;
+    public GameObject countInObject;
     public GameObject enemyTimerObject;
     public GameObject healthBar;
     //public GameObject controls;
@@ -205,13 +206,11 @@ public class CombatManager : MonoBehaviour
 
         GameManager.Instance.playerInputManager.SetActive(true);
 
-        /*
         GameManager.Instance.winScreen.SetActive(false);
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
         GameManager.Instance.lostHealth = false;
-        */
 
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
 

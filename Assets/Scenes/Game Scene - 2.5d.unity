@@ -1860,7 +1860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ef574441cdda049a5c39cd5869aadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globelParent: {fileID: 2475752922819304764}
+  globalParent: {fileID: 0}
   menuMusic: {fileID: 1572544206}
   buttonHighlightSFX: {fileID: 1013587933}
   gameOverScreen: {fileID: 5672972235281459304}
@@ -1966,7 +1966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14f2cea497edef44889d07c0c02e95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraAnimator: {fileID: 519420036}
   lastSelectedObject: {fileID: 0}
   lastSelectedLevelObject: {fileID: 0}
   titleScreen: {fileID: 2019509087}
@@ -2002,6 +2001,7 @@ MonoBehaviour:
   loadoutScreen: {fileID: 210811172}
   loadoutScreenInteractables:
   - {fileID: 124044253}
+  loadoutInterfaceAnimator: {fileID: 1727033164}
   winScreen: {fileID: 1704172244}
   winScreenInteractables:
   - {fileID: 1704172245}
@@ -2017,6 +2017,8 @@ MonoBehaviour:
   - {fileID: 1094273227}
   - {fileID: 80388495}
   exitMenuText: {fileID: 133497314}
+  cameraAnimator: {fileID: 519420036}
+  combatInterfaceAnimator: {fileID: 6982985184345515535}
   showcaseCreditsScreen: {fileID: 0}
   showcaseCreditsScreenInteractables: []
 --- !u!114 &266916178 stripped
@@ -4868,6 +4870,11 @@ GameObject:
 Animator:
   m_CorrespondingSourceObject: {fileID: 1891488082759501072, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}
   m_PrefabInstance: {fileID: 903052831418258788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &431128438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8360324679879443222, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &455326685
 PrefabInstance:
@@ -18108,6 +18115,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f3563b29dbb4baa459fb917f0512ce2b, type: 3}
   m_PrefabInstance: {fileID: 1723362614}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1727033164 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3967720526314254455, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+  m_PrefabInstance: {fileID: 302608501}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1727588307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21435,6 +21447,7 @@ MonoBehaviour:
   resourceNum: 0
   maxResource: 150
   combatInterface: {fileID: 365487510}
+  countInObject: {fileID: 431128438}
   enemyTimerObject: {fileID: 283964733734025437}
   healthBar: {fileID: 3035491794170926340}
   resources: {fileID: 6088146093841842086}
@@ -27279,7 +27292,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1102831004995367801, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
   m_PrefabInstance: {fileID: 5775041512460051169}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 431128438}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -27305,6 +27318,11 @@ GameObject:
 --- !u!224 &6982985184345515531 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3516640260633789674, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6982985184345515535 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2324937971344817750, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
   m_PrefabInstance: {fileID: 5775041512460051169}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7024380469616546179 stripped

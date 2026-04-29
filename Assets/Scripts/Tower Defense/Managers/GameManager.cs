@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public Transform globelParent;
+    public Transform globalParent;
     public AudioSource menuMusic;
     public AudioSource buttonHighlightSFX;
 
@@ -504,7 +504,9 @@ public class GameManager : MonoBehaviour
         if (currentEncounter.introDialogue == null)
         {
             MenuEventManager.Instance.OpenLoadoutMenu();
-            
+
+            //LoadingScreenManager.Instance.StartLoading(GameManager.Instance.combatRoot, GameManager.Instance.dialogueRoot);
+
             /*
             CombatManager.Instance.enemyTimerObject.SetActive(true);
             CombatManager.Instance.healthBar.SetActive(true);

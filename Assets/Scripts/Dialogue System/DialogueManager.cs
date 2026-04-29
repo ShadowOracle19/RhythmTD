@@ -629,8 +629,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-
-    
     public void EndDialogue()
     {
         //end dialogue
@@ -642,6 +640,7 @@ public class DialogueManager : MonoBehaviour
         if (GameManager.Instance.encounterRunning)
         {
             //LoadingScreenManager.Instance.StartLoading(GameManager.Instance.combatRoot, GameManager.Instance.dialogueRoot);
+
             if (GameManager.Instance.tutorialRunning)
             {
                 //GameManager.Instance.dialogueRoot.SetActive(false);

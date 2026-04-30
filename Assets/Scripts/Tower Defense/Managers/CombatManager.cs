@@ -206,6 +206,7 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.winState = false;
         GameManager.Instance.gameOverScreen.SetActive(false);
         GameManager.Instance.loseState = false;
+        GameManager.Instance.combatRunning = true;
 
         GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
 

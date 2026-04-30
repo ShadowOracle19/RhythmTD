@@ -12,6 +12,7 @@ public class UndoingEffect : EnemyEffect
         {
             Spawner.Instance.ForceEnemySpawn(Spawner.Instance.spawnTiles[i].transform.position.y, EnemyType.Wisp);
             CombatManager.Instance.enemyTotal += 1;
+            CombatManager.Instance.totalNumEnemies += 1;
         }
         
     }                                         

@@ -544,7 +544,7 @@ public class GameManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked; //lock player cursor movement
 
-        CombatManager.Instance.EndEncounter(); //end current encounter
+        //CombatManager.Instance.EndEncounter(); //end current encounter
 
         MenuEventManager.Instance.OpenFailScreen(); //open fail screen and set active object
     }

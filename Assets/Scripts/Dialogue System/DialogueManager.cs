@@ -176,24 +176,27 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadDialogue(TextAsset desiredDialogue)
     {
-
+        //clear all previous dialogue & assets
         Clear();
+
         //set log to inactive so it doesnt show when dialogue is loaded
         log.SetActive(false);
 
         currentDialogue = desiredDialogue;
         myDialogue = JsonUtility.FromJson<DialogueList>(currentDialogue.text);
         index = 0;
+        
+        //disable player input
         dialogueInputHandler.enabled = false;
         dialogueCanvas.SetActive(false);
-
-        //MenuEventManager.Instance.DialogueOpen();
 
         StartCoroutine(PreloadAssets());
     }
 
     IEnumerator PreloadAssets()
     {
+        Debug.Log("Start Dialogue Loading");
+        
         foreach (Dialogue dialogue in myDialogue.dialogue)
         {
             Sprite characterSprite = Resources.Load<Sprite>($"Characters/{dialogue.character}/SPR-DS_{dialogue.character}-{dialogue.emotion}");
@@ -213,14 +216,14 @@ public class DialogueManager : MonoBehaviour
         Debug.Log($"Number of controllers loaded {loadedControllers.Count}");
         yield return new WaitForSeconds(1);
 
-
         titleMenuMusic.Stop();
         dialogueMusic.Play();
         dialogueCanvas.SetActive(true);
         typing = StartCoroutine(TypeLine());
         LoadingScreenManager.Instance.EndLoading();
+        
+        //enable player input
         dialogueInputHandler.enabled = true;
-
     }
 
     IEnumerator TypeLine()
@@ -275,8 +278,6 @@ public class DialogueManager : MonoBehaviour
             _previousSpeakerText.text = string.Empty;
         }
 
-
-
         bool typeText = true;
 
         totalVisibleCharacters = textInfo.characterCount;
@@ -302,8 +303,6 @@ public class DialogueManager : MonoBehaviour
             visibleCount += 1; 
             yield return new WaitForSeconds(GameManager.Instance.textSpeed);
         }
-
-
     }
 
     public void ProjectOverture() //add new line and animator line up
@@ -639,37 +638,24 @@ public class DialogueManager : MonoBehaviour
         //dialogue if its going into a combat
         if (GameManager.Instance.encounterRunning)
         {
-            //LoadingScreenManager.Instance.StartLoading(GameManager.Instance.combatRoot, GameManager.Instance.dialogueRoot);
-
+            /*
             if (GameManager.Instance.tutorialRunning)
             {
                 //GameManager.Instance.dialogueRoot.SetActive(false);
                 GameManager.Instance.LoadTutorial();
                 return;
             }
-            
-            GameManager.Instance.dialogueRoot.SetActive(false);
-
-            MenuEventManager.Instance.OpenLoadoutMenu();
-            
-            /*
-            GameManager.Instance.LoadCombat();
-            CombatManager.Instance.enemyTimerObject.SetActive(true);
-            CombatManager.Instance.healthBar.SetActive(true);
-            //CombatManager.Instance.controls.SetActive(true);
-            CombatManager.Instance.resources.SetActive(true);
-            //CombatManager.Instance.towerDisplay.SetActive(true);
-            CombatManager.Instance.feverBar.SetActive(true);
-            //CombatManager.Instance.metronome.SetActive(true);
-            CombatManager.Instance.waveCounter.SetActive(true);
-            CombatManager.Instance.combo.SetActive(true);
             */
+            
+            MenuEventManager.Instance.DialogueClose();
+            MenuEventManager.Instance.OpenLoadoutMenu();
 
             return;
         }
         //dialogue after combat
         if (GameManager.Instance.winState)
         {
+            /*
             if(GameManager.Instance.currentEncounter.isShowcase)
             {
                 GameManager.Instance.showcaseCredits.SetActive(true);
@@ -678,6 +664,7 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.combatRoot.SetActive(false);
                 return;
             }
+            */
 
             GameManager.Instance.StartWinLevelProcess();
 

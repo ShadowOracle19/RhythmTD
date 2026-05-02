@@ -146,6 +146,8 @@ public class MenuEventManager : MonoBehaviour
         cameraAnimator.SetTrigger("Enter Loadout");
 
         eventSystem.SetSelectedGameObject(loadoutScreenInteractables[0]);
+
+        LoadingScreenManager.Instance.EndLoading(); //TEMPORARY
     }
 
     public void CloseLoadoutMenu()
@@ -155,17 +157,7 @@ public class MenuEventManager : MonoBehaviour
 
     public void ConfirmLoadout()
     {
-        //LoadingScreenManager.Instance.StartLoading(GameManager.Instance.combatRoot, GameManager.Instance.dialogueRoot);
-        
         StartCoroutine(CombatStartSequence());
-        /*
-        CombatManager.Instance.enemyTimerObject.SetActive(true);
-        CombatManager.Instance.healthBar.SetActive(true);
-        CombatManager.Instance.resources.SetActive(true);
-        CombatManager.Instance.feverBar.SetActive(true);
-        CombatManager.Instance.waveCounter.SetActive(true);
-        CombatManager.Instance.combo.SetActive(true);
-        */
     }
 
     //Combat start sequence
@@ -212,7 +204,7 @@ public class MenuEventManager : MonoBehaviour
         }
 
         CombatManager.Instance.countInObject.SetActive(false);
-        GameManager.Instance.LoadCombat();
+        GameManager.Instance.StartCombat();
 
         StopCoroutine(CombatStartSequence());
     }
@@ -322,7 +314,12 @@ public class MenuEventManager : MonoBehaviour
     #region dialogue menu
     public void DialogueOpen()
     {
-        OpenMenu(dialogueScreen, dialogueScreenInteractables[0]);
+        dialogueScreen.SetActive(true);
+    }
+
+    public void DialogueClose()
+    {
+        dialogueScreen.SetActive(false);
     }
 
     public void OpenLog()
@@ -378,9 +375,19 @@ public class MenuEventManager : MonoBehaviour
         OpenMenu(failScreen, failScreenInteractables[0]);
     }
 
+    public void CloseFailScreen()
+    {
+        GameManager.Instance.ResetCombatState();
+    }
+
     public void OpenWinScreen()
     {
         OpenMenu(winScreen, winScreenInteractables[0]);
+    }
+
+    public void CloseWinScreen()
+    {
+        GameManager.Instance.ResetCombatState();
     }
     #endregion
 

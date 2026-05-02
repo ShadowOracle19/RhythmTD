@@ -316,7 +316,7 @@ public class CursorTD : MonoBehaviour
 
     public void MoveCursor(Vector2 direction)
     {
-        if (GameManager.Instance.winState || GameManager.Instance.loseState) return;
+        if (GameManager.Instance.winState || GameManager.Instance.failState) return;
 
         if (beatIsHit)
         {
@@ -498,7 +498,7 @@ public class CursorTD : MonoBehaviour
 
     public void TogglePlacementMenu()
     {
-        if (destructMode || GameManager.Instance.winState || GameManager.Instance.loseState || ConductorV2.instance.countingIn) return;
+        if (destructMode || GameManager.Instance.winState || GameManager.Instance.failState || ConductorV2.instance.countingIn) return;
 
         towerSelectMenuOpened = true;
 
@@ -735,7 +735,7 @@ public class CursorTD : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving || GameManager.Instance.winState || GameManager.Instance.loseState) 
+        if (desiredMovement == Vector3.zero || towerSelectMenuOpened || isMoving || GameManager.Instance.winState || GameManager.Instance.failState) 
             return;
         
 
@@ -855,7 +855,7 @@ public class CursorTD : MonoBehaviour
 
     public void SpawnBeatHitResult(_BeatResult result)
     {
-        if (GameManager.Instance.winState || GameManager.Instance.loseState || GameManager.Instance.isGamePaused || beatIsHit) return;
+        if (GameManager.Instance.winState || GameManager.Instance.failState || GameManager.Instance.isGamePaused || beatIsHit) return;
         
         beatIsHit = true;
 

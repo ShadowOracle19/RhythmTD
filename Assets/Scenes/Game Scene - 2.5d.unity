@@ -1863,8 +1863,8 @@ MonoBehaviour:
   globalParent: {fileID: 0}
   menuMusic: {fileID: 1572544206}
   buttonHighlightSFX: {fileID: 1013587933}
-  gameOverScreen: {fileID: 5672972235281459304}
   winScreen: {fileID: 1704172244}
+  failScreen: {fileID: 5672972235281459304}
   conductor: {fileID: 131022232610937893}
   combatRoot: {fileID: 9098906401034691361}
   dialogueRoot: {fileID: 958416913}
@@ -1887,7 +1887,7 @@ MonoBehaviour:
   currentEncounter: {fileID: 0}
   encounterRunning: 0
   winState: 0
-  loseState: 0
+  failState: 0
   tutorialRunning: 0
   textSpeed: 0.05
   tutorialSong: {fileID: 0}
@@ -1991,7 +1991,8 @@ MonoBehaviour:
   - {fileID: 2101405990}
   - {fileID: 1373763160}
   dialogueScreen: {fileID: 958416913}
-  dialogueScreenInteractables: []
+  dialogueScreenInteractables:
+  - {fileID: 0}
   logScreen: {fileID: 613346468}
   logScreenInteractables: []
   mainScreen: {fileID: 1804208461}

@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
     public AudioSource menuMusic;
     public AudioSource buttonHighlightSFX;
 
-    [SerializeField] public GameObject gameOverScreen;
     [SerializeField] public GameObject winScreen;
+    [SerializeField] public GameObject failScreen;
     [SerializeField] private GameObject conductor;
 
     [Header("Screen Roots")]
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     public EncounterCreator currentEncounter;
     public bool encounterRunning = false;
     public bool winState = false;
-    public bool loseState = false;
+    public bool failState = false;
     public bool tutorialRunning = false;
 
     [Header("Dialogue")]
@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
         //combatRoot.SetActive(true); //enable combat scene
         buttonHighlightSFX.Play(); //play button feedback sfx
         MenuEventManager.Instance.UpdateLastSelectedLevel(); //record last selected level button
-        MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
+        //MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
         currentSelectedButton = item.gameObject;
 
         LoadLevel(item.heldEncounter); //load encounter
@@ -405,12 +405,8 @@ public class GameManager : MonoBehaviour
     {
         healthSlider.maxValue = _maxHealth;
         healthSlider.value = _currentHealth;
-
-
     }
     #endregion
-
-
 
     public void LoadTutorial()
     {
@@ -432,8 +428,8 @@ public class GameManager : MonoBehaviour
         tutorialRunning = true;
         winState = false;
         winScreen.SetActive(false);
-        loseState = false;
-        gameOverScreen.SetActive(false);
+        failState = false;
+        failScreen.SetActive(false);
         playerInputManager.SetActive(true);
 
         CombatManager.Instance.enemyTimerObject.SetActive(false);
@@ -485,76 +481,59 @@ public class GameManager : MonoBehaviour
         ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
     }
 
+    /*
     public void LoadLevel(EncounterCreator encounter)
     {
         currentEncounter = encounter;
-
-        tutorialRunning = encounter.isTutorial;
-
         encounterRunning = true;
 
-        winState = false;
-        winScreen.SetActive(false);
-        loseState = false;
-        gameOverScreen.SetActive(false);
-        lostHealth = false;
+        //tutorialRunning = encounter.isTutorial;
 
-        LoadCombatScene();
+        LoadCombatScene(); 
 
         if (currentEncounter.introDialogue == null)
         {
+            //LoadingScreenManager.Instance.StartLoading(MenuEventManager.Instance.loadoutScreen, menuRoot);
             MenuEventManager.Instance.OpenLoadoutMenu();
-
-            //LoadingScreenManager.Instance.StartLoading(GameManager.Instance.combatRoot, GameManager.Instance.dialogueRoot);
-
-            /*
-            CombatManager.Instance.enemyTimerObject.SetActive(true);
-            CombatManager.Instance.healthBar.SetActive(true);
-            //CombatManager.Instance.controls.SetActive(true);
-            CombatManager.Instance.resources.SetActive(true);
-            //CombatManager.Instance.towerDisplay.SetActive(true);
-            CombatManager.Instance.feverBar.SetActive(true);
-            //CombatManager.Instance.metronome.SetActive(true);
-            CombatManager.Instance.waveCounter.SetActive(true);
-            CombatManager.Instance.combo.SetActive(true);
-            */
-
-            return;
         }
+        else
+        {
+            LoadingScreenManager.Instance.StartLoading(dialogueRoot, menuRoot);
+            DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
+        } 
 
-        LoadingScreenManager.Instance.StartLoading(dialogueRoot, menuRoot);
-        //dialogueRoot.SetActive(true);
-        DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
+        ResetCombatState();
+    }
+    */
+
+    public void LoadLevel(EncounterCreator encounter)
+    {
+        currentEncounter = encounter;
+        encounterRunning = true;
+        
+        StartCoroutine(LoadingScreenManager.Instance.StartLoading());
+
+        ResetCombatState();
     }
 
     public void LoadCombatScene()
     {
         combatRoot.SetActive(true); //enable combat scene
-        CombatManager.Instance.combatInterface.SetActive(false); //disable combat UI
-
         StageManager.Instance.SetStage(currentEncounter.stage); //load encounter grid data
-
-        /*
-        //reset camera position, rotation, & FOV
-        Camera.main.transform.position = Camera.main.GetComponent<CameraPositions>().CombatCameraPos;
-        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(60,0,0));
-        Camera.main.fieldOfView = 60;
-        */
+        CombatManager.Instance.combatInterface.SetActive(false); //disable combat UI
     }
     
-    public void LoadCombat()
+    public void StartCombat()
     {
         combatRunning = true; //set game state to combat
-
         CombatManager.Instance.tutorialManager.SetActive(false); //disable tutorial manager
-
         CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter); //load encounter data
     }
 
     public void GameOver()
     {
-        if (loseState) return;
-        loseState = true;
+        if (failState) return;
+        failState = true;
 
         Cursor.lockState = CursorLockMode.Locked; //lock player cursor movement
 
@@ -576,11 +555,11 @@ public class GameManager : MonoBehaviour
         currentEncounter.clearedObjective01 = true;
 
         // level cleared without losing health
-        currentEncounter.clearedObjective02 = (_currentHealth == _maxHealth);
+        //currentEncounter.clearedObjective02 = (_currentHealth == _maxHealth);
 
-        //if (lostHealth == false) {
-        //    currentEncounter.clearedObjective02 = true;
-        //}
+        if (lostHealth == false) {
+            currentEncounter.clearedObjective02 = true;
+        }
 
         //check if unique level objective was cleared
         //currentEncounter.clearedObjective03 = LevelObjectiveManager.Instance.CheckIfObjectiveWasCompleted(currentEncounter.data.uniqueLevel3Objective);
@@ -639,9 +618,36 @@ public class GameManager : MonoBehaviour
         ConductorV2.instance.StopMusic();
     }
 
-    public void ResetGameManagerVariables()
+    public void ResetCombatState()
     {
+        // reset win & fail states
+        winState = false;
+        winScreen.SetActive(false);
+        failState = false;
+        failScreen.SetActive(false);
 
+        // reset objective flags
+        lostHealth = false;
+
+        // reset player health
+        _currentHealth = _maxHealth;
+
+        /*
+        // reset combo, multiplier, & score
+        ComboManager.Instance.currentCombo = 0;
+        ComboManager.Instance.highestCombo = 0;
+        ComboManager.Instance.currentMultiplier = 1;
+        ComboManager.Instance.score = 0;
+        
+        // set flags for all objects having been spawned back to false
+        CombatManager.Instance.allEnemiesSpawned = false;
+        CombatManager.Instance.allPickupsSpawned = false;
+
+        // set enemy & pickup totals back to 0
+        CombatManager.Instance.enemiesDefeated = 0;
+        CombatManager.Instance.enemyTotal = 0;
+        CombatManager.Instance.pickupTotal = 0;
+        */
     }
 
     public void UnlockUpgrade(Tower tower, UpgradeNum upgrade)

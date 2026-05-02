@@ -112,8 +112,8 @@ public class CombatManager : MonoBehaviour
         // close win & fail screens
         GameManager.Instance.winScreen.SetActive(false);
         GameManager.Instance.winState = false;
-        GameManager.Instance.gameOverScreen.SetActive(false);
-        GameManager.Instance.loseState = false;
+        GameManager.Instance.failScreen.SetActive(false);
+        GameManager.Instance.failState = false;
 
         GameManager.Instance.lostHealth = false; //reset flag for failing objective 02
 
@@ -195,6 +195,8 @@ public class CombatManager : MonoBehaviour
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
+        currentEncounter = encounter;
+        
         /*
         if (GameManager.Instance.tutorialRunning)
         {
@@ -206,24 +208,16 @@ public class CombatManager : MonoBehaviour
 
         GameManager.Instance.playerInputManager.SetActive(true);
 
-        GameManager.Instance.winScreen.SetActive(false);
-        GameManager.Instance.winState = false;
-        GameManager.Instance.gameOverScreen.SetActive(false);
-        GameManager.Instance.loseState = false;
-        GameManager.Instance.lostHealth = false;
+        GameManager.Instance.ResetCombatState();
 
-        GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
+        // set flags for all objects having been spawned back to false
+        CombatManager.Instance.allEnemiesSpawned = false;
+        CombatManager.Instance.allPickupsSpawned = false;
 
-        currentEncounter = encounter;
-
-        // set the flags for all objects having been spawned back to false
-        allEnemiesSpawned = false;
-        allPickupsSpawned = false;
-
-        // set enemy & pickup totals back to 0 temporarily before counting
-        enemiesDefeated = 0;
-        enemyTotal = 0;
-        pickupTotal = 0;
+        // set enemy & pickup totals back to 0
+        CombatManager.Instance.enemiesDefeated = 0;
+        CombatManager.Instance.enemyTotal = 0;
+        CombatManager.Instance.pickupTotal = 0;
 
         // for each wave, get the total number of enemies & pickups and add them to the enemy & pickup totals for this encounter
         foreach (var item in currentEncounter.waves)
@@ -266,19 +260,21 @@ public class CombatManager : MonoBehaviour
         enemiesSpawnIn.gameObject.SetActive(true); // enable enemy spawn countdown text object
 
         CursorTD.Instance.InitializeCursor(); // initialize the player cursor
-
-        //BeatIndicatorManager.Instance.ResetBeatIndicator();
-
         Cursor.lockState = CursorLockMode.Locked; // lock cursor movement 
 
+        /*
         if (GameManager.Instance.tutorialRunning)
             return;
-
+        */
         TowerManager.Instance.ResetTowerManager();
 
+        TowerManager.Instance.InstantiateTowerCooldown();
+        
         //Set Animation BPM
+        Debug.Log(ConductorV2.instance.bpm);
         AnimationManager.instance.SetCombatAnimSpeed();
 
+        // start count in
         ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
     }
 
@@ -323,7 +319,7 @@ public class CombatManager : MonoBehaviour
 
         //GameManager.Instance.menuMusic.Play();
         GameManager.Instance.playerInputManager.SetActive(false);
-        GameManager.Instance.pointHolder.Clear();
+        //GameManager.Instance.pointHolder.Clear();
 
         // mute all tower tracks
         ConductorV2.instance.flats.volume = 0;
@@ -353,9 +349,8 @@ public class CombatManager : MonoBehaviour
         Spawner.Instance.spawnTiles.Clear();
         Spawner.Instance.pickupSpawnTiles.Clear();
 
-        stageParent.GetComponentInChildren<StageObject>().DestroyStage(); // remove stage
+        //stageParent.GetComponentInChildren<StageObject>().DestroyStage(); // remove stage
     }
-
 
     // Update is called once per frame
     void Update()

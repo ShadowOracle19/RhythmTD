@@ -84,12 +84,9 @@ public class ConductorV2 : MonoBehaviour
 
     bool perfectBeatReset = false;
 
-
-
+    
     public void CountUsIn(int _bpm)
     {
-        TowerManager.Instance.InstantiateTowerCooldown();
-
         pauseConductor = true;
 
         bpm = _bpm;
@@ -108,8 +105,6 @@ public class ConductorV2 : MonoBehaviour
 
     IEnumerator CountIn()
     {
-        LoadingScreenManager.Instance.EndLoading();
-
         countInText.gameObject.SetActive(true);
 
         for (int i = 1; i <= 4; i++)
@@ -326,8 +321,6 @@ public class ConductorV2 : MonoBehaviour
         //_ping.Play();
 
         beatTrack += 1;
-
-        
     }
 
     public void TriggerBeatEvent(float interval)

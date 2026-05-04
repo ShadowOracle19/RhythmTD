@@ -547,7 +547,8 @@ public class GameManager : MonoBehaviour
         if (winState) return;
         winState = true;
         
-        //CombatManager.Instance.EndEncounter();
+        CombatManager.Instance.StartWinSequence();
+
         encounterRunning = false;
 
         // OBJECTIVES
@@ -556,7 +557,6 @@ public class GameManager : MonoBehaviour
 
         // level cleared without losing health
         //currentEncounter.clearedObjective02 = (_currentHealth == _maxHealth);
-
         if (lostHealth == false) {
             currentEncounter.clearedObjective02 = true;
         }
@@ -567,6 +567,7 @@ public class GameManager : MonoBehaviour
         // SCORE
         pointHolder.Add(healthRemainingPointGain * _currentHealth);
 
+        /*
         UnlockLevel(currentEncounter); //unlock next level
         if (currentEncounter.endDialogue == null)
         {
@@ -576,16 +577,17 @@ public class GameManager : MonoBehaviour
 
         dialogueRoot.SetActive(true);
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
+        */
+        
         //conductor.SetActive(false);
         //MenuEventManager.Instance.OpenWinScreen(0);
-        ConductorV2.instance.StopMusic();
+        //ConductorV2.instance.StopMusic();
     }
 
     public void StartWinLevelProcess()
     {
         MenuEventManager.Instance.OpenWinScreen(); //open win screen and set active object
         
-
         // TEMPORARILY DISABLED UNTIL NEW WIN SCREEN IS CONNECTED
         //winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
     }

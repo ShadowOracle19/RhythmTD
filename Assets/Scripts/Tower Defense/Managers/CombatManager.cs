@@ -171,6 +171,10 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.poco.volume = 0;
         ConductorV2.instance.forte.volume = 0;
         ConductorV2.instance.legato.volume = 0;
+        ConductorV2.instance.Tower9.volume = 0;
+        ConductorV2.instance.Tower10.volume = 0;
+        ConductorV2.instance.Tower11.volume = 0;
+        ConductorV2.instance.Tower12.volume = 0;
 
         FeverSystem.Instance.feverBarNum = 0;
         ComboManager.Instance.ResetCombo();
@@ -329,6 +333,10 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.poco.volume = 0;
         ConductorV2.instance.forte.volume = 0;  
         ConductorV2.instance.legato.volume = 0; 
+        ConductorV2.instance.Tower9.volume = 0;
+        ConductorV2.instance.Tower10.volume = 0;    
+        ConductorV2.instance.Tower11.volume = 0;
+        ConductorV2.instance.Tower12.volume = 0;
 
         // reset fever bar, combo, and highest combo
         FeverSystem.Instance.feverBarNum = 0;

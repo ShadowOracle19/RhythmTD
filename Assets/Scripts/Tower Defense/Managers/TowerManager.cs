@@ -273,6 +273,30 @@ public class TowerManager : MonoBehaviour
 
                 break;
 
+            case InstrumentType.Tower9:
+                ConductorV2.instance.Tower9.volume += towerAudioVolumeIncrement;
+                ConductorV2.instance.Tower9.volume = Mathf.Clamp(ConductorV2.instance.Tower9.volume, 0, 0.5f);
+
+                break;
+
+            case InstrumentType.Tower10:
+                ConductorV2.instance.Tower10.volume += towerAudioVolumeIncrement;
+                ConductorV2.instance.Tower10.volume = Mathf.Clamp(ConductorV2.instance.Tower10.volume, 0, 0.5f);
+
+                break;
+
+            case InstrumentType.Tower11:
+                ConductorV2.instance.Tower11.volume += towerAudioVolumeIncrement;
+                ConductorV2.instance.Tower11.volume = Mathf.Clamp(ConductorV2.instance.Tower11.volume, 0, 0.5f);
+
+                break;
+
+            case InstrumentType.Tower12:
+                ConductorV2.instance.Tower12.volume += towerAudioVolumeIncrement;
+                ConductorV2.instance.Tower12.volume = Mathf.Clamp(ConductorV2.instance.Tower12.volume, 0, 0.5f);
+
+                break;
+
             default:
                 break;
         }

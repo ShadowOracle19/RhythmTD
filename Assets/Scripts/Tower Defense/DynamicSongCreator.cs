@@ -17,5 +17,9 @@ public class DynamicSongCreator : ScriptableObject
     public AudioClip poco;
     public AudioClip forte;
     public AudioClip legato;
+    public AudioClip tower9;
+    public AudioClip tower10;
+    public AudioClip tower11;
+    public AudioClip tower12;
 
 }

@@ -179,6 +179,10 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.poco.volume = 0;
         ConductorV2.instance.forte.volume = 0;
         ConductorV2.instance.legato.volume = 0;
+        ConductorV2.instance.Tower9.volume = 0;
+        ConductorV2.instance.Tower10.volume = 0;
+        ConductorV2.instance.Tower11.volume = 0;
+        ConductorV2.instance.Tower12.volume = 0;
 
         FeverSystem.Instance.feverBarNum = 0;
         ComboManager.Instance.ResetCombo();
@@ -373,6 +377,10 @@ public class CombatManager : MonoBehaviour
         float trackVolume06 = ConductorV2.instance.poco.volume;
         float trackVolume07 = ConductorV2.instance.forte.volume;  
         float trackVolume08 = ConductorV2.instance.legato.volume; 
+        float trackVolume09 = ConductorV2.instance.Tower9.volume;
+        float trackVolume10 = ConductorV2.instance.Tower10.volume;    
+        float trackVolume11 = ConductorV2.instance.Tower11.volume;
+        float trackVolume12 = ConductorV2.instance.Tower12.volume;
 
         while (timeElapsed < fadeDuration) //this should be the time across 4 beats
         {
@@ -393,6 +401,10 @@ public class CombatManager : MonoBehaviour
             ConductorV2.instance.poco.volume = Mathf.Lerp(trackVolume06,0,t);
             ConductorV2.instance.forte.volume = Mathf.Lerp(trackVolume07,0,t);  
             ConductorV2.instance.legato.volume = Mathf.Lerp(trackVolume08,0,t);
+            ConductorV2.instance.Tower9.volume = Mathf.Lerp(trackVolume09,0,t);
+            ConductorV2.instance.Tower10.volume = Mathf.Lerp(trackVolume10,0,t);    
+            ConductorV2.instance.Tower11.volume = Mathf.Lerp(trackVolume11,0,t);
+            ConductorV2.instance.Tower12.volume = Mathf.Lerp(trackVolume12,0,t);
 
             timeElapsed += Time.deltaTime;
             yield return null;
@@ -407,6 +419,10 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.poco.volume = 0;
         ConductorV2.instance.forte.volume = 0;  
         ConductorV2.instance.legato.volume = 0; 
+        ConductorV2.instance.Tower9.volume = 0;
+        ConductorV2.instance.Tower10.volume = 0;    
+        ConductorV2.instance.Tower11.volume = 0;
+        ConductorV2.instance.Tower12.volume = 0;
 
         ConductorV2.instance.StopMusic();
 
@@ -456,6 +472,7 @@ public class CombatManager : MonoBehaviour
 
         //GameManager.Instance.menuMusic.Play();
         GameManager.Instance.playerInputManager.SetActive(false);
+
         //GameManager.Instance.pointHolder.Clear();
 
         // reset fever bar, combo, and highest combo

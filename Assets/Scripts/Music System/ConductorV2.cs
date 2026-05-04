@@ -64,10 +64,16 @@ public class ConductorV2 : MonoBehaviour
     public AudioSource major;
     public AudioSource allegro;
     public AudioSource trill;
+
     public AudioSource chromatic;
     public AudioSource poco;
     public AudioSource legato;
     public AudioSource forte;
+
+    public AudioSource Tower9;
+    public AudioSource Tower10;
+    public AudioSource Tower11;
+    public AudioSource Tower12;
 
     public AudioSource _ping;
 
@@ -141,10 +147,16 @@ public class ConductorV2 : MonoBehaviour
         major.time = 0;
         allegro.time = 0;
         trill.time = 0;
+
         chromatic.time = 0;
         poco.time = 0;
         forte.time = 0;
         legato.time = 0;
+
+        Tower9.time = 0;
+        Tower10.time = 0;
+        Tower11.time = 0;
+        Tower12.time = 0;   
 
         if (GameManager.Instance.tutorialRunning)
         {
@@ -166,6 +178,11 @@ public class ConductorV2 : MonoBehaviour
         poco.volume = 0;
         forte.volume = 0;
         legato.volume = 0;
+        Tower9.volume = 0;
+        Tower10.volume = 0; 
+        Tower11.volume = 0; 
+        Tower12.volume = 0; 
+
 
         flats.clip = song.flats;
         major.clip = song.major;
@@ -175,6 +192,10 @@ public class ConductorV2 : MonoBehaviour
         poco.clip = song.poco;
         forte.clip = song.forte;
         legato.clip = song.legato;
+        Tower9.clip = song.tower9;
+        Tower10.clip = song.tower10;
+        Tower11.clip = song.tower11;
+        Tower12.clip = song.tower12;
 
         if(song.chromatic == null)
         {
@@ -363,6 +384,10 @@ public class ConductorV2 : MonoBehaviour
         poco.Pause();
         legato.Pause();
         forte.Pause();
+        Tower9.Pause();
+        Tower10.Pause();
+        Tower11.Pause();
+        Tower12.Pause();
     }
 
     public void ResumeMusic()
@@ -375,7 +400,11 @@ public class ConductorV2 : MonoBehaviour
         chromatic.UnPause();
         poco.UnPause();
         legato.UnPause();
-        forte.UnPause();    
+        forte.UnPause();  
+        Tower9.UnPause();
+        Tower10.UnPause();
+        Tower11.UnPause();
+        Tower12.UnPause();
     }
 
     public void StopMusic()
@@ -389,6 +418,10 @@ public class ConductorV2 : MonoBehaviour
         poco.Stop();    
         legato.Stop();  
         forte.Stop();
+        Tower9.Stop();
+        Tower10.Stop();
+        Tower11.Stop();
+        Tower12.Stop();
     }
 
     public void PlayMusic()
@@ -402,6 +435,10 @@ public class ConductorV2 : MonoBehaviour
         poco.Play();
         legato.Play();
         forte.Play();
+        Tower9.Play();
+        Tower10.Play();
+        Tower11.Play();
+        Tower12.Play();
       
     }
 }

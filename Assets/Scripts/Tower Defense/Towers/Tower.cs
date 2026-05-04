@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public enum InstrumentType
 {
-    Flats, Trill, Major, Chromatic, Forte, Poco, Legato, Allegro
+    Flats, Trill, Major, Chromatic, Forte, Poco, Legato, Allegro, Tower9, Tower10, Tower11, Tower12
 }
 
 public enum BuffType
@@ -520,6 +520,26 @@ public class Tower : MonoBehaviour
             case InstrumentType.Legato:
                 ConductorV2.instance.legato.volume -= towerAudioVolumeIncrement;
                 ConductorV2.instance.legato.volume = Mathf.Clamp(ConductorV2.instance.legato.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Tower9:
+                ConductorV2.instance.Tower9.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.Tower9.volume = Mathf.Clamp(ConductorV2.instance.Tower9.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Tower10:
+                ConductorV2.instance.Tower10.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.Tower10.volume = Mathf.Clamp(ConductorV2.instance.Tower10.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Tower11:
+                ConductorV2.instance.Tower11.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.Tower11.volume = Mathf.Clamp(ConductorV2.instance.Tower11.volume, 0, 0.5f);
+                break;
+
+            case InstrumentType.Tower12:
+                ConductorV2.instance.Tower12.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.Tower12.volume = Mathf.Clamp(ConductorV2.instance.Tower12.volume, 0, 0.5f);
                 break;
 
             default:

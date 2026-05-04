@@ -57,6 +57,11 @@ public class MenuEventManager : MonoBehaviour
     public List<GameObject> mainScreenInteractables;
     public AudioSource menuMusic;
 
+    [Header("Loadout Menu")]
+    public GameObject loadoutScreen;
+    public List<GameObject> loadoutScreenInteractables;
+    public Animator loadoutInterfaceAnimator;
+
     [Header("Win Screen")]
     public GameObject winScreen;
     public List<GameObject> winScreenInteractables;
@@ -71,6 +76,8 @@ public class MenuEventManager : MonoBehaviour
     public TextMeshProUGUI exitMenuText;
     
     [Header("Other")]
+    public Animator cameraAnimator;
+    public Animator combatInterfaceAnimator;
     public GameObject showcaseCreditsScreen;
     public List<GameObject> showcaseCreditsScreenInteractables;
 
@@ -107,6 +114,8 @@ public class MenuEventManager : MonoBehaviour
     #region main menu
     public void OpenMainMenu()
     {
+        cameraAnimator.SetTrigger("Enter Menu");
+
         mainScreen.SetActive(true); //enable main menu (level select)
 
         if (lastSelectedLevelObject == null) 
@@ -126,6 +135,78 @@ public class MenuEventManager : MonoBehaviour
         menuMusic.Stop();
 
         mainScreen.SetActive(false);
+    }
+    #endregion
+
+    #region loadout menu
+    public void OpenLoadoutMenu()
+    {
+        loadoutScreen.SetActive(true); //enable loadout menu
+
+        cameraAnimator.SetTrigger("Enter Loadout");
+
+        eventSystem.SetSelectedGameObject(loadoutScreenInteractables[0]);
+
+        LoadingScreenManager.Instance.EndLoading(); //TEMPORARY
+    }
+
+    public void CloseLoadoutMenu()
+    {
+        loadoutScreen.SetActive(false);
+    }
+
+    public void ConfirmLoadout()
+    {
+        StartCoroutine(CombatStartSequence());
+    }
+
+    //Combat start sequence
+    public IEnumerator CombatStartSequence()
+    {
+        bool animating = true;
+
+        //Closing Loadout UI Animation
+        //loadoutInterfaceAnimator.SetTrigger("Close Loadout");
+        
+        while (animating)
+        {
+            animating = false;
+
+            yield return new WaitForSecondsRealtime(1.0f);
+        }
+
+        //Combat Start Sequence Animation
+        cameraAnimator.SetTrigger("Combat Start");
+        animating = true;
+
+        while (animating)
+        {
+            animating = false;
+
+            yield return new WaitForSecondsRealtime(8.0f);
+        }
+
+        cameraAnimator.ResetTrigger("Enter Menu");
+        cameraAnimator.SetTrigger("Combat Idle");
+        
+        CombatManager.Instance.combatInterface.SetActive(true);
+        CombatManager.Instance.countInObject.SetActive(false);
+
+        //Combat UI Opening Animation
+        //combatInterfaceAnimator.SetTrigger("Open Combat UI");
+        animating = true;
+
+        while (animating)
+        {
+            animating = false;
+
+            yield return new WaitForSecondsRealtime(1.0f);
+        }
+
+        CombatManager.Instance.countInObject.SetActive(false);
+        GameManager.Instance.StartCombat();
+
+        StopCoroutine(CombatStartSequence());
     }
     #endregion
 
@@ -233,7 +314,12 @@ public class MenuEventManager : MonoBehaviour
     #region dialogue menu
     public void DialogueOpen()
     {
-        OpenMenu(dialogueScreen, dialogueScreenInteractables[0]);
+        dialogueScreen.SetActive(true);
+    }
+
+    public void DialogueClose()
+    {
+        dialogueScreen.SetActive(false);
     }
 
     public void OpenLog()
@@ -289,9 +375,19 @@ public class MenuEventManager : MonoBehaviour
         OpenMenu(failScreen, failScreenInteractables[0]);
     }
 
+    public void CloseFailScreen()
+    {
+        GameManager.Instance.ResetCombatState();
+    }
+
     public void OpenWinScreen()
     {
         OpenMenu(winScreen, winScreenInteractables[0]);
+    }
+
+    public void CloseWinScreen()
+    {
+        GameManager.Instance.ResetCombatState();
     }
     #endregion
 

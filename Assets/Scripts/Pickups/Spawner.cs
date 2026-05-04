@@ -393,6 +393,7 @@ public class Spawner : MonoBehaviour
     {
         cameraAnimator.ResetTrigger("Pickup Phase Start");
         cameraAnimator.SetTrigger("Pickup Phase End");
+        cameraAnimator.ResetTrigger("Pickup Phase End");
 
         cursorAnimator.ResetTrigger("Vertical");
         cursorAnimator.SetTrigger("Horizontal");

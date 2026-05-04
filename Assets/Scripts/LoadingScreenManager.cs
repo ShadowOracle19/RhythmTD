@@ -48,10 +48,8 @@ public class LoadingScreenManager : MonoBehaviour
     public bool transitionActive = false;
     public float transitionTimer = 0.0f;
     
-    public void StartLoading(GameObject loadInto, GameObject loadFrom)
+    public IEnumerator StartLoading()
     {
-
-        loadInto.SetActive(true);
         // Enable loading screen visuals
         loadingScreen.SetActive(true);
         loadingScreenVisual.SetActive(true);
@@ -67,13 +65,39 @@ public class LoadingScreenManager : MonoBehaviour
         animator.ResetTrigger("Load End");
         animator.SetTrigger("Load Start");
 
-        StartCoroutine(StartTransition(1.5f, loadInto, loadFrom));
+        transitionActive = true;
+        transitionTimer = 0.0f;
+        
+        while (transitionTimer <= 1.5f)
+        {
+            yield return null;
+            transitionTimer += Time.deltaTime;
+        }
+
+        transitionActive = false;
+
+        MenuEventManager.Instance.CloseMainMenu();
+        GameManager.Instance.LoadCombatScene(); 
+
+        // Start loading process
+        if (GameManager.Instance.currentEncounter.introDialogue != null)
+        {
+            MenuEventManager.Instance.DialogueOpen();
+            DialogueManager.Instance.LoadDialogue(GameManager.Instance.currentEncounter.introDialogue);
+        }
+        else
+        {
+            MenuEventManager.Instance.OpenLoadoutMenu();
+        } 
+
+        StopCoroutine(StartLoading());
     }
 
     public void EndLoading()
     {
         loading = false;
         StopCoroutine(UpdateLoadingText());
+        loadingText.text = "READY TO ROCK!";
         
         // Trigger closing transition
         animator.ResetTrigger("Load Start");
@@ -81,26 +105,10 @@ public class LoadingScreenManager : MonoBehaviour
         
         StartCoroutine(EndTransition(1.5f));
     }
-
-    public IEnumerator StartTransition(float timerLength, GameObject loadInto, GameObject loadFrom)
-    {
-        transitionActive = true;
-        
-        transitionTimer = 0.0f;
-        
-        while (transitionTimer <= timerLength)
-        {
-            yield return null;
-            transitionTimer += Time.deltaTime;
-        }
-
-
-        loadFrom.SetActive(false);
-        transitionActive = false;
-    }
     
     public IEnumerator EndTransition(float timerLength)
     {
+        //prevents end transition from running while start transition is still active
         while (transitionActive)
         {
             yield return null;
@@ -110,12 +118,14 @@ public class LoadingScreenManager : MonoBehaviour
         
         while (transitionTimer <= timerLength)
         {
-            yield return null;
             transitionTimer += Time.deltaTime;
+            yield return null;
         }
 
         loadingScreen.SetActive(false);
         loadingScreenVisual.SetActive(false);
+
+        StopCoroutine(EndTransition(1.5f));
     }
 
     public void SetArtwork()
@@ -136,7 +146,7 @@ public class LoadingScreenManager : MonoBehaviour
 
             loadingTextIndex += 1;
 
-            yield return new WaitForSecondsRealtime(0.01f);
+            yield return new WaitForSecondsRealtime(0.25f);
         }
     }
 }

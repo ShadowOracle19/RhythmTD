@@ -74,6 +74,8 @@ public class CombatManager : MonoBehaviour
     */
 
     [Header("Combat UI")]
+    public GameObject combatInterface;
+    public GameObject countInObject;
     public GameObject enemyTimerObject;
     public GameObject healthBar;
     //public GameObject controls;
@@ -89,6 +91,10 @@ public class CombatManager : MonoBehaviour
 
     public GameObject tutorialManager;
 
+    [Header("End Sequence")]
+    public bool fadeMusicFinished = false;
+    public float fadeDurationInBeats = 8.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,9 +103,11 @@ public class CombatManager : MonoBehaviour
 
     private void OnDisable()
     {
+        /*
         Camera.main.transform.position = Vector3.zero;
         Camera.main.transform.rotation = Quaternion.Euler(Vector3.zero);
         Camera.main.fieldOfView = 40;
+        */
     }
 
 
@@ -108,8 +116,8 @@ public class CombatManager : MonoBehaviour
         // close win & fail screens
         GameManager.Instance.winScreen.SetActive(false);
         GameManager.Instance.winState = false;
-        GameManager.Instance.gameOverScreen.SetActive(false);
-        GameManager.Instance.loseState = false;
+        GameManager.Instance.failScreen.SetActive(false);
+        GameManager.Instance.failState = false;
 
         GameManager.Instance.lostHealth = false; //reset flag for failing objective 02
 
@@ -180,50 +188,44 @@ public class CombatManager : MonoBehaviour
         ComboManager.Instance.ResetCombo();
         ComboManager.Instance.highestCombo = 0;
 
-        //ConductorV2.instance.StopMusic();
-
-        
+        //ConductorV2.instance.StopMusic(); 
     }
 
     public void SpawnStagePlatform(CombatMaker encounter)
     {
         var stage = Instantiate(encounter.stagePrefab, stageParent);
+
         //add spawn and pickup tile call to spawner
         Spawner.Instance.spawnTiles = stage.GetComponent<StageObject>().spawnTiles;
         Spawner.Instance.pickupSpawnTiles = stage.GetComponent<StageObject>().pickupTiles;
-
     }
 
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
+        currentEncounter = encounter;
+        
+        /*
         if (GameManager.Instance.tutorialRunning)
         {
             GameManager.Instance.combatRunning = true;
         }
-
-        GameManager.Instance.playerInputManager.SetActive(true);
+        */
 
         GameManager.Instance.menuMusic.Stop();
 
-        GameManager.Instance.winScreen.SetActive(false);
-        GameManager.Instance.winState = false;
-        GameManager.Instance.gameOverScreen.SetActive(false);
-        GameManager.Instance.loseState = false;
-        GameManager.Instance.combatRunning = true;
+        GameManager.Instance.playerInputManager.SetActive(true);
 
-        GameManager.Instance._currentHealth = GameManager.Instance._maxHealth;
+        GameManager.Instance.ResetCombatState();
 
-        currentEncounter = encounter;
+        // set flags for all objects having been spawned back to false
+        CombatManager.Instance.allEnemiesSpawned = false;
+        CombatManager.Instance.allPickupsSpawned = false;
 
-        // set the flags for all objects having been spawned back to false
-        allEnemiesSpawned = false;
-        allPickupsSpawned = false;
-
-        // set enemy & pickup totals back to 0 temporarily before counting
-        enemiesDefeated = 0;
-        enemyTotal = 0;
-        pickupTotal = 0;
+        // set enemy & pickup totals back to 0
+        CombatManager.Instance.enemiesDefeated = 0;
+        CombatManager.Instance.enemyTotal = 0;
+        CombatManager.Instance.pickupTotal = 0;
 
         // for each wave, get the total number of enemies & pickups and add them to the enemy & pickup totals for this encounter
         foreach (var item in currentEncounter.waves)
@@ -266,19 +268,167 @@ public class CombatManager : MonoBehaviour
         enemiesSpawnIn.gameObject.SetActive(true); // enable enemy spawn countdown text object
 
         CursorTD.Instance.InitializeCursor(); // initialize the player cursor
-
-        //BeatIndicatorManager.Instance.ResetBeatIndicator();
-
         Cursor.lockState = CursorLockMode.Locked; // lock cursor movement 
 
+        /*
         if (GameManager.Instance.tutorialRunning)
             return;
-
+        */
         TowerManager.Instance.ResetTowerManager();
-        ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
 
+        TowerManager.Instance.InstantiateTowerCooldown();
+        
         //Set Animation BPM
+        Debug.Log(ConductorV2.instance.bpm);
         AnimationManager.instance.SetCombatAnimSpeed();
+
+        // start count in
+        ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
+    }
+
+    public void StartWinSequence()
+    {
+        // fade music out
+        StartCoroutine(FadeMusic());
+        StartCoroutine(WaitForWinScreen());
+    }
+
+    public IEnumerator WaitForWinScreen()
+    {
+        while (fadeMusicFinished == false)
+        {
+            yield return null;
+        }
+        MenuEventManager.Instance.OpenWinScreen();
+
+        // remove enemies
+        foreach (Transform child in enemiesParent)
+        {
+            child.gameObject.GetComponent<Enemy>().RemoveEnemy();
+        }
+        // remove towers
+        foreach (Transform child in towersParent)
+        {
+            child.gameObject.GetComponent<Tower>().RemoveTower();
+        }
+        // remove projectiles
+        foreach (Transform child in projectilesParent)
+        {
+            child.gameObject.GetComponent<Projectile>().RemoveProjectile();
+        }
+        // remove charges
+        foreach (Transform child in chargesParent)
+        {
+            child.gameObject.GetComponent<Charges>().RemoveCharge();
+        }
+        // remove pickups
+        foreach (Transform child in pickupsParent)
+        {
+            child.gameObject.GetComponent<Pickup>().RemovePickup();
+        }
+        
+        // reset spawner activity
+        objectSpawners.startOnce = false;
+        objectSpawners.ResetSpawner();
+
+        // lock player movement
+        CursorTD.Instance.pauseMovement = true;
+        CursorTD.Instance.isMoving = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        BeatIndicatorManager.Instance.ResetBeatIndicator();
+
+        //GameManager.Instance.menuMusic.Play();
+        GameManager.Instance.playerInputManager.SetActive(false);
+        //GameManager.Instance.pointHolder.Clear();
+
+        // reset fever bar, combo, and highest combo
+        FeverSystem.Instance.feverBarNum = 0;
+        ComboManager.Instance.ResetCombo();
+        ComboManager.Instance.highestCombo = 0;
+
+        GameManager.Instance.tutorialRunning = false; 
+        GameManager.Instance.combatRunning = false;
+
+        CombatDialogueManager.Instance.combatDialogueActive = false;
+        CombatDialogueManager.Instance.Clear();
+        CombatDialogueManager.Instance.dialogueBox.SetActive(false);
+
+        // clear spawn tile list data
+        Spawner.Instance.spawnTiles.Clear();
+        Spawner.Instance.pickupSpawnTiles.Clear();
+
+        StopCoroutine(WaitForWinScreen());
+    }
+    
+    public IEnumerator FadeMusic()
+    {
+        fadeMusicFinished = false;
+
+        float timeElapsed = 0.0f;
+        float fadeDuration = (ConductorV2.instance.crotchet * fadeDurationInBeats);
+
+        // track volume start points
+        float trackVolume01 = ConductorV2.instance.flats.volume;
+        float trackVolume02 = ConductorV2.instance.major.volume;
+        float trackVolume03 = ConductorV2.instance.allegro.volume;
+        float trackVolume04 = ConductorV2.instance.trill.volume;
+        float trackVolume05 = ConductorV2.instance.chromatic.volume;
+        float trackVolume06 = ConductorV2.instance.poco.volume;
+        float trackVolume07 = ConductorV2.instance.forte.volume;  
+        float trackVolume08 = ConductorV2.instance.legato.volume; 
+        float trackVolume09 = ConductorV2.instance.Tower9.volume;
+        float trackVolume10 = ConductorV2.instance.Tower10.volume;    
+        float trackVolume11 = ConductorV2.instance.Tower11.volume;
+        float trackVolume12 = ConductorV2.instance.Tower12.volume;
+
+        while (timeElapsed < fadeDuration) //this should be the time across 4 beats
+        {
+            float t = timeElapsed / fadeDuration;
+
+            /*
+            foreach (float trackVolume in tracks)
+            {
+                trackVolume = Mathf.Lerp(trackInitialVolumes[index], 0, t)
+            }
+            */
+
+            ConductorV2.instance.flats.volume = Mathf.Lerp(trackVolume01,0,t);
+            ConductorV2.instance.major.volume = Mathf.Lerp(trackVolume02,0,t);
+            ConductorV2.instance.allegro.volume = Mathf.Lerp(trackVolume03,0,t);
+            ConductorV2.instance.trill.volume = Mathf.Lerp(trackVolume04,0,t);
+            ConductorV2.instance.chromatic.volume = Mathf.Lerp(trackVolume05,0,t);
+            ConductorV2.instance.poco.volume = Mathf.Lerp(trackVolume06,0,t);
+            ConductorV2.instance.forte.volume = Mathf.Lerp(trackVolume07,0,t);  
+            ConductorV2.instance.legato.volume = Mathf.Lerp(trackVolume08,0,t);
+            ConductorV2.instance.Tower9.volume = Mathf.Lerp(trackVolume09,0,t);
+            ConductorV2.instance.Tower10.volume = Mathf.Lerp(trackVolume10,0,t);    
+            ConductorV2.instance.Tower11.volume = Mathf.Lerp(trackVolume11,0,t);
+            ConductorV2.instance.Tower12.volume = Mathf.Lerp(trackVolume12,0,t);
+
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // mute all tower tracks
+        ConductorV2.instance.flats.volume = 0;
+        ConductorV2.instance.major.volume = 0;
+        ConductorV2.instance.allegro.volume = 0;
+        ConductorV2.instance.trill.volume = 0;
+        ConductorV2.instance.chromatic.volume = 0;
+        ConductorV2.instance.poco.volume = 0;
+        ConductorV2.instance.forte.volume = 0;  
+        ConductorV2.instance.legato.volume = 0; 
+        ConductorV2.instance.Tower9.volume = 0;
+        ConductorV2.instance.Tower10.volume = 0;    
+        ConductorV2.instance.Tower11.volume = 0;
+        ConductorV2.instance.Tower12.volume = 0;
+
+        ConductorV2.instance.StopMusic();
+
+        fadeMusicFinished = true;
+
+        StopCoroutine(FadeMusic());
     }
 
     public void EndEncounter()
@@ -322,21 +472,8 @@ public class CombatManager : MonoBehaviour
 
         //GameManager.Instance.menuMusic.Play();
         GameManager.Instance.playerInputManager.SetActive(false);
-        GameManager.Instance.pointHolder.Clear();
 
-        // mute all tower tracks
-        ConductorV2.instance.flats.volume = 0;
-        ConductorV2.instance.major.volume = 0;
-        ConductorV2.instance.allegro.volume = 0;
-        ConductorV2.instance.trill.volume = 0;
-        ConductorV2.instance.chromatic.volume = 0;
-        ConductorV2.instance.poco.volume = 0;
-        ConductorV2.instance.forte.volume = 0;  
-        ConductorV2.instance.legato.volume = 0; 
-        ConductorV2.instance.Tower9.volume = 0;
-        ConductorV2.instance.Tower10.volume = 0;    
-        ConductorV2.instance.Tower11.volume = 0;
-        ConductorV2.instance.Tower12.volume = 0;
+        //GameManager.Instance.pointHolder.Clear();
 
         // reset fever bar, combo, and highest combo
         FeverSystem.Instance.feverBarNum = 0;
@@ -356,9 +493,11 @@ public class CombatManager : MonoBehaviour
         Spawner.Instance.spawnTiles.Clear();
         Spawner.Instance.pickupSpawnTiles.Clear();
 
-        stageParent.GetComponentInChildren<StageObject>().DestroyStage(); // remove stage
-    }
+        // fade music out
+        StartCoroutine(FadeMusic());
 
+        //stageParent.GetComponentInChildren<StageObject>().DestroyStage(); // remove stage
+    }
 
     // Update is called once per frame
     void Update()

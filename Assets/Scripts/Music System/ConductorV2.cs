@@ -208,15 +208,31 @@ public class ConductorV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //PAUSING
-        if (GameManager.Instance.isGamePaused)
+        ////PAUSING
+        //if (GameManager.Instance.isGamePaused)
+        //{
+        //    PauseMusic();
+        //    return;
+        //}
+        //else
+        //{
+        //    ResumeMusic();
+        //}
+
+        if(!GameManager.Instance.isDynamicMusicActive)
         {
-            PauseMusic();
-            return;
-        }
-        else
-        {
-            ResumeMusic();
+            flats.volume = 0.5f;
+            major.volume = 0.5f;
+            allegro.volume = 0.5f;
+            trill.volume = 0.5f;
+            chromatic.volume = 0.5f;
+            poco.volume = 0.5f;
+            forte.volume = 0.5f;
+            legato.volume = 0.5f;
+            Tower9.volume = 0.5f;
+            Tower10.volume = 0.5f;
+            Tower11.volume = 0.5f;
+            Tower12.volume = 0.5f;
         }
 
         if (pauseConductor) return;

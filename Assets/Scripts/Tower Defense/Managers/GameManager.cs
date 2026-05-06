@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI enemyCounter;
     public GameObject playerInputManager;
     public bool lostHealth = false;
+    public bool isDynamicMusicActive = true;
 
     [Header("Pause Menu")]
     [SerializeField] public bool isGamePaused = false;
@@ -367,6 +368,12 @@ public class GameManager : MonoBehaviour
 
             //conductor.SetActive(false);
         }
+        if (combatRunning && !dialogueRoot.activeSelf)
+        {
+
+            ConductorV2.instance.PauseMusic();
+        }
+
         Cursor.lockState = CursorLockMode.Locked;
         isGamePaused = true;
         pauseMenuRoot.SetActive(true);
@@ -380,6 +387,7 @@ public class GameManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             conductor.SetActive(true);
+            ConductorV2.instance.ResumeMusic();
         }
 
         isGamePaused = false;

@@ -221,18 +221,18 @@ public class ConductorV2 : MonoBehaviour
 
         if(!GameManager.Instance.isDynamicMusicActive)
         {
-            flats.volume = 0.5f;
-            major.volume = 0.5f;
-            allegro.volume = 0.5f;
-            trill.volume = 0.5f;
-            chromatic.volume = 0.5f;
-            poco.volume = 0.5f;
-            forte.volume = 0.5f;
-            legato.volume = 0.5f;
-            Tower9.volume = 0.5f;
-            Tower10.volume = 0.5f;
-            Tower11.volume = 0.5f;
-            Tower12.volume = 0.5f;
+            flats.volume = 0.25f;
+            major.volume = 0.25f;
+            allegro.volume = 0.25f;
+            trill.volume = 0.25f;
+            chromatic.volume = 0.25f;
+            poco.volume = 0.25f;
+            forte.volume = 0.25f;
+            legato.volume = 0.25f;
+            Tower9.volume = 0.25f;
+            Tower10.volume = 0.25f;
+            Tower11.volume = 0.25f;
+            Tower12.volume = 0.25f;
         }
 
         if (pauseConductor) return;

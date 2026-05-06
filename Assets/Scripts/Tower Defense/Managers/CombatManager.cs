@@ -278,6 +278,8 @@ public class CombatManager : MonoBehaviour
 
         TowerManager.Instance.InstantiateTowerCooldown();
         
+        GameManager.Instance.conductor.SetActive(true); //
+
         //Set Animation BPM
         Debug.Log(ConductorV2.instance.bpm);
         AnimationManager.instance.SetCombatAnimSpeed();
@@ -286,21 +288,71 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
     }
 
+    #region Level End Sequence
+    public void StartFailSequence()
+    {
+        // fade music out
+        StartCoroutine(FadeTracks(0.0f,fadeDurationInBeats));
+        StartCoroutine(WaitForFailSequenceEnd());
+        
+        ClearEncounter();
+    }
+    
     public void StartWinSequence()
     {
         // fade music out
-        StartCoroutine(FadeMusic());
-        StartCoroutine(WaitForWinScreen());
+        StartCoroutine(FadeTracks(0.0f,fadeDurationInBeats));
+        StartCoroutine(WaitForWinSequenceEnd());
+        
+        ClearEncounter();
     }
 
-    public IEnumerator WaitForWinScreen()
+    public IEnumerator WaitForFailSequenceEnd()
     {
         while (fadeMusicFinished == false)
         {
             yield return null;
         }
-        MenuEventManager.Instance.OpenWinScreen();
+        
+        ConductorV2.instance.StopMusic();
+        GameManager.Instance.conductor.SetActive(false);
 
+        MenuEventManager.Instance.OpenFailScreen();
+        
+        StopCoroutine(WaitForFailSequenceEnd());
+    }
+
+    public IEnumerator WaitForWinSequenceEnd()
+    {
+        while (fadeMusicFinished == false)
+        {
+            yield return null;
+        }
+        
+        ConductorV2.instance.StopMusic();
+        GameManager.Instance.conductor.SetActive(false);
+
+        GameManager.Instance.UnlockLevel(GameManager.Instance.currentEncounter); 
+        if (GameManager.Instance.currentEncounter.endDialogue == null)
+        {
+            MenuEventManager.Instance.OpenWinScreen();
+        }
+        else
+        {
+            GameManager.Instance.dialogueRoot.SetActive(true);
+            DialogueManager.Instance.LoadDialogue(GameManager.Instance.currentEncounter.endDialogue);
+        }
+        
+        StopCoroutine(WaitForWinSequenceEnd());
+    }
+
+    public void ClearEncounter() 
+    {
+        // lock player movement
+        CursorTD.Instance.pauseMovement = true;
+        CursorTD.Instance.isMoving = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        
         // remove enemies
         foreach (Transform child in enemiesParent)
         {
@@ -331,11 +383,6 @@ public class CombatManager : MonoBehaviour
         objectSpawners.startOnce = false;
         objectSpawners.ResetSpawner();
 
-        // lock player movement
-        CursorTD.Instance.pauseMovement = true;
-        CursorTD.Instance.isMoving = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
         BeatIndicatorManager.Instance.ResetBeatIndicator();
 
         //GameManager.Instance.menuMusic.Play();
@@ -357,16 +404,14 @@ public class CombatManager : MonoBehaviour
         // clear spawn tile list data
         Spawner.Instance.spawnTiles.Clear();
         Spawner.Instance.pickupSpawnTiles.Clear();
-
-        StopCoroutine(WaitForWinScreen());
     }
     
-    public IEnumerator FadeMusic()
+    public IEnumerator FadeTracks(float targetVolume, float durationInBeats)
     {
         fadeMusicFinished = false;
 
         float timeElapsed = 0.0f;
-        float fadeDuration = (ConductorV2.instance.crotchet * fadeDurationInBeats);
+        float fadeDuration = (ConductorV2.instance.crotchet * durationInBeats);
 
         // track volume start points
         float trackVolume01 = ConductorV2.instance.flats.volume;
@@ -393,46 +438,56 @@ public class CombatManager : MonoBehaviour
             }
             */
 
-            ConductorV2.instance.flats.volume = Mathf.Lerp(trackVolume01,0,t);
-            ConductorV2.instance.major.volume = Mathf.Lerp(trackVolume02,0,t);
-            ConductorV2.instance.allegro.volume = Mathf.Lerp(trackVolume03,0,t);
-            ConductorV2.instance.trill.volume = Mathf.Lerp(trackVolume04,0,t);
-            ConductorV2.instance.chromatic.volume = Mathf.Lerp(trackVolume05,0,t);
-            ConductorV2.instance.poco.volume = Mathf.Lerp(trackVolume06,0,t);
-            ConductorV2.instance.forte.volume = Mathf.Lerp(trackVolume07,0,t);  
-            ConductorV2.instance.legato.volume = Mathf.Lerp(trackVolume08,0,t);
-            ConductorV2.instance.Tower9.volume = Mathf.Lerp(trackVolume09,0,t);
-            ConductorV2.instance.Tower10.volume = Mathf.Lerp(trackVolume10,0,t);    
-            ConductorV2.instance.Tower11.volume = Mathf.Lerp(trackVolume11,0,t);
-            ConductorV2.instance.Tower12.volume = Mathf.Lerp(trackVolume12,0,t);
+            ConductorV2.instance.flats.volume = Mathf.Lerp(trackVolume01,targetVolume,t);
+            ConductorV2.instance.major.volume = Mathf.Lerp(trackVolume02,targetVolume,t);
+            ConductorV2.instance.allegro.volume = Mathf.Lerp(trackVolume03,targetVolume,t);
+            ConductorV2.instance.trill.volume = Mathf.Lerp(trackVolume04,targetVolume,t);
+            ConductorV2.instance.chromatic.volume = Mathf.Lerp(trackVolume05,targetVolume,t);
+            ConductorV2.instance.poco.volume = Mathf.Lerp(trackVolume06,targetVolume,t);
+            ConductorV2.instance.forte.volume = Mathf.Lerp(trackVolume07,targetVolume,t);  
+            ConductorV2.instance.legato.volume = Mathf.Lerp(trackVolume08,targetVolume,t);
+            ConductorV2.instance.Tower9.volume = Mathf.Lerp(trackVolume09,targetVolume,t);
+            ConductorV2.instance.Tower10.volume = Mathf.Lerp(trackVolume10,targetVolume,t);    
+            ConductorV2.instance.Tower11.volume = Mathf.Lerp(trackVolume11,targetVolume,t);
+            ConductorV2.instance.Tower12.volume = Mathf.Lerp(trackVolume12,targetVolume,t);
 
             timeElapsed += Time.deltaTime;
             yield return null;
         }
 
-        // mute all tower tracks
-        ConductorV2.instance.flats.volume = 0;
-        ConductorV2.instance.major.volume = 0;
-        ConductorV2.instance.allegro.volume = 0;
-        ConductorV2.instance.trill.volume = 0;
-        ConductorV2.instance.chromatic.volume = 0;
-        ConductorV2.instance.poco.volume = 0;
-        ConductorV2.instance.forte.volume = 0;  
-        ConductorV2.instance.legato.volume = 0; 
-        ConductorV2.instance.Tower9.volume = 0;
-        ConductorV2.instance.Tower10.volume = 0;    
-        ConductorV2.instance.Tower11.volume = 0;
-        ConductorV2.instance.Tower12.volume = 0;
-
-        ConductorV2.instance.StopMusic();
+        // set all tracks to target volume
+        ConductorV2.instance.flats.volume = targetVolume;
+        ConductorV2.instance.major.volume = targetVolume;
+        ConductorV2.instance.allegro.volume = targetVolume;
+        ConductorV2.instance.trill.volume = targetVolume;
+        ConductorV2.instance.chromatic.volume = targetVolume;
+        ConductorV2.instance.poco.volume = targetVolume;
+        ConductorV2.instance.forte.volume = targetVolume;  
+        ConductorV2.instance.legato.volume = targetVolume; 
+        ConductorV2.instance.Tower9.volume = targetVolume;
+        ConductorV2.instance.Tower10.volume = targetVolume;    
+        ConductorV2.instance.Tower11.volume = targetVolume;
+        ConductorV2.instance.Tower12.volume = targetVolume;
 
         fadeMusicFinished = true;
 
-        StopCoroutine(FadeMusic());
+        StopCoroutine(FadeTracks(0.0f, fadeDurationInBeats));
     }
+
+    /*
+    public IEnumerator FadeTrack(float targetVolume, float durationInBeats)
+    {
+
+    }
+    */
 
     public void EndEncounter()
     {
+        // lock player movement
+        CursorTD.Instance.pauseMovement = true;
+        CursorTD.Instance.isMoving = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         // remove enemies
         foreach (Transform child in enemiesParent)
         {
@@ -463,10 +518,6 @@ public class CombatManager : MonoBehaviour
         objectSpawners.startOnce = false;
         objectSpawners.ResetSpawner();
 
-        // lock player movement
-        CursorTD.Instance.pauseMovement = true;
-        CursorTD.Instance.isMoving = false;
-        Cursor.lockState = CursorLockMode.Locked;
 
         BeatIndicatorManager.Instance.ResetBeatIndicator();
 
@@ -494,10 +545,11 @@ public class CombatManager : MonoBehaviour
         Spawner.Instance.pickupSpawnTiles.Clear();
 
         // fade music out
-        StartCoroutine(FadeMusic());
+        StartCoroutine(FadeTracks(0.0f, fadeDurationInBeats));
 
         //stageParent.GetComponentInChildren<StageObject>().DestroyStage(); // remove stage
     }
+    #endregion
 
     // Update is called once per frame
     void Update()

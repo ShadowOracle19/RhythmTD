@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public GameObject winScreen;
     [SerializeField] public GameObject failScreen;
-    [SerializeField] private GameObject conductor;
+    [SerializeField] public GameObject conductor;
 
     [Header("Screen Roots")]
     public GameObject combatRoot;
@@ -520,8 +520,6 @@ public class GameManager : MonoBehaviour
         encounterRunning = true;
         
         StartCoroutine(LoadingScreenManager.Instance.StartLoading());
-
-        ResetCombatState();
     }
 
     public void LoadCombatScene()
@@ -547,7 +545,7 @@ public class GameManager : MonoBehaviour
 
         //CombatManager.Instance.EndEncounter(); //end current encounter
 
-        MenuEventManager.Instance.OpenFailScreen(); //open fail screen and set active object
+        CombatManager.Instance.StartFailSequence(); //open fail screen and set active object
     }
 
     public void WinLevel()
@@ -573,23 +571,7 @@ public class GameManager : MonoBehaviour
         //currentEncounter.clearedObjective03 = LevelObjectiveManager.Instance.CheckIfObjectiveWasCompleted(currentEncounter.data.uniqueLevel3Objective);
 
         // SCORE
-        pointHolder.Add(healthRemainingPointGain * _currentHealth);
-
-        /*
-        UnlockLevel(currentEncounter); //unlock next level
-        if (currentEncounter.endDialogue == null)
-        {
-            StartWinLevelProcess();
-            return;
-        }
-
-        dialogueRoot.SetActive(true);
-        DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
-        */
-        
-        //conductor.SetActive(false);
-        //MenuEventManager.Instance.OpenWinScreen(0);
-        //ConductorV2.instance.StopMusic();
+        pointHolder.Add(healthRemainingPointGain * _currentHealth);  
     }
 
     public void StartWinLevelProcess()
@@ -642,7 +624,6 @@ public class GameManager : MonoBehaviour
         // reset player health
         _currentHealth = _maxHealth;
 
-        /*
         // reset combo, multiplier, & score
         ComboManager.Instance.currentCombo = 0;
         ComboManager.Instance.highestCombo = 0;
@@ -657,7 +638,6 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.enemiesDefeated = 0;
         CombatManager.Instance.enemyTotal = 0;
         CombatManager.Instance.pickupTotal = 0;
-        */
     }
 
     public void UnlockUpgrade(Tower tower, UpgradeNum upgrade)

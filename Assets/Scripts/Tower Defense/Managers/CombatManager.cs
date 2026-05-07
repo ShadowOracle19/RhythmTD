@@ -218,15 +218,6 @@ public class CombatManager : MonoBehaviour
 
         GameManager.Instance.ResetCombatState();
 
-        // set flags for all objects having been spawned back to false
-        CombatManager.Instance.allEnemiesSpawned = false;
-        CombatManager.Instance.allPickupsSpawned = false;
-
-        // set enemy & pickup totals back to 0
-        CombatManager.Instance.enemiesDefeated = 0;
-        CombatManager.Instance.enemyTotal = 0;
-        CombatManager.Instance.pickupTotal = 0;
-
         // for each wave, get the total number of enemies & pickups and add them to the enemy & pickup totals for this encounter
         foreach (var item in currentEncounter.waves)
         {

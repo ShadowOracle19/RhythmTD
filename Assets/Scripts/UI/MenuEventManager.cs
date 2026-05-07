@@ -377,7 +377,8 @@ public class MenuEventManager : MonoBehaviour
 
     public void CloseFailScreen()
     {
-        failScreen.SetActive(false);
+        GameManager.Instance.ResetCombatState();
+        //failScreen.SetActive(false);
     }
 
     public void OpenWinScreen()
@@ -387,7 +388,9 @@ public class MenuEventManager : MonoBehaviour
 
     public void CloseWinScreen()
     {
-        winScreen.SetActive(false);
+        GameManager.Instance.ResetCombatState();
+        
+        //winScreen.SetActive(false);
     }
     #endregion
 

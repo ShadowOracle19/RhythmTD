@@ -617,7 +617,7 @@ public class GameManager : MonoBehaviour
         winScreen.SetActive(false);
         failState = false;
         failScreen.SetActive(false);
-
+        
         // reset objective flags
         lostHealth = false;
 
@@ -638,6 +638,8 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.enemiesDefeated = 0;
         CombatManager.Instance.enemyTotal = 0;
         CombatManager.Instance.pickupTotal = 0;
+
+        Debug.Log("Combat State Reset");
     }
 
     public void UnlockUpgrade(Tower tower, UpgradeNum upgrade)

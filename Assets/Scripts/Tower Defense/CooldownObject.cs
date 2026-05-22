@@ -7,7 +7,7 @@ public class CooldownObject : MonoBehaviour
     public Transform cooldownParent;
     [HideInInspector]
     public GameObject towerLoadoutObject;
-    //public GameObject towerCooldownSlot;
+    public RectTransform cooldownBar;
     public Animator towerCooldownAnimation;
     private float AnimationBPM;
 
@@ -17,10 +17,10 @@ public class CooldownObject : MonoBehaviour
     [HideInInspector]
     public bool towerCooldown;
 
-    [HideInInspector]
+    //[HideInInspector]
     public float towerCooldownTimeRemaining = 0;
 
-    [HideInInspector]
+    //[HideInInspector]
     public float towerCooldownTime = 0;
 
     [HideInInspector]
@@ -29,7 +29,7 @@ public class CooldownObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        cooldownBar.anchoredPosition = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     // Update is called once per frame
@@ -41,15 +41,16 @@ public class CooldownObject : MonoBehaviour
         towerCooldownAnimation.SetBool("NoPurchase", CheckIfCanPurchase());
 
         //AnimationBPM = (float)(2*(ConductorV2.instance.bpm*0.0125));
-        //towerCooldownAnimation.SetFloat("Speed", AnimationBPM);
+        towerCooldownAnimation.SetFloat("Speed", AnimationBPM);
 
         if(towerCooldown)
         {
             towerCooldownTime += Time.deltaTime;
 
             //cooldown effect
-            //towerCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(towerCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((towerCooldownTime / towerCooldownTimeRemaining) * 100));
-            
+            //resourceBar.anchoredPosition = new Vector3((336.0f/100.0f) * ((towerCooldownTime / towerCooldownTimeRemaining) * 100), 0.0f, 0.0f);
+            cooldownBar.anchoredPosition = new Vector3(359.0f - ((359.0f / 100.0f) * ((towerCooldownTime / towerCooldownTimeRemaining) * 100)), 0.0f, 0.0f);
+
             if (towerCooldownTime >= towerCooldownTimeRemaining)
             {
                 towerCooldown = false;

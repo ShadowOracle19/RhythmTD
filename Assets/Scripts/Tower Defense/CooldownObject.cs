@@ -7,7 +7,7 @@ public class CooldownObject : MonoBehaviour
     public Transform cooldownParent;
     [HideInInspector]
     public GameObject towerLoadoutObject;
-    public GameObject towerCooldownSlot;
+    //public GameObject towerCooldownSlot;
     public Animator towerCooldownAnimation;
     private float AnimationBPM;
 
@@ -35,7 +35,7 @@ public class CooldownObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        towerCooldownSlot.SetActive(towerCooldown);
+        //towerCooldownSlot.SetActive(towerCooldown);
 
         towerCooldownAnimation.SetBool("Cooldown", towerCooldown);
         towerCooldownAnimation.SetBool("NoPurchase", CheckIfCanPurchase());
@@ -48,7 +48,7 @@ public class CooldownObject : MonoBehaviour
             towerCooldownTime += Time.deltaTime;
 
             //cooldown effect
-            towerCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(towerCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((towerCooldownTime / towerCooldownTimeRemaining) * 100));
+            //towerCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(towerCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((towerCooldownTime / towerCooldownTimeRemaining) * 100));
             
             if (towerCooldownTime >= towerCooldownTimeRemaining)
             {

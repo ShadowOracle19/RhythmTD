@@ -9,10 +9,22 @@ public class CooldownObject : MonoBehaviour
     public Transform cooldownParent;
     [HideInInspector]
     public GameObject towerLoadoutObject;
-    public RectTransform cooldownBar;
-    public RectTransform resourceBar;
+
+    public GameObject cooldownBar;
+    public RectTransform cooldownBarTransform;
+
+    public GameObject resourceBar;
+    public RectTransform resourceBarTransform;
+    public Image resourceBarImage;
+
     public TextMeshProUGUI resourceCostText;
+    public GameObject readyText;
     public int towerCost = 0;
+
+    public Color readyColor;
+    public Color waitColor;
+    public Color cooldownColor;
+
     public Animator towerCooldownAnimation;
     private float AnimationBPM;
 
@@ -33,14 +45,20 @@ public class CooldownObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cooldownBar.anchoredPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        cooldownBarTransform = cooldownBar.GetComponent<RectTransform>();
+        resourceBarTransform = resourceBar.GetComponent<RectTransform>();
+        resourceBarImage = resourceBar.GetComponent<Image>();
+
+        cooldownBarTransform.anchoredPosition = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        resourceBar.anchoredPosition = new Vector3(0.0f + ((336.0f/100.0f) * Mathf.Clamp((((float)CombatManager.Instance.resourceNum / (float)towerCost) * 100.0f),0.0f,100.0f)), 0.0f, 0.0f);
+        //update resource bar
+        resourceBarTransform.anchoredPosition = new Vector3(0.0f + ((336.0f/100.0f) * Mathf.Clamp((((float)CombatManager.Instance.resourceNum / (float)towerCost) * 100.0f),0.0f,100.0f)), 0.0f, 0.0f);
 
+        //tower loadout art animations
         towerCooldownAnimation.SetBool("Cooldown", towerCooldown);
         towerCooldownAnimation.SetBool("NoPurchase", CheckIfCanPurchase());
 
@@ -49,16 +67,28 @@ public class CooldownObject : MonoBehaviour
         if(towerCooldown)
         {
             towerCooldownTime += Time.deltaTime;
-
-            //cooldown effect
             
-            cooldownBar.anchoredPosition = new Vector3(359.0f - ((359.0f / 100.0f) * ((towerCooldownTime / towerCooldownTimeRemaining) * 100)), 0.0f, 0.0f);
+            readyText.SetActive(false);
+            resourceBarImage.color = cooldownColor;
+
+            //update cooldown bar
+            cooldownBarTransform.anchoredPosition = new Vector3(359.0f - ((359.0f / 100.0f) * ((towerCooldownTime / towerCooldownTimeRemaining) * 100)), 0.0f, 0.0f);
 
             if (towerCooldownTime >= towerCooldownTimeRemaining)
             {
                 towerCooldown = false;
                 towerCooldownTime = 0;
             }
+        }
+        else if (CombatManager.Instance.resourceNum < towerCost)
+        {
+            readyText.SetActive(false);
+            resourceBarImage.color = waitColor;
+        }
+        else
+        {
+            readyText.SetActive(true);
+            resourceBarImage.color = readyColor;
         }
     }
 

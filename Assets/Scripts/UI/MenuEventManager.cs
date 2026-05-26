@@ -163,6 +163,9 @@ public class MenuEventManager : MonoBehaviour
     //Combat start sequence
     public IEnumerator CombatStartSequence()
     {
+        TowerManager.Instance.ResetTowerManager();
+        TowerManager.Instance.InstantiateTowerCooldown();
+        
         bool animating = true;
 
         //Closing Loadout UI Animation
@@ -189,18 +192,18 @@ public class MenuEventManager : MonoBehaviour
         cameraAnimator.ResetTrigger("Enter Menu");
         cameraAnimator.SetTrigger("Combat Idle");
         
-        CombatManager.Instance.combatInterface.SetActive(true);
+        //CombatManager.Instance.combatInterface.SetActive(true);
         CombatManager.Instance.countInObject.SetActive(false);
 
         //Combat UI Opening Animation
-        //combatInterfaceAnimator.SetTrigger("Open Combat UI");
+        combatInterfaceAnimator.SetTrigger("Combat Start");
         animating = true;
 
         while (animating)
         {
             animating = false;
 
-            yield return new WaitForSecondsRealtime(1.0f);
+            yield return new WaitForSecondsRealtime(3.0f);
         }
 
         CombatManager.Instance.countInObject.SetActive(false);

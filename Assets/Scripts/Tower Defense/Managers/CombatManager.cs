@@ -259,15 +259,12 @@ public class CombatManager : MonoBehaviour
         enemiesSpawnIn.gameObject.SetActive(true); // enable enemy spawn countdown text object
 
         CursorTD.Instance.InitializeCursor(); // initialize the player cursor
-        Cursor.lockState = CursorLockMode.Locked; // lock cursor movement 
+        Cursor.lockState = CursorLockMode.Locked;
 
         /*
         if (GameManager.Instance.tutorialRunning)
             return;
         */
-        TowerManager.Instance.ResetTowerManager();
-
-        TowerManager.Instance.InstantiateTowerCooldown();
         
         GameManager.Instance.conductor.SetActive(true); //
 
@@ -285,6 +282,8 @@ public class CombatManager : MonoBehaviour
         // fade music out
         StartCoroutine(FadeTracks(0.0f,fadeDurationInBeats));
         StartCoroutine(WaitForFailSequenceEnd());
+
+        MenuEventManager.Instance.combatInterfaceAnimator.SetTrigger("Combat End");
         
         ClearEncounter();
     }
@@ -294,6 +293,8 @@ public class CombatManager : MonoBehaviour
         // fade music out
         StartCoroutine(FadeTracks(0.0f,fadeDurationInBeats));
         StartCoroutine(WaitForWinSequenceEnd());
+
+        MenuEventManager.Instance.combatInterfaceAnimator.SetTrigger("Combat End");
         
         ClearEncounter();
     }

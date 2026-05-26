@@ -310,7 +310,6 @@ public class TowerManager : MonoBehaviour
             GameManager.Instance.towers[i].towerCooldownInfo.ResetCooldownObject();
         }
 
-
         towerList.Clear();
     }
 

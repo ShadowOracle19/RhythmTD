@@ -59,10 +59,13 @@ public class CooldownObject : MonoBehaviour
         resourceBarTransform.anchoredPosition = new Vector3(0.0f + ((336.0f/100.0f) * Mathf.Clamp((((float)CombatManager.Instance.resourceNum / (float)towerCost) * 100.0f),0.0f,100.0f)), 0.0f, 0.0f);
 
         //tower loadout art animations
-        towerCooldownAnimation.SetBool("Cooldown", towerCooldown);
-        towerCooldownAnimation.SetBool("NoPurchase", CheckIfCanPurchase());
+        if (towerCooldownAnimation != null)
+        {
+            towerCooldownAnimation.SetBool("Cooldown", towerCooldown);
+            towerCooldownAnimation.SetBool("NoPurchase", CheckIfCanPurchase());
 
-        towerCooldownAnimation.SetFloat("Speed", AnimationBPM);
+            //towerCooldownAnimation.SetFloat("Speed", AnimationBPM);
+        }
 
         if(towerCooldown)
         {

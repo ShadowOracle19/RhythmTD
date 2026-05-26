@@ -1949,7 +1949,6 @@ MonoBehaviour:
   titleRoot: {fileID: 2019509087}
   exitMenuRoot: {fileID: 312050886}
   showcaseCredits: {fileID: 425167539}
-  healthSlider: {fileID: 0}
   _maxHealth: 5
   _currentHealth: 0
   combatRunning: 0
@@ -15577,8 +15576,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimationManager
   towerLoadoutAnimators: []
   combatSceneAnimators:
-  - animator: {fileID: 0}
-    animationBpm: 80
+  - animator: {fileID: 6982985184345515535}
+    animationBpm: 60
   - animator: {fileID: 244352146}
     animationBpm: 80
   - animator: {fileID: 1414303877}
@@ -22492,7 +22491,7 @@ MonoBehaviour:
   overrideStartingResources: 1
   startingResourcesOverride: 100
   resourceNum: 0
-  maxResource: 150
+  maxResource: 999
   combatInterface: {fileID: 365487510}
   countInObject: {fileID: 431128438}
   enemyTimerObject: {fileID: 283964733734025437}
@@ -25907,7 +25906,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803777932401218917}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b7aed6bef50db499604740c4b21680, type: 3}
   m_Name: 
@@ -26262,7 +26261,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1613168509625713407, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -64.400024
+      value: -64.3999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324937971344817750, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2521768178749273193, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
       propertyPath: m_IsActive

@@ -1,26 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CooldownObject : MonoBehaviour
 {
     public Transform cooldownParent;
     [HideInInspector]
     public GameObject towerLoadoutObject;
-    public GameObject towerCooldownSlot;
+
+    public GameObject cooldownBar;
+    public RectTransform cooldownBarTransform;
+
+    public GameObject resourceBar;
+    public RectTransform resourceBarTransform;
+    public Image resourceBarImage;
+
+    public TextMeshProUGUI resourceCostText;
+    public GameObject readyText;
+    public int towerCost = 0;
+
+    public Color readyColor;
+    public Color waitColor;
+    public Color cooldownColor;
+
     public Animator towerCooldownAnimation;
     private float AnimationBPM;
 
-    [HideInInspector]
     public Tower currentConnectedTower;
 
     [HideInInspector]
     public bool towerCooldown;
 
-    [HideInInspector]
+    //[HideInInspector]
     public float towerCooldownTimeRemaining = 0;
 
-    [HideInInspector]
+    //[HideInInspector]
     public float towerCooldownTime = 0;
 
     [HideInInspector]
@@ -29,32 +45,53 @@ public class CooldownObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        cooldownBarTransform = cooldownBar.GetComponent<RectTransform>();
+        resourceBarTransform = resourceBar.GetComponent<RectTransform>();
+        resourceBarImage = resourceBar.GetComponent<Image>();
+
+        cooldownBarTransform.anchoredPosition = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        towerCooldownSlot.SetActive(towerCooldown);
+        //update resource bar
+        resourceBarTransform.anchoredPosition = new Vector3(0.0f + ((336.0f/100.0f) * Mathf.Clamp((((float)CombatManager.Instance.resourceNum / (float)towerCost) * 100.0f),0.0f,100.0f)), 0.0f, 0.0f);
 
-        towerCooldownAnimation.SetBool("Cooldown", towerCooldown);
-        towerCooldownAnimation.SetBool("NoPurchase", CheckIfCanPurchase());
+        //tower loadout art animations
+        if (towerCooldownAnimation != null)
+        {
+            towerCooldownAnimation.SetBool("Cooldown", towerCooldown);
+            towerCooldownAnimation.SetBool("NoPurchase", CheckIfCanPurchase());
 
-        //AnimationBPM = (float)(2*(ConductorV2.instance.bpm*0.0125));
-        //towerCooldownAnimation.SetFloat("Speed", AnimationBPM);
+            //towerCooldownAnimation.SetFloat("Speed", AnimationBPM);
+        }
 
         if(towerCooldown)
         {
             towerCooldownTime += Time.deltaTime;
-
-            //cooldown effect
-            towerCooldownSlot.GetComponent<RectTransform>().offsetMax = new Vector2(towerCooldownSlot.GetComponent<RectTransform>().offsetMax.x, -((towerCooldownTime / towerCooldownTimeRemaining) * 100));
             
+            readyText.SetActive(false);
+            resourceBarImage.color = cooldownColor;
+
+            //update cooldown bar
+            cooldownBarTransform.anchoredPosition = new Vector3(359.0f - ((359.0f / 100.0f) * ((towerCooldownTime / towerCooldownTimeRemaining) * 100)), 0.0f, 0.0f);
+
             if (towerCooldownTime >= towerCooldownTimeRemaining)
             {
                 towerCooldown = false;
                 towerCooldownTime = 0;
             }
+        }
+        else if (CombatManager.Instance.resourceNum < towerCost)
+        {
+            readyText.SetActive(false);
+            resourceBarImage.color = waitColor;
+        }
+        else
+        {
+            readyText.SetActive(true);
+            resourceBarImage.color = readyColor;
         }
     }
 
@@ -81,6 +118,11 @@ public class CooldownObject : MonoBehaviour
         AnimationManager.instance.towerLoadoutAnimators.Add(towerCooldownAnimation);
 
         currentConnectedTower = tower;
+
+        Debug.Log(currentConnectedTower.towerInfo.resourceCost);
+
+        towerCost = currentConnectedTower.towerInfo.resourceCost;
+        resourceCostText.text = currentConnectedTower.towerInfo.resourceCost.ToString();
     }
 
     public void RemoveTowerLoadoutObject()

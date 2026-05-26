@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     public GameObject showcaseCredits;
 
     [Header("Combat")]
-    [SerializeField] private Slider healthSlider;
+    //[SerializeField] private Slider healthSlider;
     [SerializeField] public int _maxHealth = 5;
     [SerializeField] public int _currentHealth = 0;
     [SerializeField] public bool combatRunning = false;
@@ -145,12 +145,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //Manages health only while combat is running
         if (combatRunning)
         {
             Health();
         }
-
+        */
     }
 
     #region level buttons
@@ -411,8 +412,8 @@ public class GameManager : MonoBehaviour
 
     void Health()
     {
-        healthSlider.maxValue = _maxHealth;
-        healthSlider.value = _currentHealth;
+        //healthSlider.maxValue = _maxHealth;
+        //healthSlider.value = _currentHealth;
     }
     #endregion
 
@@ -526,7 +527,7 @@ public class GameManager : MonoBehaviour
     {
         combatRoot.SetActive(true); //enable combat scene
         StageManager.Instance.SetStage(currentEncounter.stage); //load encounter grid data
-        CombatManager.Instance.combatInterface.SetActive(false); //disable combat UI
+        //CombatManager.Instance.combatInterface.SetActive(false); //disable combat UI
     }
     
     public void StartCombat()

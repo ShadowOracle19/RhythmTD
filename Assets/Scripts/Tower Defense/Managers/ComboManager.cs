@@ -54,9 +54,9 @@ public class ComboManager : MonoBehaviour
     {
         currentMultiplier = Mathf.Clamp(currentMultiplier, 1, 5);
 
-        currentComboText.text = "COMBO " + currentCombo;
-        currentMultiplierText.text = "MULTIPLIER X" + currentMultiplier;
-        scoreText.text = "SCORE " + score;
+        currentComboText.text = currentCombo.ToString();
+        currentMultiplierText.text = currentMultiplier.ToString();
+        scoreText.text = score.ToString();
     }
 
     public void IncreaseCombo()

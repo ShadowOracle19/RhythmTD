@@ -133,6 +133,7 @@ public class Tower : MonoBehaviour
         currentAttackPattern = towerInfo.attackPattern;
         currentHealth = towerInfo.towerHealth;
         currentDamage = towerInfo.damage;
+        
         //if(isPoweredUp && towerInfo.type == InstrumentType.Piano)
         //{
         //    currentHealth = currentHealth * 2;
@@ -196,9 +197,7 @@ public class Tower : MonoBehaviour
             // Set animation
             animationController.SetBool("Upgrade4", true);
         }
-
     }
-
 
     public void towerEffectVisual()
     {

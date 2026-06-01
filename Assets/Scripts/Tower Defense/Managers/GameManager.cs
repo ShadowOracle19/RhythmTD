@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -86,6 +88,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform levelParent;
     [SerializeField] private ScrollView levelScrollView;
     [SerializeField] private int viewPortOffset = -150;
+    public float cooldownTimer = 2f;
+    private float nextFireTime = 0f;
     private ItemButtonEvent _eventItemOnSelect;
     private ItemButtonEvent _eventItemOnSubmit;
     [SerializeField] private Selectable returnToMainMenuButton;
@@ -206,7 +210,9 @@ public class GameManager : MonoBehaviour
     {
         //combatRoot.SetActive(true); //enable combat scene
         buttonHighlightSFX.Play(); //play button feedback sfx
+
         MenuEventManager.Instance.UpdateLastSelectedLevel(); //record last selected level button
+
         //MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
         currentSelectedButton = item.gameObject;
 
@@ -517,10 +523,17 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(EncounterCreator encounter)
     {
-        currentEncounter = encounter;
-        encounterRunning = true;
-        
-        StartCoroutine(LoadingScreenManager.Instance.StartLoading());
+        if (Time.time >= nextFireTime)
+        {
+            // Sets the next allowed time to prevent function from being spammed.
+            nextFireTime = Time.time + cooldownTimer;
+            currentEncounter = encounter;
+            encounterRunning = true;
+            
+            //EventSystem.current.enabled = false;
+
+            StartCoroutine(LoadingScreenManager.Instance.StartLoading());  
+        }
     }
 
     public void LoadCombatScene()

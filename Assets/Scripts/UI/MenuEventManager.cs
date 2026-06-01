@@ -85,6 +85,7 @@ public class MenuEventManager : MonoBehaviour
     private void Start()
     {
         eventSystem = EventSystem.current;
+        
     }
 
     #region active object tracking
@@ -141,9 +142,12 @@ public class MenuEventManager : MonoBehaviour
     #region loadout menu
     public void OpenLoadoutMenu()
     {
+
         loadoutScreen.SetActive(true); //enable loadout menu
 
         cameraAnimator.SetTrigger("Enter Loadout");
+
+        
 
         eventSystem.SetSelectedGameObject(loadoutScreenInteractables[0]);
 

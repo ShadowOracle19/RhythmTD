@@ -137,7 +137,7 @@ public class CombatManager : MonoBehaviour
 
         StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage); // rebuild stage
 
-        LoadEncounter(currentEncounter); 
+        LoadEncounter(currentEncounter);
     }
 
     public void RestartTutorialEncounter()

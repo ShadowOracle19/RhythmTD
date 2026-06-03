@@ -20,6 +20,10 @@ public class InputIndicator : MonoBehaviour
     public Color defaultColor;
     public Color hitColor;    
     public float hitFreezeTime = 0.1f; // the duration the indicator remains frozen & visible after being hit
+    public float defaultScrollTime = 1.0f;
+    public float scrollSpeed = 1.0f;
+    public float startingScale = 1.0f;
+    public float targetScale = 0.0f;
     
     [Header ("Measurement Variables (DO NOT TOUCH)")]
     public float measureTargetTime = 0.0f; // input timing in the measure
@@ -35,14 +39,9 @@ public class InputIndicator : MonoBehaviour
     public bool isHeld = false;
     public bool isHit = false;
     public bool isScaling = false;
-    
-    [Header ("Lerp Controls")]
-    public float scrollSpeed = 1.0f;
-    public float scrollTime = 1.0f;
-    public float startingScale = 1.0f;
-    public float targetScale = 0.75f;
 
     [Header ("Lerp Variables (DO NOT TOUCH)")]
+    public float scrollTime = 1.0f;
     public float currentScale = 1.0f;
     public float scalingProgress = 0.0f;
 
@@ -62,7 +61,7 @@ public class InputIndicator : MonoBehaviour
 
         //
         inputTargetTime = (ConductorV2.instance.crotchet * (ConductorV2.instance.measureTrack * 4)) + measureTargetTime;
-        scrollTime = 1.0f / scrollSpeed;
+        scrollTime = defaultScrollTime / scrollSpeed;
         spawnTime = inputTargetTime - scrollTime;
 
         // align rotation with parent tower
@@ -75,27 +74,30 @@ public class InputIndicator : MonoBehaviour
         songProgress = ConductorV2.instance.songPosition;
         //Debug.Log(songProgress);
         
-        if (songProgress >= (inputTargetTime + hitFreezeTime))
+        if (songProgress > (inputTargetTime + scrollTime) && !isScaling)
         {
             UpdateTargetTime();
         }
-        
+
         if (!isActive)
         {
             spriteRenderer.enabled = false;
+            Debug.Log("Tower Not Highlighted");
             return;
         }
         
         //at or past spawn time, before or at target time, not hit, and not scaling down
-        if (songProgress >= spawnTime && songProgress <= inputTargetTime && !isHit && !isScaling) 
+        if ((songProgress >= spawnTime) && (songProgress <= inputTargetTime) && !isHit && !isScaling) 
         {
             spriteRenderer.enabled = true;
             StartCoroutine(ScaleIndicator());
         }
-        else if (songProgress < spawnTime || songProgress > inputTargetTime && !isHit)
+        else if ((songProgress < spawnTime) || ((songProgress > (inputTargetTime + scrollTime)) && !isHit))
         {
             spriteRenderer.enabled = false;
+            Debug.Log("Broke because of timing");
         }
+
     }
 
     public IEnumerator ScaleIndicator() // turn into coroutine
@@ -109,9 +111,9 @@ public class InputIndicator : MonoBehaviour
 
         while (scalingProgress <= 1.0)
         {
-            scalingProgress = (songProgress - spawnTime) / (inputTargetTime - spawnTime);
+            scalingProgress = (songProgress - spawnTime) / ((inputTargetTime + scrollTime ) - spawnTime); //NOTE: prompt size should match indicator at 50% scale progress
 
-            currentScale = Mathf.Lerp(startingScale, targetScale, scalingProgress); // right now it only scales to the target time
+            currentScale = Mathf.Lerp(startingScale, targetScale, scalingProgress); 
             this.transform.localScale = new Vector3(currentScale, currentScale, 1.0f);
 
             yield return null;
@@ -123,7 +125,6 @@ public class InputIndicator : MonoBehaviour
         UpdateTargetTime();
 
         isScaling = false;
-
         StopCoroutine(ScaleIndicator());
     }
 
@@ -150,7 +151,7 @@ public class InputIndicator : MonoBehaviour
     public void UpdateTargetTime()
     {
         inputTargetTime = (ConductorV2.instance.crotchet * ((ConductorV2.instance.measureTrack + 1) * 4)) + measureTargetTime; 
-        spawnTime = inputTargetTime - (scrollTime * scrollSpeed);
+        spawnTime = inputTargetTime - scrollTime;
     }
 
 }

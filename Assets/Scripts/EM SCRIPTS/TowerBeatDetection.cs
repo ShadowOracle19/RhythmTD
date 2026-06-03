@@ -12,7 +12,7 @@ public class TowerBeatDetection : MonoBehaviour
     public float timeAtInput;
     
     public List<float> inputs = new List<float>();
-    private List<IGameObject> indicators = new List<GameObject>();
+    private List<GameObject> indicators = new List<GameObject>();
     public GameObject indicatorPrefab;
 
     public float tempSpawnTime = 0.0f;

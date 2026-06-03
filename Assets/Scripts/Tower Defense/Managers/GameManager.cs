@@ -366,7 +366,6 @@ public class GameManager : MonoBehaviour
         else
         {
             restartEncounterButton.interactable = true;
-
             //conductor.SetActive(false);
         }
         if (combatRunning && !dialogueRoot.activeSelf)

@@ -6,53 +6,85 @@ using UnityEngine.Events;
 
 public class TowerBeatDetection : MonoBehaviour
 {
-    // VARIABLES //
-
-    public int nextInputIndex;
-    public float timeAtInput;
+    // TO DO LIST //
+    /*
+    - Create indicators based on inputs
+    - Inputs should be in measure positions at first and then converted to timings
+    - Next input needs to be updated when the previous one expires (based on threshold timing) or when it gets hit
+    - When the input is hit it needs to update the corresponding input index and call the freeze method
+    - Index should wraparound based on length
+    - Should call the judgement method from the conductor or other script
+    - input times need to be updated or calculated on input
+    */
     
-    public List<float> inputs = new List<float>();
-    private List<GameObject> indicators = new List<GameObject>();
-    public GameObject indicatorPrefab;
+    // VARIABLES //
+    [Range(0.0f, 1.0f)]
+    public List<float> inputPositions = new List<float>();
+    public List<float> inputTimes = new List<float>();
 
-    public float tempSpawnTime = 0.0f;
+    public GameObject indicatorPrefab;
+    public List<GameObject> indicators = new List<GameObject>();
+
+    public int nextInputIndex; // the index of the closest input timing
+    public float timeAtInput; // song progressat the time of player input 
+    
+    public float songProgress = 0.0f; // progress of current song expressed in time
+
+    public float measureLength = 0.0f; // length of 1 measure expressed in time
+    public float measureTargetTime = 0.0f; // input timing in the measure
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //
+        measureLength = ConductorV2.instance.crotchet * 4;
         
+        CalculateInputTimes();
+        
+        InstantiateIndicators();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        songProgress = ConductorV2.instance.songPosition;
+
+
+        /*
+        if (songProgress > inputTimes.[nextInputIndex])
+        {
+
+        }
+        */
     }
 
+    public void CalculateInputTimes()
+    {
+        foreach (float inputPosition in inputTimes)
+        {
+            inputTimes.Add(inputPosition * measureLength);
+        }
+    }
+    
     public void InstantiateIndicators()
     {
-        foreach (float inputTime in inputs)
+        foreach (float inputPosition in inputPositions)
         {
-            GameObject indicator = Instantiate(indicatorPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform);
+            GameObject newIndicator = Instantiate(indicatorPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform);
+            newIndicator.GetComponent<InputIndicator>().notePosition = inputPosition;
             
-            /*
-            tempSpawnTime = inputTime - (scrollTime); //either need a way for circles to retroactively appear and at the right scale or towers need a delay after spawning
-            GameObject newIndicatorObject = Instantiate(indicatorObject, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform);
-            var newIndicator = new Indicator(newIndicatorObject, tempSpawnTime);
             indicators.Add(newIndicator);
-            */
         }
     }
 
     // check player's time of input against the next expected input time
     public void CheckInputTiming(float inputTime, float inputTargetTime)
     {
-        /*
-        if (inputTime inputTargetTime)
-        {
-
-        }
-        */
+        
     }
     
+    /*
+    indicators[nextInputIndex].GetComponent<InputIndicator>().StartCoroutine(FreezeIndicator());
+    need to update index AFTER the indicator is updated
+    */
 }

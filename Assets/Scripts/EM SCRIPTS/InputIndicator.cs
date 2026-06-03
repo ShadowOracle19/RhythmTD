@@ -8,9 +8,8 @@ public class InputIndicator : MonoBehaviour
 {
     // TO DO LIST //
     /*
-    - Adjust indicator scaling time frame to extend beyond the target input time 
-    - When indicator's corresponding input window is hit, indicator should freeze in place temporarily and change colour
-    -
+    - When indicator's corresponding input window is hit, indicator should freeze in place temporarily and change colour (this needs to be tested!)
+    - Use coroutines to make code run when tower is highlighted?
     */
     
     // VARIABLES
@@ -72,7 +71,6 @@ public class InputIndicator : MonoBehaviour
     void Update()
     {
         songProgress = ConductorV2.instance.songPosition;
-        //Debug.Log(songProgress);
         
         if (songProgress > (inputTargetTime + scrollTime) && !isScaling)
         {

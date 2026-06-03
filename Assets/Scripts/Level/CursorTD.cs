@@ -356,7 +356,7 @@ public class CursorTD : MonoBehaviour
             return;
         }
 
-        //RESOURCES
+        //JUDGEMENT BASED RESOURCE GAIN
         switch (CheckOnBeat())
         {
             case _BeatResult.miss:
@@ -417,6 +417,15 @@ public class CursorTD : MonoBehaviour
         TowerEmpowerment(BuffType.Normal);
         SpawnBeatHitResult(CheckOnBeat());
     }
+
+    /*
+    public void TriggerBuff()
+    {
+        if (towerSelectMenuOpened) return;
+
+        TowerEmpowerment(BuffType.Normal);
+    }
+    */
 
     public void TowerEmpowerment(BuffType buff)
     {
@@ -917,6 +926,33 @@ public class CursorTD : MonoBehaviour
         }
     }
 
+    /*
+    public _BeatResult CheckOnInput(float inputTime, float inputTargetTime)
+    {
+        
+        if ((ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold) || ConductorV2.instance.beatDuration < ConductorV2.instance.lateGreatBeatThreshold) {
+            return _BeatResult.perfect; 
+        }
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyGreatBeatThreshold) {
+            return _BeatResult.great;
+        }
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold) {
+            return _BeatResult.early;
+        }
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.missBeatThreshold) {
+            return _BeatResult.miss;
+        }
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.lateBeatThreshold) {
+            return _BeatResult.late;
+        }
+        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.lateGreatBeatThreshold) {
+            return _BeatResult.great;
+        }
+        else {
+            return _BeatResult.nohit;
+        }
+    }
+    */
 
     private void SpawnParticles(ParticleSystem particlesSource, ParticleSystem particlesInstance)
     {
@@ -969,15 +1005,19 @@ public class CursorTD : MonoBehaviour
                 upgradeSlotS.GetComponent<Image>().material = null;
             }
 
-            // Check if piano tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-            //if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost4 || tile.placedTower.GetComponent<Tower>().upgradeFourActive) 
-            //{
-            //    upgradeSlotA.GetComponent<Image>().material = greyscaleShader;
-            //}
-            //else
-            //{
-            //    upgradeSlotA.GetComponent<Image>().material = null;
-            //}
+            /*
+            foreach (var name in list)
+            {
+                if (CombatManager.Instance.resourceNum < upgradeCost || upgradeActive)
+                {
+                    upgradeSlot.GetComponent<Image>().material = greyscaleShader;
+                }
+                else
+                {
+                    upgradeSlot.GetComponent<Image>().material = null;
+                }
+            }
+            */
         }
         else
         {

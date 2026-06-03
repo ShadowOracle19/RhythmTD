@@ -28,8 +28,7 @@ public class Tower : MonoBehaviour
     public bool enemyInRange = false;
 
     [Header("Tower Empower Indicator")]
-    public GameObject beatIndicator;
-    public GameObject beatCircle;
+    public GameObject inputPrompt;
     public bool towerAboutToFire = false;
     public bool towerHover = false;
 
@@ -203,13 +202,11 @@ public class Tower : MonoBehaviour
     {
         if (towerHover && towerAboutToFire)
         {
-            beatIndicator.SetActive(true);
-            beatCircle.SetActive(true);
+            inputPrompt.SetActive(true);
         }
         else
         {
-            beatIndicator.SetActive(false);
-            beatCircle.SetActive(false);
+            inputPrompt.SetActive(false);
         }
     }
 

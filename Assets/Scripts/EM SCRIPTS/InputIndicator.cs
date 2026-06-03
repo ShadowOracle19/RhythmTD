@@ -62,7 +62,8 @@ public class InputIndicator : MonoBehaviour
 
         //
         inputTargetTime = (ConductorV2.instance.crotchet * (ConductorV2.instance.measureTrack * 4)) + measureTargetTime;
-        spawnTime = inputTargetTime - (scrollTime * scrollSpeed);
+        scrollTime = 1.0f / scrollSpeed;
+        spawnTime = inputTargetTime - scrollTime;
 
         // align rotation with parent tower
         this.gameObject.transform.rotation = towerTransform.rotation;
@@ -108,8 +109,6 @@ public class InputIndicator : MonoBehaviour
 
         while (scalingProgress <= 1.0)
         {
-            //scalingProgress = (songProgress - (scrollTime * scrollSpeed)) / (inputTargetTime - (scrollTime * scrollSpeed));
-
             scalingProgress = (songProgress - spawnTime) / (inputTargetTime - spawnTime);
 
             currentScale = Mathf.Lerp(startingScale, targetScale, scalingProgress); // right now it only scales to the target time
@@ -119,7 +118,7 @@ public class InputIndicator : MonoBehaviour
         }
         
         // TEST SOUND //
-        testSound.Play();
+        //testSound.Play();
 
         UpdateTargetTime();
 

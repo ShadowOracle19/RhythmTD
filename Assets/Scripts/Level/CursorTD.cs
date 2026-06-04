@@ -117,7 +117,9 @@ public class CursorTD : MonoBehaviour
     public AudioClip rightInvalidSfx;
     public AudioClip downInvalidSfx;
     public AudioClip leftInvalidSfx;
-    public AudioClip hitSfx;
+
+    public AudioSource hitSoundSource;
+    public List<AudioClip> hitSounds = new List<AudioClip>();
 
     [Header("PFX")]
     [SerializeField] private ParticleSystem buffGreatPfx;
@@ -135,10 +137,6 @@ public class CursorTD : MonoBehaviour
 
     [Header("Input Detection")]
     public float timeAtInput = 0.0f; // song progress at the time of player input
-
-    public AudioSource hitSoundSource;
-    public List<AudioClip> hitSounds = new List<AudioClip>();
-
 
     void Start()
     {
@@ -408,9 +406,6 @@ public class CursorTD : MonoBehaviour
 
     public void TowerEmpowerment(BuffType buff)
     {
-        //FEEDBACK
-        AudioManager.instance.PlaySound(hitSfx, this.gameObject.transform, 1.0f);
-        
         //BUFFING & COMBO MANAGEMENT
         if(tile.placedTower != null && !beatIsHit) //if tile is not empty and beat is not hit already
         {

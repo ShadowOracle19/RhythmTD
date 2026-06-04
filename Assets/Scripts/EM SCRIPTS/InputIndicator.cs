@@ -59,7 +59,7 @@ public class InputIndicator : MonoBehaviour
         measureTargetTime = notePosition * measureLength;
 
         //
-        inputTargetTime = (ConductorV2.instance.crotchet * (ConductorV2.instance.measureTrack * 4)) + measureTargetTime;
+        inputTargetTime = (measureLength * ConductorV2.instance.measureTrack) + measureTargetTime;
         scrollTime = defaultScrollTime / scrollSpeed;
         spawnTime = inputTargetTime - scrollTime;
 
@@ -148,8 +148,15 @@ public class InputIndicator : MonoBehaviour
 
     public void UpdateTargetTime()
     {
-        inputTargetTime = (ConductorV2.instance.crotchet * ((ConductorV2.instance.measureTrack + 1) * 4)) + measureTargetTime; 
+        inputTargetTime = (measureLength * (ConductorV2.instance.measureTrack + 1)) + measureTargetTime; 
         spawnTime = inputTargetTime - scrollTime;
     }
+
+    /*
+    public void SetIndicatorData()
+    {
+
+    }
+    */
 
 }

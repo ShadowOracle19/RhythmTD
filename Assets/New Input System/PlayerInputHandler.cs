@@ -18,10 +18,13 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private string swapTower = "Swap Tower";
     [SerializeField] private string destructMode = "Destruct Mode Toggle";
     [SerializeField] private string destructTower = "Destruct Tower";
+    [SerializeField] private string buff = "Buff";
+    /*
     [SerializeField] private string buff1 = "Buff 1";
     [SerializeField] private string buff2 = "Buff 2";
     [SerializeField] private string buff3 = "Buff 3";
     [SerializeField] private string buff4 = "Buff 4";
+    */
     [SerializeField] private string feverMode = "Fever Mode";
     [SerializeField] private string options = "Options";
 
@@ -31,10 +34,7 @@ public class PlayerInputHandler : MonoBehaviour
     private InputAction swapAction;
     private InputAction destructToggleAction;
     private InputAction destructAction;
-    private InputAction buff1Action;
-    private InputAction buff2Action;
-    private InputAction buff3Action;
-    private InputAction buff4Action;
+    private InputAction buffAction;
     private InputAction feverAction;
     private InputAction optionsAction;
 
@@ -43,10 +43,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool SwapTrigger { get; private set; }
     public bool DestructToggleTrigger { get; private set; }
     public bool DestructTrigger { get; private set; }
-    public bool Buff1Trigger { get; private set; }
-    public bool Buff2Trigger { get; private set; }
-    public bool Buff3Trigger { get; private set; }
-    public bool Buff4Trigger { get; private set; }
+    public bool BuffTrigger { get; private set; }
     public bool FeverTrigger { get; private set; }
     public bool OptionsTrigger { get; private set; }
 
@@ -69,10 +66,7 @@ public class PlayerInputHandler : MonoBehaviour
         swapAction = playerControls.FindActionMap(actionMapName).FindAction(swapTower);
         destructToggleAction = playerControls.FindActionMap(actionMapName).FindAction(destructMode);
         destructAction = playerControls.FindActionMap(actionMapName).FindAction(destructTower);
-        buff1Action = playerControls.FindActionMap(actionMapName).FindAction(buff1);
-        buff2Action = playerControls.FindActionMap(actionMapName).FindAction(buff2);
-        buff3Action = playerControls.FindActionMap(actionMapName).FindAction(buff3);
-        buff4Action = playerControls.FindActionMap(actionMapName).FindAction(buff4);
+        buffAction = playerControls.FindActionMap(actionMapName).FindAction(buff);
         feverAction = playerControls.FindActionMap(actionMapName).FindAction(feverMode);
         optionsAction = playerControls.FindActionMap(actionMapName).FindAction(options);
         
@@ -118,29 +112,11 @@ public class PlayerInputHandler : MonoBehaviour
         };
         destructAction.canceled += context => DestructTrigger = false;
 
-        buff1Action.performed += context => {
+        buffAction.performed += context => {
             if (context.interaction is TapInteraction)
-                CursorTD.Instance.Buff1Trigger();
+                CursorTD.Instance.BuffTrigger();
         };
-        buff1Action.canceled += context => Buff1Trigger = false;
-
-        buff2Action.performed += context => {
-            if (context.interaction is TapInteraction)
-                CursorTD.Instance.Buff2Trigger();
-        };
-        buff2Action.canceled += context => Buff2Trigger = false;
-
-        buff3Action.performed += context => {
-            if (context.interaction is TapInteraction)
-                CursorTD.Instance.Buff3Trigger();
-        };
-        buff3Action.canceled += context => Buff3Trigger = false;
-
-        buff4Action.performed += context => {
-            if (context.interaction is TapInteraction)
-                CursorTD.Instance.Buff4Trigger();
-        };
-        buff4Action.canceled += context => Buff4Trigger = false;
+        buffAction.canceled += context => BuffTrigger = false;
 
         feverAction.performed += context => {
             if (context.interaction is TapInteraction)
@@ -162,10 +138,7 @@ public class PlayerInputHandler : MonoBehaviour
         swapAction.Enable();
         destructToggleAction.Enable();
         destructAction.Enable();
-        buff1Action.Enable();
-        buff2Action.Enable();
-        buff3Action.Enable();
-        buff4Action.Enable();
+        buffAction.Enable();
         feverAction.Enable();
         optionsAction.Enable(); 
     }
@@ -177,10 +150,7 @@ public class PlayerInputHandler : MonoBehaviour
         swapAction.Disable();
         destructToggleAction.Disable();
         destructAction.Disable();
-        buff1Action.Disable();
-        buff2Action.Disable();
-        buff3Action.Disable();
-        buff4Action.Disable();
+        buffAction.Disable();
         feverAction.Disable();
         //optionsAction.Disable();
     }

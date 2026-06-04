@@ -17,6 +17,21 @@ public class TowerBeatDetection : MonoBehaviour
     - input times need to be updated or calculated on input
     */
     
+    /*
+    public class Note : TowerBeatDetection
+    {
+        [Range(0.0f, 1.0f)]
+        public float notePosition { get; set; }
+        public float holdTime { get; set; }
+
+        public Indicator(float , float )
+        {
+            this.notePosition = notePosition;
+            this.holdTime = holdTime;
+        }
+    }
+    */
+
     // VARIABLES //
     [Range(0.0f, 1.0f)]
     public List<float> inputPositions = new List<float>();
@@ -25,13 +40,17 @@ public class TowerBeatDetection : MonoBehaviour
     public GameObject indicatorPrefab;
     public List<GameObject> indicators = new List<GameObject>();
 
-    public int nextInputIndex; // the index of the closest input timing
+    public int inputIndex; // the index of the closest input timing
+    public int nextInputIndex; // the index of the next closest input timing
     public float timeAtInput; // song progressat the time of player input 
     
     public float songProgress = 0.0f; // progress of current song expressed in time
 
     public float measureLength = 0.0f; // length of 1 measure expressed in time
-    public float measureTargetTime = 0.0f; // input timing in the measure
+    public float inputTargetTime = 0.0f; // input timing in the measure
+
+    public float threshold = 0.0f; // PLACEHOLDER VARIABLE UNTIL I FIGURE OUT HOW I WANT TO HANDLE THRESHOLDS FOR TOWER ATTACK NOTES
+
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,6 +61,8 @@ public class TowerBeatDetection : MonoBehaviour
         CalculateInputTimes();
         
         InstantiateIndicators();
+
+        inputIndex = 0;
     }
 
     // Update is called once per frame
@@ -49,15 +70,16 @@ public class TowerBeatDetection : MonoBehaviour
     {
         songProgress = ConductorV2.instance.songPosition;
 
+        inputTargetTime = ((measureLength * ConductorV2.instance.measureTrack) + inputTimes[inputIndex]); 
 
-        /*
-        if (songProgress > inputTimes.[nextInputIndex])
+        // Update input tracking index when song progress exceeds threshold or when next note is closer //|| (inputTargetTime + inputTimes[] - songProgress) < (songProgress - inputTargetTime)
+        if (songProgress > (inputTargetTime + threshold))
         {
-
+            UpdateInputIndex();
         }
-        */
     }
 
+    // Calculates input times as time from measure start
     public void CalculateInputTimes()
     {
         foreach (float inputPosition in inputTimes)
@@ -72,7 +94,9 @@ public class TowerBeatDetection : MonoBehaviour
         {
             GameObject newIndicator = Instantiate(indicatorPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform);
             newIndicator.GetComponent<InputIndicator>().notePosition = inputPosition;
-            
+
+            //newIndicator.GetComponent<InputIndicator>().SetIndicatorData();
+
             indicators.Add(newIndicator);
         }
     }
@@ -82,9 +106,21 @@ public class TowerBeatDetection : MonoBehaviour
     {
         
     }
+
+    public void UpdateInputIndex()
+    {
+        if (inputIndex == (inputTimes.Count - 1))
+        {
+            inputIndex = 0;
+        }
+        else
+        {
+            inputIndex += 1;
+        }
+    }
     
     /*
-    indicators[nextInputIndex].GetComponent<InputIndicator>().StartCoroutine(FreezeIndicator());
+    indicators[inputIndex].GetComponent<InputIndicator>().StartCoroutine(FreezeIndicator());
     need to update index AFTER the indicator is updated
     */
 }

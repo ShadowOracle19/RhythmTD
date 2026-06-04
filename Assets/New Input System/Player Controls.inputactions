@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "Player Controls",
     "maps": [
         {
@@ -51,37 +52,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Buff 1",
+                    "name": "Buff",
                     "type": "Button",
-                    "id": "568862e4-85f9-426e-a347-dc6443ed468a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Tap",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Buff 2",
-                    "type": "Button",
-                    "id": "3b7bd3de-d4bc-45a8-bdcd-632e9f664bdc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Tap",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Buff 3",
-                    "type": "Button",
-                    "id": "ec905e10-838c-41d0-ba46-e67bf0e46d72",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Tap",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Buff 4",
-                    "type": "Button",
-                    "id": "9abbad64-1444-4244-aa77-eda9fc3756af",
-                    "expectedControlType": "Button",
+                    "id": "767dd3f4-59d2-4b09-944c-5694c8ddf1cf",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": false
@@ -90,7 +64,7 @@
                     "name": "Fever Mode",
                     "type": "Button",
                     "id": "55ebfa10-3c59-4067-9cff-61ed44675138",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": false
@@ -372,105 +346,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b20d6221-41b6-44c7-8465-9e52e95735c3",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Buff 1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aa209ecc-14ae-4c83-831d-7eec31025aef",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Buff 1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1ef09dbc-8f70-497e-9303-78e96ab873de",
-                    "path": "<XInputController>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "DDR",
-                    "action": "Buff 1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f582ca1e-8d90-4e9b-97fc-4039fac4920a",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Buff 2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "365a61e1-9876-4538-a321-c240cc98554b",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Buff 2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9279d381-53c3-44bd-b5ef-2c31d2ce9988",
-                    "path": "<XInputController>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "DDR",
-                    "action": "Buff 2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "60a5ae50-b626-4a19-b4a0-9ffbce39d8ee",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Buff 3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2faf0b93-e349-4579-b65d-b02fb0c3fd4a",
-                    "path": "<Keyboard>/v",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Buff 3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6f674cd5-0d35-40d6-9690-5f6c099fd52a",
-                    "path": "<XInputController>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "DDR",
-                    "action": "Buff 3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5a068827-8696-405a-925c-ceb5859d8003",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
@@ -559,23 +434,34 @@
                 },
                 {
                     "name": "",
-                    "id": "8b61e2e1-f344-4052-a2f2-d69ad2d7ca41",
+                    "id": "7ae4d7eb-0a74-44e4-b04e-36b3422a9c06",
                     "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Buff 4",
+                    "action": "Buff",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "f9a1ca4d-b650-4b84-8553-61540a748e3a",
+                    "id": "17748550-5496-4557-b003-dcb5c625b086",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Buff",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "569f2cf6-c19c-494f-81f7-771e1550f916",
                     "path": "<XInputController>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "DDR",
-                    "action": "Buff 4",
+                    "action": "Buff",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1731,7 +1617,7 @@
                     "name": "Skip",
                     "type": "Button",
                     "id": "e3e4fcde-e95f-4e37-a66b-d25d6ec6af2b",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": false

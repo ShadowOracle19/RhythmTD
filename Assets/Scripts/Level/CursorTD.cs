@@ -1,9 +1,11 @@
-
 using Pathfinding.Ionic.Zip;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class CursorTD : MonoBehaviour
 {
@@ -100,13 +102,10 @@ public class CursorTD : MonoBehaviour
     [Header("Resource Bar")]
     public Slider tower1Slider;
     public Image tower1ResourceSprite;
-
     public Slider tower2Slider;
     public Image tower2ResourceSprite;
-
     public Slider tower3Slider;
     public Image tower3ResourceSprite;
-
     public Slider tower4Slider;
     public Image tower4ResourceSprite;
 
@@ -133,6 +132,12 @@ public class CursorTD : MonoBehaviour
     [SerializeField] private ParticleSystem cursorResourceGenParticles;
     private ParticleSystem cursorResourceGenParticlesInstance;
 
+
+    [Header("Input Detection")]
+    public float timeAtInput = 0.0f; // song progress at the time of player input
+
+    public AudioSource hitSoundSource;
+    public List<AudioClip> hitSounds = new List<AudioClip>();
 
 
     void Start()
@@ -357,7 +362,7 @@ public class CursorTD : MonoBehaviour
         }
 
         //JUDGEMENT BASED RESOURCE GAIN
-        switch (CheckOnBeat())
+        switch (CheckOnBeat(timeAtInput))
         {
             case _BeatResult.miss:
                 SpawnBeatHitResult(_BeatResult.miss);
@@ -391,41 +396,15 @@ public class CursorTD : MonoBehaviour
         Move(desiredMovement);
     }
 
-    public void Buff1Trigger()
-    {
-        //if (towerSelectMenuOpened) return;
-        //TowerEmpowerment(BuffType.Shield);
-        //SpawnBeatHitResult();
-    }
-    public void Buff2Trigger()
-    {
-        //if (towerSelectMenuOpened) return;
-        //TowerEmpowerment(BuffType.Multi);
-        //SpawnBeatHitResult();
-    }
-    public void Buff3Trigger()
-    {
-        //if (towerSelectMenuOpened) return;
-        //TowerEmpowerment(BuffType.Burn);
-        //SpawnBeatHitResult();
-    }
-
-    public void Buff4Trigger()
+    public void BuffTrigger()
     {
         if (towerSelectMenuOpened) return;
 
-        TowerEmpowerment(BuffType.Normal);
-        SpawnBeatHitResult(CheckOnBeat());
-    }
-
-    /*
-    public void TriggerBuff()
-    {
-        if (towerSelectMenuOpened) return;
+        //timeAtInput = ConductorV2.instance.songPosition;
+        timeAtInput = ConductorV2.instance.beatDuration;
 
         TowerEmpowerment(BuffType.Normal);
     }
-    */
 
     public void TowerEmpowerment(BuffType buff)
     {
@@ -435,21 +414,26 @@ public class CursorTD : MonoBehaviour
         //BUFFING & COMBO MANAGEMENT
         if(tile.placedTower != null && !beatIsHit) //if tile is not empty and beat is not hit already
         {
-            switch (CheckOnBeat())
+            switch (CheckOnBeat(timeAtInput)) //CheckOnInput(timeAtInput, tile.placeTower.inputTimes[inputIndex])
             {
                 case _BeatResult.miss:
                     //FEEDBACK
-
-
+                    hitSoundSource.clip = hitSounds[0];
+                    hitSoundSource.Play();
+                    SpawnBeatHitResult(_BeatResult.miss);
+                    
                     //COMBO
-                    ComboManager.Instance.ResetCombo(); // reset combo on miss
+                    ComboManager.Instance.ResetCombo();
                     break;
                 case _BeatResult.great:
                     //FEEDBACK
-                    buffGreatPfxInstance = Instantiate(buffGreatPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
+                    hitSoundSource.clip = hitSounds[1];
+                    hitSoundSource.Play();
+                    SpawnBeatHitResult(_BeatResult.great);
+                    //buffGreatPfxInstance = Instantiate(buffGreatPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
 
                     //COMBO & SCORE
-                    ComboManager.Instance.IncreaseCombo(); // increase combo on great
+                    ComboManager.Instance.IncreaseCombo();
                     //ComboManager.Instance.IncreaseScore();
 
                     //BUFFING
@@ -457,10 +441,13 @@ public class CursorTD : MonoBehaviour
                     break;
                 case _BeatResult.perfect:      
                     //FEEDBACK
-                    buffPerfectPfxInstance = Instantiate(buffPerfectPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
+                    hitSoundSource.clip = hitSounds[2];
+                    hitSoundSource.Play();
+                    SpawnBeatHitResult(_BeatResult.perfect);
+                    //buffPerfectPfxInstance = Instantiate(buffPerfectPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
 
                     //COMBO & SCORE
-                    ComboManager.Instance.IncreaseCombo(); // increase combo on perfect
+                    ComboManager.Instance.IncreaseCombo();
                     //ComboManager.Instance.IncreaseScore();
 
                     //BUFFING
@@ -490,10 +477,10 @@ public class CursorTD : MonoBehaviour
                 return;
             }
 
-            TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(), false);
+            TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(timeAtInput), false);
             CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
 
-            SpawnBeatHitResult(CheckOnBeat());
+            SpawnBeatHitResult(CheckOnBeat(timeAtInput));
             TogglePlacementMenu();
             placingTower = false;
             return;
@@ -843,7 +830,7 @@ public class CursorTD : MonoBehaviour
 
     public void CheckPianoResult(Tower tower)
     {
-        switch (CheckOnBeat())
+        switch (CheckOnBeat(timeAtInput))
         {
             case _BeatResult.great:
                 //FEEDBACK
@@ -894,7 +881,7 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public _BeatResult CheckOnBeat()
+    public _BeatResult CheckOnBeat(float inputTime)
     {
         //float songInBeats = ConductorV2.instance.songPositionInBeats;
         //float adjustedInputTime = songInBeats - GameManager.Instance.inputOffset;

@@ -24,11 +24,24 @@ MonoBehaviour:
   towerHealth: 5
   resourceCost: 75
   cooldownTime: 8
-  attackPattern: 0
   damage: 4
   range: 2
   canAttackWhenever: 0
   projectilePiercesEnemies: 0
+  attackPattern: 0
+  inputs:
+  - notePosition: 0.25
+    noteTime: 0
+    holdTime: 0
+  - notePosition: 0.5
+    noteTime: 0
+    holdTime: 0
+  - notePosition: 0.75
+    noteTime: 0
+    holdTime: 0
+  - notePosition: 1
+    noteTime: 0
+    holdTime: 0
   isAOETower: 1
   isResourceTower: 0
   resourceGain: 5

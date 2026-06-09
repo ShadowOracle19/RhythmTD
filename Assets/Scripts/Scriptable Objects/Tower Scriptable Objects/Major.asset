@@ -13,27 +13,42 @@ MonoBehaviour:
   m_Name: Major
   m_EditorClassIdentifier: 
   towerName: Major
+  type: 2
   towerDescription: Shoots projectiles in a pattern from top to bottom
   towerImage: {fileID: -7699115586588543095, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
   towerLoadoutUIPrefab: {fileID: 3074392213874700494, guid: caa7854ee4e1c9348921f3bd14de5b03, type: 3}
-  type: 2
-  resourceCost: 75
   cost: 2
-  cooldownTime: 8
   cooldown: 1
   towerHealth: 5
-  attackPattern: 4
+  resourceCost: 75
+  cooldownTime: 8
   damage: 2
   range: 9
+  canAttackWhenever: 0
   projectilePiercesEnemies: 0
+  attackPattern: 4
+  inputs:
+  - notePosition: 0.25
+    noteTime: 0
+    holdTime: 0
+  - notePosition: 0.5
+    noteTime: 0
+    holdTime: 0
+  - notePosition: 0.75
+    noteTime: 0
+    holdTime: 0
+  - notePosition: 1
+    noteTime: 0
+    holdTime: 0
   isAOETower: 0
   isResourceTower: 0
   resourceGain: 5
   upgrade1: {fileID: -6037673426074501938, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
   upgradeCost1: 25
+  isUpgradeOneLocked: 1
   upgrade2: {fileID: -5384197578389128986, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
   upgradeCost2: 25
+  isUpgradeTwoLocked: 1
   upgrade3: {fileID: -8384982287457754926, guid: 07aff423cf4ac944eae27a78ee3b738d, type: 3}
   upgradeCost3: 25
-  upgrade4: {fileID: 0}
-  upgradeCost4: 25
+  isUpgradeThreeLocked: 1

@@ -429,8 +429,7 @@ public class CursorTD : MonoBehaviour
     #region Tower buffing
     public void BuffTrigger()
     {
-        beatTimeAtInput = ConductorV2.instance.beatDuration;
-        //timeAtInput = ConductorV2.instance.songPosition;
+        timeAtInput = ConductorV2.instance.songPosition;
         
         if (towerSelectMenuOpened) return;
 
@@ -440,9 +439,9 @@ public class CursorTD : MonoBehaviour
     public void TowerEmpowerment(BuffType buff)
     {
         //BUFFING & COMBO MANAGEMENT
-        if(tile.placedTower != null && !beatIsHit) //if tile is not empty and beat is not hit already
+        if(tile.placedTower != null) // if(tile.placedTower != null && !beatIsHit) if tile is not empty and beat is not hit already
         {
-            switch (CheckOnBeat(beatTimeAtInput)) //CheckOnInput(timeAtInput, tile.placeTower.inputTimes[inputIndex])
+            switch (CheckOnInput(timeAtInput, tile.placedTower.GetComponent<Tower>().inputTargetTime)) //switch (CheckOnBeat(beatTimeAtInput))
             {
                 case _BeatResult.miss:
                     //FEEDBACK
@@ -452,6 +451,24 @@ public class CursorTD : MonoBehaviour
                     
                     //COMBO
                     ComboManager.Instance.ResetCombo();
+
+                    RegisterIndicatorHit();
+                    break;
+                case _BeatResult.late:
+                    //FEEDBACK
+                    hitSoundSource.clip = hitSounds[0];
+                    hitSoundSource.Play();
+                    SpawnBeatHitResult(_BeatResult.late);
+
+                    RegisterIndicatorHit();
+                    break;
+                case _BeatResult.early:
+                    //FEEDBACK
+                    hitSoundSource.clip = hitSounds[0];
+                    hitSoundSource.Play();
+                    SpawnBeatHitResult(_BeatResult.early);
+
+                    RegisterIndicatorHit();
                     break;
                 case _BeatResult.great:
                     //FEEDBACK
@@ -466,6 +483,8 @@ public class CursorTD : MonoBehaviour
 
                     //BUFFING
                     tile.placedTower.GetComponent<Tower>().ActivateBuff(buff); // activate buff
+
+                    RegisterIndicatorHit();
                     break;
                 case _BeatResult.perfect:      
                     //FEEDBACK
@@ -480,6 +499,10 @@ public class CursorTD : MonoBehaviour
 
                     //BUFFING
                     tile.placedTower.GetComponent<Tower>().ActivateBuff(buff); // activate buff
+
+                    RegisterIndicatorHit();
+                    break;
+                case _BeatResult.nohit:
                     break;
                 default:
                     break;
@@ -489,6 +512,12 @@ public class CursorTD : MonoBehaviour
         {
             return;
         }
+    }
+
+    public void RegisterIndicatorHit()
+    {
+        //StartCoroutine(tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().FreezeIndicator());
+        tile.placedTower.GetComponent<Tower>().UpdateInputIndex();
     }
 
     public void UpgradeTower(Vector2 direction)
@@ -715,6 +744,7 @@ public class CursorTD : MonoBehaviour
         {
             if (direction == Vector2.left) //LEFT
             {
+                slotIndex = 0;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[3], "Check Slot Left", slotIndex);
                 /*
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
@@ -726,6 +756,7 @@ public class CursorTD : MonoBehaviour
             }
             else if (direction == Vector2.up) //UP
             {
+                slotIndex = 1;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[0], "Check Slot Up", slotIndex);
                 /*
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
@@ -737,6 +768,7 @@ public class CursorTD : MonoBehaviour
             }
             else if (direction == Vector2.right) //RIGHT
             {
+                slotIndex = 2;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[1], "Check Slot Right", slotIndex);
                 /*
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
@@ -748,6 +780,7 @@ public class CursorTD : MonoBehaviour
             }
             else if (direction == Vector2.down) //DOWN
             {
+                slotIndex = 3;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[2], "Check Slot Down", slotIndex);
                 /*
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
@@ -762,6 +795,7 @@ public class CursorTD : MonoBehaviour
         {
             if (direction == Vector2.left) //LEFT
             {
+                slotIndex = 0;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[3], "Check Slot Left", (slotIndex + towerSlots.Count));
                 /*
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
@@ -773,6 +807,7 @@ public class CursorTD : MonoBehaviour
             }
             else if (direction == Vector2.up) //UP
             {
+                slotIndex = 1;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[0], "Check Slot Up", (slotIndex + towerSlots.Count));
                 /*
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
@@ -784,6 +819,7 @@ public class CursorTD : MonoBehaviour
             }
             else if (direction == Vector2.right) //RIGHT
             {
+                slotIndex = 2;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[1], "Check Slot Right", (slotIndex + towerSlots.Count));
                 /*
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
@@ -795,6 +831,7 @@ public class CursorTD : MonoBehaviour
             }
             else if (direction == Vector2.down) //DOWN
             {
+                slotIndex = 1;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[2], "Check Slot Down", (slotIndex + towerSlots.Count));
                 /*
                 if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
@@ -927,33 +964,48 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    /*
+    // TO DO: Double check threshold calculations to ensure they're exact on both sides of the input timing
     public _BeatResult CheckOnInput(float inputTime, float inputTargetTime)
     {
-        
-        if ((ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold) || ConductorV2.instance.beatDuration < ConductorV2.instance.lateGreatBeatThreshold) {
-            return _BeatResult.perfect; 
-        }
-        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyGreatBeatThreshold) {
-            return _BeatResult.great;
-        }
-        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.earlyBeatThreshold) {
-            return _BeatResult.early;
-        }
-        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.missBeatThreshold) {
+        /*
+        if (inputTime >= inputTargetTime + ConductorV2.instance.missBeatThreshold) //miss+ (>= .375)
+        {
             return _BeatResult.miss;
         }
-        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.lateBeatThreshold) {
+        */
+        if (inputTime > inputTargetTime + ConductorV2.instance.maxBeatThreshold || inputTime < inputTargetTime - ConductorV2.instance.maxBeatThreshold)
+        {
+            return _BeatResult.nohit;
+        }
+        else if (inputTime >= inputTargetTime + ConductorV2.instance.lateBeatThreshold) //late (>= .250)
+        {
             return _BeatResult.late;
         }
-        else if (ConductorV2.instance.beatDuration >= ConductorV2.instance.lateGreatBeatThreshold) {
+        else if (inputTime >= inputTargetTime + ConductorV2.instance.lateGreatBeatThreshold) //great+ (>= .125)
+        {
             return _BeatResult.great;
         }
-        else {
+        else if (inputTime > inputTargetTime - (1 - ConductorV2.instance.perfectBeatThreshold)) //perfect (> .125)
+        {
+            return _BeatResult.perfect; 
+        }
+        else if (inputTime > inputTargetTime - (1 - ConductorV2.instance.earlyGreatBeatThreshold)) //great- (> .250)
+        {
+            return _BeatResult.great;
+        }
+        else if (inputTime > inputTargetTime - (1 - ConductorV2.instance.earlyBeatThreshold)) //early (> .375)
+        {
+            return _BeatResult.early;
+        }
+        else if (inputTime <= inputTargetTime - (1 - ConductorV2.instance.earlyBeatThreshold)) //miss- (<= .375)
+        {
+            return _BeatResult.miss;
+        }
+        else
+        {
             return _BeatResult.nohit;
         }
     }
-    */
 
     public void CheckPianoResult(Tower tower)
     {

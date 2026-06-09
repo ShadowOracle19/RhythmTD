@@ -5,6 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Tower Type", menuName = "ScriptableObjects/TowerType")]
 public class TowerTypeCreator : ScriptableObject
 {
+    [System.Serializable]
+    public class Note
+    {
+        [Range(0.0f, 1.0f)]
+        public float notePosition;
+        public float noteTime;
+        public float holdTime;
+    }
+    
     [Header("<b><size=15>Tower Info</size></b>")]
     [Line(255,255,255)]
     public string towerName;
@@ -18,13 +27,11 @@ public class TowerTypeCreator : ScriptableObject
 
 
     [Space(20)][Header("<b><size=15>Tower Stats</size></b>")]
-
     [Line(255, 255, 255)]
     public int towerHealth = 0;
     public int resourceCost = 0;
     [Tooltip("In Beats")]
-    public int cooldownTime = 0;
-    public TowerAttackPattern attackPattern;
+    public int cooldownTime = 0; 
     public int damage = 0;
     public int range = 0;
     [Space(5)]
@@ -33,10 +40,13 @@ public class TowerTypeCreator : ScriptableObject
     [Tooltip("Set to true if projectile can pierce through enemies")]
     public bool projectilePiercesEnemies = false;
 
+    [Space(20)][Header("<b><size=15>Tower Attack & Input</size></b>")]
+    [Line(255, 255, 255)]
+    public TowerAttackPattern attackPattern;
+    public List<Note> inputs = new List<Note>();
+    //public Note[] inputs;
 
-    [Space(20)]
-    [Header("<b><size=15>Tower Parameters</size></b>")]
-
+    [Space(20)][Header("<b><size=15>Tower Parameters</size></b>")]
     [Line(255, 255, 255)]
 
     [Header("AOE")]

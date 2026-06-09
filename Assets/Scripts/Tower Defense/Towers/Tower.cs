@@ -21,12 +21,23 @@ public enum TowerState
 
 public class Tower : MonoBehaviour
 {
+    // VARIABLES //
     #region Variables
     public TowerTypeCreator towerInfo;
     public GameObject projectile;
 
     public bool enemyInRange = false;
 
+    [Header("Tower Attack & Input")]
+    public float songProgress = 0.0f; // progress of current song expressed in time
+    public int inputIndex; // the index of the closest input timing
+    public int nextInputIndex; // the index of the next closest input timing
+    public float measureLength = 0.0f; // length of 1 measure expressed in time
+    public int measureCycleCount = 0;
+    public float inputTargetTime = 0.0f; // input timing in the song
+    public GameObject indicatorPrefab;
+    public List<GameObject> indicators = new List<GameObject>();
+    
     [Header("Tower Empower Indicator")]
     public GameObject inputPrompt;
     public bool towerAboutToFire = false;
@@ -125,8 +136,6 @@ public class Tower : MonoBehaviour
     public int towerNum;
     #endregion
 
-    
-
     public virtual void Start()
     {
         currentAttackPattern = towerInfo.attackPattern;
@@ -151,27 +160,32 @@ public class Tower : MonoBehaviour
         //Set Animation BPM
         AnimationManager.instance.SetAnimSpeed(animationController, 80);
         AnimationManager.instance.SetAnimSpeed(towerBaseAnimationController, 60);
+
+        // TOWER INPUT //
+        measureLength = ConductorV2.instance.crotchet * 4;
+        inputIndex = 0;
+        CalculateInputTimes();
+        InstantiateIndicators();
+        measureCycleCount = ConductorV2.instance.measureTrack;
+        inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
     }
 
     public virtual void Update()
     { 
-        
+        // TOWER INPUT //
+        songProgress = ConductorV2.instance.songPosition;
+
+        // Update input tracking index when song progress exceeds threshold
+        if (songProgress > (inputTargetTime + ConductorV2.instance.missBeatThreshold)) //if (songProgress > (inputTargetTime + ConductorV2.instance.missBeatThreshold))
+        {
+            UpdateInputIndex();
+        }
+
+        //  //
         if(FeverSystem.Instance.feverModeActive)
             isShielded = true;
 
         shieldEffect.SetActive(isShielded);
-
-        //if (isPoweredUp) 
-        //{ 
-        //    poweredIcon.SetActive(true);
-        //    nonPoweredIcon.SetActive(false);
-
-        //    if(towerInfo.type == InstrumentType.Guitar)
-        //    {
-        //        towerRange = 6;
-        //    }
-
-        //}
 
         towerEffectVisual();
 
@@ -197,6 +211,46 @@ public class Tower : MonoBehaviour
             animationController.SetBool("Upgrade4", true);
         }
     }
+
+    #region Tower input
+    // Calculates input times as time from measure start
+    public void CalculateInputTimes()
+    {
+        foreach (var input in towerInfo.inputs)
+        {
+            input.noteTime = (input.notePosition * measureLength);
+        }
+    }
+    
+    public void InstantiateIndicators()
+    {
+        foreach (var input in towerInfo.inputs)
+        {
+            GameObject newIndicator = Instantiate(indicatorPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform);
+            newIndicator.GetComponent<InputIndicator>().notePosition = input.notePosition;
+
+            //newIndicator.GetComponent<InputIndicator>().SetIndicatorData();
+
+            indicators.Add(newIndicator);
+        }
+    }
+
+    // Ik there's gotta be an easier way to wrap around but GO MY IF STATEMENTS!
+    public void UpdateInputIndex()
+    {
+        if (inputIndex == (towerInfo.inputs.Count - 1))
+        {
+            measureCycleCount += 1;
+            inputIndex = 0;
+            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
+        }
+        else
+        {
+            inputIndex += 1;
+            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
+        }
+    }
+    #endregion
 
     public void towerEffectVisual()
     {

@@ -46,6 +46,7 @@ public class ConductorV2 : MonoBehaviour
     public float earlyBeatThreshold = 0.625f;
     public float earlyGreatBeatThreshold = 0.750f;
     public float perfectBeatThreshold = 0.875f;
+    public float maxBeatThreshold = 0.500f;
 
     [Header ("Beat Tracking")]
     public float beatDuration;

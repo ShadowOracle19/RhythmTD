@@ -17,22 +17,17 @@ public class TowerBeatDetection : MonoBehaviour
     - input times need to be updated or calculated on input
     */
     
-    /*
-    public class Note : TowerBeatDetection
+    [System.Serializable]
+    public class Note
     {
         [Range(0.0f, 1.0f)]
-        public float notePosition { get; set; }
-        public float holdTime { get; set; }
-
-        public Indicator(float , float )
-        {
-            this.notePosition = notePosition;
-            this.holdTime = holdTime;
-        }
+        public float notePosition;
+        public float noteTime;
+        public float holdTime;
     }
-    */
 
     // VARIABLES //
+    public List<Note> inputs = new List<Note>();
     [Range(0.0f, 1.0f)]
     public List<float> inputPositions = new List<float>();
     public List<float> inputTimes = new List<float>();
@@ -42,12 +37,12 @@ public class TowerBeatDetection : MonoBehaviour
 
     public int inputIndex; // the index of the closest input timing
     public int nextInputIndex; // the index of the next closest input timing
-    public float timeAtInput; // song progressat the time of player input 
+    public float timeAtInput; // song progress at the time of player input 
     
     public float songProgress = 0.0f; // progress of current song expressed in time
 
     public float measureLength = 0.0f; // length of 1 measure expressed in time
-    public float inputTargetTime = 0.0f; // input timing in the measure
+    public float inputTargetTime = 0.0f; // input timing in the song
 
     public float threshold = 0.0f; // PLACEHOLDER VARIABLE UNTIL I FIGURE OUT HOW I WANT TO HANDLE THRESHOLDS FOR TOWER ATTACK NOTES
 

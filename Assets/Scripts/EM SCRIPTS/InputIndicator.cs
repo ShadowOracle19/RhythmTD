@@ -18,20 +18,21 @@ public class InputIndicator : MonoBehaviour
     public float notePosition = 0.0f; // input position in the measure expressed as a percentage
     public Color defaultColor;
     public Color hitColor;    
-    public float hitFreezeTime = 0.1f; // the duration the indicator remains frozen & visible after being hit
+    public float hitFreezeTime = 0.25f; // the duration the indicator remains frozen & visible after being hit
     public float defaultScrollTime = 1.0f;
     public float scrollSpeed = 1.0f;
     public float startingScale = 1.0f;
     public float targetScale = 0.0f;
     
     [Header ("Measurement Variables (DO NOT TOUCH)")]
+    public int measureCycleCount;
     public float measureTargetTime = 0.0f; // input timing in the measure
     public float inputTargetTime = 1.0f; // input timing in the song
     public float spawnTime = 0.0f; // spawn timing in the song
     public float measureLength = 0.0f; // length of 1 measure expressed in time
     public float songProgress = 0.0f; // progress of current song expressed in time
     public SpriteRenderer spriteRenderer;
-    public Transform towerTransform;
+    //public Transform towerTransform;
 
     [Header ("State (DO NOT TOUCH)")]
     public bool isActive = true;
@@ -59,12 +60,13 @@ public class InputIndicator : MonoBehaviour
         measureTargetTime = notePosition * measureLength;
 
         //
-        inputTargetTime = (measureLength * ConductorV2.instance.measureTrack) + measureTargetTime;
+        measureCycleCount = ConductorV2.instance.measureTrack;
+        inputTargetTime = (measureLength * measureCycleCount) + measureTargetTime;
         scrollTime = defaultScrollTime / scrollSpeed;
         spawnTime = inputTargetTime - scrollTime;
 
         // align rotation with parent tower
-        this.gameObject.transform.rotation = towerTransform.rotation;
+        //this.gameObject.transform.rotation = towerTransform.rotation;
     }
 
     // Update is called once per frame
@@ -90,11 +92,13 @@ public class InputIndicator : MonoBehaviour
             spriteRenderer.enabled = true;
             StartCoroutine(ScaleIndicator());
         }
-        else if ((songProgress < spawnTime) || ((songProgress > (inputTargetTime + scrollTime)) && !isHit))
+        /*
+        else if (((songProgress < spawnTime) && !isHit) || ((songProgress > (inputTargetTime + scrollTime)) && !isHit))
         {
             spriteRenderer.enabled = false;
             Debug.Log("Broke because of timing");
         }
+        */
 
     }
 
@@ -129,6 +133,7 @@ public class InputIndicator : MonoBehaviour
     public IEnumerator FreezeIndicator()
     {
         isHit = true;
+        spriteRenderer.enabled = true;
 
         // stop scaling
         StopCoroutine(ScaleIndicator());
@@ -148,7 +153,8 @@ public class InputIndicator : MonoBehaviour
 
     public void UpdateTargetTime()
     {
-        inputTargetTime = (measureLength * (ConductorV2.instance.measureTrack + 1)) + measureTargetTime; 
+        measureCycleCount += 1;
+        inputTargetTime = (measureLength * (measureCycleCount)) + measureTargetTime; 
         spawnTime = inputTargetTime - scrollTime;
     }
 

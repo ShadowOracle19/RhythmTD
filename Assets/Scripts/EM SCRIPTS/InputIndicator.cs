@@ -35,8 +35,10 @@ public class InputIndicator : MonoBehaviour
     public float spawnTime = 0.0f; // spawn timing in the song
     public float measureLength = 0.0f; // length of 1 measure expressed in time
     public float songProgress = 0.0f; // progress of current song expressed in time
+    
+    [Header("")]
     public SpriteRenderer spriteRenderer;
-    //public Transform towerTransform;
+    public GameObject parentTower;
 
     [Header ("State (DO NOT TOUCH)")]
     public bool isActive = true;
@@ -58,6 +60,8 @@ public class InputIndicator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        parentTower = this.transform.parent.gameObject;
+        
         // get reference to the indicator sprite renderer so sprite visibility can be updated
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.color = defaultColor;
@@ -85,6 +89,15 @@ public class InputIndicator : MonoBehaviour
         if (songProgress > (inputTargetTime + scrollTime) && !isScaling)
         {
             UpdateTargetTime();
+        }
+
+        if (parentTower.GetComponent<Tower>().towerHover)
+        {
+            isActive = true;
+        }
+        else
+        {
+            isActive = false;
         }
 
         if (!isActive)

@@ -516,7 +516,8 @@ public class CursorTD : MonoBehaviour
 
     public void RegisterIndicatorHit()
     {
-        //StartCoroutine(tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().FreezeIndicator());
+        tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().isHit = true;
+        tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().currentColor =  tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().hitColor;
         tile.placedTower.GetComponent<Tower>().UpdateInputIndex();
     }
 

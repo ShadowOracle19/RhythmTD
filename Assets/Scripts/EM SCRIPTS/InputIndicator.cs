@@ -7,11 +7,9 @@ using UnityEngine.Events;
 public class InputIndicator : MonoBehaviour
 {
     // TO DO LIST //
-    /*
-    - When indicator's corresponding input window is hit, indicator should freeze in place temporarily and change colour 
-    - Enable / disable sprite renderer when indicators are done scaling or when tower isn't selected
-    - Have colour fade out past input target timing as well
+    /* 
     - Different colours for different judgements?
+    - PFX for more impact?
     - Fix bug where indicators don't start scaling until next measure cycle after spawn
     */
     
@@ -22,7 +20,7 @@ public class InputIndicator : MonoBehaviour
     public Color defaultColor;
     public Color approachColor;
     public Color hitColor;    
-    public float hitFreezeTime = 0.25f; // the duration the indicator remains frozen & visible after being hit
+    public float hitFreezeTime = 0.125f; // the duration the indicator remains frozen & visible after being hit
     public float defaultScrollTime = 1.0f;
     public float scrollSpeed = 1.0f;
     public float startingScale = 1.0f;
@@ -128,27 +126,36 @@ public class InputIndicator : MonoBehaviour
 
         while (scalingProgress <= 1.0)
         {
-            if (songProgress > inputTime)
+            if (songProgress > inputTime && !isHit)
             {
                 spriteRenderer.enabled = false;
+            }
+            else
+            {
+                spriteRenderer.enabled = true;
             }
             
             scalingProgress = (songProgress - spawnTime) / ((inputTime + scrollTime) - spawnTime); //NOTE: prompt size should match indicator at 50% scale progress
             colorProgress = ((songProgress - spawnTime) + colorOffset) / (inputTime - spawnTime);
 
-            currentScale = Mathf.Lerp(startingScale, targetScale, scalingProgress); 
-            this.transform.localScale = new Vector3(currentScale, currentScale, 1.0f);
+            if (!isHit)
+            {
+                currentScale = Mathf.Lerp(startingScale, targetScale, scalingProgress); 
+                this.transform.localScale = new Vector3(currentScale, currentScale, 1.0f);
 
-            currentColor.a = Mathf.Lerp(defaultColor.a, approachColor.a, colorProgress);
-            currentColor.r = Mathf.Lerp(defaultColor.r, approachColor.r, colorProgress);
-            currentColor.g = Mathf.Lerp(defaultColor.g, approachColor.g, colorProgress);
-            currentColor.b = Mathf.Lerp(defaultColor.b, approachColor.b, colorProgress);
+                currentColor.a = Mathf.Lerp(defaultColor.a, approachColor.a, colorProgress);
+                currentColor.r = Mathf.Lerp(defaultColor.r, approachColor.r, colorProgress);
+                currentColor.g = Mathf.Lerp(defaultColor.g, approachColor.g, colorProgress);
+                currentColor.b = Mathf.Lerp(defaultColor.b, approachColor.b, colorProgress);
+            }
             
             spriteRenderer.color = currentColor;
 
             yield return null;
         }
         
+        isHit = false;
+
         // TEST SOUND //
         //testSound.Play();
 
@@ -160,15 +167,14 @@ public class InputIndicator : MonoBehaviour
         StopCoroutine(ScaleIndicator(inputTime));
     }
 
+    /*
     public IEnumerator FreezeIndicator()
     {
-        isHit = true;
-        spriteRenderer.enabled = true;
-
         // stop scaling
         StopCoroutine(ScaleIndicator(inputTargetTime));
-
-        UpdateTargetTime();
+        
+        isHit = true;
+        spriteRenderer.enabled = true;
 
         spriteRenderer.color = hitColor;
         
@@ -178,8 +184,11 @@ public class InputIndicator : MonoBehaviour
             isHit = false;
         }
 
+        UpdateTargetTime();
+
         StopCoroutine(FreezeIndicator());
     }
+    */
 
     public void UpdateTargetTime()
     {

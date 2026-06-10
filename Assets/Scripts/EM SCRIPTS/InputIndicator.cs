@@ -8,9 +8,9 @@ public class InputIndicator : MonoBehaviour
 {
     // TO DO LIST //
     /* 
-    - Different colours for different judgements?
     - PFX for more impact?
     - Fix bug where indicators don't start scaling until next measure cycle after spawn
+    - Make disappearance of indicators when moving off of towers more immediate
     */
     
     // VARIABLES
@@ -89,7 +89,7 @@ public class InputIndicator : MonoBehaviour
         {
             UpdateTargetTime();
         }
-
+        
         if (parentTower.GetComponent<Tower>().towerHover)
         {
             isActive = true;
@@ -102,10 +102,9 @@ public class InputIndicator : MonoBehaviour
         if (!isActive)
         {
             spriteRenderer.enabled = false;
-            Debug.Log("Tower Not Highlighted");
             return;
         }
-        
+
         //at or past spawn time, before or at target time, not hit, and not scaling down
         if ((songProgress >= spawnTime) && (songProgress <= inputTargetTime) && !isHit && !isScaling) 
         {
@@ -127,6 +126,11 @@ public class InputIndicator : MonoBehaviour
 
         while (scalingProgress <= 1.0)
         {
+            if (!isActive)
+            {
+                StopCoroutine(ScaleIndicator(inputTime));
+            }
+            
             if (songProgress > inputTime && !isHit)
             {
                 spriteRenderer.enabled = false;

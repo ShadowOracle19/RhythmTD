@@ -452,7 +452,7 @@ public class CursorTD : MonoBehaviour
                     //COMBO
                     ComboManager.Instance.ResetCombo();
 
-                    RegisterIndicatorHit();
+                    RegisterIndicatorHit(4);
                     break;
                 case _BeatResult.late:
                     //FEEDBACK
@@ -460,7 +460,7 @@ public class CursorTD : MonoBehaviour
                     hitSoundSource.Play();
                     SpawnBeatHitResult(_BeatResult.late);
 
-                    RegisterIndicatorHit();
+                    RegisterIndicatorHit(3);
                     break;
                 case _BeatResult.early:
                     //FEEDBACK
@@ -468,7 +468,7 @@ public class CursorTD : MonoBehaviour
                     hitSoundSource.Play();
                     SpawnBeatHitResult(_BeatResult.early);
 
-                    RegisterIndicatorHit();
+                    RegisterIndicatorHit(2);
                     break;
                 case _BeatResult.great:
                     //FEEDBACK
@@ -484,7 +484,7 @@ public class CursorTD : MonoBehaviour
                     //BUFFING
                     tile.placedTower.GetComponent<Tower>().ActivateBuff(buff); // activate buff
 
-                    RegisterIndicatorHit();
+                    RegisterIndicatorHit(1);
                     break;
                 case _BeatResult.perfect:      
                     //FEEDBACK
@@ -500,7 +500,7 @@ public class CursorTD : MonoBehaviour
                     //BUFFING
                     tile.placedTower.GetComponent<Tower>().ActivateBuff(buff); // activate buff
 
-                    RegisterIndicatorHit();
+                    RegisterIndicatorHit(0);
                     break;
                 case _BeatResult.nohit:
                     break;
@@ -514,10 +514,10 @@ public class CursorTD : MonoBehaviour
         }
     }
 
-    public void RegisterIndicatorHit()
+    public void RegisterIndicatorHit(int index)
     {
         tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().isHit = true;
-        tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().currentColor =  tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().hitColor;
+        tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().currentColor =  tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().hitColors[index];
         tile.placedTower.GetComponent<Tower>().UpdateInputIndex();
     }
 

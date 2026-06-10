@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Hologram-Flat
-  m_Shader: {fileID: -6465566751694194690, guid: 7d3fe0748d6bf9d4987b185f1f25fe19, type: 3}
+  m_Name: LightningDamageTaken
+  m_Shader: {fileID: -6465566751694194690, guid: 0c03ac56653a2cb43b4ee24fbc97aa89, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -17,21 +17,21 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: TransparentCutout
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: _Cull
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _HologramTexture:
-        m_Texture: {fileID: 2800000, guid: a3159421993155c40b01d58a3330c6c0, type: 3}
+        m_Texture: {fileID: 2800000, guid: f88677df267a41d6be1e7a6133e7d227, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b588d56733d504840b919b3b2702a347, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -48,45 +48,34 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0
     - _AlphaClip: 1
     - _AlphaToMask: 1
     - _Blend: 0
-    - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
-    - _Cull: 2
+    - _Cull: 0
     - _DissolveAmount: 1.1
     - _DissolveScale: 121
-    - _Distortion_Scale: 4.69
-    - _Distortion_Scroll_Speed: 5.14
-    - _Distortion_Strength: 3.38
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _FlickerAmount: 0.85
-    - _Fresnel_Strength: -0.06
-    - _NoiseAmount: 69.22
-    - _OutlineThickness: 0.023
+    - _OutlineThickness: 0.054
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _VericalDissolveThickness: 0
-    - _VerticalDissolve: 0.111
-    - _WorkflowMode: 1
+    - _VerticalDissolve: 0.56
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - White: {r: 1, g: 1, b: 1, a: 1}
-    - _FresnelColor: {r: 1, g: 0.9289223, b: 0, a: 0}
-    - _HologramColor: {r: 0.4764151, g: 0.7784832, b: 1, a: 0}
+    - _HologramColor: {r: 0.02352953, g: 0, b: 1, a: 0}
     - _OutlineColor: {r: 0, g: 0.07727194, b: 1, a: 1}
-    - _ScrollingSpeed: {r: 0, g: 0.03, b: 0, a: 0}
+    - _ScrollingSpeed: {r: 0, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &848099107328444625
+--- !u!114 &5776673950598982056
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,5 +86,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10

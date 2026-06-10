@@ -8,8 +8,11 @@ public class InputIndicator : MonoBehaviour
 {
     // TO DO LIST //
     /*
-    - When indicator's corresponding input window is hit, indicator should freeze in place temporarily and change colour (this needs to be tested!)
-    - Use coroutines to make code run when tower is highlighted?
+    - When indicator's corresponding input window is hit, indicator should freeze in place temporarily and change colour 
+    - Enable / disable sprite renderer when indicators are done scaling or when tower isn't selected
+    - Have colour fade out past input target timing as well
+    - Different colours for different judgements?
+    - Fix bug where indicators don't start scaling until next measure cycle after spawn
     */
     
     // VARIABLES
@@ -17,6 +20,7 @@ public class InputIndicator : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float notePosition = 0.0f; // input position in the measure expressed as a percentage
     public Color defaultColor;
+    public Color approachColor;
     public Color hitColor;    
     public float hitFreezeTime = 0.25f; // the duration the indicator remains frozen & visible after being hit
     public float defaultScrollTime = 1.0f;
@@ -44,6 +48,9 @@ public class InputIndicator : MonoBehaviour
     public float scrollTime = 1.0f;
     public float currentScale = 1.0f;
     public float scalingProgress = 0.0f;
+    public Color currentColor;
+    public float colorProgress = 0.0f;
+    public float colorOffset = 0.0f;
 
     [Header("Testing Resources")]
     public AudioSource testSound;
@@ -54,6 +61,7 @@ public class InputIndicator : MonoBehaviour
         // get reference to the indicator sprite renderer so sprite visibility can be updated
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.color = defaultColor;
+        currentColor = spriteRenderer.color;
 
         //
         measureLength = ConductorV2.instance.crotchet * 4;
@@ -65,8 +73,8 @@ public class InputIndicator : MonoBehaviour
         scrollTime = defaultScrollTime / scrollSpeed;
         spawnTime = inputTargetTime - scrollTime;
 
-        // align rotation with parent tower
-        //this.gameObject.transform.rotation = towerTransform.rotation;
+        //
+        spriteRenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -90,21 +98,15 @@ public class InputIndicator : MonoBehaviour
         if ((songProgress >= spawnTime) && (songProgress <= inputTargetTime) && !isHit && !isScaling) 
         {
             spriteRenderer.enabled = true;
-            StartCoroutine(ScaleIndicator());
+            StartCoroutine(ScaleIndicator(inputTargetTime));
         }
-        /*
-        else if (((songProgress < spawnTime) && !isHit) || ((songProgress > (inputTargetTime + scrollTime)) && !isHit))
-        {
-            spriteRenderer.enabled = false;
-            Debug.Log("Broke because of timing");
-        }
-        */
-
     }
 
-    public IEnumerator ScaleIndicator() // turn into coroutine
+    public IEnumerator ScaleIndicator(float inputTime) // turn into coroutine
     {
         isScaling = true;
+
+        spriteRenderer.enabled = true;
 
         this.transform.localScale = new Vector3(startingScale, startingScale, 1.0f); // reset scale
         spriteRenderer.color = defaultColor; // reset color
@@ -113,10 +115,23 @@ public class InputIndicator : MonoBehaviour
 
         while (scalingProgress <= 1.0)
         {
-            scalingProgress = (songProgress - spawnTime) / ((inputTargetTime + scrollTime ) - spawnTime); //NOTE: prompt size should match indicator at 50% scale progress
+            if (songProgress > inputTime)
+            {
+                spriteRenderer.enabled = false;
+            }
+            
+            scalingProgress = (songProgress - spawnTime) / ((inputTime + scrollTime) - spawnTime); //NOTE: prompt size should match indicator at 50% scale progress
+            colorProgress = ((songProgress - spawnTime) + colorOffset) / (inputTime - spawnTime);
 
             currentScale = Mathf.Lerp(startingScale, targetScale, scalingProgress); 
             this.transform.localScale = new Vector3(currentScale, currentScale, 1.0f);
+
+            currentColor.a = Mathf.Lerp(defaultColor.a, approachColor.a, colorProgress);
+            currentColor.r = Mathf.Lerp(defaultColor.r, approachColor.r, colorProgress);
+            currentColor.g = Mathf.Lerp(defaultColor.g, approachColor.g, colorProgress);
+            currentColor.b = Mathf.Lerp(defaultColor.b, approachColor.b, colorProgress);
+            
+            spriteRenderer.color = currentColor;
 
             yield return null;
         }
@@ -126,8 +141,10 @@ public class InputIndicator : MonoBehaviour
 
         UpdateTargetTime();
 
+        spriteRenderer.enabled = false;
+
         isScaling = false;
-        StopCoroutine(ScaleIndicator());
+        StopCoroutine(ScaleIndicator(inputTime));
     }
 
     public IEnumerator FreezeIndicator()
@@ -136,7 +153,7 @@ public class InputIndicator : MonoBehaviour
         spriteRenderer.enabled = true;
 
         // stop scaling
-        StopCoroutine(ScaleIndicator());
+        StopCoroutine(ScaleIndicator(inputTargetTime));
 
         UpdateTargetTime();
 

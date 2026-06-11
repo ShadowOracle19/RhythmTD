@@ -31,10 +31,13 @@ public class Tower : MonoBehaviour
     [Header("Tower Attack & Input")]
     public float songProgress = 0.0f; // progress of current song expressed in time
     public int inputIndex; // the index of the closest input timing
-    public int nextInputIndex; // the index of the next closest input timing
+    public int attackIndex;
+    public int lastAttackIndex;
     public float measureLength = 0.0f; // length of 1 measure expressed in time
     public int measureCycleCount = 0;
+    public int attackCycleCount = 0;
     public float inputTargetTime = 0.0f; // input timing in the song
+    public float attackTargetTime = 0.0f;
     public GameObject indicatorPrefab;
     public List<GameObject> indicators = new List<GameObject>();
     
@@ -141,11 +144,6 @@ public class Tower : MonoBehaviour
         currentAttackPattern = towerInfo.attackPattern;
         currentHealth = towerInfo.towerHealth;
         currentDamage = towerInfo.damage;
-        
-        //if(isPoweredUp && towerInfo.type == InstrumentType.Piano)
-        //{
-        //    currentHealth = currentHealth * 2;
-        //}
 
         beat = 1;
 
@@ -164,10 +162,14 @@ public class Tower : MonoBehaviour
         // TOWER INPUT //
         measureLength = ConductorV2.instance.crotchet * 4;
         inputIndex = 0;
+        attackIndex = 0;
+        lastAttackIndex = towerInfo.inputs.Count - 1;
         CalculateInputTimes();
         InstantiateIndicators();
         measureCycleCount = ConductorV2.instance.measureTrack;
+        attackCycleCount = ConductorV2.instance.measureTrack;
         inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
+        attackTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
     }
 
     public virtual void Update()
@@ -176,9 +178,15 @@ public class Tower : MonoBehaviour
         songProgress = ConductorV2.instance.songPosition;
 
         // Update input tracking index when song progress exceeds threshold
-        if (songProgress > (inputTargetTime + ConductorV2.instance.missBeatThreshold)) //if (songProgress > (inputTargetTime + ConductorV2.instance.missBeatThreshold))
+        if (songProgress > (inputTargetTime + ConductorV2.instance.missBeatThreshold))
         {
             UpdateInputIndex();
+        }
+
+        if (songProgress >= attackTargetTime)
+        {
+            UpdateAttackIndex();
+            FireTower(inputIndex);
         }
 
         //  //
@@ -250,7 +258,21 @@ public class Tower : MonoBehaviour
             inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
         }
     }
-    #endregion
+
+    public void UpdateAttackIndex()
+    {
+        if (attackIndex == (towerInfo.inputs.Count - 1))
+        {
+            attackCycleCount += 1;
+            attackIndex = 0;
+            attackTargetTime = ((measureLength * attackCycleCount) + towerInfo.inputs[attackIndex].noteTime);
+        }
+        else
+        {
+            attackIndex += 1;
+            attackTargetTime = ((measureLength * attackCycleCount) + towerInfo.inputs[attackIndex].noteTime);
+        }
+    }
 
     public void towerEffectVisual()
     {
@@ -263,7 +285,9 @@ public class Tower : MonoBehaviour
             inputPrompt.SetActive(false);
         }
     }
+    #endregion
 
+    #region Tower attack
     public virtual void CreateBullet(int damage, Vector3 position)
     {
         int tempRange = towerRange;
@@ -281,97 +305,45 @@ public class Tower : MonoBehaviour
 
     }
 
-    public void FireTower()
+    public void FireTower(int currentAttackIndex)
     {
-        switch (currentAttackPattern)
+        //if (songProgress >= inputTargetTime)
+        if(currentAttackIndex != lastAttackIndex)
         {
-            case TowerAttackPattern.everyBeat:
-                towerAboutToFire = true;
-                Fire();
-                break;
+            lastAttackIndex = currentAttackIndex;
+            //Fire();
 
-            case TowerAttackPattern.everyMeasure:
-                if (ConductorV2.instance.beatTrack == 4)
-                {
-                    Fire();
-                    towerAboutToFire = false;
-                }
-                else if (ConductorV2.instance.beatTrack == 3)
-                {
-                    towerAboutToFire = true;
-                }
-                break;
-
-            case TowerAttackPattern.everyOtherBeat:
-                if(ConductorV2.instance.beatTrack % 2 == 0)
-                {
-                    Fire();
-                    towerAboutToFire = false;
-                }
-                else
-                {
-                    towerAboutToFire = true;
-                }
-
-                //switch (ConductorV2.instance.beatTrack)
-                //{
-                //    case 1:
-                //        towerAboutToFire = true;
-                //        break;
-                //    case 2:
-                //        Fire();
-                //        towerAboutToFire = false;
-                //        break;
-                //    case 3:
-                //        towerAboutToFire = true;
-                //        break;
-                //    case 4:
-                //        Fire();
-                //        towerAboutToFire = false;
-                //        break;
-                //}
-                break;
-
-            case TowerAttackPattern.everyBeatButOne:
-                beat += 1;
-                if (ConductorV2.instance.beatTrack < 4)
-                {
+            switch (currentAttackPattern)
+            {
+                case TowerAttackPattern.standard:
                     towerAboutToFire = true;
                     Fire();
+                    break;
+                case TowerAttackPattern.snake:
 
-                }
-                else if (ConductorV2.instance.beatTrack == 4)
-                {
-                    towerAboutToFire = false;
-                    beat = 1;
-                }
-                break;
+                    towerAboutToFire = true;
+                    float yPosition = 0f;
 
-            case TowerAttackPattern.snakePatternFire:
-
-                towerAboutToFire = true;
-                float yPosition = 0f;
-
-                switch (ConductorV2.instance.beatTrack)
-                {
-                    case 1:
-                        yPosition = 0;
-                        break;
-                    case 2:
-                        yPosition = 1f;
-                        break;
-                    case 3:
-                        yPosition = 0;
-                        break;
-                    case 4:
-                        yPosition = -1f;
-                        break;
-                }
-                Fire(yPosition);
-                break;
-
-            default:
-                break;
+                    switch (attackIndex % 4)
+                    {
+                        case 0:
+                            yPosition = 0;
+                            break;
+                        case 1:
+                            yPosition = 1f;
+                            break;
+                        case 2:
+                            yPosition = 0;
+                            break;
+                        case 3:
+                            yPosition = -1f;
+                            break;
+                    }
+                    Fire(yPosition);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -399,41 +371,17 @@ public class Tower : MonoBehaviour
         {
             currentDamage = tempDamageHolder;
             nextProjectile = projectile;
-        }
-
-        
-        
+        } 
     }
 
-    public virtual void Fire(float yPos) //Fire on specific ypos mainly for viola
+    public virtual void Fire(float yPos) //Fire on specific ypos
     {
-
         //play attack sound
         AudioManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
 
         int damage = currentDamage;
 
         nextProjectile = projectile;
-
-        //if (ChargedUp || FeverSystem.Instance.feverModeActive)
-        //{
-        //    damage = damage * 5;
-
-        //    nextProjectile = buffProjectile;
-        //}
-        //else if (burningBullet)
-        //{
-        //    nextProjectile = buffProjectile;
-        //}
-
-        
-
-        
-        //if(isPoweredUp && towerInfo.type == InstrumentType.Bass)
-        //{
-        //    CreateBullet(damage, burningBullet, false, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + -yPos));
-            
-        //}
 
         towerUpgradeUnlocked = false;
     } 
@@ -468,24 +416,6 @@ public class Tower : MonoBehaviour
     public virtual void AOE(int damage)
     {
         int tempRange = towerRange;
-        //if(towerUpgrades)
-        //{
-        //    if(rangeUpgrade)
-        //    {
-        //        tempRange *= 2;
-
-        //    }
-        //    if(damageBoostUpgrade)
-        //    {
-        //        damage *= 2;
-        //    }
-
-        //    if(multiShotUpgrade)
-        //    {
-        //        ExtraFire();
-        //    }
-
-        //}
 
         colliders = Physics.OverlapSphere(transform.position, tempRange);
 
@@ -493,8 +423,6 @@ public class Tower : MonoBehaviour
         {
             if (item.transform.CompareTag("StageTile"))
             {
-                //item.transform.GetComponent<Tile>().Pulse(Color.blue);
-
                 //Depending on the upgrade, change the sprite
                 if (upgradePurchased)
                 {
@@ -515,18 +443,13 @@ public class Tower : MonoBehaviour
                 {
                     item.transform.GetComponent<Enemy>().isStunned = true;
                 }
-                //if(towerUpgrades && burningUpgrade)
-                //{
-                //    item.transform.GetComponent<Enemy>().burnt = true;
-                //    item.transform.GetComponent<Enemy>().burnDamage += 2;
-                //}
             }
         }
         colliders = null;
-        //towerUpgradeUnlocked = false;
         feelingItNow = false;
         synthBuff = false;
     }
+    #endregion
 
     public void RemoveTower()
     {

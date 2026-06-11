@@ -241,18 +241,6 @@ public class ConductorV2 : MonoBehaviour
         //CONDUCTING
         Conduct();
 
-        /*
-        if(beatDuration >= perfectBeatThreshold && !perfectBeatReset)
-        {
-            perfectBeatReset = true;
-            Debug.Log("Perfect");
-        }
-        else if(beatDuration < perfectBeatThreshold)
-        {
-            perfectBeatReset = false;
-        }
-        */
-
         beatTrack = Mathf.Clamp(beatTrack, 0, 4);
     }
 
@@ -309,6 +297,7 @@ public class ConductorV2 : MonoBehaviour
         TriggerBeatEvent(songPositionInBeats);
     }
 
+    /*
     public bool InThreshHold()
     {
         if(beatDuration >= perfectBeatThreshold) //perfect
@@ -347,6 +336,7 @@ public class ConductorV2 : MonoBehaviour
             return true;
         }
     }
+    */
 
     public void Beat()
     {
@@ -355,8 +345,6 @@ public class ConductorV2 : MonoBehaviour
             measureTrack += 1;
             beatTrack = 0;
         }
-
-        //_ping.Play();
 
         beatTrack += 1;
     }

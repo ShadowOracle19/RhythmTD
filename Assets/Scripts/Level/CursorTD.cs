@@ -617,20 +617,6 @@ public class CursorTD : MonoBehaviour
 
                 slotIndex += 1;
             }
-
-            /*
-            towerSlotW.GetComponent<TowerButton>().tower = GameManager.Instance.towers[4].tower;
-            towerSlotW.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[4].tower.GetComponent<Tower>().towerInfo.towerImage;
-
-            towerSlotD.GetComponent<TowerButton>().tower = GameManager.Instance.towers[5].tower;
-            towerSlotD.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[5].tower.GetComponent<Tower>().towerInfo.towerImage;
-
-            towerSlotS.GetComponent<TowerButton>().tower = GameManager.Instance.towers[6].tower;
-            towerSlotS.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[6].tower.GetComponent<Tower>().towerInfo.towerImage;
-
-            towerSlotA.GetComponent<TowerButton>().tower = GameManager.Instance.towers[7].tower;
-            towerSlotA.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[7].tower.GetComponent<Tower>().towerInfo.towerImage;
-            */
         }
         else
         {
@@ -643,23 +629,9 @@ public class CursorTD : MonoBehaviour
 
                 slotIndex += 1;
             }
-            
-            /*
-            towerSlotW.GetComponent<TowerButton>().tower = GameManager.Instance.towers[0].tower;
-            towerSlotW.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.towerImage;
-
-            towerSlotD.GetComponent<TowerButton>().tower = GameManager.Instance.towers[1].tower;
-            towerSlotD.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.towerImage;
-
-            towerSlotS.GetComponent<TowerButton>().tower = GameManager.Instance.towers[2].tower;
-            towerSlotS.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.towerImage;
-
-            towerSlotA.GetComponent<TowerButton>().tower = GameManager.Instance.towers[3].tower;
-            towerSlotA.GetComponent<TowerButton>().icon.sprite = GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.towerImage;
-            */
         }
 
-        TowerManager.Instance.SwapTowers();
+        //TowerManager.Instance.SwapTowers();
     }
     
     public void TryToPlaceTower(GameObject tower, AudioClip feedbackAudio, string feedbackVisual, int towerNum)

@@ -36,10 +36,12 @@ public class FlatTower : Tower
         }
 
         //reduce flat attack speed to every 2 beats
+        /*
         if (upgradeOneActive)
         {
             currentAttackPattern = TowerAttackPattern.everyOtherBeat;
         }
+        */
     }
 
     public override void Fire()

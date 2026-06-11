@@ -605,8 +605,9 @@ MonoBehaviour:
   enemyInRange: 0
   songProgress: 0
   inputIndex: 0
-  nextInputIndex: 0
+  lastInputIndex: 0
   measureLength: 0
+  measureCycleCount: 0
   inputTargetTime: 0
   indicatorPrefab: {fileID: 5448178981151780786, guid: 9f587f8a32efec442be6254918506e84, type: 3}
   indicators: []
@@ -633,7 +634,7 @@ MonoBehaviour:
   shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
   clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
   burningParticles: {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
-  currentAttackPattern: 0
+  currentAttackPattern: 2
   connectedTile: {fileID: 0}
   colliders: []
   nextProjectile: {fileID: 0}

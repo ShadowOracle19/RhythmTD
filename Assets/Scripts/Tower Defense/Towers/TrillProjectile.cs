@@ -31,7 +31,7 @@ public class TrillProjectile : Projectile
             //create two echo bullets
             GameObject bullet = Instantiate(echoProjectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 1)
                 , gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
-            bullet.GetComponent<ProjectileEcho>().InitializeProjectile(2, gameObject, damage / 2, false);
+            bullet.GetComponent<ProjectileEcho>().InitializeProjectile(2, gameObject, damage / 2, false, towerFiredFrom.GetComponent<Tower>().attackTargetTime);
             bullet.GetComponent<ProjectileEcho>().spriteRenderer.gameObject.transform.localScale
 
                 = new Vector3(-bullet.GetComponent<ProjectileEcho>().spriteRenderer.gameObject.transform.localScale.x,
@@ -44,7 +44,7 @@ public class TrillProjectile : Projectile
             //bullet two
             GameObject bullet2 = Instantiate(echoProjectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 1)
                 , gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
-            bullet2.GetComponent<ProjectileEcho>().InitializeProjectile(2, gameObject, damage / 2, false);
+            bullet2.GetComponent<ProjectileEcho>().InitializeProjectile(2, gameObject, damage / 2, false, towerFiredFrom.GetComponent<Tower>().attackTargetTime);
             ConductorV2.instance.projectileEvent.Add(bullet2.GetComponent<Projectile>().trigger);
             bullet2.GetComponent<ProjectileEcho>().direction = 1;
 

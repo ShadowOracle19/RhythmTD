@@ -19,7 +19,7 @@ public class TeleporterTile : Tile
             //other.transform.DOKill();
             //other.transform.DOMove(new Vector3(connectedTile.transform.position.x, other.transform.position.y, connectedTile.transform.position.z), 0f);
             other.transform.position = new Vector3(connectedTile.transform.position.x, other.transform.position.y, connectedTile.transform.position.z);
-            other.gameObject.GetComponent<Projectile>().nextPosition = new Vector3(connectedTile.transform.position.x + 1, other.transform.position.y, connectedTile.transform.position.z);
+            other.gameObject.GetComponent<Projectile>().nextPosition = new Vector3(connectedTile.transform.position.x, other.transform.position.y, connectedTile.transform.position.z);
             other.gameObject.GetComponent<Projectile>().teleported = true;
             Teleport(other.gameObject);
         }

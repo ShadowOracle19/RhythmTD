@@ -27,7 +27,7 @@ public class OverworldPlayerController : MonoBehaviour
     public bool InteractTrigger { get; private set; }
 
     [Header("Player Controller Stats")]
-    Rigidbody2D body;
+    Rigidbody body;
     Vector2 axis;
     public float speed;
     public SpriteRenderer sprite;
@@ -56,14 +56,14 @@ public class OverworldPlayerController : MonoBehaviour
     void RegisterInputActions()
     {
         //moveAction.performed += context => MoveInput = context.ReadValue<Vector2>();
-        moveAction.performed += context => Move(context.ReadValue<Vector2>());
-        moveAction.canceled += context => Move(Vector2.zero);
+        moveAction.performed += context => axis = context.ReadValue<Vector2>();
+        moveAction.canceled += context => axis = Vector2.zero;
 
         
 
         optionsAction.performed += context => {
-            if (context.interaction is TapInteraction)
-                GameManager.Instance.HandlePauseMenuInput();
+            if (context.interaction is TapInteraction) { }
+                //GameManager.Instance.HandlePauseMenuInput();
         };
         optionsAction.canceled += context => OptionsTrigger = false;
 
@@ -90,21 +90,31 @@ public class OverworldPlayerController : MonoBehaviour
 
     private void Start()
     {
-        body = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody>();
     }
 
     public void Move(Vector2 _axis)
     {
-        axis = _axis;
-        axis.Normalize();
-        sprite.flipX = !(axis.x < 0);
+        //Vector3 targetVelocity = _axis * speed;
+
+        //targetVelocity.y = body.linearVelocity.y;
+
+        //body.MovePosition(transform.position + ((Vector3)_axis * speed * Time.deltaTime));
+
+        //sprite.flipX = !(axis.x < 0);
         //transform.Translate(axis);
+    }
+
+    private void MovePlayer()
+    {
+        body.MovePosition(transform.position + (new Vector3(axis.x, 0, axis.y) * speed * Time.deltaTime));
     }
 
 
     private void FixedUpdate()
     {
-        body.linearVelocity = axis * speed;
+        MovePlayer();
+        //body.linearVelocity = axis * speed;
     }
 
 

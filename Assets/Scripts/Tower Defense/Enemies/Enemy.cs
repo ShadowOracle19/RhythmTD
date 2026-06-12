@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.Mathematics;
+using Random=UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -68,6 +70,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem clashParticles;
     private ParticleSystem clashParticlesInstance;
 
+    private float soundTimer = 0.0f;
 
 
     public virtual void Start()
@@ -85,6 +88,8 @@ public class Enemy : MonoBehaviour
 
         //Set Animation BPM
         AnimationManager.instance.SetAnimSpeed(animator, 80);
+
+        soundTimer = 0.0f;
     }
 
     // Update is called once per frame
@@ -108,6 +113,11 @@ public class Enemy : MonoBehaviour
 
         Movement();
 
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("PrintOnDisable: script was disabled");
     }
 
     public virtual void OnTick()
@@ -437,12 +447,35 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         
         //play hurt sound 
-        AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
+        //AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
 
         if (currentHealth <= 0)
         {
             Kill();
         }
+    }
+
+    public IEnumerator PlaySoundOnBeat(float timeImpacted, float timeFired)
+    {
+        Debug.Log(soundTimer);
+        Debug.Log("Coroutine Started!");
+        
+        soundTimer = ConductorV2.instance.crotchet - (math.fmod((timeImpacted - timeFired), ConductorV2.instance.crotchet));
+
+        bool waiting = true;
+
+        while (waiting)
+        {
+            waiting = false;
+            Debug.Log(waiting);
+
+            yield return new WaitForSecondsRealtime(soundTimer);
+        }
+
+        AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
+        Debug.Log("Enemy Hurt Sound Played");
+        
+        StopCoroutine(this.PlaySoundOnBeat(timeImpacted, timeFired));
     }
 
     public void Kill()

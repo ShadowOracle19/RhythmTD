@@ -123,6 +123,7 @@ public class Projectile : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().Damage(damage);
+            collision.GetComponent<Enemy>().StartCoroutine(collision.GetComponent<Enemy>().PlaySoundOnBeat(songProgress, timeAtFire));
 
             if(burningBullet)
             {
@@ -139,6 +140,7 @@ public class Projectile : MonoBehaviour
             RemoveProjectile();
         }
     }
+
     public void RemoveProjectile()
     {
         gameObject.transform.DOKill();

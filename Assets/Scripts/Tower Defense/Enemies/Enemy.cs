@@ -70,7 +70,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem clashParticles;
     private ParticleSystem clashParticlesInstance;
 
+    [Header("Sound Timing")]
     private float soundTimer = 0.0f;
+    //NOTE: It would be great to make a custom property drawer for this at some point that only snaps between powers of 2 (but it should also include 1 if the crotchet isn't being divided)
+    //NOTE: It might also be good to put this in a manager elsewhere where we can control multiple sound delays
+    [Range(1,64)] 
+    public int crotchetDivisor = 4;
 
 
     public virtual void Start()
@@ -455,25 +460,22 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //waits for a duration after a projectile makes contact with an enemy to ensure it aligns with the music
     public IEnumerator PlaySoundOnBeat(float timeImpacted, float timeFired)
     {
-        Debug.Log(soundTimer);
-        Debug.Log("Coroutine Started!");
-        
-        soundTimer = ConductorV2.instance.crotchet - (math.fmod((timeImpacted - timeFired), ConductorV2.instance.crotchet));
+        //NOTE: Maybe halve the crotchet to align the sound with the nearest half beat?
+        soundTimer = (ConductorV2.instance.crotchet / crotchetDivisor) - (math.fmod((timeImpacted - timeFired), (ConductorV2.instance.crotchet/crotchetDivisor)));
 
         bool waiting = true;
 
         while (waiting)
         {
             waiting = false;
-            Debug.Log(waiting);
-
             yield return new WaitForSecondsRealtime(soundTimer);
         }
 
         AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
-        Debug.Log("Enemy Hurt Sound Played");
+        //Debug.Log("Enemy Hurt Sound Played");
         
         StopCoroutine(this.PlaySoundOnBeat(timeImpacted, timeFired));
     }

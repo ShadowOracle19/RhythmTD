@@ -25,7 +25,7 @@ public class MajorTower : Tower
 
         base.Fire(yPos);
 
-        if(upgradeThreeActive)
+        if(upgradeIndex == 3)
         {
             int rand = Random.Range(0, 3);
 

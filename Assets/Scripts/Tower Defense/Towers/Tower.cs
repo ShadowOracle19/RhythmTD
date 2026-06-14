@@ -108,17 +108,16 @@ public class Tower : MonoBehaviour
     [Header("Tower Upgrade")]
     public bool towerUpgradeUnlocked = false;
     public bool upgradePurchased = false;
-    //upgrade 1 damage boost
-    public bool upgradeOneActive = false;
 
-    ////upgrade 2 multiple projectile
-    public bool upgradeTwoActive = false;
-
-    ////upgrade 3 burning
-    public bool upgradeThreeActive = false;
-
-    ////upgrade 4 range
-    public bool upgradeFourActive = false;
+    public int upgradeIndex = 0; //0 = no upgrade purchased
+    
+    /*
+    public bool upgradeOneActive = false; //upgrade 1 damage boost
+    public bool upgradeTwoActive = false; //upgrade 2 multiple projectile
+    public bool upgradeThreeActive = false; //upgrade 3 burning
+    public bool upgradeFourActive = false; //upgrade 4 range
+    */
+    
 
     [Header("Upgrade Modifiers")]
     public bool feelingItNow = false;
@@ -159,15 +158,20 @@ public class Tower : MonoBehaviour
         AnimationManager.instance.SetAnimSpeed(animationController, 80);
         AnimationManager.instance.SetAnimSpeed(towerBaseAnimationController, 60);
 
-        // TOWER INPUT //
+        // TOWER PATTERN //
+        //Note: Input & attack indexes are tracked separately because they update at different times with different criteria
         measureLength = ConductorV2.instance.crotchet * 4;
+
         inputIndex = 0;
         attackIndex = 0;
         lastAttackIndex = towerInfo.inputs.Count - 1;
+
         CalculateInputTimes();
         InstantiateIndicators();
+
         measureCycleCount = ConductorV2.instance.measureTrack;
         attackCycleCount = ConductorV2.instance.measureTrack;
+
         inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
         attackTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
     }
@@ -198,26 +202,26 @@ public class Tower : MonoBehaviour
         towerEffectVisual();
 
         //Animation switches
-        if (upgradeOneActive)
+        if (upgradeIndex == 1)//(upgradeOneActive)
         {
             // Set animation
             animationController.SetBool("Upgrade1", true);
         }
-        else if (upgradeTwoActive)
+        else if (upgradeIndex == 2)//(upgradeTwoActive)
         {
             // Set animation
             animationController.SetBool("Upgrade2", true);
         }
-        else if (upgradeThreeActive)
+        else if (upgradeIndex == 3)//(upgradeThreeActive)
         {
             // Set animation
             animationController.SetBool("Upgrade3", true);
         }
-        else if (upgradeFourActive)
+        else if (upgradeIndex == 4)//(upgradeFourActive)
         {
             // Set animation
             animationController.SetBool("Upgrade4", true);
-        }
+        }  
     }
 
     #region Tower input
@@ -299,7 +303,6 @@ public class Tower : MonoBehaviour
         bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, attackTargetTime);
 
         ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
-        //towerUpgradeUnlocked = false;
         feelingItNow = false;
         synthBuff = false;
 
@@ -362,7 +365,7 @@ public class Tower : MonoBehaviour
             currentDamage = currentDamage * 2;
         }
         //feeling it now inactive
-        else if (upgradePurchased)
+        else if (upgradeIndex != 0)
         {
             currentDamage = tempDamageHolder;
             //nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = upgradeAttackSprite01;
@@ -424,7 +427,7 @@ public class Tower : MonoBehaviour
             if (item.transform.CompareTag("StageTile"))
             {
                 //Depending on the upgrade, change the sprite
-                if (upgradePurchased)
+                if (upgradeIndex != 0)
                 {
                     SpawnParticles(item.transform, flameAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, true);
                     //Debug.Log("[Tower.cs] BurnUpgrade");
@@ -437,9 +440,9 @@ public class Tower : MonoBehaviour
             }
             else if (item.transform.CompareTag("Enemy"))
             {
-                item.transform.GetComponent<Enemy>().Damage(damage);
+                item.transform.GetComponent<Enemy>().Damage(damage); //To-Do: Call coroutine for damage sounds here too or move to Damage method 
 
-                if(upgradeOneActive)
+                if(upgradeIndex == 1)
                 {
                     item.transform.GetComponent<Enemy>().isStunned = true;
                 }
@@ -704,7 +707,7 @@ public class Tower : MonoBehaviour
         if(towerUpgradeUnlocked)
         {
             
-            if (upgradeOneActive)
+            if (upgradeIndex == 1)
             {
                 // Set sprite
                 burningParticlesInstance = Instantiate(burningParticles, tileTransform.position, Quaternion.identity);

@@ -30,7 +30,7 @@ public class ChromaticTower : Tower
     public override void Fire()
     {
         //passive income
-        if(upgradeTwoActive)
+        if(upgradeIndex == 2)
         {
             CombatManager.Instance.resourceNum += towerInfo.resourceGain;
             return;
@@ -43,7 +43,7 @@ public class ChromaticTower : Tower
         int chargeValue = towerInfo.resourceGain;
 
         //Power Charge
-        if (upgradeThreeActive)
+        if (upgradeIndex == 3)
         {
             chargeValue = 10;
         }

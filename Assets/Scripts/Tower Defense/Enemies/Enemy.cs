@@ -74,6 +74,7 @@ public class Enemy : MonoBehaviour
     private float soundTimer = 0.0f;
     //NOTE: It would be great to make a custom property drawer for this at some point that only snaps between powers of 2 (but it should also include 1 if the crotchet isn't being divided)
     //NOTE: It might also be good to put this in a manager elsewhere where we can control multiple sound delays
+    [Tooltip("1 = Nearest quarter note. It's recommended you set this value to a power of 2. Ex. 4 = Nearest sixteenth note")]
     [Range(1,64)] 
     public int crotchetDivisor = 4;
 

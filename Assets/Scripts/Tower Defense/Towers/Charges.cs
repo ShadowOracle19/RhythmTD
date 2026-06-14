@@ -30,8 +30,14 @@ public class Charges : MonoBehaviour
         placementLocation = _placementLocation;
         if(fromTower)
         {
-            damageCharge = connectedTower.upgradeOneActive;
-
+            if (connectedTower.upgradeIndex == 1)
+            {
+                damageCharge = true;
+            }
+            else
+            {
+                damageCharge = false;
+            }
         }
     }
 

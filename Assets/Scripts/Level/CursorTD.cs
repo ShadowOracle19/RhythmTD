@@ -536,7 +536,7 @@ public class CursorTD : MonoBehaviour
                 !hoveredTower.upgradePurchased && !hoveredTower.towerInfo.isUpgradeOneLocked)
             {
                 hoveredTower.upgradePurchased = true;
-                hoveredTower.upgradeOneActive = true;
+                hoveredTower.upgradeIndex = 1; //hoveredTower.upgradeOneActive = true;
 
                 //play upgrade sound
                 AudioManager.instance.PlaySound(hoveredTower.towerUpgradeSfx, this.gameObject.transform, 1.0f);
@@ -560,7 +560,7 @@ public class CursorTD : MonoBehaviour
                 !hoveredTower.upgradePurchased && !hoveredTower.towerInfo.isUpgradeTwoLocked)
             {
                 hoveredTower.upgradePurchased = true;
-                hoveredTower.upgradeTwoActive = true;
+                hoveredTower.upgradeIndex = 2; //hoveredTower.upgradeTwoActive = true;
                 
                 //play upgrade sound
                 AudioManager.instance.PlaySound(hoveredTower.towerUpgradeSfx, this.gameObject.transform, 1.0f);
@@ -583,7 +583,7 @@ public class CursorTD : MonoBehaviour
                 !hoveredTower.upgradePurchased && !hoveredTower.towerInfo.isUpgradeOneLocked)
             {
                 hoveredTower.upgradePurchased = true;
-                hoveredTower.upgradeThreeActive = true;
+                hoveredTower.upgradeIndex = 3; //hoveredTower.upgradeThreeActive = true;
                 
                 //play upgrade sound
                 AudioManager.instance.PlaySound(hoveredTower.towerUpgradeSfx, this.gameObject.transform, 1.0f);
@@ -692,7 +692,6 @@ public class CursorTD : MonoBehaviour
                 towerPlacementMenuSequence = false;
                 towerPlaceSequence = true;
                 Debug.Log("Do we reach this?");
-                //CombatManager.Instance.towerDisplay.SetActive(true);
             }
         }
 
@@ -719,49 +718,21 @@ public class CursorTD : MonoBehaviour
             {
                 slotIndex = 0;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[3], "Check Slot Left", slotIndex);
-                /*
-                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-                {
-                    TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 3);
-                    return;
-                }
-                */
             }
             else if (direction == Vector2.up) //UP
             {
                 slotIndex = 1;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[0], "Check Slot Up", slotIndex);
-                /*
-                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-                {
-                    TryToPlaceTower(towerSlotW.GetComponent<TowerButton>().tower, upInvalidSfx, "Check Slot 01", 0);
-                    return;
-                }
-                */
             }
             else if (direction == Vector2.right) //RIGHT
             {
                 slotIndex = 2;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[1], "Check Slot Right", slotIndex);
-                /*
-                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-                {
-                    TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 1);
-                    return;
-                }
-                */
             }
             else if (direction == Vector2.down) //DOWN
             {
                 slotIndex = 3;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[2], "Check Slot Down", slotIndex);
-                /*
-                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-                {
-                    TryToPlaceTower(towerSlotS.GetComponent<TowerButton>().tower, downInvalidSfx, "Check Slot 03", 2);
-                    return;
-                }
-                */
             }
         }
         else
@@ -770,49 +741,21 @@ public class CursorTD : MonoBehaviour
             {
                 slotIndex = 0;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[3], "Check Slot Left", (slotIndex + towerSlots.Count));
-                /*
-                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-                {
-                    TryToPlaceTower(towerSlotA.GetComponent<TowerButton>().tower, leftInvalidSfx, "Check Slot 04", 7);
-                    return;
-                }
-                */
             }
             else if (direction == Vector2.up) //UP
             {
                 slotIndex = 1;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[0], "Check Slot Up", (slotIndex + towerSlots.Count));
-                /*
-                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-                {
-                    TryToPlaceTower(towerSlotW.GetComponent<TowerButton>().tower, upInvalidSfx, "Check Slot 01", 4);
-                    return;
-                }
-                */
             }
             else if (direction == Vector2.right) //RIGHT
             {
                 slotIndex = 2;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[1], "Check Slot Right", (slotIndex + towerSlots.Count));
-                /*
-                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-                {
-                    TryToPlaceTower(towerSlotD.GetComponent<TowerButton>().tower, rightInvalidSfx, "Check Slot 02", 5);
-                    return;
-                }
-                */
             }
             else if (direction == Vector2.down) //DOWN
             {
                 slotIndex = 1;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[2], "Check Slot Down", (slotIndex + towerSlots.Count));
-                /*
-                if (towerSelectMenuOpened && tile.placedTower == null && !tile.cantPlaceTower)
-                {
-                    TryToPlaceTower(towerSlotS.GetComponent<TowerButton>().tower, downInvalidSfx, "Check Slot 03", 6);
-                    return;
-                }
-                */
             }
         }
     }
@@ -907,13 +850,6 @@ public class CursorTD : MonoBehaviour
 
     public _BeatResult CheckOnBeat(float inputTime)
     {
-        //float songInBeats = ConductorV2.instance.songPositionInBeats;
-        //float adjustedInputTime = songInBeats - GameManager.Instance.inputOffset;
-        ////float timingError = Mathf.Abs(ConductorV2.instance.numberOfBeats - adjustedInputTime);
-        //float timingError = Mathf.Abs(ConductorV2.instance.beatDuration - GameManager.Instance.inputOffset);
-        ////Debug.Log($"Time Pressed:{ConductorV2.instance.songPositionInBeats}    Adjusted Input Time:{adjustedInputTime}   TimingError:{timingError}    beat duration: {ConductorV2.instance.beatDuration}");
-        //Debug.Log($"TimingError:{timingError}    beat duration: {ConductorV2.instance.beatDuration}");
-
         if ((ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold) || ConductorV2.instance.beatDuration < ConductorV2.instance.lateGreatBeatThreshold) {
             return _BeatResult.perfect; 
         }
@@ -1013,7 +949,7 @@ public class CursorTD : MonoBehaviour
         // Check if guitar tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
         if (upgradingTower)
         {
-            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost1 || tile.placedTower.GetComponent<Tower>().upgradeOneActive) 
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost1 || tile.placedTower.GetComponent<Tower>().upgradeIndex == 1) //upgradeOneActive
             {
                 upgradeSlots[0].GetComponent<Image>().material = greyscaleShader;
             }
@@ -1023,7 +959,7 @@ public class CursorTD : MonoBehaviour
             }
             
             // Check if drum tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost2 || tile.placedTower.GetComponent<Tower>().upgradeTwoActive) 
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost2 || tile.placedTower.GetComponent<Tower>().upgradeIndex == 2) //upgradeTwoActive
             {
                 upgradeSlots[1].GetComponent<Image>().material = greyscaleShader;
             }
@@ -1033,7 +969,7 @@ public class CursorTD : MonoBehaviour
             }
 
             // Check if bass tower is on cooldown or player does not have enough resources to purchase them. If so, apply greyscale shader material. Otherwise, remove.
-            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost3 || tile.placedTower.GetComponent<Tower>().upgradeThreeActive) 
+            if (CombatManager.Instance.resourceNum < tile.placedTower.GetComponent<Tower>().towerInfo.upgradeCost3 || tile.placedTower.GetComponent<Tower>().upgradeIndex == 3) //upgradeThreeActive
             {
                 upgradeSlots[2].GetComponent<Image>().material = greyscaleShader;
             }
@@ -1059,44 +995,6 @@ public class CursorTD : MonoBehaviour
                 
                 slotIndex += 1;
             }
-            
-            /*
-            if (GameManager.Instance.towers[0].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[0].tower.GetComponent<Tower>().towerInfo.resourceCost) 
-            {
-                towerSlotW.GetComponent<Image>().material = greyscaleShader;
-            }
-            else
-            {
-                towerSlotW.GetComponent<Image>().material = null;
-            }
-            
-            if (GameManager.Instance.towers[1].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[1].tower.GetComponent<Tower>().towerInfo.resourceCost) 
-            {
-                towerSlotD.GetComponent<Image>().material = greyscaleShader;
-            }
-            else
-            {
-                towerSlotD.GetComponent<Image>().material = null;
-            }
-
-            if (GameManager.Instance.towers[2].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[2].tower.GetComponent<Tower>().towerInfo.resourceCost) 
-            {
-                towerSlotS.GetComponent<Image>().material = greyscaleShader;
-            }
-            else
-            {
-                towerSlotS.GetComponent<Image>().material = null;
-            }
-
-            if (GameManager.Instance.towers[3].towerCooldownInfo.towerCooldown || CombatManager.Instance.resourceNum < GameManager.Instance.towers[3].tower.GetComponent<Tower>().towerInfo.resourceCost) 
-            {
-                towerSlotA.GetComponent<Image>().material = greyscaleShader;
-            }
-            else
-            {
-                towerSlotA.GetComponent<Image>().material = null;
-            }
-            */
         }    
     }
     #endregion

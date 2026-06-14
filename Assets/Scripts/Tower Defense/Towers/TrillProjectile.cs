@@ -23,7 +23,7 @@ public class TrillProjectile : Projectile
     {
         //if collide with enemy spawn two echo projectiles
         if (collision.gameObject.CompareTag("Enemy")
-            && towerFiredFrom.GetComponent<Tower>().upgradeTwoActive)
+            && towerFiredFrom.GetComponent<Tower>().upgradeIndex == 2)
         {
             Debug.Log("Echo");
             collision.GetComponent<Enemy>().Damage(damage);

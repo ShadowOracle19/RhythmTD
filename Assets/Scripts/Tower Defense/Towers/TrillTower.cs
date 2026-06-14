@@ -19,7 +19,7 @@ public class TrillTower : Tower
     {
         base.Update();
 
-        if(upgradeThreeActive)
+        if(upgradeIndex == 3)
         {
             towerRange = 4;
             currentDamage = 10;
@@ -34,7 +34,7 @@ public class TrillTower : Tower
         base.Fire();
 
         //Charge shot upgrade active
-        if(upgradeOneActive)
+        if(upgradeIndex == 1)
         {
             UpgradeOne();
             return;
@@ -96,7 +96,7 @@ public class TrillTower : Tower
 
         ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
 
-        if(chargeShotDamage > 2 && upgradeOneActive)
+        if(chargeShotDamage > 2 && upgradeIndex == 1)
         {
             Debug.Log("is this happening?");
             float redLerp = chargeShotDamage / 7;

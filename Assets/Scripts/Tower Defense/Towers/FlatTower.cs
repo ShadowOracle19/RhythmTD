@@ -50,7 +50,7 @@ public class FlatTower : Tower
             return;
 
         //increase shield recharge time
-        if (upgradeTwoActive && !isShielded)
+        if (upgradeIndex == 2 && !isShielded)
         {
             upgradeTwoRecharge += 1;
         }
@@ -62,7 +62,7 @@ public class FlatTower : Tower
     public override void Damage(int damage)
     {
         //if hit while upgrade two is active and shield isnt up reduce shield cooldown to 0
-        if(upgradeTwoActive && !isShielded)
+        if(upgradeIndex == 2 && !isShielded)
         {
             upgradeTwoRecharge = 0;
         }

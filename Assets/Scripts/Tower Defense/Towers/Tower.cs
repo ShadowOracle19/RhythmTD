@@ -31,8 +31,8 @@ public class Tower : MonoBehaviour
     [Header("Tower Attack & Input")]
     public float songProgress = 0.0f; // progress of current song expressed in time
     public int inputIndex; // the index of the closest input timing
-    public int attackIndex;
-    public int lastAttackIndex;
+    public int attackIndex; //current upcoming attack index
+    public int prevAttackIndex; //previous attack index
     public float measureLength = 0.0f; // length of 1 measure expressed in time
     public int measureCycleCount = 0;
     public int attackCycleCount = 0;
@@ -164,7 +164,7 @@ public class Tower : MonoBehaviour
 
         inputIndex = 0;
         attackIndex = 0;
-        lastAttackIndex = towerInfo.inputs.Count - 1;
+        prevAttackIndex = towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1;
 
         CalculateInputTimes();
         InstantiateIndicators();
@@ -172,8 +172,8 @@ public class Tower : MonoBehaviour
         measureCycleCount = ConductorV2.instance.measureTrack;
         attackCycleCount = ConductorV2.instance.measureTrack;
 
-        inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
-        attackTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
+        inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
+        attackTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
     }
 
     public virtual void Update()
@@ -228,15 +228,18 @@ public class Tower : MonoBehaviour
     // Calculates input times as time from measure start
     public void CalculateInputTimes()
     {
-        foreach (var input in towerInfo.inputs)
+        foreach (var inputList in towerInfo.inputPatterns)
         {
-            input.noteTime = (input.notePosition * measureLength);
+            foreach (var input in towerInfo.inputPatterns[upgradeIndex].noteInputs)
+            {
+                input.noteTime = (input.notePosition * measureLength);
+            }
         }
     }
     
     public void InstantiateIndicators()
     {
-        foreach (var input in towerInfo.inputs)
+        foreach (var input in towerInfo.inputPatterns[upgradeIndex].noteInputs)
         {
             GameObject newIndicator = Instantiate(indicatorPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform);
             newIndicator.GetComponent<InputIndicator>().notePosition = input.notePosition;
@@ -247,34 +250,84 @@ public class Tower : MonoBehaviour
         }
     }
 
+    public void ResetIndicators()
+    {
+        foreach (GameObject indicator in indicators)
+        {
+            Destroy(indicator);
+        }
+        
+        indicators.Clear();
+
+        InstantiateIndicators();
+
+        if (indicators.Capacity > towerInfo.inputPatterns[upgradeIndex].noteInputs.Count)
+        {
+            indicators.TrimExcess();
+        }
+    }
+
     // Ik there's gotta be an easier way to wrap around but GO MY IF STATEMENTS!
     public void UpdateInputIndex()
     {
-        if (inputIndex == (towerInfo.inputs.Count - 1))
+        if (inputIndex == (towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1))
         {
             measureCycleCount += 1;
             inputIndex = 0;
-            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
+            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
         }
         else
         {
             inputIndex += 1;
-            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputs[inputIndex].noteTime);
+            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
         }
     }
 
     public void UpdateAttackIndex()
     {
-        if (attackIndex == (towerInfo.inputs.Count - 1))
+        if (attackIndex == (towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1))
         {
             attackCycleCount += 1;
             attackIndex = 0;
-            attackTargetTime = ((measureLength * attackCycleCount) + towerInfo.inputs[attackIndex].noteTime);
+            attackTargetTime = ((measureLength * attackCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[attackIndex].noteTime);
         }
         else
         {
             attackIndex += 1;
-            attackTargetTime = ((measureLength * attackCycleCount) + towerInfo.inputs[attackIndex].noteTime);
+            attackTargetTime = ((measureLength * attackCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[attackIndex].noteTime);
+        }
+    }
+
+    public void UpdateCycleIndices()
+    {
+        bool nextIndexFound = false;
+        int checkIndex = 0;
+
+        while (!nextIndexFound)
+        {
+            if (towerInfo.inputPatterns[upgradeIndex].noteInputs[checkIndex].noteTime >= towerInfo.inputPatterns[upgradeIndex].noteInputs[attackIndex].noteTime)
+            {
+                inputIndex = checkIndex;
+                attackIndex = checkIndex;
+                prevAttackIndex = attackIndex;
+
+                nextIndexFound = true;
+                return;
+            }
+            else
+            {
+                checkIndex += 1;
+            }
+
+            if (checkIndex == towerInfo.inputPatterns[upgradeIndex].noteInputs.Count)
+            {
+                inputIndex = 0;
+                attackIndex = 0;
+                prevAttackIndex = attackIndex;
+
+                nextIndexFound = true;
+                return;
+            }
         }
     }
 
@@ -311,9 +364,9 @@ public class Tower : MonoBehaviour
     public void FireTower(int currentAttackIndex)
     {
         //if (songProgress >= inputTargetTime)
-        if(currentAttackIndex != lastAttackIndex)
+        if(currentAttackIndex != prevAttackIndex)
         {
-            lastAttackIndex = currentAttackIndex;
+            prevAttackIndex = currentAttackIndex;
             //Fire();
 
             switch (currentAttackPattern)

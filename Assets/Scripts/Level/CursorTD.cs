@@ -57,24 +57,12 @@ public class CursorTD : MonoBehaviour
 
     public int slotIndex = 0;
     public List<GameObject> towerSlots = new List<GameObject>();
-    /*
-    public GameObject towerSlotW;
-    public GameObject towerSlotA;
-    public GameObject towerSlotS;
-    public GameObject towerSlotD;
-    */
 
     [Header ("Upgrade Menu")]
     public GameObject upgradeMenu;
     public bool upgradingTower = false;
 
     public List<GameObject> upgradeSlots = new List<GameObject>();
-    /*
-    public GameObject upgradeSlotW;
-    public GameObject upgradeSlotA;
-    public GameObject upgradeSlotS;
-    public GameObject upgradeSlotD;
-    */
 
     [Header ("Cursor Pulse")]
     public GameObject cursorSprite;
@@ -521,6 +509,7 @@ public class CursorTD : MonoBehaviour
         tile.placedTower.GetComponent<Tower>().UpdateInputIndex();
     }
 
+    //To-Do: Update attack & input indexes based on timing of new input list
     public void UpgradeTower(Vector2 direction)
     {
         if (!towerSelectMenuOpened || placingTower || !upgradingTower) return;
@@ -537,6 +526,8 @@ public class CursorTD : MonoBehaviour
             {
                 hoveredTower.upgradePurchased = true;
                 hoveredTower.upgradeIndex = 1; //hoveredTower.upgradeOneActive = true;
+                hoveredTower.UpdateCycleIndices();
+                hoveredTower.ResetIndicators(); //update indicator pattern
 
                 //play upgrade sound
                 AudioManager.instance.PlaySound(hoveredTower.towerUpgradeSfx, this.gameObject.transform, 1.0f);
@@ -561,6 +552,8 @@ public class CursorTD : MonoBehaviour
             {
                 hoveredTower.upgradePurchased = true;
                 hoveredTower.upgradeIndex = 2; //hoveredTower.upgradeTwoActive = true;
+                hoveredTower.UpdateCycleIndices();
+                hoveredTower.ResetIndicators(); //update indicator pattern
                 
                 //play upgrade sound
                 AudioManager.instance.PlaySound(hoveredTower.towerUpgradeSfx, this.gameObject.transform, 1.0f);
@@ -584,6 +577,8 @@ public class CursorTD : MonoBehaviour
             {
                 hoveredTower.upgradePurchased = true;
                 hoveredTower.upgradeIndex = 3; //hoveredTower.upgradeThreeActive = true;
+                hoveredTower.UpdateCycleIndices();
+                hoveredTower.ResetIndicators(); //update indicator pattern
                 
                 //play upgrade sound
                 AudioManager.instance.PlaySound(hoveredTower.towerUpgradeSfx, this.gameObject.transform, 1.0f);
@@ -596,7 +591,6 @@ public class CursorTD : MonoBehaviour
             }
 
             PlacementFeedback(towerMenuSounds[2], "Upgrade Slot 03");
-
         }
     }
     #endregion

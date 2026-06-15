@@ -55,7 +55,7 @@ public class TowerTypeCreator : ScriptableObject
     [Space(20)][Header("<b><size=15>Tower Action Pattern</size></b>")]
     [Line(255, 255, 255)]
     public TowerAttackPattern attackPattern;
-    public List<NoteInput> inputs = new List<NoteInput>();
+    //public List<NoteInput> inputs = new List<NoteInput>();
     public NotePatternArray[] inputPatterns;
 
 

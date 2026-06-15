@@ -70,6 +70,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem clashParticles;
     private ParticleSystem clashParticlesInstance;
 
+    public ParticleSystem hitParticles;
+
     [Header("Sound Timing")]
     private float soundTimer = 0.0f;
     //NOTE: It would be great to make a custom property drawer for this at some point that only snaps between powers of 2 (but it should also include 1 if the crotchet isn't being divided)
@@ -451,9 +453,6 @@ public class Enemy : MonoBehaviour
         _renderer.color = Color.red;
         time = 1;
         currentHealth -= damage;
-        
-        //play hurt sound 
-        //AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
 
         if (currentHealth <= 0)
         {
@@ -477,6 +476,8 @@ public class Enemy : MonoBehaviour
 
         AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
         //Debug.Log("Enemy Hurt Sound Played");
+
+        ParticleSystem particlesInstance = Instantiate(hitParticles, transform.position, Quaternion.identity, this.gameObject.transform);
         
         StopCoroutine(this.PlaySoundOnBeat(timeImpacted, timeFired));
     }

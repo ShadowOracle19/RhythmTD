@@ -6870,10 +6870,7 @@ MonoBehaviour:
   swapTower: Swap Tower
   destructMode: Destruct Mode Toggle
   destructTower: Destruct Tower
-  buff1: Buff 1
-  buff2: Buff 2
-  buff3: Buff 3
-  buff4: Buff 4
+  buff: Buff
   feverMode: Fever Mode
   options: Options
 --- !u!4 &611689255
@@ -7456,6 +7453,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!224 &683661781 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 397980891925416841, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &690954312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16013,6 +16015,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!224 &1536435501 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 995682135281990978, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1537863062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22087,6 +22094,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2138711881 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 534664607315320762, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2139336163 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8016682463979000012, guid: e8ea7ddf3aaeb6b468c0bbf880905309, type: 3}
@@ -23171,6 +23183,7 @@ MonoBehaviour:
   earlyBeatThreshold: 0.625
   earlyGreatBeatThreshold: 0.75
   perfectBeatThreshold: 0.875
+  maxBeatThreshold: 0.5
   beatDuration: 0
   numberOfBeats: 0
   beatTrack: 1
@@ -29272,9 +29285,15 @@ MonoBehaviour:
   currentMultiplier: 1
   streakIncrement: 0
   score: 0
-  currentComboText: {fileID: 621367107}
-  currentMultiplierText: {fileID: 369270383}
+  cursorSprite: {fileID: 0}
+  textDefaultSize: {x: 1, y: 1, z: 1}
+  textPulseSize: {x: 1.25, y: 1.25, z: 1.25}
+  comboText: {fileID: 621367107}
+  multiplierText: {fileID: 369270383}
   scoreText: {fileID: 683661779}
+  comboTextParent: {fileID: 1536435501}
+  multiplierTextParent: {fileID: 2138711881}
+  scoreTextParent: {fileID: 683661781}
 --- !u!1 &8194573749058023895
 GameObject:
   m_ObjectHideFlags: 0

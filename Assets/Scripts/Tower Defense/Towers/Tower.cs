@@ -228,12 +228,16 @@ public class Tower : MonoBehaviour
     // Calculates input times as time from measure start
     public void CalculateInputTimes()
     {
+        int listIndex = 0;
+
         foreach (var inputList in towerInfo.inputPatterns)
         {
-            foreach (var input in towerInfo.inputPatterns[upgradeIndex].noteInputs)
+            foreach (var input in towerInfo.inputPatterns[listIndex].noteInputs)
             {
                 input.noteTime = (input.notePosition * measureLength);
             }
+
+            listIndex += 1;
         }
     }
     
@@ -298,6 +302,7 @@ public class Tower : MonoBehaviour
         }
     }
 
+    /*
     public void UpdateCycleIndices()
     {
         bool nextIndexFound = false;
@@ -305,11 +310,20 @@ public class Tower : MonoBehaviour
 
         while (!nextIndexFound)
         {
-            if (towerInfo.inputPatterns[upgradeIndex].noteInputs[checkIndex].noteTime >= towerInfo.inputPatterns[upgradeIndex].noteInputs[attackIndex].noteTime)
+            if (checkIndex == towerInfo.inputPatterns[upgradeIndex].noteInputs.Count)
+            {
+                inputIndex = 0;
+                attackIndex = 0;
+                prevAttackIndex = towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1;
+
+                nextIndexFound = true;
+                return;
+            }
+            else if (towerInfo.inputPatterns[upgradeIndex].noteInputs[checkIndex].noteTime >= towerInfo.inputPatterns[upgradeIndex].noteInputs[attackIndex].noteTime)
             {
                 inputIndex = checkIndex;
                 attackIndex = checkIndex;
-                prevAttackIndex = attackIndex;
+                prevAttackIndex = attackIndex - 1;
 
                 nextIndexFound = true;
                 return;
@@ -318,18 +332,9 @@ public class Tower : MonoBehaviour
             {
                 checkIndex += 1;
             }
-
-            if (checkIndex == towerInfo.inputPatterns[upgradeIndex].noteInputs.Count)
-            {
-                inputIndex = 0;
-                attackIndex = 0;
-                prevAttackIndex = attackIndex;
-
-                nextIndexFound = true;
-                return;
-            }
         }
     }
+    */
 
     public void towerEffectVisual()
     {

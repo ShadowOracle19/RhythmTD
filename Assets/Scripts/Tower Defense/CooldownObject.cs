@@ -119,7 +119,7 @@ public class CooldownObject : MonoBehaviour
 
         currentConnectedTower = tower;
 
-        Debug.Log(currentConnectedTower.towerInfo.resourceCost);
+        //Debug.Log(currentConnectedTower.towerInfo.resourceCost);
 
         towerCost = currentConnectedTower.towerInfo.resourceCost;
         resourceCostText.text = currentConnectedTower.towerInfo.resourceCost.ToString();

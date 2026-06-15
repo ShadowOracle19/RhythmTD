@@ -526,8 +526,8 @@ public class CursorTD : MonoBehaviour
             {
                 hoveredTower.upgradePurchased = true;
                 hoveredTower.upgradeIndex = 1; //hoveredTower.upgradeOneActive = true;
-                hoveredTower.UpdateCycleIndices();
                 hoveredTower.ResetIndicators(); //update indicator pattern
+                //hoveredTower.UpdateCycleIndices();
 
                 //play upgrade sound
                 AudioManager.instance.PlaySound(hoveredTower.towerUpgradeSfx, this.gameObject.transform, 1.0f);
@@ -552,8 +552,8 @@ public class CursorTD : MonoBehaviour
             {
                 hoveredTower.upgradePurchased = true;
                 hoveredTower.upgradeIndex = 2; //hoveredTower.upgradeTwoActive = true;
-                hoveredTower.UpdateCycleIndices();
                 hoveredTower.ResetIndicators(); //update indicator pattern
+                //hoveredTower.UpdateCycleIndices();
                 
                 //play upgrade sound
                 AudioManager.instance.PlaySound(hoveredTower.towerUpgradeSfx, this.gameObject.transform, 1.0f);
@@ -577,8 +577,8 @@ public class CursorTD : MonoBehaviour
             {
                 hoveredTower.upgradePurchased = true;
                 hoveredTower.upgradeIndex = 3; //hoveredTower.upgradeThreeActive = true;
-                hoveredTower.UpdateCycleIndices();
                 hoveredTower.ResetIndicators(); //update indicator pattern
+                //hoveredTower.UpdateCycleIndices();
                 
                 //play upgrade sound
                 AudioManager.instance.PlaySound(hoveredTower.towerUpgradeSfx, this.gameObject.transform, 1.0f);

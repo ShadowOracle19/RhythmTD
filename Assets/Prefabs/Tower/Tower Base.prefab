@@ -317,7 +317,6 @@ GameObject:
   - component: {fileID: 1969963013028165710}
   - component: {fileID: 6367522176411443336}
   - component: {fileID: 7692277564513255499}
-  - component: {fileID: 3976351746691631787}
   - component: {fileID: 1484896754438906505}
   m_Layer: 0
   m_Name: Tower Base
@@ -376,9 +375,13 @@ MonoBehaviour:
   enemyInRange: 0
   songProgress: 0
   inputIndex: 0
-  nextInputIndex: 0
+  attackIndex: 0
+  prevAttackIndex: 0
   measureLength: 0
+  measureCycleCount: 0
+  attackCycleCount: 0
   inputTargetTime: 0
+  attackTargetTime: 0
   indicatorPrefab: {fileID: 5448178981151780786, guid: 9f587f8a32efec442be6254918506e84, type: 3}
   indicators: []
   inputPrompt: {fileID: 4305122640335676531}
@@ -393,7 +396,6 @@ MonoBehaviour:
   upgradeAttackSprite03: {fileID: 0}
   flameAttackSprite: {fileID: 1643883141, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
   animationController: {fileID: 0}
-  towerBaseAnimationController: {fileID: 3976351746691631787}
   towerAttackSfx: {fileID: 0}
   towerHurtSfx: {fileID: 0}
   towerDeathSfx: {fileID: 0}
@@ -416,10 +418,7 @@ MonoBehaviour:
   ChargedUp: 0
   towerUpgradeUnlocked: 0
   upgradePurchased: 0
-  upgradeOneActive: 0
-  upgradeTwoActive: 0
-  upgradeThreeActive: 0
-  upgradeFourActive: 0
+  upgradeIndex: 0
   feelingItNow: 0
   synthBuff: 0
   towerNum: 0
@@ -566,28 +565,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &3976351746691631787
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5183850645279424415}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 80b7bc3e425b3f0409e99951d72f2683, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1484896754438906505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,7 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3d7567aa4e5774586dcf19149c350e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3976351746691631787}
+  animator: {fileID: 0}
   currentState: 0
 --- !u!1 &5687361503201761549
 GameObject:

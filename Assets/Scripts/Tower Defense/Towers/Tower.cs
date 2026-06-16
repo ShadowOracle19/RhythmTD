@@ -64,7 +64,7 @@ public class Tower : MonoBehaviour
 
     [Header("Animation")]
     public Animator animationController;
-    public Animator towerBaseAnimationController;
+    public string currentAnimation;
     private float AnimationBPM;
 
     [Header("SFX")]
@@ -156,7 +156,6 @@ public class Tower : MonoBehaviour
 
         //Set Animation BPM
         AnimationManager.instance.SetAnimSpeed(animationController, 80);
-        AnimationManager.instance.SetAnimSpeed(towerBaseAnimationController, 60);
 
         // TOWER PATTERN //
         //Note: Input & attack indexes are tracked separately because they update at different times with different criteria
@@ -512,6 +511,17 @@ public class Tower : MonoBehaviour
     }
     #endregion
 
+    /*
+    #region Tower animation
+    public IEnumerator InterruptAnimation()
+    {
+        string currentAnimation;
+        
+        animationController.Play();
+    }
+    #endregion
+    */
+
     public void RemoveTower()
     {
         switch (towerInfo.type)
@@ -610,6 +620,8 @@ public class Tower : MonoBehaviour
         }
     }
 
+
+    #region Tower buff
     public void ActivateBuff(BuffType buffType)
     {
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerBuffSequence) //post buff sequence in tutorial
@@ -759,6 +771,7 @@ public class Tower : MonoBehaviour
         }
 
     }
+    #endregion
 
     public void SpawnParticles(Transform tileTransform, Sprite projectileSprite, ParticleSystem pfxSource, ParticleSystem pfxInstance, bool shielded, bool burning)
     {

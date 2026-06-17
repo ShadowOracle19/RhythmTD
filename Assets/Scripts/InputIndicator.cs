@@ -93,10 +93,12 @@ public class InputIndicator : MonoBehaviour
         if (parentTower.GetComponent<Tower>().towerHover && parentTower.GetComponent<Tower>().enemyInRange)
         {
             isActive = true;
+            Debug.Log("Tower is highlighted and enemy in range");
         }
         else
         {
             isActive = false;
+            Debug.Log("Tower not highlighted or enemy out of range :(");
         }
 
         if (!isActive)

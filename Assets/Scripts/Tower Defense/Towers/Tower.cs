@@ -531,7 +531,7 @@ public class Tower : MonoBehaviour
         while (isInAttackFrame)
         {
             isInAttackFrame = false;
-            yield return new WaitForSecondsRealtime(0.125f);
+            yield return new WaitForSecondsRealtime(0.250f);
         }
 
         //Resume animation

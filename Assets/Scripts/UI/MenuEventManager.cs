@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 
 
 public class MenuEventManager : MonoBehaviour
@@ -36,6 +37,7 @@ public class MenuEventManager : MonoBehaviour
     [Header("Title Menu")]
     public GameObject titleScreen;
     public List<GameObject> titleScreenInteractables;
+    public AudioSource titleMusic;
 
     [Header("Pause Menu")]
     public GameObject pauseScreen;
@@ -296,6 +298,7 @@ public class MenuEventManager : MonoBehaviour
             GameManager.Instance.combatRoot.SetActive(false);
             OpenMainMenu();
             GameManager.Instance.ResumeGame(); //unpause
+            
         }
         // if in main menu return to title menu
         else if(GameManager.Instance.menuRoot.activeSelf)
@@ -304,6 +307,7 @@ public class MenuEventManager : MonoBehaviour
             OpenMenu(titleScreen, titleScreenInteractables[1]);
             GameManager.Instance.titleRoot.GetComponent<Animator>().SetTrigger("Return To Title");
             GameManager.Instance.ResumeGame(); //unpause
+            titleMusic.Play();
         }
         // if in title menu close application
         else

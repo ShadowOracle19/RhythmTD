@@ -334,7 +334,7 @@ public class Tower : MonoBehaviour
 
     public void towerEffectVisual()
     {
-        if (towerHover && towerAboutToFire)
+        if (towerHover && towerAboutToFire && enemyInRange)
         {
             inputPrompt.SetActive(true);
         }

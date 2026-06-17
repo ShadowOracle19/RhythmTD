@@ -90,7 +90,7 @@ public class InputIndicator : MonoBehaviour
             UpdateTargetTime();
         }
         
-        if (parentTower.GetComponent<Tower>().towerHover)
+        if (parentTower.GetComponent<Tower>().towerHover && parentTower.GetComponent<Tower>().enemyInRange)
         {
             isActive = true;
         }

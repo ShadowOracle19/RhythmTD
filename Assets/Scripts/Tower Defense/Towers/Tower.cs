@@ -63,9 +63,9 @@ public class Tower : MonoBehaviour
     public Sprite flameAttackSprite;
 
     [Header("Animation")]
-    public Animator animationController;
-    public string currentAnimation;
-    private float AnimationBPM;
+    public Animator m_Animator;
+    public string[] animationStates;
+    public int[] animationHashes;
 
     [Header("SFX")]
     public AudioClip towerAttackSfx;
@@ -110,14 +110,6 @@ public class Tower : MonoBehaviour
     public bool upgradePurchased = false;
 
     public int upgradeIndex = 0; //0 = no upgrade purchased
-    
-    /*
-    public bool upgradeOneActive = false; //upgrade 1 damage boost
-    public bool upgradeTwoActive = false; //upgrade 2 multiple projectile
-    public bool upgradeThreeActive = false; //upgrade 3 burning
-    public bool upgradeFourActive = false; //upgrade 4 range
-    */
-    
 
     [Header("Upgrade Modifiers")]
     public bool feelingItNow = false;
@@ -155,7 +147,8 @@ public class Tower : MonoBehaviour
         nextProjectile = projectile; // Set default projectile type
 
         //Set Animation BPM
-        AnimationManager.instance.SetAnimSpeed(animationController, 80);
+        AnimationManager.instance.SetAnimSpeed(m_Animator, 80);
+        GenerateAnimationHashes();
 
         // TOWER PATTERN //
         //Note: Input & attack indexes are tracked separately because they update at different times with different criteria
@@ -204,22 +197,26 @@ public class Tower : MonoBehaviour
         if (upgradeIndex == 1)//(upgradeOneActive)
         {
             // Set animation
-            animationController.SetBool("Upgrade1", true);
+            m_Animator.SetBool("Upgrade1", true);
+
         }
         else if (upgradeIndex == 2)//(upgradeTwoActive)
         {
             // Set animation
-            animationController.SetBool("Upgrade2", true);
+            m_Animator.SetBool("Upgrade2", true);
+
         }
         else if (upgradeIndex == 3)//(upgradeThreeActive)
         {
             // Set animation
-            animationController.SetBool("Upgrade3", true);
+            m_Animator.SetBool("Upgrade3", true);
+
         }
         else if (upgradeIndex == 4)//(upgradeFourActive)
         {
             // Set animation
-            animationController.SetBool("Upgrade4", true);
+            m_Animator.SetBool("Upgrade4", true);
+
         }  
     }
 
@@ -511,16 +508,37 @@ public class Tower : MonoBehaviour
     }
     #endregion
 
-    /*
     #region Tower animation
+    //Generates the hashes for the attack frame animation
+    public void GenerateAnimationHashes()
+    {
+        int stateIndex = 0;
+        
+        foreach (string animationState in animationStates)
+        {
+            animationHashes[stateIndex] = Animator.StringToHash(animationState);
+            stateIndex += 1;
+        }
+    }
+    
+    //Switches to one of many attack frame animations temporarily and then returns to the current animation state (outside of attacking) at an offset based on the position in the current beat
     public IEnumerator InterruptAnimation()
     {
-        string currentAnimation;
+        bool isInAttackFrame = true;
+
+        m_Animator.Play(animationHashes[4], -1, 0.0f); // play temporary action animation
         
-        animationController.Play();
+        while (isInAttackFrame)
+        {
+            isInAttackFrame = false;
+            yield return new WaitForSecondsRealtime(0.125f);
+        }
+
+        //Resume animation
+        float animationOffset = ConductorV2.instance.beatDuration / ConductorV2.instance.crotchet;
+        m_Animator.Play(animationHashes[upgradeIndex], -1, animationOffset); // return to current animation state
     }
     #endregion
-    */
 
     public void RemoveTower()
     {

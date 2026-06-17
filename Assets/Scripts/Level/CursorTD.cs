@@ -462,6 +462,7 @@ public class CursorTD : MonoBehaviour
                     //FEEDBACK
                     hitSoundSource.clip = hitSounds[1];
                     hitSoundSource.Play();
+                    tile.placedTower.GetComponent<Tower>().StartCoroutine(tile.placedTower.GetComponent<Tower>().InterruptAnimation());
                     SpawnBeatHitResult(_BeatResult.great);
                     //buffGreatPfxInstance = Instantiate(buffGreatPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
 
@@ -478,6 +479,7 @@ public class CursorTD : MonoBehaviour
                     //FEEDBACK
                     hitSoundSource.clip = hitSounds[2];
                     hitSoundSource.Play();
+                    tile.placedTower.GetComponent<Tower>().StartCoroutine(tile.placedTower.GetComponent<Tower>().InterruptAnimation());
                     SpawnBeatHitResult(_BeatResult.perfect);
                     //buffPerfectPfxInstance = Instantiate(buffPerfectPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
 

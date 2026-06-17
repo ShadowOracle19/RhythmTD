@@ -395,7 +395,14 @@ MonoBehaviour:
   upgradeAttackSprite02: {fileID: 0}
   upgradeAttackSprite03: {fileID: 0}
   flameAttackSprite: {fileID: 1643883141, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
-  animationController: {fileID: 0}
+  m_Animator: {fileID: 0}
+  animationStates:
+  - Base Layer.Idle
+  - Base Layer.Upgrade 1
+  - Base Layer.Upgrade 2
+  - Base Layer.Upgrade 3
+  - Base Layer.Attack 1
+  animationHashes: 0000000000000000000000000000000000000000
   towerAttackSfx: {fileID: 0}
   towerHurtSfx: {fileID: 0}
   towerDeathSfx: {fileID: 0}

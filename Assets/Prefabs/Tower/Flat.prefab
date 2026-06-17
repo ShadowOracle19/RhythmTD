@@ -212,7 +212,6 @@ GameObject:
   - component: {fileID: 2149819386208914413}
   - component: {fileID: 3637877782725260547}
   - component: {fileID: 3091612715999862889}
-  - component: {fileID: 2051579340026178359}
   - component: {fileID: 1039635829487946627}
   - component: {fileID: 8207311787082713463}
   - component: {fileID: 2322212470406944789}
@@ -263,9 +262,13 @@ MonoBehaviour:
   enemyInRange: 0
   songProgress: 0
   inputIndex: 0
-  nextInputIndex: 0
+  attackIndex: 0
+  prevAttackIndex: 0
   measureLength: 0
+  measureCycleCount: 0
+  attackCycleCount: 0
   inputTargetTime: 0
+  attackTargetTime: 0
   indicatorPrefab: {fileID: 5448178981151780786, guid: 9f587f8a32efec442be6254918506e84, type: 3}
   indicators: []
   inputPrompt: {fileID: 31395926951258363}
@@ -279,8 +282,14 @@ MonoBehaviour:
   upgradeAttackSprite02: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   upgradeAttackSprite03: {fileID: 810102024932870493, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   flameAttackSprite: {fileID: -1523277831619270556, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  animationController: {fileID: 7412888328530383611}
-  towerBaseAnimationController: {fileID: 2051579340026178359}
+  m_Animator: {fileID: 7412888328530383611}
+  animationStates:
+  - Base Layer.Idle
+  - Base Layer.Upgrade 1
+  - Base Layer.Upgrade 2
+  - Base Layer.Upgrade 3
+  - Base Layer.Attack 1
+  animationHashes: 0000000000000000000000000000000000000000
   towerAttackSfx: {fileID: 8300000, guid: 64e6bfc065fb6404da83cf5259f7f894, type: 3}
   towerHurtSfx: {fileID: 8300000, guid: 0f6221cd989c4a74a9ed126be6baab7f, type: 3}
   towerDeathSfx: {fileID: 8300000, guid: 39bc06ae949154b4582c5fa4f63321a7, type: 3}
@@ -303,10 +312,7 @@ MonoBehaviour:
   ChargedUp: 0
   towerUpgradeUnlocked: 0
   upgradePurchased: 0
-  upgradeOneActive: 0
-  upgradeTwoActive: 0
-  upgradeThreeActive: 0
-  upgradeFourActive: 0
+  upgradeIndex: 0
   feelingItNow: 0
   synthBuff: 0
   towerNum: 0
@@ -407,28 +413,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &2051579340026178359
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2167625354041566739}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 80b7bc3e425b3f0409e99951d72f2683, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &1039635829487946627
 BoxCollider:
   m_ObjectHideFlags: 0

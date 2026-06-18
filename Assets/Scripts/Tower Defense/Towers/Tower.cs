@@ -373,7 +373,6 @@ public class Tower : MonoBehaviour
         }
         else if (isBuffed) // Regular buff
         {
-            attackPowerBonus = 0.5f; //+50% of base
             projectileColor = new Color(1f, 1f, 1f, 1f);
         }
         else // No buff
@@ -570,8 +569,10 @@ public class Tower : MonoBehaviour
 
 
     #region Tower buffing
-    public void BuffAttack(float inputTime)
+    public void BuffAttack(float inputTime, float judgementBonus)
     {
+        attackPowerBonus = judgementBonus;
+        
         if (inputTime > inputTargetTime) // retroactively buff attack
         {
             if (lastBulletFired != null)
@@ -585,68 +586,8 @@ public class Tower : MonoBehaviour
             isBuffed = true;
         }
     }
-    
+
     /*
-    public void ActivateBuff(BuffType buffType)
-    {
-        if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerBuffSequence) //post buff sequence in tutorial
-        {
-            if (TutorialManager.Instance.index == 11)
-            {
-                CursorTD.Instance.buffCounter += 1;
-            }
-                
-            if(CursorTD.Instance.buffCounter == 4)
-            {
-                // Make sure index is set to whichever text says "Press Z, X, C, or V when the ring touches the center circle"
-                if (TutorialManager.Instance.index == 11)
-                {
-                    TutorialManager.Instance.LoadNextTutorialDialogue();
-                }
-
-                CursorTD.Instance.towerBuffSequence = false;
-                CombatManager.Instance.healthBar.SetActive(true);
-                CombatManager.Instance.feverBar.SetActive(true);
-                CombatManager.Instance.combo.SetActive(true);
-                //CombatManager.Instance.controls.SetActive(true);
-
-                CursorTD.Instance.feverModeSequence = true;
-                FeverSystem.Instance.feverBarNum = 50;
-
-                Spawner.Instance.ForceEnemySpawn(-0.5f, EnemyType.Walker);
-                CursorTD.Instance.buffCounter = 0;
-            }
-        }
-
-        RecordBuff(buffType);
-        PlayBuffs(buffType);
-    }
-
-    public void PlayBuffs(BuffType buffType)
-    {
-        switch (buffType)
-        {
-            case BuffType.Multi://Multi Buff
-                ExtraFire();
-                break;
-
-            case BuffType.Burn://Burn Buff
-                //burningBullet = true;
-                break;
-
-            case BuffType.Shield: //Shield Buff
-                isShielded = true;
-                break;
-
-            case BuffType.Normal:
-                
-                break;
-
-            default:
-                break;
-        }
-    }
-
     public void RecordBuff(BuffType buff) //records buff inputs but if more inputs are made than there are attacks in the input sequence it will remove the first recorded buff on the list
     {
         currentState = TowerState.Recording;
@@ -733,7 +674,6 @@ public class Tower : MonoBehaviour
 
             }
         }
-
     }
     */
     #endregion
@@ -742,6 +682,4 @@ public class Tower : MonoBehaviour
     {
         ParticleSystem pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity); // Create instance of the particle effect
     }
-
-
 }

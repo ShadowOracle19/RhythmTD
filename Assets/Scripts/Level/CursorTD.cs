@@ -429,7 +429,7 @@ public class CursorTD : MonoBehaviour
         //BUFFING & COMBO MANAGEMENT
         if(tile.placedTower != null) // if(tile.placedTower != null && !beatIsHit) if tile is not empty and beat is not hit already
         {
-            switch (CheckOnInput(timeAtInput, tile.placedTower.GetComponent<Tower>().inputTargetTime)) //switch (CheckOnBeat(beatTimeAtInput))
+            switch (CheckOnInput(timeAtInput, tile.placedTower.GetComponent<Tower>().inputTargetTime))
             {
                 case _BeatResult.miss:
                     //FEEDBACK
@@ -471,7 +471,7 @@ public class CursorTD : MonoBehaviour
 
                     //BUFFING
                     //tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
-                    tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput);
+                    tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.25f);
 
                     RegisterIndicatorHit(1);
                     break;
@@ -488,7 +488,7 @@ public class CursorTD : MonoBehaviour
 
                     //BUFFING
                     //tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
-                    tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput);
+                    tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.5f);
 
                     RegisterIndicatorHit(0);
                     break;

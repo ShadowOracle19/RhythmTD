@@ -32,18 +32,18 @@ public class MajorTower : Tower
             switch (rand)
             {
                 case 0:
-                    CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z));
+                    CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z));
                     break;
 
                 case 1:
-                    CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + 1));
-                    CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z - 1));
+                    CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + 1));
+                    CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z - 1));
                     break;
 
                 case 2:
-                    CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + 1));
-                    CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z));
-                    CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z - 1));
+                    CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + 1));
+                    CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z));
+                    CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z - 1));
                     break;
 
                 default:
@@ -53,6 +53,6 @@ public class MajorTower : Tower
             return;
         }
 
-        CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
+        CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + yPos));
     }
 }

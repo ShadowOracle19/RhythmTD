@@ -44,7 +44,7 @@ public class FlatTower : Tower
         */
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
         if (!enemyInRange)
             return;
@@ -54,7 +54,7 @@ public class FlatTower : Tower
         {
             upgradeTwoRecharge += 1;
         }
-        base.Fire();
+        base.Fire(0f);
 
         AOE(towerInfo.damage);
     }

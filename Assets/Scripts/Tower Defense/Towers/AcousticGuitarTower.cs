@@ -18,9 +18,9 @@ public class AcousticGuitarTower : Tower
         
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
-        base.Fire();
+        base.Fire(0f);
 
         CreateBullet(towerInfo.damage, transform.position);
     }

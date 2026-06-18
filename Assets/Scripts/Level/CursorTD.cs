@@ -464,14 +464,14 @@ public class CursorTD : MonoBehaviour
                     hitSoundSource.Play();
                     tile.placedTower.GetComponent<Tower>().StartCoroutine(tile.placedTower.GetComponent<Tower>().InterruptAnimation());
                     SpawnBeatHitResult(_BeatResult.great);
-                    //buffGreatPfxInstance = Instantiate(buffGreatPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
 
                     //COMBO & SCORE
                     ComboManager.Instance.IncreaseCombo();
                     //ComboManager.Instance.IncreaseScore();
 
                     //BUFFING
-                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff); // activate buff
+                    //tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
+                    tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput);
 
                     RegisterIndicatorHit(1);
                     break;
@@ -481,14 +481,14 @@ public class CursorTD : MonoBehaviour
                     hitSoundSource.Play();
                     tile.placedTower.GetComponent<Tower>().StartCoroutine(tile.placedTower.GetComponent<Tower>().InterruptAnimation());
                     SpawnBeatHitResult(_BeatResult.perfect);
-                    //buffPerfectPfxInstance = Instantiate(buffPerfectPfx, tile.placedTower.transform.position, Quaternion.identity); // buff pfx
 
                     //COMBO & SCORE
                     ComboManager.Instance.IncreaseCombo();
                     //ComboManager.Instance.IncreaseScore();
 
                     //BUFFING
-                    tile.placedTower.GetComponent<Tower>().ActivateBuff(buff); // activate buff
+                    //tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
+                    tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput);
 
                     RegisterIndicatorHit(0);
                     break;

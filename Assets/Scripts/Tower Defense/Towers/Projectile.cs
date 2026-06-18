@@ -68,55 +68,11 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        //if (!canMove) return;
-
-        //transform.Translate(transform.right * 20 * Time.deltaTime);
-        //gameObject.transform.DOMoveX(nextPosition.x, ConductorV2.instance.crotchet) 
-        //    .SetEase(Ease.OutSine)
-        //    .onComplete = CallNextPosition;
-
         movementProgress = (((songProgress - timeAtFire) * speed) / (timeAtEnd - timeAtFire));
         nextPosition = new Vector3(Mathf.Lerp(startXPosition, nextXPosition, movementProgress), transform.position.y, transform.position.z);
         gameObject.transform.position = nextPosition;
 
-        /*
-        timer += Time.deltaTime * speed;
-        if (gameObject.transform.position != nextPosition)
-        {
-            gameObject.transform.position = Vector3.Slerp(gameObject.transform.position, nextPosition, timer);
-        }
-        else
-        {
-            nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
-            canMove = false;
-        }
-        */
     }
-
-    /*
-    void CallNextPosition()
-    {
-        nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
-    }
-    */
-
-    /*
-    public void OnTick()
-    {
-        canMove = true;
-        activeTime += 1;
-
-        if(burningBullet)
-        {
-            burningParticlesInstance = Instantiate(burningParticles, this.transform, worldPositionStays:false);
-        }
-
-        if (activeTime == bulletRange)
-        {
-            RemoveProjectile();
-        }
-    }
-    */
 
     public virtual void OnTriggerEnter(Collider collision)
     {

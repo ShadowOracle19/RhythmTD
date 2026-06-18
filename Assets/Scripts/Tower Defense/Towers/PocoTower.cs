@@ -28,9 +28,9 @@ public class PocoTower : Tower
         
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
-        base.Fire();
+        base.Fire(0f);
         lineObject.enabled = false;
 
         
@@ -82,6 +82,6 @@ public class PocoTower : Tower
         lineObject.enabled = true;
         lineObject.SetPosition(0, lineObject.transform.position);
         lineObject.SetPosition(1, connectedEnemy.transform.position);
-        connectedEnemy.Damage(currentDamage);
+        connectedEnemy.Damage(towerDamage);
     }
 }

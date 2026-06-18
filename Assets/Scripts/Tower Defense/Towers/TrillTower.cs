@@ -22,16 +22,16 @@ public class TrillTower : Tower
         if(upgradeIndex == 3)
         {
             towerRange = 4;
-            currentDamage = 10;
+            towerDamage = 10;
         }
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
         if (!enemyInRange)
             return;
 
-        base.Fire();
+        base.Fire(0f);
 
         //Charge shot upgrade active
         if(upgradeIndex == 1)
@@ -40,7 +40,7 @@ public class TrillTower : Tower
             return;
         }
 
-        CreateBullet(currentDamage, transform.position);
+        CreateBullet(towerDamage, transform.position);
     }
 
     //charge shot
@@ -56,8 +56,8 @@ public class TrillTower : Tower
             //if enemy detected
             if(hit.transform.CompareTag("Enemy"))
             {
-                int damage = currentDamage + chargeShotDamage;
-                CreateBullet(currentDamage, transform.position);
+                int damage = towerDamage + chargeShotDamage;
+                CreateBullet(towerDamage, transform.position);
                 chargeShotDamage = 0;
             }
         }
@@ -101,7 +101,7 @@ public class TrillTower : Tower
             Debug.Log("is this happening?");
             float redLerp = chargeShotDamage / 7;
             bullet.GetComponent<Projectile>().spriteRenderer.color = Color.Lerp(Color.white, Color.red, redLerp);
-            bullet.GetComponent<Projectile>().spriteRenderer.sprite = upgradeAttackSprite01;
+            bullet.GetComponent<Projectile>().spriteRenderer.sprite = base.projectileSprites[1];
         }
     }
 }

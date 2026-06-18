@@ -40,6 +40,9 @@ public class Tower : MonoBehaviour
     public float attackTargetTime = 0.0f;
     public GameObject indicatorPrefab;
     public List<GameObject> indicators = new List<GameObject>();
+
+    public Projectile lastBulletFired;
+    public bool isBuffed = false;
     
     [Header("Tower Empower Indicator")]
     public GameObject inputPrompt;
@@ -55,12 +58,8 @@ public class Tower : MonoBehaviour
     private int repeatSpritesIndex = 0;
 
     [Header("Projectile Sprites")]
-    public Sprite defaultAttackSprite;
-    //public Sprite buffDefaultAttackSprite;
-    public Sprite upgradeAttackSprite01;
-    public Sprite upgradeAttackSprite02;
-    public Sprite upgradeAttackSprite03;
-    public Sprite flameAttackSprite;
+    public Color projectileColor;
+    public Sprite[] projectileSprites;
 
     [Header("Animation")]
     public Animator m_Animator;
@@ -74,18 +73,7 @@ public class Tower : MonoBehaviour
     public AudioClip towerUpgradeSfx;
 
     [Header("PFX")]
-    [SerializeField] public ParticleSystem aoeAttackParticles;
-    public ParticleSystem aoeAttackParticlesInstance;
-    public Color aoeAttackColour;
-
-    [SerializeField] private ParticleSystem shieldDestructionParticles;
-    private ParticleSystem shieldDestructionParticlesInstance;
-
-    [SerializeField] private ParticleSystem clashParticles;
-    private ParticleSystem clashParticlesInstance;
-
-    [SerializeField] private ParticleSystem burningParticles;
-    private ParticleSystem burningParticlesInstance;
+    public ParticleSystem[] particleEffects;
 
     [Header ("--------- Don't need to touch ---------")]
 
@@ -98,15 +86,15 @@ public class Tower : MonoBehaviour
 
     [Header("Tower Stats")]
     private int currentHealth = 0;
-    public int currentDamage;
-    public int tempDamageHolder;
+    public int towerDamage;
+    public float attackPower = 1.0f;
+    public float attackPowerBonus = 0.0f;
     public int towerRange;
 
     [Header("Tile Interactions")]
     public bool ChargedUp = false;
 
     [Header("Tower Upgrade")]
-    public bool towerUpgradeUnlocked = false;
     public bool upgradePurchased = false;
 
     public int upgradeIndex = 0; //0 = no upgrade purchased
@@ -134,7 +122,7 @@ public class Tower : MonoBehaviour
     {
         currentAttackPattern = towerInfo.attackPattern;
         currentHealth = towerInfo.towerHealth;
-        currentDamage = towerInfo.damage;
+        towerDamage = towerInfo.damage;
 
         beat = 1;
 
@@ -177,6 +165,7 @@ public class Tower : MonoBehaviour
         if (songProgress > (inputTargetTime + ConductorV2.instance.missBeatThreshold))
         {
             UpdateInputIndex();
+            lastBulletFired = null;
         }
 
         if (songProgress >= attackTargetTime)
@@ -267,7 +256,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    // Ik there's gotta be an easier way to wrap around but GO MY IF STATEMENTS!
+    //NOTE: Ik there's gotta be an easier way to wrap around but GO MY IF STATEMENTS!
     public void UpdateInputIndex()
     {
         if (inputIndex == (towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1))
@@ -298,40 +287,6 @@ public class Tower : MonoBehaviour
         }
     }
 
-    /*
-    public void UpdateCycleIndices()
-    {
-        bool nextIndexFound = false;
-        int checkIndex = 0;
-
-        while (!nextIndexFound)
-        {
-            if (checkIndex == towerInfo.inputPatterns[upgradeIndex].noteInputs.Count)
-            {
-                inputIndex = 0;
-                attackIndex = 0;
-                prevAttackIndex = towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1;
-
-                nextIndexFound = true;
-                return;
-            }
-            else if (towerInfo.inputPatterns[upgradeIndex].noteInputs[checkIndex].noteTime >= towerInfo.inputPatterns[upgradeIndex].noteInputs[attackIndex].noteTime)
-            {
-                inputIndex = checkIndex;
-                attackIndex = checkIndex;
-                prevAttackIndex = attackIndex - 1;
-
-                nextIndexFound = true;
-                return;
-            }
-            else
-            {
-                checkIndex += 1;
-            }
-        }
-    }
-    */
-
     public void towerEffectVisual()
     {
         if (towerHover && towerAboutToFire && enemyInRange)
@@ -345,36 +300,38 @@ public class Tower : MonoBehaviour
     }
     #endregion
 
-    #region Tower attack
+    #region Tower attacking
     public virtual void CreateBullet(int damage, Vector3 position)
     {
         int tempRange = towerRange;
 
         //instatiate bullet
         GameObject bullet = Instantiate(nextProjectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
+        lastBulletFired = bullet.GetComponent<Projectile>();
+        lastBulletFired.InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, attackTargetTime);
 
-        
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, attackTargetTime);
+        lastBulletFired.spriteRenderer.sprite = projectileSprites[upgradeIndex];
+        lastBulletFired.spriteRenderer.color = projectileColor;
 
         ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
+
         feelingItNow = false;
         synthBuff = false;
+        isBuffed = false;
 
     }
 
     public void FireTower(int currentAttackIndex)
     {
-        //if (songProgress >= inputTargetTime)
         if(currentAttackIndex != prevAttackIndex)
         {
             prevAttackIndex = currentAttackIndex;
-            //Fire();
 
             switch (currentAttackPattern)
             {
                 case TowerAttackPattern.standard:
                     towerAboutToFire = true;
-                    Fire();
+                    Fire(0f);
                     break;
                 case TowerAttackPattern.snake:
 
@@ -404,57 +361,42 @@ public class Tower : MonoBehaviour
         }
     }
 
-
-    public virtual void Fire() //default fire
+    public virtual void Fire(float yPos) //default fire
     {
         //play attack sound
         AudioManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
         
-        //if feeling it now is active
-        if(feelingItNow)
+        if(feelingItNow) // Feeling It Now buff
         {
-            //nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = buffDefaultAttackSprite;
+            attackPowerBonus = 1.0f; //+100% of base
+            projectileColor = new Color(1f, 1f, 1f, 1f);
+        }
+        else if (isBuffed) // Regular buff
+        {
+            attackPowerBonus = 0.5f; //+50% of base
+            projectileColor = new Color(1f, 1f, 1f, 1f);
+        }
+        else // No buff
+        {
+            attackPowerBonus = 0.0f;
+            projectileColor = new Color(1f, 1f, 1f, 0.3f);
+        }
 
-            tempDamageHolder = currentDamage;
-            currentDamage = currentDamage * 2;
-        }
-        //feeling it now inactive
-        else if (upgradeIndex != 0)
-        {
-            currentDamage = tempDamageHolder;
-            //nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = upgradeAttackSprite01;
-        }
-        else
-        {
-            currentDamage = tempDamageHolder;
-            nextProjectile = projectile;
-        } 
+        towerDamage = Mathf.RoundToInt(towerDamage * (attackPower + attackPowerBonus));
     }
-
-    public virtual void Fire(float yPos) //Fire on specific ypos
-    {
-        //play attack sound
-        AudioManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
-
-        int damage = currentDamage;
-
-        nextProjectile = projectile;
-
-        towerUpgradeUnlocked = false;
-    } 
 
     public void ExtraFire() //buff fire
     {
         
         if(towerInfo.isAOETower)
         {
-            AOE(currentDamage);
+            AOE(towerDamage);
             return;
         }
 
-        CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 1));
+        CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 1));
 
-        CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 1));
+        CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 1));
 
     }
 
@@ -480,17 +422,7 @@ public class Tower : MonoBehaviour
         {
             if (item.transform.CompareTag("StageTile"))
             {
-                //Depending on the upgrade, change the sprite
-                if (upgradeIndex != 0)
-                {
-                    SpawnParticles(item.transform, flameAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, true);
-                    //Debug.Log("[Tower.cs] BurnUpgrade");
-                }
-                else
-                {
-                    SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, false);
-                    //Debug.LogWarning("[Tower.cs] AOE sprite display broke :(");
-                }
+                SpawnParticles(item.transform, particleEffects[0]);
             }
             else if (item.transform.CompareTag("Enemy"))
             {
@@ -621,8 +553,6 @@ public class Tower : MonoBehaviour
 
         if(isShielded)
         {
-            SpawnParticles(this.transform, defaultAttackSprite, shieldDestructionParticles, shieldDestructionParticlesInstance, true, false);
-
             isShielded = false;
             return;
         }
@@ -633,13 +563,30 @@ public class Tower : MonoBehaviour
             //play death sound
             AudioManager.instance.PlaySound(towerDeathSfx, this.gameObject.transform, 1.0f);
 
-            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the tower clash particle effect
+            //ADD HERE: Create instance of the tower clash particle effect
             RemoveTower();
         }
     }
 
 
-    #region Tower buff
+    #region Tower buffing
+    public void BuffAttack(float inputTime)
+    {
+        if (inputTime > inputTargetTime) // retroactively buff attack
+        {
+            if (lastBulletFired != null)
+            {
+                lastBulletFired.damage = Mathf.RoundToInt(towerDamage * (attackPower + attackPowerBonus));
+                lastBulletFired.spriteRenderer.color = new Color(1f, 1f, 1f, 0.3f);
+            }    
+        }
+        else
+        {
+            isBuffed = true;
+        }
+    }
+    
+    /*
     public void ActivateBuff(BuffType buffType)
     {
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerBuffSequence) //post buff sequence in tutorial
@@ -672,7 +619,6 @@ public class Tower : MonoBehaviour
         }
 
         RecordBuff(buffType);
-
         PlayBuffs(buffType);
     }
 
@@ -693,7 +639,7 @@ public class Tower : MonoBehaviour
                 break;
 
             case BuffType.Normal:
-                towerUpgradeUnlocked = true;
+                
                 break;
 
             default:
@@ -701,7 +647,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void RecordBuff(BuffType buff) //records the buff but if a 5th buff is pressed it will remove the first buff on the list
+    public void RecordBuff(BuffType buff) //records buff inputs but if more inputs are made than there are attacks in the input sequence it will remove the first recorded buff on the list
     {
         currentState = TowerState.Recording;
 
@@ -717,7 +663,7 @@ public class Tower : MonoBehaviour
 
         buffIndex = 0;
 
-        if (recordedBuffs.Count > 4)
+        if (recordedBuffs.Count > towerInfo.inputPatterns[upgradeIndex].noteInputs.Count)
         {
             recordedBuffs.RemoveAt(0);
         }
@@ -789,30 +735,12 @@ public class Tower : MonoBehaviour
         }
 
     }
+    */
     #endregion
 
-    public void SpawnParticles(Transform tileTransform, Sprite projectileSprite, ParticleSystem pfxSource, ParticleSystem pfxInstance, bool shielded, bool burning)
+    public void SpawnParticles(Transform tileTransform, ParticleSystem pfxSource)
     {
-        if(towerUpgradeUnlocked)
-        {
-            
-            if (upgradeIndex == 1)
-            {
-                // Set sprite
-                burningParticlesInstance = Instantiate(burningParticles, tileTransform.position, Quaternion.identity);
-            }
-        }
-        if (!shielded)
-        {
-            // Set sprite
-            var pfxTexture = pfxSource.textureSheetAnimation;
-            pfxTexture.SetSprite(0, projectileSprite);
-        }
-
-        
-        
-        // Create instance of the particle effect
-        pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity);
+        ParticleSystem pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity); // Create instance of the particle effect
     }
 
 

@@ -516,17 +516,16 @@ MonoBehaviour:
   attackTargetTime: 0
   indicatorPrefab: {fileID: 5448178981151780786, guid: 9f587f8a32efec442be6254918506e84, type: 3}
   indicators: []
+  lastBulletFired: {fileID: 0}
+  isBuffed: 0
   inputPrompt: {fileID: 1205972593765645086}
   towerAboutToFire: 0
   towerHover: 0
   shieldEffect: {fileID: 1876591643564607199}
   isShielded: 0
   recordingStatus: {fileID: 1735588532524689869}
-  defaultAttackSprite: {fileID: 383071095746508678, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  upgradeAttackSprite01: {fileID: 383071095746508678, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  upgradeAttackSprite02: {fileID: 383071095746508678, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  upgradeAttackSprite03: {fileID: 383071095746508678, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
-  flameAttackSprite: {fileID: 383071095746508678, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
+  projectileColor: {r: 0, g: 0, b: 0, a: 0}
+  projectileSprites: []
   m_Animator: {fileID: 1130818630121725999}
   animationStates:
   - Base Layer.Idle
@@ -535,27 +534,26 @@ MonoBehaviour:
   - Base Layer.Upgrade 3
   - Base Layer.Attack 1
   animationHashes: 0000000000000000000000000000000000000000
-  towerAttackSfx: {fileID: 0}
-  towerHurtSfx: {fileID: 0}
-  towerDeathSfx: {fileID: 0}
-  towerUpgradeSfx: {fileID: 0}
-  aoeAttackParticles: {fileID: 0}
-  aoeAttackParticlesInstance: {fileID: 0}
-  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
-  shieldDestructionParticles: {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
-  clashParticles: {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
-  burningParticles: {fileID: 0}
+  towerAttackSfx: {fileID: 8300000, guid: 64e6bfc065fb6404da83cf5259f7f894, type: 3}
+  towerHurtSfx: {fileID: 8300000, guid: 8ff81b02ac943f64b926033665f891aa, type: 3}
+  towerDeathSfx: {fileID: 8300000, guid: 53dec87046647b94189a904e84192675, type: 3}
+  towerUpgradeSfx: {fileID: 8300000, guid: 748333af800b15f48b8e6674e006355c, type: 3}
+  particleEffects:
+  - {fileID: 5103615976187222216, guid: 863485c7b148fdc4d8eee70a3cc74e80, type: 3}
+  - {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
+  - {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
+  - {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   currentAttackPattern: 0
   connectedTile: {fileID: 0}
   colliders: []
   nextProjectile: {fileID: 0}
   towerAudioVolumeIncrement: 0.1
   beat: 0
-  currentDamage: 0
-  tempDamageHolder: 0
+  towerDamage: 0
+  attackPower: 1
+  attackPowerBonus: 0
   towerRange: 0
   ChargedUp: 0
-  towerUpgradeUnlocked: 0
   upgradePurchased: 0
   upgradeIndex: 0
   feelingItNow: 0

@@ -27,7 +27,7 @@ public class ChromaticTower : Tower
         */
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
         //passive income
         if(upgradeIndex == 2)
@@ -38,7 +38,7 @@ public class ChromaticTower : Tower
 
         
 
-        base.Fire();
+        base.Fire(0f);
 
         int chargeValue = towerInfo.resourceGain;
 

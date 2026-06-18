@@ -384,17 +384,16 @@ MonoBehaviour:
   attackTargetTime: 0
   indicatorPrefab: {fileID: 5448178981151780786, guid: 9f587f8a32efec442be6254918506e84, type: 3}
   indicators: []
+  lastBulletFired: {fileID: 0}
+  isBuffed: 0
   inputPrompt: {fileID: 4305122640335676531}
   towerAboutToFire: 0
   towerHover: 0
   shieldEffect: {fileID: 5687361503201761549}
   isShielded: 0
   recordingStatus: {fileID: 8726532242815968050}
-  defaultAttackSprite: {fileID: -352905814, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
-  upgradeAttackSprite01: {fileID: 0}
-  upgradeAttackSprite02: {fileID: 0}
-  upgradeAttackSprite03: {fileID: 0}
-  flameAttackSprite: {fileID: 1643883141, guid: db0cfa28198e2a540a4adfb64ab48694, type: 3}
+  projectileColor: {r: 0, g: 0, b: 0, a: 0}
+  projectileSprites: []
   m_Animator: {fileID: 0}
   animationStates:
   - Base Layer.Idle
@@ -407,23 +406,22 @@ MonoBehaviour:
   towerHurtSfx: {fileID: 0}
   towerDeathSfx: {fileID: 0}
   towerUpgradeSfx: {fileID: 0}
-  aoeAttackParticles: {fileID: 5103615976187222216, guid: e8889e3cb260858418962975b4770ad7, type: 3}
-  aoeAttackParticlesInstance: {fileID: 0}
-  aoeAttackColour: {r: 0, g: 0, b: 0, a: 0}
-  shieldDestructionParticles: {fileID: 0}
-  clashParticles: {fileID: 0}
-  burningParticles: {fileID: 0}
+  particleEffects:
+  - {fileID: 5103615976187222216, guid: 863485c7b148fdc4d8eee70a3cc74e80, type: 3}
+  - {fileID: 7350168317149746366, guid: 813cbdb563d76034a91889b827da8562, type: 3}
+  - {fileID: 7350168317149746366, guid: 0d60aa8f853180543b651dc63828644b, type: 3}
+  - {fileID: 6363840329039339684, guid: b851b7add80beec4aa4c785abac0805d, type: 3}
   currentAttackPattern: 0
   connectedTile: {fileID: 0}
   colliders: []
   nextProjectile: {fileID: 0}
   towerAudioVolumeIncrement: 0.05
   beat: 0
-  currentDamage: 0
-  tempDamageHolder: 0
+  towerDamage: 0
+  attackPower: 1
+  attackPowerBonus: 0
   towerRange: 0
   ChargedUp: 0
-  towerUpgradeUnlocked: 0
   upgradePurchased: 0
   upgradeIndex: 0
   feelingItNow: 0

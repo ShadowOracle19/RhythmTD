@@ -148,20 +148,19 @@ public class TowerManager : MonoBehaviour
         switch (result)
         {
             case _BeatResult.miss:
-                placingTower.currentDamage = placingTower.towerInfo.damage;
+                placingTower.towerDamage = placingTower.towerInfo.damage;
 
 
                 break;
             case _BeatResult.early:
-                placingTower.currentDamage = placingTower.towerInfo.damage + 1;
+                placingTower.towerDamage = placingTower.towerInfo.damage + 1;
                 break;
             case _BeatResult.perfect:
-                placingTower.currentDamage = placingTower.towerInfo.damage + 2;
+                placingTower.towerDamage = placingTower.towerInfo.damage + 2;
                 break;
             default:
                 break;
         }
-        placingTower.tempDamageHolder = placingTower.currentDamage;
 
         towerList.Add(placingTower);
 

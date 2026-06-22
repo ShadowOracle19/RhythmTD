@@ -757,7 +757,7 @@ public class CursorTD : MonoBehaviour
             }
             else if (direction == Vector2.down) //DOWN
             {
-                slotIndex = 1;
+                slotIndex = 3;
                 CheckIfCanPlace(slotIndex, towerMenuSounds[2], "Check Slot Down", (slotIndex + towerSlots.Count));
             }
         }

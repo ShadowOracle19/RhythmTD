@@ -421,10 +421,10 @@ public class CursorTD : MonoBehaviour
         
         if (towerSelectMenuOpened) return;
 
-        TowerEmpowerment(BuffType.Normal);
+        TowerEmpowerment();
     }
 
-    public void TowerEmpowerment(BuffType buff)
+    public void TowerEmpowerment()
     {
         //BUFFING & COMBO MANAGEMENT
         if(tile.placedTower != null) // if(tile.placedTower != null && !beatIsHit) if tile is not empty and beat is not hit already
@@ -440,6 +440,9 @@ public class CursorTD : MonoBehaviour
                     //COMBO
                     ComboManager.Instance.ResetCombo();
 
+                    //BUFFING
+                    tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.0f);
+
                     RegisterIndicatorHit(4);
                     break;
                 case _BeatResult.late:
@@ -448,6 +451,9 @@ public class CursorTD : MonoBehaviour
                     hitSoundSource.Play();
                     SpawnBeatHitResult(_BeatResult.late);
 
+                    //BUFFING
+                    tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.0f);
+
                     RegisterIndicatorHit(3);
                     break;
                 case _BeatResult.early:
@@ -455,6 +461,9 @@ public class CursorTD : MonoBehaviour
                     hitSoundSource.clip = hitSounds[0];
                     hitSoundSource.Play();
                     SpawnBeatHitResult(_BeatResult.early);
+
+                    //BUFFING
+                    tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.0f);
 
                     RegisterIndicatorHit(2);
                     break;
@@ -470,7 +479,6 @@ public class CursorTD : MonoBehaviour
                     //ComboManager.Instance.IncreaseScore();
 
                     //BUFFING
-                    //tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
                     tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.25f);
 
                     RegisterIndicatorHit(1);
@@ -487,7 +495,6 @@ public class CursorTD : MonoBehaviour
                     //ComboManager.Instance.IncreaseScore();
 
                     //BUFFING
-                    //tile.placedTower.GetComponent<Tower>().ActivateBuff(buff);
                     tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.5f);
 
                     RegisterIndicatorHit(0);
@@ -642,7 +649,7 @@ public class CursorTD : MonoBehaviour
             //if tower limit is enabled and tower limit is reached use this if statement to stop tower placement
             if (!GameManager.Instance.tutorialRunning && CombatManager.Instance.currentEncounter.enableTowerLimit && TowerManager.Instance.CheckIfTowerAtLimit(towerNum))
             {
-                Debug.Log($"{tower.name} at limit cannot be placed. Please try another tower!");
+                //Debug.Log($"{tower.name} at limit cannot be placed. Please try another tower!");
                 return;
             }
 
@@ -687,7 +694,7 @@ public class CursorTD : MonoBehaviour
                 TutorialManager.Instance.LoadNextTutorialDialogue();
                 towerPlacementMenuSequence = false;
                 towerPlaceSequence = true;
-                Debug.Log("Do we reach this?");
+                //Debug.Log("Do we reach this?");
             }
         }
 

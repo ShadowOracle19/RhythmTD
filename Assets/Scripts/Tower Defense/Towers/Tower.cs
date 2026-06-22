@@ -9,11 +9,6 @@ public enum InstrumentType
     Flats, Trill, Major, Chromatic, Forte, Poco, Legato, Allegro, Tower9, Tower10, Tower11, Tower12
 }
 
-public enum BuffType
-{
-    Burn, Multi, Shield, Normal
-}
-
 public enum TowerState
 {
     Default, Recording, Repeating
@@ -105,14 +100,10 @@ public class Tower : MonoBehaviour
 
     [Header("Record Buff Input")]
     private TowerState currentState = TowerState.Default;
-    private List<BuffType> recordedBuffs = new List<BuffType>();
-    private bool isInputtingBuffs = false;
-    private int beatRecordingStarted = 1;
-    private int buffTimer = 0;
-    int buffTimerMax = 2;
-    private int buffIndex = 0;
-    private int buffCountMeasure = 0;
-    private int buffBeatCount = 1;
+    private List<float> recordedBuffs = new List<float>();
+    private int measureAtRepeatStart = 0;
+    private int measuresToRepeat = 4;
+    private int prevMeasure = 0;
 
     [HideInInspector]
     public int towerNum;
@@ -125,6 +116,7 @@ public class Tower : MonoBehaviour
         towerDamage = towerInfo.damage;
 
         beat = 1;
+        prevMeasure = 0;
 
         currentState = TowerState.Default;
 
@@ -148,6 +140,7 @@ public class Tower : MonoBehaviour
 
         CalculateInputTimes();
         InstantiateIndicators();
+        ResetRecordedBuffsList();
 
         measureCycleCount = ConductorV2.instance.measureTrack;
         attackCycleCount = ConductorV2.instance.measureTrack;
@@ -160,6 +153,35 @@ public class Tower : MonoBehaviour
     { 
         // TOWER INPUT //
         songProgress = ConductorV2.instance.songPosition;
+
+        //Tower State
+        
+        if (prevMeasure != ConductorV2.instance.measureTrack)
+        {
+            prevMeasure = ConductorV2.instance.measureTrack;
+
+            if (currentState == TowerState.Recording)
+            {
+                currentState = TowerState.Repeating;
+                measureAtRepeatStart = ConductorV2.instance.measureTrack;
+            }
+            else if (currentState == TowerState.Repeating)
+            {
+                if (ConductorV2.instance.measureTrack < (measureAtRepeatStart + measuresToRepeat))
+                {
+                    recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[ConductorV2.instance.measureTrack - measureAtRepeatStart];
+                }
+
+                if (ConductorV2.instance.measureTrack == (measureAtRepeatStart + measuresToRepeat))
+                {
+                    currentState = TowerState.Default;
+
+                    recordingStatus.SetActive(false); //RECORDING STATUS CODE
+
+                    ResetRecordedBuffs();
+                }
+            }
+        }
 
         // Update input tracking index when song progress exceeds threshold
         if (songProgress > (inputTargetTime + ConductorV2.instance.missBeatThreshold))
@@ -375,6 +397,19 @@ public class Tower : MonoBehaviour
         {
             projectileColor = new Color(1f, 1f, 1f, 1f);
         }
+        else if (currentState == TowerState.Repeating)
+        {
+            attackPowerBonus = recordedBuffs[inputIndex];
+
+            if (attackPowerBonus > 0.0f)
+            {
+                projectileColor = new Color(1f, 1f, 1f, 1f);
+            }
+            else
+            {
+                projectileColor = new Color(1f, 1f, 1f, 0.3f);
+            }
+        }
         else // No buff
         {
             attackPowerBonus = 0.0f;
@@ -571,6 +606,8 @@ public class Tower : MonoBehaviour
     #region Tower buffing
     public void BuffAttack(float inputTime, float judgementBonus)
     {
+        RecordBuff(judgementBonus);
+        
         attackPowerBonus = judgementBonus;
         
         if (inputTime > inputTargetTime) // retroactively buff attack
@@ -587,99 +624,46 @@ public class Tower : MonoBehaviour
         }
     }
 
-    /*
-    public void RecordBuff(BuffType buff) //records buff inputs but if more inputs are made than there are attacks in the input sequence it will remove the first recorded buff on the list
+    public void RecordBuff(float judgementBonus) //records buff inputs but if more inputs are made than there are attacks in the input sequence it will remove the first recorded buff on the list
     {
         currentState = TowerState.Recording;
 
         recordingStatus.SetActive(true); //RECORDING STATUS CODE
         recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.recordingSpr;//RECORDING STATUS CODE
 
-        isInputtingBuffs = true;
-
-        recordedBuffs.Add(buff);
-
-        beatRecordingStarted = ConductorV2.instance.beatTrack;
-        buffTimer = 0;
-
-        buffIndex = 0;
-
-        if (recordedBuffs.Count > towerInfo.inputPatterns[upgradeIndex].noteInputs.Count)
-        {
-            recordedBuffs.RemoveAt(0);
-        }
-        
+        recordedBuffs[inputIndex] = judgementBonus;
     }
 
-    public void BuffPlayback(int _beat)
+    // Completely clears the recorded buffs list and then populates the list with a number of new values to match the number of notes in the new input pattern
+    public void ResetRecordedBuffsList()
     {
-        if (currentState == TowerState.Default)
+        recordedBuffs.Clear();
+
+        //Debug.Log("Number of Inputs:" + towerInfo.inputPatterns[upgradeIndex].noteInputs.Count);
+
+        for (int i = 0; i < towerInfo.inputPatterns[upgradeIndex].noteInputs.Count; i += 1)
         {
-            return;
+            //Debug.Log(i);
+            recordedBuffs.Add(0.0f);
         }
-        else if (currentState == TowerState.Recording)
+
+        //Debug.Log("Passed the For loop :/");
+    }
+
+    // Reset all buff values in the recorded buffs list back to 0
+    public void ResetRecordedBuffs()
+    {
+        for (int i = 0; i < recordedBuffs.Count; i += 1)
         {
-            buffTimer += 1;
-            if(buffTimer == buffTimerMax)
-            {
-                currentState = TowerState.Repeating;
-                buffTimer = 0;
-                isInputtingBuffs = false;
-
-                repeatSpritesIndex = 0; //RECORDING STATUS CODE
-                recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[repeatSpritesIndex]; //RECORDING STATUS CODE
-            }
-            return;
-        }
-        else if(currentState == TowerState.Repeating)
-        {
-            if(buffIndex > recordedBuffs.Count - 1)
-            {
-                //When no buff is activated
-            }
-            else
-            {
-                PlayBuffs(recordedBuffs[buffIndex]);
-            }
-
-            buffIndex += 1;
-
-            buffBeatCount += 1;
-
-            if(buffBeatCount == 4)
-            {
-                buffBeatCount = 0;
-                buffCountMeasure += 1;
-
-                repeatSpritesIndex += 1; //RECORDING STATUS CODE
-                if (repeatSpritesIndex <= (GameManager.Instance.repeatSprites.Count-1))
-                {
-                    recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[repeatSpritesIndex];//RECORDING STATUS CODE
-                }
-
-                if(buffCountMeasure == 4)
-                {
-                    buffCountMeasure = 0;
-                    recordedBuffs.Clear();
-                    currentState = TowerState.Default;
-
-                    repeatSpritesIndex = 0; //RECORDING STATUS CODE
-                    recordingStatus.SetActive(false); //RECORDING STATUS CODE
-                }
-            }
-
-            if (buffIndex >= 4)
-            {
-                buffIndex = 0;
-
-            }
+            recordedBuffs[i] = 0.0f;
         }
     }
-    */
     #endregion
 
+    #region Other
     public void SpawnParticles(Transform tileTransform, ParticleSystem pfxSource)
     {
         ParticleSystem pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity); // Create instance of the particle effect
     }
+    #endregion
 }

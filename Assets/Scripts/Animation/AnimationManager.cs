@@ -34,13 +34,13 @@ public class AnimationManager : MonoBehaviour
     public float CalculateAnimSpeed(float animBpm)
     {
         float animCrotchet = 60.0f / animBpm;
-        Debug.Log("Animation Crotchet:" + animCrotchet);
+        //Debug.Log("Animation Crotchet:" + animCrotchet);
 
         float speedMultiplier = animCrotchet/(60/ConductorV2.instance.bpm);
-        Debug.Log("Crotchet:" + (60/ConductorV2.instance.bpm));
+        //Debug.Log("Crotchet:" + (60/ConductorV2.instance.bpm));
 
         float targetAnimSpeed = 1.0f * speedMultiplier;
-        Debug.Log("Target Speed:" + targetAnimSpeed);
+        //Debug.Log("Target Speed:" + targetAnimSpeed);
 
         return targetAnimSpeed;
     }
@@ -60,7 +60,7 @@ public class AnimationManager : MonoBehaviour
             }
             SetAnimSpeed(animator, 40);
         }
-        Debug.Log("Loadout Animation Speeds Set");
+        //Debug.Log("Loadout Animation Speeds Set");
         
         foreach (AnimatedElement animElement in combatSceneAnimators)
         {
@@ -68,10 +68,10 @@ public class AnimationManager : MonoBehaviour
                 continue;
             }
             
-            Debug.Log(animElement.animator);
+            //Debug.Log(animElement.animator);
             SetAnimSpeed(animElement.animator, animElement.animationBpm);
         }
-        Debug.Log("Combat Animation Speeds Set");
+        //Debug.Log("Combat Animation Speeds Set");
     }
 }
 

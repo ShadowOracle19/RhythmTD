@@ -166,22 +166,24 @@ public class TowerManager : MonoBehaviour
         //towerToPlace.GetComponent<Tower>().rotationSelect.SetActive(true);
 
         //if placed on a certain beat result increase tower base damage
-        switch (result)
-        {
-            case _BeatResult.miss:
-                placingTower.currentDamage = placingTower.towerInfo.damage;
+        //switch (result)
+        //{
+        //    case _BeatResult.miss:
+        //        placingTower.currentDamage = placingTower.towerInfo.damage;
 
 
-                break;
-            case _BeatResult.early:
-                placingTower.currentDamage = placingTower.towerInfo.damage + 1;
-                break;
-            case _BeatResult.perfect:
-                placingTower.currentDamage = placingTower.towerInfo.damage + 2;
-                break;
-            default:
-                break;
-        }
+        //        break;
+        //    case _BeatResult.early:
+        //        placingTower.currentDamage = placingTower.towerInfo.damage + 1;
+        //        break;
+        //    case _BeatResult.perfect:
+        //        placingTower.currentDamage = placingTower.towerInfo.damage + 2;
+        //        break;
+        //    default:
+        //        break;
+        //}
+
+        placingTower.currentDamage = placingTower.towerInfo.damage;
         placingTower.tempDamageHolder = placingTower.currentDamage;
 
         towerList.Add(placingTower);

@@ -49,7 +49,7 @@ public class PocoTower : Tower
 
     private void FindClosestEnemy()
     {
-        if (connectedEnemy != null)
+        if (connectedEnemy != null && connectedEnemy.currentHealth > 0)
         {
             FireLaser();
             return;

@@ -459,13 +459,7 @@ public class Enemy : MonoBehaviour
     {
         _renderer.color = Color.red;
         time = 1;
-        currentHealth -= damage;
-
-        //Checks to make sure the enemy isnt defeated before playing damage SFX.
-        if (deathParticleTriggered == false && currentHealth >0)
-        {
-            AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
-        }    
+        currentHealth -= damage;   
 
         if (currentHealth <= 0)
         {
@@ -502,8 +496,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void Kill()
-    {
-        
+    { 
         isDead = true;
         if (enemy.onDeathEffect)
         {
@@ -513,12 +506,11 @@ public class Enemy : MonoBehaviour
         if (deathSoundTriggered == false)
         {
             //play death sound 
-            AudioManager.instance.PlaySound(enemyDeathSfx, this.gameObject.transform, 1.0f);
+            StartCoroutine(PlaySoundOnBeat(ConductorV2.instance.songPosition, 0.0f));
             deathSoundTriggered = true;
         }    
         
         animator.SetBool("IsKilled",true); //Play death animation
-        
     }
 
 

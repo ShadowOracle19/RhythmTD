@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using Unity.Mathematics;
@@ -33,6 +34,11 @@ public class Enemy : MonoBehaviour
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
 
+    //Controls damage SFX.
+   // public float soundCooldown = 0.5f;
+   // private float nextPlayTime = 0f;
+    private bool deathSoundTriggered = false;
+
     public Tile tileInFront;
 
     bool playOnce = false;
@@ -57,6 +63,7 @@ public class Enemy : MonoBehaviour
 
     //Death
     private bool isDead = false;
+    private bool deathParticleTriggered = false;
     int deathCount = 0;
 
     [Header("SFX")]
@@ -71,6 +78,7 @@ public class Enemy : MonoBehaviour
     private ParticleSystem clashParticlesInstance;
 
     public ParticleSystem hitParticles;
+    [SerializeField] private ParticleSystem damageEffect;
 
     [Header("Sound Timing")]
     private float soundTimer = 0.0f;
@@ -79,7 +87,6 @@ public class Enemy : MonoBehaviour
     [Tooltip("1 = Nearest quarter note. It's recommended you set this value to a power of 2. Ex. 4 = Nearest sixteenth note")]
     [Range(1,64)] 
     public int crotchetDivisor = 4;
-
 
     public virtual void Start()
     {
@@ -454,8 +461,20 @@ public class Enemy : MonoBehaviour
         time = 1;
         currentHealth -= damage;
 
+        //Checks to make sure the enemy isnt defeated before playing damage SFX.
+        if (deathParticleTriggered == false && currentHealth >0)
+        {
+            AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
+        }    
+
         if (currentHealth <= 0)
         {
+            if (currentHealth <= 0 && deathParticleTriggered == false)
+            {
+                damageEffect = Instantiate(damageEffect, this.transform, worldPositionStays: false); 
+                deathParticleTriggered = true;
+            }
+            
             Kill();
         }
     }
@@ -484,16 +503,20 @@ public class Enemy : MonoBehaviour
 
     public void Kill()
     {
+        
         isDead = true;
         if (enemy.onDeathEffect)
         {
             enemyEffect.UseEffect();
         }
 
-        //play death sound 
-        AudioManager.instance.PlaySound(enemyDeathSfx, this.gameObject.transform, 1.0f);
-
-
+        if (deathSoundTriggered == false)
+        {
+            //play death sound 
+            AudioManager.instance.PlaySound(enemyDeathSfx, this.gameObject.transform, 1.0f);
+            deathSoundTriggered = true;
+        }    
+        
         animator.SetBool("IsKilled",true); //Play death animation
         
     }

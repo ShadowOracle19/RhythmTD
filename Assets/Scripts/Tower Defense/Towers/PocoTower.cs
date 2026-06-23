@@ -42,7 +42,9 @@ public class PocoTower : Tower
             return;
         }
 
+       
         FireLaser();
+        
     }
 
     private void FindClosestEnemy()
@@ -79,9 +81,13 @@ public class PocoTower : Tower
 
     private void FireLaser()
     {
-        lineObject.enabled = true;
-        lineObject.SetPosition(0, lineObject.transform.position);
-        lineObject.SetPosition(1, connectedEnemy.transform.position);
-        connectedEnemy.Damage(currentDamage);
+        if (connectedEnemy.currentHealth > 0)
+        {
+            lineObject.enabled = true;
+            lineObject.SetPosition(0, lineObject.transform.position);
+            lineObject.SetPosition(1, connectedEnemy.transform.position);
+            connectedEnemy.Damage(currentDamage);
+        }
+
     }
 }

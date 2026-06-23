@@ -41,11 +41,9 @@ public class AcousticGuitarTower : Tower
         //instatiate bullet 2 upwards
         GameObject bullet2 = Instantiate(nextProjectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
 
-
         bullet2.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, attackTargetTime);
         bullet2.GetComponent<AcousticGuitarProjectile>().isUp = true;
 
-        ConductorV2.instance.projectileEvent.Add(bullet2.GetComponent<Projectile>().trigger);
         //towerUpgradeUnlocked = false;
         feelingItNow = false;
         synthBuff = false;

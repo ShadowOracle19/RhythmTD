@@ -10,7 +10,6 @@ public class Projectile : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public int speed = 1;
     public float timer;
-    public bool canMove = false;
     public float startXPosition;
     public float nextXPosition;
     public Vector3 nextPosition;
@@ -50,7 +49,6 @@ public class Projectile : MonoBehaviour
     {
         startXPosition = gameObject.transform.position.x;
         nextXPosition = transform.position.x + bulletRange;
-        //nextPosition = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
 
         timeAtEnd = timeAtFire + (ConductorV2.instance.crotchet * bulletRange);
 
@@ -71,7 +69,6 @@ public class Projectile : MonoBehaviour
         movementProgress = (((songProgress - timeAtFire) * speed) / (timeAtEnd - timeAtFire));
         nextPosition = new Vector3(Mathf.Lerp(startXPosition, nextXPosition, movementProgress), transform.position.y, transform.position.z);
         gameObject.transform.position = nextPosition;
-
     }
 
     public virtual void OnTriggerEnter(Collider collision)

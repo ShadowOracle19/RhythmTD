@@ -24,8 +24,9 @@ public class PocoTower : Tower
     {
         base.Update();
 
+        if(lineObject.enabled)
+            lineObject.SetPosition(1, connectedEnemy.transform.position);
 
-        
     }
 
     public override void Fire()

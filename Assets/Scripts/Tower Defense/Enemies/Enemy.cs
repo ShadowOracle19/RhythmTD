@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     public Vector3 nextPosition;
 
     //Adds a random amount of jitter to sprite movement.
-    [SerializeField] private float defeatSpinSpeed = UnityEngine.Random.Range(-240f, 240f); 
+    [SerializeField] private float defeatSpinSpeed = 1.0f; 
 
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
@@ -108,6 +108,8 @@ public class Enemy : MonoBehaviour
         AnimationManager.instance.SetAnimSpeed(animator, 80);
 
         soundTimer = 0.0f;
+
+        defeatSpinSpeed = UnityEngine.Random.Range(-240f, 240f);
     }
 
     // Update is called once per frame
@@ -134,10 +136,12 @@ public class Enemy : MonoBehaviour
 
     }
 
+    /*
     void OnDisable()
     {
         Debug.Log("PrintOnDisable: script was disabled");
     }
+    */
 
     public virtual void OnTick()
     {
@@ -277,7 +281,7 @@ public class Enemy : MonoBehaviour
                 }
                 if (ConductorV2.instance.beatTrack == 4)
                 {
-                    Debug.Log("Effect");
+                    //Debug.Log("Effect");
                     enemyEffect.UseEffect();
                 }
                 break;
@@ -342,7 +346,7 @@ public class Enemy : MonoBehaviour
             RaycastHit hit;
             RaycastHit diagHit;
 
-            Debug.Log("Obstacle in front");
+            //Debug.Log("Obstacle in front");
 
             //If Tile above is a valid stage tile and the next tile in front isnt an obstacle
             if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward ), out hit, 1, tileMask) 

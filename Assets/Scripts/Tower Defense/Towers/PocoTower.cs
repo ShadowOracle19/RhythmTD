@@ -87,7 +87,7 @@ public class PocoTower : Tower
             lineObject.enabled = true;
             lineObject.SetPosition(0, lineObject.transform.position);
             lineObject.SetPosition(1, connectedEnemy.transform.position);
-            connectedEnemy.Damage(currentDamage);
+            connectedEnemy.Damage(towerDamage);
         }
 
     }

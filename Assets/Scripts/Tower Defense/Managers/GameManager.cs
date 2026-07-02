@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
             if (_instance is null)
             {
                 Debug.LogError("GameManager is NULL");
-                
             }
 
             return _instance;
@@ -639,7 +638,7 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.enemyTotal = 0;
         CombatManager.Instance.pickupTotal = 0;
 
-        Debug.Log("Combat State Reset");
+        //Debug.Log("Combat State Reset");
     }
 
     public void UnlockUpgrade(Tower tower, UpgradeNum upgrade)

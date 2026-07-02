@@ -431,7 +431,7 @@ public class ConductorV2 : MonoBehaviour
 
     public void PlayMusic()
     {
-        Debug.Log("music started");
+        //Debug.Log("music started");
         flats.Play();
         major.Play();
         allegro.Play();

@@ -33,7 +33,7 @@ public class ComboManager : MonoBehaviour
     public int score;
 
     [Header ("Score Pulse")]
-    public GameObject cursorSprite;
+    //public GameObject cursorSprite;
     public Vector3 textDefaultSize = new Vector3(1.0f, 1.0f, 1.0f);
     public Vector3 textPulseSize = new Vector3(1.0f, 1.25f, 1.0f);
 

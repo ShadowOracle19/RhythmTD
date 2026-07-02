@@ -58,7 +58,7 @@ public class ScrollView : MonoBehaviour
 
     public void HandleOnSelect(ItemButton item)
     {
-        Debug.Log("AM here" + item.viewportOffset);
+        //Debug.Log("AM here" + item.viewportOffset);
         Vector2 positionFrom = _viewport.anchoredPosition;
         positionFrom.x = item.viewportOffset;
 

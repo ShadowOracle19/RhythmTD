@@ -162,8 +162,7 @@ public class TowerManager : MonoBehaviour
         //        break;
         //}
 
-        placingTower.currentDamage = placingTower.towerInfo.damage;
-        placingTower.tempDamageHolder = placingTower.currentDamage;
+        placingTower.towerDamage = placingTower.towerInfo.damage;
 
         towerList.Add(placingTower);
 

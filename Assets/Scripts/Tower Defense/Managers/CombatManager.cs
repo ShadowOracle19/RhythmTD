@@ -269,7 +269,7 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.conductor.SetActive(true); //
 
         //Set Animation BPM
-        Debug.Log(ConductorV2.instance.bpm);
+        //Debug.Log(ConductorV2.instance.bpm);
         AnimationManager.instance.SetCombatAnimSpeed();
 
         // start count in

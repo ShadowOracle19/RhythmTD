@@ -36,8 +36,6 @@ public class ChromaticTower : Tower
             return;
         }
 
-        
-
         base.Fire(0f);
 
         int chargeValue = towerInfo.resourceGain;

@@ -31,6 +31,7 @@ public class Tower : MonoBehaviour
     public float measureLength = 0.0f; // length of 1 measure expressed in time
     public int measureCycleCount = 0;
     public int attackCycleCount = 0;
+    public int prevAttackCycleCount = 0;
     public float inputTargetTime = 0.0f; // input timing in the song
     public float attackTargetTime = 0.0f;
     public GameObject indicatorPrefab;
@@ -345,8 +346,9 @@ public class Tower : MonoBehaviour
 
     public void FireTower(int currentAttackIndex)
     {
-        if(currentAttackIndex != prevAttackIndex)
+        if(currentAttackIndex != prevAttackIndex || (towerInfo.inputPatterns[upgradeIndex].noteInputs.Count == 1 && attackCycleCount != prevAttackCycleCount))
         {
+            prevAttackCycleCount = attackCycleCount;
             prevAttackIndex = currentAttackIndex;
 
             switch (currentAttackPattern)

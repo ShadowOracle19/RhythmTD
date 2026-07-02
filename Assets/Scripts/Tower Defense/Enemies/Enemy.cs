@@ -31,6 +31,9 @@ public class Enemy : MonoBehaviour
 
     public Vector3 nextPosition;
 
+    //Adds a random amount of jitter to sprite movement.
+    [SerializeField] private float defeatSpinSpeed = UnityEngine.Random.Range(-240f, 240f); 
+
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
 
@@ -124,7 +127,8 @@ public class Enemy : MonoBehaviour
         time -= Time.deltaTime * 5;
         _renderer.color = Color.Lerp(_renderer.color, Color.white, Time.deltaTime / time);
 
-
+        //Moves the sprite by adding a small random movement to its z-position.
+        //this.transform.Rotate(0, 0, -defeatSpinSpeed * Time.deltaTime);
 
         Movement();
 

@@ -387,16 +387,22 @@ public class Spawner : MonoBehaviour
 
         cursorAnimator.ResetTrigger("Horizontal");
         cursorAnimator.SetTrigger("Vertical");
+        Debug.Log("starting pickups");
+
     }
 
     public void EndPickupPhase()
     {
-        cameraAnimator.ResetTrigger("Pickup Phase Start");
-        cameraAnimator.SetTrigger("Pickup Phase End");
-        cameraAnimator.ResetTrigger("Pickup Phase End");
+        if (pickupPhaseEnded == true)
+        {
+            cameraAnimator.ResetTrigger("Pickup Phase Start");
+            cameraAnimator.SetTrigger("Pickup Phase End");
+            cameraAnimator.ResetTrigger("Pickup Phase End");
 
-        cursorAnimator.ResetTrigger("Vertical");
-        cursorAnimator.SetTrigger("Horizontal");
+            cursorAnimator.ResetTrigger("Vertical");
+            cursorAnimator.SetTrigger("Horizontal");
+            Debug.Log("ending pickups");
+        }
     }
 }
 

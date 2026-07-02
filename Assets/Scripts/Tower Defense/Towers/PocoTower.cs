@@ -24,8 +24,9 @@ public class PocoTower : Tower
     {
         base.Update();
 
+        if(lineObject.enabled)
+            lineObject.SetPosition(1, connectedEnemy.transform.position);
 
-        
     }
 
     public override void Fire(float yPos)
@@ -42,12 +43,14 @@ public class PocoTower : Tower
             return;
         }
 
+       
         FireLaser();
+        
     }
 
     private void FindClosestEnemy()
     {
-        if (connectedEnemy != null)
+        if (connectedEnemy != null && connectedEnemy.currentHealth > 0)
         {
             FireLaser();
             return;
@@ -79,9 +82,13 @@ public class PocoTower : Tower
 
     private void FireLaser()
     {
-        lineObject.enabled = true;
-        lineObject.SetPosition(0, lineObject.transform.position);
-        lineObject.SetPosition(1, connectedEnemy.transform.position);
-        connectedEnemy.Damage(towerDamage);
+        if (connectedEnemy.currentHealth > 0)
+        {
+            lineObject.enabled = true;
+            lineObject.SetPosition(0, lineObject.transform.position);
+            lineObject.SetPosition(1, connectedEnemy.transform.position);
+            connectedEnemy.Damage(currentDamage);
+        }
+
     }
 }

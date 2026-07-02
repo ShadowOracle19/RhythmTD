@@ -155,6 +155,21 @@ public class Tower : MonoBehaviour
         // TOWER INPUT //
         songProgress = ConductorV2.instance.songPosition;
 
+        //Reset on song loop
+        if(songProgress < 0.1f)
+        {
+            inputIndex = 0;
+            attackIndex = 0;
+            prevAttackIndex = towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1;
+
+            measureCycleCount = 0;
+            attackCycleCount = 0;
+            prevAttackCycleCount = attackCycleCount;
+
+            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
+            attackTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
+        }
+
         //Tower State
         
         if (prevMeasure != ConductorV2.instance.measureTrack)

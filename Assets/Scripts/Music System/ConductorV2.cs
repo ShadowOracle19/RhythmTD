@@ -26,7 +26,7 @@ public class ConductorV2 : MonoBehaviour
     //The number of beats in each loop
     public float beatsPerLoop;
 
-    //the total number of loops completed since the looping clip first started
+    //the total number of loops (measures) completed since the looping clip first started
     public int completedLoops = 0;
 
     //The current position of the song within the loop in beats.
@@ -264,7 +264,7 @@ public class ConductorV2 : MonoBehaviour
         }
 
         //determine how many seconds since the song started
-        songPosition = (musicSource.time) ;
+        songPosition = (musicSource.time);
 
         //determine how many beats since the song started
         songPositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
@@ -444,7 +444,6 @@ public class ConductorV2 : MonoBehaviour
         Tower10.Play();
         Tower11.Play();
         Tower12.Play();
-      
     }
 }
 

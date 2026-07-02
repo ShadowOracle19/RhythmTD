@@ -18,6 +18,8 @@ public class ConductorV2 : MonoBehaviour
 
     public float bpm = 160;//song beats per minute
     public float crotchet;//Gives the time duration of a beat, calculated from the bpm
+    public int songLoops = 0;
+    public bool songHasLooped = true;
     public float songPosition;
     public float songPositionInBeats;//current song position in beats
     public float dspSongTime;//how many seconds have passed since the song started
@@ -95,8 +97,9 @@ public class ConductorV2 : MonoBehaviour
     public void CountUsIn(int _bpm)
     {
         pauseConductor = true;
-
         bpm = _bpm;
+        songLoops = 0;
+        songHasLooped = true;
         completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 0;
@@ -257,14 +260,25 @@ public class ConductorV2 : MonoBehaviour
             return;
         }
         
+        if (songPosition > 1.0f)
+        {
+            songHasLooped = false;
+        }
+
         if(songPosition < 0.1f)
         {
             completedLoops = 0;
             numberOfBeats = 0;
+
+            if (songHasLooped == false)
+            {
+                songLoops += 1;
+                songHasLooped = true;
+            }  
         }
 
         //determine how many seconds since the song started
-        songPosition = (musicSource.time);
+        songPosition = (musicSource.time) + (musicSource.clip.length * songLoops);
 
         //determine how many beats since the song started
         songPositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
@@ -431,7 +445,6 @@ public class ConductorV2 : MonoBehaviour
 
     public void PlayMusic()
     {
-        //Debug.Log("music started");
         flats.Play();
         major.Play();
         allegro.Play();
@@ -444,6 +457,8 @@ public class ConductorV2 : MonoBehaviour
         Tower10.Play();
         Tower11.Play();
         Tower12.Play();
+
+        //Debug.Log("music started");
     }
 }
 

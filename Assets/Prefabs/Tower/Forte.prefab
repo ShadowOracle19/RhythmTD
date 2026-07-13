@@ -171,6 +171,7 @@ MonoBehaviour:
   measureLength: 0
   measureCycleCount: 0
   attackCycleCount: 0
+  prevAttackCycleCount: 0
   inputTargetTime: 0
   attackTargetTime: 0
   indicatorPrefab: {fileID: 5448178981151780786, guid: 9f587f8a32efec442be6254918506e84, type: 3}
@@ -183,7 +184,7 @@ MonoBehaviour:
   shieldEffect: {fileID: 5223548057794400369}
   isShielded: 0
   recordingStatus: {fileID: 2928146528420797377}
-  projectileColor: {r: 0, g: 0, b: 0, a: 0}
+  projectileColor: {r: 1, g: 1, b: 1, a: 0.29411766}
   projectileSprites:
   - {fileID: -1865030782402858528, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}
   - {fileID: 4500404875889587923, guid: 99b4baa3ff54db2409371d0295d53455, type: 3}

@@ -19,7 +19,6 @@ public class ConductorV2 : MonoBehaviour
     public float bpm = 160;//song beats per minute
     public float crotchet;//Gives the time duration of a beat, calculated from the bpm
     public int songLoops = 0;
-    public bool songHasLooped = true;
     public float songPosition;
     public float songPositionInBeats;//current song position in beats
     public float dspSongTime;//how many seconds have passed since the song started
@@ -29,6 +28,7 @@ public class ConductorV2 : MonoBehaviour
     public float beatsPerLoop;
 
     //the total number of loops (measures) completed since the looping clip first started
+    /*
     public int completedLoops = 0;
 
     //The current position of the song within the loop in beats.
@@ -36,6 +36,7 @@ public class ConductorV2 : MonoBehaviour
 
     //The current relative position of the song within the loop measured between 0 and 1.
     public float loopPositionInAnalog;
+    */
 
 
     //Beat Thresholds
@@ -99,8 +100,7 @@ public class ConductorV2 : MonoBehaviour
         pauseConductor = true;
         bpm = _bpm;
         songLoops = 0;
-        songHasLooped = true;
-        completedLoops = 0;
+        //completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 0;
         measureTrack = 0;
@@ -142,7 +142,7 @@ public class ConductorV2 : MonoBehaviour
         pauseConductor = false;
         countInText.gameObject.SetActive(false);
 
-        completedLoops = 0;
+        //completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 1;
         beatDuration = 0;
@@ -260,35 +260,35 @@ public class ConductorV2 : MonoBehaviour
             return;
         }
         
-        if (songPosition > 1.0f)
-        {
-            songHasLooped = false;
-        }
-
-        if(songPosition < 0.1f)
-        {
-            completedLoops = 0;
-            numberOfBeats = 0;
-
-            if (songHasLooped == false)
-            {
-                songLoops += 1;
-                songHasLooped = true;
-            }  
-        }
+        songLoops = Mathf.FloorToInt(songPosition/musicSource.clip.length);
 
         //determine how many seconds since the song started
-        songPosition = (musicSource.time) + (musicSource.clip.length * songLoops);
+        Debug.Log((musicSource.time) - (songPosition % musicSource.clip.length));
 
+        if (((musicSource.time) - (songPosition % musicSource.clip.length)) < 0)
+        {
+            songPosition += musicSource.time + (musicSource.clip.length - songPosition);
+            Debug.Log("Modified time addition on loop");
+        }
+        else
+        {
+            songPosition += ((musicSource.time) - (songPosition % musicSource.clip.length));
+            Debug.Log("Normal time addition");
+        }
+        
         //determine how many beats since the song started
         songPositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
+        //songPositionInBeats = (musicSource.time / crotchet) - GameManager.Instance.audioOffset;
+        //stagePositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
 
         //calculate the loop position
+        /*
         if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
             completedLoops++;
         loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop + 1;
 
         loopPositionInAnalog = (loopPositionInBeats - 1) / beatsPerLoop;
+        */
 
         if (songPositionInBeats >= numberOfBeats + 1 * 1)
         {

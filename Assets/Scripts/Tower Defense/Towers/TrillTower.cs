@@ -92,16 +92,24 @@ public class TrillTower : Tower
 
         //instatiate bullet
         GameObject bullet = Instantiate(nextProjectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, attackTargetTime);
+        lastBulletFired = bullet.GetComponent<Projectile>();
+        lastBulletFired.InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, attackTargetTime);
 
-        ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        lastBulletFired.spriteRenderer.sprite = projectileSprites[upgradeIndex];
+        lastBulletFired.spriteRenderer.color = projectileColor;
+
+        ConductorV2.instance.projectileEvent.Add(lastBulletFired.trigger);
 
         if(chargeShotDamage > 2 && upgradeIndex == 1)
         {
             Debug.Log("is this happening?");
             float redLerp = chargeShotDamage / 7;
-            bullet.GetComponent<Projectile>().spriteRenderer.color = Color.Lerp(Color.white, Color.red, redLerp);
-            bullet.GetComponent<Projectile>().spriteRenderer.sprite = base.projectileSprites[1];
+            lastBulletFired.spriteRenderer.color = Color.Lerp(projectileColor, Color.red, redLerp);
+            lastBulletFired.spriteRenderer.sprite = base.projectileSprites[1];
         }
+
+        feelingItNow = false;
+        synthBuff = false;
+        isBuffed = false;
     }
 }

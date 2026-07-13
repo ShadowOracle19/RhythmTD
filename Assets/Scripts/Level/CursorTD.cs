@@ -516,6 +516,7 @@ public class CursorTD : MonoBehaviour
         tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().isHit = true;
         tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().currentColor =  tile.placedTower.GetComponent<Tower>().indicators[tile.placedTower.GetComponent<Tower>().inputIndex].GetComponent<InputIndicator>().hitColors[index];
         tile.placedTower.GetComponent<Tower>().UpdateInputIndex();
+        tile.placedTower.GetComponent<Tower>().inputPrompt.SetActive(false);
     }
 
     //To-Do: Update attack & input indexes based on timing of new input list

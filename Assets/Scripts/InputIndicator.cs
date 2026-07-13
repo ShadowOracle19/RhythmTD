@@ -90,7 +90,8 @@ public class InputIndicator : MonoBehaviour
             UpdateTargetTime();
         }
         
-        if (parentTower.GetComponent<Tower>().towerHover && parentTower.GetComponent<Tower>().enemyInRange)
+        //NOTE: Towers without enemy sightlines weren't displaying indicators properly. If we only want some towers to display indicators in the presence of enemies we'll need additional variables.
+        if (parentTower.GetComponent<Tower>().towerHover) //(parentTower.GetComponent<Tower>().towerHover && parentTower.GetComponent<Tower>().enemyInRange)
         {
             isActive = true;
             //Debug.Log("Tower is highlighted and enemy in range");
@@ -104,6 +105,7 @@ public class InputIndicator : MonoBehaviour
         if (!isActive)
         {
             spriteRenderer.enabled = false;
+            parentTower.GetComponent<Tower>().inputPrompt.SetActive(false);
             return;
         }
 
@@ -157,6 +159,7 @@ public class InputIndicator : MonoBehaviour
             }
             
             spriteRenderer.color = currentColor;
+            parentTower.GetComponent<Tower>().inputPrompt.SetActive(true);
 
             yield return null;
         }
@@ -177,12 +180,4 @@ public class InputIndicator : MonoBehaviour
         inputTargetTime = (measureLength * (measureCycleCount)) + measureTargetTime; 
         spawnTime = inputTargetTime - scrollTime;
     }
-
-    /*
-    public void SetIndicatorData()
-    {
-
-    }
-    */
-
 }

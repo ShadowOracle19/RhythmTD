@@ -23,7 +23,7 @@ public class SyncedAnimatorToTwoBeats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.Play(currentState, -1, ((ConductorV2.instance.songPositionInBeats - ConductorV2.instance.completedLoops * ConductorV2.instance.beatsPerLoop + 1) / 2));
+        animator.Play(currentState, -1, ((ConductorV2.instance.songPositionInBeats - ConductorV2.instance.measureTrack * ConductorV2.instance.beatsPerLoop + 1) / 2));
         animator.speed = 0;
     }
 }

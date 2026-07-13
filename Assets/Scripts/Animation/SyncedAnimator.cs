@@ -23,7 +23,7 @@ public class SyncedAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.Play(currentState, -1, (ConductorV2.instance.loopPositionInAnalog));
+        animator.Play(currentState, -1, (((ConductorV2.instance.beatTrack * ConductorV2.instance.crotchet) + ConductorV2.instance.beatDuration)) / (ConductorV2.instance.crotchet * ConductorV2.instance.beatsPerLoop));
         animator.speed = 0;
     }
 }

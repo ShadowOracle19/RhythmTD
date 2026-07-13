@@ -18,13 +18,6 @@ public class ChromaticTower : Tower
     public override void Update()
     {
         base.Update();
-        
-        /*
-        if(upgradeThreeActive)
-        {
-            currentAttackPattern = TowerAttackPattern.everyMeasure;
-        }
-        */
     }
 
     public override void Fire(float yPos)

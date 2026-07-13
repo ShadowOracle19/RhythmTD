@@ -218,7 +218,7 @@ public class Tower : MonoBehaviour
 
         shieldEffect.SetActive(isShielded);
 
-        towerEffectVisual();
+        //TowerEffectVisual();
 
         //Animation switches
         if (upgradeIndex == 1)//(upgradeOneActive)
@@ -325,9 +325,10 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void towerEffectVisual()
+    /*
+    public void TowerEffectVisual()
     {
-        if (towerHover && towerAboutToFire && enemyInRange)
+        if (towerHover && towerAboutToFire) //(towerHover && towerAboutToFire && enemyInRange)
         {
             inputPrompt.SetActive(true);
         }
@@ -336,6 +337,7 @@ public class Tower : MonoBehaviour
             inputPrompt.SetActive(false);
         }
     }
+    */
     #endregion
 
     #region Tower attacking
@@ -356,7 +358,6 @@ public class Tower : MonoBehaviour
         feelingItNow = false;
         synthBuff = false;
         isBuffed = false;
-
     }
 
     public void FireTower(int currentAttackIndex)

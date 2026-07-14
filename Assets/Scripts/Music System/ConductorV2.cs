@@ -281,15 +281,6 @@ public class ConductorV2 : MonoBehaviour
         //songPositionInBeats = (musicSource.time / crotchet) - GameManager.Instance.audioOffset;
         //stagePositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
 
-        //calculate the loop position
-        /*
-        if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
-            completedLoops++;
-        loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop + 1;
-
-        loopPositionInAnalog = (loopPositionInBeats - 1) / beatsPerLoop;
-        */
-
         if (songPositionInBeats >= numberOfBeats + 1 * 1)
         {
             numberOfBeats++;

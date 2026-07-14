@@ -19,8 +19,7 @@ public class InputIndicator : MonoBehaviour
     public float notePosition = 0.0f; // input position in the measure expressed as a percentage
     public Color defaultColor;
     public Color approachColor;
-    public List<Color> hitColors = new List<Color>();
-    //public Color hitColor;    
+    public List<Color> hitColors = new List<Color>();   
     public float hitFreezeTime = 0.125f; // the duration the indicator remains frozen & visible after being hit
     public float defaultScrollTime = 1.0f;
     public float scrollSpeed = 1.0f;

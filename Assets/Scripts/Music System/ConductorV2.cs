@@ -263,17 +263,17 @@ public class ConductorV2 : MonoBehaviour
         songLoops = Mathf.FloorToInt(songPosition/musicSource.clip.length);
 
         //determine how many seconds since the song started
-        Debug.Log((musicSource.time) - (songPosition % musicSource.clip.length));
+        //Debug.Log((musicSource.time) - (songPosition % musicSource.clip.length));
 
         if (((musicSource.time) - (songPosition % musicSource.clip.length)) < 0)
         {
             songPosition += musicSource.time + (musicSource.clip.length - (songPosition % musicSource.clip.length));
-            Debug.Log("Modified time addition on loop");
+            //Debug.Log("Modified time addition on loop");
         }
         else
         {
             songPosition += ((musicSource.time) - (songPosition % musicSource.clip.length));
-            Debug.Log("Normal time addition");
+            //Debug.Log("Normal time addition");
         }
         
         //determine how many beats since the song started

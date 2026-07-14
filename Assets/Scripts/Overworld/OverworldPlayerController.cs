@@ -31,6 +31,7 @@ public class OverworldPlayerController : MonoBehaviour
     Vector2 axis;
     public float speed;
     public SpriteRenderer sprite;
+    public PlayerInteractionDetection interactionDetection;
 
     public static OverworldPlayerController Instance { get; private set; }
 
@@ -68,10 +69,8 @@ public class OverworldPlayerController : MonoBehaviour
         optionsAction.canceled += context => OptionsTrigger = false;
 
         interactAction.performed += context => {
-            if (context.interaction is TapInteraction)
-            {
-                //Interact functionality
-            }
+            Debug.Log("interact");
+            interactionDetection.InteractableObject.GetComponent<InteractionBase>().Interaction();
         };
         interactAction.canceled += context => InteractTrigger = false;
     }
@@ -79,12 +78,14 @@ public class OverworldPlayerController : MonoBehaviour
     private void OnEnable()
     {
         moveAction.Enable();
+        interactAction.Enable();
         optionsAction.Enable();
     }
 
     private void OnDisable()
     {
         moveAction.Disable();
+        interactAction.Disable();
         optionsAction.Disable();
     }
 

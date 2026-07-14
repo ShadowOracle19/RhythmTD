@@ -9,7 +9,7 @@ public class ChangeScene : MonoBehaviour
 {
     public void MainScenePlay()
     {
-        SceneManager.LoadScene("Game Scene");
+        SceneManager.LoadScene("Game Scene - 2.5d");
     }
     
     public void MainMenuLoad()

@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     public Vector3 nextPosition;
 
     //Adds a random amount of jitter to sprite movement.
-    [SerializeField] private float defeatSpinSpeed = UnityEngine.Random.Range(-240f, 240f); 
+    [SerializeField] private float defeatSpinSpeed; 
 
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
@@ -96,6 +96,7 @@ public class Enemy : MonoBehaviour
 
         //Set Animation BPM
         AnimationManager.instance.SetAnimSpeed(animator, 80);
+        defeatSpinSpeed = Random.Range(-240f, 240f);
     }
 
     // Update is called once per frame

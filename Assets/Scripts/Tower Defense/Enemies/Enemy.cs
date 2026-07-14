@@ -123,6 +123,7 @@ public class Enemy : MonoBehaviour
                 RemoveEnemy();
             }
             GetComponent<BoxCollider>().enabled = false;
+            enemyState = EnemyState.Walk;
             dontMove = true;
             return;
         }
@@ -434,7 +435,6 @@ public class Enemy : MonoBehaviour
 
     public virtual void Movement()
     {
-
         timer += Time.deltaTime * speed;
         if (gameObject.transform.position != nextPosition && !dontMove)
         {
@@ -456,10 +456,8 @@ public class Enemy : MonoBehaviour
                 enemyState = EnemyState.Attack;
                 dontMove = true;
                 return;
-            }
-            
+            }  
         }
-        
     }
     
 

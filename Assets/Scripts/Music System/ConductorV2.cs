@@ -267,7 +267,7 @@ public class ConductorV2 : MonoBehaviour
 
         if (((musicSource.time) - (songPosition % musicSource.clip.length)) < 0)
         {
-            songPosition += musicSource.time + (musicSource.clip.length - songPosition);
+            songPosition += musicSource.time + (musicSource.clip.length - (songPosition % musicSource.clip.length));
             Debug.Log("Modified time addition on loop");
         }
         else
@@ -278,8 +278,6 @@ public class ConductorV2 : MonoBehaviour
         
         //determine how many beats since the song started
         songPositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
-        //songPositionInBeats = (musicSource.time / crotchet) - GameManager.Instance.audioOffset;
-        //stagePositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
 
         if (songPositionInBeats >= numberOfBeats + 1 * 1)
         {

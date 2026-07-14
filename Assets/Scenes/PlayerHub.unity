@@ -5532,6 +5532,7 @@ GameObject:
   - component: {fileID: 2796566366978985561}
   - component: {fileID: 1459877928}
   - component: {fileID: 1459877927}
+  - component: {fileID: 6830153334469951016}
   m_Layer: 0
   m_Name: SpriteSorter
   m_TagString: Interactable
@@ -48219,6 +48220,7 @@ GameObject:
   - component: {fileID: 2857359396887113121}
   - component: {fileID: 1356658896}
   - component: {fileID: 1356658895}
+  - component: {fileID: 6056419822268629868}
   m_Layer: 0
   m_Name: SpriteFlat
   m_TagString: Interactable
@@ -49487,6 +49489,7 @@ GameObject:
   - component: {fileID: 5523696202714887426}
   - component: {fileID: 1693931821}
   - component: {fileID: 1693931820}
+  - component: {fileID: 9187396146037088117}
   m_Layer: 0
   m_Name: SpriteChromatic
   m_TagString: Interactable
@@ -55474,6 +55477,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &6056419822268629868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180320470538772513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edbb51001eb1a841971b4411d79510e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueInteractionCharacter
 --- !u!1 &6062813628667791293
 GameObject:
   m_ObjectHideFlags: 0
@@ -55630,6 +55645,9 @@ GameObject:
   - component: {fileID: 6913955031544733689}
   - component: {fileID: 7520051424436195420}
   - component: {fileID: 5744448684332967062}
+  - component: {fileID: 7520051424436195423}
+  - component: {fileID: 7520051424436195422}
+  - component: {fileID: 7520051424436195421}
   m_Layer: 0
   m_Name: GM-MOD_Record-Player
   m_TagString: Untagged
@@ -61471,6 +61489,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7330145580889564897}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &6830153334469951016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78679122673966620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edbb51001eb1a841971b4411d79510e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueInteractionCharacter
 --- !u!1 &6831204622996088537
 GameObject:
   m_ObjectHideFlags: 0
@@ -67175,6 +67205,66 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6104802831620883779}
   m_Mesh: {fileID: -3088289327894590169, guid: f2282e5e804a82143a87601724b74d60, type: 3}
+--- !u!114 &7520051424436195421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6104802831620883779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b42cf19f2df99d3429c5bf34117e7482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RecordPlayer
+--- !u!65 &7520051424436195422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6104802831620883779}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.008000007, y: 0.008000003, z: 0.0019750025}
+  m_Center: {x: 0.00000065941214, y: 0.00000015111004, z: 0.0009867388}
+--- !u!54 &7520051424436195423
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6104802831620883779}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &7522497278909962254
 GameObject:
   m_ObjectHideFlags: 0
@@ -77874,6 +77964,7 @@ GameObject:
   - component: {fileID: 8659117666531497120}
   - component: {fileID: 1619946328}
   - component: {fileID: 1619946327}
+  - component: {fileID: 8792904845871153868}
   m_Layer: 0
   m_Name: SpriteRunner
   m_TagString: Interactable
@@ -77881,6 +77972,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8792904845871153868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792904845871153867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edbb51001eb1a841971b4411d79510e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueInteractionCharacter
 --- !u!1 &8795000188170416377
 GameObject:
   m_ObjectHideFlags: 0
@@ -81697,6 +81800,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7330145580889564897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9187396146037088117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5356159528049866146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edbb51001eb1a841971b4411d79510e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueInteractionCharacter
 --- !u!23 &9189614171432176601
 MeshRenderer:
   m_ObjectHideFlags: 0

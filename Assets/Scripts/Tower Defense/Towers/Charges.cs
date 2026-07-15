@@ -19,7 +19,7 @@ public class Charges : MonoBehaviour
     public float alphaTargetTime = 0.0f;
     public float alphaProgress = 0.0f;
     public float defaultAlpha = 1.0f;
-    public float expiryAlpha = 0.5f;
+    public float expiryAlpha = 0.25f;
 
     private void Update()
     {
@@ -78,26 +78,22 @@ public class Charges : MonoBehaviour
     {
         bool fading = true;
         
-        while (ConductorV2.instance.songPosition < (timeAtPlacement + (ConductorV2.instance.crotchet * expiryTimeInBeats))) //(expiryTimeInBeats - expiryTelegraphInBeats)
+        while (ConductorV2.instance.songPosition < (timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats))))
         {
             Debug.Log(timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats)));
             yield return null;
         }
 
-        //alphaTargetTime = (timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats))) + (ConductorV2.instance.crotchet / 4);
-        //alphaProgress = 0.0f;
-        //Debug.Log("Current Song Time:" + ConductorV2.instance.songPosition);
-        //Debug.Log("Alpha Target Time:" + alphaTargetTime);
-        //Debug.Log("Expiry End Time:" + (timeAtPlacement + (ConductorV2.instance.crotchet * expiryTimeInBeats)));
+        alphaProgress = 0.0f;
+        alphaTargetTime = (timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats))) + (ConductorV2.instance.crotchet / 4);
 
-        /*
         while (ConductorV2.instance.songPosition < (timeAtPlacement + (ConductorV2.instance.crotchet * expiryTimeInBeats)))
         {
             alphaProgress = (ConductorV2.instance.songPosition - timeAtPlacement) / (alphaTargetTime - timeAtPlacement);
 
             currentColor = new Color(1f, 1f, 1f, Mathf.Lerp(startAlpha, endAlpha, alphaProgress));
             spriteRenderer.color = currentColor;
-            
+
             if (fading && alphaProgress >= 1.0f)
             {
                 startAlpha = expiryAlpha;
@@ -113,6 +109,22 @@ public class Charges : MonoBehaviour
                 fading = true;
             }
 
+
+            yield return null;
+        }
+
+        //Debug.Log("Current Song Time:" + ConductorV2.instance.songPosition);
+        //Debug.Log("Alpha Target Time:" + alphaTargetTime);
+        //Debug.Log("Expiry End Time:" + (timeAtPlacement + (ConductorV2.instance.crotchet * expiryTimeInBeats)));
+
+        /*
+        while (ConductorV2.instance.songPosition < (timeAtPlacement + (ConductorV2.instance.crotchet * expiryTimeInBeats)))
+        {
+            
+
+            
+            
+            
             yield return null;
         }
         */

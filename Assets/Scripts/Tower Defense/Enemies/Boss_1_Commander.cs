@@ -110,7 +110,7 @@ public class Boss_1_Commander : Enemy
                 WinState();
                 break;
             case CommanderStates.lossPhase:
-                GameManager.Instance.GameOver();
+                GameManager.Instance.FailLevel();
                 break;
             default:
                 break;

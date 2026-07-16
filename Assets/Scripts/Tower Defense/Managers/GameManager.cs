@@ -28,59 +28,70 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Variables
     public Transform globalParent;
+
     public AudioSource menuMusic;
     public AudioSource buttonHighlightSFX;
 
-    [SerializeField] public GameObject winScreen;
-    [SerializeField] public GameObject failScreen;
-    [SerializeField] public GameObject conductor;
+    public GameObject conductor;
 
-    [Header("Screen Roots")]
-    public GameObject combatRoot;
-    public GameObject dialogueRoot;
-    public GameObject menuRoot;
-    [SerializeField] private GameObject settings;
-    public GameObject pauseMenuRoot;
+    [Space(20)][Header("<b><size=15>Screens<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject titleRoot;
-    public GameObject exitMenuRoot;
-    public GameObject showcaseCredits;
-
-    [Header("Combat")]
-    //[SerializeField] private Slider healthSlider;
-    [SerializeField] public int _maxHealth = 5;
-    [SerializeField] public int _currentHealth = 0;
-    [SerializeField] public bool combatRunning = false;
-    public TextMeshProUGUI waveCounter;
-    public TextMeshProUGUI enemyCounter;
-    public GameObject playerInputManager;
-    public bool lostHealth = false;
-    public bool isDynamicMusicActive = true;
-
-    [Header("Pause Menu")]
-    [SerializeField] public bool isGamePaused = false;
+    [Space(10)]
+    public GameObject menuRoot;
+    [Space(10)]
+    public GameObject dialogueRoot;
+    [Space(10)]
+    public GameObject combatRoot;
+    public GameObject winScreen;
+    public GameObject failScreen;
+    [Space(10)]
+    public GameObject pauseMenuRoot;
+    [SerializeField] private GameObject settings;
     [SerializeField] private Button restartEncounterButton;
+    public GameObject exitMenuRoot;
+
+    [Space(20)][Header("<b><size=15>Pausing<b><size=15>")]
+    [Line(255,255,255)]
+    [SerializeField] public bool isGamePaused = false;
+    
     //[SerializeField] private GameObject pauseMenu;
 
-
-    [Header("Encounter")]
+    [Space(20)][Header("<b><size=15>Combat<b><size=15>")]
+    [Line(255,255,255)]
+    public GameObject playerInputManager;
+    [Space(10)]
+    [SerializeField] public bool combatRunning = false;
+    [Space(10)][Header("Health")]
+    [SerializeField] public int _maxHealth = 5;
+    [SerializeField] public int _currentHealth = 0;
+    public bool hasLostHealth = false;
+    //[SerializeField] private Slider healthSlider;
+    [Space(10)][Header("Enemy UI")]
+    public TextMeshProUGUI waveCounter;
+    public TextMeshProUGUI enemyCounter;
+    
+    [Space(20)][Header("<b><size=15>Encounter<b><size=15>")]
+    [Line(255,255,255)]
     public EncounterCreator currentEncounter;
     public bool encounterRunning = false;
+    public bool tutorialRunning = false;
     public bool winState = false;
     public bool failState = false;
-    public bool tutorialRunning = false;
 
-    [Header("Dialogue")]
-    public float textSpeed = 0.05f;
-
-    [Header("Tutorial")]
+    [Space(20)][Header("<b><size=15>Tutorial<b><size=15>")]
+    [Line(255,255,255)]
     public DynamicSongCreator tutorialSong;
 
-    [Header("Conductor")]
+    [Space(20)][Header("<b><size=15>Conductor<b><size=15>")]
+    [Line(255,255,255)]
     public float audioOffset;
     public float inputOffset;
 
-    [Header("Level Buttons")]
+    [Space(20)][Header("<b><size=15>Level Buttons<b><size=15>")]
+    [Line(255,255,255)]
     [SerializeField] private GameObject levelButtons;
     [SerializeField] private Transform levelParent;
     [SerializeField] private ScrollView levelScrollView;
@@ -90,7 +101,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Selectable returnToMainMenuButton;
     public GameObject currentSelectedButton;
 
-    [Header("Info Panel Connections")]
+    [Space(20)][Header("<b><size=15>Level Info Panel<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject infoPanel;
     public TextMeshProUGUI levelNameText;
     public TextMeshProUGUI levelNumText;
@@ -104,18 +116,22 @@ public class GameManager : MonoBehaviour
     public List<Image> intelImages;
     public int imageIndex = 0;
 
-    [Header("Tower Loadout")]
+    [Space(20)][Header("<b><size=15>Tower Loadout<b><size=15>")]
+    [Line(255,255,255)]
     public List<TowerPlacementInfo> towers = new List<TowerPlacementInfo>();
 
-    [Header("Recording Assets")]
-    public Sprite recordingSpr;//RECORDING STATUS CODE
+    [Space(20)][Header("<b><size=15>Tower Repetition Assets<b><size=15>")]
+    [Line(255,255,255)]
+    public Sprite recordingSpr;
     public List<Sprite> repeatSprites = new List<Sprite>();
 
-    [Header("Level Scoring")]
+    [Space(20)][Header("<b><size=15>Level Scoring<b><size=15>")]
+    [Line(255,255,255)]
     public List<int> pointHolder = new List<int>();
     public int healthRemainingPointGain = 100;
+    #endregion
 
-
+    #region Start
     // Start is called before the first frame update
     void Start()
     {
@@ -140,7 +156,9 @@ public class GameManager : MonoBehaviour
         LoadLevelButtons();
         UpdateAllLevelSelectButtonNavigationReferences();
     }
+    #endregion
 
+    #region Update
     // Update is called once per frame
     void Update()
     {
@@ -152,8 +170,9 @@ public class GameManager : MonoBehaviour
         }
         */
     }
+    #endregion
 
-    #region level buttons
+    #region Level buttons
     private void LoadLevelButtons()
     {
         EncounterCreator[] encounters = Resources.LoadAll<EncounterCreator>("Encounters/");
@@ -328,10 +347,9 @@ public class GameManager : MonoBehaviour
 
         return itemNext.heldEncounter;
     }
-
     #endregion
 
-    #region pause function
+    #region Pausing
     public void HandlePauseMenuInput()
     {
         //allows player to use pause menu in combat, level select and dialogue
@@ -398,14 +416,14 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    #region tower defense health/damage
+    #region Tower defense hp/dmg
     public void Damage()
     {
         _currentHealth -= 1;
         
         ComboManager.Instance.ResetCombo();
 
-        lostHealth = true; //set flag for failing objective 02
+        hasLostHealth = true; //set flag for failing objective 02
     }
 
     void Health()
@@ -415,6 +433,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Tutorial
     public void LoadTutorial()
     {
 
@@ -488,6 +507,26 @@ public class GameManager : MonoBehaviour
         ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
     }
 
+    public void TutorialWinState()
+    {
+        if (winState) return;
+        winState = true;
+
+        CombatManager.Instance.tutorialManager.SetActive(false);
+
+        CombatManager.Instance.EndEncounter();
+        encounterRunning = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        //winScreen.SetActive(true);
+        //conductor.SetActive(false);
+        //MenuEventManager.Instance.OpenWinScreen(0);
+        dialogueRoot.SetActive(true);
+        DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
+        ConductorV2.instance.StopMusic();
+    }
+    #endregion
+
     /*
     public void LoadLevel(EncounterCreator encounter)
     {
@@ -513,6 +552,7 @@ public class GameManager : MonoBehaviour
     }
     */
 
+    #region Start level
     public void LoadLevel(EncounterCreator encounter)
     {
         currentEncounter = encounter;
@@ -534,24 +574,25 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.tutorialManager.SetActive(false); //disable tutorial manager
         CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter); //load encounter data
     }
+    #endregion
 
-    public void GameOver()
+    #region End level
+    public void FailLevel()
     {
-        if (failState) return;
+        if (failState) return; //prevents function from continuing if already in the fail state
         failState = true;
 
         Cursor.lockState = CursorLockMode.Locked; //lock player cursor movement
-
         //CombatManager.Instance.EndEncounter(); //end current encounter
-
         CombatManager.Instance.StartFailSequence(); //open fail screen and set active object
     }
 
     public void WinLevel()
     {
-        if (winState) return;
+        if (winState) return; //prevents function from continuing if already in the win state
         winState = true;
         
+        Cursor.lockState = CursorLockMode.Locked; //lock player cursor movement
         CombatManager.Instance.StartWinSequence();
 
         encounterRunning = false;
@@ -562,7 +603,7 @@ public class GameManager : MonoBehaviour
 
         // level cleared without losing health
         //currentEncounter.clearedObjective02 = (_currentHealth == _maxHealth);
-        if (lostHealth == false) {
+        if (hasLostHealth == false) {
             currentEncounter.clearedObjective02 = true;
         }
 
@@ -580,35 +621,9 @@ public class GameManager : MonoBehaviour
         // TEMPORARILY DISABLED UNTIL NEW WIN SCREEN IS CONNECTED
         //winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
     }
+    #endregion
 
-    public void UnlockLevel(EncounterCreator wonLevel)
-    {
-        if (wonLevel.levelThatUnlocks != null)
-        {
-            currentSelectedButton.GetComponent<ItemButton>().nextButton.SetActive(true);
-            wonLevel.levelThatUnlocks.isLevelLocked = false;
-        }
-    }
-
-    public void TutorialWinState()
-    {
-        if (winState) return;
-        winState = true;
-
-        CombatManager.Instance.tutorialManager.SetActive(false);
-
-        CombatManager.Instance.EndEncounter();
-        encounterRunning = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        //winScreen.SetActive(true);
-        //conductor.SetActive(false);
-        //MenuEventManager.Instance.OpenWinScreen(0);
-        dialogueRoot.SetActive(true);
-        DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
-        ConductorV2.instance.StopMusic();
-    }
-
+    #region Reset
     public void ResetCombatState()
     {
         // reset win & fail states
@@ -618,7 +633,7 @@ public class GameManager : MonoBehaviour
         failScreen.SetActive(false);
         
         // reset objective flags
-        lostHealth = false;
+        hasLostHealth = false;
 
         // reset player health
         _currentHealth = _maxHealth;
@@ -638,7 +653,18 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.enemyTotal = 0;
         CombatManager.Instance.pickupTotal = 0;
 
-        //Debug.Log("Combat State Reset");
+        Debug.Log("Combat State Reset");
+    }
+    #endregion
+
+    #region Unlock triggers
+    public void UnlockLevel(EncounterCreator wonLevel)
+    {
+        if (wonLevel.levelThatUnlocks != null)
+        {
+            currentSelectedButton.GetComponent<ItemButton>().nextButton.SetActive(true);
+            wonLevel.levelThatUnlocks.isLevelLocked = false;
+        }
     }
 
     public void UnlockUpgrade(Tower tower, UpgradeNum upgrade)
@@ -656,7 +682,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-
+    #endregion
 }
 
 public enum UpgradeNum

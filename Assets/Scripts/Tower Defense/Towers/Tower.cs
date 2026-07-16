@@ -23,7 +23,8 @@ public class Tower : MonoBehaviour
 
     public bool enemyInRange = false;
 
-    [Header("Tower Attack & Input")]
+    [Header("<b><size=15>Tower Attack & Input<b><size=15>")]
+    [Line(255,255,255)]
     public float songProgress = 0.0f; // progress of current song expressed in time
     public int inputIndex; // the index of the closest input timing
     public int attackIndex; //current upcoming attack index
@@ -40,38 +41,46 @@ public class Tower : MonoBehaviour
     public Projectile lastBulletFired;
     public bool isBuffed = false;
     
-    [Header("Tower Empower Indicator")]
+    [Header("<b><size=15>Tower Empower Indicator<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject inputPrompt;
     public bool towerAboutToFire = false;
     public bool towerHover = false;
 
-    [Header("Shield")]
+    [Header("<b><size=15>Shield<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject shieldEffect;
     public bool isShielded = false;
 
-    [Header("Record State Sprites")] //moved recording sprites to game manager
+    [Header("<b><size=15>Record State Sprites<b><size=15>")] //moved recording sprites to game manager
+    [Line(255,255,255)]
     public GameObject recordingStatus;//RECORDING STATUS CODE
     private int repeatSpritesIndex = 0;
 
-    [Header("Projectile Sprites")]
+    [Header("<b><size=15>Projectile Sprites<b><size=15>")]
+    [Line(255,255,255)]
     public Color projectileColor;
     public Sprite[] projectileSprites;
 
-    [Header("Animation")]
+    [Header("<b><size=15>Animation<b><size=15>")]
+    [Line(255,255,255)]
     public Animator m_Animator;
     public string[] animationStates;
     public int[] animationHashes;
 
-    [Header("SFX")]
+    [Header("<b><size=15>SFX<b><size=15>")]
+    [Line(255,255,255)]
     public AudioClip towerAttackSfx;
     public AudioClip towerHurtSfx;
     public AudioClip towerDeathSfx;
     public AudioClip towerUpgradeSfx;
 
-    [Header("PFX")]
+    [Header("<b><size=15>PFX<b><size=15>")]
+    [Line(255,255,255)]
     public ParticleSystem[] particleEffects;
 
-    [Header ("--------- Don't need to touch ---------")]
+    [Header ("<b><size=15>--------- Don't need to touch ---------<b><size=15>")]
+    [Line(255,255,255)]
 
     public TowerAttackPattern currentAttackPattern;
     public Tile connectedTile;
@@ -80,26 +89,30 @@ public class Tower : MonoBehaviour
     public float towerAudioVolumeIncrement = 0.05f;
     public int beat;
 
-    [Header("Tower Stats")]
+    [Header("<b><size=15>Tower Stats<b><size=15>")]
+    [Line(255,255,255)]
     private int currentHealth = 0;
     public int towerDamage;
     public float attackPower = 1.0f;
     public float attackPowerBonus = 0.0f;
     public int towerRange;
 
-    [Header("Tile Interactions")]
+    [Header("<b><size=15>Tile Interactions<b><size=15>")]
+    [Line(255,255,255)]
     public bool ChargedUp = false;
 
-    [Header("Tower Upgrade")]
+    [Header("<b><size=15>Tower Upgrade<b><size=15>")]
+    [Line(255,255,255)]
     public bool upgradePurchased = false;
-
     public int upgradeIndex = 0; //0 = no upgrade purchased
 
-    [Header("Upgrade Modifiers")]
+    [Header("<b><size=15>Upgrade Modifiers<b><size=15>")]
+    [Line(255,255,255)]
     public bool feelingItNow = false;
     public bool synthBuff = false;
 
-    [Header("Record Buff Input")]
+    [Header("<b><size=15>Record Buff Input<b><size=15>")]
+    [Line(255,255,255)]
     private TowerState currentState = TowerState.Default;
     private List<float> recordedBuffs = new List<float>();
     private int measureAtRepeatStart = 0;
@@ -110,6 +123,7 @@ public class Tower : MonoBehaviour
     public int towerNum;
     #endregion
 
+    #region Start
     public virtual void Start()
     {
         currentAttackPattern = towerInfo.attackPattern;
@@ -149,7 +163,9 @@ public class Tower : MonoBehaviour
         inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
         attackTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
     }
+    #endregion
 
+    #region Update
     public virtual void Update()
     { 
         // TOWER INPUT //
@@ -246,6 +262,7 @@ public class Tower : MonoBehaviour
 
         }  
     }
+    #endregion
 
     #region Tower input
     // Calculates input times as time from measure start
@@ -324,20 +341,6 @@ public class Tower : MonoBehaviour
             attackTargetTime = ((measureLength * attackCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[attackIndex].noteTime);
         }
     }
-
-    /*
-    public void TowerEffectVisual()
-    {
-        if (towerHover && towerAboutToFire) //(towerHover && towerAboutToFire && enemyInRange)
-        {
-            inputPrompt.SetActive(true);
-        }
-        else
-        {
-            inputPrompt.SetActive(false);
-        }
-    }
-    */
     #endregion
 
     #region Tower attacking
@@ -524,6 +527,7 @@ public class Tower : MonoBehaviour
     }
     #endregion
 
+    #region Tower destruction
     public void RemoveTower()
     {
         switch (towerInfo.type)
@@ -619,7 +623,7 @@ public class Tower : MonoBehaviour
             RemoveTower();
         }
     }
-
+    #endregion
 
     #region Tower buffing
     public void BuffAttack(float inputTime, float judgementBonus)

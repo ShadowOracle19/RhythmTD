@@ -28,6 +28,13 @@ public class LoadingScreenManager : MonoBehaviour
     #endregion
 
     #region Variables
+    [Header("<b><size=15>Screens<b><size=15>")]
+    [Line(255,255,255)]
+    public GameObject loadingScreen;
+    public GameObject loadingScreenVisual;
+
+    [Space(20)][Header("<b><size=15>Screen Content<b><size=15>")]
+    [Line(255,255,255)]
     public TextMeshProUGUI loadingText;
     public string[] loadingTextArray = new string[3];
     public int loadingTextIndex = 0;
@@ -39,17 +46,14 @@ public class LoadingScreenManager : MonoBehaviour
     public Image artwork;
     public List<Sprite> artworkList = new List<Sprite>();
 
-    public GameObject loadingScreen;
-    public GameObject loadingScreenVisual;
-    
-    //public GameObject prevScreen;
-    //public GameObject nextScreen;
-
+    [Space(20)][Header("<b><size=15>Load Transition<b><size=15>")]
+    [Line(255,255,255)]
     public Animator animator;
     public bool transitionActive = false;
     public float transitionTimer = 0.0f;
     #endregion
     
+    #region Start loading
     public IEnumerator StartLoading()
     {
         // Enable loading screen visuals
@@ -95,7 +99,9 @@ public class LoadingScreenManager : MonoBehaviour
 
         StopCoroutine(StartLoading());
     }
+    #endregion
 
+    #region End loading
     public void EndLoading()
     {
         loading = false;
@@ -130,7 +136,9 @@ public class LoadingScreenManager : MonoBehaviour
 
         StopCoroutine(EndTransition(1.5f));
     }
+    #endregion
 
+    #region Screen content
     public void SetArtwork()
     {
         artwork.sprite = artworkList[Random.Range(0, artworkList.Count-1)];
@@ -152,4 +160,5 @@ public class LoadingScreenManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.25f);
         }
     }
+    #endregion
 }

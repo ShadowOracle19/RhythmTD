@@ -31,10 +31,14 @@ public class GameManager : MonoBehaviour
     #region Variables
     public Transform globalParent;
 
+    [Space(20)][Header("<b><size=15>Conductor<b><size=15>")]
+    [Line(255,255,255)]
+    public GameObject conductor;
+
+    [Space(20)][Header("<b><size=15>Audio<b><size=15>")]
+    [Line(255,255,255)]
     public AudioSource menuMusic;
     public AudioSource buttonHighlightSFX;
-
-    public GameObject conductor;
 
     [Space(20)][Header("<b><size=15>Screens<b><size=15>")]
     [Line(255,255,255)]
@@ -462,7 +466,7 @@ public class GameManager : MonoBehaviour
             _currentHealth -= 1;
         }
         
-        ComboManager.Instance.ResetCombo();
+        ScoreManager.Instance.ResetCombo();
 
         hasLostHealth = true; //set flag for failing objective 02
     }
@@ -666,7 +670,7 @@ public class GameManager : MonoBehaviour
         MenuEventManager.Instance.OpenWinScreen(); //open win screen and set active object
         
         // TEMPORARILY DISABLED UNTIL NEW WIN SCREEN IS CONNECTED
-        //winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
+        //winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ScoreManager.Instance.score, ScoreManager.Instance.highestCombo + ScoreManager.Instance.score, _currentHealth == _maxHealth, false);
     }
     #endregion
 
@@ -693,10 +697,7 @@ public class GameManager : MonoBehaviour
         }
         
         // reset combo, multiplier, & score
-        ComboManager.Instance.currentCombo = 0;
-        ComboManager.Instance.highestCombo = 0;
-        ComboManager.Instance.currentMultiplier = 1;
-        ComboManager.Instance.score = 0;
+        ScoreManager.Instance.ResetStageScoreData();
         
         // set flags for all objects having been spawned back to false
         CombatManager.Instance.allEnemiesSpawned = false;

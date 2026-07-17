@@ -6,17 +6,31 @@ public class AudioManager : MonoBehaviour
 {
     // Code from Sasquatch B Studios @ https://youtu.be/DU7cgVsU2rM?si=9FW1TVGFbVxKq9-X&t=262
 
-    public static AudioManager instance;
+    #region dont touch this
+    private static AudioManager _instance;
+    public static AudioManager instance
+    {
+        get
+        {
+            if (_instance is null)
+            {
+                Debug.LogError("AudioManager is NULL");
+            }
 
-    [SerializeField] private AudioSource soundEffectObject;
+            return _instance;
+        }
+    }
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+    #endregion
+
+    [Header("<b><size=15>Audio<b><size=15>")]
+    [Line(255,255,255)]
+    [SerializeField] private AudioSource soundEffectObject;
 
     public void PlaySound(AudioClip audioClip, Transform spawnTransform, float volume)
     {

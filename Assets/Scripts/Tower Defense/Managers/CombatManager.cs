@@ -218,7 +218,7 @@ public class CombatManager : MonoBehaviour
         CursorTD.Instance.isMoving = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        ConductorV2.instance.flats.volume = 0;
+        ConductorV2.instance.flat.volume = 0;
         ConductorV2.instance.major.volume = 0;
         ConductorV2.instance.allegro.volume = 0;
         ConductorV2.instance.trill.volume = 0;
@@ -232,8 +232,8 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.Tower12.volume = 0;
 
         FeverSystem.Instance.feverBarNum = 0;
-        ComboManager.Instance.ResetCombo();
-        ComboManager.Instance.highestCombo = 0;
+        ScoreManager.Instance.ResetCombo();
+        ScoreManager.Instance.highestCombo = 0;
 
         //ConductorV2.instance.StopMusic(); 
     }
@@ -448,8 +448,8 @@ public class CombatManager : MonoBehaviour
 
         // reset fever bar, combo, and highest combo
         FeverSystem.Instance.feverBarNum = 0;
-        ComboManager.Instance.ResetCombo();
-        ComboManager.Instance.highestCombo = 0;
+        ScoreManager.Instance.ResetCombo();
+        ScoreManager.Instance.highestCombo = 0;
 
         ConductorV2.instance.StopMusic();
 
@@ -517,8 +517,8 @@ public class CombatManager : MonoBehaviour
 
         // reset fever bar, combo, and highest combo
         FeverSystem.Instance.feverBarNum = 0;
-        ComboManager.Instance.ResetCombo();
-        ComboManager.Instance.highestCombo = 0;
+        ScoreManager.Instance.ResetCombo();
+        ScoreManager.Instance.highestCombo = 0;
 
         GameManager.Instance.tutorialRunning = false; 
         GameManager.Instance.combatRunning = false;
@@ -542,7 +542,7 @@ public class CombatManager : MonoBehaviour
         float fadeDuration = (ConductorV2.instance.crotchet * durationInBeats);
 
         // track volume start points
-        float trackVolume01 = ConductorV2.instance.flats.volume;
+        float trackVolume01 = ConductorV2.instance.flat.volume;
         float trackVolume02 = ConductorV2.instance.major.volume;
         float trackVolume03 = ConductorV2.instance.allegro.volume;
         float trackVolume04 = ConductorV2.instance.trill.volume;
@@ -566,7 +566,7 @@ public class CombatManager : MonoBehaviour
             }
             */
 
-            ConductorV2.instance.flats.volume = Mathf.Lerp(trackVolume01,targetVolume,t);
+            ConductorV2.instance.flat.volume = Mathf.Lerp(trackVolume01,targetVolume,t);
             ConductorV2.instance.major.volume = Mathf.Lerp(trackVolume02,targetVolume,t);
             ConductorV2.instance.allegro.volume = Mathf.Lerp(trackVolume03,targetVolume,t);
             ConductorV2.instance.trill.volume = Mathf.Lerp(trackVolume04,targetVolume,t);
@@ -584,7 +584,7 @@ public class CombatManager : MonoBehaviour
         }
 
         // set all tracks to target volume
-        ConductorV2.instance.flats.volume = targetVolume;
+        ConductorV2.instance.flat.volume = targetVolume;
         ConductorV2.instance.major.volume = targetVolume;
         ConductorV2.instance.allegro.volume = targetVolume;
         ConductorV2.instance.trill.volume = targetVolume;

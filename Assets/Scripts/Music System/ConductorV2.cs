@@ -52,7 +52,7 @@ public class ConductorV2 : MonoBehaviour
     public int lastInterval;
 
     //Dynamic Music tracks
-    public AudioSource flats;
+    public AudioSource flat;
     public AudioSource major;
     public AudioSource allegro;
     public AudioSource trill;
@@ -150,7 +150,7 @@ public class ConductorV2 : MonoBehaviour
         beatTrack = 1;
         beatDuration = 0;
 
-        flats.time = 0;
+        flat.time = 0;
         major.time = 0;
         allegro.time = 0;
         trill.time = 0;
@@ -177,7 +177,7 @@ public class ConductorV2 : MonoBehaviour
 
     public void DynamicSongInit(DynamicSongCreator song)
     {
-        flats.volume = 0;
+        flat.volume = 0;
         major.volume = 0;
         allegro.volume = 0;
         trill.volume = 0;
@@ -191,7 +191,7 @@ public class ConductorV2 : MonoBehaviour
         Tower12.volume = 0; 
 
 
-        flats.clip = song.flats;
+        flat.clip = song.flat;
         major.clip = song.major;
         allegro.clip = song.allegro;
         trill.clip = song.trill;
@@ -230,7 +230,7 @@ public class ConductorV2 : MonoBehaviour
 
         if(!SettingsManager.Instance.isDynamicMusicActive)
         {
-            flats.volume = 0.25f;
+            flat.volume = 0.25f;
             major.volume = 0.25f;
             allegro.volume = 0.25f;
             trill.volume = 0.25f;
@@ -350,7 +350,7 @@ public class ConductorV2 : MonoBehaviour
     public void PauseMusic()
     {
         musicSource.Pause();
-        flats.Pause();
+        flat.Pause();
         major.Pause();
         allegro.Pause();
         trill.Pause();
@@ -367,7 +367,7 @@ public class ConductorV2 : MonoBehaviour
     public void ResumeMusic()
     {
         musicSource.UnPause();
-        flats.UnPause();
+        flat.UnPause();
         major.UnPause();
         allegro.UnPause();
         trill.UnPause();
@@ -384,7 +384,7 @@ public class ConductorV2 : MonoBehaviour
     public void StopMusic()
     {
         musicSource.Stop();
-        flats.Stop();
+        flat.Stop();
         major.Stop();
         allegro.Stop();
         trill.Stop();
@@ -400,7 +400,7 @@ public class ConductorV2 : MonoBehaviour
 
     public void PlayMusic()
     {
-        flats.Play();
+        flat.Play();
         major.Play();
         allegro.Play();
         trill.Play();

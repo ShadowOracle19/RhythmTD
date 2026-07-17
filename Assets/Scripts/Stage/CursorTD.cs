@@ -248,7 +248,7 @@ public class CursorTD : MonoBehaviour
         if (beatIsHit)
         {
             SpawnBeatHitResult(_BeatResult.miss);
-            ComboManager.Instance.ResetCombo();
+            ScoreManager.Instance.ResetCombo();
             return;
         }
 
@@ -293,7 +293,7 @@ public class CursorTD : MonoBehaviour
                 }
 
                 SpawnBeatHitResult(_BeatResult.miss);
-                ComboManager.Instance.ResetCombo();
+                ScoreManager.Instance.ResetCombo();
                 break;
             case _BeatResult.late:
                 if (GameManager.Instance.isPerfectsOnly)
@@ -320,15 +320,15 @@ public class CursorTD : MonoBehaviour
                 }
 
                 SpawnBeatHitResult(_BeatResult.great);
-                ComboManager.Instance.IncreaseCombo();
-                //ComboManager.Instance.IncreaseScore();
+                ScoreManager.Instance.IncreaseCombo();
+                //ScoreManager.Instance.IncreaseScore();
                 CombatManager.Instance.resourceNum += 1;
                 SpawnParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
                 break;
             case _BeatResult.perfect:
                 SpawnBeatHitResult(_BeatResult.perfect);
-                ComboManager.Instance.IncreaseCombo();
-                //ComboManager.Instance.IncreaseScore();
+                ScoreManager.Instance.IncreaseCombo();
+                //ScoreManager.Instance.IncreaseScore();
                 CombatManager.Instance.resourceNum += 3;
                 SpawnParticles(cursorResourceGenParticles, cursorResourceGenParticlesInstance);
                 break;
@@ -464,7 +464,7 @@ public class CursorTD : MonoBehaviour
                     SpawnBeatHitResult(_BeatResult.miss);
                     
                     //COMBO
-                    ComboManager.Instance.ResetCombo();
+                    ScoreManager.Instance.ResetCombo();
 
                     //MOD
                     if (GameManager.Instance.isPerfectsOnly || GameManager.Instance.isHitsOnly)
@@ -529,8 +529,8 @@ public class CursorTD : MonoBehaviour
                     }
 
                     //COMBO & SCORE
-                    ComboManager.Instance.IncreaseCombo();
-                    //ComboManager.Instance.IncreaseScore();
+                    ScoreManager.Instance.IncreaseCombo();
+                    //ScoreManager.Instance.IncreaseScore();
 
                     //BUFFING
                     tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.25f);
@@ -545,8 +545,8 @@ public class CursorTD : MonoBehaviour
                     SpawnBeatHitResult(_BeatResult.perfect);
 
                     //COMBO & SCORE
-                    ComboManager.Instance.IncreaseCombo();
-                    //ComboManager.Instance.IncreaseScore();
+                    ScoreManager.Instance.IncreaseCombo();
+                    //ScoreManager.Instance.IncreaseScore();
 
                     //BUFFING
                     tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.5f);

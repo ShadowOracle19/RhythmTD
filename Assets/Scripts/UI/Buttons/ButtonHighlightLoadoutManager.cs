@@ -7,8 +7,10 @@ using UnityEngine.EventSystems;
 
 public class ButtonHighlightLoadoutManager : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
+    #region Variables
     // Level Info
-    [Header("Character Info")]
+    [Header("<b><size=15>Tower Info<b><size=15>")]
+    [Line(255,255,255)]
     public string charaName;
     public string charaInstrument;
     public string charaCooldown;
@@ -24,7 +26,8 @@ public class ButtonHighlightLoadoutManager : MonoBehaviour, ISelectHandler, IDes
     public Sprite rhythmPreview;
     public Sprite rangePreview;
 
-    [Header("Character Info Panel Connections")]
+    [Space(20)][Header("<b><size=15>Tower Info Panel Connections<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject charaInfoPanel;
     public TextMeshProUGUI charaNameText;
     public TextMeshProUGUI charaInstrumentText;
@@ -40,7 +43,9 @@ public class ButtonHighlightLoadoutManager : MonoBehaviour, ISelectHandler, IDes
     public Image upgradeImage03;
     public List<Image> costImages;
     private int imageIndex = 0;
+    #endregion
 
+    #region Select
     public void OnSelect(BaseEventData eventData)
     {
         charaInfoPanel.SetActive(true);
@@ -75,9 +80,12 @@ public class ButtonHighlightLoadoutManager : MonoBehaviour, ISelectHandler, IDes
             imageIndex += 1;
         }
     }
+    #endregion
 
+    #region Deselect
     public void OnDeselect(BaseEventData eventData)
     {
         charaInfoPanel.SetActive(false);
     }
+    #endregion
 }

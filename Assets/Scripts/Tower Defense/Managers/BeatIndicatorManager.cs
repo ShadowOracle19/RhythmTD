@@ -25,25 +25,25 @@ public class BeatIndicatorManager : MonoBehaviour
     }
     #endregion
 
+    #region Variables
     public int x1, x2;
 
+    [Space(20)][Header("<b><size=15>Indicators<b><size=15>")]
+    [Line(255,255,255)]
     public List<GameObject> leftIndicators = new List<GameObject>();
     public List<GameObject> rightIndicators = new List<GameObject>();
 
+    [Space(20)][Header("<b><size=15>Time<b><size=15>")]
+    [Line(255,255,255)]
     public float time;
     public float lerpTime;
-
+    [Space(10)]
     int beat = 1;
+    #endregion
 
     private void Start()
     {
         beat = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Beat()
@@ -56,7 +56,6 @@ public class BeatIndicatorManager : MonoBehaviour
         beat += 1;
 
         leftIndicators[beat - 1].GetComponent<BeatDongle>().StartDongle(duration, x1);
-
 
         rightIndicators[beat - 1].GetComponent<BeatDongle>().StartDongle(duration, x2);
     }

@@ -28,95 +28,113 @@ public class MenuEventManager : MonoBehaviour
         _instance = this;
     }
     #endregion
+
+    #region Variables
     EventSystem eventSystem;
 
-    [Header("Active Object Tracking")]
+    [Space(20)][Header("<b><size=15>Active Object Tracking<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject lastSelectedObject;
     public GameObject lastSelectedLevelObject;
 
-    [Header("Title Menu")]
+    [Space(20)][Header("<b><size=15>Title Menu<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject titleScreen;
     public List<GameObject> titleScreenInteractables;
     public AudioSource titleMusic;
 
-    [Header("Pause Menu")]
+    [Space(20)][Header("<b><size=15>Pause Menu<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject pauseScreen;
     public List<GameObject> pauseScreenInteractables;
 
-    [Header("Settings Menu")]
+    [Space(20)][Header("<b><size=15>Settings Menu<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject settingsScreen;
     public List<GameObject> settingsScreenInteractables;
 
-    [Header("Dialogue Menu")]
+    [Space(20)][Header("<b><size=15>Dialogue Menu<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject dialogueScreen;
     public List<GameObject> dialogueScreenInteractables;
-
+    [Space(10)]
     public GameObject logScreen;
     public List<GameObject> logScreenInteractables;
 
-    [Header("Main Menu")]
+    [Space(20)][Header("<b><size=15>Main Menu<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject mainScreen;
+    public List<GameObject> mainScreenInteractables;
+    [Space(10)]
+    public bool isModMenuOpen = false;
     public GameObject modifierScreenObject;
     public Animator modifierScreenAnimator;
-    public bool isModMenuOpen = false;
-    public List<GameObject> mainScreenInteractables;
+    [Space(10)]
     public AudioSource menuMusic;
 
-    [Header("Loadout Menu")]
+    [Space(20)][Header("<b><size=15>Loadout Menu<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject loadoutScreen;
     public List<GameObject> loadoutScreenInteractables;
     public Animator loadoutInterfaceAnimator;
 
-    [Header("Win Screen")]
+    [Space(20)][Header("<b><size=15>Win Screen<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject winScreen;
     public List<GameObject> winScreenInteractables;
 
-    [Header("Fail Screen")]
+    [Space(20)][Header("<b><size=15>Fail Screen<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject failScreen;
     public List<GameObject> failScreenInteractables;
 
-    [Header("Exit Confirmation Menu")]
+    [Space(20)][Header("<b><size=15>Exit Confirmation Menu<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject exitScreen;
     public List<GameObject> exitScreenInteractables;
     public TextMeshProUGUI exitMenuText;
     
-    [Header("Other")]
+    [Space(20)][Header("<b><size=15>Other<b><size=15>")]
+    [Line(255,255,255)]
     public Animator cameraAnimator;
     public Animator combatInterfaceAnimator;
-    public GameObject showcaseCreditsScreen;
-    public List<GameObject> showcaseCreditsScreenInteractables;
+    #endregion
 
-
+    #region Start
     private void Start()
     {
         eventSystem = EventSystem.current;
     }
+    #endregion
 
-    #region active object tracking
+    #region Object selection
+    // Gets a reference to the most recently selected menu element
     public void UpdateLastSelectedObject()
     {
         lastSelectedObject = eventSystem.currentSelectedGameObject;
     }
 
+    // Sets the active menu element to the last selected menu element
     public void SelectLastSelectedObject()
     {
         eventSystem.SetSelectedGameObject(lastSelectedObject);
     }
     
-    // Updates a reference to the most recent level the player entered
+    // Gets a reference to the button of the last selected level
     public void UpdateLastSelectedLevel()
     {
         lastSelectedLevelObject = eventSystem.currentSelectedGameObject;
     }
     
-    // Sets the currently selected menu element to the button of the most recent level the player entered
+    // Sets the active menu element to the button of the most recent level the player entered / Highlighted
     public void SelectLastSelectedLevel()
     {
         eventSystem.SetSelectedGameObject(lastSelectedLevelObject);
     }
     #endregion
     
-    #region main menu
+    #region Level select
+    // Opens the level select menu
     public void OpenMainMenu()
     {
         cameraAnimator.SetTrigger("Enter Menu");
@@ -135,6 +153,7 @@ public class MenuEventManager : MonoBehaviour
         menuMusic.Play();
     }
 
+    // Closes the level select menu
     public void CloseMainMenu()
     {
         menuMusic.Stop();
@@ -142,15 +161,16 @@ public class MenuEventManager : MonoBehaviour
         mainScreen.SetActive(false);
     }
 
+    // Opens and closes the modifier menu in the level select menu
     public void HandleModifierMenuInput()
     {
-        if (!isModMenuOpen)
+        if (!isModMenuOpen) //if modifier menu is closed, open it
         {
             modifierScreenAnimator.SetTrigger("Open");
             eventSystem.SetSelectedGameObject(modifierScreenObject);
             isModMenuOpen = true;
         }
-        else
+        else //if modifier menu is open, close it
         {
             modifierScreenAnimator.SetTrigger("Close");
             SelectLastSelectedLevel();
@@ -159,7 +179,8 @@ public class MenuEventManager : MonoBehaviour
     }
     #endregion
 
-    #region loadout menu
+    #region Loadout
+    // Opens the loadout menu
     public void OpenLoadoutMenu()
     {
         loadoutScreen.SetActive(true); //enable loadout menu
@@ -171,17 +192,20 @@ public class MenuEventManager : MonoBehaviour
         LoadingScreenManager.Instance.EndLoading(); //TEMPORARY
     }
 
+    // Closes the loadout menu
     public void CloseLoadoutMenu()
     {
         loadoutScreen.SetActive(false);
     }
+    #endregion
 
-    public void ConfirmLoadout()
+    #region Combat sequence
+    // Starts the combat start sequence
+    public void StartCombatStartSequence()
     {
         StartCoroutine(CombatStartSequence());
     }
 
-    //Combat start sequence
     public IEnumerator CombatStartSequence()
     {
         TowerManager.Instance.ResetTowerManager();
@@ -234,7 +258,7 @@ public class MenuEventManager : MonoBehaviour
     }
     #endregion
 
-    #region settings menu
+    #region Settings
     public void CloseSettings()
     {
         //
@@ -252,7 +276,7 @@ public class MenuEventManager : MonoBehaviour
     }
     #endregion
 
-    #region exit confirmation menu
+    #region Exit confirmation
     //Open exit confirmation menu & set text
     public void OpenConfirmation()
     {
@@ -337,7 +361,7 @@ public class MenuEventManager : MonoBehaviour
     }
     #endregion
 
-    #region dialogue menu
+    #region Dialogue
     public void DialogueOpen()
     {
         dialogueScreen.SetActive(true);
@@ -354,7 +378,7 @@ public class MenuEventManager : MonoBehaviour
     }
     #endregion
 
-    #region pause menu
+    #region Pause
     public void PauseMenuOpen()
     {
         OpenMenu(pauseScreen, pauseScreenInteractables[0]);
@@ -394,7 +418,7 @@ public class MenuEventManager : MonoBehaviour
     }
     #endregion
     
-    #region game end menus
+    #region Game end
     // Open the fail screen 
     public void OpenFailScreen()
     {
@@ -418,31 +442,19 @@ public class MenuEventManager : MonoBehaviour
         
         //winScreen.SetActive(false);
     }
+
+    public void WinScreenToLevelSelect()
+    {
+        eventSystem.SetSelectedGameObject(GameManager.Instance.currentSelectedButton);
+    }
     #endregion
 
-    /*
-    public void OpenShowcaseCredits()
-    {
-        OpenMenu(showcaseCreditsScreen, showcaseCreditsScreenInteractables[0]);
-    }
-    */
-
+    #region General
     public void OpenMenu(GameObject menuRoot, GameObject activeObject)
     {
         //menuMusic.Play();
         menuRoot.SetActive(true); //enable root
         eventSystem.SetSelectedGameObject(activeObject); //set active object
     }
-
-    public void WinScreenToLevelSelect()
-    {
-        eventSystem.SetSelectedGameObject(GameManager.Instance.currentSelectedButton);
-    }
-
-    /*
-    void OnSelect(BaseEventData eventData) 
-    {
-
-    }
-    */
+    #endregion
 }

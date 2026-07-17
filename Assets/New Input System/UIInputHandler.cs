@@ -6,13 +6,16 @@ using UnityEngine.InputSystem.Interactions;
 
 public class UIInputHandler : MonoBehaviour
 {
-    [Header("Input Action Asset")]
+    [Header("<b><size=15>Input Action Asset<b><size=15>")]
+    [Line(255,255,255)]
     [SerializeField] private InputActionAsset uiControls;
 
-    [Header("Action Map Name Reference")]
+    [Space(20)][Header("<b><size=15>Action Map Name Reference<b><size=15>")]
+    [Line(255,255,255)]
     [SerializeField] private string actionMapName = "UI";
 
-    [Header("Action Name References")]
+    [Space(20)][Header("<b><size=15>Action Name References<b><size=15>")]
+    [Line(255,255,255)]
     [SerializeField] private string modifierMenu = "Modifier Menu Toggle";
 
     private InputAction modifierAction;

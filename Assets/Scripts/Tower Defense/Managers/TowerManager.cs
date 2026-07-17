@@ -29,31 +29,27 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
+    #region Variables
+    [Header("<b><size=15>Tower Placement<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject towerToPlace;
     public bool isTowerHovering = false;
-    
-
-    //Tower background shader management
-    /*
-    public Material feverModeShader;
-
-    public GameObject stageBackground;
-    */
-    
-    //Tower menu shader management
-    public Material greyscaleShader;
-   
-
     public bool towerSwap;
+    public List<Tower> towerList;
 
+    [Space(20)][Header("<b><size=15>Audio<b><size=15>")]
+    [Line(255,255,255)]
     public AudioSource audioSource;
     public float towerAudioVolumeIncrement = 0.05f;
 
-    public List<Tower> towerList;
-
+    [Space(20)][Header("<b><size=15>Shader Materials<b><size=15>")]
+    [Line(255,255,255)]
+    public Material greyscaleShader;
 
     //public static event Action FireTower;
+    #endregion
 
+    #region Cooldown
     public void InstantiateTowerCooldown()
     {
         for (int i = 0; i < GameManager.Instance.towers.Count; i++)
@@ -63,12 +59,21 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetCooldown(int towerNum, Tower placingTower)
     {
-        
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown = true;
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTime = 0;  
     }
 
+    public bool CheckIfOnCoolDown(int towerNum)
+    {
+        return GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown;
+        
+    }
+    #endregion
+
+    #region Resource bars
     public void SetResourceBarSprite(Tower tower, Slider resourceSlider, Image resourceImage)
     {
         switch (tower.towerInfo.cost)
@@ -93,40 +98,9 @@ public class TowerManager : MonoBehaviour
                 break;
         }
     }
+    #endregion
 
-    
-    public bool CheckIfOnCoolDown(int towerNum)
-    {
-        return GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown;
-        
-    }
-
-    public bool CheckIfTowerAtLimit(int towerNum)
-    {
-        return GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced >= CombatManager.Instance.currentEncounter.towerLimit;
-        
-    }
-
-    public void PlacedTower(int towerNum)
-    {
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced += 1;
-        
-    }
-
-    public void RemovedTower(int towerNum)
-    {
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced -= 1;
-    }
-
-    public void SetCooldown(int towerNum, Tower placingTower)
-    {
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown = true;
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTime = 0;
-        
-        
-    }
-
+    #region Tower placement
     public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, int towerNum, _BeatResult result, bool isEmpowered)
     {
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
@@ -193,8 +167,26 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    public void PlacedTower(int towerNum)
+    {
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced += 1;
+    }
+
+    public void RemovedTower(int towerNum)
+    {
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced -= 1;
+    }
+
+    public bool CheckIfTowerAtLimit(int towerNum)
+    {
+        return GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced >= CombatManager.Instance.currentEncounter.towerLimit;
+    }
+    #endregion
+
+    #region Music
     public void DynamicMusicVolume(InstrumentType type)
     {
+        /*
         if (!GameManager.Instance.tutorialRunning)
         {
             if (CombatManager.Instance.currentEncounter.enableTowerLimit)
@@ -207,14 +199,13 @@ public class TowerManager : MonoBehaviour
                 towerAudioVolumeIncrement = 0.05f;
             }
         }
-
-        
+        */
 
         switch (type)
         {
-            case InstrumentType.Flats:
-                ConductorV2.instance.flats.volume += towerAudioVolumeIncrement;
-                ConductorV2.instance.flats.volume = Mathf.Clamp(ConductorV2.instance.flats.volume, 0, 0.5f);
+            case InstrumentType.Flat:
+                ConductorV2.instance.flat.volume += towerAudioVolumeIncrement;
+                ConductorV2.instance.flat.volume = Mathf.Clamp(ConductorV2.instance.flat.volume, 0, 0.5f);
 
                 break;
 
@@ -286,7 +277,9 @@ public class TowerManager : MonoBehaviour
                 break;
         }
     }
+    #endregion
 
+    #region Reset
     public void ResetTowerManager()
     {
     
@@ -297,6 +290,7 @@ public class TowerManager : MonoBehaviour
 
         towerList.Clear();
     }
+    #endregion
 
     /*
     public void FireTowers()

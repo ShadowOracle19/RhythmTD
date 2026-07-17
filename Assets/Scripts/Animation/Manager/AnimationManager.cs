@@ -7,29 +7,33 @@ using UnityEngine.UI;
 public class AnimationManager : MonoBehaviour
 {
     //Animation Manager Instance
-    public static AnimationManager instance;
-    void Awake()
+    #region dont touch this
+    private static AnimationManager _instance;
+    public static AnimationManager instance
     {
-        instance = this;
-    }
-    
-    //VARIABLES
-    public List<Animator> towerLoadoutAnimators = new List<Animator>();
-    public List<AnimatedElement> combatSceneAnimators = new List<AnimatedElement>();
-    
-    /*
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+        get
+        {
+            if (_instance is null)
+            {
+                Debug.LogError("AnimationManager is NULL");
+            }
+
+            return _instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
-    */
+    #endregion
+    
+    //VARIABLES
+    [Header("<b><size=15>Animators<b><size=15>")]
+    [Line(255,255,255)]
+    public List<Animator> towerLoadoutAnimators = new List<Animator>();
+    public List<AnimatedElement> combatSceneAnimators = new List<AnimatedElement>();
 
     public float CalculateAnimSpeed(float animBpm)
     {
@@ -45,7 +49,7 @@ public class AnimationManager : MonoBehaviour
         return targetAnimSpeed;
     }
 
-    public void SetAnimSpeed(Animator animator, float animBpm) //requires programmers atm to know the animation BPMs and hardcode them when calling this function which could be improved later
+    public void SetAnimSpeed(Animator animator, float animBpm) //NOTE: Currently requires programmers to know the animation BPMs and hardcode them when calling this function which could be improved later
     {
         animator.speed = 1.0f; // reset animation speed
         animator.speed = CalculateAnimSpeed(animBpm);

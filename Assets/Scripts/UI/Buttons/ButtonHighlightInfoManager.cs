@@ -8,7 +8,12 @@ using UnityEngine.EventSystems;
 public class ButtonHighlightInfoManager : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     // Level Info
-    [Header("Encounter Info")]
+    [Header("<b><size=15>Encounter Info<b><size=15>")]
+    [Line(255,255,255)]
+    public ItemButton itemButton;
+
+    [Space(20)][Header("<b><size=15>Encounter Info<b><size=15>")]
+    [Line(255,255,255)]
     public string levelName;
     public string levelNum;
     public string objectiveDesc01;
@@ -19,20 +24,25 @@ public class ButtonHighlightInfoManager : MonoBehaviour, ISelectHandler, IDesele
     public Sprite objectiveCompleteIcon;
     public List<Sprite> intelIcons;
 
+    #region Start
     private void Start()
     {
-        levelName = GetComponent<ItemButton>().heldEncounter.encounterName;
-        levelNum = GetComponent<ItemButton>().heldEncounter.LevelLabel;
-        objectiveDesc01 = GetComponent<ItemButton>().heldEncounter.data.objectiveDesc01;
-        objectiveDesc02 = GetComponent<ItemButton>().heldEncounter.data.objectiveDesc02;
-        objectiveDesc03 = GetComponent<ItemButton>().heldEncounter.data.objectiveDesc03;
-        levelPreview = GetComponent<ItemButton>().heldEncounter.data.levelPreview;
-        objectiveIncompleteIcon = GetComponent<ItemButton>().heldEncounter.data.objectiveIncompleteIcon;
-        objectiveCompleteIcon = GetComponent<ItemButton>().heldEncounter.data.objectiveCompleteIcon;
+        itemButton = GetComponent<ItemButton>();
+        
+        levelName = itemButton.heldEncounter.encounterName;
+        levelNum = itemButton.heldEncounter.LevelLabel;
+        objectiveDesc01 = itemButton.heldEncounter.data.objectiveDesc01;
+        objectiveDesc02 = itemButton.heldEncounter.data.objectiveDesc02;
+        objectiveDesc03 = itemButton.heldEncounter.data.objectiveDesc03;
+        levelPreview = itemButton.heldEncounter.data.levelPreview;
+        objectiveIncompleteIcon = itemButton.heldEncounter.data.objectiveIncompleteIcon;
+        objectiveCompleteIcon = itemButton.heldEncounter.data.objectiveCompleteIcon;
 
-        intelIcons = GetComponent<ItemButton>().heldEncounter.data.intelIcons;
+        intelIcons = itemButton.heldEncounter.data.intelIcons;
     }
+    #endregion
 
+    #region Select
     public void OnSelect(BaseEventData eventData)
     {
         GameManager.Instance.levelNameText.enabled = true;
@@ -88,10 +98,13 @@ public class ButtonHighlightInfoManager : MonoBehaviour, ISelectHandler, IDesele
             GameManager.Instance.imageIndex += 1;
         }
     }
+    #endregion
 
+    #region Deselect
     public void OnDeselect(BaseEventData eventData)
     {
         GameManager.Instance.levelNameText.enabled = false;
         GameManager.Instance.infoPanel.SetActive(false);
     }
+    #endregion
 }

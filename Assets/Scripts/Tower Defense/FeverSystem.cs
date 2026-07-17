@@ -13,7 +13,7 @@ public class FeverSystem : MonoBehaviour
         {
             if (_instance is null)
             {
-                Debug.LogError("FeverSystem Manager is NULL");
+                Debug.LogError("FeverSystemManager is NULL");
             }
 
             return _instance;
@@ -26,21 +26,21 @@ public class FeverSystem : MonoBehaviour
     }
     #endregion
 
-    public Slider feverBar;
+    #region Variables
+    [Header("<b><size=15>Fever<b><size=15>")]
+    [Line(255,255,255)]
     public bool feverModeActive = false;
     public int feverBarNum = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Space(20)][Header("<b><size=15>UI<b><size=15>")]
+    [Line(255,255,255)]
+    public Slider feverBar;
+    #endregion
 
+    #region Update
     // Update is called once per frame
     void Update()
     {
-        
-
         feverBarNum = Mathf.Clamp(feverBarNum, 0, 100);
         feverBar.value = feverBarNum;
         if(feverBarNum == 0)
@@ -48,6 +48,7 @@ public class FeverSystem : MonoBehaviour
             feverModeActive = false;
         }
     }
+    #endregion
 
     public void ActivateFeverMode()
     {
@@ -57,11 +58,8 @@ public class FeverSystem : MonoBehaviour
 
             if(GameManager.Instance.tutorialRunning && CursorTD.Instance.feverModeSequence)
             {
-                CursorTD.Instance.feverModeSequence = false;
-                
-                
+                CursorTD.Instance.feverModeSequence = false;   
             }
-
         }
     }
 
@@ -73,11 +71,7 @@ public class FeverSystem : MonoBehaviour
         }
         else
         {
-            feverBarNum += 1 * ComboManager.Instance.currentMultiplier;
-
-            
-
+            feverBarNum += 1 * ScoreManager.Instance.multiplier;
         }
-
     }
 }

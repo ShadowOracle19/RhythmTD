@@ -130,7 +130,7 @@ public class Pickup : MonoBehaviour
             switch (pickup.pickupType)
             {
                 case PickupType.score:
-                    ComboManager.Instance.score += pickup.score;
+                    ScoreManager.Instance.score += pickup.score;
                     break;
 
                 case PickupType.health:
@@ -140,7 +140,7 @@ public class Pickup : MonoBehaviour
                     } 
                     else
                     {
-                        ComboManager.Instance.score += pickup.score;
+                        ScoreManager.Instance.score += pickup.score;
                     }
                     break;
 

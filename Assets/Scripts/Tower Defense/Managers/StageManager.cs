@@ -34,19 +34,27 @@ public class StageManager : MonoBehaviour
         _instance = this;
     }
     #endregion
+
+    #region Variables
+    [Header("<b><size=15>Stage Environments<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject default_environment;
     public GameObject outside;
     public GameObject outside_InfoHub;
     public GameObject inside_InfoHub;
     public GameObject alert_LevelBG;
+    #endregion
 
+    #region OnEnable
     private void OnEnable()
     {
         HideLevel();
     }
+    #endregion
 
     public void HideLevel()
     {
+        default_environment.SetActive(false);
         outside.SetActive(false);
         outside_InfoHub.SetActive(false);
         inside_InfoHub.SetActive(false);
@@ -55,7 +63,7 @@ public class StageManager : MonoBehaviour
 
     public void SetStage(LevelSelection stage)
     {
-        HideLevel();
+        HideLevel(); //hide all environments
 
         switch (stage)
         {

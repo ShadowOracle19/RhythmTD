@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public enum InstrumentType
 {
-    Flats, Trill, Major, Chromatic, Forte, Poco, Legato, Allegro, Tower9, Tower10, Tower11, Tower12
+    Flat, Trill, Major, Chromatic, Forte, Poco, Legato, Allegro, Tower9, Tower10, Tower11, Tower12
 }
 
 public enum TowerState
@@ -532,9 +532,9 @@ public class Tower : MonoBehaviour
     {
         switch (towerInfo.type)
         {
-            case InstrumentType.Flats:
-                ConductorV2.instance.flats.volume -= towerAudioVolumeIncrement;
-                ConductorV2.instance.flats.volume = Mathf.Clamp(ConductorV2.instance.flats.volume, 0, 0.5f);
+            case InstrumentType.Flat:
+                ConductorV2.instance.flat.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.flat.volume = Mathf.Clamp(ConductorV2.instance.flat.volume, 0, 0.5f);
                 break;
 
             case InstrumentType.Trill:

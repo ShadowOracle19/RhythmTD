@@ -452,7 +452,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 3
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 3
@@ -1839,7 +1839,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: HandleTextSpeedData
         m_Mode: 0
@@ -3709,7 +3709,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: HandleScreenMode
         m_Mode: 0
@@ -4057,7 +4057,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: HandleTextSpeedData
         m_Mode: 0
@@ -5279,7 +5279,6 @@ GameObject:
   - component: {fileID: 3853992216592240586}
   - component: {fileID: 253439622015460594}
   - component: {fileID: 439662902792488834}
-  - component: {fileID: 384544649386332990}
   m_Layer: 5
   m_Name: Settings Root
   m_TagString: Untagged
@@ -5370,60 +5369,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &384544649386332990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3286430013444867488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78cbaec8c400be34fb301d65483e5023, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterAudioMixer: {fileID: 24100000, guid: cbeb25204ea54804ab75e53b61086195, type: 2}
-  masterVolume: 0.7
-  masterVolumeSlider: {fileID: 2905623722635215838}
-  masterVolumeText: {fileID: 693099878951273485}
-  musicVolume: 1
-  musicVolumeSlider: {fileID: 6470296457390277460}
-  musicVolumeText: {fileID: 5581194438223887996}
-  metronomeVolume: 1
-  metronomeVolumeSlider: {fileID: 5996253286417659554}
-  metronomeVolumeText: {fileID: 7521807375807890220}
-  metronomeTestSound: {fileID: 3530386311690618289}
-  sfxVolume: 1
-  sfxVolumeSlider: {fileID: 7496999535587567936}
-  sfxVolumeText: {fileID: 5005697927580911477}
-  sfxTestSound: {fileID: 2498800323051725870}
-  hitSfxVolume: 1
-  hitSfxVolumeSlider: {fileID: 8287683834752942366}
-  hitSfxVolumeText: {fileID: 8538531127145011696}
-  hitSfxTestSound: {fileID: 7247986988613114410}
-  dialogueSfxVolume: 1
-  dialogueSfxVolumeSlider: {fileID: 5527786550830014276}
-  dialogueSfxVolumeText: {fileID: 4202901562320612292}
-  dialogueSfxTestSound: {fileID: 7554762880268354879}
-  fullScreenMode: 3
-  resolution: {x: 1280, y: 720}
-  isGridWraparound: 0
-  indicatorSpeedSlider: {fileID: 0}
-  indicatorSpeedText: {fileID: 0}
-  isDynamicMusicActive: 1
-  audioLatencySlider: {fileID: 4908696165176012505}
-  audioLatencyText: {fileID: 472331660742589274}
-  inputLatencySlider: {fileID: 9106093554151436083}
-  inputLatencyText: {fileID: 3247358366134141773}
-  textSpeed: 0.05
-  textSpeeds: []
-  isTextAutoAdvance: 0
-  isAlwaysPlayDialogue: 0
-  settingsSelection: {fileID: 3357313318107346276}
-  gameSettings: {fileID: 2777075213953252934}
-  soundSettings: {fileID: 1096302865687289819}
-  displaySettings: {fileID: 2981493290238783475}
-  constrolsSettings: {fileID: 161006491081406019}
 --- !u!1 &3298415977128542029
 GameObject:
   m_ObjectHideFlags: 0
@@ -5515,7 +5460,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 3
@@ -8192,7 +8137,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 3
@@ -12488,7 +12433,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 3
@@ -14211,7 +14156,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 3
@@ -15924,7 +15869,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 384544649386332990}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: HandleResolutionDropdownData
         m_Mode: 0

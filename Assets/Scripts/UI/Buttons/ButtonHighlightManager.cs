@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    // VARIABLES
+    #region Variables
     //public GameObject menuCursor;
 
     [Header("SFX")]
@@ -21,13 +21,9 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
 
     [Header("Selection Scale")]
     public Vector3 highlightScale = new Vector3(1.25f, 1.25f, 1.0f); //scale of the button when highlighted
+    #endregion
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //
-    }
-
+    #region Select
     public void OnSelect(BaseEventData eventData)
     {
         //play select sound
@@ -48,7 +44,9 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
         //set button to the object actively highlighted by the cursor
         //menuCursor.GetComponent<MenuCursorMovement>().SetActiveElement(this.gameObject);
     }
+    #endregion
 
+    #region  Deselect
     public void OnDeselect(BaseEventData eventData)
     {
         //play deselect animation
@@ -66,4 +64,5 @@ public class ButtonHighlightManager : MonoBehaviour, ISelectHandler, IDeselectHa
         //set button to the object last highlighted by the cursor
         //menuCursor.GetComponent<MenuCursorMovement>().SetPreviousElement(this.gameObject);
     }
+    #endregion
 }

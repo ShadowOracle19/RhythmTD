@@ -671,6 +671,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 90d18c7abb63a9e4bbd635e59af73f9e, type: 3}
   m_PrefabInstance: {fileID: 895451374}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &125054624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7222742111175965708, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+  m_PrefabInstance: {fileID: 302608501}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &133497314 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6003752312761161874, guid: f46922ad386300e488119826e6c46688, type: 3}
@@ -1962,7 +1967,7 @@ MonoBehaviour:
   menuMusic: {fileID: 625633373}
   loadoutScreen: {fileID: 210811172}
   loadoutScreenInteractables:
-  - {fileID: 0}
+  - {fileID: 125054624}
   loadoutInterfaceAnimator: {fileID: 1727033164}
   winScreen: {fileID: 1704172244}
   winScreenInteractables:
@@ -2851,6 +2856,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 5471342839971330476, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 5529426865573031512, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -3111,6 +3120,10 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7222742111175965708, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7236163555261785688, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
@@ -3259,6 +3272,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7782262413779684188, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7822588132349086614, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -3346,6 +3363,10 @@ PrefabInstance:
     - target: {fileID: 8716109057913663913, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756396943520053929, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8776651319269019370, guid: 9aadf186ad9a2e549ac779571edc0492, type: 3}
       propertyPath: m_Layer
@@ -20204,7 +20225,7 @@ MonoBehaviour:
   measureTrack: 0
   _interval: 0
   lastInterval: 0
-  flats: {fileID: 4403314348635615938}
+  flat: {fileID: 0}
   major: {fileID: 4313831337325133717}
   allegro: {fileID: 3060394202002935623}
   trill: {fileID: 1822769460003083570}
@@ -27064,11 +27085,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerToPlace: {fileID: 0}
   isTowerHovering: 0
-  greyscaleShader: {fileID: 2100000, guid: ea195610c6654e64b81c7eee2e749bcf, type: 2}
   towerSwap: 0
+  towerList: []
   audioSource: {fileID: 7375087823833580385}
   towerAudioVolumeIncrement: 0.1
-  towerList: []
+  greyscaleShader: {fileID: 2100000, guid: ea195610c6654e64b81c7eee2e749bcf, type: 2}
 --- !u!114 &7209039134156115095 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7531125949545011699, guid: 940f8448dc2a61046abcfa5cf0169c1d, type: 3}

@@ -108,11 +108,6 @@ public class TowerManager : MonoBehaviour
 
         _tower.GetComponent<Tower>().towerNum = towerNum;
 
-        if (GameManager.Instance.isTowerFragile)
-        {
-            _tower.GetComponent<Tower>().currentHealth = 1;
-        }
-
         _tower.transform.position = tilePosition;
 
         tile.placedTower = _tower;

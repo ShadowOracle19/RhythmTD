@@ -127,7 +127,16 @@ public class Tower : MonoBehaviour
     public virtual void Start()
     {
         currentAttackPattern = towerInfo.attackPattern;
-        currentHealth = towerInfo.towerHealth;
+
+        if (GameManager.Instance.isTowerFragile)
+        {
+            currentHealth = 1;
+        }
+        else
+        {
+            currentHealth = towerInfo.towerHealth;
+        }
+        
         towerDamage = towerInfo.damage;
 
         beat = 1;

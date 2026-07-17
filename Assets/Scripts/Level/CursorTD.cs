@@ -35,41 +35,13 @@ public class CursorTD : MonoBehaviour
     #region Variables
     private PlayerInputHandler inputHandler;
 
-    public bool isMoving = false;
-    public Vector3 originPos, targetPos;
-    public float timeToMove = 1f;
+    [Header("<b><size=15>Input Time Tracking<b><size=15>")]
+    [Line(255,255,255)]
+    public float beatTimeAtInput = 0.0f; // beat progress at time of player input
+    public float timeAtInput = 0.0f; // song progress at time of player input
 
-    public Vector3 desiredMovement;
-
-    //placement menu
-    [SerializeField]private bool towerSelectMenuOpened = false;
-    private bool inputOnce = false;
-    private bool destructMode = false;
-
-    public Tile tile;
-
-    [Header("Shaders Materials")]
-    public Material greyscaleShader;
-    
-    [Header("Placement Menu")]
-    public GameObject placementMenu;
-    public Animator radialMenuAnimator;
-
-    public int slotIndex = 0;
-    public List<GameObject> towerSlots = new List<GameObject>();
-
-    [Header ("Upgrade Menu")]
-    public GameObject upgradeMenu;
-    public bool upgradingTower = false;
-
-    public List<GameObject> upgradeSlots = new List<GameObject>();
-
-    [Header ("Cursor Pulse")]
-    public GameObject cursorSprite;
-    public Vector3 defaultSize;
-    public Vector3 pulseSize;
-
-    [Header ("Hit Judgement")]
+    [Space(20)][Header("<b><size=15>Input Judgements<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject beatHitResultPrefab;
     public Sprite perfectHitSprite;
     public Sprite greatHitSprite;
@@ -77,42 +49,72 @@ public class CursorTD : MonoBehaviour
     public Sprite lateHitSprite;
     public Sprite missHitSprite;
 
-    public bool pauseMovement = false;
+    [Space(20)][Header("<b><size=15>Cursor Movement<b><size=15>")]
+    [Line(255,255,255)]
+    public bool isMoving = false;
+    public Vector3 originPos, targetPos;
+    public Vector3 desiredMovement;
+    public float timeToMove = 1f;
+    
+    [Space(20)][Header("<b><size=15>Cursor Pulse<b><size=15>")]
+    [Line(255,255,255)]
+    public GameObject cursorSprite;
+    public Vector3 defaultSize;
+    public Vector3 pulseSize;
+    
+    [Space(20)][Header("<b><size=15>Placement Menu<b><size=15>")]
+    [Line(255,255,255)]
+    public GameObject placementMenu;
+    public Animator radialMenuAnimator;
 
+    [SerializeField]private bool towerSelectMenuOpened = false;
+    private bool inputOnce = false;
+    private bool destructMode = false;
+
+    public Tile tile;
+
+    public int slotIndex = 0;
+    public List<GameObject> towerSlots = new List<GameObject>();
+
+    public bool pauseMovement = false;
+    public bool placingTower = false;
     public bool towerSwap;
 
-    public bool placingTower = false;
+    [Space(20)][Header("<b><size=15>Upgrade Menu<b><size=15>")]
+    [Line(255,255,255)]
+    public GameObject upgradeMenu;
+    public bool upgradingTower = false;
 
-    [Header("Tutorial Objects")]
+    public List<GameObject> upgradeSlots = new List<GameObject>();
+
+    [Space(20)][Header("<b><size=15>Tutorial Objects<b><size=15>")]
+    [Line(255,255,255)]
     public bool movementSequence = false;
     public bool towerPlacementMenuSequence = false;
     public bool towerPlacementMenuSequencePassed = false;
     public bool towerPlaceSequence = false ;
     public bool towerBuffSequence = false;
     public bool feverModeSequence = false;
-
+    [Space(10)]
     public int moveCounter = 0;
     public int buffCounter = 0;
-
+    [Space(10)]
     public bool beatIsHit = false;
     public bool beatHasReset = false;
 
-    [Header("Piano resource gain")]
+    [Space(20)][Header("<b><size=15>Piano Resource Gain<b><size=15>")]
+    [Line(255,255,255)]
     public int pianoMod = 0;
 
-    [Header("SFX")]
+    [Space(20)][Header("<b><size=15>SFX<b><size=15>")]
+    [Line(255,255,255)]
     public List<AudioClip> towerMenuSounds = new List<AudioClip>();
-    /*
-    public AudioClip upInvalidSfx;
-    public AudioClip rightInvalidSfx;
-    public AudioClip downInvalidSfx;
-    public AudioClip leftInvalidSfx;
-    */
-
+    [Space(10)]
     public AudioSource hitSoundSource;
     public List<AudioClip> hitSounds = new List<AudioClip>();
 
-    [Header("PFX")]
+    [Space(20)][Header("<b><size=15>VFX<b><size=15>")]
+    [Line(255,255,255)]
     //[SerializeField] private List<ParticleSystem>() particleEffects = new List<ParticleSystem>();
     // private ParticleSystem particleInstance;
     [SerializeField] private ParticleSystem buffGreatPfx;
@@ -124,17 +126,19 @@ public class CursorTD : MonoBehaviour
     [SerializeField] private ParticleSystem cursorResourceGenParticles;
     private ParticleSystem cursorResourceGenParticlesInstance;
 
-    [Header("Input Detection")]
-    public float beatTimeAtInput = 0.0f; // beat progress at time of player input
-    public float timeAtInput = 0.0f; // song progress at time of player input
+    [Space(20)][Header("<b><size=15>Shaders Materials<b><size=15>")]
+    [Line(255,255,255)]
+    public Material greyscaleShader;
     #endregion
 
+    #region Start
     void Start()
     {
         radialMenuAnimator = placementMenu.GetComponent<Animator>();
 
         //beatHitResultSpriteRenderer = beatHitResultPrefab.GetComponent<SpriteRenderer>(); //get reference to the hit judgement sprite renderer
     }
+    #endregion
 
     #region Update
     // Update is called once per frame

@@ -30,7 +30,7 @@ public class CombatManager : MonoBehaviour
     #endregion
 
     #region Variables
-    [Space(20)][Header("<b><size=15>Encounter<b><size=15>")]
+    [Header("<b><size=15>Encounter<b><size=15>")]
     [Line(255,255,255)]
     public CombatMaker currentEncounter;
 
@@ -64,12 +64,13 @@ public class CombatManager : MonoBehaviour
     public bool overrideStartingResources = false;
     public int startingResourcesOverride = 100;
     [Space(10)]
-    public int resourceNum;
+    public int resourceNum = 0;
+    public int resourceCap = 999;
     public int resourceCapMax = 999;
     public int resourceCapLimited = 150;
-    public int resourceCap = 999;
+    
 
-    [Space(20)][Header("<b><size=15>Combat UI<b><size=15>")]
+    [Space(20)][Header("<b><size=15>UI<b><size=15>")]
     [Line(255,255,255)]
     public GameObject combatInterface;
     public GameObject countInObject;
@@ -83,7 +84,7 @@ public class CombatManager : MonoBehaviour
     [Space(10)]
     public GameObject tutorialManager;
 
-    [Space(20)][Header("<b><size=15>End Sequence<b><size=15>")]
+    [Space(20)][Header("<b><size=15>Stage End Sequence<b><size=15>")]
     [Line(255,255,255)]
     public bool fadeMusicFinished = false;
     public float fadeDurationInBeats = 8.0f;
@@ -298,7 +299,6 @@ public class CombatManager : MonoBehaviour
         if (GameManager.Instance.isLimitedResources)
         {
             resourceCap = resourceCapLimited;
-            resourceNum = currentEncounter.startingResources;
         }
         else
         {

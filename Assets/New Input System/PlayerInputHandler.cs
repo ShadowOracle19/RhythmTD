@@ -6,28 +6,24 @@ using UnityEngine.InputSystem.Interactions;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    [Header("Input Action Asset")]
+    [Header("<b><size=15>Input Action Asset<b><size=15>")]
+    [Line(255,255,255)]
     [SerializeField] private InputActionAsset playerControls;
 
-    [Header("Action Map Name Reference")]
+    [Space(20)][Header("<b><size=15>Action Map Name Reference<b><size=15>")]
+    [Line(255,255,255)]
     [SerializeField] private string actionMapName = "Player";
 
-    [Header("Action Name References")]
+    [Space(20)][Header("<b><size=15>Action Name References<b><size=15>")]
+    [Line(255,255,255)]
     [SerializeField] private string move = "Move";
     [SerializeField] private string radialMenu = "Radial Menu Toggle";
     [SerializeField] private string swapTower = "Swap Tower";
     [SerializeField] private string destructMode = "Destruct Mode Toggle";
     [SerializeField] private string destructTower = "Destruct Tower";
     [SerializeField] private string buff = "Buff";
-    /*
-    [SerializeField] private string buff1 = "Buff 1";
-    [SerializeField] private string buff2 = "Buff 2";
-    [SerializeField] private string buff3 = "Buff 3";
-    [SerializeField] private string buff4 = "Buff 4";
-    */
     [SerializeField] private string feverMode = "Fever Mode";
     [SerializeField] private string options = "Options";
-
 
     private InputAction moveAction;
     private InputAction radialAction;

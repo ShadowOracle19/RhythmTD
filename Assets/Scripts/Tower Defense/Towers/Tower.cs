@@ -91,7 +91,7 @@ public class Tower : MonoBehaviour
 
     [Header("<b><size=15>Tower Stats<b><size=15>")]
     [Line(255,255,255)]
-    private int currentHealth = 0;
+    public int currentHealth = 0;
     public int towerDamage;
     public float attackPower = 1.0f;
     public float attackPowerBonus = 0.0f;

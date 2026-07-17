@@ -78,11 +78,12 @@ public class Spawner : MonoBehaviour
     public GameObject walkerEnemy;
     public GameObject wispEnemy;
 
-
+    #region Update
     private void Update()
     {
         //WaveCounter();
     }
+    #endregion
 
     public void WaveCounter()
     {

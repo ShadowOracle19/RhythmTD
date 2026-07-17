@@ -87,7 +87,20 @@ public class ConductorV2 : MonoBehaviour
     public void CountUsIn(int _bpm)
     {
         pauseConductor = true;
-        bpm = _bpm;
+
+        if (GameManager.Instance.isDoubleTime)
+        {
+            bpm = _bpm * 2;
+        }   
+        else if (GameManager.Instance.isHalfTime)
+        {
+            bpm = _bpm / 2;
+        }   
+        else
+        {
+            bpm = _bpm;
+        } 
+        
         songLoops = 0;
         //completedLoops = 0;
         numberOfBeats = 0;

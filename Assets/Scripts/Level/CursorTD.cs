@@ -279,20 +279,42 @@ public class CursorTD : MonoBehaviour
             return;
         }
 
-        //JUDGEMENT BASED RESOURCE GAIN
+        //JUDGEMENT
         switch (CheckOnBeat(beatTimeAtInput))
         {
             case _BeatResult.miss:
+                if (GameManager.Instance.isPerfectsOnly || GameManager.Instance.isHitsOnly)
+                {
+                    GameManager.Instance._currentHealth = 0;
+                }
+
                 SpawnBeatHitResult(_BeatResult.miss);
                 ComboManager.Instance.ResetCombo();
                 break;
             case _BeatResult.late:
+                if (GameManager.Instance.isPerfectsOnly)
+                {
+                    GameManager.Instance._currentHealth = 0;
+                }
+
                 SpawnBeatHitResult(_BeatResult.late);
                 break;
             case _BeatResult.early:
+                if (GameManager.Instance.isPerfectsOnly)
+                {
+                    GameManager.Instance._currentHealth = 0;
+                }
+
                 SpawnBeatHitResult(_BeatResult.early);
                 break;
             case _BeatResult.great:
+                if (GameManager.Instance.isPerfectsOnly)
+                {
+                    GameManager.Instance._currentHealth = 0;
+                    SpawnBeatHitResult(_BeatResult.great);
+                    break;
+                }
+
                 SpawnBeatHitResult(_BeatResult.great);
                 ComboManager.Instance.IncreaseCombo();
                 //ComboManager.Instance.IncreaseScore();
@@ -440,6 +462,13 @@ public class CursorTD : MonoBehaviour
                     //COMBO
                     ComboManager.Instance.ResetCombo();
 
+                    //MOD
+                    if (GameManager.Instance.isPerfectsOnly || GameManager.Instance.isHitsOnly)
+                    {
+                        GameManager.Instance._currentHealth = 0;
+                        break;
+                    }
+
                     //BUFFING
                     tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.0f);
 
@@ -450,6 +479,13 @@ public class CursorTD : MonoBehaviour
                     hitSoundSource.clip = hitSounds[0];
                     hitSoundSource.Play();
                     SpawnBeatHitResult(_BeatResult.late);
+
+                    //MOD
+                    if (GameManager.Instance.isPerfectsOnly)
+                    {
+                        GameManager.Instance._currentHealth = 0;
+                        break;
+                    }
 
                     //BUFFING
                     tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.0f);
@@ -462,6 +498,13 @@ public class CursorTD : MonoBehaviour
                     hitSoundSource.Play();
                     SpawnBeatHitResult(_BeatResult.early);
 
+                    //MOD
+                    if (GameManager.Instance.isPerfectsOnly)
+                    {
+                        GameManager.Instance._currentHealth = 0;
+                        break;
+                    }
+
                     //BUFFING
                     tile.placedTower.GetComponent<Tower>().BuffAttack(timeAtInput, 0.0f);
 
@@ -473,6 +516,13 @@ public class CursorTD : MonoBehaviour
                     hitSoundSource.Play();
                     tile.placedTower.GetComponent<Tower>().StartCoroutine(tile.placedTower.GetComponent<Tower>().InterruptAnimation());
                     SpawnBeatHitResult(_BeatResult.great);
+
+                    //MOD
+                    if (GameManager.Instance.isPerfectsOnly)
+                    {
+                        GameManager.Instance._currentHealth = 0;
+                        break;
+                    }
 
                     //COMBO & SCORE
                     ComboManager.Instance.IncreaseCombo();
@@ -655,8 +705,12 @@ public class CursorTD : MonoBehaviour
             }
 
             TowerManager.Instance.SetTower(tower, new Vector3(transform.position.x, 0.5f, transform.position.z), tile, towerNum, CheckOnBeat(timeAtInput), false);
-            CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
-
+            
+            if (!GameManager.Instance.isInfiniteResources)
+            {
+                CombatManager.Instance.resourceNum -= tower.GetComponent<Tower>().towerInfo.resourceCost;
+            }
+            
             SpawnBeatHitResult(CheckOnBeat(beatTimeAtInput));
             TogglePlacementMenu();
             placingTower = false;
@@ -880,6 +934,21 @@ public class CursorTD : MonoBehaviour
     // TO DO: Double check threshold calculations to ensure they're exact on both sides of the input timing
     public _BeatResult CheckOnInput(float inputTime, float inputTargetTime)
     {
+        float modDivisor = 0f;
+
+        if (GameManager.Instance.isPreciseTiming)
+        {
+            modDivisor = 2f;
+        }
+        else if (GameManager.Instance.isPreciseTiming)
+        {
+            modDivisor = 0.5f;
+        }
+        else
+        {
+            modDivisor = 0f;
+        }
+
         /*
         if (inputTime >= inputTargetTime + ConductorV2.instance.missBeatThreshold) //miss+ (>= .375)
         {
@@ -890,27 +959,27 @@ public class CursorTD : MonoBehaviour
         {
             return _BeatResult.nohit;
         }
-        else if (inputTime >= inputTargetTime + ConductorV2.instance.lateBeatThreshold) //late (>= .250)
+        else if (inputTime >= inputTargetTime + (ConductorV2.instance.lateBeatThreshold / modDivisor)) //late (>= .250)
         {
             return _BeatResult.late;
         }
-        else if (inputTime >= inputTargetTime + ConductorV2.instance.lateGreatBeatThreshold) //great+ (>= .125)
+        else if (inputTime >= inputTargetTime + (ConductorV2.instance.lateGreatBeatThreshold / modDivisor)) //great+ (>= .125)
         {
             return _BeatResult.great;
         }
-        else if (inputTime > inputTargetTime - (1 - ConductorV2.instance.perfectBeatThreshold)) //perfect (> .125)
+        else if (inputTime > inputTargetTime - (1 - (ConductorV2.instance.perfectBeatThreshold / modDivisor))) //perfect (> .125)
         {
             return _BeatResult.perfect; 
         }
-        else if (inputTime > inputTargetTime - (1 - ConductorV2.instance.earlyGreatBeatThreshold)) //great- (> .250)
+        else if (inputTime > inputTargetTime - (1 - (ConductorV2.instance.earlyGreatBeatThreshold / modDivisor))) //great- (> .250)
         {
             return _BeatResult.great;
         }
-        else if (inputTime > inputTargetTime - (1 - ConductorV2.instance.earlyBeatThreshold)) //early (> .375)
+        else if (inputTime > inputTargetTime - (1 - (ConductorV2.instance.earlyBeatThreshold / modDivisor))) //early (> .375)
         {
             return _BeatResult.early;
         }
-        else if (inputTime <= inputTargetTime - (1 - ConductorV2.instance.earlyBeatThreshold)) //miss- (<= .375)
+        else if (inputTime <= inputTargetTime - (1 - (ConductorV2.instance.earlyBeatThreshold / modDivisor))) //miss- (<= .375)
         {
             return _BeatResult.miss;
         }

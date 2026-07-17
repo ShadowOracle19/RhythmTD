@@ -56,6 +56,9 @@ public class MenuEventManager : MonoBehaviour
 
     [Header("Main Menu")]
     public GameObject mainScreen;
+    public GameObject modifierScreenObject;
+    public Animator modifierScreenAnimator;
+    public bool isModMenuOpen = false;
     public List<GameObject> mainScreenInteractables;
     public AudioSource menuMusic;
 
@@ -137,6 +140,22 @@ public class MenuEventManager : MonoBehaviour
         menuMusic.Stop();
 
         mainScreen.SetActive(false);
+    }
+
+    public void HandleModifierMenuInput()
+    {
+        if (!isModMenuOpen)
+        {
+            modifierScreenAnimator.SetTrigger("Open");
+            eventSystem.SetSelectedGameObject(modifierScreenObject);
+            isModMenuOpen = true;
+        }
+        else
+        {
+            modifierScreenAnimator.SetTrigger("Close");
+            SelectLastSelectedLevel();
+            isModMenuOpen = false;
+        }
     }
     #endregion
 

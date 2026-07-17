@@ -116,6 +116,44 @@ public class GameManager : MonoBehaviour
     public List<Image> intelImages;
     public int imageIndex = 0;
 
+    [Space(20)][Header("<b><size=15>Modifiers<b><size=15>")]
+    [Line(255,255,255)]
+    [Header("<b><size=15>General<b><size=15>")]
+    public bool isOneHealth = false; // Reduces player HP to 1 hit from failing                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isNoFail = false; // Prevents the player from failing a level                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isTowerFragile = false; // Reduces all tower HP values to 1 hit from destruction                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isEnemyFragile = false; // Reduces all enemy HP values to 1 hit from destruction                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isDoubleTime = false; // Doubles game speed (does not currently increase music speed)                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isHalfTime = false; // Halves game speed (does not currently decrease music speed)                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isPreciseTiming = false; // Tightens the perfect judgement window                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isGenerousTiming = false; // Increases the perfect judgement window                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isPerfectsOnly = false; // Only perfects allowed                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isHitsOnly = false; // No misses allowed                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isLimitedResources = false; // Limits the resource cap, preventing the player from accumulating enough resources to build multiple towers in short succession                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isInfiniteResources = false; // Grants the player infinite resources                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    [Space(10)][Header("<b><size=15>Misc<b><size=15>")]
+    public bool isNotesHidden = false; // Hides the input prompts for tower attack patterns
+    public bool isMirrorMode = false; // Mirrors grid tiles and enemy spawn locations along the x axis
+    public bool isInvisibleEnemies = false; // Makes enemies invisible (VFX & SFX are still enabled)
+    public bool isRandomEnemies = false; // Spawns random enemy types in place of usual enemy spawns
+    public bool isDeafened = false; // BGM & SFX are muted/muffled
+
+    [Space(20)][Header("<b><size=15>Modifier Toggles<b><size=15>")]
+    [Line(255,255,255)]
+    [Header("<b><size=15>General<b><size=15>")]
+    public Toggle oneHealthToggle;
+    public Toggle noFailToggle;
+    public Toggle towerFragileToggle;
+    public Toggle enemyFragileToggle;
+    public Toggle doubleTimeToggle;
+    public Toggle halfTimeToggle;
+    public Toggle preciseTimingToggle;
+    public Toggle generousTimingToggle;
+    public Toggle perfectsOnlyToggle;
+    public Toggle hitsOnlyToggle;
+    public Toggle limitedResourceToggle;
+    public Toggle infiniteResourcesToggle;
+
     [Space(20)][Header("<b><size=15>Tower Loadout<b><size=15>")]
     [Line(255,255,255)]
     public List<TowerPlacementInfo> towers = new List<TowerPlacementInfo>();
@@ -416,10 +454,13 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    #region Tower defense hp/dmg
+    #region Health
     public void Damage()
     {
-        _currentHealth -= 1;
+        if (!isNoFail)
+        {
+            _currentHealth -= 1;
+        }
         
         ComboManager.Instance.ResetCombo();
 
@@ -602,7 +643,6 @@ public class GameManager : MonoBehaviour
         currentEncounter.clearedObjective01 = true;
 
         // level cleared without losing health
-        //currentEncounter.clearedObjective02 = (_currentHealth == _maxHealth);
         if (hasLostHealth == false) {
             currentEncounter.clearedObjective02 = true;
         }
@@ -611,7 +651,14 @@ public class GameManager : MonoBehaviour
         //currentEncounter.clearedObjective03 = LevelObjectiveManager.Instance.CheckIfObjectiveWasCompleted(currentEncounter.data.uniqueLevel3Objective);
 
         // SCORE
-        pointHolder.Add(healthRemainingPointGain * _currentHealth);  
+        if (isOneHealth)
+        {
+            pointHolder.Add(healthRemainingPointGain * _maxHealth); 
+        }
+        else
+        {
+            pointHolder.Add(healthRemainingPointGain * _currentHealth); 
+        }
     }
 
     public void StartWinLevelProcess()
@@ -636,8 +683,15 @@ public class GameManager : MonoBehaviour
         hasLostHealth = false;
 
         // reset player health
-        _currentHealth = _maxHealth;
-
+        if (isOneHealth)
+        {
+            _currentHealth = 1;
+        }
+        else
+        {
+            _currentHealth = _maxHealth;
+        }
+        
         // reset combo, multiplier, & score
         ComboManager.Instance.currentCombo = 0;
         ComboManager.Instance.highestCombo = 0;
@@ -681,6 +735,168 @@ public class GameManager : MonoBehaviour
                 tower.towerInfo.isUpgradeThreeLocked = false;
                 break;
         }
+    }
+    #endregion
+
+    #region Modifier toggles
+    public void ToggleOneHealth()
+    {
+        if (oneHealthToggle.isOn && noFailToggle.isOn)
+        {
+            isOneHealth = oneHealthToggle.isOn;
+
+            noFailToggle.isOn = false;
+            isNoFail = noFailToggle.isOn;
+        }
+        else
+        {
+            isOneHealth = oneHealthToggle.isOn;
+        }
+    }
+
+    public void ToggleNoFail()
+    {
+        if (oneHealthToggle.isOn && noFailToggle.isOn)
+        {
+            isNoFail = noFailToggle.isOn;
+
+            oneHealthToggle.isOn = false;
+            isOneHealth = oneHealthToggle.isOn;
+        }
+        else
+        {
+            isNoFail = noFailToggle.isOn;
+        }
+    }
+
+    public void ToggleFragileTowers()
+    {
+        isTowerFragile = towerFragileToggle.isOn;
+    }
+
+    public void ToggleFragileEnemies()
+    {
+        isEnemyFragile = enemyFragileToggle.isOn;
+    }
+
+    public void ToggleDoubleTime()
+    {
+        if (doubleTimeToggle.isOn && halfTimeToggle.isOn)
+        {
+            isDoubleTime = doubleTimeToggle.isOn;
+
+            halfTimeToggle.isOn = false;
+            isHalfTime = halfTimeToggle.isOn;
+        }
+        else
+        {
+            isDoubleTime = doubleTimeToggle.isOn;
+        }
+    }
+
+    public void ToggleHalfTime()
+    {
+        if (doubleTimeToggle.isOn && halfTimeToggle.isOn)
+        {
+            isHalfTime = halfTimeToggle.isOn;
+
+            doubleTimeToggle.isOn = false;
+            isDoubleTime = doubleTimeToggle.isOn;
+        }
+        else
+        {
+            isHalfTime = halfTimeToggle.isOn;
+        }
+    }
+
+    public void TogglePrecision()
+    {
+        if (preciseTimingToggle.isOn && generousTimingToggle.isOn)
+        {
+            isPreciseTiming = preciseTimingToggle.isOn;
+
+            generousTimingToggle.isOn = false;
+            isGenerousTiming = generousTimingToggle.isOn;
+        }
+        else
+        {
+            isPreciseTiming = preciseTimingToggle.isOn;
+        }
+    }
+
+    public void ToggleSenzaMisura()
+    {
+        if (preciseTimingToggle.isOn && generousTimingToggle.isOn)
+        {
+            isGenerousTiming = generousTimingToggle.isOn;
+
+            preciseTimingToggle.isOn = false;
+            isPreciseTiming = preciseTimingToggle.isOn;
+        }
+        else
+        {
+            isGenerousTiming = generousTimingToggle.isOn;
+        }
+    }
+
+    public void TogglePerfectionist()
+    {
+        if (perfectsOnlyToggle.isOn && hitsOnlyToggle.isOn)
+        {
+            isPerfectsOnly = perfectsOnlyToggle.isOn;
+
+            hitsOnlyToggle.isOn = false;
+            isHitsOnly = hitsOnlyToggle.isOn;
+        }
+        else
+        {
+            isPerfectsOnly = perfectsOnlyToggle.isOn;
+        }
+    }
+
+    public void ToggleNoMissTakes()
+    {
+        if (perfectsOnlyToggle.isOn && hitsOnlyToggle.isOn)
+        {
+            isHitsOnly = hitsOnlyToggle.isOn;
+
+            perfectsOnlyToggle.isOn = false;
+            isPerfectsOnly = perfectsOnlyToggle.isOn;
+        }
+        else
+        {
+            isHitsOnly = hitsOnlyToggle.isOn;
+        }
+    }
+
+    public void ToggleLowBattery()
+    {
+        if (limitedResourceToggle.isOn && infiniteResourcesToggle.isOn)
+        {
+            isLimitedResources = limitedResourceToggle.isOn;
+
+            infiniteResourcesToggle.isOn = false;
+            isInfiniteResources = infiniteResourcesToggle.isOn;
+        }
+        else
+        {
+            isLimitedResources = limitedResourceToggle.isOn;
+        }
+    }
+
+    public void ToggleInfinitePower()
+    {
+        if (limitedResourceToggle.isOn && infiniteResourcesToggle.isOn)
+        {
+            isInfiniteResources = infiniteResourcesToggle.isOn;
+
+            limitedResourceToggle.isOn = false;
+            isLimitedResources = limitedResourceToggle.isOn;
+        }
+        else
+        {
+            isInfiniteResources = infiniteResourcesToggle.isOn;
+        }   
     }
     #endregion
 }

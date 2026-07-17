@@ -73,7 +73,7 @@
                     "name": "Options",
                     "type": "Button",
                     "id": "f6e721db-95c9-4949-8683-a70b7f80ac0b",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": false
@@ -1046,7 +1046,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "c33d598d-8235-4a73-bcca-ec629e903cf6",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1055,7 +1055,7 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "e62a6905-20de-49e4-a719-69ec470f4995",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1127,7 +1127,16 @@
                     "name": "Options",
                     "type": "Button",
                     "id": "46abe3c3-b91b-4f76-9353-8b7e9fe9e72a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Modifier Menu Toggle",
+                    "type": "Button",
+                    "id": "a093c285-0927-47fe-9d65-7d403fa550fd",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": false
@@ -1397,6 +1406,17 @@
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "7d92cca3-3fc7-49d9-968d-9339d3b14c13",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Modifier Menu Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

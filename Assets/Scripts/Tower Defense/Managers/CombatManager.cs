@@ -29,88 +29,78 @@ public class CombatManager : MonoBehaviour
     }
     #endregion
 
+    #region Variables
+    [Space(20)][Header("<b><size=15>Encounter<b><size=15>")]
+    [Line(255,255,255)]
+    public CombatMaker currentEncounter;
+
+    [Space(20)][Header("<b><size=15>Spawning<b><size=15>")]
+    [Line(255,255,255)]
+    [SerializeField] private Spawner objectSpawners;
     public bool spawnerDelayRunning = false;
+    [Space(10)]
     public bool allEnemiesSpawned = false;
     public bool allPickupsSpawned = false;
     public int enemiesDefeated = 0;
     public int enemyTotal = 0;
     public int pickupTotal = 0;
-    [SerializeField] private Spawner objectSpawners;
-
-    public CombatMaker currentEncounter;
-
+    public int totalNumEnemies;
+    public int totalNumPickups;
+    [Space(10)]
     [SerializeField] public Transform enemiesParent;
     [SerializeField] public Transform towersParent;
     [SerializeField] public Transform projectilesParent;
     [SerializeField] public Transform chargesParent;
     [SerializeField] public Transform pickupsParent;
     [SerializeField] public Transform stageParent;
-
+    [Space(10)]
     public TextMeshProUGUI enemiesSpawnIn;
     public int enemyTimerMax = 30;
     public int enemyTimer = 40;
     bool switchColor = false;
 
-    [Header("Round Info")]
-    public int totalNumEnemies;
-    public int totalNumPickups;
-
-    [Header("Resources Testing")]
+    [Space(20)][Header("<b><size=15>Resources<b><size=15>")]
+    [Line(255,255,255)]
     public bool overrideStartingResources = false;
     public int startingResourcesOverride = 100;
-    
-    [Header("Resources")]
+    [Space(10)]
     public int resourceNum;
-    public int maxResource = 100;
-    /*
-    public Slider resourceSlider1;
-    public Slider resourceSlider2;
-    public Slider resourceSlider3;
-    public Slider resourceSlider4;
+    public int resourceCapMax = 999;
+    public int resourceCapLimited = 150;
+    public int resourceCap = 999;
 
-    [Header("Overcharge Resources")]
-    public Slider overchargeSlider;
-    public bool canPlaceEmpoweredTower = false;
-    */
-
-    [Header("Combat UI")]
+    [Space(20)][Header("<b><size=15>Combat UI<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject combatInterface;
     public GameObject countInObject;
     public GameObject enemyTimerObject;
     public GameObject healthBar;
-    //public GameObject controls;
     public GameObject resources;
     public TextMeshProUGUI resourceNumText;
-    //public GameObject overchargeResources;
-    //public GameObject towerDisplay;
     public GameObject feverBar;
-    //public GameObject metronome;
     public GameObject waveCounter;
     public GameObject combo;
-    //public GameObject knockEmDead;
-
+    [Space(10)]
     public GameObject tutorialManager;
 
-    [Header("End Sequence")]
+    [Space(20)][Header("<b><size=15>End Sequence<b><size=15>")]
+    [Line(255,255,255)]
     public bool fadeMusicFinished = false;
     public float fadeDurationInBeats = 8.0f;
+    #endregion
 
     #region Start
     // Start is called before the first frame update
     void Start()
     {
-        //LoadEncounter(currentEncounter);
+        
     }
     #endregion
 
     #region OnDisable
     private void OnDisable()
     {
-        /*
-        Camera.main.transform.position = Vector3.zero;
-        Camera.main.transform.rotation = Quaternion.Euler(Vector3.zero);
-        Camera.main.fieldOfView = 40;
-        */
+        
     }
     #endregion
 
@@ -146,29 +136,6 @@ public class CombatManager : MonoBehaviour
 
         //delays enemy spawning
         DelayTimer();
-
-        if (GameManager.Instance.tutorialRunning)
-        {
-            //overchargeResources.SetActive(false);
-            resourceNum = Mathf.Clamp(resourceNum, 0, 100);
-            return;
-
-        }
-
-        /*
-        overchargeSlider.value = resourceNum - 100;
-
-        if (resourceNum > 100)
-        {
-            overchargeResources.SetActive(true);
-        }
-        else
-        {
-            overchargeResources.SetActive(false);
-        }
-
-        if (resourceNum == 150) canPlaceEmpoweredTower = true;
-        */
     }
 
     private void FixedUpdate()
@@ -328,9 +295,23 @@ public class CombatManager : MonoBehaviour
         objectSpawners.ForecastWave(0);
 
         // set starting resources
+        if (GameManager.Instance.isLimitedResources)
+        {
+            resourceCap = resourceCapLimited;
+            resourceNum = currentEncounter.startingResources;
+        }
+        else
+        {
+            resourceCap = resourceCapMax;
+        }
+        
         if (overrideStartingResources)
         {
             resourceNum = startingResourcesOverride;
+        }
+        else if (GameManager.Instance.isInfiniteResources)
+        {
+            resourceNum = resourceCap;
         }
         else
         {
@@ -648,7 +629,7 @@ public class CombatManager : MonoBehaviour
     #region UI
     void ResourceBar()
     {
-        resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
+        resourceNum = Mathf.Clamp(resourceNum, 0, resourceCap);
         resourceNumText.text = resourceNum.ToString();
     }
     #endregion

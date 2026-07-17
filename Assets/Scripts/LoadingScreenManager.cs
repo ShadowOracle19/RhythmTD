@@ -27,6 +27,7 @@ public class LoadingScreenManager : MonoBehaviour
     }
     #endregion
 
+    #region Variables
     public TextMeshProUGUI loadingText;
     public string[] loadingTextArray = new string[3];
     public int loadingTextIndex = 0;
@@ -47,6 +48,7 @@ public class LoadingScreenManager : MonoBehaviour
     public Animator animator;
     public bool transitionActive = false;
     public float transitionTimer = 0.0f;
+    #endregion
     
     public IEnumerator StartLoading()
     {

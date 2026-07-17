@@ -153,6 +153,7 @@ public class PlayerInputHandler : MonoBehaviour
         buffAction.Disable();
         feverAction.Disable();
         //optionsAction.Disable();
+        Debug.Log("Player Input Handler Disabled");
     }
 
 }

@@ -144,6 +144,7 @@ public class MenuEventManager : MonoBehaviour
         if (lastSelectedLevelObject == null) 
         {
             eventSystem.SetSelectedGameObject(mainScreenInteractables[0]);
+            UpdateLastSelectedLevel();
         }
         else
         {

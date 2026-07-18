@@ -912,6 +912,22 @@ public class CursorTD : MonoBehaviour
 
     public _BeatResult CheckOnBeat(float inputTime)
     {
+        /*
+        float modMultiplier = 0f;
+        
+        if (GameManager.Instance.isPreciseTiming) {
+            modMultiplier = 1f;
+        }
+        else if (GameManager.Instance.isGenerousTiming) {
+            modMultiplier = -0.5f;
+        }
+        else {
+            modMultiplier = 0f;
+        }
+        */
+
+        // + ((1 - ConductorV2.instance.perfectBeatThreshold) * modMultiplier)
+        
         if ((ConductorV2.instance.beatDuration >= ConductorV2.instance.perfectBeatThreshold) || ConductorV2.instance.beatDuration < ConductorV2.instance.lateGreatBeatThreshold) {
             return _BeatResult.perfect; 
         }
@@ -938,18 +954,15 @@ public class CursorTD : MonoBehaviour
     // TO DO: Double check threshold calculations to ensure they're exact on both sides of the input timing
     public _BeatResult CheckOnInput(float inputTime, float inputTargetTime)
     {
-        float modDivisor = 1f;
-
-        if (GameManager.Instance.isPreciseTiming)
-        {
+        float modDivisor = 1.0f;
+        
+        if (GameManager.Instance.isPreciseTiming) {
             modDivisor = 2f;
         }
-        else if (GameManager.Instance.isPreciseTiming)
-        {
-            modDivisor = 0.5f;
+        else if (GameManager.Instance.isGenerousTiming) {
+            modDivisor = 0.75f;
         }
-        else
-        {
+        else {
             modDivisor = 1f;
         }
 
@@ -959,36 +972,28 @@ public class CursorTD : MonoBehaviour
             return _BeatResult.miss;
         }
         */
-        if (inputTime > inputTargetTime + ConductorV2.instance.maxBeatThreshold || inputTime < inputTargetTime - ConductorV2.instance.maxBeatThreshold)
-        {
+        if (inputTime > inputTargetTime + ConductorV2.instance.maxBeatThreshold || inputTime < inputTargetTime - ConductorV2.instance.maxBeatThreshold) {
             return _BeatResult.nohit;
         }
-        else if (inputTime >= inputTargetTime + (ConductorV2.instance.lateBeatThreshold / modDivisor)) //late (>= .250)
-        {
+        else if (inputTime >= inputTargetTime + (ConductorV2.instance.lateBeatThreshold / modDivisor)) {
             return _BeatResult.late;
         }
-        else if (inputTime >= inputTargetTime + (ConductorV2.instance.lateGreatBeatThreshold / modDivisor)) //great+ (>= .125)
-        {
+        else if (inputTime >= inputTargetTime + (ConductorV2.instance.lateGreatBeatThreshold / modDivisor)) {
             return _BeatResult.great;
         }
-        else if (inputTime > inputTargetTime - (1 - (ConductorV2.instance.perfectBeatThreshold / modDivisor))) //perfect (> .125)
-        {
+        else if (inputTime > inputTargetTime - ((1 - ConductorV2.instance.perfectBeatThreshold) / modDivisor)) {
             return _BeatResult.perfect; 
         }
-        else if (inputTime > inputTargetTime - (1 - (ConductorV2.instance.earlyGreatBeatThreshold / modDivisor))) //great- (> .250)
-        {
+        else if (inputTime > inputTargetTime - ((1 - ConductorV2.instance.earlyGreatBeatThreshold) / modDivisor)) {
             return _BeatResult.great;
         }
-        else if (inputTime > inputTargetTime - (1 - (ConductorV2.instance.earlyBeatThreshold / modDivisor))) //early (> .375)
-        {
+        else if (inputTime > inputTargetTime - ((1 - ConductorV2.instance.earlyBeatThreshold) / modDivisor)) {
             return _BeatResult.early;
         }
-        else if (inputTime <= inputTargetTime - (1 - (ConductorV2.instance.earlyBeatThreshold / modDivisor))) //miss- (<= .375)
-        {
+        else if (inputTime <= inputTargetTime - ((1 - ConductorV2.instance.earlyBeatThreshold) / modDivisor)) {
             return _BeatResult.miss;
         }
-        else
-        {
+        else {
             return _BeatResult.nohit;
         }
     }

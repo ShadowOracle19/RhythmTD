@@ -1296,7 +1296,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5695447336917730913, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
   m_PrefabInstance: {fileID: 5775041512460051169}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1667458793}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -15173,6 +15173,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1665010587603055454, guid: 180e4dfeb1d3f31489b17b8e33f57abf, type: 3}
   m_PrefabInstance: {fileID: 1243628892}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1667458793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6377117093312959835, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1670135674
 GameObject:
   m_ObjectHideFlags: 0
@@ -19670,7 +19675,7 @@ MonoBehaviour:
   enemiesSpawnIn: {fileID: 5409566660305168033}
   enemyTimerMax: 5
   enemyTimer: 5
-  overrideStartingResources: 1
+  overrideStartingResources: 0
   startingResourcesOverride: 100
   resourceNum: 0
   resourceCap: 999
@@ -19681,6 +19686,8 @@ MonoBehaviour:
   enemyTimerObject: {fileID: 283964733734025437}
   healthBar: {fileID: 0}
   resources: {fileID: 0}
+  infinityIcon: {fileID: 5775041512460051174}
+  resourceText: {fileID: 1667458793}
   resourceNumText: {fileID: 217858251}
   feverBar: {fileID: 1206784059}
   waveCounter: {fileID: 1245335698}
@@ -24174,6 +24181,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4775364376188186647}
     m_Modifications:
+    - target: {fileID: 431750448932733493, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 768939829410093965, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -24399,6 +24410,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 686437cf69a40ba4b843d9260622a6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CooldownObject
+--- !u!1 &5775041512460051174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 431750448932733493, guid: 1b6ba74460c615349ba541b3e3a36735, type: 3}
+  m_PrefabInstance: {fileID: 5775041512460051169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5896263209683615630
 GameObject:
   m_ObjectHideFlags: 0

@@ -77,6 +77,8 @@ public class CombatManager : MonoBehaviour
     public GameObject enemyTimerObject;
     public GameObject healthBar;
     public GameObject resources;
+    public GameObject infinityIcon;
+    public GameObject resourceText;
     public TextMeshProUGUI resourceNumText;
     public GameObject feverBar;
     public GameObject waveCounter;
@@ -296,25 +298,29 @@ public class CombatManager : MonoBehaviour
         objectSpawners.ForecastWave(0);
 
         // set starting resources
-        if (GameManager.Instance.isLimitedResources)
-        {
+        if (GameManager.Instance.isInfiniteResources) {
+            infinityIcon.SetActive(true);
+            resourceText.SetActive(false);
+        }
+        else {
+            infinityIcon.SetActive(false);
+            resourceText.SetActive(true);
+        }
+
+        if (GameManager.Instance.isLimitedResources) {
             resourceCap = resourceCapLimited;
         }
-        else
-        {
+        else {
             resourceCap = resourceCapMax;
         }
         
-        if (overrideStartingResources)
-        {
+        if (overrideStartingResources) {
             resourceNum = startingResourcesOverride;
         }
-        else if (GameManager.Instance.isInfiniteResources)
-        {
+        else if (GameManager.Instance.isInfiniteResources) {
             resourceNum = resourceCap;
         }
-        else
-        {
+        else {
             resourceNum = currentEncounter.startingResources;
         }
 
@@ -626,11 +632,19 @@ public class CombatManager : MonoBehaviour
     */
     #endregion
 
-    #region UI
+    #region Resource bar
     void ResourceBar()
     {
         resourceNum = Mathf.Clamp(resourceNum, 0, resourceCap);
-        resourceNumText.text = resourceNum.ToString();
+        
+        if (GameManager.Instance.isInfiniteResources)
+        {
+            return;
+        }
+        else
+        {
+            resourceNumText.text = resourceNum.ToString();
+        } 
     }
     #endregion
 

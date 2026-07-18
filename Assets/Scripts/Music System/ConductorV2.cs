@@ -90,11 +90,11 @@ public class ConductorV2 : MonoBehaviour
 
         if (GameManager.Instance.isDoubleTime)
         {
-            bpm = _bpm * 2;
+            bpm = (_bpm * 2f);
         }   
         else if (GameManager.Instance.isHalfTime)
         {
-            bpm = _bpm / 2;
+            bpm = (_bpm / 2f);
         }   
         else
         {

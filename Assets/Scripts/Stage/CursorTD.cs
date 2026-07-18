@@ -938,7 +938,7 @@ public class CursorTD : MonoBehaviour
     // TO DO: Double check threshold calculations to ensure they're exact on both sides of the input timing
     public _BeatResult CheckOnInput(float inputTime, float inputTargetTime)
     {
-        float modDivisor = 0f;
+        float modDivisor = 1f;
 
         if (GameManager.Instance.isPreciseTiming)
         {
@@ -950,7 +950,7 @@ public class CursorTD : MonoBehaviour
         }
         else
         {
-            modDivisor = 0f;
+            modDivisor = 1f;
         }
 
         /*

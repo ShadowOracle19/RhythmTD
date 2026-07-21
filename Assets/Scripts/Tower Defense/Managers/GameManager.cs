@@ -141,6 +141,11 @@ public class GameManager : MonoBehaviour
     public bool isInvisibleEnemies = false; // Makes enemies invisible (VFX & SFX are still enabled)
     public bool isRandomEnemies = false; // Spawns random enemy types in place of usual enemy spawns
     public bool isDeafened = false; // BGM & SFX are muted/muffled
+    [Space(10)][Header("<b><size=15>Info<b><size=15>")]
+    public TextMeshProUGUI modifierName;
+    public TextMeshProUGUI modifierDescription;
+    public List<string> modifierNames = new List<string>();
+    public List<string> modifierDescriptions = new List<string>();
 
     [Space(20)][Header("<b><size=15>Modifier Toggles<b><size=15>")]
     [Line(255,255,255)]
@@ -740,6 +745,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Modifier toggles
+    public void UpdateModDescription(int modifierInfoIndex)
+    {
+        modifierName.text = modifierNames[modifierInfoIndex];
+        modifierDescription.text = modifierDescriptions[modifierInfoIndex];
+    }
+    
     public void ToggleOneHealth()
     {
         if (oneHealthToggle.isOn && noFailToggle.isOn)

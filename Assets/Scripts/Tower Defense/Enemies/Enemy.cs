@@ -463,8 +463,21 @@ public class Enemy : MonoBehaviour
                 deathParticleTriggered = true;
             }
             
+            if(enemy.explodesOnDeath)
+            {
+                DeathExplosion();
+                return;
+            }
+
             Kill();
         }
+    }
+
+    public void DeathExplosion()
+    {
+        isDead = true;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, enemy.explosionRange); 
     }
 
     public void Kill()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.Playables;
 
 public class Enemy : MonoBehaviour
 {
@@ -477,7 +478,19 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, enemy.explosionRange); 
+        Collider[] colliders = Physics.OverlapSphere(transform.position, enemy.explosionRange);
+
+        foreach (var collider in colliders)
+        {
+            if(collider.transform.CompareTag("Enemy"))
+            {
+                collider.transform.GetComponent<Enemy>().Damage(1000);
+            }
+            else if (collider.transform.CompareTag("Enemy"))
+            {
+                collider.transform.GetComponent<Enemy>().Damage(1000);
+            }
+        }
     }
 
     public void Kill()

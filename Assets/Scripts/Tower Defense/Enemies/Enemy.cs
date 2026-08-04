@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
     private bool deathParticleTriggered = false;
     int deathCount = 0;
+    bool deathEffectInvoked = false;
 
     [Header("SFX")]
     public AudioClip enemyHurtSfx;
@@ -80,6 +81,8 @@ public class Enemy : MonoBehaviour
     private ParticleSystem clashParticlesInstance;
 
     [SerializeField] private ParticleSystem damageEffect;
+
+    [SerializeField] private ParticleSystem enemyAOE;
 
 
     public virtual void Start()
@@ -466,6 +469,7 @@ public class Enemy : MonoBehaviour
             
             if(enemy.explodesOnDeath)
             {
+                Debug.Log("explode!!!");
                 DeathExplosion();
                 return;
             }
@@ -476,9 +480,14 @@ public class Enemy : MonoBehaviour
 
     public void DeathExplosion()
     {
+        if (deathEffectInvoked) return;
+        deathEffectInvoked = true;
+
         isDead = true;
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, enemy.explosionRange);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, enemy.explosionRange, GameManager.Instance.interactableMask);
+
+        Debug.Log("colliders collected");
 
         foreach (var collider in colliders)
         {
@@ -486,11 +495,17 @@ public class Enemy : MonoBehaviour
             {
                 collider.transform.GetComponent<Enemy>().Damage(1000);
             }
-            else if (collider.transform.CompareTag("Enemy"))
+            else if (collider.transform.CompareTag("Tower"))
             {
-                collider.transform.GetComponent<Enemy>().Damage(1000);
+                collider.transform.GetComponent<Tower>().Damage(1000);
+            }
+            else if(collider.transform.CompareTag("StageTile"))
+            {
+                SpawnParticles(collider.transform, enemyAOE);
             }
         }
+
+        RemoveEnemy();
     }
 
     public void Kill()
@@ -519,7 +534,7 @@ public class Enemy : MonoBehaviour
         if (playOnce) return;
         playOnce = true;
 
-        if(!GameManager.Instance.currentEncounter.isBossBattle)
+        if (!GameManager.Instance.currentEncounter.isBossBattle)
         {
             CombatManager.Instance.enemyTotal -= 1;
             CombatManager.Instance.enemiesDefeated += 1;
@@ -540,6 +555,12 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject, 1);
 
+    }
+
+
+    public void SpawnParticles(Transform tileTransform, ParticleSystem pfxSource)
+    {
+        var pfxInstance = Instantiate(pfxSource, transform.position, Quaternion.identity);
     }
 }
 

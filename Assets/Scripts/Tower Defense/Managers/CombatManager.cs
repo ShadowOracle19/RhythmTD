@@ -255,7 +255,7 @@ public class CombatManager : MonoBehaviour
             resourceNum = currentEncounter.startingResources;
         }
 
-        enemyTimer = enemyTimerMax; // reset enemy spawn countdown timer
+        enemyTimer = objectSpawners.currentWaves[0].delay; // reset enemy spawn countdown timer
         enemiesSpawnIn.gameObject.SetActive(true); // enable enemy spawn countdown text object
 
         CursorTD.Instance.InitializeCursor(); // initialize the player cursor

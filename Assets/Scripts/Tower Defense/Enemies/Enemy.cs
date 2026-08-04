@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.Playables;
 
 public class Enemy : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour
     public Vector3 nextPosition;
 
     //Adds a random amount of jitter to sprite movement.
-    [SerializeField] private float defeatSpinSpeed = UnityEngine.Random.Range(-240f, 240f); 
+    [SerializeField] private float defeatSpinSpeed; 
 
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
@@ -66,6 +67,7 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
     private bool deathParticleTriggered = false;
     int deathCount = 0;
+    bool deathEffectInvoked = false;
 
     [Header("SFX")]
     public AudioClip enemyHurtSfx;
@@ -79,6 +81,8 @@ public class Enemy : MonoBehaviour
     private ParticleSystem clashParticlesInstance;
 
     [SerializeField] private ParticleSystem damageEffect;
+
+    [SerializeField] private ParticleSystem enemyAOE;
 
 
     public virtual void Start()
@@ -96,6 +100,7 @@ public class Enemy : MonoBehaviour
 
         //Set Animation BPM
         AnimationManager.instance.SetAnimSpeed(animator, 80);
+        defeatSpinSpeed = Random.Range(-240f, 240f);
     }
 
     // Update is called once per frame
@@ -462,8 +467,45 @@ public class Enemy : MonoBehaviour
                 deathParticleTriggered = true;
             }
             
+            if(enemy.explodesOnDeath)
+            {
+                Debug.Log("explode!!!");
+                DeathExplosion();
+                return;
+            }
+
             Kill();
         }
+    }
+
+    public void DeathExplosion()
+    {
+        if (deathEffectInvoked) return;
+        deathEffectInvoked = true;
+
+        isDead = true;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, enemy.explosionRange, GameManager.Instance.interactableMask);
+
+        Debug.Log("colliders collected");
+
+        foreach (var collider in colliders)
+        {
+            if(collider.transform.CompareTag("Enemy"))
+            {
+                collider.transform.GetComponent<Enemy>().Damage(1000);
+            }
+            else if (collider.transform.CompareTag("Tower"))
+            {
+                collider.transform.GetComponent<Tower>().Damage(1000);
+            }
+            else if(collider.transform.CompareTag("StageTile"))
+            {
+                SpawnParticles(collider.transform, enemyAOE);
+            }
+        }
+
+        RemoveEnemy();
     }
 
     public void Kill()
@@ -492,7 +534,7 @@ public class Enemy : MonoBehaviour
         if (playOnce) return;
         playOnce = true;
 
-        if(!GameManager.Instance.currentEncounter.isBossBattle)
+        if (!GameManager.Instance.currentEncounter.isBossBattle)
         {
             CombatManager.Instance.enemyTotal -= 1;
             CombatManager.Instance.enemiesDefeated += 1;
@@ -513,6 +555,12 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject, 1);
 
+    }
+
+
+    public void SpawnParticles(Transform tileTransform, ParticleSystem pfxSource)
+    {
+        var pfxInstance = Instantiate(pfxSource, transform.position, Quaternion.identity);
     }
 }
 

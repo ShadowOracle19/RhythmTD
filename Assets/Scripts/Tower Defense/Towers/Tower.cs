@@ -437,7 +437,7 @@ public class Tower : MonoBehaviour
 
         //}
 
-        colliders = Physics.OverlapSphere(transform.position, tempRange);
+        colliders = Physics.OverlapSphere(transform.position, tempRange, GameManager.Instance.interactableMask);
 
         foreach (var item in colliders)
         {

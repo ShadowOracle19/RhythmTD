@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int _maxHealth = 5;
     [SerializeField] public int _currentHealth = 0;
     [SerializeField] public bool combatRunning = false;
+    public LayerMask interactableMask;
     public TextMeshProUGUI waveCounter;
     public TextMeshProUGUI enemyCounter;
     public GameObject playerInputManager;
@@ -128,6 +129,9 @@ public class GameManager : MonoBehaviour
         settings.SetActive(false);
         pauseMenuRoot.SetActive(false);
         exitMenuRoot.SetActive(false);
+
+        //setup interactable mask
+        interactableMask = LayerMask.GetMask("Enemy", "Tower", "Stage");
 
         _currentHealth = _maxHealth;
 

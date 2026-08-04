@@ -1947,6 +1947,9 @@ MonoBehaviour:
   _maxHealth: 5
   _currentHealth: 0
   combatRunning: 0
+  interactableMask:
+    serializedVersion: 2
+    m_Bits: 8576
   waveCounter: {fileID: 8999282464804729699}
   enemyCounter: {fileID: 782079785}
   playerInputManager: {fileID: 611689253}
@@ -26446,7 +26449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9117658308685687412
 Transform:
   m_ObjectHideFlags: 0

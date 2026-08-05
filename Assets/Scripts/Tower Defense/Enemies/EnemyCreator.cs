@@ -18,6 +18,10 @@ public class EnemyCreator : ScriptableObject
     public int deathIncome;
     public bool onDeathEffect;
     public int onDeathPoints = 5;
+
+    [Header("Enemy Features")]
+    public bool explodesOnDeath = false;
+    public int explosionRange = 3;
 }
 
 public enum EnemyMovementPattern

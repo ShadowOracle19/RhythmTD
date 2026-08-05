@@ -62,10 +62,30 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool isGamePaused = false;
     
     //[SerializeField] private GameObject pauseMenu;
+    /*
+    public GameObject exitMenuRoot;
+    public GameObject showcaseCredits;
+
+    [Header("Combat")]
+    //[SerializeField] private Slider healthSlider;
+    [SerializeField] public int _maxHealth = 5;
+    [SerializeField] public int _currentHealth = 0;
+    [SerializeField] public bool combatRunning = false;
+    
+    public TextMeshProUGUI waveCounter;
+    public TextMeshProUGUI enemyCounter;
+    public GameObject playerInputManager;
+    public bool lostHealth = false;
+    public bool isDynamicMusicActive = true;
+
+    [Header("Pause Menu")]
+    [SerializeField] public bool isGamePaused = false;
+    */
 
     [Space(20)][Header("<b><size=15>Combat<b><size=15>")]
     [Line(255,255,255)]
     public GameObject playerInputManager;
+    public LayerMask interactableMask;
     [Space(10)]
     [SerializeField] public bool combatRunning = false;
     [Space(10)][Header("Health")]
@@ -190,6 +210,9 @@ public class GameManager : MonoBehaviour
         settings.SetActive(false);
         pauseMenuRoot.SetActive(false);
         exitMenuRoot.SetActive(false);
+
+        //setup interactable mask
+        interactableMask = LayerMask.GetMask("Enemy", "Tower", "Stage");
 
         _currentHealth = _maxHealth;
 

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Unity.Mathematics;
 using Random=UnityEngine.Random;
+using UnityEngine.Experimental.Playables;
 
 public class Enemy : MonoBehaviour
 {
@@ -69,6 +70,7 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
     private bool deathParticleTriggered = false;
     int deathCount = 0;
+    bool deathEffectInvoked = false;
 
     [Header("SFX")]
     public AudioClip enemyHurtSfx;
@@ -83,6 +85,8 @@ public class Enemy : MonoBehaviour
 
     public ParticleSystem hitParticles;
     [SerializeField] private ParticleSystem damageEffect;
+
+    [SerializeField] private ParticleSystem enemyAOE;
 
     [Header("Sound Timing")]
     private float soundTimer = 0.0f;
@@ -497,8 +501,45 @@ public class Enemy : MonoBehaviour
                 deathParticleTriggered = true;
             }
             
+            if(enemy.explodesOnDeath)
+            {
+                Debug.Log("explode!!!");
+                DeathExplosion();
+                return;
+            }
+
             Kill();
         }
+    }
+
+    public void DeathExplosion()
+    {
+        if (deathEffectInvoked) return;
+        deathEffectInvoked = true;
+
+        isDead = true;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, enemy.explosionRange, GameManager.Instance.interactableMask);
+
+        Debug.Log("colliders collected");
+
+        foreach (var collider in colliders)
+        {
+            if(collider.transform.CompareTag("Enemy"))
+            {
+                collider.transform.GetComponent<Enemy>().Damage(1000);
+            }
+            else if (collider.transform.CompareTag("Tower"))
+            {
+                collider.transform.GetComponent<Tower>().Damage(1000);
+            }
+            else if(collider.transform.CompareTag("StageTile"))
+            {
+                SpawnParticles(collider.transform, enemyAOE);
+            }
+        }
+
+        RemoveEnemy();
     }
 
     //waits for a duration after a projectile makes contact with an enemy to ensure it aligns with the music
@@ -546,7 +587,7 @@ public class Enemy : MonoBehaviour
         if (playOnce) return;
         playOnce = true;
 
-        if(!GameManager.Instance.currentEncounter.isBossBattle)
+        if (!GameManager.Instance.currentEncounter.isBossBattle)
         {
             CombatManager.Instance.enemyTotal -= 1;
             CombatManager.Instance.enemiesDefeated += 1;
@@ -569,6 +610,11 @@ public class Enemy : MonoBehaviour
 
     }
     #endregion
+
+    public void SpawnParticles(Transform tileTransform, ParticleSystem pfxSource)
+    {
+        var pfxInstance = Instantiate(pfxSource, transform.position, Quaternion.identity);
+    }
 }
 
 public enum EnemyState

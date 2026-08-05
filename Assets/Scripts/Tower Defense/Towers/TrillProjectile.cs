@@ -23,7 +23,7 @@ public class TrillProjectile : Projectile
     {
         //if collide with enemy spawn two echo projectiles
         if (collision.gameObject.CompareTag("Enemy")
-            && towerFiredFrom.GetComponent<Tower>().upgradeTwoActive)
+            && towerFiredFrom.GetComponent<Tower>().upgradeIndex == 2)
         {
             Debug.Log("Echo");
             collision.GetComponent<Enemy>().Damage(damage);
@@ -31,21 +31,19 @@ public class TrillProjectile : Projectile
             //create two echo bullets
             GameObject bullet = Instantiate(echoProjectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 1)
                 , gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
-            bullet.GetComponent<ProjectileEcho>().InitializeProjectile(2, gameObject, damage / 2, false);
+            bullet.GetComponent<ProjectileEcho>().InitializeProjectile(2, gameObject, damage / 2, false, towerFiredFrom.GetComponent<Tower>().attackTargetTime);
             bullet.GetComponent<ProjectileEcho>().spriteRenderer.gameObject.transform.localScale
 
                 = new Vector3(-bullet.GetComponent<ProjectileEcho>().spriteRenderer.gameObject.transform.localScale.x,
                 bullet.GetComponent<ProjectileEcho>().spriteRenderer.gameObject.transform.localScale.y,
                 bullet.GetComponent<ProjectileEcho>().spriteRenderer.gameObject.transform.localScale.z);
 
-            ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
             bullet.GetComponent<ProjectileEcho>().direction = -1;
 
             //bullet two
             GameObject bullet2 = Instantiate(echoProjectile, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 1)
                 , gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
-            bullet2.GetComponent<ProjectileEcho>().InitializeProjectile(2, gameObject, damage / 2, false);
-            ConductorV2.instance.projectileEvent.Add(bullet2.GetComponent<Projectile>().trigger);
+            bullet2.GetComponent<ProjectileEcho>().InitializeProjectile(2, gameObject, damage / 2, false, towerFiredFrom.GetComponent<Tower>().attackTargetTime);
             bullet2.GetComponent<ProjectileEcho>().direction = 1;
 
 

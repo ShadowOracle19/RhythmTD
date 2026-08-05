@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.Mathematics;
+using Random=UnityEngine.Random;
 using UnityEngine.Experimental.Playables;
 
 public class Enemy : MonoBehaviour
 {
+    #region Variables
     public EnemyCreator enemy;
     public EnemyEffect enemyEffect;
 
@@ -31,7 +34,7 @@ public class Enemy : MonoBehaviour
     public Vector3 nextPosition;
 
     //Adds a random amount of jitter to sprite movement.
-    [SerializeField] private float defeatSpinSpeed; 
+    [SerializeField] private float defeatSpinSpeed = 1.0f; 
 
     float time = 1;
     [SerializeField] private SpriteRenderer _renderer;
@@ -80,16 +83,34 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem clashParticles;
     private ParticleSystem clashParticlesInstance;
 
+    public ParticleSystem hitParticles;
     [SerializeField] private ParticleSystem damageEffect;
 
     [SerializeField] private ParticleSystem enemyAOE;
 
+    [Header("Sound Timing")]
+    private float soundTimer = 0.0f;
+    //NOTE: It would be great to make a custom property drawer for this at some point that only snaps between powers of 2 (but it should also include 1 if the crotchet isn't being divided)
+    //NOTE: It might also be good to put this in a manager elsewhere where we can control multiple sound delays
+    [Tooltip("1 = Nearest quarter note. It's recommended you set this value to a power of 2. Ex. 4 = Nearest sixteenth note")]
+    [Range(1,64)] 
+    public int crotchetDivisor = 4;
+    #endregion
 
+    #region Start
     public virtual void Start()
     {
         tileMask = LayerMask.GetMask("Stage");
         obstacleMask = LayerMask.GetMask("Obstacle");
-        currentHealth = enemy.maxHealth;
+        
+        if (GameManager.Instance.isEnemyFragile)
+        {
+            currentHealth = 1;
+        }
+        else
+        {
+            currentHealth = enemy.maxHealth;
+        }
 
         dontMove = true;
 
@@ -100,9 +121,14 @@ public class Enemy : MonoBehaviour
 
         //Set Animation BPM
         AnimationManager.instance.SetAnimSpeed(animator, 80);
-        defeatSpinSpeed = Random.Range(-240f, 240f);
-    }
 
+        soundTimer = 0.0f;
+
+        defeatSpinSpeed = UnityEngine.Random.Range(-240f, 240f);
+    }
+    #endregion
+
+    #region Update
     // Update is called once per frame
     public virtual void Update()
     {
@@ -114,6 +140,7 @@ public class Enemy : MonoBehaviour
                 RemoveEnemy();
             }
             GetComponent<BoxCollider>().enabled = false;
+            enemyState = EnemyState.Walk;
             dontMove = true;
             return;
         }
@@ -126,7 +153,16 @@ public class Enemy : MonoBehaviour
         Movement();
 
     }
+    #endregion
 
+    /*
+    void OnDisable()
+    {
+        Debug.Log("PrintOnDisable: script was disabled");
+    }
+    */
+
+    #region OnTick
     public virtual void OnTick()
     {
         
@@ -212,6 +248,105 @@ public class Enemy : MonoBehaviour
         }
 
     }
+    #endregion
+    
+    #region Detection
+    //Enemies eyes to see if a tile or obstacle is around them
+    public void EnemyDetection()
+    {
+        //if enemy is infront of a obstacle tile
+        if(obstacleFound)
+        {
+            RaycastHit hit;
+            RaycastHit diagHit;
+
+            //Debug.Log("Obstacle in front");
+
+            //If Tile above is a valid stage tile and the next tile in front isnt an obstacle
+            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward ), out hit, 1, tileMask) 
+                && !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out diagHit, 1, obstacleMask)))
+            {
+                
+                nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + 1);
+                dontMove = true;
+                return;
+            }
+            //If tile below is a valid stage tile
+            else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask) &&
+                !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out diagHit, 1, obstacleMask)))
+            {
+                nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z - 1);
+                dontMove = true;
+                return;
+
+            }
+        }
+    }
+    #endregion
+
+    #region Clashing
+    //public void Clash(ClashStrength clashStrength)
+    //{
+    //    switch (clashStrength)
+    //    {
+    //        case ClashStrength.Weak:
+    //            tileInFront.placedTower.GetComponent<Tower>().Damage(_currentDamage);
+    //            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
+    //            Kill();
+    //            break;
+    //        case ClashStrength.Medium:
+    //            tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
+    //            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
+    //            Kill();
+    //            break;
+    //        case ClashStrength.High:
+    //            tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
+    //            break;
+    //        case ClashStrength.Immune:
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
+
+    public void Clash()
+    {
+        tileInFront.placedTower.GetComponent<Tower>().Damage(1);
+
+        if (tileInFront != null && tileInFront.placedTower == null)
+        {
+            enemyState = EnemyState.Walk;
+            dontMove = true;
+            return;
+        }
+    }
+    #endregion
+
+    #region Pathing
+    //Pathing Function
+    //voiddontMovement()
+    //{
+    //    timer += Time.deltaTime * speed;
+    //    if (gameObject.transform.position != currentPositionHolder)
+    //    {
+    //        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentPositionHolder, timer);
+    //    }
+    //    else
+    //    {
+    //        if (currentNode < path.Count - 1)
+    //        {
+    //           dontMove = false;
+    //            currentNode++;
+    //            CheckNode();
+    //        }
+    //    }
+    //}
+
+    //void CheckNode()
+    //{
+    //    timer = 0;
+    //    currentPositionHolder = path[currentNode];
+    //}
 
     public void EnemyPathingPatterns()
     {
@@ -265,7 +400,7 @@ public class Enemy : MonoBehaviour
                 }
                 if (ConductorV2.instance.beatTrack == 4)
                 {
-                    Debug.Log("Effect");
+                    //Debug.Log("Effect");
                     enemyEffect.UseEffect();
                 }
                 break;
@@ -320,105 +455,11 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
-
-    //Enemies eyes to see if a tile or obstacle is around them
-    public void EnemyDetection()
-    {
-        //if enemy is infront of a obstacle tile
-        if(obstacleFound)
-        {
-            RaycastHit hit;
-            RaycastHit diagHit;
-
-            Debug.Log("Obstacle in front");
-
-            //If Tile above is a valid stage tile and the next tile in front isnt an obstacle
-            if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward ), out hit, 1, tileMask) 
-                && !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.left), out diagHit, 1, obstacleMask)))
-            {
-                
-                nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z + 1);
-                dontMove = true;
-                return;
-            }
-            //If tile below is a valid stage tile
-            else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1, tileMask) &&
-                !(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back + Vector3.left), out diagHit, 1, obstacleMask)))
-            {
-                nextPosition = new Vector3(transform.position.x, 0.5f, transform.position.z - 1);
-                dontMove = true;
-                return;
-
-            }
-        }
-    }
-
-    //public void Clash(ClashStrength clashStrength)
-    //{
-    //    switch (clashStrength)
-    //    {
-    //        case ClashStrength.Weak:
-    //            tileInFront.placedTower.GetComponent<Tower>().Damage(_currentDamage);
-    //            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
-    //            Kill();
-    //            break;
-    //        case ClashStrength.Medium:
-    //            tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
-    //            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the enemy clash particle effect
-    //            Kill();
-    //            break;
-    //        case ClashStrength.High:
-    //            tileInFront.placedTower.GetComponent<Tower>().Damage(tileInFront.placedTower.GetComponent<Tower>().towerInfo.towerHealth);
-    //            break;
-    //        case ClashStrength.Immune:
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
-
-    public void Clash()
-    {
-        tileInFront.placedTower.GetComponent<Tower>().Damage(1);
-
-        if (tileInFront != null && tileInFront.placedTower == null)
-        {
-            enemyState = EnemyState.Walk;
-            dontMove = true;
-            return;
-        }
-    }
-
-    #region pathing
-    //Pathing Function
-    //voiddontMovement()
-    //{
-    //    timer += Time.deltaTime * speed;
-    //    if (gameObject.transform.position != currentPositionHolder)
-    //    {
-    //        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentPositionHolder, timer);
-    //    }
-    //    else
-    //    {
-    //        if (currentNode < path.Count - 1)
-    //        {
-    //           dontMove = false;
-    //            currentNode++;
-    //            CheckNode();
-    //        }
-    //    }
-    //}
-
-    //void CheckNode()
-    //{
-    //    timer = 0;
-    //    currentPositionHolder = path[currentNode];
-    //}
     #endregion
 
+    #region Movement
     public virtual void Movement()
     {
-
         timer += Time.deltaTime * speed;
         if (gameObject.transform.position != nextPosition && !dontMove)
         {
@@ -440,24 +481,17 @@ public class Enemy : MonoBehaviour
                 enemyState = EnemyState.Attack;
                 dontMove = true;
                 return;
-            }
-            
+            }  
         }
-        
     }
-    
+    #endregion
 
+    #region Destruction
     public virtual void Damage(int damage)
     {
         _renderer.color = Color.red;
         time = 1;
-        currentHealth -= damage;
-
-        //Checks to make sure the enemy isnt defeated before playing damage SFX.
-        if (deathParticleTriggered == false && currentHealth >0)
-        {
-            AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
-        }    
+        currentHealth -= damage;   
 
         if (currentHealth <= 0)
         {
@@ -508,9 +542,30 @@ public class Enemy : MonoBehaviour
         RemoveEnemy();
     }
 
-    public void Kill()
+    //waits for a duration after a projectile makes contact with an enemy to ensure it aligns with the music
+    public IEnumerator PlaySoundOnBeat(float timeImpacted, float timeFired)
     {
+        //NOTE: Maybe halve the crotchet to align the sound with the nearest half beat?
+        soundTimer = (ConductorV2.instance.crotchet / crotchetDivisor) - (math.fmod((timeImpacted - timeFired), (ConductorV2.instance.crotchet/crotchetDivisor)));
+
+        bool waiting = true;
+
+        while (waiting)
+        {
+            waiting = false;
+            yield return new WaitForSecondsRealtime(soundTimer);
+        }
+
+        AudioManager.instance.PlaySound(enemyHurtSfx, this.gameObject.transform, 1.0f);
+        //Debug.Log("Enemy Hurt Sound Played");
+
+        ParticleSystem particlesInstance = Instantiate(hitParticles, transform.position, Quaternion.identity, this.gameObject.transform);
         
+        StopCoroutine(this.PlaySoundOnBeat(timeImpacted, timeFired));
+    }
+    
+    public void Kill()
+    { 
         isDead = true;
         if (enemy.onDeathEffect)
         {
@@ -520,14 +575,12 @@ public class Enemy : MonoBehaviour
         if (deathSoundTriggered == false)
         {
             //play death sound 
-            AudioManager.instance.PlaySound(enemyDeathSfx, this.gameObject.transform, 1.0f);
+            StartCoroutine(PlaySoundOnBeat(ConductorV2.instance.songPosition, 0.0f));
             deathSoundTriggered = true;
         }    
         
         animator.SetBool("IsKilled",true); //Play death animation
-        
     }
-
 
     public void RemoveEnemy()
     {
@@ -556,7 +609,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 1);
 
     }
-
+    #endregion
 
     public void SpawnParticles(Transform tileTransform, ParticleSystem pfxSource)
     {

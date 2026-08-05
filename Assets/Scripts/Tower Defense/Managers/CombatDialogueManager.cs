@@ -96,11 +96,9 @@ public class CombatDialogueManager : MonoBehaviour
             dialogueTextMesh.maxVisibleCharacters = visibleCount;
 
             visibleCount += 1;
-            yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+            yield return new WaitForSeconds(SettingsManager.Instance.textSpeed);
 
         }
-
-
     }
 
     public void NextLine()

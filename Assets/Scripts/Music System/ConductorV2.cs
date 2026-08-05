@@ -14,10 +14,13 @@ public class ConductorV2 : MonoBehaviour
         instance = this;
     }
 
+    #region Variables
     public bool isInTestingEnvironment = false;
 
     public float bpm = 160;//song beats per minute
     public float crotchet;//Gives the time duration of a beat, calculated from the bpm
+    public int songLoops = 0;
+    public float prevTrackPosition;
     public float songPosition;
     public float songPositionInBeats;//current song position in beats
     public float dspSongTime;//how many seconds have passed since the song started
@@ -26,19 +29,8 @@ public class ConductorV2 : MonoBehaviour
     //The number of beats in each loop
     public float beatsPerLoop;
 
-    //the total number of loops completed since the looping clip first started
-    public int completedLoops = 0;
-
-    //The current position of the song within the loop in beats.
-    public float loopPositionInBeats;
-
-    //The current relative position of the song within the loop measured between 0 and 1.
-    public float loopPositionInAnalog;
-
-
     //Beat Thresholds
-    //Note:
-    //When checking beat threshold check late, miss, early, great, and then perfect
+    //Note: When checking beat threshold check late, miss, early, great, and then perfect
     [Header ("Beat Judgement Thresholds")]
     public float lateGreatBeatThreshold = 0.125f;
     public float lateBeatThreshold = 0.250f;  
@@ -46,6 +38,7 @@ public class ConductorV2 : MonoBehaviour
     public float earlyBeatThreshold = 0.625f;
     public float earlyGreatBeatThreshold = 0.750f;
     public float perfectBeatThreshold = 0.875f;
+    public float maxBeatThreshold = 0.500f;
 
     [Header ("Beat Tracking")]
     public float beatDuration;
@@ -60,7 +53,7 @@ public class ConductorV2 : MonoBehaviour
     public int lastInterval;
 
     //Dynamic Music tracks
-    public AudioSource flats;
+    public AudioSource flat;
     public AudioSource major;
     public AudioSource allegro;
     public AudioSource trill;
@@ -89,14 +82,28 @@ public class ConductorV2 : MonoBehaviour
     public bool countingIn = false;
 
     bool perfectBeatReset = false;
+    #endregion
 
-    
+    #region Conductor start
     public void CountUsIn(int _bpm)
     {
         pauseConductor = true;
 
-        bpm = _bpm;
-        completedLoops = 0;
+        if (GameManager.Instance.isDoubleTime)
+        {
+            bpm = (_bpm * 2f);
+        }   
+        else if (GameManager.Instance.isHalfTime)
+        {
+            bpm = (_bpm / 2f);
+        }   
+        else
+        {
+            bpm = _bpm;
+        } 
+        
+        songLoops = 0;
+        //completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 0;
         measureTrack = 0;
@@ -128,6 +135,7 @@ public class ConductorV2 : MonoBehaviour
 
         yield return null;
     }
+    
 
     public void StartConductor()
     {
@@ -138,12 +146,12 @@ public class ConductorV2 : MonoBehaviour
         pauseConductor = false;
         countInText.gameObject.SetActive(false);
 
-        completedLoops = 0;
+        //completedLoops = 0;
         numberOfBeats = 0;
         beatTrack = 1;
         beatDuration = 0;
 
-        flats.time = 0;
+        flat.time = 0;
         major.time = 0;
         allegro.time = 0;
         trill.time = 0;
@@ -170,7 +178,7 @@ public class ConductorV2 : MonoBehaviour
 
     public void DynamicSongInit(DynamicSongCreator song)
     {
-        flats.volume = 0;
+        flat.volume = 0;
         major.volume = 0;
         allegro.volume = 0;
         trill.volume = 0;
@@ -184,7 +192,7 @@ public class ConductorV2 : MonoBehaviour
         Tower12.volume = 0; 
 
 
-        flats.clip = song.flats;
+        flat.clip = song.flat;
         major.clip = song.major;
         allegro.clip = song.allegro;
         trill.clip = song.trill;
@@ -204,7 +212,9 @@ public class ConductorV2 : MonoBehaviour
 
         PlayMusic();
     }
+    #endregion
 
+    #region Update
     // Update is called once per frame
     void Update()
     {
@@ -219,9 +229,9 @@ public class ConductorV2 : MonoBehaviour
         //    ResumeMusic();
         //}
 
-        if(!GameManager.Instance.isDynamicMusicActive)
+        if(!SettingsManager.Instance.isDynamicMusicActive)
         {
-            flats.volume = 0.25f;
+            flat.volume = 0.25f;
             major.volume = 0.25f;
             allegro.volume = 0.25f;
             trill.volume = 0.25f;
@@ -240,26 +250,11 @@ public class ConductorV2 : MonoBehaviour
         //CONDUCTING
         Conduct();
 
-        /*
-        if(beatDuration >= perfectBeatThreshold && !perfectBeatReset)
-        {
-            perfectBeatReset = true;
-            Debug.Log("Perfect");
-        }
-        else if(beatDuration < perfectBeatThreshold)
-        {
-            perfectBeatReset = false;
-        }
-        */
-
         beatTrack = Mathf.Clamp(beatTrack, 0, 4);
     }
+    #endregion
 
-    private void FixedUpdate()
-    {
-        
-    }
-
+    #region Position tracking
     public void Conduct()
     {
         //if the track assigned to the conductor music source is null, throw an error and return
@@ -268,24 +263,35 @@ public class ConductorV2 : MonoBehaviour
             return;
         }
         
-        if(songPosition < 0.1f)
+
+
+        //songLoops = Mathf.FloorToInt(songPosition/musicSource.clip.length);
+        
+        //determine how many seconds since the song started
+        if ((musicSource.time - (songPosition % musicSource.clip.length)) < 0)
         {
-            completedLoops = 0;
-            numberOfBeats = 0;
+            if (musicSource.time == prevTrackPosition)
+            {
+                songPosition += 0;
+            }
+            else
+            {
+                songPosition += musicSource.time + (musicSource.clip.length - (songPosition % musicSource.clip.length));
+            }
+
+            prevTrackPosition = musicSource.time;
+        }
+        else
+        {
+            songPosition += musicSource.time - (songPosition % musicSource.clip.length);
+
+            prevTrackPosition = musicSource.time;
         }
 
-        //determine how many seconds since the song started
-        songPosition = (musicSource.time) ;
+        
 
         //determine how many beats since the song started
         songPositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
-
-        //calculate the loop position
-        if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
-            completedLoops++;
-        loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop + 1;
-
-        loopPositionInAnalog = (loopPositionInBeats - 1) / beatsPerLoop;
 
         if (songPositionInBeats >= numberOfBeats + 1 * 1)
         {
@@ -307,46 +313,8 @@ public class ConductorV2 : MonoBehaviour
         _interval = musicSource.timeSamples / (musicSource.clip.frequency * crotchet);
         TriggerBeatEvent(songPositionInBeats);
     }
-
-    public bool InThreshHold()
-    {
-        if(beatDuration >= perfectBeatThreshold) //perfect
-        {
-            Debug.Log("Perfect Beat Hit");
-            return true;
-        }
-        else if (beatDuration >= earlyGreatBeatThreshold) //great
-        {
-            Debug.Log("Great [Early] Beat Hit");
-            return true;
-        }
-        else if (beatDuration >= earlyGreatBeatThreshold)
-        {
-            Debug.Log("Early Beat Hit");
-            return true;
-        }
-        else if (beatDuration >= missBeatThreshold)
-        {
-            Debug.Log("Miss Beat Hit");
-            return false;
-        }
-        else if (beatDuration >= lateBeatThreshold)
-        {
-            Debug.Log("Late Beat Hit");
-            return true;
-        }
-        else if (beatDuration >= lateGreatBeatThreshold)
-        {
-            Debug.Log("Great [Late] Beat Hit");
-            return true;
-        }
-        else
-        {
-            Debug.Log("Perfect Beat Hit");
-            return true;
-        }
-    }
-
+ 
+    //updates the number of the current beat in each measure
     public void Beat()
     {
         if (beatTrack == 4)
@@ -355,11 +323,11 @@ public class ConductorV2 : MonoBehaviour
             beatTrack = 0;
         }
 
-        //_ping.Play();
-
         beatTrack += 1;
     }
+    #endregion
 
+    #region Events
     public void TriggerBeatEvent(float interval)
     {
         if(Mathf.FloorToInt(interval) != lastInterval)
@@ -388,11 +356,13 @@ public class ConductorV2 : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region Music controls
     public void PauseMusic()
     {
         musicSource.Pause();
-        flats.Pause();
+        flat.Pause();
         major.Pause();
         allegro.Pause();
         trill.Pause();
@@ -409,7 +379,7 @@ public class ConductorV2 : MonoBehaviour
     public void ResumeMusic()
     {
         musicSource.UnPause();
-        flats.UnPause();
+        flat.UnPause();
         major.UnPause();
         allegro.UnPause();
         trill.UnPause();
@@ -426,7 +396,7 @@ public class ConductorV2 : MonoBehaviour
     public void StopMusic()
     {
         musicSource.Stop();
-        flats.Stop();
+        flat.Stop();
         major.Stop();
         allegro.Stop();
         trill.Stop();
@@ -442,8 +412,7 @@ public class ConductorV2 : MonoBehaviour
 
     public void PlayMusic()
     {
-        Debug.Log("music started");
-        flats.Play();
+        flat.Play();
         major.Play();
         allegro.Play();
         trill.Play();
@@ -455,8 +424,10 @@ public class ConductorV2 : MonoBehaviour
         Tower10.Play();
         Tower11.Play();
         Tower12.Play();
-      
+
+        //Debug.Log("music started");
     }
+    #endregion
 }
 
 public enum _BeatResult

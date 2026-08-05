@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class TowerLoadoutManager : MonoBehaviour
 {
+    [Header("<b><size=15>Tower Objects<b><size=15>")]
+    [Line(255,255,255)]
     public List<GameObject> towerObjects = new List<GameObject>();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SelectTowerToLoadout(GameObject towerObject)
     {
@@ -45,5 +35,4 @@ public class TowerLoadoutManager : MonoBehaviour
         GameManager.Instance.towers[2].tower = towerObjects[2];
         GameManager.Instance.towers[3].tower = towerObjects[3];
     }
-
 }

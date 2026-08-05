@@ -6,12 +6,7 @@ using UnityEngine.Events;
 
 public enum InstrumentType
 {
-    Flats, Trill, Major, Chromatic, Forte, Poco, Legato, Allegro, Tower9, Tower10, Tower11, Tower12
-}
-
-public enum BuffType
-{
-    Burn, Multi, Shield, Normal
+    Flat, Trill, Major, Chromatic, Forte, Poco, Legato, Allegro, Tower9, Tower10, Tower11, Tower12
 }
 
 public enum TowerState
@@ -21,60 +16,71 @@ public enum TowerState
 
 public class Tower : MonoBehaviour
 {
+    // VARIABLES //
     #region Variables
     public TowerTypeCreator towerInfo;
     public GameObject projectile;
 
     public bool enemyInRange = false;
 
-    [Header("Tower Empower Indicator")]
-    public GameObject beatIndicator;
-    public GameObject beatCircle;
+    [Header("<b><size=15>Tower Attack & Input<b><size=15>")]
+    [Line(255,255,255)]
+    public float songProgress = 0.0f; // progress of current song expressed in time
+    public int inputIndex; // the index of the closest input timing
+    public int attackIndex; //current upcoming attack index
+    public int prevAttackIndex; //previous attack index
+    public float measureLength = 0.0f; // length of 1 measure expressed in time
+    public int measureCycleCount = 0;
+    public int attackCycleCount = 0;
+    public int prevAttackCycleCount = 0;
+    public float inputTargetTime = 0.0f; // input timing in the song
+    public float attackTargetTime = 0.0f;
+    public GameObject indicatorPrefab;
+    public List<GameObject> indicators = new List<GameObject>();
+
+    public Projectile lastBulletFired;
+    public bool isBuffed = false;
+    
+    [Header("<b><size=15>Tower Empower Indicator<b><size=15>")]
+    [Line(255,255,255)]
+    public GameObject inputPrompt;
     public bool towerAboutToFire = false;
     public bool towerHover = false;
 
-    [Header("Shield")]
+    [Header("<b><size=15>Shield<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject shieldEffect;
     public bool isShielded = false;
 
-    [Header("Record State Sprites")] //moved recording sprites to game manager
+    [Header("<b><size=15>Record State Sprites<b><size=15>")] //moved recording sprites to game manager
+    [Line(255,255,255)]
     public GameObject recordingStatus;//RECORDING STATUS CODE
     private int repeatSpritesIndex = 0;
 
-    [Header("Projectile Sprites")]
-    public Sprite defaultAttackSprite;
-    //public Sprite buffDefaultAttackSprite;
-    public Sprite upgradeAttackSprite01;
-    public Sprite upgradeAttackSprite02;
-    public Sprite upgradeAttackSprite03;
-    public Sprite flameAttackSprite;
+    [Header("<b><size=15>Projectile Sprites<b><size=15>")]
+    [Line(255,255,255)]
+    public Color projectileColor;
+    public Sprite[] projectileSprites;
 
-    [Header("Animation")]
-    public Animator animationController;
-    public Animator towerBaseAnimationController;
-    private float AnimationBPM;
+    [Header("<b><size=15>Animation<b><size=15>")]
+    [Line(255,255,255)]
+    public Animator m_Animator;
+    public string[] animationStates;
+    public int[] animationHashes;
 
-    [Header("SFX")]
+    [Header("<b><size=15>SFX<b><size=15>")]
+    [Line(255,255,255)]
     public AudioClip towerAttackSfx;
     public AudioClip towerHurtSfx;
     public AudioClip towerDeathSfx;
     public AudioClip towerUpgradeSfx;
 
-    [Header("PFX")]
-    [SerializeField] public ParticleSystem aoeAttackParticles;
-    public ParticleSystem aoeAttackParticlesInstance;
-    public Color aoeAttackColour;
+    [Header("<b><size=15>PFX<b><size=15>")]
+    [Line(255,255,255)]
+    public ParticleSystem[] particleEffects;
 
-    [SerializeField] private ParticleSystem shieldDestructionParticles;
-    private ParticleSystem shieldDestructionParticlesInstance;
-
-    [SerializeField] private ParticleSystem clashParticles;
-    private ParticleSystem clashParticlesInstance;
-
-    [SerializeField] private ParticleSystem burningParticles;
-    private ParticleSystem burningParticlesInstance;
-
-    [Header ("--------- Don't need to touch ---------")]
+    [Header ("<b><size=15>--------- Don't need to touch ---------<b><size=15>")]
+    [Line(255,255,255)]
 
     public TowerAttackPattern currentAttackPattern;
     public Tile connectedTile;
@@ -83,62 +89,58 @@ public class Tower : MonoBehaviour
     public float towerAudioVolumeIncrement = 0.05f;
     public int beat;
 
-    [Header("Tower Stats")]
-    private int currentHealth = 0;
-    public int currentDamage;
-    public int tempDamageHolder;
+    [Header("<b><size=15>Tower Stats<b><size=15>")]
+    [Line(255,255,255)]
+    public int currentHealth = 0;
+    public int towerDamage;
+    public float attackPower = 1.0f;
+    public float attackPowerBonus = 0.0f;
     public int towerRange;
 
-    [Header("Tile Interactions")]
+    [Header("<b><size=15>Tile Interactions<b><size=15>")]
+    [Line(255,255,255)]
     public bool ChargedUp = false;
 
-    [Header("Tower Upgrade")]
-    public bool towerUpgradeUnlocked = false;
+    [Header("<b><size=15>Tower Upgrade<b><size=15>")]
+    [Line(255,255,255)]
     public bool upgradePurchased = false;
-    //upgrade 1 damage boost
-    public bool upgradeOneActive = false;
+    public int upgradeIndex = 0; //0 = no upgrade purchased
 
-    ////upgrade 2 multiple projectile
-    public bool upgradeTwoActive = false;
-
-    ////upgrade 3 burning
-    public bool upgradeThreeActive = false;
-
-    ////upgrade 4 range
-    public bool upgradeFourActive = false;
-
-    [Header("Upgrade Modifiers")]
+    [Header("<b><size=15>Upgrade Modifiers<b><size=15>")]
+    [Line(255,255,255)]
     public bool feelingItNow = false;
     public bool synthBuff = false;
 
-    [Header("Record Buff Input")]
+    [Header("<b><size=15>Record Buff Input<b><size=15>")]
+    [Line(255,255,255)]
     private TowerState currentState = TowerState.Default;
-    private List<BuffType> recordedBuffs = new List<BuffType>();
-    private bool isInputtingBuffs = false;
-    private int beatRecordingStarted = 1;
-    private int buffTimer = 0;
-    int buffTimerMax = 2;
-    private int buffIndex = 0;
-    private int buffCountMeasure = 0;
-    private int buffBeatCount = 1;
+    private List<float> recordedBuffs = new List<float>();
+    private int measureAtRepeatStart = 0;
+    private int measuresToRepeat = 4;
+    private int prevMeasure = 0;
 
     [HideInInspector]
     public int towerNum;
     #endregion
 
-    
-
+    #region Start
     public virtual void Start()
     {
         currentAttackPattern = towerInfo.attackPattern;
-        currentHealth = towerInfo.towerHealth;
-        currentDamage = towerInfo.damage;
-        //if(isPoweredUp && towerInfo.type == InstrumentType.Piano)
-        //{
-        //    currentHealth = currentHealth * 2;
-        //}
+
+        if (GameManager.Instance.isTowerFragile)
+        {
+            currentHealth = 1;
+        }
+        else
+        {
+            currentHealth = towerInfo.towerHealth;
+        }
+        
+        towerDamage = towerInfo.damage;
 
         beat = 1;
+        prevMeasure = 0;
 
         currentState = TowerState.Default;
 
@@ -149,257 +151,318 @@ public class Tower : MonoBehaviour
         nextProjectile = projectile; // Set default projectile type
 
         //Set Animation BPM
-        AnimationManager.instance.SetAnimSpeed(animationController, 80);
-        AnimationManager.instance.SetAnimSpeed(towerBaseAnimationController, 60);
-    }
+        AnimationManager.instance.SetAnimSpeed(m_Animator, 80);
+        GenerateAnimationHashes();
 
+        // TOWER PATTERN //
+        //Note: Input & attack indexes are tracked separately because they update at different times with different criteria
+        measureLength = ConductorV2.instance.crotchet * 4;
+
+        inputIndex = 0;
+        attackIndex = 0;
+        prevAttackIndex = towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1;
+
+        CalculateInputTimes();
+        InstantiateIndicators();
+        ResetRecordedBuffsList();
+
+        measureCycleCount = ConductorV2.instance.measureTrack;
+        attackCycleCount = ConductorV2.instance.measureTrack;
+
+        inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
+        attackTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
+    }
+    #endregion
+
+    #region Update
     public virtual void Update()
     { 
+        // TOWER INPUT //
+        songProgress = ConductorV2.instance.songPosition;
+
+        //Reset on song loop
+        if(songProgress < 0.1f)
+        {
+            inputIndex = 0;
+            attackIndex = 0;
+            prevAttackIndex = towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1;
+
+            measureCycleCount = 0;
+            attackCycleCount = 0;
+            prevAttackCycleCount = attackCycleCount;
+
+            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
+            attackTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
+        }
+
+        //Tower State
         
+        if (prevMeasure != ConductorV2.instance.measureTrack)
+        {
+            prevMeasure = ConductorV2.instance.measureTrack;
+
+            if (currentState == TowerState.Recording)
+            {
+                currentState = TowerState.Repeating;
+                measureAtRepeatStart = ConductorV2.instance.measureTrack;
+            }
+            else if (currentState == TowerState.Repeating)
+            {
+                if (ConductorV2.instance.measureTrack < (measureAtRepeatStart + measuresToRepeat))
+                {
+                    recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[ConductorV2.instance.measureTrack - measureAtRepeatStart];
+                }
+
+                if (ConductorV2.instance.measureTrack == (measureAtRepeatStart + measuresToRepeat))
+                {
+                    currentState = TowerState.Default;
+
+                    recordingStatus.SetActive(false); //RECORDING STATUS CODE
+
+                    ResetRecordedBuffs();
+                }
+            }
+        }
+
+        // Update input tracking index when song progress exceeds threshold
+        if (songProgress > (inputTargetTime + ConductorV2.instance.missBeatThreshold))
+        {
+            UpdateInputIndex();
+            lastBulletFired = null;
+        }
+
+        if (songProgress >= attackTargetTime)
+        {
+            UpdateAttackIndex();
+            FireTower(inputIndex);
+        }
+
+        //
+        /*
         if(FeverSystem.Instance.feverModeActive)
             isShielded = true;
 
         shieldEffect.SetActive(isShielded);
+        */
 
-        //if (isPoweredUp) 
-        //{ 
-        //    poweredIcon.SetActive(true);
-        //    nonPoweredIcon.SetActive(false);
-
-        //    if(towerInfo.type == InstrumentType.Guitar)
-        //    {
-        //        towerRange = 6;
-        //    }
-
-        //}
-
-        towerEffectVisual();
+        //TowerEffectVisual();
 
         //Animation switches
-        if (upgradeOneActive)
+        if (upgradeIndex == 1)//(upgradeOneActive)
         {
             // Set animation
-            animationController.SetBool("Upgrade1", true);
-        }
-        else if (upgradeTwoActive)
-        {
-            // Set animation
-            animationController.SetBool("Upgrade2", true);
-        }
-        else if (upgradeThreeActive)
-        {
-            // Set animation
-            animationController.SetBool("Upgrade3", true);
-        }
-        else if (upgradeFourActive)
-        {
-            // Set animation
-            animationController.SetBool("Upgrade4", true);
-        }
+            m_Animator.SetBool("Upgrade1", true);
 
+        }
+        else if (upgradeIndex == 2)//(upgradeTwoActive)
+        {
+            // Set animation
+            m_Animator.SetBool("Upgrade2", true);
+
+        }
+        else if (upgradeIndex == 3)//(upgradeThreeActive)
+        {
+            // Set animation
+            m_Animator.SetBool("Upgrade3", true);
+
+        }
+        else if (upgradeIndex == 4)//(upgradeFourActive)
+        {
+            // Set animation
+            m_Animator.SetBool("Upgrade4", true);
+
+        }  
+    }
+    #endregion
+
+    #region Tower input
+    // Calculates input times as time from measure start
+    public void CalculateInputTimes()
+    {
+        int listIndex = 0;
+
+        foreach (var inputList in towerInfo.inputPatterns)
+        {
+            foreach (var input in towerInfo.inputPatterns[listIndex].noteInputs)
+            {
+                input.noteTime = (input.notePosition * measureLength);
+            }
+
+            listIndex += 1;
+        }
+    }
+    
+    public void InstantiateIndicators()
+    {
+        foreach (var input in towerInfo.inputPatterns[upgradeIndex].noteInputs)
+        {
+            GameObject newIndicator = Instantiate(indicatorPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform);
+            newIndicator.GetComponent<InputIndicator>().notePosition = input.notePosition;
+
+            //newIndicator.GetComponent<InputIndicator>().SetIndicatorData();
+
+            indicators.Add(newIndicator);
+        }
     }
 
-
-    public void towerEffectVisual()
+    public void ResetIndicators()
     {
-        if (towerHover && towerAboutToFire)
+        foreach (GameObject indicator in indicators)
         {
-            beatIndicator.SetActive(true);
-            beatCircle.SetActive(true);
+            Destroy(indicator);
+        }
+        
+        indicators.Clear();
+
+        InstantiateIndicators();
+
+        if (indicators.Capacity > towerInfo.inputPatterns[upgradeIndex].noteInputs.Count)
+        {
+            indicators.TrimExcess();
+        }
+    }
+
+    //NOTE: Ik there's gotta be an easier way to wrap around but GO MY IF STATEMENTS!
+    public void UpdateInputIndex()
+    {
+        if (inputIndex == (towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1))
+        {
+            measureCycleCount += 1;
+            inputIndex = 0;
+            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
         }
         else
         {
-            beatIndicator.SetActive(false);
-            beatCircle.SetActive(false);
+            inputIndex += 1;
+            inputTargetTime = ((measureLength * measureCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[inputIndex].noteTime);
         }
     }
 
+    public void UpdateAttackIndex()
+    {
+        if (attackIndex == (towerInfo.inputPatterns[upgradeIndex].noteInputs.Count - 1))
+        {
+            attackCycleCount += 1;
+            attackIndex = 0;
+            attackTargetTime = ((measureLength * attackCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[attackIndex].noteTime);
+        }
+        else
+        {
+            attackIndex += 1;
+            attackTargetTime = ((measureLength * attackCycleCount) + towerInfo.inputPatterns[upgradeIndex].noteInputs[attackIndex].noteTime);
+        }
+    }
+    #endregion
+
+    #region Tower attacking
     public virtual void CreateBullet(int damage, Vector3 position)
     {
         int tempRange = towerRange;
 
         //instatiate bullet
         GameObject bullet = Instantiate(nextProjectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
+        lastBulletFired = bullet.GetComponent<Projectile>();
+        lastBulletFired.InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, attackTargetTime);
 
-        
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies);
+        lastBulletFired.spriteRenderer.sprite = projectileSprites[upgradeIndex];
+        lastBulletFired.spriteRenderer.color = projectileColor;
 
         ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
-        //towerUpgradeUnlocked = false;
+
         feelingItNow = false;
         synthBuff = false;
-
+        isBuffed = false;
     }
 
-    public void FireTower()
+    public void FireTower(int currentAttackIndex)
     {
-        switch (currentAttackPattern)
+        if(currentAttackIndex != prevAttackIndex || (towerInfo.inputPatterns[upgradeIndex].noteInputs.Count == 1 && attackCycleCount != prevAttackCycleCount))
         {
-            case TowerAttackPattern.everyBeat:
-                towerAboutToFire = true;
-                Fire();
-                break;
+            prevAttackCycleCount = attackCycleCount;
+            prevAttackIndex = currentAttackIndex;
 
-            case TowerAttackPattern.everyMeasure:
-                if (ConductorV2.instance.beatTrack == 4)
-                {
-                    Fire();
-                    towerAboutToFire = false;
-                }
-                else if (ConductorV2.instance.beatTrack == 3)
-                {
+            switch (currentAttackPattern)
+            {
+                case TowerAttackPattern.standard:
                     towerAboutToFire = true;
-                }
-                break;
+                    Fire(0f);
+                    break;
+                case TowerAttackPattern.snake:
 
-            case TowerAttackPattern.everyOtherBeat:
-                if(ConductorV2.instance.beatTrack % 2 == 0)
-                {
-                    Fire();
-                    towerAboutToFire = false;
-                }
-                else
-                {
                     towerAboutToFire = true;
-                }
+                    float yPosition = 0f;
 
-                //switch (ConductorV2.instance.beatTrack)
-                //{
-                //    case 1:
-                //        towerAboutToFire = true;
-                //        break;
-                //    case 2:
-                //        Fire();
-                //        towerAboutToFire = false;
-                //        break;
-                //    case 3:
-                //        towerAboutToFire = true;
-                //        break;
-                //    case 4:
-                //        Fire();
-                //        towerAboutToFire = false;
-                //        break;
-                //}
-                break;
-
-            case TowerAttackPattern.everyBeatButOne:
-                beat += 1;
-                if (ConductorV2.instance.beatTrack < 4)
-                {
-                    towerAboutToFire = true;
-                    Fire();
-
-                }
-                else if (ConductorV2.instance.beatTrack == 4)
-                {
-                    towerAboutToFire = false;
-                    beat = 1;
-                }
-                break;
-
-            case TowerAttackPattern.snakePatternFire:
-
-                towerAboutToFire = true;
-                float yPosition = 0f;
-
-                switch (ConductorV2.instance.beatTrack)
-                {
-                    case 1:
-                        yPosition = 0;
-                        break;
-                    case 2:
-                        yPosition = 1f;
-                        break;
-                    case 3:
-                        yPosition = 0;
-                        break;
-                    case 4:
-                        yPosition = -1f;
-                        break;
-                }
-                Fire(yPosition);
-                break;
-
-            default:
-                break;
+                    switch (attackIndex % 4)
+                    {
+                        case 0:
+                            yPosition = 0;
+                            break;
+                        case 1:
+                            yPosition = 1f;
+                            break;
+                        case 2:
+                            yPosition = 0;
+                            break;
+                        case 3:
+                            yPosition = -1f;
+                            break;
+                    }
+                    Fire(yPosition);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-
-    public virtual void Fire() //default fire
+    public virtual void Fire(float yPos) //default fire
     {
         //play attack sound
         AudioManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
         
-        //if feeling it now is active
-        if(feelingItNow)
+        if(feelingItNow) // Feeling It Now buff
         {
-            //nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = buffDefaultAttackSprite;
+            attackPowerBonus = 1.0f; //+100% of base
+            projectileColor = new Color(1f, 1f, 1f, 1f);
+        }
+        else if (isBuffed) // Regular buff
+        {
+            projectileColor = new Color(1f, 1f, 1f, 1f);
+        }
+        else if (currentState == TowerState.Repeating)
+        {
+            attackPowerBonus = recordedBuffs[inputIndex];
 
-            tempDamageHolder = currentDamage;
-            currentDamage = currentDamage * 2;
+            if (attackPowerBonus > 0.0f)
+            {
+                projectileColor = new Color(1f, 1f, 1f, 1f);
+            }
+            else
+            {
+                projectileColor = new Color(1f, 1f, 1f, 0.3f);
+            }
         }
-        //feeling it now inactive
-        else if (upgradePurchased)
+        else // No buff
         {
-            currentDamage = tempDamageHolder;
-            //nextProjectile.GetComponent<Projectile>().spriteRenderer.sprite = upgradeAttackSprite01;
-        }
-        else
-        {
-            currentDamage = tempDamageHolder;
-            nextProjectile = projectile;
+            attackPowerBonus = 0.0f;
+            projectileColor = new Color(1f, 1f, 1f, 0.3f);
         }
 
-        
-        
+        towerDamage = Mathf.RoundToInt(towerDamage * (attackPower + attackPowerBonus));
     }
-
-    public virtual void Fire(float yPos) //Fire on specific ypos mainly for viola
-    {
-
-        //play attack sound
-        AudioManager.instance.PlaySound(towerAttackSfx, this.gameObject.transform, 1.0f);
-
-        int damage = currentDamage;
-
-        nextProjectile = projectile;
-
-        //if (ChargedUp || FeverSystem.Instance.feverModeActive)
-        //{
-        //    damage = damage * 5;
-
-        //    nextProjectile = buffProjectile;
-        //}
-        //else if (burningBullet)
-        //{
-        //    nextProjectile = buffProjectile;
-        //}
-
-        
-
-        
-        //if(isPoweredUp && towerInfo.type == InstrumentType.Bass)
-        //{
-        //    CreateBullet(damage, burningBullet, false, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y, gameObject.transform.position.z + -yPos));
-            
-        //}
-
-        towerUpgradeUnlocked = false;
-    } 
 
     public void ExtraFire() //buff fire
     {
         
         if(towerInfo.isAOETower)
         {
-            AOE(currentDamage);
+            AOE(towerDamage);
             return;
         }
 
-        CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 1));
+        CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 1));
 
-        CreateBullet(currentDamage, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 1));
+        CreateBullet(towerDamage, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 1));
 
     }
 
@@ -418,24 +481,6 @@ public class Tower : MonoBehaviour
     public virtual void AOE(int damage)
     {
         int tempRange = towerRange;
-        //if(towerUpgrades)
-        //{
-        //    if(rangeUpgrade)
-        //    {
-        //        tempRange *= 2;
-
-        //    }
-        //    if(damageBoostUpgrade)
-        //    {
-        //        damage *= 2;
-        //    }
-
-        //    if(multiShotUpgrade)
-        //    {
-        //        ExtraFire();
-        //    }
-
-        //}
 
         colliders = Physics.OverlapSphere(transform.position, tempRange, GameManager.Instance.interactableMask);
 
@@ -443,48 +488,64 @@ public class Tower : MonoBehaviour
         {
             if (item.transform.CompareTag("StageTile"))
             {
-                //item.transform.GetComponent<Tile>().Pulse(Color.blue);
-
-                //Depending on the upgrade, change the sprite
-                if (upgradePurchased)
-                {
-                    SpawnParticles(item.transform, flameAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, true);
-                    //Debug.Log("[Tower.cs] BurnUpgrade");
-                }
-                else
-                {
-                    SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, false);
-                    //Debug.LogWarning("[Tower.cs] AOE sprite display broke :(");
-                }
+                SpawnParticles(item.transform, particleEffects[0]);
             }
             else if (item.transform.CompareTag("Enemy"))
             {
-                item.transform.GetComponent<Enemy>().Damage(damage);
+                item.transform.GetComponent<Enemy>().Damage(damage); //To-Do: Call coroutine for damage sounds here too or move to Damage method 
 
-                if(upgradeOneActive)
+                if(upgradeIndex == 1)
                 {
                     item.transform.GetComponent<Enemy>().isStunned = true;
                 }
-                //if(towerUpgrades && burningUpgrade)
-                //{
-                //    item.transform.GetComponent<Enemy>().burnt = true;
-                //    item.transform.GetComponent<Enemy>().burnDamage += 2;
-                //}
             }
         }
         colliders = null;
-        //towerUpgradeUnlocked = false;
         feelingItNow = false;
         synthBuff = false;
     }
+    #endregion
 
+    #region Tower animation
+    //Generates the hashes for the attack frame animation
+    public void GenerateAnimationHashes()
+    {
+        int stateIndex = 0;
+        
+        foreach (string animationState in animationStates)
+        {
+            animationHashes[stateIndex] = Animator.StringToHash(animationState);
+            stateIndex += 1;
+        }
+    }
+    
+    //Switches to one of many attack frame animations temporarily and then returns to the current animation state (outside of attacking) at an offset based on the position in the current beat
+    public IEnumerator InterruptAnimation()
+    {
+        bool isInAttackFrame = true;
+
+        m_Animator.Play(animationHashes[4], -1, 0.0f); // play temporary action animation
+        
+        while (isInAttackFrame)
+        {
+            isInAttackFrame = false;
+            yield return new WaitForSecondsRealtime(0.250f);
+        }
+
+        //Resume animation
+        float animationOffset = ConductorV2.instance.beatDuration / ConductorV2.instance.crotchet;
+        m_Animator.Play(animationHashes[upgradeIndex], -1, animationOffset); // return to current animation state
+    }
+    #endregion
+
+    #region Tower destruction
     public void RemoveTower()
     {
         switch (towerInfo.type)
         {
-            case InstrumentType.Flats:
-                ConductorV2.instance.flats.volume -= towerAudioVolumeIncrement;
-                ConductorV2.instance.flats.volume = Mathf.Clamp(ConductorV2.instance.flats.volume, 0, 0.5f);
+            case InstrumentType.Flat:
+                ConductorV2.instance.flat.volume -= towerAudioVolumeIncrement;
+                ConductorV2.instance.flat.volume = Mathf.Clamp(ConductorV2.instance.flat.volume, 0, 0.5f);
                 break;
 
             case InstrumentType.Trill:
@@ -559,8 +620,6 @@ public class Tower : MonoBehaviour
 
         if(isShielded)
         {
-            SpawnParticles(this.transform, defaultAttackSprite, shieldDestructionParticles, shieldDestructionParticlesInstance, true, false);
-
             isShielded = false;
             return;
         }
@@ -571,184 +630,73 @@ public class Tower : MonoBehaviour
             //play death sound
             AudioManager.instance.PlaySound(towerDeathSfx, this.gameObject.transform, 1.0f);
 
-            clashParticlesInstance = Instantiate(clashParticles, this.transform.position, Quaternion.identity); // Create instance of the tower clash particle effect
+            //ADD HERE: Create instance of the tower clash particle effect
             RemoveTower();
         }
     }
+    #endregion
 
-    public void ActivateBuff(BuffType buffType)
+    #region Tower buffing
+    public void BuffAttack(float inputTime, float judgementBonus)
     {
-        if (GameManager.Instance.tutorialRunning && CursorTD.Instance.towerBuffSequence) //post buff sequence in tutorial
+        RecordBuff(judgementBonus);
+        
+        attackPowerBonus = judgementBonus;
+        
+        if (inputTime > inputTargetTime) // retroactively buff attack
         {
-            if (TutorialManager.Instance.index == 11)
+            if (lastBulletFired != null)
             {
-                CursorTD.Instance.buffCounter += 1;
-            }
-                
-            if(CursorTD.Instance.buffCounter == 4)
-            {
-                // Make sure index is set to whichever text says "Press Z, X, C, or V when the ring touches the center circle"
-                if (TutorialManager.Instance.index == 11)
-                {
-                    TutorialManager.Instance.LoadNextTutorialDialogue();
-                }
-
-                CursorTD.Instance.towerBuffSequence = false;
-                CombatManager.Instance.healthBar.SetActive(true);
-                CombatManager.Instance.feverBar.SetActive(true);
-                CombatManager.Instance.combo.SetActive(true);
-                //CombatManager.Instance.controls.SetActive(true);
-
-                CursorTD.Instance.feverModeSequence = true;
-                FeverSystem.Instance.feverBarNum = 50;
-
-                Spawner.Instance.ForceEnemySpawn(-0.5f, EnemyType.Walker);
-                CursorTD.Instance.buffCounter = 0;
-            }
+                lastBulletFired.damage = Mathf.RoundToInt(towerDamage * (attackPower + attackPowerBonus));
+                lastBulletFired.spriteRenderer.color = new Color(1f, 1f, 1f, 0.3f);
+            }    
         }
-
-        RecordBuff(buffType);
-
-        PlayBuffs(buffType);
-    }
-
-    public void PlayBuffs(BuffType buffType)
-    {
-        switch (buffType)
+        else
         {
-            case BuffType.Multi://Multi Buff
-                ExtraFire();
-                break;
-
-            case BuffType.Burn://Burn Buff
-                //burningBullet = true;
-                break;
-
-            case BuffType.Shield: //Shield Buff
-                isShielded = true;
-                break;
-
-            case BuffType.Normal:
-                towerUpgradeUnlocked = true;
-                break;
-
-            default:
-                break;
+            isBuffed = true;
         }
     }
 
-    public void RecordBuff(BuffType buff) //records the buff but if a 5th buff is pressed it will remove the first buff on the list
+    public void RecordBuff(float judgementBonus) //records buff inputs but if more inputs are made than there are attacks in the input sequence it will remove the first recorded buff on the list
     {
         currentState = TowerState.Recording;
 
         recordingStatus.SetActive(true); //RECORDING STATUS CODE
         recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.recordingSpr;//RECORDING STATUS CODE
 
-        isInputtingBuffs = true;
-
-        recordedBuffs.Add(buff);
-
-        beatRecordingStarted = ConductorV2.instance.beatTrack;
-        buffTimer = 0;
-
-        buffIndex = 0;
-
-        if (recordedBuffs.Count > 4)
-        {
-            recordedBuffs.RemoveAt(0);
-        }
-        
+        recordedBuffs[inputIndex] = judgementBonus;
     }
 
-    public void BuffPlayback(int _beat)
+    // Completely clears the recorded buffs list and then populates the list with a number of new values to match the number of notes in the new input pattern
+    public void ResetRecordedBuffsList()
     {
-        if (currentState == TowerState.Default)
+        recordedBuffs.Clear();
+
+        //Debug.Log("Number of Inputs:" + towerInfo.inputPatterns[upgradeIndex].noteInputs.Count);
+
+        for (int i = 0; i < towerInfo.inputPatterns[upgradeIndex].noteInputs.Count; i += 1)
         {
-            return;
-        }
-        else if (currentState == TowerState.Recording)
-        {
-            buffTimer += 1;
-            if(buffTimer == buffTimerMax)
-            {
-                currentState = TowerState.Repeating;
-                buffTimer = 0;
-                isInputtingBuffs = false;
-
-                repeatSpritesIndex = 0; //RECORDING STATUS CODE
-                recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[repeatSpritesIndex]; //RECORDING STATUS CODE
-            }
-            return;
-        }
-        else if(currentState == TowerState.Repeating)
-        {
-            if(buffIndex > recordedBuffs.Count - 1)
-            {
-                //When no buff is activated
-            }
-            else
-            {
-                PlayBuffs(recordedBuffs[buffIndex]);
-            }
-
-            buffIndex += 1;
-
-            buffBeatCount += 1;
-
-            if(buffBeatCount == 4)
-            {
-                buffBeatCount = 0;
-                buffCountMeasure += 1;
-
-                repeatSpritesIndex += 1; //RECORDING STATUS CODE
-                if (repeatSpritesIndex <= (GameManager.Instance.repeatSprites.Count-1))
-                {
-                    recordingStatus.GetComponent<SpriteRenderer>().sprite = GameManager.Instance.repeatSprites[repeatSpritesIndex];//RECORDING STATUS CODE
-                }
-
-                if(buffCountMeasure == 4)
-                {
-                    buffCountMeasure = 0;
-                    recordedBuffs.Clear();
-                    currentState = TowerState.Default;
-
-                    repeatSpritesIndex = 0; //RECORDING STATUS CODE
-                    recordingStatus.SetActive(false); //RECORDING STATUS CODE
-                }
-            }
-
-            if (buffIndex >= 4)
-            {
-                buffIndex = 0;
-
-            }
+            //Debug.Log(i);
+            recordedBuffs.Add(0.0f);
         }
 
+        //Debug.Log("Passed the For loop :/");
     }
 
-    public void SpawnParticles(Transform tileTransform, Sprite projectileSprite, ParticleSystem pfxSource, ParticleSystem pfxInstance, bool shielded, bool burning)
+    // Reset all buff values in the recorded buffs list back to 0
+    public void ResetRecordedBuffs()
     {
-        if(towerUpgradeUnlocked)
+        for (int i = 0; i < recordedBuffs.Count; i += 1)
         {
-            
-            if (upgradeOneActive)
-            {
-                // Set sprite
-                burningParticlesInstance = Instantiate(burningParticles, tileTransform.position, Quaternion.identity);
-            }
+            recordedBuffs[i] = 0.0f;
         }
-        if (!shielded)
-        {
-            // Set sprite
-            var pfxTexture = pfxSource.textureSheetAnimation;
-            pfxTexture.SetSprite(0, projectileSprite);
-        }
-
-        
-        
-        // Create instance of the particle effect
-        pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity);
     }
+    #endregion
 
-
+    #region Other
+    public void SpawnParticles(Transform tileTransform, ParticleSystem pfxSource)
+    {
+        ParticleSystem pfxInstance = Instantiate(pfxSource, tileTransform.position, Quaternion.identity); // Create instance of the particle effect
+    }
+    #endregion
 }

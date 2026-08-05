@@ -29,88 +29,136 @@ public class CombatManager : MonoBehaviour
     }
     #endregion
 
+    #region Variables
+    [Header("<b><size=15>Encounter<b><size=15>")]
+    [Line(255,255,255)]
+    public CombatMaker currentEncounter;
+
+    [Space(20)][Header("<b><size=15>Spawning<b><size=15>")]
+    [Line(255,255,255)]
+    [SerializeField] private Spawner objectSpawners;
     public bool spawnerDelayRunning = false;
+    [Space(10)]
     public bool allEnemiesSpawned = false;
     public bool allPickupsSpawned = false;
     public int enemiesDefeated = 0;
     public int enemyTotal = 0;
     public int pickupTotal = 0;
-    [SerializeField] private Spawner objectSpawners;
-
-    public CombatMaker currentEncounter;
-
+    public int totalNumEnemies;
+    public int totalNumPickups;
+    [Space(10)]
     [SerializeField] public Transform enemiesParent;
     [SerializeField] public Transform towersParent;
     [SerializeField] public Transform projectilesParent;
     [SerializeField] public Transform chargesParent;
     [SerializeField] public Transform pickupsParent;
-    [SerializeField] public Transform stageParent;
-
+    [Space(10)]
     public TextMeshProUGUI enemiesSpawnIn;
     public int enemyTimerMax = 30;
     public int enemyTimer = 40;
     bool switchColor = false;
 
-    [Header("Round Info")]
-    public int totalNumEnemies;
-    public int totalNumPickups;
-
-    [Header("Resources Testing")]
+    [Space(20)][Header("<b><size=15>Resources<b><size=15>")]
+    [Line(255,255,255)]
     public bool overrideStartingResources = false;
     public int startingResourcesOverride = 100;
+    [Space(10)]
+    public int resourceNum = 0;
+    public int resourceCap = 999;
+    public int resourceCapMax = 999;
+    public int resourceCapLimited = 150;
     
-    [Header("Resources")]
-    public int resourceNum;
-    public int maxResource = 100;
-    /*
-    public Slider resourceSlider1;
-    public Slider resourceSlider2;
-    public Slider resourceSlider3;
-    public Slider resourceSlider4;
 
-    [Header("Overcharge Resources")]
-    public Slider overchargeSlider;
-    public bool canPlaceEmpoweredTower = false;
-    */
-
-    [Header("Combat UI")]
+    [Space(20)][Header("<b><size=15>UI<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject combatInterface;
     public GameObject countInObject;
     public GameObject enemyTimerObject;
     public GameObject healthBar;
-    //public GameObject controls;
     public GameObject resources;
+    public GameObject infinityIcon;
+    public GameObject resourceText;
     public TextMeshProUGUI resourceNumText;
-    //public GameObject overchargeResources;
-    //public GameObject towerDisplay;
     public GameObject feverBar;
-    //public GameObject metronome;
     public GameObject waveCounter;
     public GameObject combo;
-    //public GameObject knockEmDead;
-
+    [Space(10)]
     public GameObject tutorialManager;
 
-    [Header("End Sequence")]
+    [Space(20)][Header("<b><size=15>Stage End Sequence<b><size=15>")]
+    [Line(255,255,255)]
     public bool fadeMusicFinished = false;
     public float fadeDurationInBeats = 8.0f;
+    #endregion
 
+    #region Start
     // Start is called before the first frame update
     void Start()
     {
-        //LoadEncounter(currentEncounter);
+        
     }
+    #endregion
 
+    #region OnDisable
     private void OnDisable()
     {
-        /*
-        Camera.main.transform.position = Vector3.zero;
-        Camera.main.transform.rotation = Quaternion.Euler(Vector3.zero);
-        Camera.main.fieldOfView = 40;
-        */
+        
+    }
+    #endregion
+
+    #region Update
+    // Update is called once per frame
+    void Update()
+    {
+        ResourceBar();
+
+        //checks if not all enemies have been spawned
+        if (!objectSpawners.allEnemiesSpawned)
+        {
+            allEnemiesSpawned = false;
+        }
+        else
+        {
+            allEnemiesSpawned = true;
+        }
+
+        //checks if not all pickups have been spawned
+        if (!objectSpawners.allPickupsSpawned)
+        {
+            allPickupsSpawned = false; 
+        }
+        else
+        {
+            allPickupsSpawned = true;
+        }
+        
+        //enemies defeated text
+        GameManager.Instance.enemyCounter.text = $"{enemiesDefeated}/{totalNumEnemies}";
+
+
+        //delays enemy spawning
+        DelayTimer();
     }
 
+    private void FixedUpdate()
+    {
+        if (GameManager.Instance._currentHealth <= 0)
+        {
+            GameManager.Instance.FailLevel();
+        }
 
+        else if(GameManager.Instance._currentHealth != 0 && allEnemiesSpawned && enemyTotal <= 0 && !GameManager.Instance.currentEncounter.isBossBattle)
+        {
+            if (GameManager.Instance._currentHealth <= 0)
+                return;
+
+            GameManager.Instance.WinLevel();
+        } //checks if all enemies have died or player health hasnt reached zero to give a win state
+
+    }
+    #endregion
+
+    #region Restart
     public void RestartEncounter()
     {
         // close win & fail screens
@@ -119,27 +167,16 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.failScreen.SetActive(false);
         GameManager.Instance.failState = false;
 
-        GameManager.Instance.lostHealth = false; //reset flag for failing objective 02
-
-        // restart encounter differently for tutorials & showcases
-        if (GameManager.Instance.tutorialRunning || GameManager.Instance.currentEncounter.isShowcase)
-        {
-            EndEncounter();
-
-            StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage);
-
-            RestartTutorialEncounter();
-
-            return;
-        }
+        GameManager.Instance.hasLostHealth = false; //reset flag for failing objective 02
 
         EndEncounter();
 
-        StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage); // rebuild stage
+        StageManager.Instance.SetStageEnvironment(GameManager.Instance.currentEncounter.stage); // rebuild stage
 
         LoadEncounter(currentEncounter);
     }
 
+    /*
     public void RestartTutorialEncounter()
     {
         GameManager.Instance.LoadTutorial();
@@ -171,7 +208,7 @@ public class CombatManager : MonoBehaviour
         CursorTD.Instance.isMoving = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        ConductorV2.instance.flats.volume = 0;
+        ConductorV2.instance.flat.volume = 0;
         ConductorV2.instance.major.volume = 0;
         ConductorV2.instance.allegro.volume = 0;
         ConductorV2.instance.trill.volume = 0;
@@ -185,21 +222,15 @@ public class CombatManager : MonoBehaviour
         ConductorV2.instance.Tower12.volume = 0;
 
         FeverSystem.Instance.feverBarNum = 0;
-        ComboManager.Instance.ResetCombo();
-        ComboManager.Instance.highestCombo = 0;
+        ScoreManager.Instance.ResetCombo();
+        ScoreManager.Instance.highestCombo = 0;
 
         //ConductorV2.instance.StopMusic(); 
     }
+    */
+    #endregion
 
-    public void SpawnStagePlatform(CombatMaker encounter)
-    {
-        var stage = Instantiate(encounter.stagePrefab, stageParent);
-
-        //add spawn and pickup tile call to spawner
-        Spawner.Instance.spawnTiles = stage.GetComponent<StageObject>().spawnTiles;
-        Spawner.Instance.pickupSpawnTiles = stage.GetComponent<StageObject>().pickupTiles;
-    }
-
+    #region Start level
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {
@@ -246,12 +277,29 @@ public class CombatManager : MonoBehaviour
         objectSpawners.ForecastWave(0);
 
         // set starting resources
-        if (overrideStartingResources)
-        {
+        if (GameManager.Instance.isInfiniteResources) {
+            infinityIcon.SetActive(true);
+            resourceText.SetActive(false);
+        }
+        else {
+            infinityIcon.SetActive(false);
+            resourceText.SetActive(true);
+        }
+
+        if (GameManager.Instance.isLimitedResources) {
+            resourceCap = resourceCapLimited;
+        }
+        else {
+            resourceCap = resourceCapMax;
+        }
+        
+        if (overrideStartingResources) {
             resourceNum = startingResourcesOverride;
         }
-        else
-        {
+        else if (GameManager.Instance.isInfiniteResources) {
+            resourceNum = resourceCap;
+        }
+        else {
             resourceNum = currentEncounter.startingResources;
         }
 
@@ -269,14 +317,15 @@ public class CombatManager : MonoBehaviour
         GameManager.Instance.conductor.SetActive(true); //
 
         //Set Animation BPM
-        Debug.Log(ConductorV2.instance.bpm);
+        //Debug.Log(ConductorV2.instance.bpm);
         AnimationManager.instance.SetCombatAnimSpeed();
 
         // start count in
         ConductorV2.instance.CountUsIn(currentEncounter.dynamicSong.bpm);
     }
+    #endregion
 
-    #region Level End Sequence
+    #region End level
     public void StartFailSequence()
     {
         // fade music out
@@ -338,6 +387,76 @@ public class CombatManager : MonoBehaviour
         StopCoroutine(WaitForWinSequenceEnd());
     }
 
+    public void EndEncounter()
+    {
+        // lock player movement
+        CursorTD.Instance.pauseMovement = true;
+        CursorTD.Instance.isMoving = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        // remove enemies
+        foreach (Transform child in enemiesParent)
+        {
+            child.gameObject.GetComponent<Enemy>().RemoveEnemy();
+        }
+        // remove towers
+        foreach (Transform child in towersParent)
+        {
+            child.gameObject.GetComponent<Tower>().RemoveTower();
+        }
+        // remove projectiles
+        foreach (Transform child in projectilesParent)
+        {
+            child.gameObject.GetComponent<Projectile>().RemoveProjectile();
+        }
+        // remove charges
+        foreach (Transform child in chargesParent)
+        {
+            child.gameObject.GetComponent<Charges>().RemoveCharge();
+        }
+        // remove pickups
+        foreach (Transform child in pickupsParent)
+        {
+            child.gameObject.GetComponent<Pickup>().RemovePickup();
+        }
+        
+        // reset spawner activity
+        objectSpawners.startOnce = false;
+        objectSpawners.ResetSpawner();
+
+        BeatIndicatorManager.Instance.ResetBeatIndicator();
+
+        //GameManager.Instance.menuMusic.Play();
+        GameManager.Instance.playerInputManager.SetActive(false);
+
+        //GameManager.Instance.pointHolder.Clear();
+
+        // reset fever bar, combo, and highest combo
+        FeverSystem.Instance.feverBarNum = 0;
+        ScoreManager.Instance.ResetCombo();
+        ScoreManager.Instance.highestCombo = 0;
+
+        ConductorV2.instance.StopMusic();
+
+        GameManager.Instance.tutorialRunning = false; 
+        GameManager.Instance.combatRunning = false;
+
+        CombatDialogueManager.Instance.combatDialogueActive = false;
+        CombatDialogueManager.Instance.Clear();
+        CombatDialogueManager.Instance.dialogueBox.SetActive(false);
+
+        // clear spawn tile list data
+        Spawner.Instance.spawnTiles.Clear();
+        Spawner.Instance.pickupSpawnTiles.Clear();
+
+        // fade music out
+        StartCoroutine(FadeTracks(0.0f, fadeDurationInBeats));
+
+        //stageParent.GetComponentInChildren<StageObject>().DestroyStage(); // remove stage
+    }
+    #endregion
+
+    #region Reset
     public void ClearEncounter() 
     {
         // lock player movement
@@ -383,8 +502,8 @@ public class CombatManager : MonoBehaviour
 
         // reset fever bar, combo, and highest combo
         FeverSystem.Instance.feverBarNum = 0;
-        ComboManager.Instance.ResetCombo();
-        ComboManager.Instance.highestCombo = 0;
+        ScoreManager.Instance.ResetCombo();
+        ScoreManager.Instance.highestCombo = 0;
 
         GameManager.Instance.tutorialRunning = false; 
         GameManager.Instance.combatRunning = false;
@@ -397,7 +516,9 @@ public class CombatManager : MonoBehaviour
         Spawner.Instance.spawnTiles.Clear();
         Spawner.Instance.pickupSpawnTiles.Clear();
     }
+    #endregion
     
+    #region Music controls
     public IEnumerator FadeTracks(float targetVolume, float durationInBeats)
     {
         fadeMusicFinished = false;
@@ -406,7 +527,7 @@ public class CombatManager : MonoBehaviour
         float fadeDuration = (ConductorV2.instance.crotchet * durationInBeats);
 
         // track volume start points
-        float trackVolume01 = ConductorV2.instance.flats.volume;
+        float trackVolume01 = ConductorV2.instance.flat.volume;
         float trackVolume02 = ConductorV2.instance.major.volume;
         float trackVolume03 = ConductorV2.instance.allegro.volume;
         float trackVolume04 = ConductorV2.instance.trill.volume;
@@ -430,7 +551,7 @@ public class CombatManager : MonoBehaviour
             }
             */
 
-            ConductorV2.instance.flats.volume = Mathf.Lerp(trackVolume01,targetVolume,t);
+            ConductorV2.instance.flat.volume = Mathf.Lerp(trackVolume01,targetVolume,t);
             ConductorV2.instance.major.volume = Mathf.Lerp(trackVolume02,targetVolume,t);
             ConductorV2.instance.allegro.volume = Mathf.Lerp(trackVolume03,targetVolume,t);
             ConductorV2.instance.trill.volume = Mathf.Lerp(trackVolume04,targetVolume,t);
@@ -448,7 +569,7 @@ public class CombatManager : MonoBehaviour
         }
 
         // set all tracks to target volume
-        ConductorV2.instance.flats.volume = targetVolume;
+        ConductorV2.instance.flat.volume = targetVolume;
         ConductorV2.instance.major.volume = targetVolume;
         ConductorV2.instance.allegro.volume = targetVolume;
         ConductorV2.instance.trill.volume = targetVolume;
@@ -469,168 +590,45 @@ public class CombatManager : MonoBehaviour
     /*
     public IEnumerator FadeTrack(float targetVolume, float durationInBeats)
     {
+        float timeElapsed = 0.0f;
+        float fadeDuration = (ConductorV2.instance.crotchet * durationInBeats);
 
+        float initialVolume = ConductorV2.instance.'track'.volume; // get track initial volume
+        float fadeProgress = 0.0f;
+
+        while (timeElapsed < fadeDuration) //this should be the time across 4 beats
+        {
+            fadeProgress = timeElapsed / fadeDuration;
+            ConductorV2.instance.'track'.volume = Mathf.Lerp(initialVolume, targetVolume, fadeProgress);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        ConductorV2.instance.'track'.volume = targetVolume; // set track volume to exact target volume
+
+        StopCoroutine(FadeTrack(0.0f, fadeDurationInBeats));
     }
     */
+    #endregion
 
-    public void EndEncounter()
+    #region Resource bar
+    void ResourceBar()
     {
-        // lock player movement
-        CursorTD.Instance.pauseMovement = true;
-        CursorTD.Instance.isMoving = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        // remove enemies
-        foreach (Transform child in enemiesParent)
-        {
-            child.gameObject.GetComponent<Enemy>().RemoveEnemy();
-        }
-        // remove towers
-        foreach (Transform child in towersParent)
-        {
-            child.gameObject.GetComponent<Tower>().RemoveTower();
-        }
-        // remove projectiles
-        foreach (Transform child in projectilesParent)
-        {
-            child.gameObject.GetComponent<Projectile>().RemoveProjectile();
-        }
-        // remove charges
-        foreach (Transform child in chargesParent)
-        {
-            child.gameObject.GetComponent<Charges>().RemoveCharge();
-        }
-        // remove pickups
-        foreach (Transform child in pickupsParent)
-        {
-            child.gameObject.GetComponent<Pickup>().RemovePickup();
-        }
+        resourceNum = Mathf.Clamp(resourceNum, 0, resourceCap);
         
-        // reset spawner activity
-        objectSpawners.startOnce = false;
-        objectSpawners.ResetSpawner();
-
-
-        BeatIndicatorManager.Instance.ResetBeatIndicator();
-
-        //GameManager.Instance.menuMusic.Play();
-        GameManager.Instance.playerInputManager.SetActive(false);
-
-        //GameManager.Instance.pointHolder.Clear();
-
-        // reset fever bar, combo, and highest combo
-        FeverSystem.Instance.feverBarNum = 0;
-        ComboManager.Instance.ResetCombo();
-        ComboManager.Instance.highestCombo = 0;
-
-        ConductorV2.instance.StopMusic();
-
-        GameManager.Instance.tutorialRunning = false; 
-        GameManager.Instance.combatRunning = false;
-
-        CombatDialogueManager.Instance.combatDialogueActive = false;
-        CombatDialogueManager.Instance.Clear();
-        CombatDialogueManager.Instance.dialogueBox.SetActive(false);
-
-        // clear spawn tile list data
-        Spawner.Instance.spawnTiles.Clear();
-        Spawner.Instance.pickupSpawnTiles.Clear();
-
-        // fade music out
-        StartCoroutine(FadeTracks(0.0f, fadeDurationInBeats));
-
-        //stageParent.GetComponentInChildren<StageObject>().DestroyStage(); // remove stage
+        if (GameManager.Instance.isInfiniteResources)
+        {
+            return;
+        }
+        else
+        {
+            resourceNumText.text = resourceNum.ToString();
+        } 
     }
     #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        ResourceBar();
-
-        //checks if not all enemies have been spawned
-        if (!objectSpawners.allEnemiesSpawned)
-        {
-            allEnemiesSpawned = false;
-        }
-        else
-        {
-            allEnemiesSpawned = true;
-        }
-
-        //checks if not all pickups have been spawned
-        if (!objectSpawners.allPickupsSpawned)
-        {
-            allPickupsSpawned = false; 
-        }
-        else
-        {
-            allPickupsSpawned = true;
-        }
-        
-        //enemies defeated text
-        GameManager.Instance.enemyCounter.text = $"{enemiesDefeated}/{totalNumEnemies}";
-
-
-        //delays enemy spawning
-        DelayTimer();
-
-        if (GameManager.Instance.tutorialRunning)
-        {
-            //overchargeResources.SetActive(false);
-            resourceNum = Mathf.Clamp(resourceNum, 0, 100);
-            return;
-
-        }
-
-        /*
-        overchargeSlider.value = resourceNum - 100;
-
-        if (resourceNum > 100)
-        {
-            overchargeResources.SetActive(true);
-        }
-        else
-        {
-            overchargeResources.SetActive(false);
-        }
-
-        if (resourceNum == 150) canPlaceEmpoweredTower = true;
-        */
-    }
-
-    private void FixedUpdate()
-    {
-        if (GameManager.Instance._currentHealth <= 0)
-        {
-            GameManager.Instance.GameOver();
-        }
-
-        else if(GameManager.Instance._currentHealth != 0 && allEnemiesSpawned && enemyTotal <= 0 && !GameManager.Instance.currentEncounter.isBossBattle)
-        {
-            if (GameManager.Instance._currentHealth <= 0)
-                return;
-
-            GameManager.Instance.WinLevel();
-        } //checks if all enemies have died or player health hasnt reached zero to give a win state
-
-    }
-
-    void ResourceBar()
-    {
-        //resource stuff
-        resourceNum = Mathf.Clamp(resourceNum, 0, maxResource);
-        
-        resourceNumText.text = resourceNum.ToString();
-
-        /*
-        resourceSlider1.value = resourceNum;
-        resourceSlider2.value = resourceNum - 25;
-        resourceSlider3.value = resourceNum - 50;
-        resourceSlider4.value = resourceNum - 75;
-        */
-    }
-
+    #region Enemy timer
+    // Starts spawning the first enemies after an initial countdown
     void DelayTimer()
     {
         if (GameManager.Instance.tutorialRunning)
@@ -643,13 +641,10 @@ public class CombatManager : MonoBehaviour
             return;
         }
 
-        //Spawner.Instance.ForecastWave(0);//forecast the first wave
-
         enemiesSpawnIn.text = "Enemies Spawn in " + enemyTimer;
-        //Start spawning enemies on the 10th bar
-        
-
     }
+
+    // Updates the delay timer that counts down between the start of a level and when the first enemies start spawning
     public void BeatCountdown()
     {
         enemyTimer -= 1;
@@ -659,7 +654,10 @@ public class CombatManager : MonoBehaviour
             enemiesSpawnIn.color = Color.blue;
         switchColor = !switchColor;
     }
+    #endregion
 
+    #region Tutorial resource generation
+    //
     public void GenerateResource()
     {
         if (GameManager.Instance.tutorialRunning && CursorTD.Instance.movementSequence)
@@ -676,5 +674,5 @@ public class CombatManager : MonoBehaviour
         resourceNum += 1;
         return;
     }
-     
+    #endregion
 }

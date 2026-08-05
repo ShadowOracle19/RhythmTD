@@ -12,7 +12,6 @@ public class MajorProjectile : Projectile
     public override void Start()
     {
         base.Start();
-
     }
 
     // Update is called once per frame
@@ -25,7 +24,7 @@ public class MajorProjectile : Projectile
     {
         //confusing orders
         if(collision.gameObject.CompareTag("Enemy")
-            && towerFiredFrom.GetComponent<Tower>().upgradeTwoActive)
+            && towerFiredFrom.GetComponent<Tower>().upgradeIndex == 2)
         {
             collision.GetComponent<Enemy>().confusingOrderActive = true;
         }
@@ -35,7 +34,7 @@ public class MajorProjectile : Projectile
         //are you feeling it now comandeer
         //if collide with friendly tower and are you feeling it now is active
         if(collision.gameObject.CompareTag("Tower") 
-            && towerFiredFrom.GetComponent<Tower>().upgradeOneActive)
+            && towerFiredFrom.GetComponent<Tower>().upgradeIndex == 1)
         {
             buffMajorPfxInstance = Instantiate(buffMajorPfx, collision.gameObject.transform.position, Quaternion.identity);
             collision.GetComponent<Tower>().feelingItNow = true;

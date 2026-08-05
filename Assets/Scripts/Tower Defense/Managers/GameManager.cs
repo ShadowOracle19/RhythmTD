@@ -253,7 +253,7 @@ public class GameManager : MonoBehaviour
         viewPortOffset += levelScrollView.viewportOffsetValue;
 
         //add event listeners
-        //gameObject.GetComponent<Button>().onClick.AddListener(LoadLevel(encounter));
+        //gameObject.GetComponent<Button>().onClick.AddListener(LoadStage(encounter));
         item.OnSubmitEvent.AddListener((ItemButton) => { HandleEventItemOnSubmit(item); });
         item.OnSelectEvent.AddListener((ItemButton) => { HandleEventItemOnSelect(item); });
 
@@ -275,7 +275,7 @@ public class GameManager : MonoBehaviour
         //MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
         currentSelectedButton = item.gameObject;
 
-        LoadLevel(item.heldEncounter); //load encounter
+        LoadStage(item.heldEncounter); //load encounter
     }
 
     // 
@@ -551,7 +551,7 @@ public class GameManager : MonoBehaviour
 
         TutorialManager.Instance.LoadTutorial();
 
-        StageManager.Instance.SetStage(currentEncounter.stage);
+        StageManager.Instance.SetStageEnvironment(currentEncounter.stage);
 
 
         ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
@@ -578,14 +578,14 @@ public class GameManager : MonoBehaviour
     #endregion
 
     /*
-    public void LoadLevel(EncounterCreator encounter)
+    public void LoadStage(EncounterCreator encounter)
     {
         currentEncounter = encounter;
         encounterRunning = true;
 
         //tutorialRunning = encounter.isTutorial;
 
-        LoadCombatScene(); 
+        SetCombatScene(); 
 
         if (currentEncounter.introDialogue == null)
         {
@@ -603,7 +603,7 @@ public class GameManager : MonoBehaviour
     */
 
     #region Start level
-    public void LoadLevel(EncounterCreator encounter)
+    public void LoadStage(EncounterCreator encounter)
     {
         currentEncounter = encounter;
         encounterRunning = true;
@@ -611,10 +611,13 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadingScreenManager.Instance.StartLoading());
     }
 
-    public void LoadCombatScene()
+    public void SetCombatScene()
     {
         combatRoot.SetActive(true); //enable combat scene
-        StageManager.Instance.SetStage(currentEncounter.stage); //load encounter grid data
+
+        StageManager.Instance.SetStageEnvironment(currentEncounter.stage); //load encounter grid data
+        StageManager.Instance.SpawnStageGrid(currentEncounter.combatEncounter);
+
         //CombatManager.Instance.combatInterface.SetActive(false); //disable combat UI
     }
     

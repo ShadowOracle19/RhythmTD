@@ -37,6 +37,11 @@ public class TowerManager : MonoBehaviour
     public bool towerSwap;
     public List<Tower> towerList;
 
+    /* Incremental Tower Cost
+    [Header("<b><size=15>Towers Placed<b><size=15>")]
+    [Line(255,255,255)]
+    */
+
     [Space(20)][Header("<b><size=15>Audio<b><size=15>")]
     [Line(255,255,255)]
     public AudioSource audioSource;
@@ -69,7 +74,6 @@ public class TowerManager : MonoBehaviour
     public bool CheckIfOnCoolDown(int towerNum)
     {
         return GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown;
-        
     }
     #endregion
 

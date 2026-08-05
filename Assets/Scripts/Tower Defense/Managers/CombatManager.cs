@@ -52,7 +52,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public Transform projectilesParent;
     [SerializeField] public Transform chargesParent;
     [SerializeField] public Transform pickupsParent;
-    [SerializeField] public Transform stageParent;
     [Space(10)]
     public TextMeshProUGUI enemiesSpawnIn;
     public int enemyTimerMax = 30;
@@ -170,25 +169,14 @@ public class CombatManager : MonoBehaviour
 
         GameManager.Instance.hasLostHealth = false; //reset flag for failing objective 02
 
-        // restart encounter differently for tutorials & showcases
-        if (GameManager.Instance.tutorialRunning || GameManager.Instance.currentEncounter.isShowcase)
-        {
-            EndEncounter();
-
-            StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage);
-
-            RestartTutorialEncounter();
-
-            return;
-        }
-
         EndEncounter();
 
-        StageManager.Instance.SetStage(GameManager.Instance.currentEncounter.stage); // rebuild stage
+        StageManager.Instance.SetStageEnvironment(GameManager.Instance.currentEncounter.stage); // rebuild stage
 
         LoadEncounter(currentEncounter);
     }
 
+    /*
     public void RestartTutorialEncounter()
     {
         GameManager.Instance.LoadTutorial();
@@ -239,19 +227,10 @@ public class CombatManager : MonoBehaviour
 
         //ConductorV2.instance.StopMusic(); 
     }
+    */
     #endregion
 
     #region Start level
-    //
-    public void SpawnStagePlatform(CombatMaker encounter)
-    {
-        var stage = Instantiate(encounter.stagePrefab, stageParent);
-
-        //add spawn and pickup tile call to spawner
-        Spawner.Instance.spawnTiles = stage.GetComponent<StageObject>().spawnTiles;
-        Spawner.Instance.pickupSpawnTiles = stage.GetComponent<StageObject>().pickupTiles;
-    }
-
     //play this when loading up an encounter
     public void LoadEncounter(CombatMaker encounter)
     {

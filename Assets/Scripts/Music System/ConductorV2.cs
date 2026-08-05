@@ -20,6 +20,7 @@ public class ConductorV2 : MonoBehaviour
     public float bpm = 160;//song beats per minute
     public float crotchet;//Gives the time duration of a beat, calculated from the bpm
     public int songLoops = 0;
+    public float prevTrackPosition;
     public float songPosition;
     public float songPositionInBeats;//current song position in beats
     public float dspSongTime;//how many seconds have passed since the song started
@@ -262,22 +263,33 @@ public class ConductorV2 : MonoBehaviour
             return;
         }
         
-        songLoops = Mathf.FloorToInt(songPosition/musicSource.clip.length);
 
+
+        //songLoops = Mathf.FloorToInt(songPosition/musicSource.clip.length);
+        
         //determine how many seconds since the song started
-        //Debug.Log((musicSource.time) - (songPosition % musicSource.clip.length));
-
-        if (((musicSource.time) - (songPosition % musicSource.clip.length)) < 0)
+        if ((musicSource.time - (songPosition % musicSource.clip.length)) < 0)
         {
-            songPosition += musicSource.time + (musicSource.clip.length - (songPosition % musicSource.clip.length));
-            //Debug.Log("Modified time addition on loop");
+            if (musicSource.time == prevTrackPosition)
+            {
+                songPosition += 0;
+            }
+            else
+            {
+                songPosition += musicSource.time + (musicSource.clip.length - (songPosition % musicSource.clip.length));
+            }
+
+            prevTrackPosition = musicSource.time;
         }
         else
         {
-            songPosition += ((musicSource.time) - (songPosition % musicSource.clip.length));
-            //Debug.Log("Normal time addition");
+            songPosition += musicSource.time - (songPosition % musicSource.clip.length);
+
+            prevTrackPosition = musicSource.time;
         }
+
         
+
         //determine how many beats since the song started
         songPositionInBeats = (songPosition / crotchet) - GameManager.Instance.audioOffset;
 

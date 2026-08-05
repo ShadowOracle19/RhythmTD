@@ -13,7 +13,7 @@ public class FeverSystem : MonoBehaviour
         {
             if (_instance is null)
             {
-                Debug.LogError("FeverSystemManager is NULL");
+                //Debug.LogError("FeverSystemManager is NULL");
             }
 
             return _instance;

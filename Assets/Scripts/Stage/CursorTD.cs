@@ -688,8 +688,6 @@ public class CursorTD : MonoBehaviour
                 slotIndex += 1;
             }
         }
-
-        //TowerManager.Instance.SwapTowers();
     }
     
     public void TryToPlaceTower(GameObject tower, AudioClip feedbackAudio, string feedbackVisual, int towerNum)

@@ -80,7 +80,7 @@ public class Charges : MonoBehaviour
         
         while (ConductorV2.instance.songPosition < (timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats))))
         {
-            Debug.Log(timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats)));
+            //Debug.Log(timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats)));
             yield return null;
         }
 

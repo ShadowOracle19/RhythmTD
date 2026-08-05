@@ -8735,6 +8735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4183777d34a42334d9646d0a415f3301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageParent: {fileID: 8954601326441955595}
   default_environment: {fileID: 397653791}
   outside: {fileID: 1664829299}
   outside_InfoHub: {fileID: 1947840845}
@@ -19530,8 +19531,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7666491097923946949}
   - component: {fileID: 8092519107834879467}
-  - component: {fileID: 4852751281795396319}
-  - component: {fileID: 8514983560515989172}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -19732,7 +19731,6 @@ MonoBehaviour:
   projectilesParent: {fileID: 2859736321427214727}
   chargesParent: {fileID: 1461795495}
   pickupsParent: {fileID: 886537953}
-  stageParent: {fileID: 8954601326441955595}
   enemiesSpawnIn: {fileID: 5409566660305168033}
   enemyTimerMax: 5
   enemyTimer: 5
@@ -20375,7 +20373,7 @@ MonoBehaviour:
         m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4852751281795396319}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FeverSystem, Assembly-CSharp
         m_MethodName: FeverBarBeat
         m_Mode: 1
@@ -23898,21 +23896,6 @@ Transform:
   - {fileID: 917429115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4852751281795396319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803777932401218917}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6b7aed6bef50db499604740c4b21680, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  feverModeActive: 0
-  feverBarNum: 0
-  feverBar: {fileID: 0}
 --- !u!1001 &5140289844780695287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28293,23 +28276,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &8514983560515989172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803777932401218917}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a3738644affe844fafeb70673592a5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 13
-  height: 5
-  gridParent: {fileID: 0}
-  tilePrefab: {fileID: 6026861394526949739, guid: 87a3802f738b78040bfdfed40292f6ba, type: 3}
-  tiles: []
 --- !u!4 &8892677853944803681
 Transform:
   m_ObjectHideFlags: 0

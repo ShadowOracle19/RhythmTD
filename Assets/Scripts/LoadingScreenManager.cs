@@ -83,7 +83,7 @@ public class LoadingScreenManager : MonoBehaviour
         transitionActive = false;
 
         MenuEventManager.Instance.CloseMainMenu();
-        GameManager.Instance.LoadCombatScene();
+        GameManager.Instance.SetCombatScene();
         GameManager.Instance.ResetCombatState(); 
 
         // Start loading process

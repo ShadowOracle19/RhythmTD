@@ -237,11 +237,13 @@ public class Tower : MonoBehaviour
             FireTower(inputIndex);
         }
 
-        //  //
+        //
+        /*
         if(FeverSystem.Instance.feverModeActive)
             isShielded = true;
 
         shieldEffect.SetActive(isShielded);
+        */
 
         //TowerEffectVisual();
 

@@ -491,17 +491,18 @@ public class Enemy : MonoBehaviour
 
         foreach (var collider in colliders)
         {
-            if(collider.transform.CompareTag("Enemy"))
+            if (collider.transform.CompareTag("StageTile"))
             {
-                collider.transform.GetComponent<Enemy>().Damage(1000);
+                SpawnParticles(collider.transform, enemyAOE);
             }
+            
             else if (collider.transform.CompareTag("Tower"))
             {
                 collider.transform.GetComponent<Tower>().Damage(1000);
             }
-            else if(collider.transform.CompareTag("StageTile"))
+            else if (collider.transform.CompareTag("Enemy"))
             {
-                SpawnParticles(collider.transform, enemyAOE);
+                collider.transform.GetComponent<Enemy>().Damage(1000);
             }
         }
 

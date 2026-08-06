@@ -201,7 +201,7 @@ public class TowerManager : MonoBehaviour
             TutorialManager.Instance.LoadNextTutorialDialogue();
             CursorTD.Instance.towerPlaceSequence = false;
             CursorTD.Instance.towerBuffSequence = true;
-            Spawner.Instance.ForceEnemySpawn(-0.5f, EnemyType.Walker);
+            Spawner.Instance.ForceEnemySpawn(-0.5f, EnemyType.Lifter);
         }
 
         if(CombatManager.Instance.currentEncounter.enableTowerLimit)

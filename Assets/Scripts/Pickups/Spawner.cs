@@ -156,14 +156,14 @@ public class Spawner : MonoBehaviour
 
     }
 
-    public void ForceEnemySpawnOnTile(Transform pos, GameObject enemy)
+    public void ForceEnemySpawnOnTile(Vector3 pos, GameObject enemy)
     {
         numberOfEnemiesToSpawn += 1;
         currentNumberOfEnemiesSpawned += 1;
 
         GameObject _enemy = null;
 
-        _enemy = Instantiate(enemy, pos.position, Quaternion.identity, enemyParent);
+        _enemy = Instantiate(enemy, pos, Quaternion.identity, enemyParent);
 
 
         ConductorV2.instance.enemyEvent.Add(_enemy.GetComponent<Enemy>().trigger);

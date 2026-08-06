@@ -77,6 +77,7 @@ public class Spawner : MonoBehaviour
     [Header("EnemyType")]
     public GameObject walkerEnemy;
     public GameObject wispEnemy;
+    public GameObject LinkBot;
 
 
     private void Update()
@@ -123,11 +124,14 @@ public class Spawner : MonoBehaviour
         GameObject enemy = null;
         switch (enemyType)
         {
-            case EnemyType.Wisp:
+            case EnemyType.Runner:
                 enemy = Instantiate(wispEnemy, new Vector3(transform.position.x, 0.5f, zpos), Quaternion.identity, enemyParent);
                 break;
-            case EnemyType.Walker:
+            case EnemyType.Lifter:
                 enemy = Instantiate(walkerEnemy, new Vector3(transform.position.x, 0.5f, zpos), Quaternion.identity, enemyParent);
+                break;
+            case EnemyType.Link:
+                enemy = Instantiate(LinkBot, new Vector3(transform.position.x, 0.5f, zpos), Quaternion.identity, enemyParent);
                 break;
             default:
                 break;
@@ -406,5 +410,8 @@ public class Spawner : MonoBehaviour
     }
 }
 
-
+public enum EnemyType
+{
+    Runner, Lifter, Link
+}
 //pickupsWave && pickups.Count != 0

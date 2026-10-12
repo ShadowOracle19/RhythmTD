@@ -34,6 +34,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4950180535021892593
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -49,6 +50,11 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -70,9 +76,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 6f9eb1364d89e4c4eb639cd6cf2a40fd, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.34509805}
   m_FlipX: 0
@@ -82,7 +90,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6855828711236915027
 GameObject:
@@ -142,12 +149,18 @@ MonoBehaviour:
   pickupParent: {fileID: 0}
   lastRandomSpawn: 0
   spawnTiles: []
+  pickupSpawnTiles: []
   enemies: []
   pickups: []
   killAllEnemiesBeforeNextWave: 0
+  collectAllPickupsBeforeNextWave: 0
+  isPickupWave: 0
+  pickupPhaseEnded: 0
   forecastEndsIn: 4
   forecastingActive: 0
   spawnParticles: {fileID: 3700797917211557132, guid: 199938363afe6174bbdb59b2af9062be, type: 3}
+  cameraAnimator: {fileID: 0}
+  cursorAnimator: {fileID: 0}
   timeRemainingToWaveStart: 0
   waveIndex: 0
   allEnemiesSpawnedFromWave: 0
@@ -157,9 +170,10 @@ MonoBehaviour:
   delay: 0
   walkerEnemy: {fileID: 239132429429542008, guid: d646f505c923a854b9fc5bdba3ea4369, type: 3}
   wispEnemy: {fileID: 239132429429542008, guid: 5c4343eb14890d94491ded30dff87c78, type: 3}
+  LinkBot: {fileID: 239132429429542008, guid: a9c55d28bbe6ed544b5d913e8728488e, type: 3}
 --- !u!120 &5314118494258792361
 LineRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -175,6 +189,11 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -196,9 +215,11 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
+  m_MaskInteraction: 0
   m_Positions:
   - {x: 7.07, y: -2, z: 5.518091}
   - {x: 7.07, y: -2, z: 5.518091}
@@ -257,7 +278,6 @@ LineRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1

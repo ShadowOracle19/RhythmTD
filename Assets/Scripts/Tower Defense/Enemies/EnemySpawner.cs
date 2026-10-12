@@ -102,10 +102,13 @@ public class EnemySpawner : MonoBehaviour
         GameObject enemy = null;
         switch (enemyType)
         {
-            case EnemyType.Wisp:
+            case EnemyType.Runner:
                 enemy = Instantiate(wispEnemy, new Vector3(transform.position.x, 0.5f, ypos), Quaternion.identity, enemyParent);
                 break;
-            case EnemyType.Walker:
+            case EnemyType.Lifter:
+                enemy = Instantiate(walkerEnemy, new Vector3(transform.position.x, 0.5f, ypos), Quaternion.identity, enemyParent);
+                break;
+            case EnemyType.Link:
                 enemy = Instantiate(walkerEnemy, new Vector3(transform.position.x, 0.5f, ypos), Quaternion.identity, enemyParent);
                 break;
             default:
@@ -244,7 +247,4 @@ public class EnemySpawner : MonoBehaviour
     }
 }
 
-public enum EnemyType
-{
-    Wisp, Walker
-}
+

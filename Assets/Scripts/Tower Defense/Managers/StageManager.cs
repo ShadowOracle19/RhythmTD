@@ -34,28 +34,37 @@ public class StageManager : MonoBehaviour
         _instance = this;
     }
     #endregion
+
+    #region Variables
+    [SerializeField] public Transform stageParent;
+    [Space(10)][Header("<b><size=15>Stage Environments<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject default_environment;
     public GameObject outside;
     public GameObject outside_InfoHub;
     public GameObject inside_InfoHub;
     public GameObject alert_LevelBG;
+    #endregion
 
+    #region OnEnable
     private void OnEnable()
     {
-        HideLevel();
+        HideStageEnvironment();
+    }
+    #endregion
+
+    public void SpawnStageGrid(CombatMaker encounter)
+    {
+        var stage = Instantiate(encounter.stagePrefab, stageParent);
+
+        //add spawn and pickup tile call to spawner
+        Spawner.Instance.spawnTiles = stage.GetComponent<StageObject>().spawnTiles;
+        Spawner.Instance.pickupSpawnTiles = stage.GetComponent<StageObject>().pickupTiles;
     }
 
-    public void HideLevel()
+    public void SetStageEnvironment(LevelSelection stage)
     {
-        outside.SetActive(false);
-        outside_InfoHub.SetActive(false);
-        inside_InfoHub.SetActive(false);
-        alert_LevelBG.SetActive(false);
-    }
-
-    public void SetStage(LevelSelection stage)
-    {
-        HideLevel();
+        HideStageEnvironment();
 
         switch (stage)
         {
@@ -79,8 +88,15 @@ public class StageManager : MonoBehaviour
             default:
                 break;
         }
-
-        CombatManager.Instance.SpawnStagePlatform(GameManager.Instance.currentEncounter.combatEncounter);
     }
 
+    // Disable all stage environments
+    public void HideStageEnvironment()
+    {
+        default_environment.SetActive(false);
+        outside.SetActive(false);
+        outside_InfoHub.SetActive(false);
+        inside_InfoHub.SetActive(false);
+        alert_LevelBG.SetActive(false);
+    }
 }

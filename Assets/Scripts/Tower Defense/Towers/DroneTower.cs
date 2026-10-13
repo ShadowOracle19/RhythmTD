@@ -16,9 +16,9 @@ public class DroneTower : Tower
 
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
-        base.Fire();
+        base.Fire(0f);
     }
 
     public override void CreateBullet(int damage, Vector3 position)

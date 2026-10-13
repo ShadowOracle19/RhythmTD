@@ -29,31 +29,32 @@ public class TowerManager : MonoBehaviour
     }
     #endregion
 
+    #region Variables
+    [Header("<b><size=15>Tower Placement<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject towerToPlace;
     public bool isTowerHovering = false;
-    
-
-    //Tower background shader management
-    /*
-    public Material feverModeShader;
-
-    public GameObject stageBackground;
-    */
-    
-    //Tower menu shader management
-    public Material greyscaleShader;
-   
-
     public bool towerSwap;
+    public List<Tower> towerList;
 
+    /* Incremental Tower Cost
+    [Header("<b><size=15>Towers Placed<b><size=15>")]
+    [Line(255,255,255)]
+    */
+
+    [Space(20)][Header("<b><size=15>Audio<b><size=15>")]
+    [Line(255,255,255)]
     public AudioSource audioSource;
     public float towerAudioVolumeIncrement = 0.05f;
 
-    public List<Tower> towerList;
+    [Space(20)][Header("<b><size=15>Shader Materials<b><size=15>")]
+    [Line(255,255,255)]
+    public Material greyscaleShader;
 
+    //public static event Action FireTower;
+    #endregion
 
-    public static event Action FireTower;
-
+    #region Cooldown
     public void InstantiateTowerCooldown()
     {
         for (int i = 0; i < GameManager.Instance.towers.Count; i++)
@@ -63,12 +64,20 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetCooldown(int towerNum, Tower placingTower)
     {
-        
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown = true;
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTime = 0;  
     }
 
+    public bool CheckIfOnCoolDown(int towerNum)
+    {
+        return GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown;
+    }
+    #endregion
+
+    #region Resource bars
     public void SetResourceBarSprite(Tower tower, Slider resourceSlider, Image resourceImage)
     {
         switch (tower.towerInfo.cost)
@@ -93,61 +102,9 @@ public class TowerManager : MonoBehaviour
                 break;
         }
     }
+    #endregion
 
-    
-    public void SwapTowers()
-    {
-        //(drumCooldown, drumCooldownBack) = (drumCooldownBack, drumCooldown);
-        //(bassCooldown, bassCooldownBack) = (bassCooldownBack, bassCooldown);
-        //(guitarCooldown, guitarCooldownBack) = (guitarCooldownBack, guitarCooldown);
-        //(pianoCooldown, pianoCooldownBack) = (pianoCooldownBack, pianoCooldown);
-
-        //(drumCooldownTime, drumCooldownTimeBack) = (drumCooldownTimeBack, drumCooldownTime);
-        //(bassCooldownTime, bassCooldownTimeBack) = (bassCooldownTimeBack, bassCooldownTime);
-        //(guitarCooldownTime, guitarCooldownTimeBack) = (guitarCooldownTimeBack, guitarCooldownTime);
-        //(pianoCooldownTime, pianoCooldownTimeBack) = (pianoCooldownTimeBack, pianoCooldownTime);
-
-        //(drumCooldownTimeRemaining, drumCooldownTimeRemainingBack) = (drumCooldownTimeRemainingBack, drumCooldownTimeRemaining);
-        //(bassCooldownTimeRemaining, bassCooldownTimeRemainingBack) = (bassCooldownTimeRemainingBack, bassCooldownTimeRemaining);
-        //(guitarCooldownTimeRemaining, guitarCooldownTimeRemainingBack) = (guitarCooldownTimeRemainingBack, guitarCooldownTimeRemaining);
-        //(pianoCooldownTimeRemaining, pianoCooldownTimeRemainingBack) = (pianoCooldownTimeRemainingBack, pianoCooldownTimeRemaining);
-
-        //towerSwap = !towerSwap;
-    }
-
-    
-    public bool CheckIfOnCoolDown(int towerNum)
-    {
-        return GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown;
-        
-    }
-
-    public bool CheckIfTowerAtLimit(int towerNum)
-    {
-        return GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced >= CombatManager.Instance.currentEncounter.towerLimit;
-        
-    }
-
-    public void PlacedTower(int towerNum)
-    {
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced += 1;
-        
-    }
-
-    public void RemovedTower(int towerNum)
-    {
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced -= 1;
-    }
-
-    public void SetCooldown(int towerNum, Tower placingTower)
-    {
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldown = true;
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTimeRemaining = placingTower.towerInfo.cooldownTime;
-        GameManager.Instance.towers[towerNum].towerCooldownInfo.towerCooldownTime = 0;
-        
-        
-    }
-
+    #region Tower placement
     public void SetTower(GameObject tower, Vector3 tilePosition, Tile tile, int towerNum, _BeatResult result, bool isEmpowered)
     {
         GameObject _tower = Instantiate(tower, tilePosition, Quaternion.identity, CombatManager.Instance.towersParent);
@@ -183,8 +140,7 @@ public class TowerManager : MonoBehaviour
         //        break;
         //}
 
-        placingTower.currentDamage = placingTower.towerInfo.damage;
-        placingTower.tempDamageHolder = placingTower.currentDamage;
+        placingTower.towerDamage = placingTower.towerInfo.damage;
 
         towerList.Add(placingTower);
 
@@ -210,8 +166,26 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    public void PlacedTower(int towerNum)
+    {
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced += 1;
+    }
+
+    public void RemovedTower(int towerNum)
+    {
+        GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced -= 1;
+    }
+
+    public bool CheckIfTowerAtLimit(int towerNum)
+    {
+        return GameManager.Instance.towers[towerNum].towerCooldownInfo.currentNumberPlaced >= CombatManager.Instance.currentEncounter.towerLimit;
+    }
+    #endregion
+
+    #region Music
     public void DynamicMusicVolume(InstrumentType type)
     {
+        /*
         if (!GameManager.Instance.tutorialRunning)
         {
             if (CombatManager.Instance.currentEncounter.enableTowerLimit)
@@ -224,14 +198,13 @@ public class TowerManager : MonoBehaviour
                 towerAudioVolumeIncrement = 0.05f;
             }
         }
-
-        
+        */
 
         switch (type)
         {
-            case InstrumentType.Flats:
-                ConductorV2.instance.flats.volume += towerAudioVolumeIncrement;
-                ConductorV2.instance.flats.volume = Mathf.Clamp(ConductorV2.instance.flats.volume, 0, 0.5f);
+            case InstrumentType.Flat:
+                ConductorV2.instance.flat.volume += towerAudioVolumeIncrement;
+                ConductorV2.instance.flat.volume = Mathf.Clamp(ConductorV2.instance.flat.volume, 0, 0.5f);
 
                 break;
 
@@ -303,7 +276,9 @@ public class TowerManager : MonoBehaviour
                 break;
         }
     }
+    #endregion
 
+    #region Reset
     public void ResetTowerManager()
     {
     
@@ -314,109 +289,14 @@ public class TowerManager : MonoBehaviour
 
         towerList.Clear();
     }
+    #endregion
 
-    
+    /*
     public void FireTowers()
     {
         gameObject.BroadcastMessage("FireTower");
-
-        //if (towerList.Count == 0) return;
-
-        //foreach (Tower tower in towerList.ToArray())
-        //{
-        //    tower.BuffPlayback(ConductorV2.instance.beatTrack);
-
-        //    if(tower == null)
-        //    {
-        //        towerList.Remove(tower);
-        //        continue;
-        //    }
-
-        //    switch (tower.currentAttackPattern)
-        //    {
-        //        case TowerAttackPattern.everyBeat:
-        //            tower.towerAboutToFire = true;
-        //            tower.Fire();
-        //            break;
-
-        //        case TowerAttackPattern.everyMeasure:
-        //            if (ConductorV2.instance.beatTrack == 4)
-        //            {
-        //                tower.Fire();
-        //                tower.towerAboutToFire = false;
-        //            }
-        //            else if (ConductorV2.instance.beatTrack == 3)
-        //            {
-        //                tower.towerAboutToFire = true;
-        //            }
-        //            break;
-
-        //        case TowerAttackPattern.everyOtherBeat:
-
-        //            switch (ConductorV2.instance.beatTrack)
-        //            {
-        //                case 1:
-        //                    tower.towerAboutToFire = true;
-        //                    break;
-        //                case 2:
-        //                    tower.Fire();
-        //                    tower.towerAboutToFire = false;
-        //                    break;
-        //                case 3:
-        //                    tower.towerAboutToFire = true;
-        //                    break;
-        //                case 4:
-        //                    tower.Fire();
-        //                    tower.towerAboutToFire = false;
-        //                    break;
-        //            }
-        //            break;
-
-        //        case TowerAttackPattern.everyBeatButOne:
-        //            tower.beat += 1;
-        //            if (ConductorV2.instance.beatTrack < 4)
-        //            {
-        //                tower.towerAboutToFire = true;
-        //                tower.Fire();
-
-        //            }
-        //            else if (ConductorV2.instance.beatTrack == 4)
-        //            {
-        //                tower.towerAboutToFire = false;
-        //                tower.beat = 1;
-        //            }
-        //            break;
-
-        //        case TowerAttackPattern.snakePatternFire:
-                    
-        //            tower.towerAboutToFire = true;
-        //            float yPosition = 0f;
-                    
-        //            switch (ConductorV2.instance.beatTrack) 
-        //            {
-        //                case 1:
-        //                    yPosition = 0;
-        //                    break;
-        //                case 2:
-        //                    yPosition = 1f;
-        //                    break;
-        //                case 3:
-        //                    yPosition = 0;
-        //                    break;
-        //                case 4:
-        //                    yPosition = -1f;
-        //                    break;
-        //            }
-        //            tower.Fire(yPosition);
-        //            break; 
-
-        //        default:
-        //            break;
-        //    }
-        //}
     }
-
-   
+    */
 }
 
 [System.Serializable]

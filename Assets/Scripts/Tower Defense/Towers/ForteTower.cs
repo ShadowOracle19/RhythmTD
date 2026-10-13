@@ -17,14 +17,14 @@ public class ForteTower : Tower
 
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
         if (!enemyInRange)
             return;
 
-        base.Fire();
+        base.Fire(0f);
 
-        AOE(currentDamage);
+        AOE(towerDamage);
     }
 
     public override void AOE(int damage)
@@ -38,7 +38,7 @@ public class ForteTower : Tower
             if (item.transform.CompareTag("StageTile"))
             {
                 //item.transform.GetComponent<Tile>().Pulse(Color.blue);
-                SpawnParticles(item.transform, defaultAttackSprite, aoeAttackParticles, aoeAttackParticlesInstance, false, false);
+                SpawnParticles(item.transform, particleEffects[0]);
                 
             }
             else if (item.transform.CompareTag("Enemy"))

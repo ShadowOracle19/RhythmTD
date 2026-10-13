@@ -17,9 +17,9 @@ public class SynthTower : Tower
 
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
-        base.Fire();
+        base.Fire(0f);
 
 
         AOE(towerInfo.damage);

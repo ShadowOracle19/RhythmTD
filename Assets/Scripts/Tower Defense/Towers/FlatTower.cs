@@ -36,23 +36,25 @@ public class FlatTower : Tower
         }
 
         //reduce flat attack speed to every 2 beats
+        /*
         if (upgradeOneActive)
         {
             currentAttackPattern = TowerAttackPattern.everyOtherBeat;
         }
+        */
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
         if (!enemyInRange)
             return;
 
         //increase shield recharge time
-        if (upgradeTwoActive && !isShielded)
+        if (upgradeIndex == 2 && !isShielded)
         {
             upgradeTwoRecharge += 1;
         }
-        base.Fire();
+        base.Fire(0f);
 
         AOE(towerInfo.damage);
     }
@@ -60,7 +62,7 @@ public class FlatTower : Tower
     public override void Damage(int damage)
     {
         //if hit while upgrade two is active and shield isnt up reduce shield cooldown to 0
-        if(upgradeTwoActive && !isShielded)
+        if(upgradeIndex == 2 && !isShielded)
         {
             upgradeTwoRecharge = 0;
         }

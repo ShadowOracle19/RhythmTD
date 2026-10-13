@@ -5,46 +5,41 @@ using UnityEngine;
 public class AcousticGuitarProjectile : Projectile
 {
     public bool isUp = false;
+    public float startZPosition;
+    public float nextZPosition;
+
     // Start is called before the first frame update
     public override void Start()
     {
-        NextPosition();
-        
-    }
+        startZPosition = gameObject.transform.position.z;
 
-    void NextPosition()
-    {
         if (isUp)
         {
-            nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+            nextZPosition = transform.position.z - bulletRange;
         }
         else
         {
-            nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
-
+            nextZPosition = transform.position.z + bulletRange;
         }
+        
+        timeAtEnd = timeAtFire + (ConductorV2.instance.crotchet * bulletRange);
+
+        movementProgress = 0.0f;
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        if (!canMove) return;
-        //transform.Translate(transform.right * 20 * Time.deltaTime);
-        //gameObject.transform.DOMoveX(nextPosition.x, ConductorV2.instance.crotchet) 
-        //    .SetEase(Ease.OutSine)
-        //    .onComplete = CallNextPosition;
-        timer += Time.deltaTime * speed;
-        if (gameObject.transform.position != nextPosition)
-        {
+        songProgress = ConductorV2.instance.songPosition;
 
-            gameObject.transform.position = Vector3.Slerp(gameObject.transform.position, nextPosition, timer);
-        }
-        else
+        if (movementProgress >= 1.0f)
         {
-            NextPosition();
-                
-            canMove = false;
+            RemoveProjectile();
+            return;
         }
 
+        movementProgress = (((songProgress - timeAtFire) * speed) / (timeAtEnd - timeAtFire));
+        nextPosition = new Vector3(transform.position.x, transform.position.y, Mathf.Lerp(startZPosition, nextZPosition, movementProgress));
+        gameObject.transform.position = nextPosition;
     }
 }

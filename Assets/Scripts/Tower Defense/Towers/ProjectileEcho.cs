@@ -5,29 +5,34 @@ using UnityEngine;
 public class ProjectileEcho : Projectile
 {
     public int direction = 0;
+    public float startZPosition;
+    public float nextZPosition;
 
     // Start is called before the first frame update
     public override void Start()
     {
-        nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + direction);
+        startZPosition = gameObject.transform.position.z;
 
+        nextZPosition = transform.position.z + (bulletRange * direction);
+        
+        timeAtEnd = timeAtFire + (ConductorV2.instance.crotchet * bulletRange);
+
+        movementProgress = 0.0f;
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        if (!canMove) return;
+        songProgress = ConductorV2.instance.songPosition;
 
-        timer += Time.deltaTime * speed;
-        if (gameObject.transform.position != nextPosition)
+        if (movementProgress >= 1.0f)
         {
+            RemoveProjectile();
+            return;
+        }
 
-            gameObject.transform.position = Vector3.Slerp(gameObject.transform.position, nextPosition, timer);
-        }
-        else
-        {
-            nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + direction);
-            canMove = false;
-        }
+        movementProgress = (((songProgress - timeAtFire) * speed) / (timeAtEnd - timeAtFire));
+        nextPosition = new Vector3(transform.position.x, transform.position.y, Mathf.Lerp(startZPosition, nextZPosition, movementProgress));
+        gameObject.transform.position = nextPosition;
     }
 }

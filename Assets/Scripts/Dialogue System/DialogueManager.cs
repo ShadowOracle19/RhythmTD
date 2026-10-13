@@ -87,7 +87,6 @@ public class DialogueManager : MonoBehaviour
     public bool dialogueFinished = false;
     public GameObject dialogueSystemParent;
 
-    public float textSpeed = 0.05f;
     public float defaultTextSpeed = 0.05f;
 
     public Animator cameraAnimator;
@@ -287,12 +286,12 @@ public class DialogueManager : MonoBehaviour
         {
             while (pauseDialogue)
             {
-                yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+                yield return new WaitForSeconds(SettingsManager.Instance.textSpeed);
             }
 
             if (visibleCount > totalVisibleCharacters)
             {
-                yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+                yield return new WaitForSeconds(SettingsManager.Instance.textSpeed);
                 //visibleCount = 0;
                 typeText = false;
             }
@@ -301,7 +300,7 @@ public class DialogueManager : MonoBehaviour
 
             PlayCharacterAudio();
             visibleCount += 1; 
-            yield return new WaitForSeconds(GameManager.Instance.textSpeed);
+            yield return new WaitForSeconds(SettingsManager.Instance.textSpeed);
         }
     }
 
@@ -589,15 +588,15 @@ public class DialogueManager : MonoBehaviour
             GetComponent<AudioSource>().clip = _characterSpeaking;
 
             //Below is theoretical code the increase the sound speed of the dialogue depending on the text speed. But it doesn't sound great / work right now.
-            /*if (GameManager.Instance.textSpeed == 0.01f) //Slow
+            /*if (SettingsManager.Instance.textSpeed == 0.01f) //Slow
             {
                 audioSource.pitch = Random.Range(0.3f, 0.5f);
             }
-            else if (GameManager.Instance.textSpeed == 0.05f) //Med
+            else if (SettingsManager.Instance.textSpeed == 0.05f) //Med
             {
                 audioSource.pitch = Random.Range(0.9f, 1.1f);
             }
-            else if (GameManager.Instance.textSpeed == 0.001f) //Fast
+            else if (SettingsManager.Instance.textSpeed == 0.001f) //Fast
             {
                 audioSource.pitch = Random.Range(1.5f, 1.7f);
             }

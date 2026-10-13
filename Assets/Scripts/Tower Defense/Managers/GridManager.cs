@@ -13,7 +13,7 @@ public class GridManager : MonoBehaviour
         {
             if (_instance is null)
             {
-                Debug.LogError("grid Manager is NULL");
+                Debug.LogError("GridManager is NULL");
             }
 
             return _instance;
@@ -26,46 +26,32 @@ public class GridManager : MonoBehaviour
     }
     #endregion
 
+    #region Variables
+    [Header("<b><size=15>Grid Data<b><size=15>")]
+    [Line(255,255,255)]
+    [Header("<b><size=15>Dimensions<b><size=15>")]
     //sets the width and height of the grid
-    public int width, height;
-
-    //tile prefab
-    public Tile tilePrefab;
-
-    //grid parent where we will spawn tiles 
-    public Transform gridParent;
-
-    bool squareInit = false;
-    int squareTick = 0;
-
+    public int width;
+    public int height;
+    [Space(10)][Header("<b><size=15>Objects<b><size=15>")]
+    public Transform gridParent; //grid parent where we will spawn tiles 
+    public Tile tilePrefab; //tile prefab
     public Dictionary<Vector2, Tile> grid = new Dictionary<Vector2, Tile>();
     public List<Tile> tiles;
+    #endregion
 
+    #region Start
     // Start is called before the first frame update
     void Start()
     {
         InitGrid();
     }
+    #endregion
 
     //play this at the start
     public void InitGrid()
     {
-        //GenerateGrid();
-        float y = 0;
-        float x = 0;
         tiles.Clear();
-        //at start iterate through tiles to allow offset color then after set width change the offset so they make checkered pattern
-        //foreach(Transform child in gridParent)
-        //{
-        //    if(y != child.position.y)
-        //    {
-        //        squareInit = !squareInit;
-        //        y = child.position.y;
-        //    }
-        //    squareInit = !squareInit;
-        //    child.GetComponent<Tile>().Init(squareInit);
-        //    tiles.Add(child.GetComponent<Tile>());
-        //}
     }
 
     public Tile GetTileAtPosition(Vector2 position)
@@ -74,10 +60,5 @@ public class GridManager : MonoBehaviour
             return tile;
 
         return null;
-    }
-
-    public void RecordGrid()
-    {
-        
     }
 }

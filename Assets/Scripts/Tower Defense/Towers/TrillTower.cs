@@ -19,28 +19,28 @@ public class TrillTower : Tower
     {
         base.Update();
 
-        if(upgradeThreeActive)
+        if(upgradeIndex == 3)
         {
             towerRange = 4;
-            currentDamage = 10;
+            towerDamage = 10;
         }
     }
 
-    public override void Fire()
+    public override void Fire(float yPos)
     {
         if (!enemyInRange)
             return;
 
-        base.Fire();
+        base.Fire(0f);
 
         //Charge shot upgrade active
-        if(upgradeOneActive)
+        if(upgradeIndex == 1)
         {
             UpgradeOne();
             return;
         }
 
-        CreateBullet(currentDamage, transform.position);
+        CreateBullet(towerDamage, transform.position);
     }
 
     //charge shot
@@ -56,8 +56,8 @@ public class TrillTower : Tower
             //if enemy detected
             if(hit.transform.CompareTag("Enemy"))
             {
-                int damage = currentDamage + chargeShotDamage;
-                CreateBullet(currentDamage, transform.position);
+                int damage = towerDamage + chargeShotDamage;
+                CreateBullet(towerDamage, transform.position);
                 chargeShotDamage = 0;
             }
         }
@@ -92,16 +92,24 @@ public class TrillTower : Tower
 
         //instatiate bullet
         GameObject bullet = Instantiate(nextProjectile, position, gameObject.transform.rotation, CombatManager.Instance.projectilesParent);
-        bullet.GetComponent<Projectile>().InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies);
+        lastBulletFired = bullet.GetComponent<Projectile>();
+        lastBulletFired.InitializeProjectile(towerRange, gameObject, damage, towerInfo.projectilePiercesEnemies, attackTargetTime);
 
-        ConductorV2.instance.projectileEvent.Add(bullet.GetComponent<Projectile>().trigger);
+        lastBulletFired.spriteRenderer.sprite = projectileSprites[upgradeIndex];
+        lastBulletFired.spriteRenderer.color = projectileColor;
 
-        if(chargeShotDamage > 2 && upgradeOneActive)
+        ConductorV2.instance.projectileEvent.Add(lastBulletFired.trigger);
+
+        if(chargeShotDamage > 2 && upgradeIndex == 1)
         {
             Debug.Log("is this happening?");
             float redLerp = chargeShotDamage / 7;
-            bullet.GetComponent<Projectile>().spriteRenderer.color = Color.Lerp(Color.white, Color.red, redLerp);
-            bullet.GetComponent<Projectile>().spriteRenderer.sprite = upgradeAttackSprite01;
+            lastBulletFired.spriteRenderer.color = Color.Lerp(projectileColor, Color.red, redLerp);
+            lastBulletFired.spriteRenderer.sprite = base.projectileSprites[1];
         }
+
+        feelingItNow = false;
+        synthBuff = false;
+        isBuffed = false;
     }
 }

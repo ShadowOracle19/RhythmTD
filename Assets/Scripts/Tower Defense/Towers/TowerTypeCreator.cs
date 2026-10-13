@@ -5,6 +5,26 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Tower Type", menuName = "ScriptableObjects/TowerType")]
 public class TowerTypeCreator : ScriptableObject
 {
+    #region Note (Input) Class
+    [System.Serializable]
+    public class NoteInput
+    {
+        [Range(0.0f, 1.0f)]
+        public float notePosition; //position in 1 measure
+        public float noteTime; //position 
+        public float holdTime; //NOTE: Currently unused
+    }
+    #endregion
+
+    #region Note (Input) Array Class
+    [System.Serializable]
+    public class NotePatternArray
+    {
+        public List<NoteInput> noteInputs;
+    }
+    #endregion
+    
+    #region Variables
     [Header("<b><size=15>Tower Info</size></b>")]
     [Line(255,255,255)]
     public string towerName;
@@ -18,13 +38,11 @@ public class TowerTypeCreator : ScriptableObject
 
 
     [Space(20)][Header("<b><size=15>Tower Stats</size></b>")]
-
     [Line(255, 255, 255)]
     public int towerHealth = 0;
     public int resourceCost = 0;
     [Tooltip("In Beats")]
-    public int cooldownTime = 0;
-    public TowerAttackPattern attackPattern;
+    public int cooldownTime = 0; 
     public int damage = 0;
     public int range = 0;
     [Space(5)]
@@ -34,56 +52,53 @@ public class TowerTypeCreator : ScriptableObject
     public bool projectilePiercesEnemies = false;
 
 
-    [Space(20)]
-    [Header("<b><size=15>Tower Parameters</size></b>")]
+    [Space(20)][Header("<b><size=15>Tower Action Pattern</size></b>")]
+    [Line(255, 255, 255)]
+    public TowerAttackPattern attackPattern;
+    //public List<NoteInput> inputs = new List<NoteInput>();
+    public NotePatternArray[] inputPatterns;
 
+
+    [Space(20)][Header("<b><size=15>Tower Parameters</size></b>")]
     [Line(255, 255, 255)]
 
     [Header("AOE")]
     [Tooltip("Set to true if you want tower to be AOE")]
     public bool isAOETower = false;
 
-
     [Space(5)][Header("Resource Tower")]
     public bool isResourceTower = false;
     public int resourceGain = 5;
 
 
-    [Space(20)]
-    [Header("<b><size=15>Tower Upgrades</size></b>")]
-
+    [Space(20)][Header("<b><size=15>Tower Upgrades</size></b>")]
     [Line(255, 255, 255)]
+
     [Header("Tower Upgrade One")]
     public Sprite upgrade1;
     public int upgradeCost1 = 25;
     [Tooltip("Set to true to lock, set to false to unlock")]
     public bool isUpgradeOneLocked = true;
 
-    [Space(5)]
-    [Header("Tower Upgrade Two")]
+    [Space(5)][Header("Tower Upgrade Two")]
     public Sprite upgrade2;
     public int upgradeCost2 = 25;
     [Tooltip("Set to true to lock, set to false to unlock")]
     public bool isUpgradeTwoLocked = true;
 
-    [Space(5)]
-    [Header("Tower Upgrade Three")]
+    [Space(5)][Header("Tower Upgrade Three")]
     public Sprite upgrade3;
     public int upgradeCost3 = 25;
     [Tooltip("Set to true to lock, set to false to unlock")]
     public bool isUpgradeThreeLocked = true;
-
-
-    //[Space(5)]
-    //[Header("Tower Upgrade Four")]
-    //public Sprite upgrade4;
-    //public int upgradeCost4 = 25;
+    #endregion
 }
 
 public enum TowerAttackPattern
 {
 
-    everyBeat, everyMeasure, everyOtherBeat, everyBeatButOne, snakePatternFire, none
+    standard, snake, none
+    //everyBeat, everyMeasure, everyOtherBeat, everyBeatButOne, snakePatternFire, none
 
 }
 

@@ -9,12 +9,23 @@ public class Charges : MonoBehaviour
     public bool chargeActive = false;
     private bool damageCharge = false;
 
+    public float timeAtPlacement = 0.0f;
+    public int expiryTimeInBeats = 0;
+    public int expiryTelegraphInBeats = 0;
+
+    [Header ("Lerp Variables (DO NOT TOUCH)")]
+    public SpriteRenderer spriteRenderer;
+    public Color currentColor;
+    public float alphaTargetTime = 0.0f;
+    public float alphaProgress = 0.0f;
+    public float defaultAlpha = 1.0f;
+    public float expiryAlpha = 0.25f;
+
     private void Update()
     {
         if (!chargeActive)
         {
             transform.position = Vector3.Lerp(transform.position, placementLocation, Time.deltaTime * 5);
-
 
             if (Vector3.Distance(transform.position, placementLocation) < 0.01f)
             {
@@ -26,18 +37,27 @@ public class Charges : MonoBehaviour
 
     public void initalizeCharge(int _resourceGain, Vector3 _placementLocation, Tower connectedTower, bool fromTower)
     {
+        timeAtPlacement = ConductorV2.instance.songPosition;
         resourceGain = _resourceGain;
         placementLocation = _placementLocation;
         if(fromTower)
         {
-            damageCharge = connectedTower.upgradeOneActive;
-
+            if (connectedTower.upgradeIndex == 1)
+            {
+                damageCharge = true;
+            }
+            else
+            {
+                damageCharge = false;
+            }
         }
+
+        StartCoroutine(StartChargeExpiry(defaultAlpha, expiryAlpha));
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player") && !damageCharge)
+        if(other.gameObject.CompareTag("Player") && !damageCharge && chargeActive)
         {
             CombatManager.Instance.resourceNum += resourceGain;
             RemoveCharge();
@@ -52,5 +72,63 @@ public class Charges : MonoBehaviour
     public void RemoveCharge()
     {
         Destroy(gameObject);
+    }
+
+    public IEnumerator StartChargeExpiry(float startAlpha, float endAlpha)
+    {
+        bool fading = true;
+        
+        while (ConductorV2.instance.songPosition < (timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats))))
+        {
+            //Debug.Log(timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats)));
+            yield return null;
+        }
+
+        alphaProgress = 0.0f;
+        alphaTargetTime = (timeAtPlacement + (ConductorV2.instance.crotchet * (expiryTimeInBeats - expiryTelegraphInBeats))) + (ConductorV2.instance.crotchet / 4);
+
+        while (ConductorV2.instance.songPosition < (timeAtPlacement + (ConductorV2.instance.crotchet * expiryTimeInBeats)))
+        {
+            alphaProgress = (ConductorV2.instance.songPosition - timeAtPlacement) / (alphaTargetTime - timeAtPlacement);
+
+            currentColor = new Color(1f, 1f, 1f, Mathf.Lerp(startAlpha, endAlpha, alphaProgress));
+            spriteRenderer.color = currentColor;
+
+            if (fading && alphaProgress >= 1.0f)
+            {
+                startAlpha = expiryAlpha;
+                endAlpha = defaultAlpha;
+                alphaTargetTime += ConductorV2.instance.crotchet / 4;
+                fading = false;
+            }
+            else if (alphaProgress >= 1.0f)
+            {
+                startAlpha = defaultAlpha;
+                endAlpha = expiryAlpha;
+                alphaTargetTime += ConductorV2.instance.crotchet / 4;
+                fading = true;
+            }
+
+
+            yield return null;
+        }
+
+        //Debug.Log("Current Song Time:" + ConductorV2.instance.songPosition);
+        //Debug.Log("Alpha Target Time:" + alphaTargetTime);
+        //Debug.Log("Expiry End Time:" + (timeAtPlacement + (ConductorV2.instance.crotchet * expiryTimeInBeats)));
+
+        /*
+        while (ConductorV2.instance.songPosition < (timeAtPlacement + (ConductorV2.instance.crotchet * expiryTimeInBeats)))
+        {
+            
+
+            
+            
+            
+            yield return null;
+        }
+        */
+
+        RemoveCharge();
     }
 }

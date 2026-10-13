@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
             if (_instance is null)
             {
                 Debug.LogError("GameManager is NULL");
-                
             }
 
             return _instance;
@@ -29,21 +28,41 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Variables
     public Transform globalParent;
+
+    [Space(20)][Header("<b><size=15>Conductor<b><size=15>")]
+    [Line(255,255,255)]
+    public GameObject conductor;
+
+    [Space(20)][Header("<b><size=15>Audio<b><size=15>")]
+    [Line(255,255,255)]
     public AudioSource menuMusic;
     public AudioSource buttonHighlightSFX;
 
-    [SerializeField] public GameObject winScreen;
-    [SerializeField] public GameObject failScreen;
-    [SerializeField] public GameObject conductor;
-
-    [Header("Screen Roots")]
-    public GameObject combatRoot;
-    public GameObject dialogueRoot;
-    public GameObject menuRoot;
-    [SerializeField] private GameObject settings;
-    public GameObject pauseMenuRoot;
+    [Space(20)][Header("<b><size=15>Screens<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject titleRoot;
+    [Space(10)]
+    public GameObject menuRoot;
+    [Space(10)]
+    public GameObject dialogueRoot;
+    [Space(10)]
+    public GameObject combatRoot;
+    public GameObject winScreen;
+    public GameObject failScreen;
+    [Space(10)]
+    public GameObject pauseMenuRoot;
+    [SerializeField] private GameObject settings;
+    [SerializeField] private Button restartEncounterButton;
+    public GameObject exitMenuRoot;
+
+    [Space(20)][Header("<b><size=15>Pausing<b><size=15>")]
+    [Line(255,255,255)]
+    [SerializeField] public bool isGamePaused = false;
+    
+    //[SerializeField] private GameObject pauseMenu;
+    /*
     public GameObject exitMenuRoot;
     public GameObject showcaseCredits;
 
@@ -52,7 +71,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int _maxHealth = 5;
     [SerializeField] public int _currentHealth = 0;
     [SerializeField] public bool combatRunning = false;
-    public LayerMask interactableMask;
+    
     public TextMeshProUGUI waveCounter;
     public TextMeshProUGUI enemyCounter;
     public GameObject playerInputManager;
@@ -61,28 +80,42 @@ public class GameManager : MonoBehaviour
 
     [Header("Pause Menu")]
     [SerializeField] public bool isGamePaused = false;
-    [SerializeField] private Button restartEncounterButton;
-    //[SerializeField] private GameObject pauseMenu;
+    */
 
-
-    [Header("Encounter")]
+    [Space(20)][Header("<b><size=15>Combat<b><size=15>")]
+    [Line(255,255,255)]
+    public GameObject playerInputManager;
+    public LayerMask interactableMask;
+    [Space(10)]
+    [SerializeField] public bool combatRunning = false;
+    [Space(10)][Header("Health")]
+    [SerializeField] public int _maxHealth = 5;
+    [SerializeField] public int _currentHealth = 0;
+    public bool hasLostHealth = false;
+    //[SerializeField] private Slider healthSlider;
+    [Space(10)][Header("Enemy UI")]
+    public TextMeshProUGUI waveCounter;
+    public TextMeshProUGUI enemyCounter;
+    
+    [Space(20)][Header("<b><size=15>Encounter<b><size=15>")]
+    [Line(255,255,255)]
     public EncounterCreator currentEncounter;
     public bool encounterRunning = false;
+    public bool tutorialRunning = false;
     public bool winState = false;
     public bool failState = false;
-    public bool tutorialRunning = false;
 
-    [Header("Dialogue")]
-    public float textSpeed = 0.05f;
-
-    [Header("Tutorial")]
+    [Space(20)][Header("<b><size=15>Tutorial<b><size=15>")]
+    [Line(255,255,255)]
     public DynamicSongCreator tutorialSong;
 
-    [Header("Conductor")]
+    [Space(20)][Header("<b><size=15>Conductor<b><size=15>")]
+    [Line(255,255,255)]
     public float audioOffset;
     public float inputOffset;
 
-    [Header("Level Buttons")]
+    [Space(20)][Header("<b><size=15>Level Buttons<b><size=15>")]
+    [Line(255,255,255)]
     [SerializeField] private GameObject levelButtons;
     [SerializeField] private Transform levelParent;
     [SerializeField] private ScrollView levelScrollView;
@@ -92,7 +125,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Selectable returnToMainMenuButton;
     public GameObject currentSelectedButton;
 
-    [Header("Info Panel Connections")]
+    [Space(20)][Header("<b><size=15>Level Info Panel<b><size=15>")]
+    [Line(255,255,255)]
     public GameObject infoPanel;
     public TextMeshProUGUI levelNameText;
     public TextMeshProUGUI levelNumText;
@@ -106,18 +140,65 @@ public class GameManager : MonoBehaviour
     public List<Image> intelImages;
     public int imageIndex = 0;
 
-    [Header("Tower Loadout")]
+    [Space(20)][Header("<b><size=15>Modifiers<b><size=15>")]
+    [Line(255,255,255)]
+    [Header("<b><size=15>General<b><size=15>")]
+    public bool isOneHealth = false; // Reduces player HP to 1 hit from failing                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isNoFail = false; // Prevents the player from failing a level                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isTowerFragile = false; // Reduces all tower HP values to 1 hit from destruction                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isEnemyFragile = false; // Reduces all enemy HP values to 1 hit from destruction                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isDoubleTime = false; // Doubles game speed (does not currently increase music speed)                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isHalfTime = false; // Halves game speed (does not currently decrease music speed)                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isPreciseTiming = false; // Tightens the perfect judgement window                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isGenerousTiming = false; // Increases the perfect judgement window                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isPerfectsOnly = false; // Only perfects allowed                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isHitsOnly = false; // No misses allowed                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isLimitedResources = false; // Limits the resource cap, preventing the player from accumulating enough resources to build multiple towers in short succession                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    public bool isInfiniteResources = false; // Grants the player infinite resources                    EFFECT IMPLEMENTED / NOT TESTED / NO TOGGLE YET
+    [Space(10)][Header("<b><size=15>Misc<b><size=15>")]
+    public bool isNotesHidden = false; // Hides the input prompts for tower attack patterns
+    public bool isMirrorMode = false; // Mirrors grid tiles and enemy spawn locations along the x axis
+    public bool isInvisibleEnemies = false; // Makes enemies invisible (VFX & SFX are still enabled)
+    public bool isRandomEnemies = false; // Spawns random enemy types in place of usual enemy spawns
+    public bool isDeafened = false; // BGM & SFX are muted/muffled
+    [Space(10)][Header("<b><size=15>Info<b><size=15>")]
+    public TextMeshProUGUI modifierName;
+    public TextMeshProUGUI modifierDescription;
+    public List<string> modifierNames = new List<string>();
+    public List<string> modifierDescriptions = new List<string>();
+
+    [Space(20)][Header("<b><size=15>Modifier Toggles<b><size=15>")]
+    [Line(255,255,255)]
+    [Header("<b><size=15>General<b><size=15>")]
+    public Toggle oneHealthToggle;
+    public Toggle noFailToggle;
+    public Toggle towerFragileToggle;
+    public Toggle enemyFragileToggle;
+    public Toggle doubleTimeToggle;
+    public Toggle halfTimeToggle;
+    public Toggle preciseTimingToggle;
+    public Toggle generousTimingToggle;
+    public Toggle perfectsOnlyToggle;
+    public Toggle hitsOnlyToggle;
+    public Toggle limitedResourceToggle;
+    public Toggle infiniteResourcesToggle;
+
+    [Space(20)][Header("<b><size=15>Tower Loadout<b><size=15>")]
+    [Line(255,255,255)]
     public List<TowerPlacementInfo> towers = new List<TowerPlacementInfo>();
 
-    [Header("Recording Assets")]
-    public Sprite recordingSpr;//RECORDING STATUS CODE
+    [Space(20)][Header("<b><size=15>Tower Repetition Assets<b><size=15>")]
+    [Line(255,255,255)]
+    public Sprite recordingSpr;
     public List<Sprite> repeatSprites = new List<Sprite>();
 
-    [Header("Level Scoring")]
+    [Space(20)][Header("<b><size=15>Level Scoring<b><size=15>")]
+    [Line(255,255,255)]
     public List<int> pointHolder = new List<int>();
     public int healthRemainingPointGain = 100;
+    #endregion
 
-
+    #region Start
     // Start is called before the first frame update
     void Start()
     {
@@ -145,7 +226,9 @@ public class GameManager : MonoBehaviour
         LoadLevelButtons();
         UpdateAllLevelSelectButtonNavigationReferences();
     }
+    #endregion
 
+    #region Update
     // Update is called once per frame
     void Update()
     {
@@ -157,8 +240,9 @@ public class GameManager : MonoBehaviour
         }
         */
     }
+    #endregion
 
-    #region level buttons
+    #region Level buttons
     private void LoadLevelButtons()
     {
         EncounterCreator[] encounters = Resources.LoadAll<EncounterCreator>("Encounters/");
@@ -192,7 +276,7 @@ public class GameManager : MonoBehaviour
         viewPortOffset += levelScrollView.viewportOffsetValue;
 
         //add event listeners
-        //gameObject.GetComponent<Button>().onClick.AddListener(LoadLevel(encounter));
+        //gameObject.GetComponent<Button>().onClick.AddListener(LoadStage(encounter));
         item.OnSubmitEvent.AddListener((ItemButton) => { HandleEventItemOnSubmit(item); });
         item.OnSelectEvent.AddListener((ItemButton) => { HandleEventItemOnSelect(item); });
 
@@ -214,7 +298,7 @@ public class GameManager : MonoBehaviour
         //MenuEventManager.Instance.CloseMainMenu(); //stop main menu music, update last selected level, disable main menu
         currentSelectedButton = item.gameObject;
 
-        LoadLevel(item.heldEncounter); //load encounter
+        LoadStage(item.heldEncounter); //load encounter
     }
 
     // 
@@ -333,10 +417,9 @@ public class GameManager : MonoBehaviour
 
         return itemNext.heldEncounter;
     }
-
     #endregion
 
-    #region pause function
+    #region Pausing
     public void HandlePauseMenuInput()
     {
         //allows player to use pause menu in combat, level select and dialogue
@@ -403,14 +486,17 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    #region tower defense health/damage
+    #region Health
     public void Damage()
     {
-        _currentHealth -= 1;
+        if (!isNoFail)
+        {
+            _currentHealth -= 1;
+        }
         
-        ComboManager.Instance.ResetCombo();
+        ScoreManager.Instance.ResetCombo();
 
-        lostHealth = true; //set flag for failing objective 02
+        hasLostHealth = true; //set flag for failing objective 02
     }
 
     void Health()
@@ -420,6 +506,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Tutorial
     public void LoadTutorial()
     {
 
@@ -487,112 +574,10 @@ public class GameManager : MonoBehaviour
 
         TutorialManager.Instance.LoadTutorial();
 
-        StageManager.Instance.SetStage(currentEncounter.stage);
+        StageManager.Instance.SetStageEnvironment(currentEncounter.stage);
 
 
         ConductorV2.instance.CountUsIn(currentEncounter.combatEncounter.dynamicSong.bpm);
-    }
-
-    /*
-    public void LoadLevel(EncounterCreator encounter)
-    {
-        currentEncounter = encounter;
-        encounterRunning = true;
-
-        //tutorialRunning = encounter.isTutorial;
-
-        LoadCombatScene(); 
-
-        if (currentEncounter.introDialogue == null)
-        {
-            //LoadingScreenManager.Instance.StartLoading(MenuEventManager.Instance.loadoutScreen, menuRoot);
-            MenuEventManager.Instance.OpenLoadoutMenu();
-        }
-        else
-        {
-            LoadingScreenManager.Instance.StartLoading(dialogueRoot, menuRoot);
-            DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
-        } 
-
-        ResetCombatState();
-    }
-    */
-
-    public void LoadLevel(EncounterCreator encounter)
-    {
-        currentEncounter = encounter;
-        encounterRunning = true;
-        
-        StartCoroutine(LoadingScreenManager.Instance.StartLoading());
-    }
-
-    public void LoadCombatScene()
-    {
-        combatRoot.SetActive(true); //enable combat scene
-        StageManager.Instance.SetStage(currentEncounter.stage); //load encounter grid data
-        //CombatManager.Instance.combatInterface.SetActive(false); //disable combat UI
-    }
-    
-    public void StartCombat()
-    {
-        combatRunning = true; //set game state to combat
-        CombatManager.Instance.tutorialManager.SetActive(false); //disable tutorial manager
-        CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter); //load encounter data
-    }
-
-    public void GameOver()
-    {
-        if (failState) return;
-        failState = true;
-
-        Cursor.lockState = CursorLockMode.Locked; //lock player cursor movement
-
-        //CombatManager.Instance.EndEncounter(); //end current encounter
-
-        CombatManager.Instance.StartFailSequence(); //open fail screen and set active object
-    }
-
-    public void WinLevel()
-    {
-        if (winState) return;
-        winState = true;
-        
-        CombatManager.Instance.StartWinSequence();
-
-        encounterRunning = false;
-
-        // OBJECTIVES
-        // level cleared
-        currentEncounter.clearedObjective01 = true;
-
-        // level cleared without losing health
-        //currentEncounter.clearedObjective02 = (_currentHealth == _maxHealth);
-        if (lostHealth == false) {
-            currentEncounter.clearedObjective02 = true;
-        }
-
-        //check if unique level objective was cleared
-        //currentEncounter.clearedObjective03 = LevelObjectiveManager.Instance.CheckIfObjectiveWasCompleted(currentEncounter.data.uniqueLevel3Objective);
-
-        // SCORE
-        pointHolder.Add(healthRemainingPointGain * _currentHealth);  
-    }
-
-    public void StartWinLevelProcess()
-    {
-        MenuEventManager.Instance.OpenWinScreen(); //open win screen and set active object
-        
-        // TEMPORARILY DISABLED UNTIL NEW WIN SCREEN IS CONNECTED
-        //winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ComboManager.Instance.score, ComboManager.Instance.highestCombo + ComboManager.Instance.score, _currentHealth == _maxHealth, false);
-    }
-
-    public void UnlockLevel(EncounterCreator wonLevel)
-    {
-        if (wonLevel.levelThatUnlocks != null)
-        {
-            currentSelectedButton.GetComponent<ItemButton>().nextButton.SetActive(true);
-            wonLevel.levelThatUnlocks.isLevelLocked = false;
-        }
     }
 
     public void TutorialWinState()
@@ -613,7 +598,114 @@ public class GameManager : MonoBehaviour
         DialogueManager.Instance.LoadDialogue(currentEncounter.endDialogue);
         ConductorV2.instance.StopMusic();
     }
+    #endregion
 
+    /*
+    public void LoadStage(EncounterCreator encounter)
+    {
+        currentEncounter = encounter;
+        encounterRunning = true;
+
+        //tutorialRunning = encounter.isTutorial;
+
+        SetCombatScene(); 
+
+        if (currentEncounter.introDialogue == null)
+        {
+            //LoadingScreenManager.Instance.StartLoading(MenuEventManager.Instance.loadoutScreen, menuRoot);
+            MenuEventManager.Instance.OpenLoadoutMenu();
+        }
+        else
+        {
+            LoadingScreenManager.Instance.StartLoading(dialogueRoot, menuRoot);
+            DialogueManager.Instance.LoadDialogue(currentEncounter.introDialogue);
+        } 
+
+        ResetCombatState();
+    }
+    */
+
+    #region Start level
+    public void LoadStage(EncounterCreator encounter)
+    {
+        currentEncounter = encounter;
+        encounterRunning = true;
+        
+        StartCoroutine(LoadingScreenManager.Instance.StartLoading());
+    }
+
+    public void SetCombatScene()
+    {
+        combatRoot.SetActive(true); //enable combat scene
+
+        StageManager.Instance.SetStageEnvironment(currentEncounter.stage); //load encounter grid data
+        StageManager.Instance.SpawnStageGrid(currentEncounter.combatEncounter);
+
+        //CombatManager.Instance.combatInterface.SetActive(false); //disable combat UI
+    }
+    
+    public void StartCombat()
+    {
+        combatRunning = true; //set game state to combat
+        CombatManager.Instance.tutorialManager.SetActive(false); //disable tutorial manager
+        CombatManager.Instance.LoadEncounter(currentEncounter.combatEncounter); //load encounter data
+    }
+    #endregion
+
+    #region End level
+    public void FailLevel()
+    {
+        if (failState) return; //prevents function from continuing if already in the fail state
+        failState = true;
+
+        Cursor.lockState = CursorLockMode.Locked; //lock player cursor movement
+        //CombatManager.Instance.EndEncounter(); //end current encounter
+        CombatManager.Instance.StartFailSequence(); //open fail screen and set active object
+    }
+
+    public void WinLevel()
+    {
+        if (winState) return; //prevents function from continuing if already in the win state
+        winState = true;
+        
+        Cursor.lockState = CursorLockMode.Locked; //lock player cursor movement
+        CombatManager.Instance.StartWinSequence();
+
+        encounterRunning = false;
+
+        // OBJECTIVES
+        // level cleared
+        currentEncounter.clearedObjective01 = true;
+
+        // level cleared without losing health
+        if (hasLostHealth == false) {
+            currentEncounter.clearedObjective02 = true;
+        }
+
+        //check if unique level objective was cleared
+        //currentEncounter.clearedObjective03 = LevelObjectiveManager.Instance.CheckIfObjectiveWasCompleted(currentEncounter.data.uniqueLevel3Objective);
+
+        // SCORE
+        if (isOneHealth)
+        {
+            pointHolder.Add(healthRemainingPointGain * _maxHealth); 
+        }
+        else
+        {
+            pointHolder.Add(healthRemainingPointGain * _currentHealth); 
+        }
+    }
+
+    public void StartWinLevelProcess()
+    {
+        MenuEventManager.Instance.OpenWinScreen(); //open win screen and set active object
+        
+        // TEMPORARILY DISABLED UNTIL NEW WIN SCREEN IS CONNECTED
+        //winScreen.GetComponent<ResultScreenInfo>().WriteToResultScreen(true, currentEncounter.encounterName, ScoreManager.Instance.score, ScoreManager.Instance.highestCombo + ScoreManager.Instance.score, _currentHealth == _maxHealth, false);
+    }
+    #endregion
+
+    #region Reset
     public void ResetCombatState()
     {
         // reset win & fail states
@@ -623,16 +715,20 @@ public class GameManager : MonoBehaviour
         failScreen.SetActive(false);
         
         // reset objective flags
-        lostHealth = false;
+        hasLostHealth = false;
 
         // reset player health
-        _currentHealth = _maxHealth;
-
+        if (isOneHealth)
+        {
+            _currentHealth = 1;
+        }
+        else
+        {
+            _currentHealth = _maxHealth;
+        }
+        
         // reset combo, multiplier, & score
-        ComboManager.Instance.currentCombo = 0;
-        ComboManager.Instance.highestCombo = 0;
-        ComboManager.Instance.currentMultiplier = 1;
-        ComboManager.Instance.score = 0;
+        ScoreManager.Instance.ResetStageScoreData();
         
         // set flags for all objects having been spawned back to false
         CombatManager.Instance.allEnemiesSpawned = false;
@@ -644,6 +740,17 @@ public class GameManager : MonoBehaviour
         CombatManager.Instance.pickupTotal = 0;
 
         Debug.Log("Combat State Reset");
+    }
+    #endregion
+
+    #region Unlock triggers
+    public void UnlockLevel(EncounterCreator wonLevel)
+    {
+        if (wonLevel.levelThatUnlocks != null)
+        {
+            currentSelectedButton.GetComponent<ItemButton>().nextButton.SetActive(true);
+            wonLevel.levelThatUnlocks.isLevelLocked = false;
+        }
     }
 
     public void UnlockUpgrade(Tower tower, UpgradeNum upgrade)
@@ -661,7 +768,175 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+    #endregion
 
+    #region Modifier toggles
+    public void UpdateModDescription(int modifierInfoIndex)
+    {
+        modifierName.text = modifierNames[modifierInfoIndex];
+        modifierDescription.text = modifierDescriptions[modifierInfoIndex];
+    }
+    
+    public void ToggleOneHealth()
+    {
+        if (oneHealthToggle.isOn && noFailToggle.isOn)
+        {
+            isOneHealth = oneHealthToggle.isOn;
+
+            noFailToggle.isOn = false;
+            isNoFail = noFailToggle.isOn;
+        }
+        else
+        {
+            isOneHealth = oneHealthToggle.isOn;
+        }
+    }
+
+    public void ToggleNoFail()
+    {
+        if (oneHealthToggle.isOn && noFailToggle.isOn)
+        {
+            isNoFail = noFailToggle.isOn;
+
+            oneHealthToggle.isOn = false;
+            isOneHealth = oneHealthToggle.isOn;
+        }
+        else
+        {
+            isNoFail = noFailToggle.isOn;
+        }
+    }
+
+    public void ToggleFragileTowers()
+    {
+        isTowerFragile = towerFragileToggle.isOn;
+    }
+
+    public void ToggleFragileEnemies()
+    {
+        isEnemyFragile = enemyFragileToggle.isOn;
+    }
+
+    public void ToggleDoubleTime()
+    {
+        if (doubleTimeToggle.isOn && halfTimeToggle.isOn)
+        {
+            isDoubleTime = doubleTimeToggle.isOn;
+
+            halfTimeToggle.isOn = false;
+            isHalfTime = halfTimeToggle.isOn;
+        }
+        else
+        {
+            isDoubleTime = doubleTimeToggle.isOn;
+        }
+    }
+
+    public void ToggleHalfTime()
+    {
+        if (doubleTimeToggle.isOn && halfTimeToggle.isOn)
+        {
+            isHalfTime = halfTimeToggle.isOn;
+
+            doubleTimeToggle.isOn = false;
+            isDoubleTime = doubleTimeToggle.isOn;
+        }
+        else
+        {
+            isHalfTime = halfTimeToggle.isOn;
+        }
+    }
+
+    public void TogglePrecision()
+    {
+        if (preciseTimingToggle.isOn && generousTimingToggle.isOn)
+        {
+            isPreciseTiming = preciseTimingToggle.isOn;
+
+            generousTimingToggle.isOn = false;
+            isGenerousTiming = generousTimingToggle.isOn;
+        }
+        else
+        {
+            isPreciseTiming = preciseTimingToggle.isOn;
+        }
+    }
+
+    public void ToggleSenzaMisura()
+    {
+        if (preciseTimingToggle.isOn && generousTimingToggle.isOn)
+        {
+            isGenerousTiming = generousTimingToggle.isOn;
+
+            preciseTimingToggle.isOn = false;
+            isPreciseTiming = preciseTimingToggle.isOn;
+        }
+        else
+        {
+            isGenerousTiming = generousTimingToggle.isOn;
+        }
+    }
+
+    public void TogglePerfectionist()
+    {
+        if (perfectsOnlyToggle.isOn && hitsOnlyToggle.isOn)
+        {
+            isPerfectsOnly = perfectsOnlyToggle.isOn;
+
+            hitsOnlyToggle.isOn = false;
+            isHitsOnly = hitsOnlyToggle.isOn;
+        }
+        else
+        {
+            isPerfectsOnly = perfectsOnlyToggle.isOn;
+        }
+    }
+
+    public void ToggleNoMissTakes()
+    {
+        if (perfectsOnlyToggle.isOn && hitsOnlyToggle.isOn)
+        {
+            isHitsOnly = hitsOnlyToggle.isOn;
+
+            perfectsOnlyToggle.isOn = false;
+            isPerfectsOnly = perfectsOnlyToggle.isOn;
+        }
+        else
+        {
+            isHitsOnly = hitsOnlyToggle.isOn;
+        }
+    }
+
+    public void ToggleLowBattery()
+    {
+        if (limitedResourceToggle.isOn && infiniteResourcesToggle.isOn)
+        {
+            isLimitedResources = limitedResourceToggle.isOn;
+
+            infiniteResourcesToggle.isOn = false;
+            isInfiniteResources = infiniteResourcesToggle.isOn;
+        }
+        else
+        {
+            isLimitedResources = limitedResourceToggle.isOn;
+        }
+    }
+
+    public void ToggleInfinitePower()
+    {
+        if (limitedResourceToggle.isOn && infiniteResourcesToggle.isOn)
+        {
+            isInfiniteResources = infiniteResourcesToggle.isOn;
+
+            limitedResourceToggle.isOn = false;
+            isLimitedResources = limitedResourceToggle.isOn;
+        }
+        else
+        {
+            isInfiniteResources = infiniteResourcesToggle.isOn;
+        }   
+    }
+    #endregion
 }
 
 public enum UpgradeNum

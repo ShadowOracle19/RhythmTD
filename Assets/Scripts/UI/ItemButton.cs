@@ -39,6 +39,8 @@ public class ItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, IDesele
         gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(243, 588);
         _onSelectEvent.Invoke(this);
 
+        MenuEventManager.Instance.UpdateLastSelectedLevel();
+        
         //cameraObject.GetComponent<CameraMovement>().SetCameraTarget(levelMapTransform);
     }
 
